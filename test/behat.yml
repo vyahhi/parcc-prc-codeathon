@@ -1,0 +1,13 @@
+default:
+  autoload:
+    '': %paths.base%/features/bootstrap
+  suites:
+    default:
+      paths:
+        - %paths.base%/features
+  extensions:
+    Behat\MinkExtension:
+      base_url:  'http://drupal_behat.local:8083'
+      sessions:
+        default:
+          selenium2: ~
