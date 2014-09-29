@@ -1,13 +1,21 @@
 default:
-  autoload:
-    '': %paths.base%/features/bootstrap
-  suites:
-    default:
-      paths:
-        - %paths.base%/features
+  filters:
+    tags: "~@api&&~@drush"
   extensions:
-    Behat\MinkExtension:
-      base_url:  'http://prc-poc.local:8083'
-      sessions:
-        default:
-          selenium2: ~
+    Behat\MinkExtension\ServiceContainer\MinkExtension:
+      goutte: ~
+      selenium2: ~
+      base_url: http://drupal.org
+    Drupal\DrupalExtension\ServiceContainer\DrupalExtension:
+      blackbox: ~
+      region_map:
+        content: "#content"
+        footer: "#footer"
+        left header: "#header-left"
+        right header: "#header-right"
+        right sidebar: "#aside-region"
+      selectors:
+        message_selector: '.messages'
+        error_message_selector: '.messages.error'
+        success_message_selector: '.messages.status'
+        warning_message_selector: '.messages.warning'

@@ -1,31 +1,8 @@
 {
-    "name": "vendor_name/package_name",
-    "description": "description_text",
-    "minimum-stability": "stable",
-    "license": "proprietary",
-    "authors": [
-        {
-            "name": "author's name",
-            "email": "email@example.com"
-        }
-    ],
+    "config": {
+        "bin-dir": "bin/"
+    },
     "require": {
-        "behat/mink": "1.5.*@stable",
-        "behat/mink-goutte-driver": "*",
-        "behat/mink-selenium2-driver": "*",
-        "behat/behat": "2.5.*@stable",
-        "behat/mink-extension": "*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "3.7.*"
-    },
-    "autoload": {
-        "psr-0": {
-            "Drupal\\Component": "src/",
-            "Drupal\\Driver": "src/",
-            "Drupal\\Drupal": "src/",
-            "Drupal\\Exception": "src/",
-            "Drupal\\DrupalExtension": "src/"
-        }
+        "drupal/drupal-extension": "2.0.x-dev"
     }
 }
