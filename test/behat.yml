@@ -1,6 +1,4 @@
 default:
-  filters:
-    tags: "~@api&&~@drush"
   extensions:
     Behat\MinkExtension\ServiceContainer\MinkExtension:
       goutte: ~
