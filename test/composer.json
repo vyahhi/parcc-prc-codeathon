@@ -10,11 +10,22 @@
         }
     ],
     "require": {
-        "behat/behat": "3.0.x-dev",
-        "behat/mink": "1.6.x-dev",
-        "behat/mink-extension": "2.0.x-dev",
-        "behat/mink-selenium2-driver": "1.2.x-dev",
-        "behat/mink-browserkit-driver": "1.2.x-dev",
-        "behat/mink-goutte-driver": "1.1.x-dev"
+        "behat/mink": "1.5.*@stable",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*",
+        "behat/behat": "2.5.*@stable",
+        "behat/mink-extension": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Drupal\\Component": "src/",
+            "Drupal\\Driver": "src/",
+            "Drupal\\Drupal": "src/",
+            "Drupal\\Exception": "src/",
+            "Drupal\\DrupalExtension": "src/"
+        }
     }
 }

@@ -1,24 +1,25 @@
 <?php
 
+namespace Behat\Gherkin\Filter;
+
+use Behat\Gherkin\Node\AbstractNode,
+    Behat\Gherkin\Node\FeatureNode,
+    Behat\Gherkin\Node\ScenarioNode;
+
 /*
  * This file is part of the Behat Gherkin.
- * (c) Konstantin Kudryashov <ever.zet@gmail.com>
+ * (c) 2011 Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Behat\Gherkin\Filter;
-
-use Behat\Gherkin\Node\FeatureNode;
-use Behat\Gherkin\Node\ScenarioInterface;
 
 /**
  * Filters scenarios by feature/scenario tag.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class TagFilter extends ComplexFilter
+class TagFilter extends SimpleFilter
 {
     protected $filterString;
 
@@ -41,30 +42,29 @@ class TagFilter extends ComplexFilter
      */
     public function isFeatureMatch(FeatureNode $feature)
     {
-        return $this->isTagsMatchCondition($feature->getTags());
+        return $this->matchesCondition($feature);
     }
 
     /**
      * Checks if scenario or outline matches specified filter.
      *
-     * @param FeatureNode       $feature  Feature node instance
-     * @param ScenarioInterface $scenario Scenario or Outline node instance
+     * @param ScenarioNode $scenario Scenario or Outline node instance
      *
      * @return Boolean
      */
-    public function isScenarioMatch(FeatureNode $feature, ScenarioInterface $scenario)
+    public function isScenarioMatch(ScenarioNode $scenario)
     {
-        return $this->isTagsMatchCondition(array_merge($feature->getTags(), $scenario->getTags()));
+        return $this->matchesCondition($scenario);
     }
 
     /**
      * Checks that node matches condition.
      *
-     * @param string[] $tags
+     * @param AbstractNode $node Node to check
      *
      * @return Boolean
      */
-    protected function isTagsMatchCondition($tags)
+    protected function matchesCondition(AbstractNode $node)
     {
         $satisfies = true;
 
@@ -76,9 +76,9 @@ class TagFilter extends ComplexFilter
 
                 if ('~' === $tag[0]) {
                     $tag = mb_substr($tag, 1, mb_strlen($tag, 'utf8') - 1, 'utf8');
-                    $satisfiesComma = !in_array($tag, $tags) || $satisfiesComma;
+                    $satisfiesComma = !$node->hasTag($tag) || $satisfiesComma;
                 } else {
-                    $satisfiesComma = in_array($tag, $tags) || $satisfiesComma;
+                    $satisfiesComma = $node->hasTag($tag) || $satisfiesComma;
                 }
             }
 

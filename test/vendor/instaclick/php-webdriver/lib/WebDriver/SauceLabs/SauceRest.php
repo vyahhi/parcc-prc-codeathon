@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2012-2014 Anthon Pang. All Rights Reserved.
+ * Copyright 2012-2013 Anthon Pang. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -267,16 +267,10 @@ class SauceRest
     /**
      * Get currently supported browsers: /rest/v1/info/browsers (GET)
      *
-     * @param string $termination Optional termination (one of "all", "selenium-rc", or "webdriver')
-     *
      * @return array
      */
-    public function getBrowsers($termination = false)
+    public function getBrowsers()
     {
-        if ($termination) {
-            return $this->execute('GET', 'info/browsers/' . $termination);
-        }
-
         return $this->execute('GET', 'info/browsers');
     }
 

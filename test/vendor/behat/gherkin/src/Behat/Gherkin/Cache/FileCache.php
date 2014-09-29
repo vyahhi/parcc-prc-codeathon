@@ -1,17 +1,16 @@
 <?php
 
+namespace Behat\Gherkin\Cache;
+
+use Behat\Gherkin\Node\FeatureNode;
+
 /*
 * This file is part of the Behat Gherkin.
-* (c) Konstantin Kudryashov <ever.zet@gmail.com>
+* (c) 2011 Konstantin Kudryashov <ever.zet@gmail.com>
 *
 * For the full copyright and license information, please view the LICENSE
 * file that was distributed with this source code.
 */
-
-namespace Behat\Gherkin\Cache;
-
-use Behat\Gherkin\Exception\CacheException;
-use Behat\Gherkin\Node\FeatureNode;
 
 /**
  * File cache.
@@ -30,11 +29,11 @@ class FileCache implements CacheInterface
      */
     public function __construct($path)
     {
-        $this->path = rtrim($path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'412';
-
-        if (!is_dir($this->path)) {
-            mkdir($this->path, 0777, true);
+        if (!is_dir($path)) {
+            mkdir($path, 0777, true);
         }
+
+        $this->path = rtrim($path, '/');
     }
 
     /**
@@ -62,19 +61,10 @@ class FileCache implements CacheInterface
      * @param string $path Feature path
      *
      * @return FeatureNode
-     *
-     * @throws CacheException
      */
     public function read($path)
     {
-        $cachePath = $this->getCachePathFor($path);
-        $feature = unserialize(file_get_contents($cachePath));
-
-        if (!$feature instanceof FeatureNode) {
-            throw new CacheException(sprintf('Can not load cache for a feature "%s" from "%s".', $path, $cachePath ));
-        }
-
-        return $feature;
+        return unserialize(file_get_contents($this->getCachePathFor($path)));
     }
 
     /**

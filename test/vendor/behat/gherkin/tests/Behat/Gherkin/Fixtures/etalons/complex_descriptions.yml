@@ -23,4 +23,4 @@ feature:
         """
       line:     16
       steps:
-        - { keyword_type: 'Given', type: 'Given',  text: 'one two three',  line: 22 }
+        - { type: 'Given',  text: 'one two three',  line: 22 }

@@ -1,17 +1,18 @@
 <?php
 
+namespace Behat\Gherkin\Filter;
+
+use Behat\Gherkin\Node\FeatureNode,
+    Behat\Gherkin\Node\ScenarioNode,
+    Behat\Gherkin\Node\OutlineNode;
+
 /*
  * This file is part of the Behat Gherkin.
- * (c) Konstantin Kudryashov <ever.zet@gmail.com>
+ * (c) 2013 Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Behat\Gherkin\Filter;
-
-use Behat\Gherkin\Node\FeatureNode;
-use Behat\Gherkin\Node\ScenarioInterface;
 
 /**
  * Filters features by their actors role.
@@ -29,12 +30,12 @@ class RoleFilter extends SimpleFilter
      */
     public function __construct($role)
     {
-        $this->pattern = '/as an? ' . strtr(preg_quote($role, '/'), array(
+        $this->pattern = '/as an? '.strtr(preg_quote($role, '/'), array(
             '\*' => '.*',
             '\?' => '.',
             '\[' => '[',
             '\]' => ']'
-        )) . '[$\n]/i';
+        )).'[$\n]/i';
     }
 
     /**
@@ -52,12 +53,12 @@ class RoleFilter extends SimpleFilter
     /**
      * Checks if scenario or outline matches specified filter.
      *
-     * @param ScenarioInterface $scenario Scenario or Outline node instance
+     * @param ScenarioNode $scenario Scenario or Outline node instance
      *
-     * @return false This filter is designed to work only with features
+     * @return Boolean
      */
-    public function isScenarioMatch(ScenarioInterface $scenario)
+    public function isScenarioMatch(ScenarioNode $scenario)
     {
-        return false;
+        return $this->isFeatureMatch($scenario->getFeature());
     }
 }

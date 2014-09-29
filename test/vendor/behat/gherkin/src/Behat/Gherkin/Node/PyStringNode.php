@@ -1,61 +1,77 @@
 <?php
 
+namespace Behat\Gherkin\Node;
+
 /*
  * This file is part of the Behat Gherkin.
- * (c) Konstantin Kudryashov <ever.zet@gmail.com>
+ * (c) 2011 Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Behat\Gherkin\Node;
-
 /**
- * Represents Gherkin PyString argument.
+ * PyString Argument Gherkin AST node.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class PyStringNode implements ArgumentInterface
+class PyStringNode implements StepArgumentNodeInterface
 {
-    /**
-     * @var array
-     */
-    private $strings = array();
-    /**
-     * @var integer
-     */
-    private $line;
+    private $lines = array();
 
     /**
      * Initializes PyString.
      *
-     * @param array   $strings String in form of [$stringLine]
-     * @param integer $line    Line number where string been started
+     * @param string $string Initial string
      */
-    public function __construct(array $strings, $line)
+    public function __construct($string = null)
     {
-        $this->strings = $strings;
-        $this->line = $line;
+        if (null !== $string) {
+            $string = preg_replace("/\r\n|\r/", "\n", $string);
+            $this->lines = explode("\n", $string);
+        }
     }
 
     /**
-     * Returns node type.
+     * Returns new PyString node with replaced outline example row tokens.
      *
-     * @return string
+     * @param array $tokens
+     *
+     * @return ExamplePyStringNode
      */
-    public function getNodeType()
+    public function createExampleRowStepArgument(array $tokens)
     {
-        return 'PyString';
+        return new ExamplePyStringNode($this, $tokens);
     }
 
     /**
-     * Returns entire PyString lines set.
+     * Adds a line to the PyString.
+     *
+     * @param string $line Line of text
+     */
+    public function addLine($line)
+    {
+        $this->lines[] = $line;
+    }
+
+    /**
+     * Sets PyString lines.
+     *
+     * @param array $lines Array of text lines
+     */
+    public function setLines(array $lines)
+    {
+        $this->lines = $lines;
+    }
+
+    /**
+     * Returns PyString lines.
      *
      * @return array
      */
-    public function getStrings()
+    public function getLines()
     {
-        return $this->strings;
+        return $this->lines;
     }
 
     /**
@@ -65,7 +81,7 @@ class PyStringNode implements ArgumentInterface
      */
     public function getRaw()
     {
-        return implode("\n", $this->strings);
+        return implode("\n", $this->lines);
     }
 
     /**
@@ -76,15 +92,5 @@ class PyStringNode implements ArgumentInterface
     public function __toString()
     {
         return $this->getRaw();
-    }
-
-    /**
-     * Returns line number at which PyString was started.
-     *
-     * @return integer
-     */
-    public function getLine()
-    {
-        return $this->line;
     }
 }

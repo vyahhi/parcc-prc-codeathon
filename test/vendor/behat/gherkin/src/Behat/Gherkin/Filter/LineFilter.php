@@ -1,19 +1,18 @@
 <?php
 
+namespace Behat\Gherkin\Filter;
+
+use Behat\Gherkin\Node\FeatureNode,
+    Behat\Gherkin\Node\ScenarioNode,
+    Behat\Gherkin\Node\OutlineNode;
+
 /*
  * This file is part of the Behat Gherkin.
- * (c) Konstantin Kudryashov <ever.zet@gmail.com>
+ * (c) 2011 Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Behat\Gherkin\Filter;
-
-use Behat\Gherkin\Node\ExampleTableNode;
-use Behat\Gherkin\Node\FeatureNode;
-use Behat\Gherkin\Node\OutlineNode;
-use Behat\Gherkin\Node\ScenarioInterface;
 
 /**
  * Filters scenarios by definition line number.
@@ -49,11 +48,11 @@ class LineFilter implements FilterInterface
     /**
      * Checks if scenario or outline matches specified filter.
      *
-     * @param ScenarioInterface $scenario Scenario or Outline node instance
+     * @param ScenarioNode $scenario Scenario or Outline node instance
      *
      * @return Boolean
      */
-    public function isScenarioMatch(ScenarioInterface $scenario)
+    public function isScenarioMatch(ScenarioNode $scenario)
     {
         if ($this->filterLine === $scenario->getLine()) {
             return true;
@@ -61,62 +60,41 @@ class LineFilter implements FilterInterface
 
         if ($scenario instanceof OutlineNode && $scenario->hasExamples()) {
             return $this->filterLine === $scenario->getLine()
-                || in_array($this->filterLine, $scenario->getExampleTable()->getLines());
+                || in_array($this->filterLine, $scenario->getExamples()->getRowLines());
         }
 
         return false;
     }
 
     /**
-     * Filters feature according to the filter and returns new one.
+     * Filters feature according to the filter.
      *
      * @param FeatureNode $feature
-     *
-     * @return FeatureNode
      */
     public function filterFeature(FeatureNode $feature)
     {
-        $scenarios = array();
-        foreach ($feature->getScenarios() as $scenario) {
+        $scenarios = $feature->getScenarios();
+        foreach ($scenarios as $i => $scenario) {
             if (!$this->isScenarioMatch($scenario)) {
+                unset($scenarios[$i]);
                 continue;
             }
 
             if ($scenario instanceof OutlineNode && $scenario->hasExamples()) {
-                $table = $scenario->getExampleTable()->getTable();
-                $lines = array_keys($table);
+                $lines = $scenario->getExamples()->getRowLines();
+                $rows  = $scenario->getExamples()->getNumeratedRows();
 
-                if (in_array($this->filterLine, $lines)) {
-                    $filteredTable = array($lines[0] => $table[$lines[0]]);
+                if (current($lines) <= $this->filterLine && end($lines) >= $this->filterLine) {
+                    $scenario->getExamples()->setRows(array());
+                    $scenario->getExamples()->addRow($rows[$lines[0]], $lines[0]);
 
                     if ($lines[0] !== $this->filterLine) {
-                        $filteredTable[$this->filterLine] = $table[$this->filterLine];
+                        $scenario->getExamples()->addRow($rows[$this->filterLine], $this->filterLine);
                     }
-
-                    $scenario = new OutlineNode(
-                        $scenario->getTitle(),
-                        $scenario->getTags(),
-                        $scenario->getSteps(),
-                        new ExampleTableNode($filteredTable, $scenario->getExampleTable()->getKeyword()),
-                        $scenario->getKeyword(),
-                        $scenario->getLine()
-                    );
                 }
             }
-
-            $scenarios[] = $scenario;
         }
 
-        return new FeatureNode(
-            $feature->getTitle(),
-            $feature->getDescription(),
-            $feature->getTags(),
-            $feature->getBackground(),
-            $scenarios,
-            $feature->getKeyword(),
-            $feature->getLanguage(),
-            $feature->getFile(),
-            $feature->getLine()
-        );
+        $feature->setScenarios($scenarios);
     }
 }
