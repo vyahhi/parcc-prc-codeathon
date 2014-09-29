@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Alters to login forms.
+ */
+
+//function prc_login_form_form_alter(&$form, &$form_state, $form_id) {
+//}
+
+function prc_login_form_form_user_login_block_alter(&$form, &$form_state) {
+  // Are these really theming operations?
+  // String substitution?
+  // Well, anyway, we are replacing them per PRC-51 AC#4
+  $replaces = array(
+    'Request new password' => 'Forgot password?',
+    'Create new account' => 'Join now!',
+    '<a href="/user/register"' => 'Not registered yet? <a href="/user/register"',
+  );
+
+  foreach($replaces as $replace => $with) {
+    $links = str_replace($replace, $with, $form['links']['#markup']);
+    $form['links']['#markup'] = $links;
+  }
+}

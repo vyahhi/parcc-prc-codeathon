@@ -7,7 +7,7 @@ default:
         - %paths.base%/features
   extensions:
     Behat\MinkExtension:
-      base_url:  'http://drupal_behat.local:8083'
+      base_url:  'http://prc-poc.local:8083'
       sessions:
         default:
           selenium2: ~
