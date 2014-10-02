@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f5797bde6a80d7208d56bfaf417dd153",
+    "hash": "5ec23a2f58f2e2a25b83ea4836609afe",
     "packages": [
         {
             "name": "behat/behat",
@@ -257,7 +257,7 @@
         },
         {
             "name": "behat/mink-extension",
-            "version": "v2.0.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/MinkExtension.git",
@@ -1515,7 +1515,9 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "drupal/drupal-extension": 20
+        "drupal/drupal-extension": 20,
+        "behat/mink": 0,
+        "behat/mink-extension": 20
     },
     "prefer-stable": false,
     "platform": [

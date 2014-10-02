@@ -1,10 +1,19 @@
 default:
+  suites:
+    default:
+      contexts: [CustomDrupalContext, FeatureContext] # CustomDrupalContext
+      filters:
+        tags: "~@api&&~@drushTest"
   extensions:
-    Behat\MinkExtension\ServiceContainer\MinkExtension:
-      goutte: ~
+    Behat\MinkExtension:
+#      goutte: ~
       selenium2: ~
-      base_url: http://drupal.org
-    Drupal\DrupalExtension\ServiceContainer\DrupalExtension:
+      base_url: http://prc-poc.local:8083
+    Drupal\DrupalExtension:
+      api_driver: "drupal"
+      drupal:
+        # Change this to the absolute path to Drupal install.
+        drupal_root: "/Users/jfranks/Sites/devdesktop/prc-poc/docroot"
       blackbox: ~
       region_map:
         content: "#content"
@@ -17,3 +26,44 @@ default:
         error_message_selector: '.messages.error'
         success_message_selector: '.messages.status'
         warning_message_selector: '.messages.warning'
+
+# Separate profile for testing using the api driver. This assumes a
+# stock Drupal 7 install.
+drupal7:
+  suites:
+    default:
+      contexts: [CustomDrupalContext, FeatureContext]
+      filters:
+        tags: "@d7"
+  extensions:
+    Behat\MinkExtension:
+      base_url: http://prc-poc.local:8083
+    Drupal\DrupalExtension:
+      api_driver: "drupal"
+      drupal:
+        # Change this to the absolute path to Drupal install.
+        drupal_root: "/Users/jfranks/Sites/devdesktop/prc-poc/docroot"
+      region_map:
+        left sidebar: "#sidebar-first"
+        content: "#content"
+
+# Separate profile for testing using the Drush driver. Assumes a stock
+# Drupal 7 install.
+drush:
+  suites:
+    default:
+      contexts: [CustomDrupalContext, FeatureContext]
+      filters:
+        tags: "@drushTest"
+  extensions:
+    Behat\MinkExtension:
+      base_url: http://prc-poc.local:8083
+    Drupal\DrupalExtension:
+      api_driver: "drush"
+      drush_driver: "drush"
+      drush:
+        root: "/Users/jfranks/Sites/devdesktop/prc-poc/docroot"
+      region_map:
+        left sidebar: "#sidebar-first"
+        content: "#content"
+
