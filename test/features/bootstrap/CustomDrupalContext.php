@@ -6,6 +6,29 @@
  * Time: 1:14 PM
  */
 
+
+use Behat\MinkExtension\Context\MinkContext;
+use Behat\Behat\Exception\PendingException;
+use Behat\Behat\Event\ScenarioEvent;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
+
+use Drupal\Drupal;
+use Drupal\DrupalExtension\Event\EntityEvent;
+use Drupal\DrupalExtension\Context\DrupalSubContextInterface;
+
+use Symfony\Component\Process\Process;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+
+use Behat\Behat\Context\Step\Given;
+use Behat\Behat\Context\Step\When;
+use Behat\Behat\Context\Step\Then;
+use Behat\Behat\Context\TranslatedContextInterface;
+
+use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
+
+use Behat\Mink\Driver\Selenium2Driver as Selenium2Driver;
+
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
 
@@ -90,5 +113,25 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       throw new Exception("Element ({$button}) not found");
     }
   }
+
+  /**
+   * Asserts that a given node type is editable.
+   *
+   * @Then /^I should not be able to edit (?:a|an) "([^"]*)" node$/
+   */
+  public function assertNotEditNodeOfType($type) {
+    $node = (object) array('type' => $type);
+    $saved = $this->getDriver()->createNode($node);
+    $this->nodes[] = $saved;
+
+    // Set internal browser on the node edit page.
+    $this->getSession()->visit($this->locatePath('/node/' . $saved->nid . '/edit'));
+
+    // Test status.
+    return new Then("I should get a \"403\" HTTP response");
+
+  }
+
+
 
 } 
