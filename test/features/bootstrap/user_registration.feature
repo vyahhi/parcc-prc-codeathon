@@ -13,8 +13,7 @@ Feature: Login & Public Registration (PRC-48)
 #  Scenario: Fields on registration form (AC4)
 #
 #  Scenario: Registration form validation (AC5, AC6)
-
-  @d7
+  @api @d7
   Scenario: Logout (AC8)
     Given I am logged in as a user with the "authenticated user" role
       And I am on the homepage

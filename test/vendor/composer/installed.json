@@ -1501,12 +1501,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/jhedstrom/drupalextension.git",
-            "reference": "86950d2a73f095d19611aaed49d9ad37d886fe2e"
+            "reference": "aa3db38acc9e0b97d46a8db1238d393cc616dd2c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/jhedstrom/drupalextension/zipball/86950d2a73f095d19611aaed49d9ad37d886fe2e",
-            "reference": "86950d2a73f095d19611aaed49d9ad37d886fe2e",
+            "url": "https://api.github.com/repos/jhedstrom/drupalextension/zipball/aa3db38acc9e0b97d46a8db1238d393cc616dd2c",
+            "reference": "aa3db38acc9e0b97d46a8db1238d393cc616dd2c",
             "shasum": ""
         },
         "require": {
@@ -1520,7 +1520,7 @@
             "phpspec/phpspec": "~2.0",
             "phpunit/phpunit": "3.7.*"
         },
-        "time": "2014-09-24 21:08:49",
+        "time": "2014-10-02 12:10:07",
         "type": "behat-extension",
         "extra": {
             "branch-alias": {
