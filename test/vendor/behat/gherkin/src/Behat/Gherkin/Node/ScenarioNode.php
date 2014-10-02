@@ -1,83 +1,68 @@
 <?php
 
+namespace Behat\Gherkin\Node;
+
 /*
  * This file is part of the Behat Gherkin.
- * (c) Konstantin Kudryashov <ever.zet@gmail.com>
+ * (c) 2011 Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Behat\Gherkin\Node;
-
 /**
- * Represents Gherkin Scenario.
+ * Scenario Gherkin AST node.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class ScenarioNode implements ScenarioInterface
+class ScenarioNode extends AbstractScenarioNode
 {
-    /**
-     * @var string
-     */
-    private $title;
-    /**
-     * @var array
-     */
     private $tags = array();
-    /**
-     * @var StepNode[]
-     */
-    private $steps = array();
-    /**
-     * @var string
-     */
-    private $keyword;
-    /**
-     * @var integer
-     */
-    private $line;
 
     /**
-     * Initializes scenario.
+     * Sets scenario tags.
      *
-     * @param null|string $title
-     * @param array       $tags
-     * @param StepNode[]  $steps
-     * @param string      $keyword
-     * @param integer     $line
+     * @param array $tags Array of tag names
+     *
+     * @throws \LogicException if feature is frozen
      */
-    public function __construct($title, array $tags, array $steps, $keyword, $line)
+    public function setTags(array $tags)
     {
-        $this->title = $title;
+        if ($this->isFrozen()) {
+            throw new \LogicException('Impossible to change scenario tags in frozen feature.');
+        }
+
         $this->tags = $tags;
-        $this->steps = $steps;
-        $this->keyword = $keyword;
-        $this->line = $line;
     }
 
     /**
-     * Returns node type string
+     * Adds tag to scenario.
      *
-     * @return string
-     */
-    public function getNodeType()
-    {
-        return 'Scenario';
-    }
-
-    /**
-     * Returns scenario title.
+     * @param string $tag Tag name
      *
-     * @return null|string
+     * @throws \LogicException if feature is frozen
      */
-    public function getTitle()
+    public function addTag($tag)
     {
-        return $this->title;
+        if ($this->isFrozen()) {
+            throw new \LogicException('Impossible to change scenario tags in frozen feature.');
+        }
+
+        $this->tags[] = $tag;
     }
 
     /**
-     * Checks if scenario is tagged with tag.
+     * Checks if scenario has tags.
+     *
+     * @return Boolean
+     */
+    public function hasTags()
+    {
+        return count($this->getTags()) > 0;
+    }
+
+    /**
+     * Checks if scenario has tag.
      *
      * @param string $tag
      *
@@ -89,62 +74,28 @@ class ScenarioNode implements ScenarioInterface
     }
 
     /**
-     * Checks if scenario has tags (both inherited from feature and own).
-     *
-     * @return Boolean
-     */
-    public function hasTags()
-    {
-        return 0 < count($this->getTags());
-    }
-
-    /**
-     * Returns scenario tags (including inherited from feature).
+     * Returns scenario tags.
      *
      * @return array
      */
     public function getTags()
     {
+        $tags = $this->tags;
+
+        if ($feature = $this->getFeature()) {
+            $tags = array_merge($tags, $feature->getTags());
+        }
+
+        return $tags;
+    }
+
+    /**
+     * Returns only own tags (without inherited ones).
+     *
+     * @return array
+     */
+    public function getOwnTags()
+    {
         return $this->tags;
-    }
-
-    /**
-     * Checks if scenario has steps.
-     *
-     * @return Boolean
-     */
-    public function hasSteps()
-    {
-        return 0 < count($this->steps);
-    }
-
-    /**
-     * Returns scenario steps.
-     *
-     * @return StepNode[]
-     */
-    public function getSteps()
-    {
-        return $this->steps;
-    }
-
-    /**
-     * Returns scenario keyword.
-     *
-     * @return string
-     */
-    public function getKeyword()
-    {
-        return $this->keyword;
-    }
-
-    /**
-     * Returns scenario declaration line number.
-     *
-     * @return integer
-     */
-    public function getLine()
-    {
-        return $this->line;
     }
 }

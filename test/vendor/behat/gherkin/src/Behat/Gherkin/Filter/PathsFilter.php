@@ -1,17 +1,18 @@
 <?php
 
+namespace Behat\Gherkin\Filter;
+
+use Behat\Gherkin\Node\FeatureNode,
+    Behat\Gherkin\Node\ScenarioNode,
+    Behat\Gherkin\Node\OutlineNode;
+
 /*
  * This file is part of the Behat Gherkin.
- * (c) Konstantin Kudryashov <ever.zet@gmail.com>
+ * (c) 2013 Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Behat\Gherkin\Filter;
-
-use Behat\Gherkin\Node\FeatureNode;
-use Behat\Gherkin\Node\ScenarioInterface;
 
 /**
  * Filters features by their paths.
@@ -25,11 +26,11 @@ class PathsFilter extends SimpleFilter
     /**
      * Initializes filter.
      *
-     * @param string[] $paths List of approved paths
+     * @param array $paths List of approved paths
      */
     public function __construct(array $paths)
     {
-        $this->filterPaths = array_map('realpath', $paths);
+        $this->filterPaths = $paths;
     }
 
     /**
@@ -42,10 +43,6 @@ class PathsFilter extends SimpleFilter
     public function isFeatureMatch(FeatureNode $feature)
     {
         foreach ($this->filterPaths as $path) {
-            if (!$path) {
-                continue;
-            }
-
             if (0 === strpos($feature->getFile(), $path)) {
                 return true;
             }
@@ -57,12 +54,12 @@ class PathsFilter extends SimpleFilter
     /**
      * Checks if scenario or outline matches specified filter.
      *
-     * @param ScenarioInterface $scenario Scenario or Outline node instance
+     * @param ScenarioNode $scenario Scenario or Outline node instance
      *
-     * @return false This filter is designed to work only with features
+     * @return Boolean
      */
-    public function isScenarioMatch(ScenarioInterface $scenario)
+    public function isScenarioMatch(ScenarioNode $scenario)
     {
-        return false;
+        return $this->isFeatureMatch($scenario->getFeature());
     }
 }

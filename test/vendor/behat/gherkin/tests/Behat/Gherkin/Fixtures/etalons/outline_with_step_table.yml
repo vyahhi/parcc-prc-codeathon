@@ -11,10 +11,9 @@ feature:
       line:     3
       steps:
         -
-          keyword_type: Given
-          type:         Given
-          text:         the following users exist in the system
-          line:         4
+          type:   Given
+          text:   the following users exist in the system
+          line:   4
           arguments:
             -
               type:   table

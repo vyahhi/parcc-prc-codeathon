@@ -1,82 +1,129 @@
 <?php
 
+namespace Behat\Gherkin\Node;
+
 /*
  * This file is part of the Behat Gherkin.
- * (c) Konstantin Kudryashov <ever.zet@gmail.com>
+ * (c) 2011 Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Behat\Gherkin\Node;
-
-use ArrayIterator;
-use Behat\Gherkin\Exception\NodeException;
-use Iterator;
-use IteratorAggregate;
-
 /**
- * Represents Gherkin Table argument.
+ * Table Argument Gherkin AST node.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class TableNode implements ArgumentInterface, IteratorAggregate
+class TableNode implements StepArgumentNodeInterface
 {
-    /**
-     * @var array
-     */
-    private $table;
-    /**
-     * @var integer
-     */
-    private $maxLineLength = array();
+    private $rows = array();
+    private $rowLines = array();
+    private $keyword;
 
     /**
      * Initializes table.
      *
-     * @param array $table Table in form of [$rowLineNumber => [$val1, $val2, $val3]]
+     * @param string $table Initial table string
      */
-    public function __construct(array $table)
+    public function __construct($table = null)
     {
-        $this->table = $table;
+        if (null !== $table) {
+            $table = preg_replace("/\r\n|\r/", "\n", $table);
 
-        foreach ($this->getRows() as $row) {
-            foreach ($row as $column => $string) {
-                if (!isset($this->maxLineLength[$column])) {
-                    $this->maxLineLength[$column] = 0;
-                }
-
-                $this->maxLineLength[$column] = max($this->maxLineLength[$column], mb_strlen($string, 'utf8'));
+            foreach (explode("\n", $table) as $row) {
+                $this->addRow($row);
             }
         }
     }
 
     /**
-     * Returns node type.
+     * Returns new node with replaced outline example row tokens.
      *
-     * @return string
+     * @returns ExampleTableNode
      */
-    public function getNodeType()
+    public function createExampleRowStepArgument(array $tokens)
     {
-        return 'Table';
+        return new ExampleTableNode($this, $tokens);
     }
 
     /**
-     * Returns table hash, formed by columns (ColumnsHash).
+     * Adds a row to the string.
+     *
+     * @param string|array $row  Columns hash (column1 => value, column2 => value) or row string
+     * @param null|integer $line Row line number
+     */
+    public function addRow($row, $line = null)
+    {
+        if (is_array($row)) {
+            $this->rows[] = $row;
+        } else {
+            $row = preg_replace("/^\s*\||\|\s*$/", '', $row);
+
+            $this->rows[] = array_map(function($item) {
+                return preg_replace("/^\s*|\s*$/", '', $item);
+            }, explode('|', $row));
+        }
+
+        $this->rowLines[count($this->rows) - 1] = $line;
+    }
+
+    /**
+     * Returns table rows.
+     *
+     * @return array
+     */
+    public function getRows()
+    {
+        return $this->rows;
+    }
+
+    /**
+     * Sets table rows.
+     *
+     * @param array $rows
+     */
+    public function setRows(array $rows)
+    {
+        $this->rows = $rows;
+        $this->rowLines = array();
+    }
+
+    /**
+     * Returns specific row in a table.
+     *
+     * @param integer $rowNum Row number
+     *
+     * @return array
+     */
+    public function getRow($rowNum)
+    {
+        return $this->rows[$rowNum];
+    }
+
+    /**
+     * Converts row into delimited string.
+     *
+     * @param integer $rowNum Row number
+     *
+     * @return string
+     */
+    public function getRowAsString($rowNum)
+    {
+        $values = array();
+        foreach ($this->getRow($rowNum) as $col => $value) {
+            $values[] = $this->padRight(' '.$value.' ', $this->getMaxLengthForColumn($col) + 2);
+        }
+
+        return sprintf('|%s|', implode('|', $values));
+    }
+
+    /**
+     * Returns table hash, formed by columns (ColumnHash).
      *
      * @return array
      */
     public function getHash()
-    {
-        return $this->getColumnsHash();
-    }
-
-    /**
-     * Returns table hash, formed by columns.
-     *
-     * @return array
-     */
-    public function getColumnsHash()
     {
         $rows = $this->getRows();
         $keys = array_shift($rows);
@@ -90,7 +137,7 @@ class TableNode implements ArgumentInterface, IteratorAggregate
     }
 
     /**
-     * Returns table hash, formed by rows.
+     * Returns table hash, formed by rows (RowsHash).
      *
      * @return array
      */
@@ -106,136 +153,54 @@ class TableNode implements ArgumentInterface, IteratorAggregate
     }
 
     /**
+     * Sets current node definition keyword.
+     *
+     * @param string $keyword Sets table keyword
+     */
+    public function setKeyword($keyword)
+    {
+        $this->keyword = $keyword;
+    }
+
+    /**
+     * Returns current node definition keyword.
+     *
+     * @return string
+     */
+    public function getKeyword()
+    {
+        return $this->keyword;
+    }
+
+    /**
      * Returns numerated table lines.
      * Line numbers are keys, lines are values.
      *
      * @return array
      */
-    public function getTable()
+    public function getNumeratedRows()
     {
-        return $this->table;
+        return array_combine($this->rowLines, $this->rows);
     }
 
     /**
-     * Returns table rows.
+     * Returns line numbers for rows.
      *
      * @return array
      */
-    public function getRows()
+    public function getRowLines()
     {
-        return array_values($this->table);
+        return $this->rowLines;
     }
 
     /**
-     * Returns table definition lines.
-     *
-     * @return array
-     */
-    public function getLines()
-    {
-        return array_keys($this->table);
-    }
-
-    /**
-     * Returns specific row in a table.
-     *
-     * @param integer $index Row number
-     *
-     * @return array
-     *
-     * @throws NodeException If row with specified index does not exist
-     */
-    public function getRow($index)
-    {
-        $rows = $this->getRows();
-
-        if (!isset($rows[$index])) {
-            throw new NodeException(sprintf('Rows #%d does not exist in table.', $index));
-        }
-
-        return $rows[$index];
-    }
-
-    /**
-     * Returns line number at which specific row was defined.
-     *
-     * @param integer $index
-     *
-     * @return integer
-     *
-     * @throws NodeException If row with specified index does not exist
-     */
-    public function getRowLine($index)
-    {
-        $lines = array_keys($this->table);
-
-        if (!isset($lines[$index])) {
-            throw new NodeException(sprintf('Rows #%d does not exist in table.', $index));
-        }
-
-        return $lines[$index];
-    }
-
-    /**
-     * Converts row into delimited string.
-     *
-     * @param integer $rowNum Row number
-     *
-     * @return string
-     */
-    public function getRowAsString($rowNum)
-    {
-        $values = array();
-        foreach ($this->getRow($rowNum) as $column => $value) {
-            $values[] = $this->padRight(' ' . $value . ' ', $this->maxLineLength[$column] + 2);
-        }
-
-        return sprintf('|%s|', implode('|', $values));
-    }
-
-    /**
-     * Converts row into delimited string.
-     *
-     * @param integer  $rowNum  Row number
-     * @param callable $wrapper Wrapper function
-     *
-     * @return string
-     */
-    public function getRowAsStringWithWrappedValues($rowNum, $wrapper)
-    {
-        $values = array();
-        foreach ($this->getRow($rowNum) as $column => $value) {
-            $value = $this->padRight(' ' . $value . ' ', $this->maxLineLength[$column] + 2);
-
-            $values[] = call_user_func($wrapper, $value, $column);
-        }
-
-        return sprintf('|%s|', implode('|', $values));
-    }
-
-    /**
-     * Converts entire table into string
-     *
-     * @return string
-     */
-    public function getTableAsString()
-    {
-        $lines = array();
-        for ($i = 0; $i < count($this->getRows()); $i++) {
-            $lines[] = $this->getRowAsString($i);
-        }
-
-        return implode("\n", $lines);
-    }
-
-    /**
-     * Returns line number at which table was started.
+     * Returns table start line number.
      *
      * @return integer
      */
     public function getLine()
     {
-        return $this->getRowLine(0);
+        return count($this->rowLines) ? $this->rowLines[0] : 0;
     }
 
     /**
@@ -245,24 +210,45 @@ class TableNode implements ArgumentInterface, IteratorAggregate
      */
     public function __toString()
     {
-        return $this->getTableAsString();
+        $string = '';
+
+        for ($i = 0; $i < count($this->getRows()); $i++) {
+            if ('' !== $string) {
+                $string .= "\n";
+            }
+            $string .= $this->getRowAsString($i);
+        }
+
+        return $string;
     }
 
     /**
-     * Retrieves a hash iterator.
+     * Returns max length of specific column.
      *
-     * @return Iterator
+     * @param integer $columnNum Column number
+     *
+     * @return integer
      */
-    public function getIterator()
+    protected function getMaxLengthForColumn($columnNum)
     {
-        return new ArrayIterator($this->getHash());
+        $max = 0;
+
+        foreach ($this->getRows() as $row) {
+            if(isset($row[$columnNum])){
+                if (($tmp = mb_strlen($row[$columnNum], 'utf8')) > $max) {
+                    $max = $tmp;
+                }
+            }
+        }
+
+        return $max;
     }
 
     /**
      * Pads string right.
      *
      * @param string  $text   Text to pad
-     * @param integer $length Length
+     * @param integer $length Lenght
      *
      * @return string
      */

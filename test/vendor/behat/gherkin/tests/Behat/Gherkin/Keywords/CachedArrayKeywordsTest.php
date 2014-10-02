@@ -2,32 +2,33 @@
 
 namespace Tests\Behat\Gherkin\Keywords;
 
-use Behat\Gherkin\Keywords\CachedArrayKeywords;
-use Behat\Gherkin\Node\StepNode;
+use Behat\Gherkin\Keywords\CachedArrayKeywords,
+    Behat\Gherkin\Node;
+
+require_once 'KeywordsTest.php';
 
 class CachedArrayKeywordsTest extends KeywordsTest
 {
     protected function getKeywords()
     {
-        return new CachedArrayKeywords(__DIR__ . '/../../../../i18n.php');
+        return new CachedArrayKeywords(__DIR__.'/../../../../i18n.php');
     }
 
     protected function getKeywordsArray()
     {
-        return include(__DIR__ . '/../../../../i18n.php');
+        return include(__DIR__.'/../../../../i18n.php');
     }
 
-    protected function getSteps($keywords, $text, &$line, $keywordType)
+    protected function addSteps(Node\AbstractScenarioNode $scenario, $keywords, $text, $line)
     {
-        $steps = array();
         foreach (explode('|', $keywords) as $keyword) {
             if (false !== mb_strpos($keyword, '<')) {
                 $keyword = mb_substr($keyword, 0, -1);
             }
-
-            $steps[] = new StepNode($keyword, $text, array(), $line++, $keywordType);
+            $scenario->addStep(new Node\StepNode($keyword, $text, $line));
+            $line += 1;
         }
 
-        return $steps;
+        return $line;
     }
 }

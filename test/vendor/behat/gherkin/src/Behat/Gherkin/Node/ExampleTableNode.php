@@ -1,57 +1,55 @@
 <?php
 
+namespace Behat\Gherkin\Node;
+
 /*
  * This file is part of the Behat Gherkin.
- * (c) Konstantin Kudryashov <ever.zet@gmail.com>
+ * (c) 2011 Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Behat\Gherkin\Node;
-
 /**
- * Represents Gherkin Outline Example Table.
+ * Table Argument Gherkin AST node.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
 class ExampleTableNode extends TableNode
 {
-    /**
-     * @var string
-     */
-    private $keyword;
+    private $cleanRows = array();
 
     /**
-     * Initializes example table.
+     * Initializes table.
      *
-     * @param array  $table   Table in form of [$rowLineNumber => [$val1, $val2, $val3]]
-     * @param string $keyword
+     * @param TableNode $cleanTable
+     * @param array     $tokens
+     *
+     * @internal param string $table Initial table string
      */
-    public function __construct(array $table, $keyword)
+    public function __construct(TableNode $cleanTable, array $tokens)
     {
-        $this->keyword = $keyword;
+        $this->cleanRows = $rows = $cleanTable->getRows();
 
-        parent::__construct($table);
+        foreach ($tokens as $key => $value) {
+            foreach (array_keys($rows) as $row) {
+                foreach (array_keys($rows[$row]) as $col) {
+                    $rows[$row][$col] = str_replace('<'.$key.'>', $value, $rows[$row][$col]);
+                }
+            }
+        }
+
+        $this->setKeyword($cleanTable->getKeyword());
+        $this->setRows($rows);
     }
 
     /**
-     * Returns node type string
+     * Returns rows without tokens being replaced.
      *
-     * @return string
+     * @return array
      */
-    public function getNodeType()
+    public function getCleanRows()
     {
-        return 'ExampleTable';
-    }
-
-    /**
-     * Returns example table keyword.
-     *
-     * @return string
-     */
-    public function getKeyword()
-    {
-        return $this->keyword;
+        return $this->cleanRows;
     }
 }

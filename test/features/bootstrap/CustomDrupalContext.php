@@ -6,7 +6,7 @@
  * Time: 1:14 PM
  */
 
-class CustomDrupalContext extends \Drupal\DrupalExtension\Context\DrupalContext {
+class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
 
   /**
