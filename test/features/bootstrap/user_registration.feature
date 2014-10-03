@@ -41,6 +41,14 @@ Feature: Login & Public Registration (PRC-48)
     Then I press the "Create new account" button
     Then I should see the error message "The e-mail address invalid is not valid."
 
+  Scenario: Registration form validation - passwords do not match (AC5b)
+    Given I am on the homepage
+    And I follow "Join now!"
+    Then I fill in "abc" for "Password"
+    And I fill in "xyz" for "Confirm password"
+    Then I press the "Create new account" button
+    Then I should see the error message "The specified passwords do not match."
+
 
   @api @d7
   Scenario: Logout (AC8)
