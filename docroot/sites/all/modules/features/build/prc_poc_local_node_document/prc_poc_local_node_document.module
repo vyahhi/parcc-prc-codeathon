@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Document feature.
+ */
+
+include_once 'prc_poc_local_node_document.features.inc';

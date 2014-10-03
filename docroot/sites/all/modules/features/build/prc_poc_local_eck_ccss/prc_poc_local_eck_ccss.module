@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local ccss feature.
+ */
+
+include_once 'prc_poc_local_eck_ccss.features.inc';

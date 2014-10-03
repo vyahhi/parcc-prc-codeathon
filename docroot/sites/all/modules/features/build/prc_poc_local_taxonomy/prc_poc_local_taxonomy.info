@@ -1,0 +1,12 @@
+name = prc-poc.local Taxonomy
+core = 7.x
+package = Configuration
+dependencies[] = features
+dependencies[] = taxonomy
+features[taxonomy][] = ccss_grade
+features[taxonomy][] = genre
+features[taxonomy][] = grade_level
+features[taxonomy][] = hierarchy
+features[taxonomy][] = subject
+features[taxonomy][] = tags
+features[features_api][] = api:2

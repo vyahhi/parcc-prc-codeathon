@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Media feature.
+ */
+
+include_once 'prc_poc_local_media.features.inc';

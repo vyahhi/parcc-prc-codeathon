@@ -1,0 +1,10 @@
+name = prc-poc.local ccss
+core = 7.x
+package = Entity
+dependencies[] = features
+features[eck_bundle][] = ccss_ccss_superdomain
+features[eck_bundle][] = ccss_ccss_standard
+features[eck_bundle][] = ccss_ccss_domain
+features[eck_bundle][] = ccss_ccss_cluster
+features[eck_entity_type][] = ccss
+features[features_api][] = api:2

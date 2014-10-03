@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Views feature.
+ */
+
+include_once 'prc_poc_local_views.features.inc';
