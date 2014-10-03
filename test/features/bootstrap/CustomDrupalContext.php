@@ -89,6 +89,19 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * Checks for that a field with specified id|name|title|alt|value does not exist.
+   *
+   * @Then /^(?:|I )should not see an? "(?P<element>[^"]*)" field$/
+   */
+  public function iShouldNotSeeAField($field)
+  {
+    $field = $this->fixStepArgument($field);
+    if ($this->getSession()->getPage()->hasField($field)) {
+      throw new Exception("Element ({$field}) found");
+    }
+  }
+
+  /**
    * Checks for a link with specified id|name|title|alt|value.
    *
    * @Then /^(?:|I )should see an? "(?P<element>[^"]*)" link$/
@@ -132,6 +145,4 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
   }
 
-
-
-} 
+}
