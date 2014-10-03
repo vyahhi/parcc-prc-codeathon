@@ -39,3 +39,51 @@ function prc_login_form_form_user_login_block_alter(&$form, &$form_state) {
     $form['links']['#markup'] = $links;
   }
 }
+
+/**
+ *  Implements hook_user_insert().
+ */
+function prc_login_form_user_insert(&$edit, $account, $category) {
+  //TODO: Check that this user is self-registering and not coming through an invitation
+  //_prc_login_form_add_role_to_user($account, 'Educator');
+  // Get the rid from the roles table.
+  $role_name = 'Educator';
+  $roles = user_roles(TRUE);
+  $rid = array_search($role_name, $roles);
+  if ($rid != FALSE) {
+    $new_role[$rid] = $role_name;
+    $all_roles = $account->roles + $new_role; // Add new role to existing roles.
+    $account->roles = $all_roles;
+  }
+
+}
+
+/**
+ * Add a role to a user.
+ *
+ * @param $user
+ *   User object or user ID.
+ * @param $role_name
+ *   String value of role to be added.
+ *
+ * @see http_://drupal.org/node/28379#comment-4277052
+ * @see http_://api.drupal.org/api/drupal/modules--user--user.module/function/user_save
+ */
+function _prc_login_form_add_role_to_user($user, $role_name) {
+  // For convenience, we'll allow user ids as well as full user objects.
+  if (is_numeric($user)) {
+    $user = user_load($user);
+  }
+  // If the user doesn't already have the role, add the role to that user.
+  $key = array_search($role_name, $user->roles);
+  if ($key == FALSE) {
+    // Get the rid from the roles table.
+    $roles = user_roles(TRUE);
+    $rid = array_search($role_name, $roles);
+    if ($rid != FALSE) {
+      $new_role[$rid] = $role_name;
+      $all_roles = $user->roles + $new_role; // Add new role to existing roles.
+      user_save($user, array('roles' => $all_roles));
+    }
+  }
+}

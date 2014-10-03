@@ -46,7 +46,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
   protected function fixStepArgument($argument) {
     if (strpos($argument, '@timestamp') !== FALSE) {
-      $argument = str_replace('@timestamp', time(), $argument);
+      $argument = str_replace('@timestamp', $this->timestamp, $argument);
     }
     return parent::fixStepArgument($argument);
   }
@@ -144,5 +144,16 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     return new Then("I should get a \"403\" HTTP response");
 
   }
+
+  /**
+   * Asserts that a given user has the specified role.
+   *
+   * @Then /^I should know that the user "([^"]*)" has a role of "([^"]*)"$/
+   */
+  public function assertUserHasRole($username, $role) {
+    parent::assertDrushCommandWithArgument('user-information', $username);
+    parent::assertDrushOutput($role);
+  }
+
 
 }

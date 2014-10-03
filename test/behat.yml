@@ -13,7 +13,7 @@ default:
       blackbox: ~
       # Set the drush alias to "@self" by default, when executing tests from within the drupal installation.
       drush:
-        root: /Users/jfranks/Sites/devdesktop/prc-poc/docroot
+        root: "/Users/jfranks/Sites/devdesktop/prc-poc/docroot"
       text:
         username_field: "E-mail"
       selectors:

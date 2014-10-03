@@ -76,3 +76,16 @@ Feature: Login & Public Registration (PRC-48)
     And I go to "front"
     Then I should see a "Log in" button
 
+  Scenario: When I self-register, I am automatically given the Educator role
+    Given I am an anonymous user
+    And I am on the homepage
+    And I follow "Join now!"
+    Then I fill in "test@timestamp@example.com" for "E-mail"
+    And I fill in "abc123" for "Password"
+    And I fill in "abc123" for "Confirm password"
+    And I fill in "First" for "First Name"
+    And I fill in "Last" for "Last Name"
+    And I fill in "Automated Test Robot" for "Profession"
+    Then I press the "Create new account" button
+    Then I should see the message "Registration successful. You are now logged in."
+    Then I should know that the user "test@timestamp@example.com" has a role of "Educator"
