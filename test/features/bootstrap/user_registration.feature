@@ -34,9 +34,12 @@ Feature: Login & Public Registration (PRC-48)
       And I should see a "Password *" field
       And I should see a "Confirm password *" field
 
-#
-#  Scenario: Registration form validation (AC5, AC6)
-
+  Scenario: Registration form validation - invalid email address (AC5a)
+    Given I am on the homepage
+      And I follow "Join now!"
+    Then I fill in "invalid" for "E-mail"
+    Then I press the "Create new account" button
+    Then I should see the error message "The e-mail address invalid is not valid."
 
 
   @api @d7

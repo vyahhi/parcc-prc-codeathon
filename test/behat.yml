@@ -16,3 +16,7 @@ default:
         root: /Users/jfranks/Sites/devdesktop/prc-poc/docroot
       text:
         username_field: "E-mail"
+      selectors:
+        message_selector: '.messages'
+        error_message_selector: '.messages.error'
+        success_message_selector: '.messages.status'
