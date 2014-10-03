@@ -33,6 +33,7 @@ Feature: Login & Public Registration (PRC-48)
       # JF lobbying to remove this requirement
       And I should see a "Password *" field
       And I should see a "Confirm password *" field
+      And I should see "Password strength"
 
   Scenario: Registration form validation - invalid email address (AC5a)
     Given I am on the homepage
@@ -65,4 +66,16 @@ Feature: Login & Public Registration (PRC-48)
     When I click "Log out"
       And I go to "front"
     Then I should see a "Log in" button
+
+  Scenario: Successful registration message (AC6d)
+    Given I am on the homepage
+    And I follow "Join now!"
+    Then I fill in "@timestamp@example.com" for "E-mail"
+    And I fill in "abc123" for "Password"
+    And I fill in "abc123" for "Confirm password"
+    And I fill in "First" for "First Name"
+    And I fill in "Last" for "Last Name"
+    And I fill in "Automated Test Robot" for "Profession"
+    Then I press the "Create new account" button
+    Then I should see the message "Registration successful. You are now logged in."
 
