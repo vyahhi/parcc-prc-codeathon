@@ -8,6 +8,7 @@ Feature: Login & Public Registration (PRC-48)
   Scenario: A new role Educator shall be created. This role can view content, but cannot make any changes to the update. (AC1)
     Given I am logged in as a user with the "Educator" role
     Then I should not be able to edit an "article" node
+    Then I should not be able to edit a "basic page" node
 
   Scenario: When a user clicks the Join Now! button or link from the PRC website home page, a new page opens to allow the user create a new user account. (AC2)
     Given I am on the homepage
@@ -19,7 +20,6 @@ Feature: Login & Public Registration (PRC-48)
     And I follow "Join now!"
     Then I should see the text "Create User Account to Join Partnership Resource Center"
 
-
   Scenario: Fields on registration form (AC4)
     Given I am on the homepage
       And I follow "Join now!"
@@ -28,9 +28,6 @@ Feature: Login & Public Registration (PRC-48)
       And I should see a "Profession *" field
       And I should not see a "Username" field
       And I should see an "E-mail *" field
-      # JF lobbying to rename this field label
-      # And I should see a "Confirm Email Address *" field
-      # JF lobbying to remove this requirement
       And I should see a "Password *" field
       And I should see a "Confirm password *" field
       And I should see "Password strength"
@@ -59,14 +56,6 @@ Feature: Login & Public Registration (PRC-48)
     And I should see the error message "Profession field is required."
     And I should see the error message "E-mail field is required."
 
-  @api @d7
-  Scenario: Logout (AC8)
-    Given I am logged in as a user with the "authenticated user" role
-      And I am on the homepage
-    When I click "Log out"
-      And I go to "front"
-    Then I should see a "Log in" button
-
   Scenario: Successful registration message (AC6d)
     Given I am on the homepage
     And I follow "Join now!"
@@ -78,4 +67,12 @@ Feature: Login & Public Registration (PRC-48)
     And I fill in "Automated Test Robot" for "Profession"
     Then I press the "Create new account" button
     Then I should see the message "Registration successful. You are now logged in."
+
+  @api @d7
+  Scenario: Logout (AC8)
+    Given I am logged in as a user with the "authenticated user" role
+    And I am on the homepage
+    When I click "Log out"
+    And I go to "front"
+    Then I should see a "Log in" button
 
