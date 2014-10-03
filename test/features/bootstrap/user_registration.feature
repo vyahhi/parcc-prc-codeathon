@@ -49,6 +49,14 @@ Feature: Login & Public Registration (PRC-48)
     Then I press the "Create new account" button
     Then I should see the error message "The specified passwords do not match."
 
+  Scenario: Registration form validation - required fields (AC6)
+    Given I am on the homepage
+    And I follow "Join now!"
+    Then I press the "Create new account" button
+    Then I should see the error message "First Name field is required."
+    And I should see the error message "Last Name field is required."
+    And I should see the error message "Profession field is required."
+    And I should see the error message "E-mail field is required."
 
   @api @d7
   Scenario: Logout (AC8)
