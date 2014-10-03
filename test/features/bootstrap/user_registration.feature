@@ -22,19 +22,19 @@ Feature: Login & Public Registration (PRC-48)
 
   Scenario: Fields on registration form (AC4)
     Given I am on the homepage
-      And I follow "Join now!"
+    And I follow "Join now!"
     Then I should see a "First Name *" field
-      And I should see a "Last Name *" field
-      And I should see a "Profession *" field
-      And I should not see a "Username" field
-      And I should see an "E-mail *" field
-      And I should see a "Password *" field
-      And I should see a "Confirm password *" field
-      And I should see "Password strength"
+    And I should see a "Last Name *" field
+    And I should see a "Profession" field
+    And I should not see a "Username" field
+    And I should see an "E-mail *" field
+    And I should see a "Password *" field
+    And I should see a "Confirm password *" field
+    And I should see "Password strength"
 
   Scenario: Registration form validation - invalid email address (AC5a)
     Given I am on the homepage
-      And I follow "Join now!"
+    And I follow "Join now!"
     Then I fill in "invalid" for "E-mail"
     Then I press the "Create new account" button
     Then I should see the error message "The e-mail address invalid is not valid."
@@ -53,7 +53,7 @@ Feature: Login & Public Registration (PRC-48)
     Then I press the "Create new account" button
     Then I should see the error message "First Name field is required."
     And I should see the error message "Last Name field is required."
-    And I should see the error message "Profession field is required."
+    And I should not see the error message "Profession field is required."
     And I should see the error message "E-mail field is required."
 
   Scenario: Successful registration message (AC6d)
