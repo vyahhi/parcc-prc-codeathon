@@ -5,9 +5,25 @@
  * Alters to login forms.
  */
 
+/**
+ * Implements hook_form_alter().
+ * @param $form
+ * @param $form_state
+ * @param $form_id
+ */
 //function prc_login_form_form_alter(&$form, &$form_state, $form_id) {
+//  $x = 'x';
+//  Just leaving this i
 //}
 
+function prc_login_form_form_user_register_form_alter(&$form, &$form_state) {
+  drupal_set_title('Create User Account to Join Partnership Resource Center');
+}
+
+/**
+ * @param $form
+ * @param $form_state
+ */
 function prc_login_form_form_user_login_block_alter(&$form, &$form_state) {
   // Are these really theming operations?
   // String substitution?
@@ -18,7 +34,7 @@ function prc_login_form_form_user_login_block_alter(&$form, &$form_state) {
     '<a href="/user/register"' => 'Not registered yet? <a href="/user/register"',
   );
 
-  foreach($replaces as $replace => $with) {
+  foreach ($replaces as $replace => $with) {
     $links = str_replace($replace, $with, $form['links']['#markup']);
     $form['links']['#markup'] = $links;
   }
