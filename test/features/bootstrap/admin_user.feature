@@ -8,3 +8,11 @@ Feature: PRC Administrators
     Given I am logged in as a user with the "PRC Admin" role
     Then I should be able to edit an "Article" node
     And I should be able to edit a "Basic page" node
+
+  @api @d7
+  Scenario: Logout (AC5)
+    Given I am logged in as a user with the "PRC Admin" role
+    And I am on the homepage
+    When I click "Log out"
+    And I go to "front"
+    Then I should see a "Log in" button
