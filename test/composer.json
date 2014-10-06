@@ -3,6 +3,7 @@
         "bin-dir": "bin/"
     },
     "require": {
-        "drupal/drupal-extension": "1.0.*@stable"
+        "drupal/drupal-extension": "1.0.*@stable",
+        "facebook/webdriver": "v0.4"
     }
 }

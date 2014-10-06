@@ -7,27 +7,7 @@
  */
 
 
-use Behat\MinkExtension\Context\MinkContext;
-use Behat\Behat\Exception\PendingException;
-use Behat\Behat\Event\ScenarioEvent;
-use Behat\Mink\Exception\UnsupportedDriverActionException;
-
-use Drupal\Drupal;
-use Drupal\DrupalExtension\Event\EntityEvent;
-use Drupal\DrupalExtension\Context\DrupalSubContextInterface;
-
-use Symfony\Component\Process\Process;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-
-use Behat\Behat\Context\Step\Given;
-use Behat\Behat\Context\Step\When;
 use Behat\Behat\Context\Step\Then;
-use Behat\Behat\Context\TranslatedContextInterface;
-
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
-
-use Behat\Mink\Driver\Selenium2Driver as Selenium2Driver;
 
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
