@@ -140,7 +140,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   /**
    * Asserts that a given field has the specified length
    *
-   * @Then /^the field "([^"]*)" has a length of "([^"]*)"$/
+   * @Then /^the field "([^"]*)" should have a length of "([^"]*)"$/
    */
   public function assertFieldLength($field, $length) {
     $f = field_info_field($field);

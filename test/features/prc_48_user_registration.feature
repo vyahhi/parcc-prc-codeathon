@@ -89,3 +89,10 @@ Feature: Login & Public Registration (PRC-48)
     Then I press the "Create new account" button
     Then I should see the message "Registration successful. You are now logged in."
     Then I should know that the user "test@timestamp@example.com" has a role of "Educator"
+
+  Scenario: Field lengths
+    # Password length is managed by Drupal
+    # Email length is managed by Drupal
+    Then the field "field_first_name" should have a length of "255"
+    Then the field "field_last_name" should have a length of "255"
+    Then the field "field_profession" should have a length of "255"
