@@ -32,6 +32,13 @@ Feature: Login & Public Registration (PRC-48)
     And I should see a "Confirm password *" field
     And I should see "Password strength"
 
+  Scenario: Field lengths (AC4)
+    # Password length is managed by Drupal
+    # Email length is managed by Drupal
+    Then the field "field_first_name" should have a length of "255"
+    Then the field "field_last_name" should have a length of "255"
+    Then the field "field_profession" should have a length of "255"
+
   Scenario: Registration form validation - invalid email address (AC5a)
     Given I am on the homepage
     And I follow "Join now!"
@@ -46,6 +53,11 @@ Feature: Login & Public Registration (PRC-48)
     And I fill in "xyz" for "Confirm password"
     Then I press the "Create new account" button
     Then I should see the error message "The specified passwords do not match."
+
+  Scenario: Registration form - Password strength (AC5d)
+    Given I am on the homepage
+    And I follow "Join now!"
+    Then I should see "Password strength:"
 
   Scenario: Registration form validation - required fields (AC6)
     Given I am on the homepage
@@ -69,12 +81,14 @@ Feature: Login & Public Registration (PRC-48)
     Then I should see the message "Registration successful. You are now logged in."
 
   @api @d7
-  Scenario: Logout (AC8)
+  Scenario: Logout (AC6b)
     Given I am logged in as a user with the "authenticated user" role
     And I am on the homepage
     When I click "Log out"
     And I go to "front"
     Then I should see a "Log in" button
+
+  #TODO : AC7 - Email after registration
 
   Scenario: When I self-register, I am automatically given the Educator role
     Given I am an anonymous user
@@ -90,9 +104,3 @@ Feature: Login & Public Registration (PRC-48)
     Then I should see the message "Registration successful. You are now logged in."
     Then I should know that the user "test@timestamp@example.com" has a role of "Educator"
 
-  Scenario: Field lengths
-    # Password length is managed by Drupal
-    # Email length is managed by Drupal
-    Then the field "field_first_name" should have a length of "255"
-    Then the field "field_last_name" should have a length of "255"
-    Then the field "field_profession" should have a length of "255"
