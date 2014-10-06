@@ -33,6 +33,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
   /**
    * @Then /^"([^"]*)" should be visible$/
+   * @param $selector
+   * @throws Exception
    */
   public function shouldBeVisible($selector) {
     $el = $this->getSession()->getPage()->find('css', $selector);
