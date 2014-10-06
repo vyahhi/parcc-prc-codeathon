@@ -137,5 +137,17 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     parent::assertDrushOutput($role);
   }
 
+  /**
+   * Asserts that a given field has the specified length
+   *
+   * @Then /^the field "([^"]*)" has a length of "([^"]*)"$/
+   */
+  public function assertFieldLength($field, $length) {
+    $f = field_info_field($field);
+    $actual_length = $f['columns']['format']['length'];
+    if ($length != $actual_length) {
+      throw new \Exception(sprintf("The field '%s' did not have a length of %d.\nInstead, it was:\n\n%d", $field, $length, $actual_length));
+    }
+  }
 
 }
