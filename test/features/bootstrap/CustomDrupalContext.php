@@ -150,4 +150,47 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
   }
 
+  /**
+   * Creates X number of random users with the specified role
+   *
+   * @Given /^I create (\d+) users with the "(?P<role>[^"]*)" role$/
+   */
+  public function createXUsersOfYRole($number, $role) {
+    // Provide user data in the following format:
+    //
+    // | name     | mail         |
+    // | user foo | foo@bar.com  |
+
+    // Provides user data to createUsers()
+
+    $table_node = new \Behat\Gherkin\Node\TableNode();
+    $table_node->addRow(array('name', 'mail', 'status'));
+
+    for ($i = 0; $i < $number; $i++) {
+      $user_name = 'userbehat' . $i;
+      $email = $user_name . '@example.com';
+      $table_node->addRow(array($user_name, $email, 1));
+    }
+    parent::createUsers($table_node);
+  }
+  /**
+   * Asserts that a given field has no empty cells
+   *
+   * @Given /^I should not see any empty "(?P<column>[^"]*)" cells$/
+   */
+  public function assertNoCellsEmpty($column) {
+    $page = $this->getSession()->getPage();
+
+    $matches = $page->find("xpath", "//*[contains(text(), 'Roles')]");
+    $css_class = str_replace('views-field ', '', $matches->getAttribute('class'));
+
+    $cells = $page->findAll('css', "td.$css_class");
+
+    foreach ($cells as $cell) {
+      if (!strlen($cell->getText())) {
+        throw new \Exception(sprintf("The column '%s' had an empty cell!", $column));
+      }
+    }
+  }
+
 }
