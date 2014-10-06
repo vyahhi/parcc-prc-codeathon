@@ -3,6 +3,7 @@ Feature: Anonymous User Home Page (PRC-51)
   I want to access the PRC website,
   So that I can decide whether I want to register or continue accessing public information provided by PRC in the website.
 
+  # javascript here because we are testing visibility. Goutte doesn't respond to visibility so we need Webdriver.
   @javascript
   Scenario: When a user types the PRC URL in their browser, the PRC home page opens # AC1 AC2
     Given I am an anonymous user
@@ -18,7 +19,7 @@ Feature: Anonymous User Home Page (PRC-51)
   Scenario: The login block is present # AC3 AC4
     Given I am an anonymous user
       And I am on the homepage
-    Then I should see a "Username" field
+    Then I should see a "E-mail" field
     And I should see an "Password" field
     And I should see an "Log in" button
     And I should see a "Forgot password?" link
