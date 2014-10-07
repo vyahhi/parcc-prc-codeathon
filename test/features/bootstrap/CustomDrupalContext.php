@@ -110,7 +110,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
-   * Asserts that a given node type is editable.
+   * Asserts that a given node type is not editable.
    *
    * @Then /^I should not be able to edit (?:a|an) "([^"]*)" node$/
    */
