@@ -26,6 +26,11 @@ Feature: Admin UI: View User Accounts (PRC-37)
     And I follow "Users"
     Then I should be on "/admin-users"
 
+  Scenario: Page title (AC1)
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "/admin-users"
+    Then I should see "PRC Website Users"
+
   Scenario: Page contains table that only contains Educator and PRC Admin users (AC2)
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "/admin-users"
