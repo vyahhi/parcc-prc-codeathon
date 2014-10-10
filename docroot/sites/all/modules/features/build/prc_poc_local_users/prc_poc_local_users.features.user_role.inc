@@ -10,6 +10,12 @@
 function prc_poc_local_users_user_default_roles() {
   $roles = array();
 
+  // Exported role: Content Author.
+  $roles['Content Author'] = array(
+    'name' => 'Content Author',
+    'weight' => 5,
+  );
+
   // Exported role: Educator.
   $roles['Educator'] = array(
     'name' => 'Educator',

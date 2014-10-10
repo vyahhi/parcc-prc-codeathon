@@ -441,7 +441,6 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['create article content'] = array(
     'name' => 'create article content',
     'roles' => array(
-      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -451,6 +450,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['create document content'] = array(
     'name' => 'create document content',
     'roles' => array(
+      'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
       'authenticated user' => 'authenticated user',
     ),
@@ -470,7 +470,6 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['create page content'] = array(
     'name' => 'create page content',
     'roles' => array(
-      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -495,18 +494,14 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'create practice_test content'.
   $permissions['create practice_test content'] = array(
     'name' => 'create practice_test content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'create test_item content'.
   $permissions['create test_item content'] = array(
     'name' => 'create test_item content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -523,7 +518,6 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['delete any article content'] = array(
     'name' => 'delete any article content',
     'roles' => array(
-      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -533,6 +527,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['delete any document content'] = array(
     'name' => 'delete any document content',
     'roles' => array(
+      'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
@@ -543,7 +538,6 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['delete any page content'] = array(
     'name' => 'delete any page content',
     'roles' => array(
-      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -568,18 +562,14 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any practice_test content'.
   $permissions['delete any practice_test content'] = array(
     'name' => 'delete any practice_test content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any test_item content'.
   $permissions['delete any test_item content'] = array(
     'name' => 'delete any test_item content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -587,7 +577,6 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['delete own article content'] = array(
     'name' => 'delete own article content',
     'roles' => array(
-      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -597,6 +586,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['delete own document content'] = array(
     'name' => 'delete own document content',
     'roles' => array(
+      'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
       'authenticated user' => 'authenticated user',
     ),
@@ -607,7 +597,6 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['delete own page content'] = array(
     'name' => 'delete own page content',
     'roles' => array(
-      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -632,18 +621,14 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete own practice_test content'.
   $permissions['delete own practice_test content'] = array(
     'name' => 'delete own practice_test content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own test_item content'.
   $permissions['delete own test_item content'] = array(
     'name' => 'delete own test_item content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1067,7 +1052,6 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit any article content'] = array(
     'name' => 'edit any article content',
     'roles' => array(
-      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -1077,6 +1061,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit any document content'] = array(
     'name' => 'edit any document content',
     'roles' => array(
+      'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
@@ -1087,7 +1072,6 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit any page content'] = array(
     'name' => 'edit any page content',
     'roles' => array(
-      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -1112,18 +1096,14 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit any practice_test content'.
   $permissions['edit any practice_test content'] = array(
     'name' => 'edit any practice_test content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any test_item content'.
   $permissions['edit any test_item content'] = array(
     'name' => 'edit any test_item content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1131,7 +1111,6 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit own article content'] = array(
     'name' => 'edit own article content',
     'roles' => array(
-      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -1150,6 +1129,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit own document content'] = array(
     'name' => 'edit own document content',
     'roles' => array(
+      'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
       'authenticated user' => 'authenticated user',
     ),
@@ -1160,7 +1140,6 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit own page content'] = array(
     'name' => 'edit own page content',
     'roles' => array(
-      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -1185,18 +1164,14 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit own practice_test content'.
   $permissions['edit own practice_test content'] = array(
     'name' => 'edit own practice_test content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own test_item content'.
   $permissions['edit own test_item content'] = array(
     'name' => 'edit own test_item content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 

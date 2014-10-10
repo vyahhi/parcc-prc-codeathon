@@ -179,6 +179,7 @@ features[user_permission][] = view own unpublished content
 features[user_permission][] = view pane admin links
 features[user_permission][] = view revisions
 features[user_permission][] = view the administration theme
+features[user_role][] = Content Author
 features[user_role][] = Educator
 features[user_role][] = PRC Admin
 features[user_role][] = administrator

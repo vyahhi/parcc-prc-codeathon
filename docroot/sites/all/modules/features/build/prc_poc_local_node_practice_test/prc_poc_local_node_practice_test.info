@@ -2,6 +2,7 @@ name = prc-poc.local Practice Test
 core = 7.x
 package = Content
 dependencies[] = features
+dependencies[] = prc_poc_local_fields
 features[field_instance][] = node-practice_test-body
 features[node][] = practice_test
 features[features_api][] = api:2

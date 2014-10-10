@@ -4,6 +4,7 @@ package = CTools
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = views
+features[views_view][] = admin_user_view
 features[views_view][] = archive
 features[views_view][] = backlinks
 features[views_view][] = comments_recent

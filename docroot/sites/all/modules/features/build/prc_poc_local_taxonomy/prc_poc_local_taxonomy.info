@@ -2,6 +2,7 @@ name = prc-poc.local Taxonomy
 core = 7.x
 package = Configuration
 dependencies[] = features
+dependencies[] = prc_poc_local_fields
 dependencies[] = taxonomy
 features[taxonomy][] = ccss_grade
 features[taxonomy][] = genre
