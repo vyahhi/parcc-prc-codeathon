@@ -3,17 +3,16 @@ Feature: Anonymous User Home Page (PRC-51)
   I want to access the PRC website,
   So that I can decide whether I want to register or continue accessing public information provided by PRC in the website.
 
-  # javascript here because we are testing visibility. Goutte doesn't respond to visibility so we need Webdriver for this one.
-  @javascript
   Scenario: When a user types the PRC URL in their browser, the PRC home page opens # AC1 AC2
     Given I am an anonymous user
       And I go to "/"
     Then I should see "Welcome!"
     And I should see a "logo" link
-    And ".pane-digital-library-placeholder" should be visible
-    And ".pane-welcome-anonymous" should be visible
-    And ".pane-sample-article-panel-pane-1" should be visible
-    And ".pane-user-login" should be visible
+    And I should see the heading "Digital Library Tree View" in the "content" region
+    And I should see the heading "Welcome!" in the "content" region
+    And I should see the heading "Slideshow" in the "content" region
+    And I should see the heading "User login" in the "content" region
+    And I should see the heading "Sample Article" in the "content" region
     And I should see text matching "Join the discussions. Share tips and experiences. Connect with educators from all around the world."
 
   Scenario: The login block is present # AC3 AC4
