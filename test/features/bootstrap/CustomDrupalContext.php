@@ -175,6 +175,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       $this->getDriver()->userCreate($user);
       $this->dispatcher->dispatch('afterUserCreate', new EntityEvent($this, $user));
 
+      // Now we will populate all of the field_ entries in the TableNode
       $account = user_load_by_name($user->name);
       $w = entity_metadata_wrapper('user', $account);
       foreach($userHash as $key => $value) {
@@ -226,5 +227,93 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       }
     }
   }
+
+  /**
+   * @Given /^the test email system is enabled$/
+   */
+  public function theTestEmailSystemIsEnabled() {
+    // Store the original system to restore after the scenario.
+    $this->originalMailSystem = variable_get('mail_system', array('default-system' => 'DefaultMailSystem'));
+    // Set the test system.
+    variable_set('mail_system', array('default-system' => 'TestingMailSystem'));
+    // Flush the email buffer, allowing us to reuse this step definition to clear existing mail.
+    variable_set('drupal_test_email_collector', array());
+  }
+
+  /**
+   * @Given /^the default email system is enabled$/
+   */
+  public function theDefaultEmailSystemIsEnabled() {
+    // Set the default system.
+    variable_set('mail_system', array('default-system' => 'DefaultMailSystem'));
+    // Flush the email buffer, allowing us to reuse this step definition to clear existing mail.
+    variable_set('drupal_test_email_collector', array());
+  }
+
+  /**
+   * @Then /^the email to "([^"]*)" should contain "([^"]*)"$/
+   */
+  public function theEmailToShouldContain($to, $contents) {
+    // We can't use variable_get() because $conf is only fetched once per
+    // scenario.
+    $variables = array_map('unserialize', db_query("SELECT name, value FROM {variable} WHERE name = 'drupal_test_email_collector'")->fetchAllKeyed());
+    $this->activeEmail = FALSE;
+    foreach ($variables['drupal_test_email_collector'] as $message) {
+      if ($message['to'] == $to) {
+        $this->activeEmail = $message;
+        if (strpos($message['body'], $contents) !== FALSE ||
+          strpos($message['subject'], $contents) !== FALSE) {
+          return TRUE;
+        }
+        throw new \Exception('Did not find expected content in message body or subject.');
+      }
+    }
+    throw new \Exception(sprintf('Did not find expected message to %s', $to));
+  }
+
+  /**
+   * @Given /^the email should contain "([^"]*)"$/
+   */
+  public function theEmailShouldContain($contents) {
+    if (!$this->activeEmail) {
+      throw new \Exception('No active email');
+    }
+    $message = $this->activeEmail;
+    if (strpos($message['body'], $contents) !== FALSE ||
+      strpos($message['subject'], $contents) !== FALSE) {
+      return TRUE;
+    }
+    throw new \Exception('Did not find expected content in message body or subject.');
+  }
+
+  /**
+   * @Then /^I follow the link in the email$/
+   */
+  public function followEmailLink() {
+    if (!$this->activeEmail) {
+      throw new \Exception('No active email');
+    }
+    $message = $this->activeEmail;
+
+    $body = $message['body'];
+    // The Regular Expression to look for URLs
+    $reg_exUrl = '`([^"=\'>])((http|https|ftp)://[^\s<]+[^\s<\.)])`i';
+    if(preg_match($reg_exUrl, $body, $url)) {
+      // It does return multiple matches. In this particular case we only care about the first one (so far)
+      $follow_url = $url[0];
+    }
+    if (isset($follow_url)) {
+      // Have to go to the driver level because visit only works for pages off the base url
+      $this->getSession()->visit($follow_url);
+      return TRUE;
+    }
+    throw new \Exception('Did not find expected content in message body or subject.');
+  }
+
+    public function afterScenario($event) {
+    parent::afterScenario($event);
+    $this->theDefaultEmailSystemIsEnabled();
+  }
+
 
 }
