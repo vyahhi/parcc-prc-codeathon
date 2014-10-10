@@ -8,6 +8,7 @@
 
 
 use Behat\Behat\Context\Step\Then;
+use Drupal\DrupalExtension\Event\EntityEvent;
 
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
@@ -149,6 +150,45 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       throw new \Exception(sprintf("The field '%s' did not have a length of %d.\nInstead, it was:\n\n%d", $field, $length, $actual_length));
     }
   }
+
+  /**
+   * Creates multiple users.
+   * Overrides parent::createUsers().
+   */
+  public function createUsers(\Behat\Gherkin\Node\TableNode $usersTable) {
+    foreach ($usersTable->getHash() as $userHash) {
+
+      // If we have roles convert it to array.
+      if (isset($userHash['roles'])) {
+        $userHash['roles'] = explode(',', $userHash['roles']);
+        $userHash['roles'] = array_map('trim', $userHash['roles']);
+      }
+
+      $user = (object) $userHash;
+
+      // Set a password.
+      if (!isset($user->pass)) {
+        $user->pass = $this->getDrupal()->random->name();
+      }
+
+      $this->dispatcher->dispatch('beforeUserCreate', new EntityEvent($this, $user));
+      $this->getDriver()->userCreate($user);
+      $this->dispatcher->dispatch('afterUserCreate', new EntityEvent($this, $user));
+
+      $account = user_load_by_name($user->name);
+      $w = entity_metadata_wrapper('user', $account);
+      foreach($userHash as $key => $value) {
+        if (strpos($key, 'field_') === 0) {
+          // This is a field_something so we have to assign it
+          $w->{$key}->set($value);
+        }
+      }
+      $w->save();
+
+      $this->users[$user->name] = $user;
+    }
+  }
+
 
   /**
    * Creates X number of random users with the specified role
