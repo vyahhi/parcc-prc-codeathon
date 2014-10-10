@@ -130,7 +130,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   /**
    * Asserts that a given user has the specified role.
    *
-   * @Then /^I should know that the user "([^"]*)" has a role of "([^"]*)"$/
+   * @Then /^the user "([^"]*)" should have a role of "([^"]*)"$/
    */
   public function assertUserHasRole($username, $role) {
     parent::assertDrushCommandWithArgument('user-information', $username);
@@ -156,13 +156,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Given /^I create (\d+) users with the "(?P<role>[^"]*)" role$/
    */
   public function createXUsersOfYRole($number, $role) {
-    // Provide user data in the following format:
-    //
-    // | name     | mail         |
-    // | user foo | foo@bar.com  |
-
     // Provides user data to createUsers()
-
     $table_node = new \Behat\Gherkin\Node\TableNode();
     $table_node->addRow(array('name', 'mail', 'status'));
 

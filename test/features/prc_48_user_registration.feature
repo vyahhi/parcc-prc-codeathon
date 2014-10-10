@@ -4,11 +4,13 @@ Feature: Login & Public Registration (PRC-48)
   I want to register and log in to the PRC website,
   So that I can benefit from the contents and features provided by PRC in the website.
 
+  # This was taken out of this story and has moved somewhere else - keeping it here until permissions are introduced
   @api @d7
   Scenario: A new role Educator shall be created. This role can view content, but cannot make any changes to the update. (AC1)
     Given I am logged in as a user with the "Educator" role
     Then I should not be able to edit an "article" node
-    Then I should not be able to edit a "basic page" node
+    And I should not be able to edit a "basic page" node
+    And I should not be able to edit a "document" node
 
   Scenario: When a user clicks the Join Now! button or link from the PRC website home page, a new page opens to allow the user create a new user account. (AC2)
     Given I am on the homepage
@@ -39,14 +41,14 @@ Feature: Login & Public Registration (PRC-48)
     Then the field "field_last_name" should have a length of "255"
     Then the field "field_profession" should have a length of "255"
 
-  Scenario: Registration form validation - invalid email address (AC5a)
+  Scenario: Registration form validation - invalid email address (AC6b)
     Given I am on the homepage
     And I follow "Join now!"
     Then I fill in "invalid" for "E-mail"
     Then I press the "Create new account" button
     Then I should see the error message "The e-mail address invalid is not valid."
 
-  Scenario: Registration form validation - passwords do not match (AC5b)
+  Scenario: Registration form validation - passwords do not match (AC6c)
     Given I am on the homepage
     And I follow "Join now!"
     Then I fill in "abc" for "Password"
@@ -54,12 +56,12 @@ Feature: Login & Public Registration (PRC-48)
     Then I press the "Create new account" button
     Then I should see the error message "The specified passwords do not match."
 
-  Scenario: Registration form - Password strength (AC5d)
+  Scenario: Registration form - Password strength (AC6d)
     Given I am on the homepage
     And I follow "Join now!"
     Then I should see "Password strength:"
 
-  Scenario: Registration form validation - required fields (AC6)
+  Scenario: Registration form validation - required fields (AC6a)
     Given I am on the homepage
     And I follow "Join now!"
     Then I press the "Create new account" button
@@ -68,7 +70,7 @@ Feature: Login & Public Registration (PRC-48)
     And I should not see the error message "Profession field is required."
     And I should see the error message "E-mail field is required."
 
-  Scenario: Successful registration message (AC6d)
+  Scenario: Successful registration message (AC5d)
     Given I am on the homepage
     And I follow "Join now!"
     Then I fill in "@timestamp@example.com" for "E-mail"
@@ -79,16 +81,6 @@ Feature: Login & Public Registration (PRC-48)
     And I fill in "Automated Test Robot" for "Profession"
     Then I press the "Create new account" button
     Then I should see the message "Registration successful. You are now logged in."
-
-  @api @d7
-  Scenario: Logout (AC6b)
-    Given I am logged in as a user with the "authenticated user" role
-    And I am on the homepage
-    When I click "Log out"
-    And I go to "front"
-    Then I should see a "Log in" button
-
-  #TODO : AC7 - Email after registration
 
   Scenario: When I self-register, I am automatically given the Educator role
     Given I am an anonymous user
@@ -102,5 +94,5 @@ Feature: Login & Public Registration (PRC-48)
     And I fill in "Automated Test Robot" for "Profession"
     Then I press the "Create new account" button
     Then I should see the message "Registration successful. You are now logged in."
-    Then I should know that the user "test@timestamp@example.com" has a role of "Educator"
+    Then the user "test@timestamp@example.com" should have a role of "Educator"
 
