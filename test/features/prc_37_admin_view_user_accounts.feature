@@ -40,6 +40,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
   Scenario: Page contains user fields (AC2)
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "/admin-users"
+    Then I should see the text "User ID"
     Then I should see the text "First Name"
     Then I should see the text "Last Name"
     Then I should see the text "E-mail"
@@ -50,6 +51,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
   Scenario: All fields are sortable (AC3)
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "/admin-users"
+    Then I should see the link "User ID"
     Then I should see the link "Last Name"
     Then I should see the link "First Name"
     Then I should see the link "E-mail"

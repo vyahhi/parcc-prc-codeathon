@@ -39,7 +39,6 @@ Feature: Forgot Password (PRC-146)
     Then I should see the link "Log out"
     And I should see "Welcome, Joe User"
 
-
   Scenario: AC2 - The educator will select the reset password link from the email and update their password.
     # This is covered in the big test for AC1
 

@@ -1,0 +1,8 @@
+name = prc-poc.local Favorites List
+core = 7.x
+package = Content
+dependencies[] = features
+dependencies[] = prc_poc_local_fields
+features[field_instance][] = node-favorites_list-group_group
+features[node][] = favorites_list
+features[features_api][] = api:2
