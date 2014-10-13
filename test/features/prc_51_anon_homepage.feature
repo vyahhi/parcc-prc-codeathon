@@ -8,10 +8,11 @@ Feature: Anonymous User Home Page (PRC-51)
       And I go to "/"
     Then I should see "Welcome!"
     And I should see a "logo" link
+    And I should see the heading "Digital Library" in the "content" region
     And I should see the heading "Welcome!" in the "content" region
     And I should see the heading "Slideshow" in the "content" region
     And I should see the heading "User login" in the "content" region
-    And I should see the heading "Sample Article" in the "content" region
+    And I should see the heading "K-12 Educators and PARCC" in the "content" region
     And I should see text matching "Join the discussions. Share tips and experiences. Connect with educators from all around the world."
 
   Scenario: The login block is present # AC3 AC4

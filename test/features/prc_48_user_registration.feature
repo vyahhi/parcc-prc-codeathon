@@ -41,6 +41,27 @@ Feature: Login & Public Registration (PRC-48)
     Then the field "field_last_name" should have a length of "255"
     Then the field "field_profession" should have a length of "255"
 
+  Scenario: Successful registration message (AC5)
+    Given I am on the homepage
+    And I follow "Join now!"
+    Then I fill in "@timestamp@example.com" for "E-mail"
+    And I fill in "abc123" for "Password"
+    And I fill in "abc123" for "Confirm password"
+    And I fill in "First" for "First Name"
+    And I fill in "Last" for "Last Name"
+    And I fill in "Automated Test Robot" for "Profession"
+    Then I press the "Create new account" button
+    Then I should see the message "Registration successful. You are now logged in."
+
+  Scenario: Registration form validation - required fields (AC6a)
+    Given I am on the homepage
+    And I follow "Join now!"
+    Then I press the "Create new account" button
+    Then I should see the error message "First Name field is required."
+    And I should see the error message "Last Name field is required."
+    And I should not see the error message "Profession field is required."
+    And I should see the error message "E-mail field is required."
+
   Scenario: Registration form validation - invalid email address (AC6b)
     Given I am on the homepage
     And I follow "Join now!"
@@ -60,27 +81,6 @@ Feature: Login & Public Registration (PRC-48)
     Given I am on the homepage
     And I follow "Join now!"
     Then I should see "Password strength:"
-
-  Scenario: Registration form validation - required fields (AC6a)
-    Given I am on the homepage
-    And I follow "Join now!"
-    Then I press the "Create new account" button
-    Then I should see the error message "First Name field is required."
-    And I should see the error message "Last Name field is required."
-    And I should not see the error message "Profession field is required."
-    And I should see the error message "E-mail field is required."
-
-  Scenario: Successful registration message (AC5d)
-    Given I am on the homepage
-    And I follow "Join now!"
-    Then I fill in "@timestamp@example.com" for "E-mail"
-    And I fill in "abc123" for "Password"
-    And I fill in "abc123" for "Confirm password"
-    And I fill in "First" for "First Name"
-    And I fill in "Last" for "Last Name"
-    And I fill in "Automated Test Robot" for "Profession"
-    Then I press the "Create new account" button
-    Then I should see the message "Registration successful. You are now logged in."
 
   Scenario: When I self-register, I am automatically given the Educator role
     Given I am an anonymous user
