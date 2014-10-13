@@ -4,6 +4,7 @@ Feature: Forgot Password (PRC-146)
   I want to reset my login password,
   so that I can continue to benefit from the contents and features provided by PRC in the website.
 
+  # This test needs to run in Web Driver since it tests redirection and visibility
   @javascript
   Scenario: AC1 - The educator will select the "Forgot Password" link located in the Login block of the Home page. On click, the system will...
     # This test actually goes through the entire reset password flow and covers all 3 ACs.
