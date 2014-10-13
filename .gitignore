@@ -40,7 +40,6 @@ docroot/sites/*/private
 ######################
 logs
 *.log
-*.sql
 *.sqlite
 
 # OS generated files #
