@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Alters to user edit forms.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * @param $form
+ * @param $form_state
+ */
+function prc_user_edit_form_form_user_profile_form_alter(&$form, &$form_state) {
+  global $user;
+  if (!array_search('administrator', $user->roles)) {
+    $form['account']['mail']['#title'] = 'E-mail';
+    $form['picture']['#access'] = FALSE;
+    $form['account']['name']['#access'] = FALSE;
+    $form['og_user_node']['#access'] = FALSE;
+  }
+}

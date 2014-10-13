@@ -251,6 +251,15 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Then /^I click on the edit link for the user "(?P<column>[^"]*)"$/
+   */
+  public function clickUserViewEditLink($username) {
+    $user = $this->users[$username];
+    $uid = $user->uid;
+    $this->clickLink($uid);
+  }
+
+  /**
    * @Then /^the email to "([^"]*)" should contain "([^"]*)"$/
    */
   public function theEmailToShouldContain($to, $contents) {

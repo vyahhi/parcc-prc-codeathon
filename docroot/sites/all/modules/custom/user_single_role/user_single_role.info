@@ -1,0 +1,4 @@
+name = User Single Role
+description = Forces users to have a single additional role selected, plus authenticated user
+package = PRC
+core = 7.x

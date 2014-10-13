@@ -38,6 +38,7 @@ function prc_login_form_form_user_login_block_alter(&$form, &$form_state) {
     $links = str_replace($replace, $with, $form['links']['#markup']);
     $form['links']['#markup'] = $links;
   }
+
 }
 
 /**
@@ -87,3 +88,4 @@ function _prc_login_form_add_role_to_user($user, $role_name) {
     }
   }
 }
+
