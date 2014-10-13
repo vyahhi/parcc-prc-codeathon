@@ -280,7 +280,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     if (!$this->activeEmail) {
       throw new \Exception('No active email');
     }
-    $message = $this->activeEmail;print_r($message);
+    $message = $this->activeEmail;
     if (strpos($message['body'], $contents) !== FALSE ||
       strpos($message['subject'], $contents) !== FALSE) {
       return TRUE;
