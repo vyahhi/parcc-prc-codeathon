@@ -10,24 +10,41 @@
 function prc_menu_links_menu_default_menu_links() {
   $menu_links = array();
 
-  // Exported menu link: main-menu_content:node/add
-  $menu_links['main-menu_content:node/add'] = array(
+  // Exported menu link: main-menu_assessments:assessments
+  $menu_links['main-menu_assessments:assessments'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'node/add',
-    'router_path' => 'node/add',
+    'link_path' => 'assessments',
+    'router_path' => 'assessments',
+    'link_title' => 'Assessments',
+    'options' => array(
+      'identifier' => 'main-menu_assessments:assessments',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -48,
+    'customized' => 1,
+  );
+  // Exported menu link: main-menu_content:node/add/document
+  $menu_links['main-menu_content:node/add/document'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'node/add/document',
+    'router_path' => 'node/add/document',
     'link_title' => 'Content',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'main-menu_content:node/add',
+      'identifier' => 'main-menu_content:node/add/document',
     ),
     'module' => 'menu',
     'hidden' => 0,
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -49,
+    'weight' => -46,
     'customized' => 1,
   );
   // Exported menu link: main-menu_digital-library:digital-library-tree-view
@@ -47,7 +64,7 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => 0,
+    'weight' => -49,
     'customized' => 1,
   );
   // Exported menu link: main-menu_home:<front>
@@ -67,6 +84,23 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => -50,
     'customized' => 1,
   );
+  // Exported menu link: main-menu_professional-development:professional-development
+  $menu_links['main-menu_professional-development:professional-development'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'professional-development',
+    'router_path' => 'professional-development',
+    'link_title' => 'Professional Development',
+    'options' => array(
+      'identifier' => 'main-menu_professional-development:professional-development',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -47,
+    'customized' => 1,
+  );
   // Exported menu link: main-menu_users:admin-users
   $menu_links['main-menu_users:admin-users'] = array(
     'menu_name' => 'main-menu',
@@ -81,14 +115,16 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -48,
+    'weight' => -45,
     'customized' => 1,
   );
   // Translatables
   // Included for use with string extractors like potx.
+  t('Assessments');
   t('Content');
   t('Digital Library');
   t('Home');
+  t('Professional Development');
   t('Users');
 
 
