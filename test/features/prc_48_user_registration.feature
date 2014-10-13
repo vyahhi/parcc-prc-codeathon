@@ -53,6 +53,21 @@ Feature: Login & Public Registration (PRC-48)
     Then I press the "Create new account" button
     Then I should see the message "Registration successful. You are now logged in."
 
+  Scenario: The email the system sends by default when a user registers is: (AC5b)
+    Given I am on the homepage
+    And the test email system is enabled
+    And I follow "Join now!"
+    Then I fill in "@timestamp@example.com" for "E-mail"
+    And I fill in "abc123" for "Password"
+    And I fill in "abc123" for "Confirm password"
+    And I fill in "First" for "First Name"
+    And I fill in "Last" for "Last Name"
+    And I fill in "Automated Test Robot" for "Profession"
+    Then I press the "Create new account" button
+    Then the email to "@timestamp@example.com" should contain "Thank you for registering at"
+    And the email should contain "You may now log in"
+    And the email should contain "by clicking this link or copying and pasting it to your browser:"
+
   Scenario: Registration form validation - required fields (AC6a)
     Given I am on the homepage
     And I follow "Join now!"

@@ -256,10 +256,12 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   public function theEmailToShouldContain($to, $contents) {
     // We can't use variable_get() because $conf is only fetched once per
     // scenario.
+    $mail_to = $this->fixStepArgument($to);
+
     $variables = array_map('unserialize', db_query("SELECT name, value FROM {variable} WHERE name = 'drupal_test_email_collector'")->fetchAllKeyed());
     $this->activeEmail = FALSE;
     foreach ($variables['drupal_test_email_collector'] as $message) {
-      if ($message['to'] == $to) {
+      if ($message['to'] == $mail_to) {
         $this->activeEmail = $message;
         if (strpos($message['body'], $contents) !== FALSE ||
           strpos($message['subject'], $contents) !== FALSE) {
@@ -268,7 +270,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
         throw new \Exception('Did not find expected content in message body or subject.');
       }
     }
-    throw new \Exception(sprintf('Did not find expected message to %s', $to));
+    throw new \Exception(sprintf('Did not find expected message to %s', $mail_to));
   }
 
   /**
@@ -278,7 +280,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     if (!$this->activeEmail) {
       throw new \Exception('No active email');
     }
-    $message = $this->activeEmail;
+    $message = $this->activeEmail;print_r($message);
     if (strpos($message['body'], $contents) !== FALSE ||
       strpos($message['subject'], $contents) !== FALSE) {
       return TRUE;
