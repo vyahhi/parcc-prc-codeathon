@@ -87,3 +87,4 @@ function _prc_login_form_add_role_to_user($user, $role_name) {
     }
   }
 }
+

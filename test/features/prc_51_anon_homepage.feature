@@ -8,7 +8,6 @@ Feature: Anonymous User Home Page (PRC-51)
       And I go to "/"
     Then I should see "Welcome!"
     And I should see a "logo" link
-    And I should see the heading "Digital Library Tree View" in the "content" region
     And I should see the heading "Welcome!" in the "content" region
     And I should see the heading "Slideshow" in the "content" region
     And I should see the heading "User login" in the "content" region

@@ -1,0 +1,12 @@
+name = PRC Menu Links
+description = PRC Menu Links
+core = 7.x
+package = PRC
+dependencies[] = features
+dependencies[] = menu
+dependencies[] = prc_poc_local_menu
+features[features_api][] = api:2
+features[menu_links][] = main-menu_content:node/add
+features[menu_links][] = main-menu_digital-library:digital-library-tree-view
+features[menu_links][] = main-menu_home:<front>
+features[menu_links][] = main-menu_users:admin-users
