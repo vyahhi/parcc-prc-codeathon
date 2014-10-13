@@ -257,6 +257,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'menu',
   );
 
+  // Exported permission: 'administer menu_token'.
+  $permissions['administer menu_token'] = array(
+    'name' => 'administer menu_token',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'menu_token',
+  );
+
   // Exported permission: 'administer mini panels'.
   $permissions['administer mini panels'] = array(
     'name' => 'administer mini panels',
@@ -345,24 +354,6 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'user',
-  );
-
-  // Exported permission: 'administer profile types'.
-  $permissions['administer profile types'] = array(
-    'name' => 'administer profile types',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'profile2',
-  );
-
-  // Exported permission: 'administer profiles'.
-  $permissions['administer profiles'] = array(
-    'name' => 'administer profiles',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'profile2',
   );
 
   // Exported permission: 'administer search'.
@@ -509,13 +500,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'create commentable content'.
-  $permissions['create commentable content'] = array(
-    'name' => 'create commentable content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'create document content'.
   $permissions['create document content'] = array(
     'name' => 'create document content',
@@ -602,13 +586,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete any commentable content'.
-  $permissions['delete any commentable content'] = array(
-    'name' => 'delete any commentable content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete any document content'.
   $permissions['delete any document content'] = array(
     'name' => 'delete any document content',
@@ -672,13 +649,6 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
     ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own commentable content'.
-  $permissions['delete own commentable content'] = array(
-    'name' => 'delete own commentable content',
-    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1166,13 +1136,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit any commentable content'.
-  $permissions['edit any commentable content'] = array(
-    'name' => 'edit any commentable content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit any document content'.
   $permissions['edit any document content'] = array(
     'name' => 'edit any document content',
@@ -1189,15 +1152,6 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'edit any favorites_list content',
     'roles' => array(),
     'module' => 'node',
-  );
-
-  // Exported permission: 'edit any main profile'.
-  $permissions['edit any main profile'] = array(
-    'name' => 'edit any main profile',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'profile2',
   );
 
   // Exported permission: 'edit any page content'.
@@ -1248,13 +1202,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit own commentable content'.
-  $permissions['edit own commentable content'] = array(
-    'name' => 'edit own commentable content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit own comments'.
   $permissions['edit own comments'] = array(
     'name' => 'edit own comments',
@@ -1282,16 +1229,6 @@ function prc_poc_local_users_user_default_permissions() {
       'Educator' => 'Educator',
     ),
     'module' => 'node',
-  );
-
-  // Exported permission: 'edit own main profile'.
-  $permissions['edit own main profile'] = array(
-    'name' => 'edit own main profile',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'profile2',
   );
 
   // Exported permission: 'edit own page content'.
@@ -1603,25 +1540,6 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'filter',
-  );
-
-  // Exported permission: 'view any main profile'.
-  $permissions['view any main profile'] = array(
-    'name' => 'view any main profile',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'profile2',
-  );
-
-  // Exported permission: 'view own main profile'.
-  $permissions['view own main profile'] = array(
-    'name' => 'view own main profile',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'profile2',
   );
 
   // Exported permission: 'view own unpublished content'.

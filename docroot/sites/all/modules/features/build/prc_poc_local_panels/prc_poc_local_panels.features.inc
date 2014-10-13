@@ -14,4 +14,7 @@ function prc_poc_local_panels_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "panels" && $api == "pipelines") {
     return array("version" => "1");
   }
+  if ($module == "strongarm" && $api == "strongarm") {
+    return array("version" => "1");
+  }
 }

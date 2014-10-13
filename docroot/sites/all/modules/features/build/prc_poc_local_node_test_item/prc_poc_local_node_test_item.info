@@ -1,9 +1,13 @@
 name = prc-poc.local Test Item
 core = 7.x
 package = Content
+dependencies[] = ctools
 dependencies[] = features
 dependencies[] = prc_poc_local_fields
-features[field_instance][] = node-test_item-body
-features[field_instance][] = node-test_item-field_test_items
+dependencies[] = strongarm
 features[node][] = test_item
+features[variable][] = menu_options_test_item
+features[variable][] = menu_parent_test_item
+features[variable][] = node_options_test_item
+features[variable][] = node_submitted_test_item
 features[features_api][] = api:2

@@ -24,6 +24,15 @@ function prc_poc_local_node_document_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'front_page_item' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 600,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 1,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -66,6 +75,12 @@ function prc_poc_local_node_document_field_default_field_instances() {
         'settings' => array(),
         'type' => 'file_default',
         'weight' => 1,
+      ),
+      'front_page_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -117,6 +132,12 @@ function prc_poc_local_node_document_field_default_field_instances() {
         'type' => 'fivestar_formatter_default',
         'weight' => 2,
       ),
+      'front_page_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -158,6 +179,12 @@ function prc_poc_local_node_document_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 3,
+      ),
+      'front_page_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
