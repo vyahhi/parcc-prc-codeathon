@@ -18,4 +18,11 @@ function prc_user_edit_form_form_user_profile_form_alter(&$form, &$form_state) {
     $form['account']['name']['#access'] = FALSE;
     $form['og_user_node']['#access'] = FALSE;
   }
+
+  $w = entity_metadata_wrapper('user', $form['#user']);
+  $first = $w->field_first_name->value();
+  $last = $w->field_last_name->value();
+  $uid = $w->uid->value();
+  $title = "$first $last ($uid)";
+  drupal_set_title($title);
 }

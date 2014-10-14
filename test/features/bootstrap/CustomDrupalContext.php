@@ -29,8 +29,31 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     if (strpos($argument, '@timestamp') !== FALSE) {
       $argument = str_replace('@timestamp', $this->timestamp, $argument);
     }
+    if (strpos($argument, '@uname') !== FALSE) {
+      $start = strpos($argument, '@uname');
+      $bracket_open = strpos($argument, '[', $start);
+      $bracket_close = strpos($argument, ']', $start);
+      $uname = substr($argument, $bracket_open + 1, $bracket_close - $bracket_open - 1);
+      $user = $this->users[$uname];
+      $uid = $user->uid;
+      $whole_token = "@uname[$uname]";
+      $argument = str_replace($whole_token, $uid, $argument);
+    }
     return parent::fixStepArgument($argument);
   }
+
+  /**
+   * The default assertRegionHeading() doesn't do a fixStepArgument()
+   * on the $heading variable. We need to.
+   * @param $heading
+   * @param $region
+   * @throws Exception
+   */
+  public function assertRegionHeading($heading, $region) {
+    $fixed_heading = $this->fixStepArgument($heading);
+    return parent::assertRegionHeading($fixed_heading, $region);
+  }
+
 
   /**
    * @Then /^"([^"]*)" should be visible$/
@@ -251,13 +274,42 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
-   * @Then /^I click on the edit link for the user "(?P<column>[^"]*)"$/
+   * This looks for a link with text matching the uid for the specified username
+   * and clicks that link.
+   *
+   * @Then /^I click on the edit link for the user "(?P<username>[^"]*)"$/
    */
   public function clickUserViewEditLink($username) {
     $user = $this->users[$username];
     $uid = $user->uid;
     $this->clickLink($uid);
   }
+
+  /**
+   * Verifies that the URL is the edit page for the specified username.
+   *
+   * @Then /^I should be at the edit page for the user "(?P<username>[^"]*)"$/
+   */
+  public function assertUserEditUrl($username) {
+    $user = $this->users[$username];
+    $uid = $user->uid;
+
+    $expected_path = "user/$uid/edit";
+
+    $this->assertAtPath($expected_path);
+  }
+
+  /**
+   * @Then /^I should not see the radio button "(?P<label>[^"]*)"$/
+   */
+  public function assertRadioByIdNotPresent($label, $id = FALSE) {
+    $element = $this->getSession()->getPage();
+    $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
+    if ($radiobutton !== NULL) {
+      throw new \Exception(sprintf('The radio button with "%s" was found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
+    }
+  }
+
 
   /**
    * @Then /^the email to "([^"]*)" should contain "([^"]*)"$/
@@ -321,7 +373,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     throw new \Exception('Did not find expected content in message body or subject.');
   }
 
-    public function afterScenario($event) {
+  public function afterScenario($event) {
     parent::afterScenario($event);
     $this->theDefaultEmailSystemIsEnabled();
   }

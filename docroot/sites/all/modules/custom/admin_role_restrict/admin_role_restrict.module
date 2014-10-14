@@ -16,7 +16,6 @@ function admin_role_restrict_form_alter(&$form, &$form_state, $form_id) {
     global $user;
     if (!array_search('administrator', $user->roles)) {
       unset($form['account']['roles']['#options'][3]);
-      $form['#validate'][] = 'admin_role_restrict_form_user_profile_form_validate';
     }
   }
 }
