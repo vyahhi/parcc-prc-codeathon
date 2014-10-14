@@ -22,6 +22,11 @@ Feature: Admin UI: Edit User (PRC-105)
   Scenario: AC2 - The header for this Admin page shall be the user's name (First Name + Last Name), followed by the User ID in the parentheses.
     Then I should see the heading "Joe User (@uname[Joe User])" in the "content" region
 
+  Scenario: AC2 - The header should stay the same on failed validation
+    Then I fill in "E-mail *" with ""
+    Then I press the "Save" button
+    Then I should see the heading "Joe User (@uname[Joe User])" in the "content" region
+
   Scenario: AC3 - Keep the top nav bar
     Then I should see the link "Users" in the "header" region
 
@@ -67,7 +72,16 @@ Feature: Admin UI: Edit User (PRC-105)
     Then I should see "Password strength:"
 
   Scenario: AC7 - Save button
+    Then I fill in "First Name *" with "New First"
+    Then I fill in "Last Name *" with "New Last"
+    Then I fill in "Profession" with "New Job"
+    Then I fill in "E-mail *" with "new@example.com"
+    Then I press the "Save" button
+    Then I should see the message containing "The changes have been saved."
 
-  Scenario: AC8 - Cancel button
+  #Scenario: AC8 - Cancel button
+    # todo: Where does the Cancel button take you? What if you didn't come in through the users view?
+    # Drupal doesn't give you a Cancel button on anything. It's the user's job to navigate away.
+    # Users are used to clicking the Back button.Scenario:
 
   Scenario: AC9 - Javascript to confirm nav away from page

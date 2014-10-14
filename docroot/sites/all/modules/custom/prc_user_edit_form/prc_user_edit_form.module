@@ -19,10 +19,25 @@ function prc_user_edit_form_form_user_profile_form_alter(&$form, &$form_state) {
     $form['og_user_node']['#access'] = FALSE;
   }
 
+  _prc_user_edit_form_title($form);
+
+  $form['#validate'][] = 'prc_user_edit_Form_form_user_profile_form_validate';
+
+}
+
+/**
+ * @param $form
+ */
+function _prc_user_edit_form_title(&$form) {
   $w = entity_metadata_wrapper('user', $form['#user']);
   $first = $w->field_first_name->value();
   $last = $w->field_last_name->value();
   $uid = $w->uid->value();
   $title = "$first $last ($uid)";
   drupal_set_title($title);
+}
+
+function prc_user_edit_Form_form_user_profile_form_validate(&$form, &$form_state) {
+  # If validation fails, the form_alter won't change the title again. Set it here.
+  _prc_user_edit_form_title($form);
 }
