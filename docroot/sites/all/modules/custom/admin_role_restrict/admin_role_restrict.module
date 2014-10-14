@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Alters to user edit forms.
+ */
+
+/**
+ * Implements hook_form_alter().
+ * @param $form
+ * @param $form_state
+ */
+function admin_role_restrict_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'user_profile_form' || $form_id == 'user_registration_form') {
+
+    global $user;
+    if (!array_search('administrator', $user->roles)) {
+      unset($form['account']['roles']['#options'][3]);
+      $form['#validate'][] = 'admin_role_restrict_form_user_profile_form_validate';
+    }
+  }
+}
