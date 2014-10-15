@@ -14,22 +14,24 @@ function user_single_role_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_profile_form' || $form_id == 'user_registration_form') {
     // We are generating a fake roles field so that we don't have to make any changes
     // to the actual role field.
-    $form['faux_roles'] = $form['account']['roles'];
-    $form['faux_roles']['#type'] = 'radios';
-    $form['faux_roles']['#required'] = TRUE;
-    unset($form['faux_roles'][2]);
+    if ($form['account']['roles']['#access']) {
+      $form['faux_roles'] = $form['account']['roles'];
+      $form['faux_roles']['#type'] = 'radios';
+      $form['faux_roles']['#required'] = TRUE;
+      unset($form['faux_roles'][2]);
 
-    foreach ($form['account']['roles']['#default_value'] as $role_key => $selected) {
-      // Don't bother with auth user - every user has to have it and we'll set it by default in submit
-      if ($selected != 2) {
-        //unset($form['faux_roles']['#default_value'][$role_key]);
-        $form['faux_roles'][$selected]['#default_value'] = TRUE;
+      foreach ($form['account']['roles']['#default_value'] as $role_key => $selected) {
+        // Don't bother with auth user - every user has to have it and we'll set it by default in submit
+        if ($selected != 2) {
+          //unset($form['faux_roles']['#default_value'][$role_key]);
+          $form['faux_roles'][$selected]['#default_value'] = TRUE;
+        }
       }
+
+      $form['account']['roles']['#access'] = FALSE; // Hide the normal roles checkboxes
+
+      $form['#submit'][] = 'user_single_role_form_user_profile_form_submit';
     }
-
-    $form['account']['roles']['#access'] = FALSE; // Hide the normal roles checkboxes
-
-    $form['#submit'][] = 'user_single_role_form_user_profile_form_submit';
   }
 }
 
@@ -45,6 +47,7 @@ function user_single_role_form_user_profile_form_submit(&$form, &$form_state) {
       $account->roles[$rid] = $rid;
     }
   }
+  $account->roles[$selected_role] = $selected_role;
   $all_roles = $account->roles;
   user_save($account, array('roles' => $all_roles));
 }
