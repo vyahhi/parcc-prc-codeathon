@@ -28,20 +28,20 @@ Feature: Forgot Password (PRC-146)
     And I should see an "Log in" button
     And I press "Log in"
     Then I should see the message containing "You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password."
-    And I fill in "Password" with "password"
-    And I fill in "Confirm password" with "password"
+    And I fill in "Password" with "password1"
+    And I fill in "Confirm password" with "password1"
     And I press "Save"
     Then I should see the message containing "The changes have been saved."
     Then I click "Log out"
     Then the url should match "/"
-    Then I fill in "E-mail" with "joe@example.com"
-    And I fill in "Password" with "password"
+    Then I fill in "E-mail" with "joe_@uname[Joe User]"
+    And I fill in "Password" with "password1"
     And I press "Log in"
     Then I should see the link "Log out"
     And I should see "Welcome, Joe User"
 
-  Scenario: AC2 - The educator will select the reset password link from the email and update their password.
-    # This is covered in the big test for AC1
+  # AC2 - The educator will select the reset password link from the email and update their password.
+  # This is covered in the big test for AC1
 
-  Scenario: AC3 - The educator will log into the PRC website.
-    # This is also covered in the big test for AC1.
+  # AC3 - The educator will log into the PRC website.
+  # This is also covered in the big test for AC1.

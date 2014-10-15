@@ -35,7 +35,8 @@ function user_single_role_form_alter(&$form, &$form_state, $form_id) {
 
 function user_single_role_form_user_profile_form_submit(&$form, &$form_state) {
   $selected_role = $form_state['values']['faux_roles'];
-  $account = $form_state['user'];
+  $uid = $form_state['user']->uid;
+  $account = user_load($uid);
   foreach ($account->roles as $rid => $value) {
     if ($rid != 2 && $rid != $selected_role) {
       $account->roles[$rid] = 0;

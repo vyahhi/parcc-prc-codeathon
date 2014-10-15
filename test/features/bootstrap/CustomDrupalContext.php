@@ -201,6 +201,12 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       // Now we will populate all of the field_ entries in the TableNode
       $account = user_load_by_name($user->name);
       $w = entity_metadata_wrapper('user', $account);
+
+      // We are using email_registration, so we have to tweak the user name to match what it expects
+      $email_parts = explode('@', $userHash['mail']);
+      $new_user_name = $email_parts[0] . '_' . $account->uid;
+      $w->name->set($new_user_name);
+
       foreach($userHash as $key => $value) {
         if (strpos($key, 'field_') === 0) {
           // This is a field_something so we have to assign it
