@@ -8,6 +8,7 @@
 
 
 use Behat\Behat\Context\Step\Then;
+use Behat\Behat\Context\Step\Given;
 use Drupal\DrupalExtension\Event\EntityEvent;
 
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
@@ -378,6 +379,27 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
     throw new \Exception('Did not find expected content in message body or subject.');
   }
+
+  /**
+   * Visit a given path, and additionally check for HTTP response code.
+   *
+   * @Then /^I should get a "(?P<code>[^"]*)" HTTP response at "(?P<path>[^"]*)"$/
+   *
+   * @throws UnsupportedDriverActionException
+   */
+  public function assertResponseCodeAtPath($code, $path) {
+    $this->getSession()->visit($this->locatePath($path));
+
+    // If available, add extra validation that this is a 200 response.
+    try {
+      $this->getSession()->getStatusCode();
+      return new Given('I should get a "' . $code . '" HTTP response');
+    }
+    catch (UnsupportedDriverActionException $e) {
+      // Simply continue on, as this driver doesn't support HTTP response codes.
+    }
+  }
+
 
   public function afterScenario($event) {
     parent::afterScenario($event);

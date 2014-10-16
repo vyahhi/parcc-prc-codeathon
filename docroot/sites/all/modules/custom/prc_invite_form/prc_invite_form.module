@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Alters to user edit forms.
+ */
+
+/**
+ *  Implements hook_form_alter().
+ */
+function prc_invite_form_form_alter(&$form, &$form_state, $form_id) {
+  $x = 'x';
+}
+
+function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
+
+  _prc_invite_form_set_title();
+
+  $form['#validate'][] = 'prc_invite_form_form_invite_form_validate';
+  $form['field_invitation_email_address']['und']['#required'] = TRUE;
+  $form['field_invitation_email_address']['und'][0]['#required'] = TRUE;
+
+  $form['field_invitation_email_subject']['#access'] = FALSE;
+  $form['field_invitation_email_body']['und']['#title'] = 'Message';
+}
+
+function _prc_invite_form_set_title() {
+  drupal_set_title('Invite New PRC Website User');
+}
+
+function prc_invite_form_form_invite_form_validate(&$form, &$form_state) {
+  _prc_invite_form_set_title();
+}

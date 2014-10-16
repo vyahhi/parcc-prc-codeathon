@@ -1,0 +1,4 @@
+name = PRC Invite Form
+description = Changes to user invitation form from Invite
+package = PRC
+core = 7.x
