@@ -9,25 +9,176 @@
  *  Implements hook_form_alter().
  */
 function prc_invite_form_form_alter(&$form, &$form_state, $form_id) {
-  $x = 'x';
+  $x = 'Breakpoint placeholder';
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
 function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
-
   _prc_invite_form_set_title();
 
-  $form['#validate'][] = 'prc_invite_form_form_invite_form_validate';
-  $form['field_invitation_email_address']['und']['#required'] = TRUE;
-  $form['field_invitation_email_address']['und'][0]['#required'] = TRUE;
+  // Change mail label and description, and make it a multi-line text area
+  $mail = array(
+    '#required' => '1',
+    '#description' => t('Input email addresses of users you want to invite. Put each address on a separate line. Each person will receive an invitation to join the site.'),
+    '#weight' => '0',
+    '#type' => 'textarea',
+    '#title' => t('E-mail'),
+  );
+  $form['field_multi_emails'] = $mail;
 
+  // We are leaving out the standard Invite email fields...
+  $form['field_invitation_email_address']['#access'] = FALSE;
   $form['field_invitation_email_subject']['#access'] = FALSE;
-  $form['field_invitation_email_body']['und']['#title'] = 'Message';
+  $form['field_invitation_email_body']['#access'] = FALSE;
+  $form['token_help']['#access'] = FALSE;
+
+  // ...and adding our own.
+  $default_message_text = "I'd like to invite you to the PARCC Partnership Resource Center.";
+  $form['prc_invite_message'] = array(
+    '#required' => '1',
+    '#description' => t('You can personalize the message that will be sent in the invitation email.'),
+    '#weight' => '1',
+    '#type' => 'textarea',
+    '#title' => t('Message'),
+    '#default_value' => $default_message_text,
+  );
+
+  // And add a set of radio buttons for roles...
+  $roles = _prc_invite_form_invite_roles();
+  $form['invite_role'] = array(
+    '#type' => 'radios',
+    '#title' => 'Role',
+    '#description' => 'Users invited will have the role selected.',
+    '#required' => TRUE,
+    '#access' => TRUE,
+    '#options' => $roles,
+  );
+
+  $form['#validate'][] = 'prc_invite_form_form_invite_form_validate';
+
+  foreach ($form['#validate'] as $key => $og_user_node) {
+    if ($og_user_node == "invite_by_email_form_invite_form_validate") {
+      unset ($form['#validate'][$key]);
+    }
+  }
+
+  // in form action, add prc_invite_form_form_invite_form_submit submit, remove invited_edit_form_submit,
+  // and make sure this all happens before ctools_wizard_submit
+  if (isset($form['actions']['submit']['#submit'])) {
+    array_unshift($form['actions']['submit']['#submit'], 'prc_invite_form_form_invite_form_submit');
+    foreach ($form['actions']['submit']['#submit'] as $key => $og_user_node) {
+      if ($og_user_node == "invite_form_submit") {
+        unset ($form['actions']['submit']['#submit'][$key]);
+      }
+    }
+  }
+
+}
+
+function _prc_invite_form_invite_roles() {
+  $all_roles = user_roles();
+  $omit_roles = array('administrator', 'anonymous user', 'authenticated user');
+  $roles = array_diff($all_roles, $omit_roles);
+  return $roles;
 }
 
 function _prc_invite_form_set_title() {
   drupal_set_title('Invite New PRC Website User');
 }
 
-function prc_invite_form_form_invite_form_validate(&$form, &$form_state) {
+function prc_invite_form_form_invite_form_validate($form, &$form_state)
+{
   _prc_invite_form_set_title();
+
+  if (
+    empty($form_state['values']['field_invitation_email_address']) &&
+    !empty($form_state['input']['field_invitation_email_address'])
+  ) {
+    $form_state['values']['field_invitation_email_address'] = $form_state['input']['field_invitation_email_address'];
+  }
+
+  if (isset($form_state['values']['field_invitation_email_address'])) {
+    $valid = array();
+    $invalid = array();
+
+    $trimmed_emails = $form_state['values']['field_invitation_email_address']['und'][0]['value'];
+    $trimmed_emails = trim($form_state['values']['field_multi_emails']);
+
+    foreach (explode("\n", $trimmed_emails) as $email) {
+      $email = trim($email);
+      if (!empty($email)) {
+        if (valid_email_address($email)) {
+          $valid[] = $email;
+        } else {
+          $invalid[] = $email;
+        }
+      }
+    }
+    if (empty($invalid)) {
+      $form_state['invitees'] = $valid;
+    } elseif (count($invalid) == 1) {
+      form_set_error('field_invitation_email_address', t('%email is not a valid e-mail address.', array('%email' => reset($invalid))));
+    } else {
+      form_set_error('field_invitation_email_address', t('%emails are not valid e-mail addresses.', array('%emails' => implode(', ', $invalid))));
+    }
+    if (empty($valid) && empty($invalid)) {
+      form_set_error('field_invitation_email_address', t('Please input one or more email addresses'));
+    }
+  }
+
+  // Notify field widgets to validate their data.
+  field_attach_form_validate('invite', $form_state['invite'], $form, $form_state);
+}
+
+// each email address needs its own invite object
+// so we tell the entity builder that this guy is new
+function _prc_invite_form_invitations_entity_builder($entity_type, $entity, $form, $form_state)
+{
+  if (!isset($entity->is_new)) {
+    $entity->is_new = TRUE;
+    // we want a new invites token, so unset token if it exists
+    if (isset($entity->invites_token)) {
+      unset ($entity->invites_token);
+    }
+    // and reset the invites id
+    $entity->invites_id = '';
+  }
+}
+
+function prc_invite_form_form_invite_form_submit(&$form, &$form_state)
+{
+  $entity_builders = array('_prc_invite_form_invitations_entity_builder');
+  if (array_key_exists('#entity_builders', $form)) {
+    $entity_builders += $form['#entity_builders'];
+  }
+  $form['#entity_builders'] = $entity_builders;
+  $new_body = $form_state['values']['prc_invite_message'] . '<br />' . $form_state['values']['field_invitation_email_body'][LANGUAGE_NONE][0]['value'];
+  $form_state['values']['field_invitation_email_body'][LANGUAGE_NONE][0]['value'] = $new_body; // .= pre-concat operator not working
+  foreach ($form_state['invitees'] as $key => $invitee) {
+    // invite to group
+    //$form_state['values']['field_invitation_email_address'] = $invitee;
+    $form_state['values']['field_invitation_email_address'][LANGUAGE_NONE][0]['value'] = $invitee;
+    invite_form_submit($form, $form_state);
+    $form_state['invite']->reg_code = invite_generate_code();
+    unset($form_state['invite']->iid);
+  }
+}
+
+function prc_invite_form_invitations_invite_accept($invite, $account) {
+//  if (isset($invite->og_group_ref) && count($invite->og_group_ref)) {
+//    $invite_wrapper = entity_metadata_wrapper('invite', $invite);
+//    $invite_group = $invite_wrapper->og_group_ref->getIterator()->current()->value();
+//    $gid = $invite_group->nid;
+//
+//    $user = user_load($account->uid);
+//    $ogid = og_group('node', $gid, array('entity_type' => 'user', 'entity' => $user));
+//    if ($ogid) {
+//      $title = $invite_group->title;
+//      $uri = entity_uri('node', $invite_group);
+//      drupal_set_message(t("You just joined !group.", array('!group' => l($title, $uri['path']))));
+//    }
+//
+//  }
 }

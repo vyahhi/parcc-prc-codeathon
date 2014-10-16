@@ -41,9 +41,52 @@ Feature: Invite User (PRC-92)
     Then I select the radio button "Content Author"
     Then I should not see the radio button "administrator"
 
-  Scenario: AC7 - The Role selected will apply to all E-Mail addresses entered and the invitational message drafted before submission.
+  # AC7 - The Role selected will apply to all E-Mail addresses entered and the invitational message drafted before submission.
+  # This is really a UI constraint, and the test for PRC-73 Create User Account Following an Invitation will cover it
+
   Scenario: AC8 - Validations: The following validations shall occur:
-  Scenario: AC9 - A Send Invitation button is provided at the end. At click, the system shall:
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    Then I press "Send Invitation"
+    Then I should see the error message containing "E-mail field is required."
+    Then I should not see the error message containing "Message field is required."
+    Then I should see the error message containing "Role field is required."
+
+  Scenario: AC8 - Validations: E-mail required
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    Then I fill in "E-mail *" with "example@example.com"
+    And I press "Send Invitation"
+    Then I should not see the error message containing "E-mail field is required."
+    Then I should not see the error message containing "Message field is required."
+    Then I should see the error message containing "Role field is required."
+
+  Scenario: AC8 - Validations: Message required
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    Then I fill in "Message *" with ""
+    And I press "Send Invitation"
+    Then I should see the error message containing "E-mail field is required."
+    Then I should see the error message containing "Message field is required."
+    Then I should see the error message containing "Role field is required."
+
+  Scenario: AC8 - Validations: Role required
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    Then I select the radio button "Educator"
+    And I press "Send Invitation"
+    Then I should see the error message containing "E-mail field is required."
+    Then I should not see the error message containing "Role field is required."
+
+  Scenario: AC9 - A Send Invitation button is provided at the end. At click, the system shall sends an email to the address provided, stating the pre-defined role.
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    And the test email system is enabled
+    Then I select the radio button "Educator"
+    And I fill in "E-mail" with "example@example.com"
+    And I press "Send Invitation"
+    Then the email to "example@example.com" should contain "has sent you an invite!"
+    And the email should contain "has invited you to join Partnership Resource Center at"
 
   Scenario: AC10 - Only a PRC Admin can perform this task. - Educator cannot
     Given I am logged in as a user with the "Educator" role
@@ -60,3 +103,8 @@ Feature: Invite User (PRC-92)
   Scenario: AC10 - Only a PRC Admin can perform this task. - Content Author cannot
     Given I am logged in as a user with the "Content Author" role
     Then I should get a "403" HTTP response at "invite/add/invite_by_email"
+
+  Scenario: Default message text
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    Then the "Message" field should contain "I'd like to invite you to the PARCC Partnership Resource Center."
