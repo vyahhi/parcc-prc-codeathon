@@ -90,6 +90,21 @@ Feature: Invite User (PRC-92)
     And the email should contain "has invited you to join Partnership Resource Center at"
     And the email should contain "MESSAGE1234"
 
+  Scenario: AC9 - Send invitations to multiple roles
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    And the test email system is enabled
+    Then I select the radio button "Educator"
+    And I fill in "Message" with "4321MESSAGE1234"
+    And I fill in "E-mail" with "example1@example.com,example2@example.com"
+    And I press "Send Invitation"
+    Then the email to "example1@example.com" should contain "has sent you an invite!"
+    And the email should contain "has invited you to join Partnership Resource Center at"
+    And the email should contain "4321MESSAGE1234"
+    Then the email to "example2@example.com" should contain "has sent you an invite!"
+    And the email should contain "has invited you to join Partnership Resource Center at"
+    And the email should contain "4321MESSAGE1234"
+
   Scenario: AC10 - Only a PRC Admin can perform this task. - Educator cannot
     Given I am logged in as a user with the "Educator" role
     Then I should get a "403" HTTP response at "invite/add/invite_by_email"

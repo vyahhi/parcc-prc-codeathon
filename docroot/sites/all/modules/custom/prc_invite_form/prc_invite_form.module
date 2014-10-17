@@ -103,8 +103,11 @@ function prc_invite_form_form_invite_form_validate($form, &$form_state)
     $valid = array();
     $invalid = array();
 
-    $trimmed_emails = $form_state['values']['field_invitation_email_address']['und'][0]['value'];
     $trimmed_emails = trim($form_state['values']['field_multi_emails']);
+
+    // Allow multiple delimiters. Fixes DEU problems and currently the Behat test can't put a linebreak into the textarea
+    $trimmed_emails = str_replace(',', "\n", $trimmed_emails);
+    $trimmed_emails = str_replace(';', "\n", $trimmed_emails);
 
     foreach (explode("\n", $trimmed_emails) as $email) {
       $email = trim($email);
@@ -166,19 +169,3 @@ function prc_invite_form_form_invite_form_submit(&$form, &$form_state)
   }
 }
 
-function prc_invite_form_invitations_invite_accept($invite, $account) {
-//  if (isset($invite->og_group_ref) && count($invite->og_group_ref)) {
-//    $invite_wrapper = entity_metadata_wrapper('invite', $invite);
-//    $invite_group = $invite_wrapper->og_group_ref->getIterator()->current()->value();
-//    $gid = $invite_group->nid;
-//
-//    $user = user_load($account->uid);
-//    $ogid = og_group('node', $gid, array('entity_type' => 'user', 'entity' => $user));
-//    if ($ogid) {
-//      $title = $invite_group->title;
-//      $uri = entity_uri('node', $invite_group);
-//      drupal_set_message(t("You just joined !group.", array('!group' => l($title, $uri['path']))));
-//    }
-//
-//  }
-}
