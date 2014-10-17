@@ -163,6 +163,16 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * Deletes the user with the specified email address.
+   *
+   * @Then /^I delete the user with the email address "([^"]*)"$/
+   */
+  public function deleteUserByEmail($email) {
+    $user = user_load_by_mail($email);
+    user_delete($user->uid);
+  }
+
+  /**
    * Asserts that a given field has the specified length
    *
    * @Then /^the field "([^"]*)" should have a length of "([^"]*)"$/
@@ -397,6 +407,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function assertFieldValue($field, $value)
   {
+    $field = $this->fixStepArgument($field);
+    $value = $this->fixStepArgument($value);
     $found = $this->getSession()->getPage()->findField($field);
 
     if (null === $found) {
