@@ -32,14 +32,17 @@ Feature: Invite User (PRC-92)
     And I visit "invite/add/invite_by_email"
     Then I should see an "E-mail *" field
     And I should see a "Message *" field
+    And I should see "Role *"
 
   Scenario: AC6 - Role: Only 1 of the roles listed below can be selected from the radio button at a time:
     Given I am logged in as a user with the "PRC Admin" role
+    Given I am logged in as a user with the "Educator" role
     And I visit "invite/add/invite_by_email"
     Then I select the radio button "Educator"
     Then I select the radio button "PRC Admin"
     Then I select the radio button "Content Author"
     Then I should not see the radio button "administrator"
+    Then I should not see the radio button "authenticated user"
 
   # AC7 - The Role selected will apply to all E-Mail addresses entered and the invitational message drafted before submission.
   # This is really a UI constraint, and the test for PRC-73 Create User Account Following an Invitation will cover it
@@ -90,7 +93,7 @@ Feature: Invite User (PRC-92)
     And the email should contain "has invited you to join Partnership Resource Center at"
     And the email should contain "MESSAGE1234"
 
-  Scenario: AC9 - Send invitations to multiple roles
+  Scenario: AC9 - Send invitations to multiple users
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
     And the test email system is enabled

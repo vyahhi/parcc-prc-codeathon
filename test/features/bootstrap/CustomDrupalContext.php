@@ -357,6 +357,61 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Then /^I follow link "(?P<number>[^"]*)" in the email$/
+   */
+  public function followEmailLinkByIndex($number) {
+    if (!$this->activeEmail) {
+      throw new \Exception('No active email');
+    }
+    $message = $this->activeEmail;
+
+    $body = $message['body'];
+
+    $body = str_replace('/.', '/ .', $body); # Separates URLs that end with a . from the end of the sentence
+    $body = str_replace("\r\n", ' ', $body); # Replaces line breaks with spaces so that we can search the body
+
+    $urls = $this->getUrls($body);
+
+    if (isset($urls[$number])) {
+      $follow_url = $urls[$number];
+      print $follow_url;
+    }
+    if (isset($follow_url)) {
+      // Have to go to the driver level because visit only works for pages off the base url
+      $this->getSession()->visit($follow_url);
+      return TRUE;
+    }
+    throw new \Exception('Did not find expected content in message body or subject.');
+  }
+
+  function getUrls($string) {
+    $regex = '/https?\:\/\/[^\" ]+/i';
+    preg_match_all($regex, $string, $matches);
+    return ($matches[0]);
+  }
+
+  /**
+   * Fills in form field with specified id|name|label|value.
+   *
+   * @When /^(?:|I )should see "(?P<value>(?:[^"]|\\")*)" in the "(?P<field>(?:[^"]|\\")*)" field$/
+   */
+  public function assertFieldValue($field, $value)
+  {
+    $found = $this->getSession()->getPage()->findField($field);
+
+    if (null === $found) {
+      throw new ElementNotFoundException(
+        $this->getSession(), 'form field', 'id|name|label|value', $field
+      );
+    }
+
+    $actual_value = $found->getValue();
+    if ($value != $actual_value) {
+      throw new \Exception(sprintf("The field '%s' did not have a value of '%s'.\nInstead, it was '%s'", $field, $value, $actual_value));
+    }
+  }
+
+  /**
    * @Then /^I follow the link in the email$/
    */
   public function followEmailLink() {
