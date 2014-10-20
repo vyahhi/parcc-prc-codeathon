@@ -34,6 +34,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Management',
     'description' => 'The <em>Management</em> menu contains links for administrative tasks.',
   );
+  // Exported menu: menu-invite-users.
+  $menus['menu-invite-users'] = array(
+    'menu_name' => 'menu-invite-users',
+    'title' => 'Invite Users',
+    'description' => '',
+  );
   // Exported menu: navigation.
   $menus['navigation'] = array(
     'menu_name' => 'navigation',
@@ -51,6 +57,7 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Development');
   t('Development link');
   t('Features');
+  t('Invite Users');
   t('Main menu');
   t('Management');
   t('Menu items for any enabled features.');

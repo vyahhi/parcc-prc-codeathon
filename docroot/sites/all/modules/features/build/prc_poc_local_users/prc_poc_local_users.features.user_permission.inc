@@ -248,6 +248,24 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'image',
   );
 
+  // Exported permission: 'administer invitations'.
+  $permissions['administer invitations'] = array(
+    'name' => 'administer invitations',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'invite',
+  );
+
+  // Exported permission: 'administer invite types'.
+  $permissions['administer invite types'] = array(
+    'name' => 'administer invite types',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'invite',
+  );
+
   // Exported permission: 'administer menu'.
   $permissions['administer menu'] = array(
     'name' => 'administer menu',
@@ -351,6 +369,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['administer permissions'] = array(
     'name' => 'administer permissions',
     'roles' => array(
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'user',
@@ -423,6 +442,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['administer users'] = array(
     'name' => 'administer users',
     'roles' => array(
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'user',
@@ -491,6 +511,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'create any invite entities'.
+  $permissions['create any invite entities'] = array(
+    'name' => 'create any invite entities',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'invite',
+  );
+
   // Exported permission: 'create article content'.
   $permissions['create article content'] = array(
     'name' => 'create article content',
@@ -517,6 +547,15 @@ function prc_poc_local_users_user_default_permissions() {
       'Educator' => 'Educator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'create invite_by_email entity'.
+  $permissions['create invite_by_email entity'] = array(
+    'name' => 'create invite_by_email entity',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+    ),
+    'module' => 'invite',
   );
 
   // Exported permission: 'create mini panels'.
@@ -1152,6 +1191,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any invite entities'.
+  $permissions['edit any invite entities'] = array(
+    'name' => 'edit any invite entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'invite',
+  );
+
   // Exported permission: 'edit any page content'.
   $permissions['edit any page content'] = array(
     'name' => 'edit any page content',
@@ -1226,6 +1274,15 @@ function prc_poc_local_users_user_default_permissions() {
       'Educator' => 'Educator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'edit own invite entities'.
+  $permissions['edit own invite entities'] = array(
+    'name' => 'edit own invite entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'invite',
   );
 
   // Exported permission: 'edit own page content'.
@@ -1539,6 +1596,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'filter',
   );
 
+  // Exported permission: 'view any invite entities'.
+  $permissions['view any invite entities'] = array(
+    'name' => 'view any invite entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'invite',
+  );
+
   // Exported permission: 'view own unpublished content'.
   $permissions['view own unpublished content'] = array(
     'name' => 'view own unpublished content',
@@ -1573,6 +1639,24 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'system',
+  );
+
+  // Exported permission: 'withdraw own accepted invitations'.
+  $permissions['withdraw own accepted invitations'] = array(
+    'name' => 'withdraw own accepted invitations',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'invite',
+  );
+
+  // Exported permission: 'withdraw own invitations'.
+  $permissions['withdraw own invitations'] = array(
+    'name' => 'withdraw own invitations',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'invite',
   );
 
   return $permissions;

@@ -7,6 +7,7 @@ features[menu_custom][] = devel
 features[menu_custom][] = features
 features[menu_custom][] = main-menu
 features[menu_custom][] = management
+features[menu_custom][] = menu-invite-users
 features[menu_custom][] = navigation
 features[menu_custom][] = user-menu
 features[features_api][] = api:2
