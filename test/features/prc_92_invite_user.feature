@@ -36,7 +36,6 @@ Feature: Invite User (PRC-92)
 
   Scenario: AC6 - Role: Only 1 of the roles listed below can be selected from the radio button at a time:
     Given I am logged in as a user with the "PRC Admin" role
-    Given I am logged in as a user with the "Educator" role
     And I visit "invite/add/invite_by_email"
     Then I select the radio button "Educator"
     Then I select the radio button "PRC Admin"

@@ -168,6 +168,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^I delete the user with the email address "([^"]*)"$/
    */
   public function deleteUserByEmail($email) {
+    $email = $this->fixStepArgument($email);
     $user = user_load_by_mail($email);
     user_delete($user->uid);
   }

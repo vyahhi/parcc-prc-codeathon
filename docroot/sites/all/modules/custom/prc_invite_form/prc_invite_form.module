@@ -56,6 +56,11 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
     '#options' => $roles,
   );
 
+  // Hide the field_role_id field - we'll use this to save the role we pick in invite_role
+  if (array_key_exists('field_role_id', $form)) {
+    $form['field_role_id']['#access'] = FALSE;
+  }
+
   $form['#validate'][] = 'prc_invite_form_form_invite_form_validate';
 
   foreach ($form['#validate'] as $key => $og_user_node) {
@@ -159,6 +164,8 @@ function prc_invite_form_form_invite_form_submit(&$form, &$form_state)
   $form['#entity_builders'] = $entity_builders;
   $new_body = $form_state['values']['prc_invite_message'] . '<br />' . $form_state['values']['field_invitation_email_body'][LANGUAGE_NONE][0]['value'];
   $form_state['values']['field_invitation_email_body'][LANGUAGE_NONE][0]['value'] = $new_body; // .= pre-concat operator not working
+  $rid = $form_state['values']['invite_role'];
+  $form_state['values']['field_role_id'][LANGUAGE_NONE][0]['value'] = $rid;
   foreach ($form_state['invitees'] as $key => $invitee) {
     // invite to group
     //$form_state['values']['field_invitation_email_address'] = $invitee;
@@ -169,3 +176,20 @@ function prc_invite_form_form_invite_form_submit(&$form, &$form_state)
   }
 }
 
+/**
+ *  Implements hook_invite_accept().
+ */
+function prc_invite_form_invite_accept($invite) {
+  $w = entity_metadata_wrapper('invite', $invite);
+  $invitee = $invite->invitee;
+  $account = user_load($invitee);
+  $rid = $w->field_role_id->value();
+  $roles = user_roles(TRUE);
+  if (isset($roles[$rid])) {
+    $role_name = $roles[$rid];
+    // Add role to user
+    $new_role[$rid] = $role_name;
+    $all_roles = $account->roles + $new_role; // Add new role to existing roles.
+    user_save($account, array('roles' => $all_roles));
+  }
+}
