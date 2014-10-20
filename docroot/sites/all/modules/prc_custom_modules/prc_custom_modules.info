@@ -1,0 +1,10 @@
+name = PRC Custom Modules
+description = Dependencies and configuration for custom PRC modules
+core = 7.x
+package = PRC
+dependencies[] = admin_role_restrict
+dependencies[] = prc_invite_form
+dependencies[] = prc_login_form
+dependencies[] = prc_user_edit_form
+dependencies[] = user_single_role
+features[features_api][] = api:2
