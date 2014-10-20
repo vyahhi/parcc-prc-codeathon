@@ -118,12 +118,33 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => -45,
     'customized' => 1,
   );
+  // Exported menu link: menu-invite-users_invite-new-user:invite/add/invite_by_email
+  $menu_links['menu-invite-users_invite-new-user:invite/add/invite_by_email'] = array(
+    'menu_name' => 'menu-invite-users',
+    'link_path' => 'invite/add/invite_by_email',
+    'router_path' => 'invite/add/invite_by_email',
+    'link_title' => 'Invite New User',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-invite-users_invite-new-user:invite/add/invite_by_email',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Translatables
   // Included for use with string extractors like potx.
   t('Assessments');
   t('Content');
   t('Digital Library');
   t('Home');
+  t('Invite New User');
   t('Professional Development');
   t('Users');
 

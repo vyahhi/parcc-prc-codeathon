@@ -12,5 +12,4 @@ features[menu_links][] = main-menu_digital-library:digital-library-tree-view
 features[menu_links][] = main-menu_home:<front>
 features[menu_links][] = main-menu_professional-development:professional-development
 features[menu_links][] = main-menu_users:admin-users
-features_exclude[menu_links][main-menu_assessments:assessments] = main-menu_assessments:assessments
-features_exclude[menu_links][main-menu_professional-development:professional-development] = main-menu_professional-development:professional-development
+features[menu_links][] = menu-invite-users_invite-new-user:invite/add/invite_by_email
