@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the PRC Panels Extras feature.
+ */
+
+include_once 'prc_panels_extras.features.inc';
