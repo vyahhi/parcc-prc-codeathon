@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the PRC Invite feature.
+ */
+
+include_once 'prc_invite.features.inc';
