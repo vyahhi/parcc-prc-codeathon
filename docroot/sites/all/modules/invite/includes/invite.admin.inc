@@ -210,6 +210,7 @@ function invite_form_validate($form, &$form_state) {
  * @param $form_state
  */
 function invite_form_submit($form, &$form_state) {
+  dpm(__FUNCTION__);
   $invite = $form_state['invite'];
 
   entity_form_submit_build_entity('invite', $invite, $form, $form_state);

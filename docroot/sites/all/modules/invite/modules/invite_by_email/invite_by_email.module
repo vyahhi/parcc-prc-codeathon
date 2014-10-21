@@ -373,6 +373,7 @@ function invite_by_email_send_invitation($invite) {
   if (!empty($reply_to)) {
     $params['reply-to'] = $reply_to;
   }
+  dpm(__FUNCTION__);
 
   // Send e-mail.
   $result = drupal_mail('invite_by_email', 'invite', $entity->field_invitation_email_address->value(), $language, $params, $from, TRUE);
@@ -385,6 +386,7 @@ function invite_by_email_send_invitation($invite) {
  */
 function invite_by_email_mail($key, &$message, $params) {
   global $user;
+  dpm(__FUNCTION__);
 
   $invite = $params['invite'];
 

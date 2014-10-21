@@ -449,6 +449,7 @@ function invite_load_multiple($iids, $conditions = array(), $reset = FALSE) {
  * @return bool
  */
 function invite_save($invite) {
+  dpm(__FUNCTION__);
   return entity_save('invite', $invite);
 }
 
