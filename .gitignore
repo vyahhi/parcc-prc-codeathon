@@ -55,5 +55,6 @@ Thumbs.db
 
 # Composer Vendirs #
 ####################
-# Could be we're doing it wrong, but we are committing submodules and dependencies for the time being
-# vendor/.git
+# We don't want composer vendors acting like submodules
+# See https://getcomposer.org/doc/faqs/should-i-commit-the-dependencies-in-my-vendor-directory.md
+vendor/.git
