@@ -193,3 +193,10 @@ function prc_invite_form_invite_accept($invite) {
     user_save($account, array('roles' => $all_roles));
   }
 }
+
+/**
+ *  Implements hook_mail_alter().
+ */
+function prc_invite_form_mail_alter(&$message) {
+  dpm($message);
+}
