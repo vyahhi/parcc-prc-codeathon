@@ -4,21 +4,22 @@ Feature: Forgot Password (PRC-146)
   I want to reset my login password,
   so that I can continue to benefit from the contents and features provided by PRC in the website.
 
+  @javascript
   Scenario: AC1 - The educator will select the "Forgot Password" link located in the Login block of the Home page. On click, the system will...
     # This test actually goes through the entire reset password flow and covers all 3 ACs.
     Given users:
-      | name     | mail            | pass     | field_first_name | field_last_name | status |
-      | Joe User | joe@example.com | xyz123   | Joe              | User            | 1      |
+      | name     | mail                    | pass     | field_first_name | field_last_name | status |
+      | Joe User | joe_prc_146@example.com | xyz123   | Joe              | User            | 1      |
     And I am an anonymous user
     And I am on the homepage
     And the test email system is enabled
     When I click "Forgot password?"
     Then the url should match "user/password"
-    Then I fill in "E-mail" with "joe@example.com"
+    Then I fill in "E-mail" with "joe_prc_146@example.com"
     And I press "E-mail new password"
     Then I should see the message containing "Further instructions have been sent to your e-mail address."
     # The matching is very dependent on line-breaks and formatting
-    Then the email to "joe@example.com" should contain "A request to reset the password for your account has been made at"
+    Then the email to "joe_prc_146@example.com" should contain "A request to reset the password for your account has been made at"
     And the email should contain "You may now log in by clicking this link or copying and pasting it to your"
     And I follow the link in the email
     Then I should see "Reset Password"
@@ -32,7 +33,8 @@ Feature: Forgot Password (PRC-146)
     Then I should see the message containing "The changes have been saved."
     Then I click "Log out"
     Then the url should match "/"
-    Then I fill in "E-mail" with "joe_@uname[Joe User]"
+#    Then I fill in "E-mail" with "joe_@uname[Joe User]"
+    Then I fill in "E-mail" with "joe_prc_146@example.com"
     And I fill in "Password" with "password1"
     And I press "Log in"
     Then I should see the link "Log out"
