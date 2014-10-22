@@ -379,7 +379,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $message = $this->activeEmail;
 
     $body = $message['body'];
-
     $body = str_replace('/.', '/ .', $body); # Separates URLs that end with a . from the end of the sentence
     $body = str_replace("\r\n", ' ', $body); # Replaces line breaks with spaces so that we can search the body
 
@@ -397,6 +396,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   function getUrls($string) {
+    // Replace line breaks with a space so we can match them to pull the URLs out
+    $string = preg_replace('#\R+#', ' ', $string);
     $regex = '/https?\:\/\/[^\" ]+/i';
     preg_match_all($regex, $string, $matches);
     return ($matches[0]);
@@ -429,24 +430,24 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^I follow the link in the email$/
    */
   public function followEmailLink() {
-    if (!$this->activeEmail) {
-      throw new \Exception('No active email');
-    }
-    $message = $this->activeEmail;
-
-    $body = $message['body'];
-    // The Regular Expression to look for URLs
-    $reg_exUrl = '`([^"=\'>])((http|https|ftp)://[^\s<]+[^\s<\.)])`i';
-    if(preg_match($reg_exUrl, $body, $url)) {
-      // It does return multiple matches. In this particular case we only care about the first one (so far)
-      $follow_url = $url[0];
-    }
-    if (isset($follow_url)) {
-      // Have to go to the driver level because visit only works for pages off the base url
-      $this->getSession()->visit($follow_url);
-      return TRUE;
-    }
-    throw new \Exception('Did not find expected content in message body or subject.');
+    $this->followEmailLinkByIndex(0);
+//    if (!$this->activeEmail) {
+//      throw new \Exception('No active email');
+//    }
+//    $message = $this->activeEmail;
+//
+//    $body = $message['body'];
+//    // The Regular Expression to look for URLs
+//    $reg_exUrl = '`([^"=\'>])((http|https|ftp)://[^\s<]+[^\s<\.)])`i';
+//    if(preg_match($reg_exUrl, $body, $url)) {
+//      // It does return multiple matches. In this particular case we only care about the first one (so far)
+//      $follow_url = $url[0];
+//    }
+//    if (isset($follow_url)) {
+//      // Have to go to the driver level because visit only works for pages off the base url
+//      $this->getSession()->visit($follow_url);
+//      return TRUE;
+//    }
   }
 
   /**
