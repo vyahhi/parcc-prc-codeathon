@@ -11,10 +11,10 @@ Feature: PRC Administrators (PRC-61)
   @api @d7
   Scenario: AC1 - A user shall use the Login block of the Home page and enter the E-mail and password provided.
     Given users:
-      | name     | mail            | pass     | field_first_name | field_last_name | status |
-      | Joe User | joe@example.com | xyz123   | Joe              | User            | 1      |
+      | name     | mail                   | pass     | field_first_name | field_last_name | status |
+      | Joe User | joe_prc_61@example.com | xyz123   | Joe              | User            | 1      |
     And I am on the homepage
-    When I fill in "E-mail" with "joe@example.com"
+    When I fill in "E-mail" with "joe_prc_61@example.com"
     And I fill in "Password" with "xyz123"
     And I press "Log in"
     Then I should see the link "Log out"
@@ -36,7 +36,7 @@ Feature: PRC Administrators (PRC-61)
   Scenario: AC3 - If any of the credentials are missing, the following messages appear (email)
     Given I am an anonymous user
     And I am on the homepage
-    When I fill in "E-mail" with "joe@example.com"
+    When I fill in "E-mail" with "joe_prc_61@example.com"
     And I press "Log in"
     Then I should not see the error message containing "E-mail field is required."
     And I should see the error message containing "Password field is required."
@@ -52,9 +52,9 @@ Feature: PRC Administrators (PRC-61)
   Scenario: AC4 - If any of the credentials are wrong, the following message appears (wrong password)
     Given users:
       | name     | mail            | pass     | field_first_name | field_last_name | status |
-      | Joe User | joe@example.com | xyz123   | Joe              | User            | 1      |
+      | Joe User | joe_prc_61_4@example.com | xyz123   | Joe              | User            | 1      |
     And I am on the homepage
-    When I fill in "E-mail" with "joe@example.com"
+    When I fill in "E-mail" with "joe_prc_61_4@example.com"
     And I fill in "Password" with "wrong"
     And I press "Log in"
     # Quotes apparently screw it up, so we'll just leave out the link
