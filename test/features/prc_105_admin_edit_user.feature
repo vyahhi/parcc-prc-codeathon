@@ -8,8 +8,8 @@ Feature: Admin UI: Edit User (PRC-105)
     Given I am logged in as a user with the "PRC Admin" role
     And I am on the homepage
     And users:
-      | name     | mail            | pass     | field_first_name | field_last_name | status |
-      | Joe User | joe@example.com | xyz123   | Joe              | User            | 1      |
+      | name     | mail                    | pass     | field_first_name | field_last_name | status |
+      | Joe User | joe_prc_105@example.com | xyz123   | Joe              | User            | 1      |
     Then I click "Users"
     Then the url should match "admin-users"
     # Now sort by User ID descending so that the new user we created is up top
