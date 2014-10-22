@@ -13,7 +13,7 @@ use Drupal\DrupalExtension\Event\EntityEvent;
 
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
-
+  protected $originalMailSystem;
   /**
    * Initializes context.
    *
@@ -274,7 +274,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function theTestEmailSystemIsEnabled() {
     // Store the original system to restore after the scenario.
-    $this->originalMailSystem = variable_get('mail_system', array('default-system' => 'DefaultMailSystem'));
+    $mail_system = variable_get('mail_system', array('default-system' => 'DefaultMailSystem'));
+    $this->originalMailSystem = $mail_system['default-system'];
     // Set the test system.
     variable_set('mail_system', array('default-system' => 'TestingMailSystem'));
     // Flush the email buffer, allowing us to reuse this step definition to clear existing mail.
@@ -386,7 +387,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
     if (isset($urls[$number])) {
       $follow_url = $urls[$number];
-      print $follow_url;
     }
     if (isset($follow_url)) {
       // Have to go to the driver level because visit only works for pages off the base url
