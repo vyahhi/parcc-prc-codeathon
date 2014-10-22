@@ -470,6 +470,82 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
   }
 
+  /**
+   * Accepts a confirmation dialog
+   *
+   * @Then /^I accept the confirmation$/
+   */
+  public function acceptAlert() {
+    $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+  }
+
+
+//
+
+  /**
+   * @Given /^I confirm the dialog$/
+   */
+  public function iConfirmTheDialog() {
+    $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+//    $this->handleAjaxTimeout();
+  }
+
+  /**
+   * @Given /^I dismiss the dialog$/
+   */
+  public function iDismissTheDialog() {
+    $this->getSession()->getDriver()->getWebDriverSession()->dismiss_alert();
+//    $this->handleAjaxTimeout();
+  }
+
+  /**
+   * Needs to be in single command to avoid "unexpected alert open" errors in Selenium.
+   * Example1: I press the "Remove current combo" button, confirming the dialog
+   * Example2: I follow the "Remove current combo" link, confirming the dialog
+   *
+   * @Given /^I (?:press|follow) the "([^"]*)" (?:button|link), confirming the dialog$/
+   */
+  public function stepIPressTheButtonConfirmingTheDialog($button) {
+    $this->clickLink($button);
+    $this->iConfirmTheDialog();
+  }
+
+  /**
+   * Needs to be in single command to avoid "unexpected alert open" errors in Selenium.
+   * Example: I follow the "Remove current combo" link, dismissing the dialog
+   *
+   * @Given /^I (?:press|follow) the "([^"]*)" (?:button|link), dismissing the dialog$/
+   */
+  public function stepIPressTheButtonDismissingTheDialog($button) {
+    $this->clickLink($button);
+    $this->iDismissTheDialog();
+  }
+
+
+
+
+
+
+  /**
+   * Dismisses a confirmation dialog
+   *
+   * @Then /^I dismiss the confirmation$/
+   */
+  public function dismissAlert() {
+    $this->getSession()->getDriver()->getWebDriverSession()->dismiss_alert();
+  }
+
+  /**
+   * @Then /^(?:|I )should see "([^"]*)" in popup$/
+   *
+   * @param string $message The message.
+   *
+   * @return bool
+   */
+  public function assertPopupMessage($message)
+  {
+    return $message == $this->getSession()->getDriver()->getWebDriverSession()->getAlert_text();
+  }
 
   public function afterScenario($event) {
     parent::afterScenario($event);

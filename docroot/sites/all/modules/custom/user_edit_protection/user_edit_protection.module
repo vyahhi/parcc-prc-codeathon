@@ -1,0 +1,8 @@
+<?php
+/**
+ * @file 
+ * Stops page from changing when user is posting.
+ */
+function user_edit_protection_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
+  drupal_add_js(drupal_get_path('module', 'user_edit_protection') . '/user-edit-protection.js');
+}
