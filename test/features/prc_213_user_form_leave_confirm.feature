@@ -7,7 +7,7 @@ Feature: Edit User - Leaving Page Without Saving Changes (PRC-213)
   Background:
     Given I am logged in as a user with the "PRC Admin" role
     And users:
-      | name     | mail            | pass     | field_first_name | field_last_name | status |
+      | name         | mail            | pass     | field_first_name | field_last_name | status |
       | PRC-213 User | joe@example.com | xyz123   | Joe              | User            | 1      |
     Then I click "Users"
     Then the url should match "admin-users"
