@@ -6,13 +6,6 @@
  */
 
 /**
- *  Implements hook_form_alter().
- */
-function prc_invite_form_form_alter(&$form, &$form_state, $form_id) {
-  $x = 'Breakpoint placeholder';
-}
-
-/**
  * Implements hook_form_FORM_ID_alter().
  */
 function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
