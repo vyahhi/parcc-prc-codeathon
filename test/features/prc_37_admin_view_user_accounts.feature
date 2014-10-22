@@ -26,7 +26,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
     And I follow "Users"
     Then I should be on "/admin-users"
 
-  Scenario: Page title (AC1)
+  Scenario: Page title (AC2)
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "/admin-users"
     Then I should see "PRC Website Users"
@@ -60,10 +60,21 @@ Feature: Admin UI: View User Accounts (PRC-37)
     Then I should see the link "Profession"
     Then I should see the link "Active"
 
-  Scenario: Pagination - 100 per page (AC5)
-    Given I am logged in as a user with the "PRC Admin" role
-    And I create 100 users with the "Educator" role
+  @javascript
+  Scenario: AC7 - Pagination - 100 users no pagination
+    # Create 99 users because the PRC Admin we will be logged in as makes 100
+    Given I have a total of 98 users with the "Educator" role
+    And I am logged in as a user with the "PRC Admin" role
     And I visit "/admin-users"
-    Then I should see the link "2"
+#    Then I should not see the link "2"
+    And I should not see the link "next"
+    And I should not see the link "last"
+
+  Scenario: AC7 - Pagination - 100 per page
+    # Our PRC Admin makes user 100
+    Given I have a total of 99 users with the "Educator" role
+    And I am logged in as a user with the "PRC Admin" role
+    And I visit "/admin-users"
+#    Then I should see the link "2"
     And I should see the link "next"
     And I should see the link "last"

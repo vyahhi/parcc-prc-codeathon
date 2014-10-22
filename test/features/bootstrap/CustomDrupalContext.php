@@ -233,6 +233,24 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
 
   /**
+   * Creates X number of random users with the specified role.
+   * Note: This will delete all users other than UID 1, as Devel Generate Users can.
+   * This also will not automatically clean up these users.
+   *
+   * @Given /^I have a total of (\d+) users with the "(?P<role>[^"]*)" role$/
+   */
+  public function createXUsersOfYRoleAndKillOtherUsers($number, $role) {
+    $uids = db_select('users', 'u')
+      ->fields('u', array('uid'))
+      ->condition('uid', 1, '>')
+      ->execute()
+      ->fetchAllAssoc('uid');
+    user_delete_multiple(array_keys($uids));
+    // Users killed
+    $this->createXUsersOfYRole($number, $role);
+  }
+
+  /**
    * Creates X number of random users with the specified role
    *
    * @Given /^I create (\d+) users with the "(?P<role>[^"]*)" role$/
