@@ -9,6 +9,7 @@ Feature: Edit Content - Leaving page without saving
     Then I click "Add content"
     Then I click "Document"
     Then I fill in "Title *" with "title"
+    Then I fill in "Body" with "body"
     Then the url should match "node/add/document"
     Then I should see the heading "Create Document" in the "content" region
 

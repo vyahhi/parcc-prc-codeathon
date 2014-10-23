@@ -19,6 +19,7 @@ Feature: Edit User - Leaving Page Without Saving Changes (PRC-213)
     Then the url should match "user/"
     Then the url should match "/edit"
     Then I fill in "First Name *" with "Nothing"
+    Then I fill in "Last Name *" with "Nothing"
 
   # Apparently the confirmation dialog is preventing our testing
   # browser from closing, so we have to explicitly confirm the
