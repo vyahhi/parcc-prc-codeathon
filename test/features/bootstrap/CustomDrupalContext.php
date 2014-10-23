@@ -13,7 +13,7 @@ use Drupal\DrupalExtension\Event\EntityEvent;
 
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
-
+  protected $originalMailSystem;
   /**
    * Initializes context.
    *
@@ -233,6 +233,24 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
 
   /**
+   * Creates X number of random users with the specified role.
+   * Note: This will delete all users other than UID 1, as Devel Generate Users can.
+   * This also will not automatically clean up these users.
+   *
+   * @Given /^I have a total of (\d+) users with the "(?P<role>[^"]*)" role$/
+   */
+  public function createXUsersOfYRoleAndKillOtherUsers($number, $role) {
+    $uids = db_select('users', 'u')
+      ->fields('u', array('uid'))
+      ->condition('uid', 1, '>')
+      ->execute()
+      ->fetchAllAssoc('uid');
+    user_delete_multiple(array_keys($uids));
+    // Users killed
+    $this->createXUsersOfYRole($number, $role);
+  }
+
+  /**
    * Creates X number of random users with the specified role
    *
    * @Given /^I create (\d+) users with the "(?P<role>[^"]*)" role$/
@@ -274,7 +292,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function theTestEmailSystemIsEnabled() {
     // Store the original system to restore after the scenario.
-    $this->originalMailSystem = variable_get('mail_system', array('default-system' => 'DefaultMailSystem'));
+    $mail_system = variable_get('mail_system', array('default-system' => 'DefaultMailSystem'));
+    $this->originalMailSystem = $mail_system['default-system'];
     // Set the test system.
     variable_set('mail_system', array('default-system' => 'TestingMailSystem'));
     // Flush the email buffer, allowing us to reuse this step definition to clear existing mail.
@@ -378,7 +397,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $message = $this->activeEmail;
 
     $body = $message['body'];
-
     $body = str_replace('/.', '/ .', $body); # Separates URLs that end with a . from the end of the sentence
     $body = str_replace("\r\n", ' ', $body); # Replaces line breaks with spaces so that we can search the body
 
@@ -386,7 +404,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
     if (isset($urls[$number])) {
       $follow_url = $urls[$number];
-      print $follow_url;
     }
     if (isset($follow_url)) {
       // Have to go to the driver level because visit only works for pages off the base url
@@ -397,6 +414,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   function getUrls($string) {
+    // Replace line breaks with a space so we can match them to pull the URLs out
+    $string = preg_replace('#\R+#', ' ', $string);
     $regex = '/https?\:\/\/[^\" ]+/i';
     preg_match_all($regex, $string, $matches);
     return ($matches[0]);
@@ -429,24 +448,24 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^I follow the link in the email$/
    */
   public function followEmailLink() {
-    if (!$this->activeEmail) {
-      throw new \Exception('No active email');
-    }
-    $message = $this->activeEmail;
-
-    $body = $message['body'];
-    // The Regular Expression to look for URLs
-    $reg_exUrl = '`([^"=\'>])((http|https|ftp)://[^\s<]+[^\s<\.)])`i';
-    if(preg_match($reg_exUrl, $body, $url)) {
-      // It does return multiple matches. In this particular case we only care about the first one (so far)
-      $follow_url = $url[0];
-    }
-    if (isset($follow_url)) {
-      // Have to go to the driver level because visit only works for pages off the base url
-      $this->getSession()->visit($follow_url);
-      return TRUE;
-    }
-    throw new \Exception('Did not find expected content in message body or subject.');
+    $this->followEmailLinkByIndex(0);
+//    if (!$this->activeEmail) {
+//      throw new \Exception('No active email');
+//    }
+//    $message = $this->activeEmail;
+//
+//    $body = $message['body'];
+//    // The Regular Expression to look for URLs
+//    $reg_exUrl = '`([^"=\'>])((http|https|ftp)://[^\s<]+[^\s<\.)])`i';
+//    if(preg_match($reg_exUrl, $body, $url)) {
+//      // It does return multiple matches. In this particular case we only care about the first one (so far)
+//      $follow_url = $url[0];
+//    }
+//    if (isset($follow_url)) {
+//      // Have to go to the driver level because visit only works for pages off the base url
+//      $this->getSession()->visit($follow_url);
+//      return TRUE;
+//    }
   }
 
   /**
@@ -469,6 +488,82 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
   }
 
+  /**
+   * Accepts a confirmation dialog
+   *
+   * @Then /^I accept the confirmation$/
+   */
+  public function acceptAlert() {
+    $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+  }
+
+
+//
+
+  /**
+   * @Given /^I confirm the dialog$/
+   */
+  public function iConfirmTheDialog() {
+    $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+//    $this->handleAjaxTimeout();
+  }
+
+  /**
+   * @Given /^I dismiss the dialog$/
+   */
+  public function iDismissTheDialog() {
+    $this->getSession()->getDriver()->getWebDriverSession()->dismiss_alert();
+//    $this->handleAjaxTimeout();
+  }
+
+  /**
+   * Needs to be in single command to avoid "unexpected alert open" errors in Selenium.
+   * Example1: I press the "Remove current combo" button, confirming the dialog
+   * Example2: I follow the "Remove current combo" link, confirming the dialog
+   *
+   * @Given /^I (?:press|follow) the "([^"]*)" (?:button|link), confirming the dialog$/
+   */
+  public function stepIPressTheButtonConfirmingTheDialog($button) {
+    $this->clickLink($button);
+    $this->iConfirmTheDialog();
+  }
+
+  /**
+   * Needs to be in single command to avoid "unexpected alert open" errors in Selenium.
+   * Example: I follow the "Remove current combo" link, dismissing the dialog
+   *
+   * @Given /^I (?:press|follow) the "([^"]*)" (?:button|link), dismissing the dialog$/
+   */
+  public function stepIPressTheButtonDismissingTheDialog($button) {
+    $this->clickLink($button);
+    $this->iDismissTheDialog();
+  }
+
+
+
+
+
+
+  /**
+   * Dismisses a confirmation dialog
+   *
+   * @Then /^I dismiss the confirmation$/
+   */
+  public function dismissAlert() {
+    $this->getSession()->getDriver()->getWebDriverSession()->dismiss_alert();
+  }
+
+  /**
+   * @Then /^(?:|I )should see "([^"]*)" in popup$/
+   *
+   * @param string $message The message.
+   *
+   * @return bool
+   */
+  public function assertPopupMessage($message)
+  {
+    return $message == $this->getSession()->getDriver()->getWebDriverSession()->getAlert_text();
+  }
 
   public function afterScenario($event) {
     parent::afterScenario($event);
