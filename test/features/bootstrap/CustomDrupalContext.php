@@ -541,6 +541,28 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
 
 
+  /**
+   * Moves backward one page in history and confirms the dialog.
+   *
+   * @When /^(?:|I )move backward one page, confirming the dialog$/
+   */
+  public function backAndConfirm()
+  {
+    $this->getSession()->back();
+    $this->iConfirmTheDialog();
+  }
+
+  /**
+   * Moves backward one page in history and dismisses the dialog.
+   *
+   * @When /^(?:|I )move backward one page, dismissing the dialog$/
+   */
+  public function backAndDismiss()
+  {
+    $this->getSession()->back();
+    $this->iDismissTheDialog();
+  }
+
 
 
 
