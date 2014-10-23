@@ -563,8 +563,37 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $this->iDismissTheDialog();
   }
 
+  /**
+   * Wait for X seconds.
+   *
+   * @Given /^I wait (\d+) seconds$/
+   */
+  public function iWaitForXSeconds($seconds) {
+    $ms = $seconds * 1000;
+    $this->getSession()->wait($ms);
+  }
 
 
+
+  /**
+   * Click on the element with the provided CSS Selector
+   *
+   * @When /^I click on the element with css selector "([^"]*)"$/
+   */
+  public function iClickOnTheElementWithCSSSelector($cssSelector)
+  {
+    $session = $this->getSession();
+    $element = $session->getPage()->find(
+      'xpath',
+      $session->getSelectorsHandler()->selectorToXpath('css', $cssSelector) // just changed xpath to css
+    );
+    if (null === $element) {
+      throw new \InvalidArgumentException(sprintf('Could not evaluate CSS Selector: "%s"', $cssSelector));
+    }
+
+    $element->click();
+
+  }
 
   /**
    * Dismisses a confirmation dialog
