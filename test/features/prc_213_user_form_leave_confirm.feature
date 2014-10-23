@@ -20,20 +20,35 @@ Feature: Edit User - Leaving Page Without Saving Changes (PRC-213)
     Then the url should match "/edit"
     Then I fill in "First Name *" with "Nothing"
 
+  # Apparently the confirmation dialog is preventing our testing
+  # browser from closing, so we have to explicitly confirm the
+  # dialog after every dismissal test. Ridiculous!
+
   @javascript
-  Scenario: If a PRC Admin navigates away from the "Edit User" page without saving changes, confirming the dialog navigates away
+  Scenario: Navigate away - confirm
     Then I follow the "Home" link, confirming the dialog
     Then the url should match "/"
 
   @javascript
-  Scenario: If a PRC Admin navigates away from the "Edit User" page without saving changes, confirming the dialog navigates away
+  Scenario: Navigate away - dismiss
+    Then I follow the "Home" link, dismissing the dialog
+    # We could probably make this some fancy regex, but we don't care what the number in the middle is
+    # We are just trying to make sure we are editing a user
+    Then the url should match "user/"
+    Then the url should match "/edit"
+    Then I move backward one page, confirming the dialog
+
+  @javascript
+  Scenario: Back button - confirm
     Then I move backward one page, confirming the dialog
     Then the url should match "/"
 
   @javascript
-  Scenario: If a PRC Admin navigates away from the "Edit User" page without saving changes, dismissing the dialog prevents navigation
+  Scenario: Back button - dismiss
     Then I move backward one page, dismissing the dialog
     # We could probably make this some fancy regex, but we don't care what the number in the middle is
     # We are just trying to make sure we are editing a user
     Then the url should match "user/"
     Then the url should match "/edit"
+    Then I move backward one page, confirming the dialog
+
