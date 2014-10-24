@@ -4,7 +4,7 @@ Feature: Forgot Password (PRC-146)
   I want to reset my login password,
   so that I can continue to benefit from the contents and features provided by PRC in the website.
 
-  Scenario: AC1 - The educator will select the "Forgot Password" link located in the Login block of the Home page. On click, the system will...
+  Scenario: Complete walkthrough
     # This test actually goes through the entire reset password flow and covers all 3 ACs.
     Given users:
       | name     | mail                    | pass     | field_first_name  | field_last_name  | status |
@@ -14,6 +14,7 @@ Feature: Forgot Password (PRC-146)
     And the test email system is enabled
     When I click "Forgot password?"
     Then the url should match "user/password"
+    And I should see the text "Request new password"
     Then I fill in "E-mail" with "joe_prc_146@example.com"
     And I press "E-mail new password"
     Then I should see the message containing "Further instructions have been sent to your e-mail address."
@@ -45,3 +46,22 @@ Feature: Forgot Password (PRC-146)
 
   # AC3 - The educator will log into the PRC website.
   # This is also covered in the big test for AC1.
+
+  Scenario: Unregistered email address
+  # This test actually goes through the entire reset password flow and covers all 3 ACs.
+    Given I am an anonymous user
+    And I am on the homepage
+    And the test email system is enabled
+    When I click "Forgot password?"
+    Then I fill in "E-mail" with "notarealemailaddress@example.com"
+    And I press "E-mail new password"
+    Then I should see the error message containing "Sorry, notarealemailaddress@example.com is not recognized as a user name or an e-mail address."
+
+  Scenario: Invalid email address
+    Given I am an anonymous user
+    And I am on the homepage
+    And the test email system is enabled
+    When I click "Forgot password?"
+    Then I fill in "E-mail" with "notarealemailaddress"
+    And I press "E-mail new password"
+    Then I should see the error message containing "Sorry, notarealemailaddress is not recognized as a user name or an e-mail address."
