@@ -126,7 +126,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    *
    * @Then /^(?:|I )should see an? "(?P<button>(?:[^"]|\\")*)" button$/
    */
-  public function iShouldSeeAButton($button)
+  public function   iShouldSeeAButton($button)
   {
     $button = $this->fixStepArgument($button);
     if (!$this->getSession()->getPage()->hasButton($button)) {
