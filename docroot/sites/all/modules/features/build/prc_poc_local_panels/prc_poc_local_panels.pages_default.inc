@@ -442,21 +442,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_title = 'Assessments';
   $page->admin_description = '';
   $page->path = 'assessments';
-  $page->access = array(
-    'plugins' => array(
-      0 => array(
-        'name' => 'role',
-        'settings' => array(
-          'rids' => array(
-            0 => 1,
-          ),
-        ),
-        'context' => 'logged-in-user',
-        'not' => TRUE,
-      ),
-    ),
-    'logic' => 'and',
-  );
+  $page->access = array();
   $page->menu = array(
     'type' => 'normal',
     'title' => 'Assessments',
@@ -535,6 +521,121 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['assessments'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
+  $page->name = 'content_administration_page';
+  $page->task = 'page';
+  $page->admin_title = 'Content Administration Page';
+  $page->admin_description = 'PRC Content administration page';
+  $page->path = 'admin-content';
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 3,
+            1 => 6,
+            2 => 5,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+    ),
+    'logic' => 'and',
+  );
+  $page->menu = array();
+  $page->arguments = array();
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_content_administration_page_panel_context';
+  $handler->task = 'page';
+  $handler->subtask = 'content_administration_page';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Admin Content Page',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'panels_everywhere_site_template' => '',
+  );
+  $display = new panels_display();
+  $display->layout = 'flexible';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'center' => NULL,
+    ),
+    'center' => array(
+      'style' => '-1',
+    ),
+  );
+  $display->cache = array();
+  $display->title = 'PRC Website Content';
+  $display->uuid = '6c59397e-f06e-4f8b-8aee-d41104fed820';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-1e808230-6c7e-4e77-a023-6f93bde398b7';
+    $pane->panel = 'center';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-add-content';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '1e808230-6c7e-4e77-a023-6f93bde398b7';
+    $display->content['new-1e808230-6c7e-4e77-a023-6f93bde398b7'] = $pane;
+    $display->panels['center'][0] = 'new-1e808230-6c7e-4e77-a023-6f93bde398b7';
+    $pane = new stdClass();
+    $pane->pid = 'new-46dbc263-aec7-4e18-b8a7-3e061587b2bf';
+    $pane->panel = 'center';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'digital_library_tree_view-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '46dbc263-aec7-4e18-b8a7-3e061587b2bf';
+    $display->content['new-46dbc263-aec7-4e18-b8a7-3e061587b2bf'] = $pane;
+    $display->panels['center'][1] = 'new-46dbc263-aec7-4e18-b8a7-3e061587b2bf';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['content_administration_page'] = $page;
 
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
@@ -807,21 +908,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_title = 'Professional Development';
   $page->admin_description = 'Professional Development placeholder';
   $page->path = 'professional-development';
-  $page->access = array(
-    'plugins' => array(
-      0 => array(
-        'name' => 'role',
-        'settings' => array(
-          'rids' => array(
-            0 => 1,
-          ),
-        ),
-        'context' => 'logged-in-user',
-        'not' => TRUE,
-      ),
-    ),
-    'logic' => 'and',
-  );
+  $page->access = array();
   $page->menu = array(
     'type' => 'normal',
     'title' => 'Professional Development',
