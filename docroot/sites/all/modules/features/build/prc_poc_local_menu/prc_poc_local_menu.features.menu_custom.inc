@@ -34,6 +34,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Management',
     'description' => 'The <em>Management</em> menu contains links for administrative tasks.',
   );
+  // Exported menu: menu-add-content.
+  $menus['menu-add-content'] = array(
+    'menu_name' => 'menu-add-content',
+    'title' => 'Add content',
+    'description' => '',
+  );
   // Exported menu: menu-invite-users.
   $menus['menu-invite-users'] = array(
     'menu_name' => 'menu-invite-users',
@@ -54,6 +60,7 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   );
   // Translatables
   // Included for use with string extractors like potx.
+  t('Add content');
   t('Development');
   t('Development link');
   t('Features');

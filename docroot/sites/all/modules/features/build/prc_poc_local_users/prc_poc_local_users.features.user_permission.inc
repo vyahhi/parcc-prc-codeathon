@@ -530,6 +530,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create digital_library_content content'.
+  $permissions['create digital_library_content content'] = array(
+    'name' => 'create digital_library_content content',
+    'roles' => array(
+      'Content Author' => 'Content Author',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create document content'.
   $permissions['create document content'] = array(
     'name' => 'create document content',
@@ -544,6 +553,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['create favorites_list content'] = array(
     'name' => 'create favorites_list content',
     'roles' => array(
+      'Content Author' => 'Content Author',
       'Educator' => 'Educator',
     ),
     'module' => 'node',
@@ -624,6 +634,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any digital_library_content content'.
+  $permissions['delete any digital_library_content content'] = array(
+    'name' => 'delete any digital_library_content content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any document content'.
   $permissions['delete any document content'] = array(
     'name' => 'delete any document content',
@@ -690,6 +707,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own digital_library_content content'.
+  $permissions['delete own digital_library_content content'] = array(
+    'name' => 'delete own digital_library_content content',
+    'roles' => array(
+      'Content Author' => 'Content Author',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own document content'.
   $permissions['delete own document content'] = array(
     'name' => 'delete own document content',
@@ -704,6 +730,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['delete own favorites_list content'] = array(
     'name' => 'delete own favorites_list content',
     'roles' => array(
+      'Content Author' => 'Content Author',
       'Educator' => 'Educator',
     ),
     'module' => 'node',
@@ -1173,6 +1200,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any digital_library_content content'.
+  $permissions['edit any digital_library_content content'] = array(
+    'name' => 'edit any digital_library_content content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any document content'.
   $permissions['edit any document content'] = array(
     'name' => 'edit any document content',
@@ -1257,6 +1291,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'comment',
   );
 
+  // Exported permission: 'edit own digital_library_content content'.
+  $permissions['edit own digital_library_content content'] = array(
+    'name' => 'edit own digital_library_content content',
+    'roles' => array(
+      'Content Author' => 'Content Author',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own document content'.
   $permissions['edit own document content'] = array(
     'name' => 'edit own document content',
@@ -1271,6 +1314,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit own favorites_list content'] = array(
     'name' => 'edit own favorites_list content',
     'roles' => array(
+      'Content Author' => 'Content Author',
       'Educator' => 'Educator',
     ),
     'module' => 'node',

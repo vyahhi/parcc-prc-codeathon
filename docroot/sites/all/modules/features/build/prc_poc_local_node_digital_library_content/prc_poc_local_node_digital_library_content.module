@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Digital Library Content feature.
+ */
+
+include_once 'prc_poc_local_node_digital_library_content.features.inc';
