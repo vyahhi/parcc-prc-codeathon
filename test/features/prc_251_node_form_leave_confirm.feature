@@ -10,7 +10,7 @@ Feature: PRC-251 Edit Content - Leaving page without saving
     Then I click "Document"
     Then I fill in "Title *" with "title"
     Then I fill in "Body" with "body"
-    Then the url should match "node/add/document"
+    Then the url should match "node/add/digital-library-content"
     Then I should see the heading "Create Document" in the "content" region
 
   # Apparently the confirmation dialog is preventing our testing
