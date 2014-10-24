@@ -305,10 +305,73 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function theDefaultEmailSystemIsEnabled() {
     // Set the default system.
-    $revert_to = $this->originalMailSystem ? $this->originalMailSystem : 'DefaultMailSystem';
+    $revert_to = isset($this->originalMailSystem) ? $this->originalMailSystem : 'DefaultMailSystem';
     variable_set('mail_system', array('default-system' => $revert_to));
     // Flush the email buffer, allowing us to reuse this step definition to clear existing mail.
     variable_set('drupal_test_email_collector', array());
+  }
+
+
+  /**
+   * Asserts that a given node type is not editable.
+   *
+   * @Then /^I should not be able to edit another user's "([^"]*)" node$/
+   */
+  public function assertNotEditAnyNodeOfType($type) {
+    $this->assertNotEditNodeOfType($type);
+  }
+
+    /**
+   * Asserts that a given node type is editable by the author.
+   *
+   * @Then /^I should be able to edit my own "([^"]*)" node$/
+   */
+  public function assertEditOwnNodeOfType($type) {
+    if (!$this->user->uid) {
+      throw new \Exception(sprintf('There is no current logged in user to create a node for.'));
+    }
+    $node = (object) array(
+      'title' => $this->getDrupal()->random->string(255),
+      'type' => $type,
+      'body' => $this->getDrupal()->random->string(255),
+      'uid' => $this->user->uid,
+    );
+    $saved = $this->getDriver()->createNode($node);
+    $this->nodes[] = $saved;
+
+    // Set internal browser on the node edit page.
+    $this->getSession()->visit($this->locatePath('/node/' . $saved->nid . '/edit'));
+
+    // Test status.
+    return new Then("I should get a \"200\" HTTP response");
+
+  }
+
+  /**
+   * Overrides DrupalContext::createMyNode
+   * There is a bug in the original in the 'body' => this->getDrupal()->string(255), because it is missing
+   * the ->random
+   * @param $type
+   * @param $title
+   * @throws Exception
+   */
+  public function createMyNode($type, $title) {
+    if (!$this->user->uid) {
+      throw new \Exception(sprintf('There is no current logged in user to create a node for.'));
+    }
+    $node = (object) array(
+      'title' => $title,
+      'type' => $type,
+      'body' => $this->getDrupal()->random->string(255),
+      'uid' => $this->user->uid,
+    );
+    $this->dispatcher->dispatch('beforeNodeCreate', new EntityEvent($this, $node));
+    $saved = $this->getDriver()->createNode($node);
+    $this->dispatcher->dispatch('afterNodeCreate', new EntityEvent($this, $saved));
+    $this->nodes[] = $saved;
+
+    // Set internal page on the new node.
+    $this->getSession()->visit($this->locatePath('/node/' . $saved->nid));
   }
 
   /**
