@@ -27,46 +27,6 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => -48,
     'customized' => 1,
   );
-  // Exported menu link: main-menu_content:node/add/document
-  $menu_links['main-menu_content:node/add/document'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/add/document',
-    'router_path' => 'node/add/document',
-    'link_title' => 'Content',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'main-menu_content:node/add/document',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -46,
-    'customized' => 1,
-  );
-  // Exported menu link: main-menu_digital-library:digital-library-tree-view
-  $menu_links['main-menu_digital-library:digital-library-tree-view'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'digital-library-tree-view',
-    'router_path' => 'digital-library-tree-view',
-    'link_title' => 'Digital Library',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'main-menu_digital-library:digital-library-tree-view',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -49,
-    'customized' => 1,
-  );
   // Exported menu link: main-menu_home:<front>
   $menu_links['main-menu_home:<front>'] = array(
     'menu_name' => 'main-menu',
@@ -118,6 +78,26 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => -45,
     'customized' => 1,
   );
+  // Exported menu link: menu-add-content_add-content:node/add/digital-library-content
+  $menu_links['menu-add-content_add-content:node/add/digital-library-content'] = array(
+    'menu_name' => 'menu-add-content',
+    'link_path' => 'node/add/digital-library-content',
+    'router_path' => 'node/add/digital-library-content',
+    'link_title' => 'Add content',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-add-content_add-content:node/add/digital-library-content',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-invite-users_invite-new-user:invite/add/invite_by_email
   $menu_links['menu-invite-users_invite-new-user:invite/add/invite_by_email'] = array(
     'menu_name' => 'menu-invite-users',
@@ -140,9 +120,8 @@ function prc_menu_links_menu_default_menu_links() {
   );
   // Translatables
   // Included for use with string extractors like potx.
+  t('Add content');
   t('Assessments');
-  t('Content');
-  t('Digital Library');
   t('Home');
   t('Invite New User');
   t('Professional Development');
