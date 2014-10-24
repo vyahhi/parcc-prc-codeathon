@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the PRC Custom Modules feature.
  */
+
+include_once 'prc_custom_modules.features.inc';

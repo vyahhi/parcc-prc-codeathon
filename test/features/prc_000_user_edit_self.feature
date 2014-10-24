@@ -6,13 +6,14 @@ Feature: PRC ??? - User edits own account
 
   Scenario: User edits own account
     Given users:
-      | name     | mail            | pass     | field_first_name | field_last_name | status |
-      | Joe User | joe@example.com | xyz123   | Joe              | User            | 1      |
+      | name     | mail                | pass     | field_first_name | field_last_name | status |
+      | Joe User | joe_000@example.com | xyz123   | Joe              | User            | 1      |
     And I am an anonymous user
     And I am on the homepage
     # Log in
-    Then the user "joe_@uname[Joe User]" should have a role of "Educator"
-    Then I fill in "E-mail" with "joe_@uname[Joe User]"
+#    Then the user "joe_@uname[Joe User]" should have a role of "Educator"
+    Then the user "joe_000@example.com" should have a role of "Educator"
+    Then I fill in "E-mail" with "joe_000@example.com"
     And I fill in "Password" with "xyz123"
     And I press "Log in"
     Then I should see the link "Log out"
@@ -25,10 +26,10 @@ Feature: PRC ??? - User edits own account
     And I fill in "Confirm password" with "password1"
     And I press "Save"
     Then I should see the message containing "The changes have been saved."
-    Then the user "joe_@uname[Joe User]" should have a role of "Educator"
+    Then the user "joe_000@example.com" should have a role of "Educator"
     Then I click "Log out"
     Then the url should match "/"
-    Then I fill in "E-mail" with "joe_@uname[Joe User]"
+    Then I fill in "E-mail" with "joe_000@example.com"
     And I fill in "Password" with "password1"
     And I press "Log in"
     Then I should see the link "Log out"

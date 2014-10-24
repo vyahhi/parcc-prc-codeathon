@@ -1,12 +1,20 @@
-@api @d7
+@api
 Feature: Admin UI: Post Content (PRC-28)
   As a Content Author,
   I want to post a new content to PRC Website,
   so that the educators can access and view them.
 
-  Scenario: AC1 Content Author permission
+  Scenario: Content Author permission - Edit Any
     Given I am logged in as a user with the "Content Author" role
-    Then I should be able to edit a "Digital Library Content" node
+    Then I should not be able to edit another user's "Digital Library Content" node
+
+  Scenario: Content Author permission - Edit Own
+    Given I am logged in as a user with the "Content Author" role
+    Then I should be able to edit my own "Digital Library Content" node
+
+  Scenario: AC1 Content author permission to create
+    Given I am logged in as a user with the "Content Author" role
+    And I am viewing my "Digital Library Content" node with the title "PRC-28 AC1 Title"
 
   Scenario Outline: AC2 and AC3 Content tab visibility for authorized users
     Given I am logged in as a user with the "<role>" role
@@ -37,4 +45,3 @@ Feature: Admin UI: Post Content (PRC-28)
     Then I click "Add content"
     Then the url should match "node/add/digital-library-content"
     And I should see the heading "Create Digital Library Content" in the "content" region
-
