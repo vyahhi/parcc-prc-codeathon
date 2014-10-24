@@ -6,7 +6,7 @@ Feature: Admin UI: Post Content (PRC-28)
 
   Scenario: AC1 Content Author permission
     Given I am logged in as a user with the "Content Author" role
-    Then I should be able to edit a "Document" node
+    Then I should be able to edit a "Digital Library Content" node
 
   Scenario Outline: AC2 and AC3 Content tab visibility for authorized users
     Given I am logged in as a user with the "<role>" role
