@@ -48,7 +48,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
-  /* Field: Content: Attach a file */
+  /* Field: Content: Document */
   $handler->display->display_options['fields']['field_document']['id'] = 'field_document';
   $handler->display->display_options['fields']['field_document']['table'] = 'field_data_field_document';
   $handler->display->display_options['fields']['field_document']['field'] = 'field_document';
@@ -843,10 +843,6 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'digital_library_content' => 'digital_library_content',
   );
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'digital-library-tree-view';
 
   /* Display: Content pane */
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');

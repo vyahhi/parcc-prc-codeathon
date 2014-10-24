@@ -47,17 +47,17 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => -46,
     'customized' => 1,
   );
-  // Exported menu link: main-menu_digital-library:digital-library-tree-view
-  $menu_links['main-menu_digital-library:digital-library-tree-view'] = array(
+  // Exported menu link: main-menu_digital-library:digital-library
+  $menu_links['main-menu_digital-library:digital-library'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'digital-library-tree-view',
-    'router_path' => 'digital-library-tree-view',
+    'link_path' => 'digital-library',
+    'router_path' => 'digital-library',
     'link_title' => 'Digital Library',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'main-menu_digital-library:digital-library-tree-view',
+      'identifier' => 'main-menu_digital-library:digital-library',
     ),
     'module' => 'menu',
     'hidden' => 0,
