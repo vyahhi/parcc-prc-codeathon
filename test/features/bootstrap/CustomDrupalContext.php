@@ -311,7 +311,17 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     variable_set('drupal_test_email_collector', array());
   }
 
+
   /**
+   * Asserts that a given node type is not editable.
+   *
+   * @Then /^I should not be able to edit another user's "([^"]*)" node$/
+   */
+  public function assertNotEditAnyNodeOfType($type) {
+    $this->assertNotEditNodeOfType($type);
+  }
+
+    /**
    * Asserts that a given node type is editable by the author.
    *
    * @Then /^I should be able to edit my own "([^"]*)" node$/

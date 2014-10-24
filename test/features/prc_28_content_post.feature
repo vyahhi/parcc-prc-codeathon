@@ -4,17 +4,17 @@ Feature: Admin UI: Post Content (PRC-28)
   I want to post a new content to PRC Website,
   so that the educators can access and view them.
 
-  Scenario: Content Author permission
+  Scenario: Content Author permission - Edit Any
     Given I am logged in as a user with the "Content Author" role
-    Then I should be able to edit a "Document" node
+    Then I should not be able to edit another user's "Digital Library Content" node
+
+  Scenario: Content Author permission - Edit Own
+    Given I am logged in as a user with the "Content Author" role
+    Then I should be able to edit my own "Digital Library Content" node
 
   Scenario: AC1 Content author permission to create
     Given I am logged in as a user with the "Content Author" role
     And I am viewing my "Digital Library Content" node with the title "PRC-28 AC1 Title"
-
-  Scenario: AC1 Content Author permission
-    Given I am logged in as a user with the "Content Author" role
-    Then I should be able to edit my own "Digital Library" node
 
   Scenario: Adding content - Form fields
     Given I am logged in as a user with the "Content Author" role
