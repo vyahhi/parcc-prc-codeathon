@@ -8,8 +8,8 @@ Feature: Forgot Password (PRC-146)
   Scenario: AC1 - The educator will select the "Forgot Password" link located in the Login block of the Home page. On click, the system will...
     # This test actually goes through the entire reset password flow and covers all 3 ACs.
     Given users:
-      | name     | mail                    | pass     | field_first_name | field_last_name | status |
-      | Joe User | joe_prc_146@example.com | xyz123   | Joe              | User            | 1      |
+      | name     | mail                    | pass     | field_first_name  | field_last_name  | status |
+      | Joe User | joe_prc_146@example.com | xyz123   | JoeF              | UserL            | 1      |
     And I am an anonymous user
     And I am on the homepage
     And the test email system is enabled
@@ -38,7 +38,7 @@ Feature: Forgot Password (PRC-146)
     And I fill in "Password" with "password1"
     And I press "Log in"
     Then I should see the link "Log out"
-    And I should see "Welcome, Joe User"
+    And I should see "Welcome, JoeF UserL"
 
   # AC2 - The educator will select the reset password link from the email and update their password.
   # This is covered in the big test for AC1

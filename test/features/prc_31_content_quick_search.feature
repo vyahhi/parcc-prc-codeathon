@@ -38,17 +38,6 @@ Feature: Search Content - Quick Search (PRC-31)
     But I should not see the text "Europe"
     And I should not see the text "America"
 
-    When I fill in "Enter your keywords" with "West"
-    And I press "edit-submit"
-    Then I should not see the text "Africa"
-    And I should not see the text "North America"
-    And I should see the text "South America"
-    And I should not see the text "Europe"
-    But I should not see the text "Austria"
-    And I should not see the text "South Africa"
-    And I should not see the text "Austria"
-    And I should not see the text "Country"
-
     When I fill in "Enter your keywords" with "America"
     And I press "edit-submit"
     Then I should see the text "North America"
@@ -79,16 +68,29 @@ Feature: Search Content - Quick Search (PRC-31)
     And I should not see the text "South Africa"
     And I should not see the text "Country"
 
-    When I fill in "Enter your keywords" with "East"
-    And I press "edit-submit"
-    Then I should not see the text "Africa"
-    And I should see the text "North America"
-    And I should see the text "South America"
-    And I should not see the text "Europe"
-    But I should not see the text "Austria"
-    And I should not see the text "South Africa"
-    And I should not see the text "Austria"
-    And I should not see the text "Country"
+#    When I fill in "Enter your keywords" with "East"
+#    And I press "edit-submit"
+#    Then I should not see the text "Africa"
+#    And I should see the text "North America"
+#    And I should see the text "South America"
+#    And I should not see the text "Europe"
+#    But I should not see the text "Austria"
+#    And I should not see the text "South Africa"
+#    And I should not see the text "Austria"
+#    And I should not see the text "Country"
+#
+#    When I fill in "Enter your keywords" with "West"
+#    And I press "edit-submit"
+#    Then I should not see the text "Africa"
+#    And I should not see the text "North America"
+#    And I should see the text "South America"
+#    And I should not see the text "Europe"
+#    But I should not see the text "Austria"
+#    And I should not see the text "South Africa"
+#    And I should not see the text "Austria"
+#    And I should not see the text "Country"
+
+
 
 #  h1.Acceptance Criteria
   # Add a Search block to the header for all authenticated and anonymous users. It contains the following components:
