@@ -77,7 +77,7 @@ function prc_poc_local_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'site_mail';
-  $strongarm->value = 'noreply@breaktech.org';
+  $strongarm->value = 'jonathan.franks@breaktech.com';
   $export['site_mail'] = $strongarm;
 
   $strongarm = new stdClass();

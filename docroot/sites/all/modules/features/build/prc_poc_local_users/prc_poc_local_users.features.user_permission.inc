@@ -212,6 +212,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'features',
   );
 
+  // Exported permission: 'administer fieldgroups'.
+  $permissions['administer fieldgroups'] = array(
+    'name' => 'administer fieldgroups',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'field_group',
+  );
+
   // Exported permission: 'administer filters'.
   $permissions['administer filters'] = array(
     'name' => 'administer filters',
@@ -816,6 +825,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'delete terms in media_type'.
+  $permissions['delete terms in media_type'] = array(
+    'name' => 'delete terms in media_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'delete terms in subject'.
   $permissions['delete terms in subject'] = array(
     'name' => 'delete terms in subject',
@@ -1403,6 +1419,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'edit terms in media_type'.
+  $permissions['edit terms in media_type'] = array(
+    'name' => 'edit terms in media_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'edit terms in subject'.
   $permissions['edit terms in subject'] = array(
     'name' => 'edit terms in subject',
@@ -1514,7 +1537,6 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'search content',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'search',
   );
