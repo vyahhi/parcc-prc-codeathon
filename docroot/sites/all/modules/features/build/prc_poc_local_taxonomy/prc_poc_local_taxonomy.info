@@ -1,13 +1,17 @@
 name = prc-poc.local Taxonomy
 core = 7.x
 package = Configuration
+dependencies[] = ctools
 dependencies[] = features
 dependencies[] = prc_poc_local_fields
+dependencies[] = strongarm
 dependencies[] = taxonomy
 features[taxonomy][] = ccss_grade
 features[taxonomy][] = genre
 features[taxonomy][] = grade_level
 features[taxonomy][] = hierarchy
+features[taxonomy][] = media_type
 features[taxonomy][] = subject
 features[taxonomy][] = tags
+features[variable][] = field_bundle_settings_taxonomy_term__media_type
 features[features_api][] = api:2

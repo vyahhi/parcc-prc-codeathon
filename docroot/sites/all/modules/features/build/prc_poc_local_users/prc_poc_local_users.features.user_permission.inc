@@ -212,6 +212,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'features',
   );
 
+  // Exported permission: 'administer fieldgroups'.
+  $permissions['administer fieldgroups'] = array(
+    'name' => 'administer fieldgroups',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'field_group',
+  );
+
   // Exported permission: 'administer filters'.
   $permissions['administer filters'] = array(
     'name' => 'administer filters',
@@ -544,6 +553,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'create digital_library_content content',
     'roles' => array(
       'Content Author' => 'Content Author',
+      'PRC Admin' => 'PRC Admin',
     ),
     'module' => 'node',
   );
@@ -628,7 +638,9 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any digital_library_content content'.
   $permissions['delete any digital_library_content content'] = array(
     'name' => 'delete any digital_library_content content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+    ),
     'module' => 'node',
   );
 
@@ -685,6 +697,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'delete own digital_library_content content',
     'roles' => array(
       'Content Author' => 'Content Author',
+      'PRC Admin' => 'PRC Admin',
     ),
     'module' => 'node',
   );
@@ -772,6 +785,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete terms in hierarchy'.
   $permissions['delete terms in hierarchy'] = array(
     'name' => 'delete terms in hierarchy',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'delete terms in media_type'.
+  $permissions['delete terms in media_type'] = array(
+    'name' => 'delete terms in media_type',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -1158,7 +1178,9 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit any digital_library_content content'.
   $permissions['edit any digital_library_content content'] = array(
     'name' => 'edit any digital_library_content content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+    ),
     'module' => 'node',
   );
 
@@ -1233,6 +1255,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'edit own digital_library_content content',
     'roles' => array(
       'Content Author' => 'Content Author',
+      'PRC Admin' => 'PRC Admin',
     ),
     'module' => 'node',
   );
@@ -1320,6 +1343,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit terms in hierarchy'.
   $permissions['edit terms in hierarchy'] = array(
     'name' => 'edit terms in hierarchy',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in media_type'.
+  $permissions['edit terms in media_type'] = array(
+    'name' => 'edit terms in media_type',
     'roles' => array(),
     'module' => 'taxonomy',
   );

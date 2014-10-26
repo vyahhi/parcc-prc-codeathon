@@ -68,7 +68,6 @@ Feature: Admin UI: View User Accounts (PRC-37)
     Then I fill in "Search" with "example.com"
     And I press "Apply"
 
-
   @javascript
   Scenario: AC6 - Filter searches all data and not just the current page
     Given I have a total of 150 users with the "Educator" role
