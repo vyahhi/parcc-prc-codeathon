@@ -5,16 +5,29 @@
  * Alters to login forms.
  */
 
+
 /**
- * Implements hook_form_alter().
+ * Implements hook_form_FORM_ID_alter
+ *
+ * Changes the display of the account username to the account full name
+ *
  * @param $form
  * @param $form_state
- * @param $form_id
  */
-//function prc_login_form_form_alter(&$form, &$form_state, $form_id) {
-//  $x = 'x';
-//  Just leaving this i
-//}
+function prc_login_form_form_user_pass_reset_alter(&$form, &$form_state) {
+  $orig_message = $form['message']['#markup'];
+  $uid = $form_state['build_info']['args'][0];
+  $account = user_load($uid);
+  if ($account) {
+    $account_name = $account->name;
+    $w = entity_metadata_wrapper('user', $account);
+    $fn = $w->field_first_name->value();
+    $ln = $w->field_last_name->value();
+    $new_name = $fn . ' ' . $ln;
+    $new_message = str_replace($account_name, $new_name, $orig_message);
+    $form['message']['#markup'] = $new_message;
+  }
+}
 
 function prc_login_form_form_user_register_form_alter(&$form, &$form_state) {
   drupal_set_title('Create User Account to Join Partnership Resource Center');

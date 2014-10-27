@@ -116,7 +116,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
     'entity_type' => 'node',
     'field_name' => 'field_document',
-    'label' => 'Attach a file',
+    'label' => 'Attach a File',
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
@@ -233,7 +233,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
     'entity_type' => 'node',
     'field_name' => 'field_link_to_a_url',
-    'label' => 'Link to a URL',
+    'label' => 'Link to URL',
     'required' => 0,
     'settings' => array(
       'absolute_url' => 1,
@@ -410,7 +410,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
     'entity_type' => 'node',
     'field_name' => 'field_thumbnail',
-    'label' => 'Thumbnail',
+    'label' => 'Add a Thumbnail Image',
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
@@ -437,18 +437,18 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Attach a file');
+  t('Add a Thumbnail Image');
+  t('Attach a File');
   t('Author Name');
   t('Body');
   t('Enter a comma-separated list of words to describe your content.');
   t('Enter the author name as you wish it to be displayed with the content');
   t('Genre');
   t('Grade Level');
-  t('Link to a URL');
+  t('Link to URL');
   t('Media Type');
   t('Subject');
   t('Tags');
-  t('Thumbnail');
 
   return $field_instances;
 }

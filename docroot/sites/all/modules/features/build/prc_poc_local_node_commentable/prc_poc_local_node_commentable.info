@@ -1,9 +1,0 @@
-name = prc-poc.local Commentable
-core = 7.x
-package = Content
-dependencies[] = features
-dependencies[] = prc_poc_local_fields
-features[field_instance][] = node-commentable-body
-features[field_instance][] = node-commentable-og_group_ref
-features[node][] = commentable
-features[features_api][] = api:2

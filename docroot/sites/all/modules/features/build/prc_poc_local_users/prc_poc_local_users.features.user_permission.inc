@@ -95,6 +95,33 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'devel',
   );
 
+  // Exported permission: 'access environment indicator'.
+  $permissions['access environment indicator'] = array(
+    'name' => 'access environment indicator',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'environment_indicator',
+  );
+
+  // Exported permission: 'access environment indicator default_environment'.
+  $permissions['access environment indicator default_environment'] = array(
+    'name' => 'access environment indicator default_environment',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'environment_indicator',
+  );
+
+  // Exported permission: 'access environment indicator overwritten_environment'.
+  $permissions['access environment indicator overwritten_environment'] = array(
+    'name' => 'access environment indicator overwritten_environment',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'environment_indicator',
+  );
+
   // Exported permission: 'access site in maintenance mode'.
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
@@ -201,6 +228,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'administer environment indicator settings'.
+  $permissions['administer environment indicator settings'] = array(
+    'name' => 'administer environment indicator settings',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'environment_indicator',
   );
 
   // Exported permission: 'administer features'.
@@ -558,16 +594,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'create document content'.
-  $permissions['create document content'] = array(
-    'name' => 'create document content',
-    'roles' => array(
-      'Content Author' => 'Content Author',
-      'PRC Admin' => 'PRC Admin',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'create favorites_list content'.
   $permissions['create favorites_list content'] = array(
     'name' => 'create favorites_list content',
@@ -644,17 +670,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete any document content'.
-  $permissions['delete any document content'] = array(
-    'name' => 'delete any document content',
-    'roles' => array(
-      'Content Author' => 'Content Author',
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete any favorites_list content'.
   $permissions['delete any favorites_list content'] = array(
     'name' => 'delete any favorites_list content',
@@ -695,16 +710,6 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete own digital_library_content content'.
   $permissions['delete own digital_library_content content'] = array(
     'name' => 'delete own digital_library_content content',
-    'roles' => array(
-      'Content Author' => 'Content Author',
-      'PRC Admin' => 'PRC Admin',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own document content'.
-  $permissions['delete own document content'] = array(
-    'name' => 'delete own document content',
     'roles' => array(
       'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
@@ -778,13 +783,6 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete terms in grade_level'.
   $permissions['delete terms in grade_level'] = array(
     'name' => 'delete terms in grade_level',
-    'roles' => array(),
-    'module' => 'taxonomy',
-  );
-
-  // Exported permission: 'delete terms in hierarchy'.
-  $permissions['delete terms in hierarchy'] = array(
-    'name' => 'delete terms in hierarchy',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -1184,17 +1182,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit any document content'.
-  $permissions['edit any document content'] = array(
-    'name' => 'edit any document content',
-    'roles' => array(
-      'Content Author' => 'Content Author',
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit any favorites_list content'.
   $permissions['edit any favorites_list content'] = array(
     'name' => 'edit any favorites_list content',
@@ -1253,16 +1240,6 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit own digital_library_content content'.
   $permissions['edit own digital_library_content content'] = array(
     'name' => 'edit own digital_library_content content',
-    'roles' => array(
-      'Content Author' => 'Content Author',
-      'PRC Admin' => 'PRC Admin',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit own document content'.
-  $permissions['edit own document content'] = array(
-    'name' => 'edit own document content',
     'roles' => array(
       'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
@@ -1340,13 +1317,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
-  // Exported permission: 'edit terms in hierarchy'.
-  $permissions['edit terms in hierarchy'] = array(
-    'name' => 'edit terms in hierarchy',
-    'roles' => array(),
-    'module' => 'taxonomy',
-  );
-
   // Exported permission: 'edit terms in media_type'.
   $permissions['edit terms in media_type'] = array(
     'name' => 'edit terms in media_type',
@@ -1379,6 +1349,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'devel',
   );
 
+  // Exported permission: 'export taxonomy by csv'.
+  $permissions['export taxonomy by csv'] = array(
+    'name' => 'export taxonomy by csv',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'taxonomy_csv',
+  );
+
   // Exported permission: 'flag bookmarks'.
   $permissions['flag bookmarks'] = array(
     'name' => 'flag bookmarks',
@@ -1404,6 +1383,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'features',
+  );
+
+  // Exported permission: 'import taxonomy by csv'.
+  $permissions['import taxonomy by csv'] = array(
+    'name' => 'import taxonomy by csv',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'taxonomy_csv',
   );
 
   // Exported permission: 'manage ccss properties'.

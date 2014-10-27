@@ -10,7 +10,7 @@ Feature: Login & Public Registration (PRC-48)
     Given I am logged in as a user with the "Educator" role
     Then I should not be able to edit an "article" node
     And I should not be able to edit a "basic page" node
-    And I should not be able to edit a "document" node
+    And I should not be able to edit a "Digital Library Content" node
 
   Scenario: When a user clicks the Join Now! button or link from the PRC website home page, a new page opens to allow the user create a new user account. (AC2)
     Given I am on the homepage
@@ -64,9 +64,13 @@ Feature: Login & Public Registration (PRC-48)
     And I fill in "Last" for "Last Name"
     And I fill in "Automated Test Robot" for "Profession"
     Then I press the "Create new account" button
-    Then the email to "@timestamp@example.com" should contain "Thank you for registering at"
-    And the email should contain "You may now log in"
-    And the email should contain "by clicking this link or copying and pasting it to your browser:"
+    Then the email to "@timestamp@example.com" should contain "First Last,"
+    And the email should contain "Thank you for registering at Partnership Resource Center. You may now log in"
+    And the email should contain "at"
+    And the email should contain "in the future using:"
+    And the email should contain "username: @timestamp@example.com"
+    And the email should contain "password: Your password"
+    And the email should contain "--  Partnership Resource Center team"
 
   Scenario: Registration form validation - required fields (AC6a)
     Given I am on the homepage
