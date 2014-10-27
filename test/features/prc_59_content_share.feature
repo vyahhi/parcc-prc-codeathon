@@ -6,7 +6,7 @@ Feature: Share Content (end user) (PRC-59)
 
   Background: In the Digital Library page where content is displayed...
     Given I am logged in as a user with the "Educator" role
-    And I am viewing a "Document" node with the title "PRC-59"
+    And I am viewing a "Digital Library Content" node with the title "PRC-59"
 
   Scenario: I should see E-mail
     Then I should see an ".st_email_button" element
