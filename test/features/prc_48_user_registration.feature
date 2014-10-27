@@ -10,7 +10,7 @@ Feature: Login & Public Registration (PRC-48)
     Given I am logged in as a user with the "Educator" role
     Then I should not be able to edit an "article" node
     And I should not be able to edit a "basic page" node
-    And I should not be able to edit a "document" node
+    And I should not be able to edit a "Digital Library Content" node
 
   Scenario: When a user clicks the Join Now! button or link from the PRC website home page, a new page opens to allow the user create a new user account. (AC2)
     Given I am on the homepage
