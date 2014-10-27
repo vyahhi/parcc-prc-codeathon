@@ -6,7 +6,10 @@ Feature: Anonymous User Home Page (PRC-51)
 
   Scenario: When a user types the PRC URL in their browser, the PRC home page opens # AC1 AC2
     Given I am an anonymous user
-      And I go to "/"
+    And "Digital Library Content" nodes:
+      | title         | body      | created            | published on       | status | promote | uid | language | tags         |
+      | Africa        | Continent | 07/07/2014 12:03am | 08/07/2014 12:03am | 1      | 0       | 1   | und      | North        |
+    And I go to "/"
     Then I should see "Welcome!"
     And I should see a "logo" link
     And I should see the heading "Digital Library" in the "content" region
