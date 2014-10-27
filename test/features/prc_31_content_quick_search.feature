@@ -32,6 +32,7 @@ Feature: Search Content - Quick Search (PRC-31)
     When I fill in "Enter your keywords" with "Africa"
     And I press "edit-submit"
     Then I should not see the text "Your search yielded no results"
+    And I should see the text "Search results for: Africa"
     But I should see the text "Africa"
     And I should see the text "Continent"
     And I should see the text "7/7/2014 - 00:03"

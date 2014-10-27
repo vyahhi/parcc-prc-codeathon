@@ -304,11 +304,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Given /^the default email system is enabled$/
    */
   public function theDefaultEmailSystemIsEnabled() {
-    // Set the default system.
-    $revert_to = isset($this->originalMailSystem) ? $this->originalMailSystem : 'DefaultMailSystem';
-    variable_set('mail_system', array('default-system' => $revert_to));
-    // Flush the email buffer, allowing us to reuse this step definition to clear existing mail.
-    variable_set('drupal_test_email_collector', array());
+    // Set the original mail system if one was set.
+    if (isset($this->originalMailSystem)) {
+      $revert_to = $this->originalMailSystem;
+      variable_set('mail_system', array('default-system' => $revert_to));
+      // Flush the email buffer, allowing us to reuse this step definition to clear existing mail.
+      variable_set('drupal_test_email_collector', array());
+    }
   }
 
 
