@@ -16,57 +16,63 @@ Feature: Search Content - Quick Search (PRC-31)
   Scenario: AC1(ish) - Should not see Advanced search here
     Then I should not see the text "Advanced search"
 
-#  Scenario: AC2 - Search terms
-#    Given "Document" nodes:
-#      | title         | body      | created            | published on       | status | promote | uid | language | tags         |
-#      | Africa        | Continent | 07/27/2014 12:03am | 07/27/2014 12:03am | 1      | 0       | 1   | und      | North        |
-#      | Europe        | Continent | 07/27/2014 12:03am | 07/27/2014 12:03am | 1      | 0       | 1   | und      | South        |
-#      | North America | Continent | 07/27/2014 12:03am | 07/27/2014 12:03am | 1      | 0       | 1   | und      | East         |
-#      | South America | Continent | 07/27/2014 12:03am | 07/27/2014 12:03am | 1      | 0       | 1   | und      | East, West   |
-#      | South Africa  | Country   | 07/27/2014 12:03am | 07/27/2014 12:03am | 1      | 0       | 1   | und      | South        |
-#      | Austria       | Country   | 07/27/2014 12:03am | 07/27/2014 12:03am | 1      | 0       | 1   | und      | North        |
-#    And I run cron
-#    # Cron redirects us. Navigate back. Also cron will pop errors into the log but it still runs and indexes.
-#    And I am on "search"
-#    When I fill in "Enter your keywords" with "Africa"
-#    And I press "edit-submit"
-#    Then I should not see the text "Your search yielded no results"
-#    But I should see the text "Africa"
-#    And I should see the text "Continent"
-#    And I should see the text "South Africa"
-#    And I should see the text "Country"
-#    But I should not see the text "Europe"
-#    And I should not see the text "America"
-#
-#    When I fill in "Enter your keywords" with "America"
-#    And I press "edit-submit"
-#    Then I should see the text "North America"
-#    And I should see the text "South America"
-#    And I should see the text "Continent"
-#    But I should not see the text "Country"
-#    And I should not see the text "Europe"
-#    And I should not see the text "Africa"
-#    And I should not see the text "Austria"
-#
-#    When I fill in "Enter your keywords" with "Continent"
-#    And I press "edit-submit"
-#    Then I should see the text "Africa"
-#    And I should see the text "North America"
-#    And I should see the text "South America"
-#    And I should see the text "Europe"
-#    But I should not see the text "Austria"
-#    And I should not see the text "South Africa"
-#    And I should not see the text "Country"
-#
-#    When I fill in "Enter your keywords" with "Continent"
-#    And I press "edit-submit"
-#    Then I should see the text "Africa"
-#    And I should see the text "North America"
-#    And I should see the text "South America"
-#    And I should see the text "Europe"
-#    But I should not see the text "Austria"
-#    And I should not see the text "South Africa"
-#    And I should not see the text "Country"
+  @javascript
+  Scenario: AC2 - Search terms
+    Given "Document" nodes:
+      | title         | body      | created            | published on       | status | promote | uid | language | tags         |
+      | Africa        | Continent | 07/07/2014 12:03am | 08/07/2014 12:03am | 1      | 0       | 1   | und      | North        |
+      | Europe        | Continent | 07/08/2014 12:03am | 08/08/2014 12:03am | 1      | 0       | 1   | und      | South        |
+      | North America | Continent | 07/09/2014 12:03am | 08/09/2014 12:03am | 1      | 0       | 1   | und      | East         |
+      | South America | Continent | 07/10/2014 12:03am | 08/10/2014 12:03am | 1      | 0       | 1   | und      | East, West   |
+      | South Africa  | Country   | 07/11/2014 12:03am | 08/11/2014 12:03am | 1      | 0       | 1   | und      | South        |
+      | Austria       | Country   | 07/12/2014 12:03am | 08/12/2014 12:03am | 1      | 0       | 1   | und      | North        |
+    And I run cron
+    # Cron redirects us. Navigate back. Also cron will pop errors into the log but it still runs and indexes.
+    And I am on "search"
+    When I fill in "Enter your keywords" with "Africa"
+    And I press "edit-submit"
+    Then I should not see the text "Your search yielded no results"
+    But I should see the text "Africa"
+    And I should see the text "Continent"
+    And I should see the text "7/7/2014 - 00:03"
+    And I wait 3 seconds
+    And I should see the text "South Africa"
+    And I should see the text "Country"
+    And I should see the text "7/11/2014 - 00:03"
+    But I should not see the text "Europe"
+    And I should not see the text "7/8/2014 - 00:03"
+    And I should not see the text "America"
+    And I should not see the text "7/9/2014 - 00:03"
+
+    When I fill in "Enter your keywords" with "America"
+    And I press "edit-submit"
+    Then I should see the text "North America"
+    And I should see the text "South America"
+    And I should see the text "Continent"
+    But I should not see the text "Country"
+    And I should not see the text "Europe"
+    And I should not see the text "Africa"
+    And I should not see the text "Austria"
+
+    When I fill in "Enter your keywords" with "Continent"
+    And I press "edit-submit"
+    Then I should see the text "Africa"
+    And I should see the text "North America"
+    And I should see the text "South America"
+    And I should see the text "Europe"
+    But I should not see the text "Austria"
+    And I should not see the text "South Africa"
+    And I should not see the text "Country"
+
+    When I fill in "Enter your keywords" with "Continent"
+    And I press "edit-submit"
+    Then I should see the text "Africa"
+    And I should see the text "North America"
+    And I should see the text "South America"
+    And I should see the text "Europe"
+    But I should not see the text "Austria"
+    And I should not see the text "South Africa"
+    And I should not see the text "Country"
 
 #    When I fill in "Enter your keywords" with "East"
 #    And I press "edit-submit"
