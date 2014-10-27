@@ -1462,6 +1462,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'devel',
   );
 
+  // Exported permission: 'export taxonomy by csv'.
+  $permissions['export taxonomy by csv'] = array(
+    'name' => 'export taxonomy by csv',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'taxonomy_csv',
+  );
+
   // Exported permission: 'flag bookmarks'.
   $permissions['flag bookmarks'] = array(
     'name' => 'flag bookmarks',
@@ -1487,6 +1496,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'features',
+  );
+
+  // Exported permission: 'import taxonomy by csv'.
+  $permissions['import taxonomy by csv'] = array(
+    'name' => 'import taxonomy by csv',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'taxonomy_csv',
   );
 
   // Exported permission: 'manage ccss properties'.

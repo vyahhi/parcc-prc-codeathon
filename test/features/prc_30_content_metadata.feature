@@ -73,7 +73,7 @@ Feature: Admin UI: Define Content Metadata (PRC-30)
     |  Audio           |
     |  Video        |
 
-  Scenario Outline: AC6 Test grade level options
+  Scenario Outline: AC6 Test genre options
     Given I am logged in as a user with the "Content Author" role
     And I am on the homepage
     When I follow "Content"

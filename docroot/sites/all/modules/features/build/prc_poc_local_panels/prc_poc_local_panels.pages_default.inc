@@ -617,7 +617,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->panel = 'center';
     $pane->type = 'views_panes';
     $pane->subtype = 'digital_library_tree_view-panel_pane_1';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array();
     $pane->cache = array();
@@ -631,6 +631,28 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->uuid = '46dbc263-aec7-4e18-b8a7-3e061587b2bf';
     $display->content['new-46dbc263-aec7-4e18-b8a7-3e061587b2bf'] = $pane;
     $display->panels['center'][1] = 'new-46dbc263-aec7-4e18-b8a7-3e061587b2bf';
+    $pane = new stdClass();
+    $pane->pid = 'new-3f310bfb-37ee-450f-9a8d-10349fd54ac3';
+    $pane->panel = 'center';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'admin_content_view-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = '3f310bfb-37ee-450f-9a8d-10349fd54ac3';
+    $display->content['new-3f310bfb-37ee-450f-9a8d-10349fd54ac3'] = $pane;
+    $display->panels['center'][2] = 'new-3f310bfb-37ee-450f-9a8d-10349fd54ac3';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
