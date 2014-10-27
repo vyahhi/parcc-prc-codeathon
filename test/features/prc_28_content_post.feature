@@ -1,4 +1,4 @@
-@api
+@api @d7
 Feature: Admin UI: Post Content (PRC-28)
   As a Content Author,
   I want to post a new content to PRC Website,
@@ -45,3 +45,16 @@ Feature: Admin UI: Post Content (PRC-28)
     Then I click "Add content"
     Then the url should match "node/add/digital-library-content"
     And I should see the heading "Create Digital Library Content" in the "content" region
+
+  Scenario: AC7 - The following fields are to be displayed on
+    Given I am logged in as a user with the "Content Author" role
+    And I am on "node/add/digital-library-content"
+    Then I should see a "Title *" field
+    And I should see a "Author Name" field
+    And I should see a "Tags" field
+    And I should see a "Summary" field
+    And I should see an "Body" field
+    And I should see "Attach a File"
+    And I should see "Add a Thumbnail Image"
+    And I should see "Link to URL"
+    And I should see "Add More Information (Content Properties)"
