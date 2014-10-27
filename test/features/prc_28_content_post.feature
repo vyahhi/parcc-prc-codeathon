@@ -19,7 +19,7 @@ Feature: Admin UI: Post Content (PRC-28)
   Scenario Outline: AC2 and AC3 Content tab visibility for authorized users
     Given I am logged in as a user with the "<role>" role
     And I am on the homepage
-    Then I should see the link "Content"
+    Then I should see the link "Content" in the "header" region
 
     Examples:
     | role            |
@@ -30,12 +30,12 @@ Feature: Admin UI: Post Content (PRC-28)
   Scenario: AC2 and AC3 Content tab invisibility for Educators
     Given I am logged in as a user with the "Educator" role
     And I am on the homepage
-    Then I should not see the link "Content"
+    Then I should not see the link "Content" in the "header" region
 
   Scenario: AC2 and AC3 Content tab invisibility for anonymous
     Given I am an anonymous user
     And I am on the homepage
-    Then I should not see the link "Content"
+    Then I should not see the link "Content" in the "header" region
 
   Scenario: AC4-6 Content Authors click on Content tab link
     Given I am logged in as a user with the "Content Author" role
@@ -58,3 +58,9 @@ Feature: Admin UI: Post Content (PRC-28)
     And I should see "Add a Thumbnail Image"
     And I should see "Link to URL"
     And I should see "Add More Information (Content Properties)"
+
+  Scenario: AC8-11 Users can upload and save an attachment
+    Given I am logged in as a user with the "Content Author" role
+    And I am on "node/add/digital-library-content"
+    And I should see "Attach a File"
+    And I press the "Upload" button
