@@ -10,7 +10,9 @@
  */
 function prc_search_block_view_alter(&$data, $block) {
   if ($block->module == 'search') {
-    if (array_key_exists('search_block_form', $data['content'])) {
+    if (is_array($data) &&
+        array_key_exists('content', $data) &&
+        array_key_exists('search_block_form', $data['content'])) {
       // Adding placeholder text
       $data['content']['search_block_form']['#attributes']['placeholder'] = t('Search');
     }
