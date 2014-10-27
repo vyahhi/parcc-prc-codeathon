@@ -95,6 +95,33 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'devel',
   );
 
+  // Exported permission: 'access environment indicator'.
+  $permissions['access environment indicator'] = array(
+    'name' => 'access environment indicator',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'environment_indicator',
+  );
+
+  // Exported permission: 'access environment indicator default_environment'.
+  $permissions['access environment indicator default_environment'] = array(
+    'name' => 'access environment indicator default_environment',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'environment_indicator',
+  );
+
+  // Exported permission: 'access environment indicator overwritten_environment'.
+  $permissions['access environment indicator overwritten_environment'] = array(
+    'name' => 'access environment indicator overwritten_environment',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'environment_indicator',
+  );
+
   // Exported permission: 'access site in maintenance mode'.
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
@@ -201,6 +228,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'administer environment indicator settings'.
+  $permissions['administer environment indicator settings'] = array(
+    'name' => 'administer environment indicator settings',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'environment_indicator',
   );
 
   // Exported permission: 'administer features'.
@@ -782,13 +818,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
-  // Exported permission: 'delete terms in hierarchy'.
-  $permissions['delete terms in hierarchy'] = array(
-    'name' => 'delete terms in hierarchy',
-    'roles' => array(),
-    'module' => 'taxonomy',
-  );
-
   // Exported permission: 'delete terms in media_type'.
   $permissions['delete terms in media_type'] = array(
     'name' => 'delete terms in media_type',
@@ -1340,13 +1369,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
-  // Exported permission: 'edit terms in hierarchy'.
-  $permissions['edit terms in hierarchy'] = array(
-    'name' => 'edit terms in hierarchy',
-    'roles' => array(),
-    'module' => 'taxonomy',
-  );
-
   // Exported permission: 'edit terms in media_type'.
   $permissions['edit terms in media_type'] = array(
     'name' => 'edit terms in media_type',
@@ -1379,6 +1401,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'devel',
   );
 
+  // Exported permission: 'export taxonomy by csv'.
+  $permissions['export taxonomy by csv'] = array(
+    'name' => 'export taxonomy by csv',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'taxonomy_csv',
+  );
+
   // Exported permission: 'flag bookmarks'.
   $permissions['flag bookmarks'] = array(
     'name' => 'flag bookmarks',
@@ -1404,6 +1435,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'features',
+  );
+
+  // Exported permission: 'import taxonomy by csv'.
+  $permissions['import taxonomy by csv'] = array(
+    'name' => 'import taxonomy by csv',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'taxonomy_csv',
   );
 
   // Exported permission: 'manage ccss properties'.
