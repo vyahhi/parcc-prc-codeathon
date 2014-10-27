@@ -95,6 +95,33 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'devel',
   );
 
+  // Exported permission: 'access environment indicator'.
+  $permissions['access environment indicator'] = array(
+    'name' => 'access environment indicator',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'environment_indicator',
+  );
+
+  // Exported permission: 'access environment indicator default_environment'.
+  $permissions['access environment indicator default_environment'] = array(
+    'name' => 'access environment indicator default_environment',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'environment_indicator',
+  );
+
+  // Exported permission: 'access environment indicator overwritten_environment'.
+  $permissions['access environment indicator overwritten_environment'] = array(
+    'name' => 'access environment indicator overwritten_environment',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'environment_indicator',
+  );
+
   // Exported permission: 'access site in maintenance mode'.
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
@@ -203,6 +230,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'administer environment indicator settings'.
+  $permissions['administer environment indicator settings'] = array(
+    'name' => 'administer environment indicator settings',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'environment_indicator',
+  );
+
   // Exported permission: 'administer features'.
   $permissions['administer features'] = array(
     'name' => 'administer features',
@@ -273,6 +309,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'invite',
+  );
+
+  // Exported permission: 'administer mailsystem'.
+  $permissions['administer mailsystem'] = array(
+    'name' => 'administer mailsystem',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'mailsystem',
   );
 
   // Exported permission: 'administer menu'.
@@ -384,6 +429,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'administer realname'.
+  $permissions['administer realname'] = array(
+    'name' => 'administer realname',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'realname',
+  );
+
   // Exported permission: 'administer search'.
   $permissions['administer search'] = array(
     'name' => 'administer search',
@@ -409,6 +463,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'system',
+  );
+
+  // Exported permission: 'administer smtp module'.
+  $permissions['administer smtp module'] = array(
+    'name' => 'administer smtp module',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'smtp',
   );
 
   // Exported permission: 'administer software updates'.
@@ -549,16 +612,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'create document content'.
-  $permissions['create document content'] = array(
-    'name' => 'create document content',
-    'roles' => array(
-      'Content Author' => 'Content Author',
-      'PRC Admin' => 'PRC Admin',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'create favorites_list content'.
   $permissions['create favorites_list content'] = array(
     'name' => 'create favorites_list content',
@@ -653,17 +706,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete any document content'.
-  $permissions['delete any document content'] = array(
-    'name' => 'delete any document content',
-    'roles' => array(
-      'Content Author' => 'Content Author',
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete any favorites_list content'.
   $permissions['delete any favorites_list content'] = array(
     'name' => 'delete any favorites_list content',
@@ -722,16 +764,6 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete own digital_library_content content'.
   $permissions['delete own digital_library_content content'] = array(
     'name' => 'delete own digital_library_content content',
-    'roles' => array(
-      'Content Author' => 'Content Author',
-      'PRC Admin' => 'PRC Admin',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own document content'.
-  $permissions['delete own document content'] = array(
-    'name' => 'delete own document content',
     'roles' => array(
       'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
@@ -1229,17 +1261,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit any document content'.
-  $permissions['edit any document content'] = array(
-    'name' => 'edit any document content',
-    'roles' => array(
-      'Content Author' => 'Content Author',
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit any favorites_list content'.
   $permissions['edit any favorites_list content'] = array(
     'name' => 'edit any favorites_list content',
@@ -1316,16 +1337,6 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit own digital_library_content content'.
   $permissions['edit own digital_library_content content'] = array(
     'name' => 'edit own digital_library_content content',
-    'roles' => array(
-      'Content Author' => 'Content Author',
-      'PRC Admin' => 'PRC Admin',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit own document content'.
-  $permissions['edit own document content'] = array(
-    'name' => 'edit own document content',
     'roles' => array(
       'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
