@@ -64,9 +64,13 @@ Feature: Login & Public Registration (PRC-48)
     And I fill in "Last" for "Last Name"
     And I fill in "Automated Test Robot" for "Profession"
     Then I press the "Create new account" button
-    Then the email to "@timestamp@example.com" should contain "Thank you for registering at"
-    And the email should contain "You may now log in"
-    And the email should contain "by clicking this link or copying and pasting it to your browser:"
+    Then the email to "@timestamp@example.com" should contain "First Last,"
+    And the email should contain "Thank you for registering at Partnership Resource Center. You may now log in"
+    And the email should contain "at"
+    And the email should contain "in the future using:"
+    And the email should contain "username: @timestamp@example.com"
+    And the email should contain "password: Your password"
+    And the email should contain "--  Partnership Resource Center team"
 
   Scenario: Registration form validation - required fields (AC6a)
     Given I am on the homepage
