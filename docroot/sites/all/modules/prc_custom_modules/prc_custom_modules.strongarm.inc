@@ -46,9 +46,8 @@ function prc_custom_modules_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'sharethis_node_types';
   $strongarm->value = array(
-    'document' => 'document',
-    'article' => 0,
-    'page' => 0,
+    'digital_library_content' => 'digital_library_content',
+    'document' => 0,
     'favorites_list' => 0,
     'panel' => 0,
     'practice_test' => 0,
