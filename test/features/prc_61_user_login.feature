@@ -8,7 +8,6 @@ Feature: PRC Administrators (PRC-61)
     And I am on the homepage
     Then I should not see the text "Welcome,"
   
-  @api @d7
   Scenario: AC1 - A user shall use the Login block of the Home page and enter the E-mail and password provided.
     Given users:
       | name     | mail                   | pass     | field_first_name | field_last_name | status |
@@ -51,7 +50,7 @@ Feature: PRC Administrators (PRC-61)
 
   Scenario: AC4 - If any of the credentials are wrong, the following message appears (wrong password)
     Given users:
-      | name     | mail            | pass     | field_first_name | field_last_name | status |
+      | name     | mail                     | pass     | field_first_name | field_last_name | status |
       | Joe User | joe_prc_61_4@example.com | xyz123   | Joe              | User            | 1      |
     And I am on the homepage
     When I fill in "E-mail" with "joe_prc_61_4@example.com"
