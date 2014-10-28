@@ -25,7 +25,7 @@ Feature: Forgot Password (PRC-146)
     And the email should contain "JoeF UserL,"
     And I follow the link in the email
     Then I should see "Reset Password"
-    And I should see "This is a one-time login for"
+    And I should see "This is a one-time login for JoeF UserL"
     And I should see an "Log in" button
     And I press "Log in"
     Then I should see the message containing "You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password."
