@@ -442,7 +442,21 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_title = 'Assessments';
   $page->admin_description = '';
   $page->path = 'assessments';
-  $page->access = array();
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 1,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => TRUE,
+      ),
+    ),
+    'logic' => 'and',
+  );
   $page->menu = array(
     'type' => 'normal',
     'title' => 'Assessments',
@@ -930,7 +944,21 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_title = 'Professional Development';
   $page->admin_description = 'Professional Development placeholder';
   $page->path = 'professional-development';
-  $page->access = array();
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 1,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => TRUE,
+      ),
+    ),
+    'logic' => 'and',
+  );
   $page->menu = array(
     'type' => 'normal',
     'title' => 'Professional Development',

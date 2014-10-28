@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the prc-poc.local Commentable feature.
- */
-
-include_once 'prc_poc_local_node_commentable.features.inc';
