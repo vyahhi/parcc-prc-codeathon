@@ -275,15 +275,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'flag',
   );
 
-  // Exported permission: 'administer group'.
-  $permissions['administer group'] = array(
-    'name' => 'administer group',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'og',
-  );
-
   // Exported permission: 'administer image styles'.
   $permissions['administer image styles'] = array(
     'name' => 'administer image styles',
@@ -604,16 +595,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'create favorites_list content'.
-  $permissions['create favorites_list content'] = array(
-    'name' => 'create favorites_list content',
-    'roles' => array(
-      'Content Author' => 'Content Author',
-      'Educator' => 'Educator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'create invite_by_email entity'.
   $permissions['create invite_by_email entity'] = array(
     'name' => 'create invite_by_email entity',
@@ -691,13 +672,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete any favorites_list content'.
-  $permissions['delete any favorites_list content'] = array(
-    'name' => 'delete any favorites_list content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete any panel content'.
   $permissions['delete any panel content'] = array(
     'name' => 'delete any panel content',
@@ -744,16 +718,6 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own favorites_list content'.
-  $permissions['delete own favorites_list content'] = array(
-    'name' => 'delete own favorites_list content',
-    'roles' => array(
-      'Content Author' => 'Content Author',
-      'Educator' => 'Educator',
     ),
     'module' => 'node',
   );
@@ -1224,13 +1188,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit any favorites_list content'.
-  $permissions['edit any favorites_list content'] = array(
-    'name' => 'edit any favorites_list content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit any invite entities'.
   $permissions['edit any invite entities'] = array(
     'name' => 'edit any invite entities',
@@ -1295,16 +1252,6 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit own favorites_list content'.
-  $permissions['edit own favorites_list content'] = array(
-    'name' => 'edit own favorites_list content',
-    'roles' => array(
-      'Content Author' => 'Content Author',
-      'Educator' => 'Educator',
     ),
     'module' => 'node',
   );
