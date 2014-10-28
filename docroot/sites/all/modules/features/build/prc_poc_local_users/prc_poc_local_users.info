@@ -45,7 +45,6 @@ features[features_api][] = api:2
 features[field_instance][] = user-user-field_first_name
 features[field_instance][] = user-user-field_last_name
 features[field_instance][] = user-user-field_profession
-features[field_instance][] = user-user-og_user_node
 features[user_permission][] = access administration menu
 features[user_permission][] = access administration pages
 features[user_permission][] = access all views
