@@ -17,7 +17,6 @@ features[page_manager_pages][] = content_administration_page
 features[page_manager_pages][] = digital_library
 features[page_manager_pages][] = home_page
 features[page_manager_pages][] = professional_development
-features[page_manager_pages][] = search
 features[page_manager_pages][] = users_administration_page
 features[panels_renderer_pipeline][] = ipe
 features[panels_renderer_pipeline][] = standard
