@@ -1,6 +1,7 @@
 name = prc-poc.local Views
 core = 7.x
 package = CTools
+dependencies[] = ctools
 dependencies[] = features
 dependencies[] = views
 dependencies[] = views_content

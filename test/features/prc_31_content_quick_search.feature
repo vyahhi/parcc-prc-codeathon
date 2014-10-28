@@ -8,9 +8,6 @@ Feature: Search Content - Quick Search (PRC-31)
     Given I am logged in as a user with the "Educator" role
     And I am on "search"
 
-  Scenario: AC1 - Permissions
-    Then I should not see the text "Access denied"
-
   Scenario: AC1 - Content search
     Then I should see the heading "Search" in the "content" region
     And I should see an "Enter your keywords" field

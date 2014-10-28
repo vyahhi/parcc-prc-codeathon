@@ -594,6 +594,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create document content'.
+  $permissions['create document content'] = array(
+    'name' => 'create document content',
+    'roles' => array(
+      'Content Author' => 'Content Author',
+      'PRC Admin' => 'PRC Admin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create favorites_list content'.
   $permissions['create favorites_list content'] = array(
     'name' => 'create favorites_list content',
@@ -670,6 +680,17 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any document content'.
+  $permissions['delete any document content'] = array(
+    'name' => 'delete any document content',
+    'roles' => array(
+      'Content Author' => 'Content Author',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any favorites_list content'.
   $permissions['delete any favorites_list content'] = array(
     'name' => 'delete any favorites_list content',
@@ -710,6 +731,16 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete own digital_library_content content'.
   $permissions['delete own digital_library_content content'] = array(
     'name' => 'delete own digital_library_content content',
+    'roles' => array(
+      'Content Author' => 'Content Author',
+      'PRC Admin' => 'PRC Admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own document content'.
+  $permissions['delete own document content'] = array(
+    'name' => 'delete own document content',
     'roles' => array(
       'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
@@ -1182,6 +1213,17 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any document content'.
+  $permissions['edit any document content'] = array(
+    'name' => 'edit any document content',
+    'roles' => array(
+      'Content Author' => 'Content Author',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any favorites_list content'.
   $permissions['edit any favorites_list content'] = array(
     'name' => 'edit any favorites_list content',
@@ -1240,6 +1282,16 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit own digital_library_content content'.
   $permissions['edit own digital_library_content content'] = array(
     'name' => 'edit own digital_library_content content',
+    'roles' => array(
+      'Content Author' => 'Content Author',
+      'PRC Admin' => 'PRC Admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own document content'.
+  $permissions['edit own document content'] = array(
+    'name' => 'edit own document content',
     'roles' => array(
       'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
