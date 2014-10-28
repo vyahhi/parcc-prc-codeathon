@@ -186,3 +186,49 @@ function prc_invite_form_invite_accept($invite) {
     user_save($account, array('roles' => $all_roles));
   }
 }
+
+/**
+ *  Implements hook_token_info().
+ */
+function prc_invite_form_token_info() {
+  $types = array();
+  $tokens = array();
+
+  $tokens['invite']['role-name'] = array(
+    'name' => t('Role Name'),
+    'description' => t('Displays role name from the field_role_id field (includes "a" or "an", eg, "an Educator" or "a Content Author".'),
+  );
+
+  return array(
+    'types' => $types,
+    'tokens' => $tokens,
+  );
+}
+
+/**
+ *  Implements hook_tokens().
+ */
+function prc_invite_form_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $langcode = LANGUAGE_NONE;
+  if (isset($options['language'])) {
+    $url_options['language'] = $options['language'];
+    $langcode = $options['language']->language;
+  }
+
+  $replacements = array();
+  // URL tokens.
+  if ($type == 'invite' && !empty($data['invite'])) {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'role-name':
+          $invite = $data['invite'];
+          $rid = $invite->field_role_id[$langcode][0]['value'];
+          $roles = user_roles();
+          $role_name = $roles[$rid];
+          $replacements[$original] = $role_name;
+          break;
+      }
+    }
+  }
+  return $replacements;
+}
