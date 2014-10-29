@@ -26,7 +26,7 @@ Feature: Search Content - Quick Search (PRC-31)
       | South America | Continent | 1      | 0       | 1   | und      | East, West   |
       | South Africa  | Country   | 1      | 0       | 1   | und      | South        |
       | Austria       | Country   | 1      | 0       | 1   | und      | North        |
-    And I run drush "cron"
+    And I run drush "search-index"
     # Cron redirects us. Navigate back. Also cron will pop errors into the log but it still runs and indexes.
     And I am on "search"
     When I fill in "Enter your keywords" with "Africa"
