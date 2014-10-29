@@ -21,7 +21,7 @@ Feature: Admin UI: Post Content (PRC-28)
     And I am on the homepage
     Then I should see the link "Content" in the "header" region
 
-    Examples:
+  Examples:
     | role            |
     |  Content Author |
     |  PRC Admin      |
@@ -59,8 +59,27 @@ Feature: Admin UI: Post Content (PRC-28)
     And I should see "Link to URL"
     And I should see "Add More Information (Content Properties)"
 
+  @javascript
   Scenario: AC8-11 Users can upload and save an attachment
     Given I am logged in as a user with the "Content Author" role
     And I am on "node/add/digital-library-content"
+    And I fill in "Title *" with "Test-o-rama"
     And I should see "Attach a File"
-    And I press the "Upload" button
+    #  We need to expand Attach a File because it's collapsed by default
+    And I click "Show Attach a File"
+    Then I attach the file "/sites/README.txt" to "edit-field-document-und-0-upload"
+    And I press "Save"
+    And I should see the success message containing "Digital Library Content Test-o-rama has been created."
+    Then I follow "Edit"
+    And I click "Show Attach a File"
+    And I should see the link "README.txt"
+
+
+
+#  Scenario: AC8-11 Users can upload and save a thumbnail
+#    Given I am logged in as a user with the "Content Author" role
+#    And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
+#    And I follow "Content" in the "header" region
+#    Then I should see the link "edit" in the "content" region
+#    Then I follow "edit"
+#    Then I should see the heading "Edit Digital Library Content Test-o-rama" in the "content" region

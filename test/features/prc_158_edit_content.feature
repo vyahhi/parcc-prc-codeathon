@@ -40,11 +40,20 @@ Feature: Edit Content (PRC-158)
     And I should see the text "Media Type"
     And I should see the text "Genre"
 
+  @javascript
   Scenario: AC4  Attachment files are listed, along with a Remove link/button. At click, the file is removed after having the user to confirm removal
     Given I am logged in as a user with the "Content Author" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
-  # And I attach the file "test.pdf" to
-  # And I attach the file "test2.pdf" to
+    And I follow "Content" in the "header" region
+    Then I should see the link "edit" in the "content" region
+    Then I follow "edit"
+    Then I should see the heading "Edit Digital Library Content Test-o-rama" in the "content" region
+    Then I attach the file "/sites/default/files/color/responsive_bartik-60224c8b/logo.png" to "edit-field-thumbnail-und-0-upload"
+    And I press "Save"
+    And I should see the success message containing "Digital Library Content Test-o-rama has been updated."
+    Then I follow "edit"
+    And I should see the link "logo.png"
+  # And I attach the file "test2.pdf"
 #  Scenario: AC5  A user may add more files; a Browse button along with an Upload button are provided to allow the user to select the file.
 #  Scenario: AC6  Once file is selected, the name of the file appears by the Browse button. When no file is selected, it displays _No file selected.
 #  Scenario: AC7  From the above attributes, the following will be provided with an expandable/collapsable control that allows a user to hide or unhide the content underneath it:
