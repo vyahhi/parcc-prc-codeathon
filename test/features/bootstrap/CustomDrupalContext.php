@@ -691,7 +691,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
     parent::afterScenario($event);
     $this->theDefaultEmailSystemIsEnabled();
-    print $this->getDrupalParameter('selectors')['success_message_selector'];
+    //print $this->getDrupalParameter('selectors')['success_message_selector'];
   }
 
   public function recordFailedEvent($event) {
