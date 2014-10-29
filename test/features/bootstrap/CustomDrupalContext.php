@@ -673,6 +673,25 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * We are overriding this because we want to use relative paths
+   * so we are changing the path here.
+   * @param $field
+   * @param $path
+   */
+  public function attachFileToField($field, $path)
+  {
+    $field = $this->fixStepArgument($field);
+    $path = $this->fixStepArgument($path);
+
+    $relative = getcwd() . '/./' . $path; //../docroot/sites/';
+    $realpath = realpath($relative);
+
+    $path = $realpath;
+
+    parent::attachFileToField($field, $path);
+  }
+
+  /**
    * @Then /^(?:|I )should see "([^"]*)" in popup$/
    *
    * @param string $message The message.
