@@ -62,3 +62,9 @@ vendor/.git
 # Test Failure Dumps #
 ######################
 test/failures
+
+# Tests #
+#########
+tests/behat.yml
+tests/composer.lock
+tests/vendor
