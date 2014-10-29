@@ -58,3 +58,7 @@ Thumbs.db
 # We don't want composer vendors acting like submodules
 # See https://getcomposer.org/doc/faqs/should-i-commit-the-dependencies-in-my-vendor-directory.md
 vendor/.git
+
+# Test Failure Dumps #
+######################
+test/failures
