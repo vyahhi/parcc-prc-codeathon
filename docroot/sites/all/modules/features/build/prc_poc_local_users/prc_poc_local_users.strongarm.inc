@@ -139,7 +139,9 @@ password: Your password
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_register_no_approval_required_body';
-  $strongarm->value = 'Thank you for registering at [site:name]. You may now log in at [site:login-url] in the future using:
+  $strongarm->value = '[user:name],
+
+Thank you for registering at [site:name]. You may now log in at [site:login-url] in the future using:
 
 username: [user:mail]
 password: Your password
