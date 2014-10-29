@@ -11,6 +11,7 @@ features[views_view][] = backlinks
 features[views_view][] = commentable_teasers
 features[views_view][] = comments_recent
 features[views_view][] = digital_library_tree_view
+features[views_view][] = digital_library_view
 features[views_view][] = favorites_list
 features[views_view][] = flag_bookmarks
 features[views_view][] = flag_bookmarks_tab

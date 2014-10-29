@@ -681,9 +681,23 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_title = 'Digital Library';
   $page->admin_description = 'This is the public view of our digital library content';
   $page->path = 'digital-library';
-  $page->access = array();
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 2,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+    ),
+    'logic' => 'and',
+  );
   $page->menu = array(
-    'type' => 'tab',
+    'type' => 'none',
     'title' => 'Digital Library',
     'name' => 'navigation',
     'weight' => '0',
@@ -733,10 +747,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-8d6420cf-9ae2-4008-a813-e85ce468bba3';
+    $pane->pid = 'new-30e765e5-3410-4e05-9d69-0dc872428ade';
     $pane->panel = 'center';
     $pane->type = 'views_panes';
-    $pane->subtype = 'admin_content_view-panel_pane_1';
+    $pane->subtype = 'digital_library_view-panel_pane_1';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -751,11 +765,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '8d6420cf-9ae2-4008-a813-e85ce468bba3';
-    $display->content['new-8d6420cf-9ae2-4008-a813-e85ce468bba3'] = $pane;
-    $display->panels['center'][0] = 'new-8d6420cf-9ae2-4008-a813-e85ce468bba3';
+    $pane->uuid = '30e765e5-3410-4e05-9d69-0dc872428ade';
+    $display->content['new-30e765e5-3410-4e05-9d69-0dc872428ade'] = $pane;
+    $display->panels['center'][0] = 'new-30e765e5-3410-4e05-9d69-0dc872428ade';
   $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = 'new-8d6420cf-9ae2-4008-a813-e85ce468bba3';
+  $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['digital_library'] = $page;
