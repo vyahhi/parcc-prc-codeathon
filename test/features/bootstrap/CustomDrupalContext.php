@@ -685,9 +685,60 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   public function afterScenario($event) {
+    if ($event->getResult()) {
+      $this->recordFailedEvent($event);
+    }
+
     parent::afterScenario($event);
     $this->theDefaultEmailSystemIsEnabled();
+    print $this->getDrupalParameter('selectors')['success_message_selector'];
   }
 
+  public function recordFailedEvent($event) {
+    $fileName = $this->timestamp;
+    // TODO: Make this a setting in behat.yml?
+    $html_dump_path = 'failures';
 
+    $message = '';
+    $session = $this->getSession();
+    $page = $session->getPage();
+    $driver = $session->getDriver();
+    $date = date('Y-m-d H:i:s');
+    $url = $session->getCurrentUrl();
+    $html = $page->getContent();
+
+    $feature_file_full = $event->getScenario()->getFeature()->getFile();
+    $ff = explode('/', $feature_file_full);
+    $feature_file_name = array_pop($ff);
+
+    if (!file_exists($html_dump_path))
+    {
+      mkdir($html_dump_path);
+    }
+
+    $html = "<!-- HTML dump from behat  \nDate: $date  \nUrl:  $url  -->\n " . $html;
+
+    $htmlCapturePath = $html_dump_path . '/' . $fileName . '.' . $feature_file_name . '.html';
+    file_put_contents($htmlCapturePath, $html);
+
+    $message .= "\nHTML available at: " . $html_dump_path  . "/". $fileName . ".html";
+
+
+    if ($driver instanceof \Behat\Mink\Driver\Selenium2Driver)
+    {
+      if (!file_exists($html_dump_path))
+      {
+        mkdir($html_dump_path);
+      }
+
+      $screenshot = $driver->getScreenshot();
+      $screenshotFilePath = $html_dump_path . '/' . $fileName . '.png';
+      file_put_contents($screenshotFilePath, $screenshot);
+
+      $message .= "\nScreenshot available at: " . $screenshotFilePath;
+    }
+
+    print $message . PHP_EOL;
+  }
 }
+
