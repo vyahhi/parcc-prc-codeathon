@@ -3,5 +3,4 @@ core = 7.x
 package = Content
 dependencies[] = features
 dependencies[] = prc_poc_local_fields
-features[node][] = panel
 features[features_api][] = api:2

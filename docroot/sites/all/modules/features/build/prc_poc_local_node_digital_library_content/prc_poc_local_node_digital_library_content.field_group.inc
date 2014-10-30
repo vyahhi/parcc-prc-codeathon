@@ -21,7 +21,7 @@ function prc_poc_local_node_digital_library_content_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Add a Thumbnail',
-    'weight' => '13',
+    'weight' => '5',
     'children' => array(
       0 => 'field_thumbnail',
     ),
@@ -49,7 +49,7 @@ function prc_poc_local_node_digital_library_content_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Attach a File',
-    'weight' => '13',
+    'weight' => '4',
     'children' => array(
       0 => 'field_document',
     ),
@@ -77,18 +77,19 @@ function prc_poc_local_node_digital_library_content_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Link to URL',
-    'weight' => '13',
+    'weight' => '6',
     'children' => array(
       0 => 'field_link_to_a_url',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Link to URL',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-link-to-url field-group-fieldset',
         'required_fields' => 1,
+        'classes' => 'group-link-to-url field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsed',
     ),
   );
   $export['group_link_to_url|node|digital_library_content|form'] = $field_group;
@@ -103,8 +104,8 @@ function prc_poc_local_node_digital_library_content_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Add more information (Content Properties)',
-    'weight' => '13',
+    'label' => 'Add More Information (Content Properties)',
+    'weight' => '7',
     'children' => array(
       0 => 'field_genre',
       1 => 'field_grade_level',
@@ -113,7 +114,7 @@ function prc_poc_local_node_digital_library_content_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Add more information (Content Properties)',
+      'label' => 'Add More Information (Content Properties)',
       'instance_settings' => array(
         'required_fields' => 1,
         'classes' => '',
