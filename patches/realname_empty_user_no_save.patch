@@ -1,0 +1,31 @@
+diff --git a/docroot/sites/all/modules/realname/realname.module b/docroot/sites/all/modules/realname/realname.module
+index a16be15..c8e4c0f 100644
+--- a/docroot/sites/all/modules/realname/realname.module
++++ b/docroot/sites/all/modules/realname/realname.module
+@@ -269,16 +269,16 @@ function realname_update($account) {
+ 
+   // Allow other modules to alter the generated realname.
+   drupal_alter('realname', $realname, $account);
+-
+-  // Save to the database and the static cache.
+-  db_merge('realname')
+-    ->key(array('uid' => $account->uid))
+-    ->fields(array(
+-      'realname' => $realname,
+-      'created' => REQUEST_TIME,
+-    ))
+-    ->execute();
+-
++  if (isset($account) && isset($account->uid)) {
++    // Save to the database and the static cache.
++    db_merge('realname')
++      ->key(array('uid' => $account->uid))
++      ->fields(array(
++        'realname' => $realname,
++        'created' => REQUEST_TIME,
++      ))
++      ->execute();
++  }
+   // Allow modules to react to the realname being updated.
+   module_invoke_all('realname_update', $realname, $account);
+ 

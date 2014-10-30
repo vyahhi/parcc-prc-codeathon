@@ -176,14 +176,20 @@ function prc_invite_form_invite_accept($invite) {
   $w = entity_metadata_wrapper('invite', $invite);
   $invitee = $invite->invitee;
   $account = user_load($invitee);
-  $rid = $w->field_role_id->value();
+  $invite_rid = $w->field_role_id->value();
   $roles = user_roles(TRUE);
-  if (isset($roles[$rid])) {
-    $role_name = $roles[$rid];
+  if (isset($roles[$invite_rid])) {
+    $role_name = $roles[$invite_rid];
+    $new_roles = array();
+    // Remove all other roles from the user
+    foreach($roles as $rid => $rname) {
+      $new_roles[$rid] = 0;
+    }
+    // Add authenticated user back in
+    $new_roles[2] = $roles[2];
+    $new_roles[$invite_rid] = $role_name;
     // Add role to user
-    $new_role[$rid] = $role_name;
-    $all_roles = $account->roles + $new_role; // Add new role to existing roles.
-    user_save($account, array('roles' => $all_roles));
+    user_save($account, array('roles' => $new_roles));
   }
 }
 

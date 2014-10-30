@@ -69,6 +69,44 @@ function prc_login_form_user_insert(&$edit, $account, $category) {
     $all_roles = $account->roles + $new_role; // Add new role to existing roles.
     $account->roles = $all_roles;
   }
+  drupal_register_shutdown_function('_prc_login_form_user_restrict_single_role', $account);
+}
+
+function _prc_login_form_user_restrict_single_role($account) {
+  $new_account = user_load($account->uid);
+  $old_roles = $new_account->roles;
+  $all_roles = user_roles(TRUE);
+
+  // Creating an administrator should kill all the other roles
+  $admin = array_search('administrator', $old_roles);
+  // Every user gets authenticated user
+  // If there is educator and there is anything else, remove educator
+  $educator = array_search('Educator', $old_roles);
+
+  $auth_user_rid = array_search('authenticated user', $all_roles);
+
+  if ($admin) {
+    $admin_rid = array_search('administrator', $all_roles);
+    $old_roles = array(
+      $admin_rid => 'administrator',
+      $auth_user_rid => 'authenicated user',
+    );
+  } elseif ($educator) {
+    $excludes = array('authenticated user', 'Educator');
+    $save_role_name = '';
+    $save_rid = 0;
+    foreach($old_roles as $rid => $name) {
+      if (!in_array($name, $excludes)) {
+        $save_role_name = $name;
+        $save_rid = $rid;
+      }
+    }
+    if ($save_rid) {
+      $old_roles[$educator] = 0;
+    }
+  }
+    // Save user without Educator
+    user_save($account, array('roles' => $old_roles));
 
 }
 

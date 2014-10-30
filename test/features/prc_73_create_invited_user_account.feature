@@ -60,6 +60,7 @@ Feature: Create User Account Following an Invite (PRC-73)
     And I press "Create new account"
     Then I should see the message containing "You have accepted the invitation from"
     And I should see the message containing "Registration successful. You are now logged in."
-    Then the user "example1@timestamp@example.com" should have a role of "Content Author"
-    Then I delete the user with the email address "example1@timestamp@example.com"
     #  Creates a new account with the pre-defined role
+    Then the user "example1@timestamp@example.com" should have a role of "Content Author"
+    And the user "example1@timestamp@example.com" should not have a role of "Educator"
+    Then I delete the user with the email address "example1@timestamp@example.com"

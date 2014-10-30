@@ -163,6 +163,16 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * Asserts that a given user has the specified role.
+   *
+   * @Then /^the user "([^"]*)" should not have a role of "([^"]*)"$/
+   */
+  public function assertUserDoesNotHaveRole($username, $role) {
+    parent::assertDrushCommandWithArgument('user-information', $username);
+    parent::drushOutputShouldNotContain($role);
+  }
+
+  /**
    * Deletes the user with the specified email address.
    *
    * @Then /^I delete the user with the email address "([^"]*)"$/
@@ -739,7 +749,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $htmlCapturePath = $html_dump_path . '/' . $fileName . '.' . $feature_file_name . '.html';
     file_put_contents($htmlCapturePath, $html);
 
-    $message .= "\nHTML available at: " . $html_dump_path  . "/". $fileName . ".html";
+    $message .= "\nHTML available at: " . $htmlCapturePath;
 
 
     if ($driver instanceof \Behat\Mink\Driver\Selenium2Driver)
