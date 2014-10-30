@@ -145,9 +145,8 @@ Thank you for registering at [site:name]. You may now log in at [site:login-url]
 
 username: [user:mail]
 password: Your password
-
---  [site:name] team
-';
+ 
+---  [site:name] team';
   $export['user_mail_register_no_approval_required_body'] = $strongarm;
 
   $strongarm = new stdClass();
