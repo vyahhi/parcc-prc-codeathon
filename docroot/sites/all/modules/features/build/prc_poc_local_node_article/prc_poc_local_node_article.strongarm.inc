@@ -1,19 +1,19 @@
 <?php
 /**
  * @file
- * prc_poc_local_node_digital_library_content.strongarm.inc
+ * prc_poc_local_node_article.strongarm.inc
  */
 
 /**
  * Implements hook_strongarm().
  */
-function prc_poc_local_node_digital_library_content_strongarm() {
+function prc_poc_local_node_article_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'field_bundle_settings_node__digital_library_content';
+  $strongarm->name = 'field_bundle_settings_node__article';
   $strongarm->value = array(
     'view_modes' => array(
       'teaser' => array(
@@ -43,14 +43,11 @@ function prc_poc_local_node_digital_library_content_strongarm() {
       'revision' => array(
         'custom_settings' => FALSE,
       ),
-      'digital_library_item' => array(
-        'custom_settings' => TRUE,
-      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '0',
+          'weight' => '-5',
         ),
       ),
       'display' => array(
@@ -59,55 +56,50 @@ function prc_poc_local_node_digital_library_content_strongarm() {
             'weight' => '10',
             'visible' => TRUE,
           ),
-          'digital_library_item' => array(
-            'weight' => '13',
-            'visible' => FALSE,
-          ),
         ),
       ),
     ),
   );
-  $export['field_bundle_settings_node__digital_library_content'] = $strongarm;
+  $export['field_bundle_settings_node__article'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_options_digital_library_content';
+  $strongarm->name = 'menu_options_article';
   $strongarm->value = array(
     0 => 'main-menu',
   );
-  $export['menu_options_digital_library_content'] = $strongarm;
+  $export['menu_options_article'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_parent_digital_library_content';
+  $strongarm->name = 'menu_parent_article';
   $strongarm->value = 'main-menu:0';
-  $export['menu_parent_digital_library_content'] = $strongarm;
+  $export['menu_parent_article'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_digital_library_content';
+  $strongarm->name = 'node_options_article';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'promote',
   );
-  $export['node_options_digital_library_content'] = $strongarm;
+  $export['node_options_article'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_preview_digital_library_content';
+  $strongarm->name = 'node_preview_article';
   $strongarm->value = '1';
-  $export['node_preview_digital_library_content'] = $strongarm;
+  $export['node_preview_article'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_submitted_digital_library_content';
+  $strongarm->name = 'node_submitted_article';
   $strongarm->value = 1;
-  $export['node_submitted_digital_library_content'] = $strongarm;
+  $export['node_submitted_article'] = $strongarm;
 
   return $export;
 }

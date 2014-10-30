@@ -141,13 +141,18 @@ password: Your password
   $strongarm->name = 'user_mail_register_no_approval_required_body';
   $strongarm->value = '[user:name],
 
-Thank you for registering at [site:name]. You may now log in at [site:login-url] in the future using:
+Thank you for registering at [site:name]. You may now log in by clicking this link or copying and pasting it to your browser:
 
-username: [user:mail]
+[user:one-time-login-url]
+
+This link can only be used once to log in and will lead you to a page where you can set your password.
+
+After setting your password, you will be able to log in at [site:login-url] in the future using:
+
+username: [user:name]
 password: Your password
 
---  [site:name] team
-';
+--  [site:name] team';
   $export['user_mail_register_no_approval_required_body'] = $strongarm;
 
   $strongarm = new stdClass();

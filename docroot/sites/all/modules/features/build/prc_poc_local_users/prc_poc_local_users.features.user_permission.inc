@@ -584,12 +584,31 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'invite',
   );
 
+  // Exported permission: 'create article content'.
+  $permissions['create article content'] = array(
+    'name' => 'create article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create digital_library_content content'.
   $permissions['create digital_library_content content'] = array(
     'name' => 'create digital_library_content content',
     'roles' => array(
       'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'create favorites_list content'.
+  $permissions['create favorites_list content'] = array(
+    'name' => 'create favorites_list content',
+    'roles' => array(
+      'Content Author' => 'Content Author',
+      'Educator' => 'Educator',
     ),
     'module' => 'node',
   );
@@ -610,6 +629,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'panels_mini',
+  );
+
+  // Exported permission: 'create page content'.
+  $permissions['create page content'] = array(
+    'name' => 'create page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'create panel content'.
@@ -651,11 +679,36 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'path',
   );
 
+  // Exported permission: 'delete any article content'.
+  $permissions['delete any article content'] = array(
+    'name' => 'delete any article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any digital_library_content content'.
   $permissions['delete any digital_library_content content'] = array(
     'name' => 'delete any digital_library_content content',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any favorites_list content'.
+  $permissions['delete any favorites_list content'] = array(
+    'name' => 'delete any favorites_list content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any page content'.
+  $permissions['delete any page content'] = array(
+    'name' => 'delete any page content',
+    'roles' => array(
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -690,12 +743,40 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own article content'.
+  $permissions['delete own article content'] = array(
+    'name' => 'delete own article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own digital_library_content content'.
   $permissions['delete own digital_library_content content'] = array(
     'name' => 'delete own digital_library_content content',
     'roles' => array(
       'Content Author' => 'Content Author',
       'PRC Admin' => 'PRC Admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own favorites_list content'.
+  $permissions['delete own favorites_list content'] = array(
+    'name' => 'delete own favorites_list content',
+    'roles' => array(
+      'Content Author' => 'Content Author',
+      'Educator' => 'Educator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own page content'.
+  $permissions['delete own page content'] = array(
+    'name' => 'delete own page content',
+    'roles' => array(
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -1153,12 +1234,28 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'edit any article content'.
+  $permissions['edit any article content'] = array(
+    'name' => 'edit any article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any digital_library_content content'.
   $permissions['edit any digital_library_content content'] = array(
     'name' => 'edit any digital_library_content content',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any favorites_list content'.
+  $permissions['edit any favorites_list content'] = array(
+    'name' => 'edit any favorites_list content',
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1169,6 +1266,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'invite',
+  );
+
+  // Exported permission: 'edit any page content'.
+  $permissions['edit any page content'] = array(
+    'name' => 'edit any page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'edit any panel content'.
@@ -1201,6 +1307,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own article content'.
+  $permissions['edit own article content'] = array(
+    'name' => 'edit own article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own comments'.
   $permissions['edit own comments'] = array(
     'name' => 'edit own comments',
@@ -1220,6 +1335,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own favorites_list content'.
+  $permissions['edit own favorites_list content'] = array(
+    'name' => 'edit own favorites_list content',
+    'roles' => array(
+      'Content Author' => 'Content Author',
+      'Educator' => 'Educator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own invite entities'.
   $permissions['edit own invite entities'] = array(
     'name' => 'edit own invite entities',
@@ -1227,6 +1352,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'invite',
+  );
+
+  // Exported permission: 'edit own page content'.
+  $permissions['edit own page content'] = array(
+    'name' => 'edit own page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'edit own panel content'.

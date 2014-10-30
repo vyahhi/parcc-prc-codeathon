@@ -24,6 +24,15 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'digital_library_item' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 600,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 4,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -68,6 +77,13 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'digital_library_item' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -106,6 +122,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'settings' => array(),
         'type' => 'file_default',
         'weight' => 3,
+      ),
+      'digital_library_item' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -150,6 +172,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'taxonomy_term_reference_link',
         'weight' => 8,
       ),
+      'digital_library_item' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -187,6 +215,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'taxonomy_term_reference_link',
         'weight' => 6,
       ),
+      'digital_library_item' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -223,6 +257,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'settings' => array(),
         'type' => 'link_default',
         'weight' => 5,
+      ),
+      'digital_library_item' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -285,6 +325,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'taxonomy_term_reference_link',
         'weight' => 9,
       ),
+      'digital_library_item' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -322,6 +368,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'taxonomy_term_reference_link',
         'weight' => 7,
       ),
+      'digital_library_item' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 16,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -358,6 +410,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 2,
+      ),
+      'digital_library_item' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -400,6 +458,16 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         ),
         'type' => 'image',
         'weight' => 4,
+      ),
+      'digital_library_item' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => 'content',
+          'image_style' => 'medium',
+        ),
+        'type' => 'image',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
