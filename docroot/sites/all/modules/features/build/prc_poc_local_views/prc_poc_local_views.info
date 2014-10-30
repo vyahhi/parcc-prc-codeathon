@@ -1,8 +1,8 @@
 name = prc-poc.local Views
 core = 7.x
 package = CTools
+dependencies[] = entity
 dependencies[] = features
-dependencies[] = views
 dependencies[] = views_content
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
@@ -21,3 +21,4 @@ features[views_view][] = glossary
 features[views_view][] = invite
 features[views_view][] = sample_article
 features[views_view][] = tracker
+features_exclude[dependencies][views] = views
