@@ -58,7 +58,7 @@ function prc_poc_local_node_digital_library_content_field_group_info() {
       'label' => 'Attach a File',
       'instance_settings' => array(
         'required_fields' => 1,
-        'classes' => 'group-attach-a-file field-group-fieldset',
+        'classes' => '',
         'description' => '',
       ),
       'formatter' => 'collapsed',

@@ -1,0 +1,134 @@
+@api @d7
+Feature: Admin UI: Content Tab (PRC-169)
+  As a Content Author,
+  I want to view the content posted to Digital Library,
+  so that I can edit them later as needed.
+
+  Scenario: TT2 (PRC-225) Content View Created
+    Given users:
+      | name     | mail                | pass     | field_first_name | field_last_name | status |  
+      | Betty User | betty@example.com | xyz123   | Betty             | User            | 1      |
+    And I am on the homepage
+    When I fill in "E-mail" with "betty@example.com"
+    And I fill in "Password" with "xyz123"
+    And I press "Log in"
+    And I am on the homepage
+    Then the user "betty@example.com" should have a role of "Content Author"
+
+    When I follow "Content" in the "header" region
+    Then I should see the heading "PRC Website Content" in the "content" region
+    And I should see the link "Add content" in the "content" region
+    Given "Digital Library Content" nodes:
+      |   	name	|  	status	|  	title	|
+      |   	Betty User 	|  	1	|  	Premo Nutus	|
+      |   	Betty User	|  	1	|  	Aliquip Pecus	|
+      |   	Betty User	|  	1	|  	Melior Nisl	|
+      |   	Betty User	|  	1	|  	Turpis	|
+      |   	Betty User	|  	1	|  	Persto	|
+      |   	Betty User	|  	1	|  	Camur Iustum	|
+      |   	Betty User	|  	1	|  	Loquor	|
+      |   	Betty User	|  	1	|  	Eligo Volutpat	|
+      |   	Betty User	|  	1	|  	Si Sino	|
+      |   	Betty User	|  	1	|  	Virtus	|
+      |   	Betty User	|  	1	|  	Mauris Olim	|
+      |   	Betty User	|  	1	|  	Abigo Importunus	|
+      |   	Betty User	|  	1	|  	Eros Quae	|
+      |   	Betty User	|  	1	|  	Nibh	|
+      |   	Betty User	|  	1	|  	Defui Roto	|
+      |   	Betty User	|  	1	|  	Refero	|
+      |   	Betty User	|  	1	|  	Ea Imputo	|
+      |   	Betty User	|  	1	|  	Euismod Proprius	|
+      |   	Betty User	|  	1	|  	Metuo Scisco	|
+      |   	Betty User	|  	1	|  	Utrum	|
+      |   	Betty User	|  	1	|  	In Wisi	|
+      |   	Betty User	|  	1	|  	Importunus Probo	|
+      |   	Betty User	|  	1	|  	Accumsan Zelus	|
+      |   	Betty User	|  	1	|  	Qui	|
+      |   	Betty User	|  	1	|  	Cui Facilisi	|
+      |   	Betty User	|  	1	|  	Jugis Veniam	|
+      |   	Betty User	|  	1	|  	Euismod Tum	|
+      |   	Betty User	|  	1	|  	Feugiat	|
+      |   	Betty User	|  	1	|  	Lenis Plaga	|
+      |   	Betty User	|  	1	|  	Bene	|
+      |   	Betty User	|  	1	|  	Odio	|
+      |   	Betty User	|  	1	|  	Quia	|
+      |   	Betty User	|  	1	|  	Consequat	|
+      |   	Betty User	|  	1	|  	Refoveo	|
+      |   	Betty User	|  	1	|  	Persto	|
+      |   	Betty User	|  	1	|  	Accumsan Obruo	|
+      |   	Betty User	|  	1	|  	Causa Ut	|
+      |   	Betty User	|  	1	|  	Elit Nobis	|
+      |   	Betty User	|  	1	|  	Venio	|
+      |   	Betty User	|  	1	|  	Lobortis	|
+      |   	Betty User	|  	1	|  	Eros	|
+      |   	Betty User	|  	1	|  	Persto Praesent	|
+      |   	Betty User	|  	1	|  	Obruo	|
+      |   	Betty User	|  	1	|  	Acsi Esca	|
+      |   	Betty User	|  	1	|  	Amet Eu	|
+      |   	Betty User	|  	1	|  	Esca	|
+      |   	Betty User	|  	1	|  	Natu	|
+      |   	Betty User	|  	1	|  	Secundum	|
+      |   	Betty User	|  	1	|  	Premo Vel	|
+      |   	Betty User	|  	1	|  	Esca Tamen	|
+      |   	Betty User	|  	1	|  	Mos Roto	|
+      |   	Betty User	|  	1	|  	Incassum	|
+      |   	Betty User	|  	1	|  	Paratus Quidem	|
+      |   	Betty User	|  	1	|  	Mos Saluto	|
+      |   	Betty User	|  	1	|  	Abdo Ex	|
+      |   	Betty User	|  	1	|  	Antehabeo Quibus	|
+      |   	Betty User	|  	1	|  	Vereor	|
+      |   	Betty User	|  	1	|  	Augue Euismod	|
+      |   	Betty User	|  	1	|  	Mauris Vulpes	|
+      |   	Betty User	|  	1	|  	Imputo	|
+      |   	Betty User	|  	1	|  	Amet	|
+      |   	Betty User	|  	1	|  	Inhibeo	|
+      |   	Betty User	|  	1	|  	Abigo Tum	|
+      |   	Betty User	|  	1	|  	Sagaciter	|
+      |   	Betty User	|  	1	|  	Praesent Singularis	|
+      |   	Betty User	|  	1	|  	Lucidus	|
+      |   	Betty User	|  	1	|  	Sino	|
+      |   	Betty User	|  	1	|  	Premo	|
+      |   	Betty User	|  	1	|  	Premo	|
+      |   	Betty User	|  	1	|  	Et Laoreet	|
+      |   	Betty User	|  	1	|  	Plaga	|
+      |   	Betty User	|  	1	|  	Ille Pala	|
+      |   	Betty User	|  	1	|  	Melior Utrum	|
+      |   	Betty User	|  	1	|  	Facilisis Rusticus	|
+      |   	Betty User	|  	1	|  	At Ex	|
+      |   	Betty User	|  	1	|  	Pala Quadrum	|
+      |   	Betty User	|  	1	|  	Huic	|
+      |   	Betty User	|  	1	|  	Jugis	|
+      |   	Betty User	|  	1	|  	Ille	|
+      |   	Betty User	|  	1	|  	Et	|
+      |   	Betty User	|  	1	|  	Capto Sit	|
+      |   	Betty User	|  	1	|  	Cogo Suscipere	|
+      |   	Betty User	|  	1	|  	Uxor Verto	|
+      |   	Betty User	|  	1	|  	Mauris	|
+      |   	Betty User	|  	1	|  	Typicus	|
+      |   	Betty User	|  	1	|  	Hendrerit Lobortis	|
+      |   	Betty User	|  	1	|  	Tincidunt	|
+      |   	Betty User	|  	1	|  	Ideo	|
+      |   	Betty User	|  	1	|  	Valde	|
+      |   	Betty User	|  	1	|  	Duis Molior	|
+      |   	Betty User	|  	1	|  	Neque	|
+      |   	Betty User	|  	1	|  	Pecus	|
+      |   	Betty User	|  	1	|  	Ad Premo	|
+      |   	Betty User	|  	1	|  	Eros	|
+      |   	Betty User	|  	1	|  	At Olim	|
+      |   	Betty User	|  	1	|  	Facilisi Nibh	|
+      |   	Betty User	|  	1	|  	Letalis Virtus	|
+      |   	Betty User	|  	1	|  	Ibidem Paulatim	|
+      |   	Betty User	|  	1	|  	Acsi	|
+      |   	Betty User	|  	1	|  	Sagaciter Vel	|
+      |   	Betty User	|  	1	|  	Autem	|
+      |   	Betty User	|  	1	|  	Exputo Nutus	|
+    And I am logged in as a user with the "Content Author" role
+    And I am on "admin-content"
+    And I break
+    Then I should see "Premo Nutus"
+    But I should not see "Exputo Nutus"
+    And I break
+    When I fill in "Filter all columns" with "Nutus"
+    And I press "edit-submit-admin-content-view"
+    Then I should see the text "Premo Nutus"
+    And I should see the text "Exputo Nutus"

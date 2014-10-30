@@ -42,7 +42,8 @@ Feature: Admin UI: Content Tab (PRC-169)
     And I should not see the link "Action"
     And I should see the link "delete"
     And I should see the link "edit"
+    #  AC8 A Filter textbox allows the user to narrow down the table content by entering a keyword from any of the fields displayed in the table.
+    And I should see an "Filter all columns" field
+    And I should see an "edit-submit-admin-content-view" button
 
-    # AC8 A Filter textbox allows the user to narrow down the table content by entering a keyword from any of the fields displayed in the table.
-    # AC9 The filter should affect the entire data and not just the current page.
-    # AC10 Pagination: 100 per page -use the default pagination: e.g. first previous 1 2 3 4 .... 26 next last
+    # AC9 and 10 tests temporarily removed awaiting user role assignment code.
