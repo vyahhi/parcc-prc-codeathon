@@ -17,10 +17,33 @@ Feature: View Content (PRC-32)
     And the url should match "digital-library"
 
   Scenario: AC3-5  In this page, the content is listed and sortable by date
-    Given I am logged in as a user with the "authenticated user" role
+    Given "Digital Library Content" nodes:
+      | title         | body              | status | promote | uid | field_author_name | field_thumbnail          |
+      | Title1        | Trimmed Content 1 | 1      | 0       | 1   | Bob               | thumbnailimage.png       |
+      | Title2        | Trimmed Content 2 | 1      | 0       | 1   | Prasdi            | thumbnailimage.png       |
+      | Title3        | Trimmed Content 3 | 1      | 0       | 1   | Jimmy             | thumbnailimage.png       |
+
+    And I am logged in as a user with the "authenticated user" role
     And I visit "digital-library"
-    Then I should see "Title"
-    Then I should see the link "Posted On"
-    Then I should see "Author"
-    Then I should see "Summary"
-    Then I should see "Thumbnail"
+    Then I should see "Title1"
+    And I should see "Trimmed Content 1"
+    And I should see "Created"
+    And I should see "by Bob"
+    # I should see the thumbnail too, but I don't know how to test it in the context of this script
+    Then I should see "Title2"
+    And I should see "Trimmed Content 2"
+    And I should see "by Prasdi"
+    # I should see the thumbnail too, but I don't know how to test it in the context of this script
+    Then I should see "Title3"
+    And I should see "Trimmed Content 3"
+    And I should see "by Jimmy"
+    # I should see the thumbnail too, but I don't know how to test it in the context of this script
+    #  AC3. In this page, the content is listed based on the sort definition. Default by date: the most recent on the top
+    #  AC4. The following components are displayed for each content:
+    #  AC4a. Title
+    #  AC4b. statement containing date and author (if available), such as: Created Feb 14, 2014 10:37 AM by Joe Admin
+    #  AC4c. Summary
+    #  AC4d. Thumbnail (when available)
+    #  AC5. A Sort dropdown menu allows the user to change the order. The only available option for now is: Date: most recent on the top
+    # And I should see "Sort by"
+    # And I should see "Date: most recent on the top"
