@@ -13,6 +13,13 @@ function prc_poc_local_node_digital_library_content_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'ds_extras_fields_extra';
+  $strongarm->value = 1;
+  $export['ds_extras_fields_extra'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__digital_library_content';
   $strongarm->value = array(
     'view_modes' => array(
@@ -61,6 +68,16 @@ function prc_poc_local_node_digital_library_content_strongarm() {
           ),
           'digital_library_item' => array(
             'weight' => '13',
+            'visible' => FALSE,
+          ),
+          'teaser' => array(
+            'weight' => '4',
+            'visible' => TRUE,
+          ),
+        ),
+        'field_author_name' => array(
+          'teaser' => array(
+            'weight' => '6',
             'visible' => FALSE,
           ),
         ),
