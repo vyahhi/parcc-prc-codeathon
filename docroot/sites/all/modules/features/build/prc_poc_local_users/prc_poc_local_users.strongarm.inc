@@ -141,7 +141,7 @@ password: Your password
   $strongarm->name = 'user_mail_register_no_approval_required_body';
   $strongarm->value = '[user:name],
 
-Thank you for registering at [site:name]. You may now log in at [site:login-url] in the future using:
+Thank you for registering at [site:name]. You may now log in at [site:url] in the future using:
 
 username: [user:mail]
 password: Your password
