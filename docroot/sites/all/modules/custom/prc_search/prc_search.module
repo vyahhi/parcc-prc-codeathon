@@ -41,3 +41,25 @@ function prc_search_form_search_form_alter(&$form, &$form_state) {
     );
   }
 }
+
+/**
+ *  Implements hook_form_alter().
+ */
+function prc_search_form_search_block_form_alter(&$form, &$form_state, $form_id) {
+  $form['#validate'][] = 'prc_search_form_search_form_validate';
+}
+
+function prc_search_form_search_form_validate(&$form, &$form_state) {
+  // Check we got an previous error from SearchQuery that we want to dismiss.
+  if (form_get_errors()) {
+    $q = arg();
+    // Reset the current search text. If there was an error before this
+    // part of the URL will retain the old, invalid criteria.
+    $q[count($q) - 1] = $form_state['values'][current(array_keys($form))];
+    // Clear error messages as user has already seen this error before.
+    drupal_get_messages();
+    // Goto the correct search page.
+    $new_search_url = implode('/', $q);
+    drupal_goto($new_search_url);
+  }
+}
