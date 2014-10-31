@@ -71,6 +71,8 @@ Feature: Login & Public Registration (PRC-48)
     And the email should contain "username: @timestamp@example.com"
     And the email should contain "password: Your password"
     And the email should contain "--  Partnership Resource Center team"
+    # PRC-277 Change the link in the email to the site url instead of login url
+    And the email should not contain "/user"
 
   Scenario: Registration form validation - required fields (AC6a)
     Given I am on the homepage

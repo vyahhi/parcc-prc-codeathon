@@ -466,6 +466,22 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Given /^the email should not contain "([^"]*)"$/
+   */
+  public function theEmailShouldNotContain($contents) {
+    if (!$this->activeEmail) {
+      throw new \Exception('No active email');
+    }
+    $contents = $this->fixStepArgument($contents);
+    $message = $this->activeEmail;
+    if (strpos($message['body'], $contents) !== FALSE ||
+      strpos($message['subject'], $contents) !== FALSE) {
+      throw new \Exception('Expected content was present in message body or subject.');
+    }
+    return TRUE;
+  }
+
+  /**
    * @Then /^I follow link "(?P<number>[^"]*)" in the email$/
    */
   public function followEmailLinkByIndex($number) {
