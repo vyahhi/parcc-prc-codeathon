@@ -180,16 +180,19 @@ function prc_invite_form_invite_accept($invite) {
   $roles = user_roles(TRUE);
   if (isset($roles[$invite_rid])) {
     $role_name = $roles[$invite_rid];
-    $new_roles = array();
-    // Remove all other roles from the user
-    foreach($roles as $rid => $rname) {
-      $new_roles[$rid] = 0;
+    // Users get Educator by default, so don't do anything funky if it's an Educator invite
+    if ($role_name != 'Educator') {
+      $new_roles = array();
+      // Remove all other roles from the user
+      foreach ($roles as $rid => $rname) {
+        $new_roles[$rid] = 0;
+      }
+      // Add authenticated user back in
+      $new_roles[2] = $roles[2];
+      $new_roles[$invite_rid] = $role_name;
+      // Add role to user
+      user_save($account, array('roles' => $new_roles));
     }
-    // Add authenticated user back in
-    $new_roles[2] = $roles[2];
-    $new_roles[$invite_rid] = $role_name;
-    // Add role to user
-    user_save($account, array('roles' => $new_roles));
   }
 }
 
