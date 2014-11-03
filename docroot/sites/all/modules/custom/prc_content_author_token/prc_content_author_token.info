@@ -1,0 +1,4 @@
+name = PRC Content Author Token
+description = Token to display content author, including the work "by"
+package = PRC
+core = 7.x

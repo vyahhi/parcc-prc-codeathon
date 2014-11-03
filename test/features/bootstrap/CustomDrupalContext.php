@@ -751,7 +751,11 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $url = $session->getCurrentUrl();
     $html = $page->getContent();
 
-    $feature_file_full = $event->getScenario()->getFeature()->getFile();
+    if (isset($event->getScenario)) {
+      $feature_file_full = $event->getScenario()->getFeature()->getFile();
+    } else {
+      $feature_file_full = 'failure';
+    }
     $ff = explode('/', $feature_file_full);
     $feature_file_name = array_pop($ff);
 
