@@ -4,83 +4,51 @@ Feature: Admin UI: Define Content Metadata (PRC-30)
   I want to define the metadata associated to a content I'm posting to PRC digital library,
   so that the educators can find the content they wish to view using the content metadata.
 
-  Scenario Outline: AC1 Test presence of metadata section with terms
+  @javascript
+  Scenario: AC1 Test presence of metadata section with terms
     Given I am logged in as a user with the "Content Author" role
     And I am on the homepage
     When I follow "Content"
     Then I click "Add content"
-    Then I should see the text "Add more information (Content Properties)" in the "content" region
-    And I should see the text "<metadata>"
+    Then I should see the text "Add More Information (Content Properties)" in the "content" region
+    And I click "Show Add More Information (Content Properties)"
+    And I should see the text "Grade Level"
+    And I should see the text "Subject"
+    And I should see the text "Media Type"
+    And I should see the text "Genre"
 
-  Examples:
-    | metadata            |
-    |  Grade Level        |
-    |  Subject            |
-    |  Media Type         |
-    |  Genre              |
+  # AC2 Test grade level options
 
-  Scenario Outline: AC2 Test grade level options
-    Given I am logged in as a user with the "Content Author" role
-    And I am on the homepage
-    When I follow "Content"
-    And I click "Add content"
-    Then I should see "<grade>" in the "content" region
+    Then I should see "PreK"
+    And I should see "Kindergarten"
+    And I should see "First Grade"
+    And I should see "Elementary School"
+    And I should see "Middle School "
+    And I should see "High School"
 
-  Examples:
-    | grade                    |
-    |  PreK                    |
-    |  Kindergarten            |
-    |  First Grade             |
-    |  Elementary School       |
-    |  Middle School           |
-    |  High School             |
+  # AC3 Test subject options
 
-  Scenario Outline: AC3 Test subject options
-    Given I am logged in as a user with the "Content Author" role
-    And I am on the homepage
-    When I follow "Content"
-    And I click "Add content"
-    Then I should see "<subject>" in the "content" region
+    And I should see "English Language Arts"
+    And I should see "Math"
+    And I should see "Science"
+    And I should see "History/Social Studies"
+    And I should see "World Languages"
+    And I should see "Visual and Performing Arts"
+    And I should see "Career and Technical Education"
+    And I should see "STEM"
+    And I should see "Physical Education "
+    And I should see "English Language Development"
+    And I should see "Special Needs Support"
+    And I should see "Educational Leadership "
 
-  Examples:
-    | subject                    |
-    | English Language Arts |
-    | Math |
-    | Science |
-    | History/Social Studies |
-    | World Languages |
-    | Visual and Performing Arts |
-    | Career and Technical Education |
-    | STEM |
-    | Physical Education |
-    | English Language Development |
-    | Special Needs Support |
-    | Educational Leadership |
+  # AC5 Test media type options
 
+    Then I should see "Text" in the "content" region
+    And I should see "Image"
+    And I should see "Audio"
+    And I should see "Video"
 
-
-  Scenario Outline: AC5 Test media type options
-    Given I am logged in as a user with the "Content Author" role
-    And I am on the homepage
-    When I follow "Content"
-    And I click "Add content"
-    Then I should see "<media>" in the "content" region
-
-  Examples:
-    | media                    |
-    |  Text                    |
-    |  Image            |
-    |  Audio           |
-    |  Video        |
-
-  Scenario Outline: AC6 Test grade level options
-    Given I am logged in as a user with the "Content Author" role
-    And I am on the homepage
-    When I follow "Content"
-    And I click "Add content"
-    Then I should see "<genre>" in the "content" region
-
-  Examples:
-    | genre                    |
-    |  Learning Fun                    |
-    |  Bonding Activities            |
+  # AC6 Test grade level options
+    
+    And I should see "Learning Fun"
+    And I should see "Bonding Activities"
