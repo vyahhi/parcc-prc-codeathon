@@ -19,7 +19,7 @@ Feature: Search Content - Quick Search (PRC-31)
   @javascript
   Scenario: AC2 - Search terms
     Given "Digital Library Content" nodes:
-      | title         | body      | status | promote | uid | language | tags         | author |
+      | title         | body      | status | promote | uid | language | tags         | field_author_name |
       | Africa        | Continent | 1      | 0       | 1   | und      | North        | Ted    |
       | Europe        | Continent | 1      | 0       | 1   | und      | South        | Fred   |
       | North America | Continent | 1      | 0       | 1   | und      | East         | Ed     |
@@ -37,6 +37,7 @@ Feature: Search Content - Quick Search (PRC-31)
     But I should see the text "Africa"
     And I should see the text "Continent"
     And I should see the text "Created"
+    Then I break
     And I should see the text "by Ted"
     And I should see the text "South Africa"
     And I should see the text "Country"
