@@ -19,13 +19,13 @@ Feature: Search Content - Quick Search (PRC-31)
   @javascript
   Scenario: AC2 - Search terms
     Given "Digital Library Content" nodes:
-      | title         | body      | status | promote | uid | language | tags         |
-      | Africa        | Continent | 1      | 0       | 1   | und      | North        |
-      | Europe        | Continent | 1      | 0       | 1   | und      | South        |
-      | North America | Continent | 1      | 0       | 1   | und      | East         |
-      | South America | Continent | 1      | 0       | 1   | und      | East, West   |
-      | South Africa  | Country   | 1      | 0       | 1   | und      | South        |
-      | Austria       | Country   | 1      | 0       | 1   | und      | North        |
+      | title         | body      | status | promote | uid | language | tags         | author |
+      | Africa        | Continent | 1      | 0       | 1   | und      | North        | Ted    |
+      | Europe        | Continent | 1      | 0       | 1   | und      | South        | Fred   |
+      | North America | Continent | 1      | 0       | 1   | und      | East         | Ed     |
+      | South America | Continent | 1      | 0       | 1   | und      | East, West   | Jed    |
+      | South Africa  | Country   | 1      | 0       | 1   | und      | South        |        |
+      | Austria       | Country   | 1      | 0       | 1   | und      | North        |        |
     And I run drush "search-index"
     # Cron redirects us. Navigate back. Also cron will pop errors into the log but it still runs and indexes.
     And I am logged in as a user with the "Educator" role
@@ -36,6 +36,8 @@ Feature: Search Content - Quick Search (PRC-31)
     And I should see the text "Search results for: Africa"
     But I should see the text "Africa"
     And I should see the text "Continent"
+    And I should see the text "Created"
+    And I should see the text "by Ted"
     And I should see the text "South Africa"
     And I should see the text "Country"
     But I should not see the text "Europe"
