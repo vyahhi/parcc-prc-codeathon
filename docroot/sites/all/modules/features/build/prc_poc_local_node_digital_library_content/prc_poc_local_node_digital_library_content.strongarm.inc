@@ -36,7 +36,7 @@ function prc_poc_local_node_digital_library_content_strongarm() {
         'custom_settings' => FALSE,
       ),
       'search_result' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
       'diff_standard' => array(
         'custom_settings' => FALSE,
@@ -74,12 +74,17 @@ function prc_poc_local_node_digital_library_content_strongarm() {
             'weight' => '4',
             'visible' => TRUE,
           ),
+          'search_result' => array(
+            'weight' => '9',
+            'visible' => FALSE,
+          ),
         ),
         'field_author_name' => array(
           'teaser' => array(
             'weight' => '6',
             'visible' => FALSE,
           ),
+          'search_result' => NULL,
         ),
       ),
     ),

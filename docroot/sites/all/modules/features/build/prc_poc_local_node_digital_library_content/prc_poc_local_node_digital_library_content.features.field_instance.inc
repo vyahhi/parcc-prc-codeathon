@@ -33,6 +33,15 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'text_summary_or_trimmed',
         'weight' => 4,
       ),
+      'search_result' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 600,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 3,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -84,6 +93,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -128,6 +143,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 14,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -178,6 +199,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'hidden',
         'weight' => 17,
       ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -221,6 +248,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'hidden',
         'weight' => 15,
       ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -263,6 +296,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 12,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -331,6 +370,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'hidden',
         'weight' => 18,
       ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -374,6 +419,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'hidden',
         'weight' => 16,
       ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -416,6 +467,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 11,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -468,6 +525,16 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         ),
         'type' => 'image',
         'weight' => 3,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => 'content',
+          'image_style' => 'thumbnail',
+        ),
+        'type' => 'image',
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'hidden',

@@ -21,7 +21,7 @@ function prc_poc_local_node_digital_library_content_ds_custom_fields_info() {
   $ds_field->ui_limit = '';
   $ds_field->properties = array(
     'code' => array(
-      'value' => 'Created [node:created] by [node:field_author_name]',
+      'value' => 'Created [node:created] [node:by_author]',
       'format' => 'plain_text',
     ),
     'use_token' => 1,
