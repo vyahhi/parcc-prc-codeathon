@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * @file
+ * Token to include content author and byline
+ */
+
+/**
+ *  Implements hook_token_info().
+ */
+function prc_content_author_token_token_info() {
+  $types = array();
+  $tokens = array();
+
+  $tokens['node']['by-author'] = array(
+    'name' => t('By Author'),
+    'description' => t('Displays the by-line for the author provided in the field_author_name field.'),
+  );
+
+  return array(
+    'types' => $types,
+    'tokens' => $tokens,
+  );
+}
+
+/**
+ *  Implements hook_tokens().
+ */
+function prc_content_author_token_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  // URL tokens.
+  if ($type == 'node' && !empty($data['node'])) {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'by_author':
+          $node = $data['node'];
+          $w = entity_metadata_wrapper('node', $node);
+          $author = $w->field_author_name->value();
+          if ($author) {
+            $replacements[$original] = t('by') . ' ' . $author;
+          }
+          break;
+      }
+    }
+  }
+  return $replacements;
+}
