@@ -43,7 +43,7 @@ Feature: Create User Account Following an Invite (PRC-73)
     # E-mail is filled in from the invitation
     And I should not see the error message "E-mail field is required."
 
-  Scenario: AC4 - Validations: The following validations shall occur: Password must match Confirm Password field.
+   Scenario: AC4 - Validations: The following validations shall occur: Password must match Confirm Password field.
     Then I fill in "Password *" with "abc123"
     And I fill in "Confirm password *" with "123abc"
     Then I press the "Create new account" button

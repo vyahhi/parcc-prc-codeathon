@@ -4,16 +4,16 @@ Feature: Search Content - Quick Search (PRC-31)
   I want to search for content by entering a keyword,
   so that I can quickly find the content I'm looking for.
 
-  Background:
+  Scenario: AC1 - Content search
     Given I am logged in as a user with the "Educator" role
     And I am on "search"
-
-  Scenario: AC1 - Content search
     Then I should see the heading "Search" in the "content" region
     And I should see an "Enter your keywords" field
     And I should see an "edit-submit" button
 
   Scenario: AC1(ish) - Should not see Advanced search here
+    Given I am logged in as a user with the "Educator" role
+    And I am on "search"
     Then I should not see the text "Advanced search"
 
   @javascript
@@ -28,6 +28,7 @@ Feature: Search Content - Quick Search (PRC-31)
       | Austria       | Country   | 1      | 0       | 1   | und      | North        |
     And I run drush "search-index"
     # Cron redirects us. Navigate back. Also cron will pop errors into the log but it still runs and indexes.
+    And I am logged in as a user with the "Educator" role
     And I am on "search"
     When I fill in "Enter your keywords" with "Africa"
     And I press "edit-submit"
@@ -136,3 +137,11 @@ Feature: Search Content - Quick Search (PRC-31)
     Then I fill in "comis" for "Search" in the "header" region
     And I press "Search" in the "header" region
     Then the url should match "search/node/comis"
+
+  Scenario: PRC-283 Anonymous users can search
+    Given I am an anonymous user
+    And I am on the homepage
+    Then I fill in "comis" for "Search" in the "header" region
+    And I press "Search" in the "header" region
+    Then the url should match "search/node/comis"
+
