@@ -37,7 +37,6 @@ Feature: Search Content - Quick Search (PRC-31)
     But I should see the text "Africa"
     And I should see the text "Continent"
     And I should see the text "Created"
-    Then I break
     And I should see the text "by Ted"
     And I should see the text "South Africa"
     And I should see the text "Country"
@@ -124,27 +123,27 @@ Feature: Search Content - Quick Search (PRC-31)
     And I am on the homepage
     When I fill in "co" for "Search" in the "header" region
     And I press "Search" in the "header" region
-    Then the url should match "search/node/co"
+    Then the url should match "search/content/co"
     And I should see the error message containing "You must include at least one positive keyword with 3 characters or more."
     Then I fill in "comis" for "Search" in the "header" region
     And I press "Search" in the "header" region
-    Then the url should match "search/node/comis"
+    Then the url should match "search/content/comis"
 
   Scenario: PRC-284 Using header search block twice in a row should search twice in a row with valid terms both times
     Given I am logged in as a user with the "Educator" role
     And I am on the homepage
     When I fill in "seven" for "Search" in the "header" region
     And I press "Search" in the "header" region
-    Then the url should match "search/node/seven"
+    Then the url should match "search/content/seven"
     And I should not see the error message containing "You must include at least one positive keyword with 3 characters or more."
     Then I fill in "comis" for "Search" in the "header" region
     And I press "Search" in the "header" region
-    Then the url should match "search/node/comis"
+    Then the url should match "search/content/comis"
 
   Scenario: PRC-283 Anonymous users can search
     Given I am an anonymous user
     And I am on the homepage
     Then I fill in "comis" for "Search" in the "header" region
     And I press "Search" in the "header" region
-    Then the url should match "search/node/comis"
+    Then the url should match "search/content/comis"
 
