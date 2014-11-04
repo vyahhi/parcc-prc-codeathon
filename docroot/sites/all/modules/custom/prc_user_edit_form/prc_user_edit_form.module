@@ -17,6 +17,7 @@ function prc_user_edit_form_form_user_profile_form_alter(&$form, &$form_state) {
     $form['picture']['#access'] = FALSE;
     $form['account']['name']['#access'] = FALSE;
     $form['og_user_node']['#access'] = FALSE;
+    $form['field_member_state']['#access'] = FALSE;
   }
 
   _prc_user_edit_form_title($form);

@@ -43,7 +43,7 @@ Feature: Admin UI: Edit User (PRC-105)
   Scenario: AC5 - Only 1 role can be selected - radio button
     Then I select the radio button "Educator"
     Then I select the radio button "PRC Admin"
-    Then I select the radio button "Content Author"
+    Then I select the radio button "Content Contributor"
     Then I should not see the radio button "administrator"
 
   Scenario: AC6a - Validation - required fields

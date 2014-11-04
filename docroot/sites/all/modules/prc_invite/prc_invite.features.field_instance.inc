@@ -121,6 +121,37 @@ To become a member of [site:name], click the link below or paste it into the add
     ),
   );
 
+  // Exported field_instance: 'invite-invite_by_email-field_member_state'
+  $field_instances['invite-invite_by_email-field_member_state'] = array(
+    'bundle' => 'invite_by_email',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 32,
+      ),
+    ),
+    'entity_type' => 'invite',
+    'field_name' => 'field_member_state',
+    'label' => 'Member State',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'invite-invite_by_email-field_role_id'
   $field_instances['invite-invite_by_email-field_role_id'] = array(
     'bundle' => 'invite_by_email',
@@ -166,6 +197,7 @@ To become a member of [site:name], click the link below or paste it into the add
   t('E-mail');
   t('Enter e-mail body.');
   t('Enter e-mail subject.');
+  t('Member State');
   t('Role ID');
   t('Subject');
   t('Type e-mail address of person you wish invite.');

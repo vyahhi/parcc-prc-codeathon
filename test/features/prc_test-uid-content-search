@@ -1,6 +1,6 @@
 @api @d7
 Feature: Admin UI: Content Tab (PRC-169)
-  As a Content Author,
+  As a Content Contributor,
   I want to view the content posted to Digital Library,
   so that I can edit them later as needed.
 
@@ -13,7 +13,7 @@ Feature: Admin UI: Content Tab (PRC-169)
     And I fill in "Password" with "xyz123"
     And I press "Log in"
     And I am on the homepage
-    Then the user "betty@example.com" should have a role of "Content Author"
+    Then the user "betty@example.com" should have a role of "Content Contributor"
 
     When I follow "Content" in the "header" region
     Then I should see the heading "PRC Website Content" in the "content" region
@@ -122,7 +122,7 @@ Feature: Admin UI: Content Tab (PRC-169)
       |   	Betty User	|  	1	|  	Sagaciter Vel	|
       |   	Betty User	|  	1	|  	Autem	|
       |   	Betty User	|  	1	|  	Exputo Nutus	|
-    And I am logged in as a user with the "Content Author" role
+    And I am logged in as a user with the "Content Contributor" role
     And I am on "admin-content"
     And I break
     Then I should see "Premo Nutus"

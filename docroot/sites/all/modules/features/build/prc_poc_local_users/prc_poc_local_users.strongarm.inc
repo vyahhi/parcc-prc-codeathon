@@ -31,6 +31,9 @@ function prc_poc_local_users_strongarm() {
         'timezone' => array(
           'weight' => '6',
         ),
+        'picture' => array(
+          'weight' => '5',
+        ),
       ),
       'display' => array(),
     ),

@@ -11,6 +11,7 @@ dependencies[] = features
 dependencies[] = link
 dependencies[] = module_filter
 dependencies[] = node_edit_protection
+dependencies[] = prc_content_author_token
 dependencies[] = prc_invite_form
 dependencies[] = prc_login_form
 dependencies[] = prc_search

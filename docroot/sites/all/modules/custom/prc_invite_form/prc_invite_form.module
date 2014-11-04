@@ -54,6 +54,22 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
     $form['field_role_id']['#access'] = FALSE;
   }
 
+  // Change the text of the -- None -- option
+  $form['field_member_state'][LANGUAGE_NONE]['#options']['_none'] = t('Select a state');
+
+  // Now make the Member State dropdown dependent on the Role selected
+  $form['field_member_state']['#states'] = array(
+    'visible' => array(
+      ':input[name="invite_role"]' => array(
+        array('value' => '7'), // PARCC-Member Educator
+        array('value' => '6'), // Content Contributor
+      ),
+    ),
+  );
+
+  // Change the title of Member State to State
+  $form['field_member_state']['und']['#title'] = t('State');
+
   $form['#validate'][] = 'prc_invite_form_form_invite_form_validate';
 
   foreach ($form['#validate'] as $key => $og_user_node) {
@@ -159,6 +175,12 @@ function prc_invite_form_form_invite_form_submit(&$form, &$form_state)
   $form_state['values']['field_invitation_email_body'][LANGUAGE_NONE][0]['value'] = $new_body; // .= pre-concat operator not working
   $rid = $form_state['values']['invite_role'];
   $form_state['values']['field_role_id'][LANGUAGE_NONE][0]['value'] = $rid;
+
+  if ($rid != 6 && $rid != 7) {
+    // Force no state on any role except PARCC-Member Educator or Content Contributor
+    $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['value'] = NULL;
+  }
+
   foreach ($form_state['invitees'] as $key => $invitee) {
     // invite to group
     //$form_state['values']['field_invitation_email_address'] = $invitee;

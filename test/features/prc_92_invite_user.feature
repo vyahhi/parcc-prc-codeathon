@@ -39,7 +39,7 @@ Feature: Invite User (PRC-92)
     And I visit "invite/add/invite_by_email"
     Then I select the radio button "Educator"
     Then I select the radio button "PRC Admin"
-    Then I select the radio button "Content Author"
+    Then I select the radio button "Content Contributor"
     Then I should not see the radio button "administrator"
     Then I should not see the radio button "authenticated user"
 
@@ -84,13 +84,13 @@ Feature: Invite User (PRC-92)
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
     And the test email system is enabled
-    Then I select the radio button "Content Author"
+    Then I select the radio button "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com"
     And I press "Send Invitation"
     Then the email to "example@example.com" should contain "has sent you an invite!"
     And the email should contain "has invited you to join Partnership Resource Center at"
-    And the email should contain "Content Author"
+    And the email should contain "Content Contributor"
     And the email should contain "MESSAGE1234"
 
   Scenario: AC9 - Send invitations to multiple users
@@ -121,8 +121,8 @@ Feature: Invite User (PRC-92)
     Given I am an anonymous user
     Then I should get a "403" HTTP response at "invite/add/invite_by_email"
 
-  Scenario: AC10 - Only a PRC Admin can perform this task. - Content Author cannot
-    Given I am logged in as a user with the "Content Author" role
+  Scenario: AC10 - Only a PRC Admin can perform this task. - Content Contributor cannot
+    Given I am logged in as a user with the "Content Contributor" role
     Then I should get a "403" HTTP response at "invite/add/invite_by_email"
 
   Scenario: Default message text

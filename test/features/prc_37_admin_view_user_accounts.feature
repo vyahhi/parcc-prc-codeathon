@@ -93,7 +93,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
 
   Scenario: AC7 - Pagination - 100 per page
     # Our PRC Admin makes user 100
-    Given I have a total of 99 users with the "Educator" role
+    Given I have a total of 100 users with the "Educator" role
     And I am logged in as a user with the "PRC Admin" role
     And I visit "/admin-users"
     And I should see the link "next"
