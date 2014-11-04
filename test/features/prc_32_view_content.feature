@@ -44,6 +44,7 @@ Feature: View Content (PRC-32)
     #  AC4b. statement containing date and author (if available), such as: Created Feb 14, 2014 10:37 AM by Joe Admin
     #  AC4c. Summary
     #  AC4d. Thumbnail (when available)
-    #  AC5. A Sort dropdown menu allows the user to change the order. The only available option for now is: Date: most recent on the top
-    # And I should see "Sort by"
-    # And I should see "Date: most recent on the top"
+   Scenario: AC5. A Sort dropdown menu allows the user to change the order. The only available option for now is: Date: most recent on the top
+     And I should see "Sort by"
+     And I should see "Date" in the "#edit-sort-by" element
+     And I should see "DESC" in the "edit-sort-order" field

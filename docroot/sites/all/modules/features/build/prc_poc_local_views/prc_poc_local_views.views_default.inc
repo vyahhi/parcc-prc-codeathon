@@ -766,6 +766,9 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'most recent on top';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'oldest on top';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -880,6 +883,13 @@ function prc_poc_local_views_views_default_views() {
 
   /* Display: Digital Library Pane */
   $handler = $view->new_display('panel_pane', 'Digital Library Pane', 'panel_pane_1');
+  $handler->display->display_options['defaults']['use_ajax'] = FALSE;
+  $handler->display->display_options['use_ajax'] = TRUE;
+  $handler->display->display_options['defaults']['exposed_form'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'oldest on top';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'most recent on top';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -925,11 +935,13 @@ function prc_poc_local_views_views_default_views() {
     'image_link' => '',
   );
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Nid */
-  $handler->display->display_options['sorts']['nid']['id'] = 'nid';
-  $handler->display->display_options['sorts']['nid']['table'] = 'node';
-  $handler->display->display_options['sorts']['nid']['field'] = 'nid';
-  $handler->display->display_options['sorts']['nid']['expose']['label'] = 'Nid';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['created']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['created']['expose']['label'] = 'Date';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['allow']['use_pager'] = 0;
   $handler->display->display_options['allow']['items_per_page'] = 0;

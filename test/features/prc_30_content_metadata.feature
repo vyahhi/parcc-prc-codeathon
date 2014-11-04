@@ -49,6 +49,6 @@ Feature: Admin UI: Define Content Metadata (PRC-30)
     And I should see "Video"
 
   # AC6 Test grade level options
-    
+
     And I should see "Learning Fun"
     And I should see "Bonding Activities"
