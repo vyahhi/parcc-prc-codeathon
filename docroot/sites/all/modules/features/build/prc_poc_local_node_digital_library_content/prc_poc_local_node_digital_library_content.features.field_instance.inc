@@ -224,7 +224,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 10,
+      'weight' => 15,
     ),
   );
 
@@ -273,7 +273,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 12,
     ),
   );
 
@@ -395,7 +395,50 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 9,
+      'weight' => 14,
+    ),
+  );
+
+  // Exported field_instance: 'node-digital_library_content-field_permissions'
+  $field_instances['node-digital_library_content-field_permissions'] = array(
+    'bundle' => 'digital_library_content',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 10,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_permissions',
+    'label' => 'Permissions',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 8,
     ),
   );
 
@@ -444,7 +487,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 13,
     ),
   );
 
@@ -586,6 +629,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
   t('Grade Level');
   t('Link to URL');
   t('Media Type');
+  t('Permissions');
   t('Subject');
   t('Tags');
 
