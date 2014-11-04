@@ -120,9 +120,9 @@ A site administrator at [site:name] has created an account for you. You may now 
 
 This link can only be used once to log in and will lead you to a page where you can set your password.
 
-After setting your password, you will be able to log in at [site:login-url] in the future using:
+After setting your password, you will be able to log in at [site:url] in the future using:
 
-username: [user:name]
+username: [user:mail]
 password: Your password
 
 --  [site:name] team';
