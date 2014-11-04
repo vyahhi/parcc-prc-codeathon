@@ -1,7 +1,7 @@
 @api
 Feature: PRC-217  Invite User with Additional Role Selection
   As a PRC Admin,
-  I want to specify the user's state when I invite a state lead as Content Author role,
+  I want to specify the user's state when I invite a state lead as Content Contributor role,
   so that the system can offer additional functionality using this new attribute.
 
 #  Acceptance Criteria
@@ -9,9 +9,10 @@ Feature: PRC-217  Invite User with Additional Role Selection
 
   Scenario: PARCC-Member Educator exists
     Given I am logged in as a user with the "PARCC-Member Educator" role
-  
 
-#  The role Content Author shall be renamed to Content Contributor .
+  Scenario:  The role Content Author shall be renamed to Content Contributor.
+    Given I am logged in as a user with the "Content Contributor" role
+
 #  In the Invite User page, the Role options will display the new role (PARCC-Member Educator) and role name (Content Contributor instead of Content Author). The new list of Role options shall be:
 #  Educator
 #  PARCC-Member Educator

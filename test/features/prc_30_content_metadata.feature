@@ -1,12 +1,12 @@
 @api @d7
 Feature: Admin UI: Define Content Metadata (PRC-30)
-  As a Content Author,
+  As a Content Contributor,
   I want to define the metadata associated to a content I'm posting to PRC digital library,
   so that the educators can find the content they wish to view using the content metadata.
 
   @javascript
   Scenario: AC1 Test presence of metadata section with terms
-    Given I am logged in as a user with the "Content Author" role
+    Given I am logged in as a user with the "Content Contributor" role
     And I am on the homepage
     When I follow "Content"
     Then I click "Add content"

@@ -8,7 +8,7 @@ Feature: Create User Account Following an Invite (PRC-73)
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
     And the test email system is enabled
-    Then I select the radio button "Content Author"
+    Then I select the radio button "Content Contributor"
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"
     And I press "Send Invitation"
@@ -61,6 +61,6 @@ Feature: Create User Account Following an Invite (PRC-73)
     Then I should see the message containing "You have accepted the invitation from"
     And I should see the message containing "Registration successful. You are now logged in."
     #  Creates a new account with the pre-defined role
-    Then the user "example1@timestamp@example.com" should have a role of "Content Author"
+    Then the user "example1@timestamp@example.com" should have a role of "Content Contributor"
     And the user "example1@timestamp@example.com" should not have a role of "Educator"
     Then I delete the user with the email address "example1@timestamp@example.com"

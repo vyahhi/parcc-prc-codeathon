@@ -1,12 +1,12 @@
 @api @d7
 Feature: Add Content: Expandable/Collapsable Controls (PRC-157)
-  As a Content Author,
+  As a Content Contributor,
   I want to expand and collapse different attribute sections within the Add Content page,
   so that the most important attributes stand out at a glance.
 
   @javascript
   Scenario: AC1a  Attach a File -collapsed by default
-    Given I am logged in as a user with the "Content Author" role
+    Given I am logged in as a user with the "Content Contributor" role
     And I am on "node/add/digital-library-content"
     # AC1a Attach a File -collapsed by default
     And I should not see "Allowed file types: txt pdf doc docx xls xlsx."

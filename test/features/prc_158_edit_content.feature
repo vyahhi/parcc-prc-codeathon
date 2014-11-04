@@ -1,11 +1,11 @@
 @api @d7
 Feature: Edit Content (PRC-158)
-  As a Content Author,
+  As a Content Contributor,
   I want to view and modify existing content within the PRC Digital Library,
   so that the educators can access and view the latest and greatest version.
 
-  Scenario: AC1  Content Authors click on content tab and see content with edit button
-    Given I am logged in as a user with the "Content Author" role
+  Scenario: AC1  Content Contributors click on content tab and see content with edit button
+    Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
     And I follow "Content" in the "header" region
     Then I should see the link "edit" in the "content" region
@@ -42,7 +42,7 @@ Feature: Edit Content (PRC-158)
 
   @javascript
   Scenario: AC4  Attachment files are listed, along with a Remove link/button. At click, the file is removed after having the user to confirm removal
-    Given I am logged in as a user with the "Content Author" role
+    Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
     And I follow "Content" in the "header" region
     Then I should see the link "edit" in the "content" region
