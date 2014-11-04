@@ -588,7 +588,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['create digital_library_content content'] = array(
     'name' => 'create digital_library_content content',
     'roles' => array(
-      'Content Author' => 'Content Author',
+      'Content Contributor' => 'Content Contributor',
       'PRC Admin' => 'PRC Admin',
     ),
     'module' => 'node',
@@ -694,7 +694,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['delete own digital_library_content content'] = array(
     'name' => 'delete own digital_library_content content',
     'roles' => array(
-      'Content Author' => 'Content Author',
+      'Content Contributor' => 'Content Contributor',
       'PRC Admin' => 'PRC Admin',
     ),
     'module' => 'node',
@@ -1214,7 +1214,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit own digital_library_content content'] = array(
     'name' => 'edit own digital_library_content content',
     'roles' => array(
-      'Content Author' => 'Content Author',
+      'Content Contributor' => 'Content Contributor',
       'PRC Admin' => 'PRC Admin',
     ),
     'module' => 'node',

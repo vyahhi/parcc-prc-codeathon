@@ -54,6 +54,19 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
     $form['field_role_id']['#access'] = FALSE;
   }
 
+  // Change the text of the -- None -- option
+  $form['field_member_state'][LANGUAGE_NONE]['#options']['_none'] = t('Select a state');
+
+  // Now make the Member State dropdown dependent on the Role selected
+  $form['field_member_state']['#states'] = array(
+    'visible' => array(
+      ':input[name="invite_role"]' => array(
+        array('value' => '7'),
+        array('value' => '6'),
+      ),
+    ),
+  );
+
   $form['#validate'][] = 'prc_invite_form_form_invite_form_validate';
 
   foreach ($form['#validate'] as $key => $og_user_node) {

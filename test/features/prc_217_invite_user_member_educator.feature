@@ -13,28 +13,46 @@ Feature: PRC-217  Invite User with Additional Role Selection
   Scenario:  The role Content Author shall be renamed to Content Contributor.
     Given I am logged in as a user with the "Content Contributor" role
 
-#  In the Invite User page, the Role options will display the new role (PARCC-Member Educator) and role name (Content Contributor instead of Content Author). The new list of Role options shall be:
-#  Educator
-#  PARCC-Member Educator
-#  Content Contributor
-#  PRC Admin
-#  Role is a required field.
-#  Only one of the role radio buttons can be selected.
-#  When Content Contributor or PARCC-member Educator role is selected in the Invite User page, a new attribute State appears with a dropdown menu. The State field is invisible when PRC Admin or Educator role is selected.
-#  The State dropdown menu contains the following options (notice they're in alphabetical order):
-#  Select a state (default- keeps (or resets value to: NULL)
-#  Arkansas
-#  Colorado
-#  District of Columbia
-#  Illinois
-#  Louisiana
-#  Maryland
-#  Massachusetts
-#  Mississippi
-#  New Jersey
-#  New Mexico
-#  New York
-#  Ohio
-#  Rhode Island
+  Scenario: In the Invite User page, the Role options will display the new role (PARCC-Member Educator) and role name (Content Contributor instead of Content Author). The new list of Role options shall be:
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    Then I select the radio button "PARCC-Member Educator"
+    Then I select the radio button "Content Contributor"
+    Then I should not see the radio button "Content Author"
+
+  @javascript
+  Scenario: When Content Contributor or PARCC-member Educator role is selected in the Invite User page, a new attribute State appears with a dropdown menu. The State field is invisible when PRC Admin or Educator role is selected.
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    Then I should not see the text "State"
+    But I select the radio button "PARCC-Member Educator"
+    And I should see the text "State"
+    Then I select the radio button "Educator"
+    And I should not see the text "State"
+    But I select the radio button "Content Contributor"
+    And I should see the text "State"
+    But I select the radio button "PRC Admin"
+    And I should not see the text "State"
+
+  Scenario:  The State dropdown menu contains the following options (notice they're in alphabetical order):
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    And I should see the text "Select a state"
+    And I should see the text "Arkansas"
+    And I should see the text "Colorado"
+    And I should see the text "District of Columbia"
+    And I should see the text "Illinois"
+    And I should see the text "Louisiana"
+    And I should see the text "Maryland"
+    And I should see the text "Massachusetts"
+    And I should see the text "Mississippi"
+    And I should see the text "New Jersey"
+    And I should see the text "New Mexico"
+    And I should see the text "New York"
+    And I should see the text "Ohio"
+    And I should see the text "Rhode Island"
+
+
+
 #  The State field is optional. One or no option can be selected.
 #  The email sending shall be the same as implemented currently
