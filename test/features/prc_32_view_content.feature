@@ -47,4 +47,4 @@ Feature: View Content (PRC-32)
    Scenario: AC5. A Sort dropdown menu allows the user to change the order. The only available option for now is: Date: most recent on the top
      And I should see "Sort by"
      And I should see "Date" in the "#edit-sort-by" element
-     And I should see "most recent on top" in the "#edit-sort-order" element
+     And I should see "DESC" in the "edit-sort-order" field
