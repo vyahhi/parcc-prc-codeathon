@@ -37,18 +37,56 @@ Feature: Content Permissions
 
   Scenario: Saving content as Public; accessible to anonymous
     Given "Digital Library Content" nodes:
-      | title      | body           | field_permissions |
-      | Public     | This is public | public            |
+      | title      | body           | field_permissions | uid |
+      | Public     | This is public | public            | 1   |
     And I am an anonymous user
     And I visit the last node created
     Then I should see the text "This is public"
 
   Scenario: Saving content as Members Only; hidden from anonymous
     Given "Digital Library Content" nodes:
-      | title      | body           | field_permissions |
-      | Public     | This is public | members            |
+      | title        | body            | field_permissions  | uid |
+      | Members Only | This is private | members            | 1   |
     And I am an anonymous user
     And I cannot visit the last node created
+
+  Scenario Outline: Saving content as Public; accessible to roles
+    Given "Digital Library Content" nodes:
+      | title      | body           | field_permissions | uid |
+      | Public     | This is public | public            | 1   |
+    And I am logged in as a user with the "<role>" role
+    And I visit the last node created
+    Then I should see the text "This is public"
+    Examples:
+    | role                |
+    | Educator            |
+    | Content Contributor |
+    | PRC Admin           |
+    | administrator       |
+    | authenticated user  |
+
+  Scenario Outline: Saving content as Members Only; hidden from role
+    Given "Digital Library Content" nodes:
+      | title        | body            | field_permissions  | uid |
+      | Members Only | This is private | members            | 1   |
+    And I am logged in as a user with the "<role>" role
+    And I cannot visit the last node created
+  Examples:
+    | role                |
+    | Educator            |
+    | authenticated user  |
+
+  Scenario Outline: Saving content as Members Only; hidden from role
+    Given "Digital Library Content" nodes:
+      | title        | body            | field_permissions  | uid |
+      | Members Only | This is private | members            | 1   |
+    And I am logged in as a user with the "<role>" role
+    And I visit the last node created
+  Examples:
+    | role                |
+    | Content Contributor |
+    | PRC Admin           |
+    | administrator       |
 
 #  Public: No restrictions; any anonymous user or logged in user with any role, including Educator role shall see the content
 #  PARCC members ONLY: PRC Admin, Content Contributor, PARCC-Member Educators shall see the content (not accessible to anonymous users or logged in users with Educator role).

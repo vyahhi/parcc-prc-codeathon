@@ -122,6 +122,18 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'environment_indicator',
   );
 
+  // Exported permission: 'access members-only content'.
+  $permissions['access members-only content'] = array(
+    'name' => 'access members-only content',
+    'roles' => array(
+      'Content Contributor' => 'Content Contributor',
+      'PARCC-Member Educator' => 'PARCC-Member Educator',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'prc_digital_library_permissions',
+  );
+
   // Exported permission: 'access site in maintenance mode'.
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',

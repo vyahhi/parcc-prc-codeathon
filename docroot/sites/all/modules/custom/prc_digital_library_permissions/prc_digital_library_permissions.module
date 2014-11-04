@@ -5,3 +5,69 @@
  * Public/members-only permission settings for Digital Library Content
  */
 
+/**
+ *  Implements hook_permission().
+ */
+function prc_digital_library_permissions_permission() {
+  $perms = array(
+    'access members-only content' => array(
+      'title' => t('Access Members-only Content'),
+      'description' => t('View content marked as PARCC members ONLY'),
+    ),
+  );
+  return $perms;
+}
+
+/**
+ *  Implements hook_node_grants().
+ */
+function prc_digital_library_permissions_node_grants($account, $op) {
+  if (user_access('access members-only content', $account)) {
+    $grants['prc_digital_library_permissions'] = array(1);
+  }
+  $grants['prc_digital_library_permissions_author'] = array($account->uid);
+  return $grants;
+
+}
+
+/**
+ *  Implements hook_node_access_records().
+ */
+function prc_digital_library_permissions_node_access_records($node) {
+  // We only care about the node if it has been marked private. If not, it is
+  // treated just like any other node and we completely ignore it.
+  if ($node->type == 'digital_library_content') {
+    $w = entity_metadata_wrapper('node', $node);
+    $is_members_only = $w->field_permissions->value() == 'members';
+
+    if ($is_members_only) {
+      $grants = array();
+      // Only published nodes should be viewable to all users. If we allow access
+      // blindly here, then all users could view an unpublished node.
+      if ($node->status) {
+        $grants[] = array(
+          'realm' => 'prc_digital_library_permissions',
+          'gid' => 1,
+          'grant_view' => 1,
+          'grant_update' => 0,
+          'grant_delete' => 0,
+          'priority' => 0,
+        );
+      }
+      // For the example_author array, the GID is equivalent to a UID, which
+      // means there are many groups of just 1 user.
+      // Note that an author can always view his or her nodes, even if they
+      // have status unpublished.
+      $grants[] = array(
+        'realm' => 'prc_digital_library_permissions_author',
+        'gid' => $node->uid,
+        'grant_view' => 1,
+        'grant_update' => 1,
+        'grant_delete' => 1,
+        'priority' => 0,
+      );
+
+      return $grants;
+    }
+  }
+}
