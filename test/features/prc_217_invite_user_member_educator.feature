@@ -52,7 +52,36 @@ Feature: PRC-217  Invite User with Additional Role Selection
     And I should see the text "Ohio"
     And I should see the text "Rhode Island"
 
+  Scenario: Selecting a state saves the state to the invite
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    Then I select the radio button "Content Contributor"
+    And I fill in "Message" with "MESSAGE1234"
+    And I fill in "E-mail" with "example@example.com"
+    And I select "Illinois" from "Member State"
+    And I press "Send Invitation"
+    Then I should see the text "Illinois"
 
+  Scenario: The State field is optional. One or no option can be selected.
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    Then I select the radio button "Content Contributor"
+    And I fill in "Message" with "MESSAGE1234"
+    And I fill in "E-mail" with "example@example.com"
+    And I select "Select a state" from "Member State"
+    And I press "Send Invitation"
+    Then I should not see the text "Member State"
 
-#  The State field is optional. One or no option can be selected.
+  Scenario: Fill in State field and then change roles
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    Then I select the radio button "Content Contributor"
+    And I fill in "Message" with "MESSAGE1234"
+    And I fill in "E-mail" with "example@example.com"
+    And I select "Ohio" from "Member State"
+    Then I select the radio button "Educator"
+    And I press "Send Invitation"
+    Then I should not see the text "Member State"
+    And I should not see the text "Ohio"
+
 #  The email sending shall be the same as implemented currently
