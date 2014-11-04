@@ -203,6 +203,11 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   public function createUsers(\Behat\Gherkin\Node\TableNode $usersTable) {
     foreach ($usersTable->getHash() as $userHash) {
 
+      // Fix each field value
+      foreach($userHash as $field => $value) {
+        $userHash[$field] = $this->fixStepArgument($value);
+      }
+
       // If we have roles convert it to array.
       if (isset($userHash['roles'])) {
         $userHash['roles'] = explode(',', $userHash['roles']);
@@ -238,6 +243,33 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       $w->save();
 
       $this->users[$user->name] = $user;
+
+
+//      // If the user doesn't already have the role, add the role to that user.
+//      $key = array_search($role_name, $user->roles);
+//      if ($key == FALSE) {
+//        // Get the rid from the roles table.
+//        $roles = user_roles(TRUE);
+//        $rid = array_search($role_name, $roles);
+//        if ($rid != FALSE) {
+//          $new_role[$rid] = $role_name;
+//          $all_roles = $user->roles + $new_role; // Add new role to existing roles.
+//          user_save($user, array('roles' => $all_roles));
+//        }
+//      }
+
+
+    }
+  }
+
+  public function assertNumElements($num, $element) {
+    $element = $this->fixStepArgument($element);
+    if (substr($element, 0, 2) == '//') {
+      // This is xpath
+      $this->assertSession()->elementsCount('xpath', $element, intval($num));
+    } else {
+      // This is CSS
+      parent::assertNumElements($num, $element);
     }
   }
 
