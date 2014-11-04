@@ -67,6 +67,9 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
     ),
   );
 
+  // Change the title of Member State to State
+  $form['field_member_state']['und']['#title'] = t('State');
+
   $form['#validate'][] = 'prc_invite_form_form_invite_form_validate';
 
   foreach ($form['#validate'] as $key => $og_user_node) {

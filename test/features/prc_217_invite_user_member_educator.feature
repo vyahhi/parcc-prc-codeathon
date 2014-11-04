@@ -58,7 +58,7 @@ Feature: PRC-217  Invite User with Additional Role Selection
     Then I select the radio button "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com"
-    And I select "Illinois" from "Member State"
+    And I select "Illinois" from "State"
     And I press "Send Invitation"
     Then I should see the text "Illinois"
 
@@ -68,7 +68,7 @@ Feature: PRC-217  Invite User with Additional Role Selection
     Then I select the radio button "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com"
-    And I select "Select a state" from "Member State"
+    And I select "Select a state" from "State"
     And I press "Send Invitation"
     Then I should not see the text "Member State"
 
@@ -78,7 +78,7 @@ Feature: PRC-217  Invite User with Additional Role Selection
     Then I select the radio button "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com"
-    And I select "Ohio" from "Member State"
+    And I select "Ohio" from "State"
     Then I select the radio button "Educator"
     And I press "Send Invitation"
     Then I should not see the text "Member State"
