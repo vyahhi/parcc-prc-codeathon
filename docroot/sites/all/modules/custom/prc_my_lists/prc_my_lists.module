@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Allows users to add content to favorites lists
+ */
+
+/**
+ *  Implements hook_node_view().
+ */
+function prc_my_lists_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'digital_library_content') {
+    // This goes to l(), which escapes !username in both title and attributes.
+    $links['prc_digital_library_add_to_favorites'] = array(
+      'title' => t('Add to Favorites'),
+      'href' => "#",
+      'attributes' => array('title' => t('Add to Favorites')),
+    );
+    $node->content['links']['prc_digital_library_content'] = array(
+      '#theme' => 'links__node__favorites',
+      '#links' => $links,
+      '#attributes' => array('class' => array('links', 'inline')),
+    );
+  }
+}

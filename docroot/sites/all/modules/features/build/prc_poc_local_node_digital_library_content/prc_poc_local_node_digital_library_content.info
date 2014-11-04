@@ -33,6 +33,7 @@ features[field_instance][] = node-digital_library_content-field_genre
 features[field_instance][] = node-digital_library_content-field_grade_level
 features[field_instance][] = node-digital_library_content-field_link_to_a_url
 features[field_instance][] = node-digital_library_content-field_media_type
+features[field_instance][] = node-digital_library_content-field_permissions
 features[field_instance][] = node-digital_library_content-field_subject
 features[field_instance][] = node-digital_library_content-field_tags
 features[field_instance][] = node-digital_library_content-field_thumbnail
