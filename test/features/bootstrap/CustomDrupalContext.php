@@ -153,6 +153,41 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * Navigates to the View page for the last node in $this->nodes
+   * @Then /^I visit the last node created$/
+   */
+  public function iVisitTheLastNodeCreated() {
+    if (!is_array($this->nodes) || count($this->nodes) == 0) {
+      throw new Exception('No nodes have been created by this context');
+    }
+    $last_index = count($this->nodes) - 1;
+    $last_node = $this->nodes[$last_index];
+    $nid = $last_node->nid;
+
+    return new Given("I am on \"node/$nid\"");
+  }
+
+  /**
+   * Asserts a 403 for the View page for the last node in $this->nodes
+   * @Then /^I cannot visit the last node created$/
+   */
+  public function iCannotVisitTheLastNodeCreated() {
+    if (!is_array($this->nodes) || count($this->nodes) == 0) {
+      throw new Exception('No nodes have been created by this context');
+    }
+    $last_index = count($this->nodes) - 1;
+    $last_node = $this->nodes[$last_index];
+    $nid = $last_node->nid;
+
+    // Set internal browser on the node edit page.
+    $this->getSession()->visit($this->locatePath('node/' . $nid));
+
+    // Test status.
+    return new Then("I should get a \"403\" HTTP response");
+  }
+
+
+  /**
    * Asserts that a given user has the specified role.
    *
    * @Then /^the user "([^"]*)" should have a role of "([^"]*)"$/

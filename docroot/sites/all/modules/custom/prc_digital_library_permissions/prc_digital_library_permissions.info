@@ -1,0 +1,4 @@
+name = PRC Digital Library Permissions
+description = Public/members-only permission settings for Digital Library Content
+package = PRC
+core = 7.x
