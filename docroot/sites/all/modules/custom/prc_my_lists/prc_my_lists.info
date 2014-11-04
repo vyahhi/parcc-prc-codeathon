@@ -1,0 +1,4 @@
+name = PRC My Lists handlers
+description = Allows users to add content to favorites lists
+package = PRC
+core = 7.x
