@@ -24,6 +24,11 @@ Feature: PRC-53 New Custom List Creation (End user)
 #  To create a new custom list, a Create New link is available in the menu.
 #  Once the Create New link is selected, an overlay opens with the following components:
 #  Title: Add to My Lists
+  Scenario: Add new list form
+    Given I am logged in as a user with the "Educator" role
+    And I am on "favorites-list/nojs/create-list"
+    Then I should see the link "Cancel"
+    And I should see a "Create" button
 #  Custom List Name textbox with the following label:
 #  Please enter a new list name:
 #  A Create button
