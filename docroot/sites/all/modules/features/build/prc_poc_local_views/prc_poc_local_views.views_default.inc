@@ -141,7 +141,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['field_author_name']['id'] = 'field_author_name';
   $handler->display->display_options['fields']['field_author_name']['table'] = 'field_data_field_author_name';
   $handler->display->display_options['fields']['field_author_name']['field'] = 'field_author_name';
-  /* Field: Content: Document */
+  /* Field: Content: Attach a File */
   $handler->display->display_options['fields']['field_document']['id'] = 'field_document';
   $handler->display->display_options['fields']['field_document']['table'] = 'field_data_field_document';
   $handler->display->display_options['fields']['field_document']['field'] = 'field_document';
@@ -256,13 +256,11 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  $handler->display->display_options['sorts']['created']['expose']['label'] = 'Post date';
-  $handler->display->display_options['sorts']['created']['granularity'] = 'minute';
+  /* Sort criterion: Content: Nid */
+  $handler->display->display_options['sorts']['nid']['id'] = 'nid';
+  $handler->display->display_options['sorts']['nid']['table'] = 'node';
+  $handler->display->display_options['sorts']['nid']['field'] = 'nid';
+  $handler->display->display_options['sorts']['nid']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Author uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
@@ -846,7 +844,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['field_author_name']['id'] = 'field_author_name';
   $handler->display->display_options['fields']['field_author_name']['table'] = 'field_data_field_author_name';
   $handler->display->display_options['fields']['field_author_name']['field'] = 'field_author_name';
-  /* Field: Content: Document */
+  /* Field: Content: Attach a File */
   $handler->display->display_options['fields']['field_document']['id'] = 'field_document';
   $handler->display->display_options['fields']['field_document']['table'] = 'field_data_field_document';
   $handler->display->display_options['fields']['field_document']['field'] = 'field_document';
