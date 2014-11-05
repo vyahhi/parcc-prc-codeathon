@@ -41,7 +41,7 @@ Feature: Edit Content (PRC-158)
     And I should see the text "Genre"
 
   @javascript
-  Scenario: AC4  Attachment files are listed, along with a Remove link/button. At click, the file is removed after having the user to confirm removal
+  Scenario: AC4 Attachment files are listed, along with a Remove link/button. At click, the file is removed after having the user to confirm removal
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
     And I follow "Content" in the "header" region
@@ -50,6 +50,7 @@ Feature: Edit Content (PRC-158)
     Then I should see the heading "Edit Digital Library Content Test-o-rama" in the "content" region
     # AC5  A user may add more files; a Browse button along with an Upload button are provided to allow the user to select the file.
     Then I attach the file "testfiles/lovelythumbnail.png" to "edit-field-thumbnail-und-0-upload"
+    And I select the radio button "Public"
     # AC8  A Save button allows the user to save the entries for the updated content to be posted.
     And I press "Save"
     # AC9  Once Saved, the system shall provide confirmation that the content has been successfully modified.
