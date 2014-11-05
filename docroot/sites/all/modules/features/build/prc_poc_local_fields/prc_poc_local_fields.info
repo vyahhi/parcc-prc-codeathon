@@ -1,6 +1,7 @@
 name = prc-poc.local Fields
 core = 7.x
 package = Configuration
+dependencies[] = entityreference
 dependencies[] = features
 dependencies[] = file
 dependencies[] = fivestar
@@ -16,6 +17,7 @@ features[field_base][] = body
 features[field_base][] = comment_body
 features[field_base][] = field_author_name
 features[field_base][] = field_document
+features[field_base][] = field_favorite_content
 features[field_base][] = field_first_name
 features[field_base][] = field_genre
 features[field_base][] = field_grade_level
