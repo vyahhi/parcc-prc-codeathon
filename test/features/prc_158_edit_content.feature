@@ -41,7 +41,7 @@ Feature: Edit Content (PRC-158)
     And I should see the text "Genre"
 
   @javascript
-  Scenario: AC4  Attachment files are listed, along with a Remove link/button. At click, the file is removed after having the user to confirm removal
+  Scenario: AC4 Attachment files are listed, along with a Remove link/button. At click, the file is removed after having the user to confirm removal
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
     And I follow "Content" in the "header" region
