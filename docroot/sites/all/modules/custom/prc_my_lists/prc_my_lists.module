@@ -38,10 +38,10 @@ function prc_my_lists_menu() {
   // Display a node add form in ctools modal.
   $items = array();
   $items['favorites-list/%ctools_js/add-to-list'] = array(
-    'title' => 'My Lists',
+    'title' => 'Add to My Lists',
     'title callback' => 'check_plain',
     'page callback' => 'modal_add_to_list',
-    'page arguments' => array('favorites_list', 2),
+    'page arguments' => array(2, 1),
     'access callback' => 'node_access',
     'access arguments' => array('create', 'favorites_list'),
     'description' => 'My Lists',
@@ -49,10 +49,10 @@ function prc_my_lists_menu() {
     'type' => MENU_CALLBACK,
   );
   $items['favorites-list/%ctools_js/create-list'] = array(
-    'title' => 'My Lists',
+    'title' => 'Add to My Lists',
     'title callback' => 'check_plain',
     'page callback' => 'modal_add_a_list',
-    'page arguments' => array('favorites_list', 2),
+    'page arguments' => array(2, 1),
     'access callback' => 'node_access',
     'access arguments' => array('create', 'favorites_list'),
     'description' => 'My Lists',

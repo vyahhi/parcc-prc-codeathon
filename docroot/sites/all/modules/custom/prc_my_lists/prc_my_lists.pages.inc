@@ -15,6 +15,20 @@
  */
 function modal_add_to_list($type, $js = NULL) {
   // Fall back if $js is not set.
+  $title = t('Add to My Lists');
+
+  if (!$js) {
+    $form_state = array(
+      'title' => $title,
+      'build_info' => array(
+        'args' => array(),
+      ),
+    );
+    return drupal_build_form('prc_my_lists_view_lists_form', $form_state);
+  }
+
+
+  // Fall back if $js is not set.
   if (!$js) {
     return node_add($type);
   }
@@ -22,27 +36,15 @@ function modal_add_to_list($type, $js = NULL) {
   ctools_include('modal');
   ctools_include('ajax');
 
-  global $user;
-
-  $types = node_type_get_types();
-  $node = (object) array(
-    'uid' => $user->uid,
-    'name' => (isset($user->name) ? $user->name : ''),
-    'type' => $type,
-    'language' => LANGUAGE_NONE,
-  );
-  $title = t('Create @name', array('@name' => $types[$type]->name));
-
   $form_state = array(
     'title' => $title,
     'ajax' => TRUE,
     'build_info' => array(
-      'args' => array($node),
+      'args' => array(),
     ),
   );
 
   ctools_form_include_file($form_state, drupal_get_path('module', 'node') . '/node.pages.inc');
-//  $output = ctools_modal_form_wrapper($type . '_node_form', $form_state);
   $output = ctools_modal_form_wrapper('prc_my_lists_view_lists_form', $form_state);
 
   if (!empty($form_state['executed'])) {
@@ -64,7 +66,7 @@ function modal_add_to_list($type, $js = NULL) {
  */
 function modal_add_a_list($type, $js = NULL) {
   // Fall back if $js is not set.
-  $title = t('Create @name', array('@name' => $types[$type]->name));
+  $title = t('Add to My Lists');
 
   if (!$js) {
     $form_state = array(
@@ -100,9 +102,15 @@ function modal_add_a_list($type, $js = NULL) {
 
 function prc_my_lists_view_lists_form($form, &$form_state) {
   $href = 'favorites-list/nojs/create-list';
-
+  $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
+  if ($ajax) {
+    ctools_include('modal');
+    $markup = ctools_modal_text_button('Create new', $href, 'Create new favorites list');
+  } else {
+    $markup = l(t('Create new'), $href);
+  }
   $form['create_new_list'] = array(
-    '#markup' => ctools_modal_text_button('Create new', $href, 'Create new favorites list'),
+    '#markup' => $markup,
   );
 
   return $form;
@@ -120,8 +128,16 @@ function prc_my_lists_create_list_form($form, &$form_state) {
   );
 
   $cancel_href = 'favorites-list/nojs/add-to-list';
+  $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
+  if ($ajax) {
+    ctools_include('modal');
+    $markup = ctools_modal_text_button('Cancel', $cancel_href, 'Cancel');
+  } else {
+    $markup = l(t('Cancel'), $cancel_href);
+  }
+
   $form['cancel'] = array(
-    '#markup' => ctools_modal_text_button('Cancel', $cancel_href, 'Cancel'),
+    '#markup' => $markup,
   );
 
   $form['#submit'] = array(

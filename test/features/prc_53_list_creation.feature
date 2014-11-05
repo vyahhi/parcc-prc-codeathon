@@ -20,8 +20,14 @@ Feature: PRC-53 New Custom List Creation (End user)
       | PRC Admin             |
       | administrator         |
 
-#  Once the Add to My Lists link is selected, the educator can add a new custom list and associate selected content to the new list.
-#  To create a new custom list, a Create New link is available in the menu.
+  Scenario: To create a new custom list, a Create New link is available in the menu.
+    Given I am logged in as a user with the "Educator" role
+    And I am on "favorites-list/nojs/add-to-list"
+    Then I should see the link "Create new"
+    And I should see the text "Add to My Lists"
+    When I click "Create new"
+    Then the url should match "favorites-list/nojs/create-list"
+
 #  Once the Create New link is selected, an overlay opens with the following components:
 #  Title: Add to My Lists
   Scenario: Add new list form
@@ -29,9 +35,17 @@ Feature: PRC-53 New Custom List Creation (End user)
     And I am on "favorites-list/nojs/create-list"
     Then I should see the link "Cancel"
     And I should see a "Create" button
-#  Custom List Name textbox with the following label:
-#  Please enter a new list name:
-#  A Create button
-#  A Cancel button
-#  When Create button is clicked, the system will add the new list into the existing custom listing in Alphabetical order.
-#  When the Cancel button is selected, the overlay closes without the items added to the list.
+    And I should see a "Please enter a new list name" field
+    And I should see the text "Add to My Lists"
+    When I click "Cancel"
+    Then the url should match "favorites-list/nojs/add-to-list"
+
+  Scenario: When Create button is clicked, the system will add the new list into the existing custom listing in Alphabetical order.
+    Given I am logged in as a user with the "Educator" role
+    And I am on "favorites-list/nojs/create-list"
+    Then I fill in "Please enter a new list name" with "Created by Behat"
+    And I press "Create"
+    Then I should see the message containing "Created new"
+    Then I should see the message containing "Created by Behat"
+    Then I should see the message containing "list"
+
