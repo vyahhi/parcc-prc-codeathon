@@ -8,6 +8,7 @@ dependencies[] = field_group
 dependencies[] = file
 dependencies[] = image
 dependencies[] = link
+dependencies[] = list
 dependencies[] = options
 dependencies[] = prc_poc_local_fields
 dependencies[] = strongarm

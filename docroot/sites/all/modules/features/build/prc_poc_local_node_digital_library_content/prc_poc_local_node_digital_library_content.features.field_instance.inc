@@ -436,7 +436,9 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'label_help_description' => 'This content shall be available to:',
+      ),
       'type' => 'options_buttons',
       'weight' => 8,
     ),

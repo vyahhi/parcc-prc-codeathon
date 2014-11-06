@@ -5,7 +5,6 @@
  * Alters to login forms.
  */
 
-
 /**
  * Implements hook_form_FORM_ID_alter
  *

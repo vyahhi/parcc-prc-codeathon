@@ -8,6 +8,7 @@ dependencies[] = ctools
 dependencies[] = ds_search
 dependencies[] = environment_indicator
 dependencies[] = features
+dependencies[] = label_help
 dependencies[] = link
 dependencies[] = module_filter
 dependencies[] = node_edit_protection
