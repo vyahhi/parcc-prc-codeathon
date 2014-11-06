@@ -9,6 +9,8 @@ Feature: Content Permissions
     Given I am logged in as a user with the "Content Contributor" role
     And I am on "node/add/digital-library-content"
     Then I should see the text "Permissions *"
+    # PRC-345 "This content shall be available to:" AC2 missing
+    And I should see the text "This content shall be available to:"
     And I should see a "Public" field
     And I should see a "PARCC members ONLY" field
 

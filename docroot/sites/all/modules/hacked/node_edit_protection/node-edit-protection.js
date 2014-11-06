@@ -10,6 +10,9 @@
         $(this).blur(function() {
           edit = true;
         });
+        $(this).focus(function() {
+          edit = true;
+        });
       });
 
       // Let all form submit buttons through

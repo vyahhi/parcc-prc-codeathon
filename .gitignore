@@ -65,6 +65,6 @@ test/failures
 
 # Tests #
 #########
-tests/behat.yml
-tests/composer.lock
-tests/vendor
+test/behat.yml
+test/composer.lock
+test/vendor
