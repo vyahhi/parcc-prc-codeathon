@@ -32,6 +32,11 @@ function prc_poc_local_node_digital_library_content_ds_field_settings_info() {
         'class' => '',
       ),
     ),
+    'links' => array(
+      'weight' => '4',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
   );
   $export['node|digital_library_content|search_result'] = $ds_fieldsetting;
 
@@ -56,6 +61,11 @@ function prc_poc_local_node_digital_library_content_ds_field_settings_info() {
         'wrapper' => 'h2',
         'class' => '',
       ),
+    ),
+    'links' => array(
+      'weight' => '4',
+      'label' => 'hidden',
+      'format' => 'default',
     ),
   );
   $export['node|digital_library_content|teaser'] = $ds_fieldsetting;
@@ -115,12 +125,16 @@ function prc_poc_local_node_digital_library_content_ds_layout_settings_info() {
       'right' => array(
         3 => 'body',
       ),
+      'footer' => array(
+        4 => 'links',
+      ),
     ),
     'fields' => array(
       'title' => 'header',
       'submitted_by_author_name' => 'header',
       'field_thumbnail' => 'left',
       'body' => 'right',
+      'links' => 'footer',
     ),
     'classes' => array(),
     'wrappers' => array(
@@ -157,7 +171,8 @@ function prc_poc_local_node_digital_library_content_ds_layout_settings_info() {
         3 => 'body',
       ),
       'footer' => array(
-        4 => 'sharethis',
+        4 => 'links',
+        5 => 'sharethis',
       ),
     ),
     'fields' => array(
@@ -165,6 +180,7 @@ function prc_poc_local_node_digital_library_content_ds_layout_settings_info() {
       'submitted_by_author_name' => 'header',
       'field_thumbnail' => 'left',
       'body' => 'right',
+      'links' => 'footer',
       'sharethis' => 'footer',
     ),
     'classes' => array(),

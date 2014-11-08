@@ -106,7 +106,8 @@ function prc_my_lists_view_lists_form($form, &$form_state) {
   if ($ajax) {
     ctools_include('modal');
     $markup = ctools_modal_text_button('Create new', $href, 'Create new favorites list');
-  } else {
+  }
+  else {
     $markup = l(t('Create new'), $href);
   }
   $form['create_new_list'] = array(
@@ -132,7 +133,8 @@ function prc_my_lists_create_list_form($form, &$form_state) {
   if ($ajax) {
     ctools_include('modal');
     $markup = ctools_modal_text_button('Cancel', $cancel_href, 'Cancel');
-  } else {
+  }
+  else {
     $markup = l(t('Cancel'), $cancel_href);
   }
 
@@ -148,8 +150,6 @@ function prc_my_lists_create_list_form($form, &$form_state) {
 }
 
 function prc_my_lists_create_list_form_submit(&$form, &$form_state) {
-  // Go back to the add to list page
-  $next_href = 'favorites-list/nojs/add-to-list';
 
   if (is_array($form_state) && array_key_exists('values', $form_state) && array_key_exists('list_name', $form_state['values'])) {
     $list_name = $form_state['values']['list_name'];
@@ -170,5 +170,16 @@ function prc_my_lists_create_list_form_submit(&$form, &$form_state) {
       drupal_set_message("Created new \"$list_name\" list.\n");
     }
   }
+
+  $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
+  if ($ajax) {
+    // We're already AJAX here so we know we can just put this in.
+    // Letting it do its thing with nojs doesn't work for the submit redirect.
+    $next_href = 'favorites-list/ajax/add-to-list';
+  }
+  else {
+    $next_href = 'favorites-list/nojs/add-to-list';
+  }
+  // Go back to the add to list page
   drupal_goto($next_href);
 }
