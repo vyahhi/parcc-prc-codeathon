@@ -125,9 +125,16 @@ function prc_my_lists_view_lists_form($form, &$form_state) {
     '#type' => 'select',
     '#title' => t('List'),
     '#options' => $list_titles,
-//    '#default_value' => $category['selected'],
-    '#description' => t('Set this to <em>Yes</em> if you would like this category to be selected by default.'),
+    '#theme_options' => array(
+      'description at top' => t('Select the list you would like to use to categorize this content.'),
+    ),
   );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Add to List'),
+  );
+
 
   return $form;
 }

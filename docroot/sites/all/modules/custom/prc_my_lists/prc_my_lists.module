@@ -6,6 +6,13 @@
  */
 
 /**
+ *  Implements hook_form_alter().
+ */
+function prc_my_lists_form_alter(&$form, &$form_state, $form_id) {
+  $x = 'x';
+}
+
+/**
  *  Implements hook_node_view().
  */
 function prc_my_lists_node_view($node, $view_mode, $langcode) {
