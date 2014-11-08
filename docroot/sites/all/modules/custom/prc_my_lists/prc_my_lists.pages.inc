@@ -114,7 +114,45 @@ function prc_my_lists_view_lists_form($form, &$form_state) {
     '#markup' => $markup,
   );
 
+  $lists = _prc_my_lists_current_user_lists();
+
+  $list_titles = array();
+  foreach ($lists as $key => $list) {
+    $list_titles[$key] = $list->title;
+  }
+
+  $form['select_list'] = array(
+    '#type' => 'select',
+    '#title' => t('List'),
+    '#options' => $list_titles,
+//    '#default_value' => $category['selected'],
+    '#description' => t('Set this to <em>Yes</em> if you would like this category to be selected by default.'),
+  );
+
   return $form;
+}
+
+function _prc_my_lists_current_user_lists() {
+  global $user;
+  $uid = $user->uid;
+
+  $query = new EntityFieldQuery();
+
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'favorites_list')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyCondition('uid', $uid);
+
+  $result = $query->execute();
+
+  if (isset($result['node'])) {
+    $list_nids = array_keys($result['node']);
+    $lists = entity_load('node', $list_nids);
+  } else {
+    $lists = array();
+  }
+
+  return $lists;
 }
 
 function prc_my_lists_create_list_form($form, &$form_state) {
