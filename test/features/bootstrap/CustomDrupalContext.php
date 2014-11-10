@@ -521,6 +521,23 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
   }
 
+  /**
+   * @Then /^"(?P<before>[^"]*)" should precede "(?P<after>[^"]*)" for the query "(?P<query>[^"]*)"$/
+   */
+  public function shouldPrecedeForTheQuery($textBefore, $textAfter, $cssQuery)
+  {
+    $items = array_map(
+      function ($element) {
+        return $element->getText();
+      },
+      $this->getSession()->getPage()->findAll('css', $cssQuery)
+    );
+    $before_index = array_search($textBefore, $items);
+    $after_index = array_search($textAfter, $items);
+    if ($before_index >= $after_index) {
+      throw new Exception("$textBefore does not proceed $textAfter");
+    }
+  }
 
   /**
    * @Then /^the email to "([^"]*)" should contain "([^"]*)"$/
@@ -641,23 +658,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function followEmailLink() {
     $this->followEmailLinkByIndex(0);
-//    if (!$this->activeEmail) {
-//      throw new \Exception('No active email');
-//    }
-//    $message = $this->activeEmail;
-//
-//    $body = $message['body'];
-//    // The Regular Expression to look for URLs
-//    $reg_exUrl = '`([^"=\'>])((http|https|ftp)://[^\s<]+[^\s<\.)])`i';
-//    if(preg_match($reg_exUrl, $body, $url)) {
-//      // It does return multiple matches. In this particular case we only care about the first one (so far)
-//      $follow_url = $url[0];
-//    }
-//    if (isset($follow_url)) {
-//      // Have to go to the driver level because visit only works for pages off the base url
-//      $this->getSession()->visit($follow_url);
-//      return TRUE;
-//    }
   }
 
   /**

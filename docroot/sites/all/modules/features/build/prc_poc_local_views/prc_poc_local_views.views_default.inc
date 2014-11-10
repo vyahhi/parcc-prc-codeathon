@@ -156,11 +156,10 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Content: Nid */
+  $handler->display->display_options['sorts']['nid']['id'] = 'nid';
+  $handler->display->display_options['sorts']['nid']['table'] = 'node';
+  $handler->display->display_options['sorts']['nid']['field'] = 'nid';
   /* Contextual filter: Content: Author uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
   $handler->display->display_options['arguments']['uid']['table'] = 'node';
@@ -255,14 +254,6 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  $handler->display->display_options['sorts']['created']['expose']['label'] = 'Post date';
-  $handler->display->display_options['sorts']['created']['granularity'] = 'minute';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Author uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';

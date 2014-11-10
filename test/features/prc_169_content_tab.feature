@@ -47,3 +47,16 @@ Feature: Admin UI: Content Tab (PRC-169)
     And I should see an "edit-submit-admin-content-view" button
 
     # AC9 and 10 tests temporarily removed awaiting user role assignment code.
+
+  Scenario: AC7: The default sort will be by content ID in ascending order (PRC-333)
+    Given I am logged in as a user with the "Content Contributor" role
+    And "Digital Library Content" nodes:
+    | title   | body            | uid         | created    |
+    | One     | One@timestamp   | @currentuid | 1410000100 |
+    | Two     | Two@timestamp   | @currentuid | 1410000200 |
+    | Three   | Three@timestamp | @currentuid | 1410000300 |
+    | Four    | Four@timestamp  | @currentuid | 1410000400 |
+    Then I visit "admin-content"
+    Then "One" should precede "Two" for the query ".view-id-admin_content_view table tr td:nth-child(5)"
+    Then "Two" should precede "Three" for the query ".view-id-admin_content_view table tr td:nth-child(5)"
+    Then "Three" should precede "Four" for the query ".view-id-admin_content_view table tr td:nth-child(5)"
