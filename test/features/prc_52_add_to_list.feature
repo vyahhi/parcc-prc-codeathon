@@ -4,10 +4,11 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
   I want to organize content into one of my existing custom lists,
   so that I can locate the content quickly and as needed.
 
-  #  Acceptance Criteria
-  # AC1 In the Digital Library page where all the content is listed, a new link called Add to My Lists will be available.
-  # AC2 Once the Add to My Lists link is selected, a list of existing custom items will appear.
-#  @javascript
+  Scenario: Anonymous cannot see Add to My Lists
+    Given I am an anonymous user
+    And I am viewing a "Digital Library Content" node with the title "PRC-52 Anonymous Link"
+    Then I should not see the link "Add to My Lists"
+
   Scenario: No previously existing lists
     Given I am logged in as a user with the "Educator" role
     And I have no "digital_library_content" nodes
@@ -66,6 +67,19 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     Then I select "third list" from "List"
     Then I select "tenth list" from "List"
 
+  Scenario: Selecting a list
+    Given I am logged in as a user with the "Educator" role
+    And I am viewing my "favorites_list" node with the title "My Only List"
+    And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
+    Then I click "Add to My Lists"
+    Then I select "My Only List" from "List"
+    Then I press "Add to List"
+    # Now how do we verify that the node was referenced by the list?
+
+
+  #  Acceptance Criteria
+  # AC1 In the Digital Library page where all the content is listed, a new link called Add to My Lists will be available.
+  # AC2 Once the Add to My Lists link is selected, a list of existing custom items will appear.
 #  AC3 The educator can associate specific content to any of the custom items, by selecting a specific item from the list displayed.
 #  AC4 The menu contains:
 #    A "Add to My Lists" Label & Textbox: The user can start typing a custom list name in order to narrow down the number of custom lists displayed.
