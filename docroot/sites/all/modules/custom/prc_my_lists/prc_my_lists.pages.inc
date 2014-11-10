@@ -13,13 +13,14 @@
  * @param null $js
  *   If Javascript is not support, $js is NULL.
  */
-function modal_add_to_list($type, $js = NULL) {
+function modal_add_to_list($type, $js = NULL, $node = NULL) {
   // Fall back if $js is not set.
   $title = t('Add to My Lists');
 
   if (!$js) {
     $form_state = array(
       'title' => $title,
+      'node' => $node,
       'build_info' => array(
         'args' => array(),
       ),
@@ -38,6 +39,7 @@ function modal_add_to_list($type, $js = NULL) {
 
   $form_state = array(
     'title' => $title,
+    'node' => $node,
     'ajax' => TRUE,
     'build_info' => array(
       'args' => array(),
@@ -64,13 +66,14 @@ function modal_add_to_list($type, $js = NULL) {
  * @param null $js
  *   If Javascript is not support, $js is NULL.
  */
-function modal_add_a_list($type, $js = NULL) {
+function modal_add_a_list($type, $js = NULL, $node = NULL) {
   // Fall back if $js is not set.
   $title = t('Add to My Lists');
 
   if (!$js) {
     $form_state = array(
       'title' => $title,
+      'node' => $node,
       'build_info' => array(
         'args' => array(),
       ),
@@ -83,6 +86,7 @@ function modal_add_a_list($type, $js = NULL) {
 
   $form_state = array(
     'title' => $title,
+    'node' => $node,
     'ajax' => TRUE,
     'build_info' => array(
       'args' => array(),
@@ -101,8 +105,10 @@ function modal_add_a_list($type, $js = NULL) {
 }
 
 function prc_my_lists_view_lists_form($form, &$form_state) {
-  $href = 'favorites-list/nojs/create-list';
   $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
+  $nid = array_key_exists('node', $form_state) ? $form_state['node']->nid : 0;
+  $href = "favorites-list/$nid/nojs/create-list";
+
   if ($ajax) {
     ctools_include('modal');
     $markup = ctools_modal_text_button('Create new', $href, 'Create new favorites list');
@@ -174,7 +180,8 @@ function prc_my_lists_create_list_form($form, &$form_state) {
     '#value' => t('Create'),
   );
 
-  $cancel_href = 'favorites-list/nojs/add-to-list';
+  $nid = array_key_exists('node', $form_state) ? $form_state['node']->nid : 0;
+  $cancel_href = "favorites-list/$nid/nojs/add-to-list";
   $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
   if ($ajax) {
     ctools_include('modal');
@@ -217,14 +224,15 @@ function prc_my_lists_create_list_form_submit(&$form, &$form_state) {
     }
   }
 
+  $nid = array_key_exists('node', $form_state) ? $form_state['node']->nid : 0;
   $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
   if ($ajax) {
     // We're already AJAX here so we know we can just put this in.
     // Letting it do its thing with nojs doesn't work for the submit redirect.
-    $next_href = 'favorites-list/ajax/add-to-list';
+    $next_href = "favorites-list/$nid/ajax/add-to-list";
   }
   else {
-    $next_href = 'favorites-list/nojs/add-to-list';
+    $next_href = "favorites-list/$nid/nojs/add-to-list";
   }
   // Go back to the add to list page
   drupal_goto($next_href);
