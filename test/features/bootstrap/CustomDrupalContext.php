@@ -10,6 +10,7 @@
 use Behat\Behat\Context\Step\Then;
 use Behat\Behat\Context\Step\Given;
 use Drupal\DrupalExtension\Event\EntityEvent;
+use Behat\Gherkin\Node\TableNode;
 
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
@@ -39,6 +40,14 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       $uid = $user->uid;
       $whole_token = "@uname[$uname]";
       $argument = str_replace($whole_token, $uid, $argument);
+    }
+    if (strpos($argument, '@currentuid') !== FALSE) {
+      if ($this->user) {
+        $current_uid = $this->user->uid;
+        $argument = str_replace('@currentuid', $current_uid, $argument);
+      } else {
+        throw new Exception("Must be logged in as a user");
+      }
     }
     return parent::fixStepArgument($argument);
   }
@@ -126,7 +135,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    *
    * @Then /^(?:|I )should see an? "(?P<button>(?:[^"]|\\")*)" button$/
    */
-  public function   iShouldSeeAButton($button)
+  public function iShouldSeeAButton($button)
   {
     $button = $this->fixStepArgument($button);
     if (!$this->getSession()->getPage()->hasButton($button)) {
@@ -427,6 +436,28 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * Overrides DrupalContext::createNodes
+   * Allows fixStepArgument to be called on each cell value
+   * @param $type
+   * @param TableNode $nodesTable
+   */
+  public function createNodes($type, TableNode $nodesTable) {
+    $new_rows = array();
+    $original_rows = $nodesTable->getRows();
+    $header_row = array_shift($original_rows);
+    $new_rows[] = $header_row;
+
+    foreach ($nodesTable->getHash() as $nodeHash) {
+      foreach ($nodeHash as $key => $value) {
+        $nodeHash[$key] = $this->fixStepArgument($value);
+      }
+      $new_rows[] = $nodeHash;
+    }
+    $nodesTable->setRows($new_rows);
+    parent::createNodes($type, $nodesTable);
+  }
+
+    /**
    * Overrides DrupalContext::createMyNode
    * There is a bug in the original in the 'body' => this->getDrupal()->string(255), because it is missing
    * the ->random
