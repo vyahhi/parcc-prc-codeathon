@@ -540,6 +540,32 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Given /^the "([^"]*)" select box should be empty$/
+   */
+  public function theSelectBoxShouldBeEmpty($field) {
+    $select_field = $this->getSession()->getPage()->findField($field);
+
+    $opt = $select_field->find('named', array(
+      'option', $this->getSession()->getSelectorsHandler()->xpathLiteral('*')
+    ));
+
+
+    $count = count($opt);
+    if ($count != 0) {
+      throw new Exception("$field was supposed to have no items. Instead, it had $count items.");
+    }
+  }
+
+  /**
+   * @Given /^I have no "([^"]*)" nodes$/
+   */
+  public function iHaveNoNodes($type) {
+    $command = 'genc';
+    $arguments = "1 0 --types=$type --kill";
+    $this->assertDrushCommandWithArgument($command, $arguments);
+  }
+
+  /**
    * @Then /^the email to "([^"]*)" should contain "([^"]*)"$/
    */
   public function theEmailToShouldContain($to, $contents) {

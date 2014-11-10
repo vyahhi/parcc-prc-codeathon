@@ -125,6 +125,7 @@ function prc_my_lists_view_lists_form($form, &$form_state) {
     '#type' => 'select',
     '#title' => t('List'),
     '#options' => $list_titles,
+    '#chosen' => TRUE,
     '#theme_options' => array(
       'description at top' => t('Select the list you would like to use to categorize this content.'),
     ),
