@@ -10,6 +10,7 @@
 use Behat\Behat\Context\Step\Then;
 use Behat\Behat\Context\Step\Given;
 use Drupal\DrupalExtension\Event\EntityEvent;
+use Behat\Gherkin\Node\TableNode;
 
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
@@ -39,6 +40,14 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       $uid = $user->uid;
       $whole_token = "@uname[$uname]";
       $argument = str_replace($whole_token, $uid, $argument);
+    }
+    if (strpos($argument, '@currentuid') !== FALSE) {
+      if ($this->user) {
+        $current_uid = $this->user->uid;
+        $argument = str_replace('@currentuid', $current_uid, $argument);
+      } else {
+        throw new Exception("Must be logged in as a user");
+      }
     }
     return parent::fixStepArgument($argument);
   }
@@ -126,7 +135,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    *
    * @Then /^(?:|I )should see an? "(?P<button>(?:[^"]|\\")*)" button$/
    */
-  public function   iShouldSeeAButton($button)
+  public function iShouldSeeAButton($button)
   {
     $button = $this->fixStepArgument($button);
     if (!$this->getSession()->getPage()->hasButton($button)) {
@@ -162,6 +171,20 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
     $last_index = count($this->nodes) - 1;
     $last_node = $this->nodes[$last_index];
+    $nid = $last_node->nid;
+
+    return new Given("I am on \"node/$nid\"");
+  }
+
+  /**
+   * Navigates to the View page for the first node in $this->nodes
+   * @Then /^I visit the first node created$/
+   */
+  public function iVisitTheFirstNodeCreated() {
+    if (!is_array($this->nodes) || count($this->nodes) == 0) {
+      throw new Exception('No nodes have been created by this context');
+    }
+    $last_node = $this->nodes[0];
     $nid = $last_node->nid;
 
     return new Given("I am on \"node/$nid\"");
@@ -427,6 +450,28 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * Overrides DrupalContext::createNodes
+   * Allows fixStepArgument to be called on each cell value
+   * @param $type
+   * @param TableNode $nodesTable
+   */
+  public function createNodes($type, TableNode $nodesTable) {
+    $new_rows = array();
+    $original_rows = $nodesTable->getRows();
+    $header_row = array_shift($original_rows);
+    $new_rows[] = $header_row;
+
+    foreach ($nodesTable->getHash() as $nodeHash) {
+      foreach ($nodeHash as $key => $value) {
+        $nodeHash[$key] = $this->fixStepArgument($value);
+      }
+      $new_rows[] = $nodeHash;
+    }
+    $nodesTable->setRows($new_rows);
+    parent::createNodes($type, $nodesTable);
+  }
+
+    /**
    * Overrides DrupalContext::createMyNode
    * There is a bug in the original in the 'body' => this->getDrupal()->string(255), because it is missing
    * the ->random
@@ -490,6 +535,49 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
   }
 
+  /**
+   * @Then /^"(?P<before>[^"]*)" should precede "(?P<after>[^"]*)" for the query "(?P<query>[^"]*)"$/
+   */
+  public function shouldPrecedeForTheQuery($textBefore, $textAfter, $cssQuery)
+  {
+    $items = array_map(
+      function ($element) {
+        return $element->getText();
+      },
+      $this->getSession()->getPage()->findAll('css', $cssQuery)
+    );
+    $before_index = array_search($textBefore, $items);
+    $after_index = array_search($textAfter, $items);
+    if ($before_index >= $after_index) {
+      throw new Exception("$textBefore does not proceed $textAfter");
+    }
+  }
+
+  /**
+   * @Given /^the "([^"]*)" select box should be empty$/
+   */
+  public function theSelectBoxShouldBeEmpty($field) {
+    $select_field = $this->getSession()->getPage()->findField($field);
+
+    $opt = $select_field->find('named', array(
+      'option', $this->getSession()->getSelectorsHandler()->xpathLiteral('*')
+    ));
+
+
+    $count = count($opt);
+    if ($count != 0) {
+      throw new Exception("$field was supposed to have no items. Instead, it had $count items.");
+    }
+  }
+
+  /**
+   * @Given /^I have no "([^"]*)" nodes$/
+   */
+  public function iHaveNoNodes($type) {
+    $command = 'genc';
+    $arguments = "1 0 --types=$type --kill";
+    $this->assertDrushCommandWithArgument($command, $arguments);
+  }
 
   /**
    * @Then /^the email to "([^"]*)" should contain "([^"]*)"$/
@@ -610,23 +698,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function followEmailLink() {
     $this->followEmailLinkByIndex(0);
-//    if (!$this->activeEmail) {
-//      throw new \Exception('No active email');
-//    }
-//    $message = $this->activeEmail;
-//
-//    $body = $message['body'];
-//    // The Regular Expression to look for URLs
-//    $reg_exUrl = '`([^"=\'>])((http|https|ftp)://[^\s<]+[^\s<\.)])`i';
-//    if(preg_match($reg_exUrl, $body, $url)) {
-//      // It does return multiple matches. In this particular case we only care about the first one (so far)
-//      $follow_url = $url[0];
-//    }
-//    if (isset($follow_url)) {
-//      // Have to go to the driver level because visit only works for pages off the base url
-//      $this->getSession()->visit($follow_url);
-//      return TRUE;
-//    }
   }
 
   /**

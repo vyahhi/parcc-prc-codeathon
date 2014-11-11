@@ -60,15 +60,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
     Then I should see the link "Profession"
     Then I should see the link "Active"
 
-  @javascript
-  Scenario: AC5 - Filter box
-    Given I have a total of 50 users with the "Educator" role
-    And I am logged in as a user with the "PRC Admin" role
-    And I visit "/admin-users"
-    Then I fill in "Search" with "example.com"
-    And I press "Apply"
-
-  @javascript
+  # Also tests AC5 - Filter box
   Scenario: AC6 - Filter searches all data and not just the current page
     Given I have a total of 150 users with the "Educator" role
     And I am logged in as a user with the "PRC Admin" role
@@ -99,10 +91,10 @@ Feature: Admin UI: View User Accounts (PRC-37)
     And I should see the link "next"
     And I should see the link "last"
 
-  @javascript
+#  @javascript
   Scenario: PRC-286 - Users with multiple roles appear once for each role
     Given users:
-      | name     | mail                   | pass     | field_first_name | field_last_name | status |
+      | name     | mail                              | pass     | field_first_name | field_last_name | status |
       | Joe User | joe_prc_286@timestamp@example.com | xyz123   | Joe              | User            | 1      |
     And I am logged in as a user with the "PRC Admin" role
     Then I run drush "user-add-role" "'Educator' joe_prc_286@timestamp@example.com"

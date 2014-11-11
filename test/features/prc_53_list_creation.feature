@@ -6,6 +6,14 @@ Feature: PRC-53 New Custom List Creation (End user)
 
   Scenario: In the Digital Library page where content is displayed, a new link Add to My Lists will be available.
     Given I am logged in as a user with the "Educator" role
+    # Right now we are just using this line to create a node
+    And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
+    And I am on the homepage
+    Then I click "Digital Library"
+    Then I should see the link "Add to My Lists"
+
+  Scenario: On a content view page, a new link Add to My Lists will be available.
+    Given I am logged in as a user with the "Educator" role
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
     Then I should see the link "Add to My Lists"
 
@@ -22,30 +30,44 @@ Feature: PRC-53 New Custom List Creation (End user)
 
   Scenario: To create a new custom list, a Create New link is available in the menu.
     Given I am logged in as a user with the "Educator" role
-    And I am on "favorites-list/nojs/add-to-list"
+    And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
+    And I click "Add to My Lists"
     Then I should see the link "Create new"
     And I should see the text "Add to My Lists"
     When I click "Create new"
-    Then the url should match "favorites-list/nojs/create-list"
+    Then the url should match "favorites-list/\d+/nojs/create-list"
 
 #  Once the Create New link is selected, an overlay opens with the following components:
 #  Title: Add to My Lists
   Scenario: Add new list form
     Given I am logged in as a user with the "Educator" role
-    And I am on "favorites-list/nojs/create-list"
+    And I am viewing a "Digital Library Content" node with the title "PRC-53 Add new list form"
+    And I click "Add to My Lists"
+    Then I click "Create new"
     Then I should see the link "Cancel"
     And I should see a "Create" button
-    And I should see a "Please enter a new list name" field
+    And I should see a "List Name" field
     And I should see the text "Add to My Lists"
     When I click "Cancel"
-    Then the url should match "favorites-list/nojs/add-to-list"
+    Then the url should match "favorites-list/\d+/nojs/add-to-list"
 
   Scenario: When Create button is clicked, the system will add the new list into the existing custom listing in Alphabetical order.
     Given I am logged in as a user with the "Educator" role
-    And I am on "favorites-list/nojs/create-list"
-    Then I fill in "Please enter a new list name" with "Created by Behat"
+    And I am viewing a "Digital Library Content" node with the title "PRC-53 Add new list form"
+    And I click "Add to My Lists"
+    Then I click "Create new"
+    And I should see a "Create" button
+    Then I fill in "List Name" with "Created by Behat"
     And I press "Create"
     Then I should see the message containing "Created new"
     Then I should see the message containing "Created by Behat"
     Then I should see the message containing "list"
 
+  Scenario: Creating a new list makes it show up in the Add to Lists list
+    Given I am logged in as a user with the "Educator" role
+    And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
+    Then I click "Add to My Lists"
+    Then I click "Create new"
+    Then I fill in "List Name" with "Created by Behat"
+    And I press "Create"
+    Then I select "Created by Behat" from "List"

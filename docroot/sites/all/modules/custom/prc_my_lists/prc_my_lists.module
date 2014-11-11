@@ -6,28 +6,48 @@
  */
 
 /**
+ *  Implements hook_permission().
+ */
+function prc_my_lists_permission() {
+  $perms = array(
+    'add to my lists' => array(
+      'title' => t('Add to My Lists'),
+      'description' => t('Add content to Favorites Lists'),
+    ),
+  );
+  return $perms;
+}
+
+
+/**
  *  Implements hook_node_view().
  */
 function prc_my_lists_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'digital_library_content') {
 
-    ctools_include('modal');
-    ctools_modal_add_js();
+    global $user;
+    if (user_access('add to my lists', $user)) {
 
-    $links['prc_digital_library_add_to_favorites'] = array(
-      'title' => t('Add to My Lists'),
-      'href' => "favorites-list/nojs/add-to-list",
-      'attributes' => array(
+      $nid = $node->nid;
+
+      ctools_include('modal');
+      ctools_modal_add_js();
+
+      $links['prc_digital_library_add_to_favorites'] = array(
         'title' => t('Add to My Lists'),
-        'class' => array('ctools-use-modal'),
-      ),
-    );
+        'href' => "favorites-list/$nid/nojs/add-to-list",
+        'attributes' => array(
+          'title' => t('Add to My Lists'),
+          'class' => array('ctools-use-modal'),
+        ),
+      );
 
-    $node->content['links']['prc_digital_library_content'] = array(
-      '#theme' => 'links__node__favorites',
-      '#links' => $links,
-      '#attributes' => array('class' => array('links', 'inline')),
-    );
+      $node->content['links']['prc_digital_library_content'] = array(
+        '#theme' => 'links__node__favorites',
+        '#links' => $links,
+        '#attributes' => array('class' => array('links', 'inline')),
+      );
+    }
   }
 }
 
@@ -37,22 +57,22 @@ function prc_my_lists_node_view($node, $view_mode, $langcode) {
 function prc_my_lists_menu() {
   // Display a node add form in ctools modal.
   $items = array();
-  $items['favorites-list/%ctools_js/add-to-list'] = array(
+  $items['favorites-list/%node/%ctools_js/add-to-list'] = array(
     'title' => 'Add to My Lists',
     'title callback' => 'check_plain',
     'page callback' => 'modal_add_to_list',
-    'page arguments' => array(2, 1),
+    'page arguments' => array(3, 2, 1),
     'access callback' => 'node_access',
     'access arguments' => array('create', 'favorites_list'),
     'description' => 'My Lists',
     'file' => 'prc_my_lists.pages.inc',
     'type' => MENU_CALLBACK,
   );
-  $items['favorites-list/%ctools_js/create-list'] = array(
+  $items['favorites-list/%node/%ctools_js/create-list'] = array(
     'title' => 'Add to My Lists',
     'title callback' => 'check_plain',
     'page callback' => 'modal_add_a_list',
-    'page arguments' => array(2, 1),
+    'page arguments' => array(3, 2, 1),
     'access callback' => 'node_access',
     'access arguments' => array('create', 'favorites_list'),
     'description' => 'My Lists',

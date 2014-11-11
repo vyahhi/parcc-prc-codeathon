@@ -13,13 +13,14 @@
  * @param null $js
  *   If Javascript is not support, $js is NULL.
  */
-function modal_add_to_list($type, $js = NULL) {
+function modal_add_to_list($type, $js = NULL, $node = NULL) {
   // Fall back if $js is not set.
   $title = t('Add to My Lists');
 
   if (!$js) {
     $form_state = array(
       'title' => $title,
+      'node' => $node,
       'build_info' => array(
         'args' => array(),
       ),
@@ -38,6 +39,7 @@ function modal_add_to_list($type, $js = NULL) {
 
   $form_state = array(
     'title' => $title,
+    'node' => $node,
     'ajax' => TRUE,
     'build_info' => array(
       'args' => array(),
@@ -64,13 +66,14 @@ function modal_add_to_list($type, $js = NULL) {
  * @param null $js
  *   If Javascript is not support, $js is NULL.
  */
-function modal_add_a_list($type, $js = NULL) {
+function modal_add_a_list($type, $js = NULL, $node = NULL) {
   // Fall back if $js is not set.
   $title = t('Add to My Lists');
 
   if (!$js) {
     $form_state = array(
       'title' => $title,
+      'node' => $node,
       'build_info' => array(
         'args' => array(),
       ),
@@ -83,6 +86,7 @@ function modal_add_a_list($type, $js = NULL) {
 
   $form_state = array(
     'title' => $title,
+    'node' => $node,
     'ajax' => TRUE,
     'build_info' => array(
       'args' => array(),
@@ -101,25 +105,83 @@ function modal_add_a_list($type, $js = NULL) {
 }
 
 function prc_my_lists_view_lists_form($form, &$form_state) {
-  $href = 'favorites-list/nojs/create-list';
   $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
+  $nid = array_key_exists('node', $form_state) ? $form_state['node']->nid : 0;
+  $href = "favorites-list/$nid/nojs/create-list";
+
   if ($ajax) {
     ctools_include('modal');
     $markup = ctools_modal_text_button('Create new', $href, 'Create new favorites list');
-  } else {
+  }
+  else {
     $markup = l(t('Create new'), $href);
   }
   $form['create_new_list'] = array(
     '#markup' => $markup,
   );
 
+  $lists = _prc_my_lists_current_user_lists();
+
+  $list_titles = array();
+  foreach ($lists as $key => $list) {
+    $list_titles[$key] = $list->title;
+  }
+
+  $form['select_list'] = array(
+    '#type' => 'select',
+    '#title' => t('List'),
+    '#options' => $list_titles,
+    '#chosen' => TRUE,
+    '#theme_options' => array(
+      'description at top' => t('Select the list you would like to use to categorize this content.'),
+    ),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Add to List'),
+  );
+
+
+  $form['#submit'] = array(
+    'prc_my_lists_view_lists_form_submit',
+  );
+
+
   return $form;
+}
+
+function _prc_my_lists_current_user_lists() {
+  global $user;
+  $uid = $user->uid;
+
+  $query = new EntityFieldQuery();
+
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'favorites_list')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyCondition('uid', $uid);
+
+  $result = $query->execute();
+
+  if (isset($result['node'])) {
+    $list_nids = array_keys($result['node']);
+    $lists = entity_load('node', $list_nids);
+  } else {
+    $lists = array();
+  }
+
+  return $lists;
 }
 
 function prc_my_lists_create_list_form($form, &$form_state) {
   $form['list_name'] = array(
     '#type' => 'textfield',
-    '#title' => t('Please enter a new list name'),
+    '#title' => t('List Name'),
+    '#theme_options' => array(
+      'description at top' => t('Please enter a name for the new list.'),
+    ),
+    '#required' => TRUE,
   );
 
   $form['submit'] = array(
@@ -127,12 +189,14 @@ function prc_my_lists_create_list_form($form, &$form_state) {
     '#value' => t('Create'),
   );
 
-  $cancel_href = 'favorites-list/nojs/add-to-list';
+  $nid = array_key_exists('node', $form_state) ? $form_state['node']->nid : 0;
+  $cancel_href = "favorites-list/$nid/nojs/add-to-list";
   $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
   if ($ajax) {
     ctools_include('modal');
     $markup = ctools_modal_text_button('Cancel', $cancel_href, 'Cancel');
-  } else {
+  }
+  else {
     $markup = l(t('Cancel'), $cancel_href);
   }
 
@@ -148,8 +212,6 @@ function prc_my_lists_create_list_form($form, &$form_state) {
 }
 
 function prc_my_lists_create_list_form_submit(&$form, &$form_state) {
-  // Go back to the add to list page
-  $next_href = 'favorites-list/nojs/add-to-list';
 
   if (is_array($form_state) && array_key_exists('values', $form_state) && array_key_exists('list_name', $form_state['values'])) {
     $list_name = $form_state['values']['list_name'];
@@ -170,5 +232,63 @@ function prc_my_lists_create_list_form_submit(&$form, &$form_state) {
       drupal_set_message("Created new \"$list_name\" list.\n");
     }
   }
+
+  $nid = array_key_exists('node', $form_state) ? $form_state['node']->nid : 0;
+  $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
+  if ($ajax) {
+    // We're already AJAX here so we know we can just put this in.
+    // Letting it do its thing with nojs doesn't work for the submit redirect.
+    $next_href = "favorites-list/$nid/ajax/add-to-list";
+  }
+  else {
+    $next_href = "favorites-list/$nid/nojs/add-to-list";
+  }
+  // Go back to the add to list page
+  drupal_goto($next_href);
+}
+
+function prc_my_lists_view_lists_form_submit(&$form, &$form_state) {
+  $nid = array_key_exists('node', $form_state) ? $form_state['node']->nid : 0;
+
+  if (is_array($form_state) && array_key_exists('values', $form_state)
+    && array_key_exists('node', $form_state)
+    && array_key_exists('select_list', $form_state['values'])) {
+    $list_nid = $form_state['values']['select_list'];
+    $list_node = node_load($list_nid);
+    if ($list_node && $list_node->type == 'favorites_list') {
+
+      $list_wrapper = entity_metadata_wrapper('node', $list_node);
+
+      $favorited_nodes = $list_wrapper->field_favorite_content->value();
+      $found = FALSE;
+      foreach($favorited_nodes as $favorited_node) {
+        $favorited_nid = $favorited_node->nid;
+        if ($favorited_nid == $nid) {
+          $found = TRUE;
+          break;
+        }
+      }
+      if (!$found) {
+        $list_wrapper->field_favorite_content[] = $nid;
+        $list_wrapper->save();
+
+        $list_name = $list_node->title;
+
+        drupal_set_message("The content is now associated with \"$list_name\".\n");
+      }
+    }
+
+  }
+
+  $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
+  if ($ajax) {
+    // We're already AJAX here so we know we can just put this in.
+    // Letting it do its thing with nojs doesn't work for the submit redirect.
+    $next_href = "favorites-list/$nid/ajax/add-to-list";
+  }
+  else {
+    $next_href = "favorites-list/$nid/nojs/add-to-list";
+  }
+  // Go back to the add to list page
   drupal_goto($next_href);
 }

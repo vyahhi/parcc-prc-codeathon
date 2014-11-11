@@ -71,11 +71,11 @@ function prc_poc_local_node_digital_library_content_strongarm() {
             'visible' => FALSE,
           ),
           'teaser' => array(
-            'weight' => '4',
+            'weight' => '5',
             'visible' => TRUE,
           ),
           'search_result' => array(
-            'weight' => '9',
+            'weight' => '19',
             'visible' => FALSE,
           ),
         ),
