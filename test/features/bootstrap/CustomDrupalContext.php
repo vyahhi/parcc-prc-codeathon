@@ -177,6 +177,20 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * Navigates to the View page for the first node in $this->nodes
+   * @Then /^I visit the first node created$/
+   */
+  public function iVisitTheFirstNodeCreated() {
+    if (!is_array($this->nodes) || count($this->nodes) == 0) {
+      throw new Exception('No nodes have been created by this context');
+    }
+    $last_node = $this->nodes[0];
+    $nid = $last_node->nid;
+
+    return new Given("I am on \"node/$nid\"");
+  }
+
+  /**
    * Asserts a 403 for the View page for the last node in $this->nodes
    * @Then /^I cannot visit the last node created$/
    */

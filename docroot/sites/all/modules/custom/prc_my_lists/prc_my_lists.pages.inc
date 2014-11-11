@@ -177,7 +177,11 @@ function _prc_my_lists_current_user_lists() {
 function prc_my_lists_create_list_form($form, &$form_state) {
   $form['list_name'] = array(
     '#type' => 'textfield',
-    '#title' => t('Please enter a new list name'),
+    '#title' => t('List Name'),
+    '#theme_options' => array(
+      'description at top' => t('Please enter a name for the new list.'),
+    ),
+    '#required' => TRUE,
   );
 
   $form['submit'] = array(
@@ -270,7 +274,7 @@ function prc_my_lists_view_lists_form_submit(&$form, &$form_state) {
 
         $list_name = $list_node->title;
 
-        drupal_set_message("Added item to \"$list_name\" list.\n");
+        drupal_set_message("The content is now associated with \"$list_name\".\n");
       }
     }
 

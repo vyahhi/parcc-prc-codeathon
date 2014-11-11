@@ -46,7 +46,7 @@ Feature: PRC-53 New Custom List Creation (End user)
     Then I click "Create new"
     Then I should see the link "Cancel"
     And I should see a "Create" button
-    And I should see a "Please enter a new list name" field
+    And I should see a "List Name" field
     And I should see the text "Add to My Lists"
     When I click "Cancel"
     Then the url should match "favorites-list/\d+/nojs/add-to-list"
@@ -57,7 +57,7 @@ Feature: PRC-53 New Custom List Creation (End user)
     And I click "Add to My Lists"
     Then I click "Create new"
     And I should see a "Create" button
-    Then I fill in "Please enter a new list name" with "Created by Behat"
+    Then I fill in "List Name" with "Created by Behat"
     And I press "Create"
     Then I should see the message containing "Created new"
     Then I should see the message containing "Created by Behat"
@@ -68,6 +68,6 @@ Feature: PRC-53 New Custom List Creation (End user)
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
     Then I click "Add to My Lists"
     Then I click "Create new"
-    Then I fill in "Please enter a new list name" with "Created by Behat"
+    Then I fill in "List Name" with "Created by Behat"
     And I press "Create"
     Then I select "Created by Behat" from "List"
