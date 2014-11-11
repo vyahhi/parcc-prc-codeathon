@@ -143,6 +143,11 @@ function prc_my_lists_view_lists_form($form, &$form_state) {
   );
 
 
+  $form['#submit'] = array(
+    'prc_my_lists_view_lists_form_submit',
+  );
+
+
   return $form;
 }
 
@@ -225,6 +230,52 @@ function prc_my_lists_create_list_form_submit(&$form, &$form_state) {
   }
 
   $nid = array_key_exists('node', $form_state) ? $form_state['node']->nid : 0;
+  $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
+  if ($ajax) {
+    // We're already AJAX here so we know we can just put this in.
+    // Letting it do its thing with nojs doesn't work for the submit redirect.
+    $next_href = "favorites-list/$nid/ajax/add-to-list";
+  }
+  else {
+    $next_href = "favorites-list/$nid/nojs/add-to-list";
+  }
+  // Go back to the add to list page
+  drupal_goto($next_href);
+}
+
+function prc_my_lists_view_lists_form_submit(&$form, &$form_state) {
+  $nid = array_key_exists('node', $form_state) ? $form_state['node']->nid : 0;
+
+  if (is_array($form_state) && array_key_exists('values', $form_state)
+    && array_key_exists('node', $form_state)
+    && array_key_exists('select_list', $form_state['values'])) {
+    $list_nid = $form_state['values']['select_list'];
+    $list_node = node_load($list_nid);
+    if ($list_node && $list_node->type == 'favorites_list') {
+
+      $list_wrapper = entity_metadata_wrapper('node', $list_node);
+
+      $favorited_nodes = $list_wrapper->field_favorite_content->value();
+      $found = FALSE;
+      foreach($favorited_nodes as $favorited_node) {
+        $favorited_nid = $favorited_node->nid;
+        if ($favorited_nid == $nid) {
+          $found = TRUE;
+          break;
+        }
+      }
+      if (!$found) {
+        $list_wrapper->field_favorite_content[] = $nid;
+        $list_wrapper->save();
+
+        $list_name = $list_node->title;
+
+        drupal_set_message("Added item to \"$list_name\" list.\n");
+      }
+    }
+
+  }
+
   $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
   if ($ajax) {
     // We're already AJAX here so we know we can just put this in.
