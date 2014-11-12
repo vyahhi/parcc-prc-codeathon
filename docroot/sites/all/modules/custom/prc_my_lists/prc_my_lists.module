@@ -33,6 +33,15 @@ function prc_my_lists_menu() {
     'file' => 'prc_my_lists.pages.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['digital_library_favorites_list/%ctools_js/%node'] = array(
+    'type' => MENU_CALLBACK,
+    'title' => t('Digital Library My Lists'),
+    'description' => t('Digital Library Favorites List AJAX Panel selection'),
+    'page callback' => 'prc_ajax_show_digital_library_favorites_list',
+    'file' => 'prc_my_lists.ajax.inc',
+    'page arguments' => array(1, 2),
+    'access arguments' => array('access content'),
+  );
   return $items;
 }
 
@@ -81,4 +90,3 @@ function prc_my_lists_node_view($node, $view_mode, $langcode) {
     }
   }
 }
-

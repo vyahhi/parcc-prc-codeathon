@@ -680,7 +680,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->task = 'page';
   $page->admin_title = 'Digital Library';
   $page->admin_description = 'This is the public view of our digital library content';
-  $page->path = 'digital-library';
+  $page->path = 'digital-library/!nid';
   $page->access = array(
     'plugins' => array(
       0 => array(
@@ -708,7 +708,14 @@ function prc_poc_local_panels_default_page_manager_pages() {
       'weight' => '0',
     ),
   );
-  $page->arguments = array();
+  $page->arguments = array(
+    'nid' => array(
+      'id' => 1,
+      'identifier' => 'Node: ID',
+      'name' => 'entity_id:node',
+      'settings' => array(),
+    ),
+  );
   $page->conf = array(
     'admin_paths' => FALSE,
   );
@@ -731,14 +738,30 @@ function prc_poc_local_panels_default_page_manager_pages() {
     'css' => '',
     'contexts' => array(),
     'relationships' => array(),
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => 'digital-library',
+          ),
+          'context' => 'empty',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
   );
   $display = new panels_display();
-  $display->layout = 'flexible';
+  $display->layout = 'twocol';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'center' => NULL,
+      'left' => NULL,
+      'right' => NULL,
     ),
   );
   $display->cache = array();
@@ -747,8 +770,49 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
+    $pane->pid = 'new-08e6f7ea-0373-432a-b119-96f1386c68f3';
+    $pane->panel = 'left';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-digital-library-left-nav';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '08e6f7ea-0373-432a-b119-96f1386c68f3';
+    $display->content['new-08e6f7ea-0373-432a-b119-96f1386c68f3'] = $pane;
+    $display->panels['left'][0] = 'new-08e6f7ea-0373-432a-b119-96f1386c68f3';
+    $pane = new stdClass();
+    $pane->pid = 'new-a5f8bc52-9761-4119-b636-2c90f803f7c3';
+    $pane->panel = 'left';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'my_lists-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'a5f8bc52-9761-4119-b636-2c90f803f7c3';
+    $display->content['new-a5f8bc52-9761-4119-b636-2c90f803f7c3'] = $pane;
+    $display->panels['left'][1] = 'new-a5f8bc52-9761-4119-b636-2c90f803f7c3';
+    $pane = new stdClass();
     $pane->pid = 'new-30e765e5-3410-4e05-9d69-0dc872428ade';
-    $pane->panel = 'center';
+    $pane->panel = 'right';
     $pane->type = 'views_panes';
     $pane->subtype = 'digital_library_view-panel_pane_1';
     $pane->shown = TRUE;
@@ -761,15 +825,134 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'digital-library-content-pane',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
     $pane->uuid = '30e765e5-3410-4e05-9d69-0dc872428ade';
     $display->content['new-30e765e5-3410-4e05-9d69-0dc872428ade'] = $pane;
-    $display->panels['center'][0] = 'new-30e765e5-3410-4e05-9d69-0dc872428ade';
+    $display->panels['right'][0] = 'new-30e765e5-3410-4e05-9d69-0dc872428ade';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_digital_library_panel_context_2';
+  $handler->task = 'page';
+  $handler->subtask = 'digital_library';
+  $handler->handler = 'panel_context';
+  $handler->weight = 1;
+  $handler->conf = array(
+    'title' => 'Digital Library Favorites',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => 'digital-library/*',
+          ),
+          'context' => 'empty',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'twocol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'left' => NULL,
+      'right' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = '4b9ee756-15ad-410b-bb48-64f625a1b4ca';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-b826acdb-e697-4466-83c8-3ca602bdec79';
+    $pane->panel = 'left';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-digital-library-left-nav';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'b826acdb-e697-4466-83c8-3ca602bdec79';
+    $display->content['new-b826acdb-e697-4466-83c8-3ca602bdec79'] = $pane;
+    $display->panels['left'][0] = 'new-b826acdb-e697-4466-83c8-3ca602bdec79';
+    $pane = new stdClass();
+    $pane->pid = 'new-52852f34-a1e9-4b6c-98ed-42c4874eedaf';
+    $pane->panel = 'left';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'my_lists-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '52852f34-a1e9-4b6c-98ed-42c4874eedaf';
+    $display->content['new-52852f34-a1e9-4b6c-98ed-42c4874eedaf'] = $pane;
+    $display->panels['left'][1] = 'new-52852f34-a1e9-4b6c-98ed-42c4874eedaf';
+    $pane = new stdClass();
+    $pane->pid = 'new-a88f9625-5618-4bd4-bca6-9d2944e43c06';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'digital_library_favorites-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'nid' => '%nid:nid',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'a88f9625-5618-4bd4-bca6-9d2944e43c06';
+    $display->content['new-a88f9625-5618-4bd4-bca6-9d2944e43c06'] = $pane;
+    $display->panels['right'][0] = 'new-a88f9625-5618-4bd4-bca6-9d2944e43c06';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-b826acdb-e697-4466-83c8-3ca602bdec79';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['digital_library'] = $page;

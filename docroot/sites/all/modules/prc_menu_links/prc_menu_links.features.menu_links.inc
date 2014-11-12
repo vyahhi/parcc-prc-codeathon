@@ -138,6 +138,26 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-digital-library-left-nav_view-all:digital-library
+  $menu_links['menu-digital-library-left-nav_view-all:digital-library'] = array(
+    'menu_name' => 'menu-digital-library-left-nav',
+    'link_path' => 'digital-library',
+    'router_path' => 'digital-library',
+    'link_title' => 'View All',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-digital-library-left-nav_view-all:digital-library',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-invite-users_invite-new-user:invite/add/invite_by_email
   $menu_links['menu-invite-users_invite-new-user:invite/add/invite_by_email'] = array(
     'menu_name' => 'menu-invite-users',
@@ -168,6 +188,7 @@ function prc_menu_links_menu_default_menu_links() {
   t('Invite New User');
   t('Professional Development');
   t('Users');
+  t('View All');
 
 
   return $menu_links;

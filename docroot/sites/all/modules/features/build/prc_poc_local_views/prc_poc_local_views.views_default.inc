@@ -692,6 +692,89 @@ function prc_poc_local_views_views_default_views() {
   $export['comments_recent'] = $view;
 
   $view = new view();
+  $view->name = 'digital_library_favorites';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Digital Library Favorites';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '100';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'entity';
+  $handler->display->display_options['row_options']['view_mode'] = 'teaser';
+  /* Relationship: Entity Reference: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_favorite_content_node']['id'] = 'reverse_field_favorite_content_node';
+  $handler->display->display_options['relationships']['reverse_field_favorite_content_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_favorite_content_node']['field'] = 'reverse_field_favorite_content_node';
+  $handler->display->display_options['relationships']['reverse_field_favorite_content_node']['label'] = 'Favorites List';
+  $handler->display->display_options['relationships']['reverse_field_favorite_content_node']['required'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'reverse_field_favorite_content_node';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'digital_library_content' => 'digital_library_content',
+  );
+
+  /* Display: Digital Library Favorites Content */
+  $handler = $view->new_display('panel_pane', 'Digital Library Favorites Content', 'panel_pane_1');
+  $handler->display->display_options['argument_input'] = array(
+    'nid' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Favorites List: Nid',
+    ),
+  );
+  $handler->display->display_options['inherit_panels_path'] = '1';
+  $export['digital_library_favorites'] = $view;
+
+  $view = new view();
   $view->name = 'digital_library_tree_view';
   $view->description = '';
   $view->tag = 'default';
@@ -749,7 +832,7 @@ function prc_poc_local_views_views_default_views() {
   $view = new view();
   $view->name = 'digital_library_view';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'PRC';
   $view->base_table = 'node';
   $view->human_name = 'Digital Library View';
   $view->core = 7;
@@ -771,7 +854,10 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'oldest on top';
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '100';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
@@ -1013,17 +1099,6 @@ function prc_poc_local_views_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Relationship: Broken/missing handler */
-  $handler->display->display_options['relationships']['og_membership_rel']['id'] = 'og_membership_rel';
-  $handler->display->display_options['relationships']['og_membership_rel']['table'] = 'node';
-  $handler->display->display_options['relationships']['og_membership_rel']['field'] = 'og_membership_rel';
-  $handler->display->display_options['relationships']['og_membership_rel']['required'] = TRUE;
-  /* Relationship: Broken/missing handler */
-  $handler->display->display_options['relationships']['og_membership_related_node_group']['id'] = 'og_membership_related_node_group';
-  $handler->display->display_options['relationships']['og_membership_related_node_group']['table'] = 'og_membership';
-  $handler->display->display_options['relationships']['og_membership_related_node_group']['field'] = 'og_membership_related_node_group';
-  $handler->display->display_options['relationships']['og_membership_related_node_group']['relationship'] = 'og_membership_rel';
-  $handler->display->display_options['relationships']['og_membership_related_node_group']['required'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1042,6 +1117,14 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -1053,6 +1136,10 @@ function prc_poc_local_views_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'favorites-list';
+
+  /* Display: Favorited Digital Library Content */
+  $handler = $view->new_display('panel_pane', 'Favorited Digital Library Content', 'digital_library_content');
+  $handler->display->display_options['display_description'] = 'Digital Library Content items that have been added to user\'s lists';
   $export['favorites_list'] = $view;
 
   $view = new view();
@@ -1543,6 +1630,77 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['menu']['name'] = 'user-menu';
   $handler->display->display_options['menu']['context'] = 0;
   $export['invite'] = $view;
+
+  $view = new view();
+  $view->name = 'my_lists';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'My Lists';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'My Lists';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['path'] = 'digital_library_favorites_list/nojs/[nid]';
+  $handler->display->display_options['fields']['title']['alter']['link_class'] = 'use-ajax';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  /* Contextual filter: Content: Author uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'node';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'favorites_list' => 'favorites_list',
+  );
+
+  /* Display: Content pane */
+  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  $handler->display->display_options['inherit_panels_path'] = '1';
+  $export['my_lists'] = $view;
 
   $view = new view();
   $view->name = 'sample_article';

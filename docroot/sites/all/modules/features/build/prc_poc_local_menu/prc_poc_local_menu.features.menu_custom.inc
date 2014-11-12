@@ -40,6 +40,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Add content',
     'description' => '',
   );
+  // Exported menu: menu-digital-library-left-nav.
+  $menus['menu-digital-library-left-nav'] = array(
+    'menu_name' => 'menu-digital-library-left-nav',
+    'title' => 'Digital Library Left Nav',
+    'description' => '',
+  );
   // Exported menu: menu-invite-users.
   $menus['menu-invite-users'] = array(
     'menu_name' => 'menu-invite-users',
@@ -63,6 +69,7 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Add content');
   t('Development');
   t('Development link');
+  t('Digital Library Left Nav');
   t('Features');
   t('Invite Users');
   t('Main menu');
