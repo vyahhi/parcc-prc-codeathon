@@ -42,13 +42,24 @@ Feature: Admin UI: Content Tab (PRC-169)
     And I should not see the link "Action"
     And I should see the link "delete"
     And I should see the link "edit"
-    #  AC8 A Filter textbox allows the user to narrow down the table content by entering a keyword from any of the fields displayed in the table.
+
+  Scenario: AC8 A Filter textbox allows the user to narrow down the table content by entering a keyword from any of the fields displayed in the table.
+    Given I am logged in as a user with the "Content Contributor" role
+    And "Digital Library Content" nodes:
+      | title     | body            | uid         | created    |
+      | One       | One@timestamp   | @currentuid | 1410000100 |
+      | Two       | Two@timestamp   | @currentuid | 1410000200 |
+      | Three     | Three@timestamp | @currentuid | 1410000300 |
+      | Fifty One | Four@timestamp  | @currentuid | 1410000400 |
+    And I visit "admin-content"
     And I should see an "Filter all columns" field
     And I should see an "Apply" button
-    When I fill in "Filter all columns" with "newest"
+    When I fill in "Filter all columns" with "one"
     And I press "Apply"
-    Then I should see the text "Newest Content"
-    But I should not see the text "Oldest"
+    Then I should see the text "One"
+    Then I should see the text "Fifty One"
+    But I should not see the text "Two"
+    But I should not see the text "Three"
 
     # AC9 and 10 tests temporarily removed awaiting user role assignment code.
 
@@ -64,21 +75,22 @@ Feature: Admin UI: Content Tab (PRC-169)
     Then "One" should precede "Two" for the query ".view-id-admin_content_view table tr td:nth-child(5)"
     Then "Two" should precede "Three" for the query ".view-id-admin_content_view table tr td:nth-child(5)"
     Then "Three" should precede "Four" for the query ".view-id-admin_content_view table tr td:nth-child(5)"
-   Scenario: AC10 Pagination: 100 per page -use the default pagination: e.g. first previous 1 2 3 4 .... 26 next last
-     # If generate <100 Digital library content nodes, I should see no pagination
-     Then I run drush "cc all"
-     Then I run drush "genu 0 --kill"
-     And I am logged in as a user with the "PRC Admin" role
-     Then I run drush "genc 100 --kill --types=digital_library_content"
-     And I visit "/admin-content"
-     And I should not see the link "next"
-     And I should not see the link "last"
-     Then I run drush "genc 400 --types=digital_library_content"
-     And I visit "/admin-content"
-     And I should see the link "next"
-     And I should see the link "last"
-     And I should not see the link "previous"
-     And I should not see the link "first"
-     When I follow "next"
-     Then I should see the link "previous"
-     And I should see the link "first"
+
+  Scenario: AC10 Pagination: 100 per page -use the default pagination: e.g. first previous 1 2 3 4 .... 26 next last
+    # If generate <100 Digital library content nodes, I should see no pagination
+    Then I run drush "cc all"
+    Then I run drush "genu 0 --kill"
+    And I am logged in as a user with the "PRC Admin" role
+    Then I run drush "genc 100 --kill --types=digital_library_content"
+    And I visit "/admin-content"
+    And I should not see the link "next"
+    And I should not see the link "last"
+    Then I run drush "genc 400 --types=digital_library_content"
+    And I visit "/admin-content"
+    And I should see the link "next"
+    And I should see the link "last"
+    And I should not see the link "previous"
+    And I should not see the link "first"
+    When I follow "next"
+    Then I should see the link "previous"
+    And I should see the link "first"

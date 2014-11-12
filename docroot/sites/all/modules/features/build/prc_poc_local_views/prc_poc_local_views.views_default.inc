@@ -22,6 +22,7 @@ function prc_poc_local_views_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -213,8 +214,6 @@ function prc_poc_local_views_views_default_views() {
 
   /* Display: Author's Content pane */
   $handler = $view->new_display('panel_pane', 'Author\'s Content pane', 'panel_pane_1');
-  $handler->display->display_options['defaults']['use_ajax'] = FALSE;
-  $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -263,7 +262,6 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['sorts']['nid']['id'] = 'nid';
   $handler->display->display_options['sorts']['nid']['table'] = 'node';
   $handler->display->display_options['sorts']['nid']['field'] = 'nid';
-  $handler->display->display_options['sorts']['nid']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Author uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
@@ -293,7 +291,7 @@ function prc_poc_local_views_views_default_views() {
       'label' => 'User: Uid',
     ),
   );
-  $handler->display->display_options['inherit_panels_path'] = '0';
+  $handler->display->display_options['inherit_panels_path'] = '1';
   $export['admin_content_view'] = $view;
 
   $view = new view();
@@ -473,6 +471,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['allow']['title_override'] = 'title_override';
   $handler->display->display_options['allow']['exposed_form'] = 0;
   $handler->display->display_options['allow']['fields_override'] = 0;
+  $handler->display->display_options['inherit_panels_path'] = '1';
   $export['admin_user_view'] = $view;
 
   $view = new view();
@@ -759,6 +758,7 @@ function prc_poc_local_views_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -884,8 +884,6 @@ function prc_poc_local_views_views_default_views() {
 
   /* Display: Digital Library Pane */
   $handler = $view->new_display('panel_pane', 'Digital Library Pane', 'panel_pane_1');
-  $handler->display->display_options['defaults']['use_ajax'] = FALSE;
-  $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'oldest on top';
@@ -963,7 +961,7 @@ function prc_poc_local_views_views_default_views() {
       'label' => 'User: Uid',
     ),
   );
-  $handler->display->display_options['inherit_panels_path'] = '0';
+  $handler->display->display_options['inherit_panels_path'] = '1';
   $export['digital_library_view'] = $view;
 
   $view = new view();
