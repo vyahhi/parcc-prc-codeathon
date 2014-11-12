@@ -6,6 +6,37 @@
  */
 
 /**
+ *  Implements hook_menu().
+ */
+function prc_my_lists_menu() {
+  // Display a node add form in ctools modal.
+  $items = array();
+  $items['favorites-list/%node/%ctools_js/add-to-list'] = array(
+    'title' => 'Add to My Lists',
+    'title callback' => 'check_plain',
+    'page callback' => 'modal_add_to_list',
+    'page arguments' => array(3, 2, 1),
+    'access callback' => 'node_access',
+    'access arguments' => array('create', 'favorites_list'),
+    'description' => 'My Lists',
+    'file' => 'prc_my_lists.pages.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['favorites-list/%node/%ctools_js/create-list'] = array(
+    'title' => 'Add to My Lists',
+    'title callback' => 'check_plain',
+    'page callback' => 'modal_add_a_list',
+    'page arguments' => array(3, 2, 1),
+    'access callback' => 'node_access',
+    'access arguments' => array('create', 'favorites_list'),
+    'description' => 'My Lists',
+    'file' => 'prc_my_lists.pages.inc',
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
  *  Implements hook_permission().
  */
 function prc_my_lists_permission() {
@@ -51,33 +82,3 @@ function prc_my_lists_node_view($node, $view_mode, $langcode) {
   }
 }
 
-/**
- *  Implements hook_menu().
- */
-function prc_my_lists_menu() {
-  // Display a node add form in ctools modal.
-  $items = array();
-  $items['favorites-list/%node/%ctools_js/add-to-list'] = array(
-    'title' => 'Add to My Lists',
-    'title callback' => 'check_plain',
-    'page callback' => 'modal_add_to_list',
-    'page arguments' => array(3, 2, 1),
-    'access callback' => 'node_access',
-    'access arguments' => array('create', 'favorites_list'),
-    'description' => 'My Lists',
-    'file' => 'prc_my_lists.pages.inc',
-    'type' => MENU_CALLBACK,
-  );
-  $items['favorites-list/%node/%ctools_js/create-list'] = array(
-    'title' => 'Add to My Lists',
-    'title callback' => 'check_plain',
-    'page callback' => 'modal_add_a_list',
-    'page arguments' => array(3, 2, 1),
-    'access callback' => 'node_access',
-    'access arguments' => array('create', 'favorites_list'),
-    'description' => 'My Lists',
-    'file' => 'prc_my_lists.pages.inc',
-    'type' => MENU_CALLBACK,
-  );
-  return $items;
-}
