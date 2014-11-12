@@ -277,18 +277,20 @@ function prc_my_lists_view_lists_form_submit(&$form, &$form_state) {
         drupal_set_message("The content is now associated with \"$list_name\".\n");
       }
     }
-
   }
 
   $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
   if ($ajax) {
     // We're already AJAX here so we know we can just put this in.
-    // Letting it do its thing with nojs doesn't work for the submit redirect.
-    $next_href = "favorites-list/$nid/ajax/add-to-list";
+    // Dismiss the modal.
+    $commands = array();
+    $commands[] = ctools_modal_command_dismiss();
+    print ajax_render($commands);
+    exit();
   }
   else {
     $next_href = "favorites-list/$nid/nojs/add-to-list";
+    // Go back to the add to list page
+    drupal_goto($next_href);
   }
-  // Go back to the add to list page
-  drupal_goto($next_href);
 }
