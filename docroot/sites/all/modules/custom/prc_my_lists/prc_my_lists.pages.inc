@@ -284,7 +284,8 @@ function prc_my_lists_view_lists_form_submit(&$form, &$form_state) {
     // We're already AJAX here so we know we can just put this in.
     // Dismiss the modal.
     $commands = array();
-    $commands[] = ctools_modal_command_dismiss();
+
+    $commands[] = ctools_ajax_command_reload();
     print ajax_render($commands);
     exit();
   }
