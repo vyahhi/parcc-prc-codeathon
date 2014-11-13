@@ -13,7 +13,7 @@ Feature: PRC-253 - Organize Content: Filter by Custom List
     And I am viewing my "Favorites List" node with the title "List 1"
     And I am on "digital-library"
     Then I should see the link "View All"
-    And I should see the text "My Lists"
+    And I should see the heading "My Lists"
     # AC4 The custom lists that the current user has created so far shall be listed
     And I should see the link "List 1"
     And I should see the link "List 2"
@@ -31,7 +31,7 @@ Feature: PRC-253 - Organize Content: Filter by Custom List
     Then I visit "digital-library"
     Then I should see the link "View All"
     # AC3 The My Lists control is not visible when no list created
-    And I should not see the text "My Lists"
+    And I should not see the heading "My Lists"
 
   Scenario: AC5 When a list is clicked, the list of content in the middle of the screen filters to display only the content associated to that list.
     Given I am logged in as a user with the "Educator" role
