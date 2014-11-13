@@ -91,7 +91,6 @@ Feature: Admin UI: View User Accounts (PRC-37)
     And I should see the link "next"
     And I should see the link "last"
 
-#  @javascript
   Scenario: PRC-286 - Users with multiple roles appear once for each role
     Given users:
       | name     | mail                              | pass     | field_first_name | field_last_name | status |
@@ -102,3 +101,25 @@ Feature: Admin UI: View User Accounts (PRC-37)
     And I am at "admin-users"
     Then I click "User ID"
     Then I should see 1 "//a[text()='@uname[Joe User]']" elements
+
+  Scenario: PRC-338 - Users with multiple roles appear once for each role
+    Given users:
+      | name            | mail                               | pass   | field_first_name | field_last_name | status |
+      | Joe Educator    | joe_prc_286a@timestamp@example.com | xyz123 | Joe              | Educator        | 1      |
+      | Joe Contributor | joe_prc_286b@timestamp@example.com | xyz123 | Joe              | Contributor     | 1      |
+      | Joe Member      | joe_prc_286c@timestamp@example.com | xyz123 | Joe              | Member          | 1      |
+      | Joe Admin       | joe_prc_286d@timestamp@example.com | xyz123 | Joe              | Admin           | 1      |
+    And I am logged in as a user with the "PRC Admin" role
+    Then I run drush "user-add-role" "'PRC Admin' joe_prc_286d@timestamp@example.com"
+    Then I run drush "user-add-role" "'PARCC-Member Educator' joe_prc_286c@timestamp@example.com"
+    Then I run drush "user-add-role" "'Content Contributor' joe_prc_286b@timestamp@example.com"
+    Then I run drush "user-remove-role" "'Educator' joe_prc_286d@timestamp@example.com"
+    Then I run drush "user-remove-role" "'Educator' joe_prc_286c@timestamp@example.com"
+    Then I run drush "user-remove-role" "'Educator' joe_prc_286b@timestamp@example.com"
+    And I am at "admin-users"
+    Then I click "User ID"
+      # Then here add in the xpath to grab a link for each of the users we created above
+    Then I should see 1 "//a[text()='@uname[Joe Educator]']" elements
+    Then I should see 1 "//a[text()='@uname[Joe Contributor]']" elements
+    Then I should see 1 "//a[text()='@uname[Joe Member]']" elements
+    Then I should see 1 "//a[text()='@uname[Joe Admin]']" elements

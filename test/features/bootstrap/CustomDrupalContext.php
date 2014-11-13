@@ -259,6 +259,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * Overrides parent::createUsers().
    */
   public function createUsers(\Behat\Gherkin\Node\TableNode $usersTable) {
+    $this->tableNodeFixStepArguments($usersTable);
     foreach ($usersTable->getHash() as $userHash) {
 
       // Fix each field value
@@ -456,18 +457,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @param TableNode $nodesTable
    */
   public function createNodes($type, TableNode $nodesTable) {
-    $new_rows = array();
-    $original_rows = $nodesTable->getRows();
-    $header_row = array_shift($original_rows);
-    $new_rows[] = $header_row;
-
-    foreach ($nodesTable->getHash() as $nodeHash) {
-      foreach ($nodeHash as $key => $value) {
-        $nodeHash[$key] = $this->fixStepArgument($value);
-      }
-      $new_rows[] = $nodeHash;
-    }
-    $nodesTable->setRows($new_rows);
+    $this->tableNodeFixStepArguments($nodesTable);
     parent::createNodes($type, $nodesTable);
   }
 
@@ -925,6 +915,25 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
 
     print $message . PHP_EOL;
+  }
+
+  /**
+   * @param TableNode $nodesTable
+   * @throws Exception
+   */
+  protected function tableNodeFixStepArguments(TableNode $table) {
+    $new_rows = array();
+    $original_rows = $table->getRows();
+    $header_row = array_shift($original_rows);
+    $new_rows[] = $header_row;
+
+    foreach ($table->getHash() as $nodeHash) {
+      foreach ($nodeHash as $key => $value) {
+        $nodeHash[$key] = $this->fixStepArgument($value);
+      }
+      $new_rows[] = $nodeHash;
+    }
+    $table->setRows($new_rows);
   }
 }
 
