@@ -4,28 +4,25 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
   I want to organize content into one of my existing custom lists,
   so that I can locate the content quickly and as needed.
 
-  Scenario: Anonymous cannot see Add to My Lists
+  Scenario: ACx Anonymous cannot see Add to My Lists
     Given I am an anonymous user
     And I am viewing a "Digital Library Content" node with the title "PRC-52 Anonymous Link"
     Then I should not see the link "Add to My Lists"
 
-  Scenario: No previously existing lists
+  Scenario: AC1 In the Digital Library page where all the content is listed, a new link called Add to My Lists will be available.
     Given I am logged in as a user with the "Educator" role
     And I have no "digital_library_content" nodes
-    # Right now we are just using this line to create a node
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
     And I am on the homepage
     Then I click "Digital Library"
-    # AC1
     Then I should see the link "Add to My Lists"
     Then I click "Add to My Lists"
     Then I should see a "List" field
     And the "List" select box should be empty
-    
-    And I should see the link "Create new"
-    And   I should see an "Add to List" button
+    And I should see the link "Create New List"
+    And I should see an "Add to List" button
 
-  Scenario: With a previously existing list
+  Scenario: AC4e, With a previously existing list
     Given I am logged in as a user with the "Educator" role
     And I have no "digital_library_content" nodes
     # Right now we are just using this line to create a node
@@ -39,7 +36,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     Then I should see a "List" field
     Then I select "My Only List" from "List"
 
-  Scenario: With 10 previously existing lists
+  Scenario: AC4e, With 10 previously existing lists
     Given I am logged in as a user with the "Educator" role
     And I have no "digital_library_content" nodes
     # Right now we are just using this line to create a node
@@ -67,7 +64,12 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     Then I select "third list" from "List"
     Then I select "tenth list" from "List"
 
-  Scenario: Selecting a list
+    And "eighth list" should precede "fifth list" for the query "#edit-select-list option"
+    And "fifth list" should precede "first list" for the query "#edit-select-list option"
+    And "first list" should precede "fourth list" for the query "#edit-select-list option"
+
+
+  Scenario: AC9 Selecting a list
     Given I am logged in as a user with the "Educator" role
     And I am viewing my "favorites_list" node with the title "My Only List"
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
@@ -76,7 +78,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     Then I press "Add to List"
     # Now how do we verify that the node was referenced by the list?
 
-  Scenario: Item gets added to list
+  Scenario: AC4a Item gets added to list
     Given I am logged in as a user with the "Educator" role
     And I am viewing my "favorites_list" node with the title "My Only List"
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
@@ -94,7 +96,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     And I should see the text "To Add To Lists"
     And I should see 1 ".field-item" elements
 
-  Scenario: Item can only be added to a list once
+  Scenario: AC8 Item can only be added to a list once
     Given I am logged in as a user with the "Educator" role
     And I am viewing my "favorites_list" node with the title "My Only List"
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
@@ -112,7 +114,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     And I should see the text "To Add To Lists"
     And I should see 1 ".field-item" elements
 
-  Scenario: Multiple items can be added to a list
+  Scenario: AC8? Multiple items can be added to a list
     Given I am logged in as a user with the "Educator" role
     And I am viewing my "favorites_list" node with the title "My Only List"
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
@@ -134,14 +136,19 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     Then I reload the page
     And I should see 2 ".field-item" elements
 
-  #  Acceptance Criteria
-  # AC1 In the Digital Library page where all the content is listed, a new link called Add to My Lists will be available.
-  # AC2 Once the Add to My Lists link is selected, a list of existing custom items will appear.
-  # AC3 The educator can associate specific content to any of the custom items, by selecting a specific item from the list displayed.
-  # AC4 The menu contains:
-  #   A "Add to My Lists" Label & Textbox: The user can start typing a custom list name in order to narrow down the number of custom lists displayed.
-  #   A Create New link (covered in story PRC-53): The educator can create a new custom list item.
-  #   A list of existing custom items: This list contains the custom lists the current user has already created. This list gets smaller based on what the user enters in the "Add to My List" textbox.
-  #   If the entered value does not match any of the existing custom lists, the only available option will be the Create New link
-  # AC5 Content can be associated to only one list at a time.
-  # AC6 When a custom list is clicked, the system will associate the content to the selected custom list and close the overlay.
+#  Acceptance Criteria
+#  AC1 In the Digital Library page where all the content is listed, a new link called Add to My Lists will be available.
+#  AC2 Once the Add to My Lists link is selected, an overlay module will appear with "Add to My List" displaying in the title section.
+#  AC3 The authenticated user can associate specific content to any of the custom items, by selecting a specific item from the list displayed.
+#  AC4 The components will display:
+#    A Create New List link (covered in story PRC-53): The authenticated user can create a new custom list item.
+#    Label called "List"
+#    Select the list you would like to use to categorize this content.
+#    Search field (Combobox/Autocomplete dropdown is one field.)
+#    A list of existing custom items: This list contains the custom lists the current user has already created.
+#  AC5 To filter the existing custom list results, the authenticated user will select the drop down list and begin typing.
+#  AC6 If the entered value does not match any of the existing custom lists, the following message will display:
+#    No results match "<entered characters here>"
+#  AC7 Selecting the list name does not save the content/custom list association and dismiss the form.
+#  AC8 Content can be associated to only one list at a time.
+#  AC9 An Add to List button will save the association between the content and the existing list and will close the overlay module.
