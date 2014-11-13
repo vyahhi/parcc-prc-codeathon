@@ -111,10 +111,10 @@ function prc_my_lists_view_lists_form($form, &$form_state) {
 
   if ($ajax) {
     ctools_include('modal');
-    $markup = ctools_modal_text_button('Create new', $href, 'Create new favorites list');
+    $markup = ctools_modal_text_button('Create New List', $href, 'Create new favorites list');
   }
   else {
-    $markup = l(t('Create new'), $href);
+    $markup = l(t('Create New List'), $href);
   }
   $form['create_new_list'] = array(
     '#markup' => $markup,
@@ -160,7 +160,8 @@ function _prc_my_lists_current_user_lists() {
   $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'favorites_list')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyCondition('uid', $uid);
+    ->propertyCondition('uid', $uid)
+    ->propertyOrderBy('title');
 
   $result = $query->execute();
 
