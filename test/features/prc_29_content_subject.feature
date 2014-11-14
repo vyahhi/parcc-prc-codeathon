@@ -28,6 +28,7 @@ Feature: PRC-29 Content Categorization - Subject
     Then I click "Edit"
     And I click "Show Add More Information (Content Properties)"
     Then I should see 1 "#edit-field-subject-und-0-tid-select-1" elements
+    Then I move backward one page, confirming the dialog
 
   @javascript
   Scenario: I can drill hierarchically through the Subject field
@@ -41,6 +42,7 @@ Feature: PRC-29 Content Categorization - Subject
     Then I wait for AJAX to finish
     Then I select "Creating Instructional Environments" from "edit-field-subject-und-0-tid-select-3"
     Then I wait for AJAX to finish
+    Then I move backward one page, confirming the dialog
 
   @javascript
   Scenario: I can select multiple Subjects
@@ -59,6 +61,7 @@ Feature: PRC-29 Content Categorization - Subject
     Then I wait for AJAX to finish
     Then I select "Creating Equations" from "edit-field-subject-und-1-tid-select-4"
     Then I wait for AJAX to finish
+    Then I move backward one page, confirming the dialog
 
   @javascript
   Scenario: I can save a node with a subject

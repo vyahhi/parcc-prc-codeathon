@@ -78,4 +78,3 @@ Feature: PRC-219 Content Categorization - Standard
     Then I wait for AJAX to finish
     Then I press "Save"
     Then I should see the text "National Council"
-    Then I move backward one page, confirming the dialog
