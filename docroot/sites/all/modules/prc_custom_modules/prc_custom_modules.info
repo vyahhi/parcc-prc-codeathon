@@ -23,6 +23,7 @@ dependencies[] = prc_search
 dependencies[] = prc_user_edit_form
 dependencies[] = realname
 dependencies[] = sharethis
+dependencies[] = shs
 dependencies[] = strongarm
 dependencies[] = user_edit_protection
 dependencies[] = user_single_role
