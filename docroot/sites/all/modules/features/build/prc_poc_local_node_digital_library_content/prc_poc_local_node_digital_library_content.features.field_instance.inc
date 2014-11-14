@@ -222,7 +222,9 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 15,
     ),
@@ -271,7 +273,9 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 12,
     ),
@@ -393,7 +397,9 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 14,
     ),
@@ -411,7 +417,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 10,
+        'weight' => 12,
       ),
       'search_result' => array(
         'label' => 'above',
@@ -441,6 +447,60 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
       ),
       'type' => 'options_buttons',
       'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance: 'node-digital_library_content-field_standard'
+  $field_instances['node-digital_library_content-field_standard'] = array(
+    'bundle' => 'digital_library_content',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'ds',
+        'settings' => array(
+          'taxonomy_term_reference_view_mode' => 'full',
+        ),
+        'type' => 'ds_taxonomy_view_mode',
+        'weight' => 10,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_standard',
+    'label' => 'Standard',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'shs',
+      'settings' => array(
+        'label_help_description' => '',
+        'shs' => array(
+          'create_new_levels' => 0,
+          'create_new_terms' => 0,
+          'force_deepest' => 0,
+          'node_count' => 0,
+          'use_chosen' => 'never',
+        ),
+      ),
+      'type' => 'taxonomy_shs',
+      'weight' => 16,
     ),
   );
 
@@ -486,9 +546,19 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
+      'module' => 'shs',
+      'settings' => array(
+        'apply_chosen' => 0,
+        'label_help_description' => '',
+        'shs' => array(
+          'create_new_levels' => 0,
+          'create_new_terms' => 0,
+          'force_deepest' => 0,
+          'node_count' => 0,
+          'use_chosen' => 'chosen',
+        ),
+      ),
+      'type' => 'taxonomy_shs',
       'weight' => 13,
     ),
   );
@@ -632,6 +702,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
   t('Link to URL');
   t('Media Type');
   t('Permissions');
+  t('Standard');
   t('Subject');
   t('Tags');
 

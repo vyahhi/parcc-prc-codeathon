@@ -59,11 +59,14 @@ function prc_poc_local_node_digital_library_content_strongarm() {
         'title' => array(
           'weight' => '0',
         ),
+        'path' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(
         'sharethis' => array(
           'default' => array(
-            'weight' => '10',
+            'weight' => '11',
             'visible' => TRUE,
           ),
           'digital_library_item' => array(

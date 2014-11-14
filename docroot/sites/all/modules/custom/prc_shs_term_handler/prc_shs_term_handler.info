@@ -1,0 +1,6 @@
+name = PRC Simple Hierarchy Select Term Handler
+description = Changes how SHS handles terms from different vocabularies
+package = PRC
+core = 7.x
+dependencies[] = shs
+

@@ -1,0 +1,38 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: jfranks
+ * Date: 11/14/14
+ * Time: 3:23 PM
+ */
+
+/**
+ *  Implements hook_shs_term_get_children_alter().
+ */
+function prc_shs_term_handler_shs_term_get_children_alter(&$terms, $context) {
+  $vid = $context['vid'];
+  $vocab = taxonomy_vocabulary_load($vid);
+  $vocab_name = $vocab->name;
+  if ($vocab_name == 'Standard') {
+    $keys = array_keys($terms);
+    $root_vid = $keys[0];
+    $fullterms = taxonomy_get_tree($root_vid, 0);
+    foreach($fullterms as $key => $term) {
+      $keyedterms[$term->tid] = $term;
+    }
+    _prc_shs_term_handler_recursive_term_description_update($terms, $keyedterms);
+  }
+}
+
+
+function _prc_shs_term_handler_recursive_term_description_update(&$terms, $fullterms) {
+  foreach($terms as $tid => &$term) {
+    if (is_array($term)) {
+      _prc_shs_term_handler_recursive_term_description_update($term, $fullterms);
+    }
+    else {
+      $term = $fullterms[$tid]->description;
+    }
+  }
+  return $terms;
+}

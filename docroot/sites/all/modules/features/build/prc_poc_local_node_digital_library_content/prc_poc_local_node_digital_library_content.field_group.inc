@@ -111,6 +111,7 @@ function prc_poc_local_node_digital_library_content_field_group_info() {
       1 => 'field_grade_level',
       2 => 'field_media_type',
       3 => 'field_subject',
+      4 => 'field_standard',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
