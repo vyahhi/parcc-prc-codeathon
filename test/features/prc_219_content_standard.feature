@@ -28,6 +28,7 @@ Feature: PRC-219 Content Categorization - Standard
     Then I click "Edit"
     And I click "Show Add More Information (Content Properties)"
     Then I should see 1 "#edit-field-standard-und-0-tid-select-1" elements
+    Then I move backward one page, confirming the dialog
 
   @javascript
   Scenario: I can drill hierarchically through the Standard field
@@ -41,6 +42,7 @@ Feature: PRC-219 Content Categorization - Standard
     Then I wait for AJAX to finish
     Then I select "Compute fluently and make reasonable estimates" from "edit-field-standard-und-0-tid-select-3"
     Then I wait for AJAX to finish
+    Then I move backward one page, confirming the dialog
 
   @javascript
   Scenario: I can select multiple Standards
@@ -63,6 +65,7 @@ Feature: PRC-219 Content Categorization - Standard
     Then I wait for AJAX to finish
     Then I select "Distinguish between defining attributes (e.g., triangles are closed and three-sided) versus non-defining attributes (e.g., color, orientation, overall size); build and draw shapes to possess defining attributes." from "edit-field-standard-und-1-tid-select-4"
     Then I wait for AJAX to finish
+    Then I move backward one page, confirming the dialog
 
   @javascript
   Scenario: I can save a node with a Standard
@@ -75,3 +78,4 @@ Feature: PRC-219 Content Categorization - Standard
     Then I wait for AJAX to finish
     Then I press "Save"
     Then I should see the text "National Council"
+    Then I move backward one page, confirming the dialog
