@@ -123,3 +123,15 @@ Feature: Admin UI: View User Accounts (PRC-37)
     Then I should see 1 "//a[text()='@uname[Joe Contributor]']" elements
     Then I should see 1 "//a[text()='@uname[Joe Member]']" elements
     Then I should see 1 "//a[text()='@uname[Joe Admin]']" elements
+
+  Scenario: PRC-367 Accounts that are blocked do not show up in list
+    Given users:
+      | name            | mail                               | pass   | field_first_name | field_last_name | status |
+      | Joe Blocked     | joe_prc_367a@timestamp@example.com | xyz123 | Joe              | Blocked         | 0      |
+      | Joe Active      | joe_prc_367b@timestamp@example.com | xyz123 | Joe              | Active          | 1      |
+    And I am logged in as a user with the "PRC Admin" role
+    And I am at "admin-users"
+    Then I click "User ID"
+      # Then here add in the xpath to grab a link for each of the users we created above
+    Then I should see 1 "//a[text()='@uname[Joe Blocked]']" elements
+    Then I should see 1 "//a[text()='@uname[Joe Active]']" elements
