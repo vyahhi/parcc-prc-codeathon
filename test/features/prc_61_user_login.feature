@@ -76,3 +76,57 @@ Feature: PRC Administrators (PRC-61)
     # Quotes apparently screw it up, so we'll just leave out the link
     Then I should see the error message containing "Sorry, unrecognized username or password."
     And I should see the link "Have you forgotten your password?"
+
+  @javascript
+  Scenario: PRC-368 Max failed login attempts message includes a request a new password link. However, successfully changing the password does NOT unlock the account.
+    Given users:
+      | name     | mail                     | pass     | field_first_name | field_last_name | status |
+      | Joe User | joe_prc_368@example.com  | xyz123   | Joe              | User            | 1      |
+    And I am an anonymous user
+    And I am on the homepage
+    And the test email system is enabled
+    # Fail login 5 times
+    When I fill in "E-mail" with "joe_prc_368@example.com"
+    And I fill in "Password" with "wrong"
+    And I press "Log in"
+    Then I fill in "E-mail" with "joe_prc_368@example.com"
+    And I fill in "Password" with "wrong"
+    And I press "Log in"
+    Then I fill in "E-mail" with "joe_prc_368@example.com"
+    And I fill in "Password" with "wrong"
+    And I press "Log in"
+    Then I fill in "E-mail" with "joe_prc_368@example.com"
+    And I fill in "Password" with "wrong"
+    And I press "Log in"
+    Then I fill in "E-mail" with "joe_prc_368@example.com"
+    And I fill in "Password" with "wrong"
+    And I press "Log in"
+    # 5! Now we should be locked
+    Then I fill in "E-mail" with "joe_prc_368@example.com"
+    And I fill in "Password" with "xyz123"
+    And I press "Log in"
+    Then I should see the error message containing "Sorry, there have been more than 5 failed login attempts for this account. It is temporarily blocked. Try again later or"
+    # Log in again, should see the same message
+    Then I fill in "E-mail" with "joe_prc_368@example.com"
+    And I fill in "Password" with "xyz123"
+    And I press "Log in"
+    Then I should see the error message containing "Sorry, there have been more than 5 failed login attempts for this account. It is temporarily blocked. Try again later or"
+    And I click "request a new password"
+    And I fill in "E-mail *" with "joe_prc_368@example.com"
+    And I press "E-mail new password"
+    Then the email to "joe_prc_368@example.com" should contain "A request to reset the password for your account has been made at"
+    And I follow the link in the email
+    Then I should see "Reset Password"
+    And I press "Log in"
+    # Logged in from the email. Now reset password and try to log in with that new password.
+    And I fill in "Password" with "password1"
+    And I fill in "Confirm password" with "password1"
+    And I press "Save"
+    Then I should see the message containing "The changes have been saved."
+    Then I click "Log out"
+    Then the url should match "/"
+    Then I fill in "E-mail" with "joe_prc_368@example.com"
+    And I fill in "Password" with "password1"
+    And I press "Log in"
+    Then I should see the link "Log out"
+    And I should see "Welcome, Joe User"

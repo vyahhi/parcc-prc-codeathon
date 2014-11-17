@@ -54,6 +54,23 @@ function prc_login_form_form_user_login_block_alter(&$form, &$form_state) {
 }
 
 /**
+ * When a user changes their password after the reset
+ *  Implements hook_user_update().
+ */
+function prc_login_form_user_update(&$edit, $account, $category) {
+  global $user;
+  // Flood actually records it like uid-ip
+  $event = 'failed_login_attempt_user';
+  $identifier = $account->uid . '-' . ip_address();
+  flood_clear_event($event, $identifier);
+
+  // Then clear the IP
+  $event = 'failed_login_attempt_ip';
+  $identifier = ip_address();
+  flood_clear_event($event, $identifier);
+}
+
+/**
  *  Implements hook_user_insert().
  */
 function prc_login_form_user_insert(&$edit, $account, $category) {
