@@ -19,6 +19,7 @@ dependencies[] = prc_digital_library_permissions
 dependencies[] = prc_invite_form
 dependencies[] = prc_login_form
 dependencies[] = prc_my_lists
+dependencies[] = prc_registration
 dependencies[] = prc_search
 dependencies[] = prc_shs_term_handler
 dependencies[] = prc_user_edit_form
