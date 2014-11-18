@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * @file
+ * Alters to registration forms.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter
+ *
+ * Changes the title of the registration form
+ *
+ * @param $form
+ * @param $form_state
+ */
+function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
+  drupal_set_title('Create User Account to Join Partnership Resource Center');
+
+  $profession_weight = $form['field_profession']['#weight'];
+
+  $form['has_member_state'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('My State is a PARCC Member'),
+    '#weight' => $profession_weight + 1,
+  );
+
+  $form['state_account_number'] = array(
+    '#type' => 'textfield',
+    '#title' => t('State Account #'),
+    '#weight' => $profession_weight + 2,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="has_member_state"]' => array('checked' => TRUE),
+      ),
+      'required' => array(
+        ':input[name="has_member_state"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
+  $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
+}
+
+
+/**
+ * Validate for user registration form
+ *
+ * @param $form
+ * @param $form_state
+ */
+function prc_registration_form_user_register_form_validate(&$form, &$form_state) {
+  $x = 'x';
+  if (
+    array_key_exists('has_member_state', $form_state['values']) && $form_state['values']['has_member_state']
+  ) {
+
+    if (!$form_state['values']['state_account_number']) {
+      form_set_error('state_account_number', t('State Account # field is required.'));
+    }
+    else {
+
+      $account_number = $form_state['values']['state_account_number'];
+
+      $query = new EntityFieldQuery();
+      $query->entityCondition('entity_type', 'taxonomy_term')
+        ->entityCondition('bundle', 'member_state')
+        ->fieldCondition('field_state_code', 'value', $account_number, '=');
+      $result = $query->execute();
+      if (array_key_exists('taxonomy_term', $result)) {
+        $tids = array_keys($result['taxonomy_term']);
+        $tid = reset($tids);
+        $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
+      }
+      else {
+        form_set_error('state_account_number', t('Valid State Account # is required.'));
+      }
+    }
+  }
+}

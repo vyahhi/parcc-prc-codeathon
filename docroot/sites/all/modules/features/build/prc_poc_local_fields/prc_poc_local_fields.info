@@ -34,6 +34,7 @@ features[field_base][] = field_profession
 features[field_base][] = field_rating
 features[field_base][] = field_role_id
 features[field_base][] = field_standard
+features[field_base][] = field_state_code
 features[field_base][] = field_subject
 features[field_base][] = field_tags
 features[field_base][] = field_thumbnail
