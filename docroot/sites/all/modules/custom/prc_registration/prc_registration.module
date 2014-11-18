@@ -15,29 +15,31 @@
  */
 function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
   drupal_set_title('Create User Account to Join Partnership Resource Center');
+  $invite = invite_load_from_session();
+  // We don't want to display any of this stuff if the user is coming from an invite
+  if (!$invite) {
+    $profession_weight = $form['field_profession']['#weight'];
 
-  $profession_weight = $form['field_profession']['#weight'];
+    $form['has_member_state'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('My State is a PARCC Member'),
+      '#weight' => $profession_weight + 1,
+    );
 
-  $form['has_member_state'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('My State is a PARCC Member'),
-    '#weight' => $profession_weight + 1,
-  );
-
-  $form['state_account_number'] = array(
-    '#type' => 'textfield',
-    '#title' => t('State Account #'),
-    '#weight' => $profession_weight + 2,
-    '#states' => array(
-      'visible' => array(
-        ':input[name="has_member_state"]' => array('checked' => TRUE),
+    $form['state_account_number'] = array(
+      '#type' => 'textfield',
+      '#title' => t('State Account #'),
+      '#weight' => $profession_weight + 2,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="has_member_state"]' => array('checked' => TRUE),
+        ),
+        'required' => array(
+          ':input[name="has_member_state"]' => array('checked' => TRUE),
+        ),
       ),
-      'required' => array(
-        ':input[name="has_member_state"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-
+    );
+  }
   $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
 }
 
@@ -49,7 +51,11 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
  * @param $form_state
  */
 function prc_registration_form_user_register_form_validate(&$form, &$form_state) {
-  $x = 'x';
+  $invite = invite_load_from_session();
+  if ($invite && count($invite->field_member_state)) {
+    $tid = $invite->field_member_state[LANGUAGE_NONE][0]['tid'];
+    $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
+  }
   if (
     array_key_exists('has_member_state', $form_state['values']) && $form_state['values']['has_member_state']
   ) {
