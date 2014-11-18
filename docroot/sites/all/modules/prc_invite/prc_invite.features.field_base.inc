@@ -17,34 +17,31 @@ function prc_invite_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_member_state',
-    'foreign keys' => array(),
+    'foreign keys' => array(
+      'tid' => array(
+        'columns' => array(
+          'tid' => 'tid',
+        ),
+        'table' => 'taxonomy_term_data',
+      ),
+    ),
     'indexes' => array(
-      'value' => array(
-        0 => 'value',
+      'tid' => array(
+        0 => 'tid',
       ),
     ),
     'locked' => 0,
-    'module' => 'list',
+    'module' => 'taxonomy',
     'settings' => array(
       'allowed_values' => array(
-        'AR' => 'Arkansas',
-        'CO' => 'Colorado',
-        'DC' => 'District of Columbia',
-        'IL' => 'Illinois',
-        'LA' => 'Louisiana',
-        'MD' => 'Maryland',
-        'MA' => 'Massachusetts',
-        'MI' => 'Mississippi',
-        'NJ' => 'New Jersey',
-        'NM' => 'New Mexico',
-        'NY' => 'New York',
-        'OH' => 'Ohio',
-        'RI' => 'Rhode Island',
+        0 => array(
+          'vocabulary' => 'member_state',
+          'parent' => 0,
+        ),
       ),
-      'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'list_text',
+    'type' => 'taxonomy_term_reference',
   );
 
   return $field_bases;

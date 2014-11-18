@@ -87,9 +87,9 @@ function prc_poc_local_users_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'taxonomy_term_reference_link',
         'weight' => 3,
       ),
     ),
@@ -103,7 +103,10 @@ function prc_poc_local_users_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+        'label_help_description' => '',
+      ),
       'type' => 'options_select',
       'weight' => 11,
     ),

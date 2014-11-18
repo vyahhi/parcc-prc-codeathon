@@ -130,9 +130,9 @@ To become a member of [site:name], click the link below or paste it into the add
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'taxonomy_term_reference_link',
         'weight' => 32,
       ),
     ),
@@ -146,7 +146,10 @@ To become a member of [site:name], click the link below or paste it into the add
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+        'label_help_description' => '',
+      ),
       'type' => 'options_select',
       'weight' => 32,
     ),
