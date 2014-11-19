@@ -1,0 +1,4 @@
+name = PRC Digital Library Form
+description = Changes to the Digital Library Content Form
+package = PRC
+core = 7.x
