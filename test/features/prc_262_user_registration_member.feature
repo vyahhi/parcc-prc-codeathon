@@ -55,7 +55,7 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
     And I check the box "My State is a PARCC Member"
     And I fill in "<account>" for "State Account #"
     Then I press the "Create new account" button
-    Then I should see the message "Registration successful. You are now logged in."
+    Then I should see the message containing "Registration successful. You are now logged in."
     And I follow "My account"
     Then I should see the text "Member State:"
     And I should see the link "<state>"

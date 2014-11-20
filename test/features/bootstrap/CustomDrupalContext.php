@@ -863,7 +863,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
 
     parent::afterScenario($event);
-    $this->theDefaultEmailSystemIsEnabled();
+    // Taking this out for the moment, because the dev machines can revert Features to get back to where we should be
+//    $this->theDefaultEmailSystemIsEnabled();
+  }
+
+  public function beforeScenario($event) {
+    parent::beforeScenario($event);
+    $this->theTestEmailSystemIsEnabled();
   }
 
   public function recordFailedEvent($event) {

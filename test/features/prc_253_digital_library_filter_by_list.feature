@@ -27,7 +27,7 @@ Feature: PRC-253 - Organize Content: Filter by Custom List
 
   Scenario: AC2 A View All option shall be available above (outside of) the list, and is selected by default and does not filter any content
     Given I am logged in as a user with the "Educator" role
-    Then I run drush "genc 0 --kill"
+    Then I run drush "genc 0 --types=digital_library_content --kill"
     Then I visit "digital-library"
     Then I should see the link "View All"
     # AC3 The My Lists control is not visible when no list created

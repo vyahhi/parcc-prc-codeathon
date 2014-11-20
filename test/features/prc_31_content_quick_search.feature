@@ -16,7 +16,6 @@ Feature: Search Content - Quick Search (PRC-31)
     And I am on "search"
     Then I should not see the text "Advanced search"
 
-  @javascript
   Scenario: AC2 - Search terms
     Given "Digital Library Content" nodes:
       | title         | body      | status | promote | uid | language | tags         | field_author_name |

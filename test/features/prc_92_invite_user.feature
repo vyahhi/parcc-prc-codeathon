@@ -83,7 +83,6 @@ Feature: Invite User (PRC-92)
   Scenario: AC9 - A Send Invitation button is provided at the end. At click, the system shall sends an email to the address provided, stating the pre-defined role.
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    And the test email system is enabled
     Then I select the radio button "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com"
@@ -96,7 +95,6 @@ Feature: Invite User (PRC-92)
   Scenario: AC9 - Send invitations to multiple users
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    And the test email system is enabled
     Then I select the radio button "Educator"
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@example.com,example2@example.com"

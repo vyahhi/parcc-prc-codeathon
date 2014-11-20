@@ -11,7 +11,6 @@ Feature: Forgot Password (PRC-146)
       | Joe User | joe_prc_146@example.com | xyz123   | JoeF              | UserL            | 1      |
     And I am an anonymous user
     And I am on the homepage
-    And the test email system is enabled
     When I click "Forgot password?"
     Then the url should match "user/password"
     And I should see the text "Request new password"
@@ -51,7 +50,6 @@ Feature: Forgot Password (PRC-146)
   # This test actually goes through the entire reset password flow and covers all 3 ACs.
     Given I am an anonymous user
     And I am on the homepage
-    And the test email system is enabled
     When I click "Forgot password?"
     Then I fill in "E-mail" with "notarealemailaddress@example.com"
     And I press "E-mail new password"
@@ -60,7 +58,6 @@ Feature: Forgot Password (PRC-146)
   Scenario: Invalid email address
     Given I am an anonymous user
     And I am on the homepage
-    And the test email system is enabled
     When I click "Forgot password?"
     Then I fill in "E-mail" with "notarealemailaddress"
     And I press "E-mail new password"

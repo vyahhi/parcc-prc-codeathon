@@ -77,14 +77,12 @@ Feature: PRC Administrators (PRC-61)
     Then I should see the error message containing "Sorry, unrecognized username or password."
     And I should see the link "Have you forgotten your password?"
 
-  @javascript
   Scenario: PRC-368 Max failed login attempts message includes a request a new password link. However, successfully changing the password does NOT unlock the account.
     Given users:
       | name     | mail                     | pass     | field_first_name | field_last_name | status |
       | Joe User | joe_prc_368@example.com  | xyz123   | Joe              | User            | 1      |
     And I am an anonymous user
     And I am on the homepage
-    And the test email system is enabled
     # Fail login 5 times
     When I fill in "E-mail" with "joe_prc_368@example.com"
     And I fill in "Password" with "wrong"

@@ -7,7 +7,6 @@ Feature: PRC-363 State Association to Invited Users
   Scenario: Accepting an invitation with a state saves that state to the user
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    And the test email system is enabled
     Then I select the radio button "Content Contributor"
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"

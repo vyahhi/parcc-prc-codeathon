@@ -55,7 +55,6 @@ Feature: Login & Public Registration (PRC-48)
 
   Scenario: The email the system sends by default when a user registers is: (AC5b)
     Given I am on the homepage
-    And the test email system is enabled
     And I follow "Join now!"
     Then I fill in "@timestamp@example.com" for "E-mail"
     And I fill in "abc123" for "Password"
