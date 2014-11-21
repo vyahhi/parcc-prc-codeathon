@@ -60,3 +60,41 @@ Feature: Edit Content (PRC-158)
     And I should see the link "lovelythumbnail.png"
     # AC7  is tested in PRC 157
     # AC10 is tested in PRC 251
+
+  @javascript
+  Scenario: PRC-342 Edit Content- Expandable/collapsible controls when attachment are in sections
+    Given I am logged in as a user with the "Content Contributor" role
+    And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
+    And I follow "Content" in the "header" region
+    Then I should see the link "edit" in the "content" region
+    Then I follow "edit"
+    Then I should see the heading "Edit Digital Library Content Test-o-rama" in the "content" region
+    Then I should see the text "Attach a File"
+    Then I should not see the text "Add a new file"
+    And I click "Attach a File"
+    Then I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-document-und-0-upload"
+    And I select the radio button "Public"
+    And I press "Save"
+    And I should see the success message containing "Digital Library Content Test-o-rama has been updated."
+    Then I follow "edit"
+    Then I should see the text "Add a new file"
+    And I should see the text "Link to URL"
+    But I should not see the text "The link title is limited to 128 characters maximum."
+    Then I click "Link to URL"
+    And I fill in "URL" with "http://breaktech.com"
+    Then I press "Save"
+    And I should see the success message containing "Digital Library Content Test-o-rama has been updated."
+    Then I follow "edit"
+    And I should see the text "The link title is limited to 128 characters maximum."
+    And I should see the text "Add More Information"
+    But I should not see the text "Grade Level"
+    Then I click "Add More Information (Content Properties)"
+    And I select "First Grade" from "Grade Level"
+    Then I press "Save"
+    And I should see the success message containing "Digital Library Content Test-o-rama has been updated."
+    Then I follow "edit"
+    And I should see the text "Grade Level"
+
+
+
+
