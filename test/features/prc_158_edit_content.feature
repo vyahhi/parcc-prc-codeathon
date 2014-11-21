@@ -86,7 +86,7 @@ Feature: Edit Content (PRC-158)
     And I should see the success message containing "Digital Library Content Test-o-rama has been updated."
     Then I follow "edit"
     And I should see the text "The link title is limited to 128 characters maximum."
-    And I should see the text "Add More Information"
+    And I should see the text "Add More Information" 
     But I should not see the text "Grade Level"
     Then I click "Add More Information (Content Properties)"
     And I select "First Grade" from "Grade Level"
