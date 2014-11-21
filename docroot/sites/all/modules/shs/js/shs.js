@@ -43,6 +43,8 @@
                 $select.addClass('error');
               }
               $select.appendTo($field.parent());
+              Drupal.attachBehaviors($select, settings);
+
               // Retrieve data for this level.
               getTermChildren($select, fieldSettings, parent_id, parent.tid, $field.attr('id'));
               // Use current term id as parent id for the next level.
@@ -65,6 +67,7 @@
               // Try to add one additional level.
               $select = shsElementCreate($field.attr('id'), fieldSettings, level);
               $select.appendTo($field.parent());
+              Drupal.attachBehaviors($select, settings);
               // Retrieve data for this level.
               getTermChildren($select, fieldSettings, parent_id, 0, $field.attr('id'));
             }
@@ -329,6 +332,7 @@
       level++;
       $element_new = shsElementCreate(base_id, settings, level);
       $element_new.appendTo($triggering_element.parent());
+      Drupal.attachBehaviors($element_new, settings);
       // Retrieve list of items for the new element.
       getTermChildren($element_new, settings, $triggering_element.val(), 0, base_id);
     }
@@ -377,7 +381,6 @@
         })
         .hide();
     }
-    Drupal.attachBehaviors($element, settings);
     // Return the new element.
     return $element;
   }
