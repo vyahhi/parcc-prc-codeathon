@@ -22,6 +22,16 @@ Feature: PRC-29 Content Categorization - Subject
   This is being changed to support Simple Hierarchy Select instead of an Advanced popup.
 
   @javascript
+  Scenario: PRC-404 Subject select triggers leave confirmation
+    Given I am logged in as a user with the "Content Contributor" role
+    And I am viewing my "Digital Library Content" node with the title "PRC-29 Subject"
+    Then I click "Edit"
+    And I click "Show Add More Information (Content Properties)"
+    When I click on the element with css selector "#edit-field-subject-und-0-tid-select-1"
+    When I click on the element with css selector "#edit-title"
+    Then I move backward one page, confirming the dialog
+
+  @javascript
   Scenario: I can see the Subject field
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "PRC-29 Subject"

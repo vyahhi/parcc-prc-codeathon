@@ -377,6 +377,7 @@
         })
         .hide();
     }
+    Drupal.attachBehaviors($element, settings);
     // Return the new element.
     return $element;
   }

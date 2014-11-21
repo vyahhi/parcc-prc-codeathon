@@ -1,0 +1,12 @@
+diff --git a/docroot/sites/all/modules/shs/js/shs.js b/docroot/sites/all/modules/shs/js/shs.js
+index 28cea53..82d807d 100644
+--- a/docroot/sites/all/modules/shs/js/shs.js
++++ b/docroot/sites/all/modules/shs/js/shs.js
+@@ -377,6 +377,7 @@
+         })
+         .hide();
+     }
++    Drupal.attachBehaviors($element, settings);
+     // Return the new element.
+     return $element;
+   }
