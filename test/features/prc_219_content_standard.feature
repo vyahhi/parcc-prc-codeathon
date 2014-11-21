@@ -24,7 +24,7 @@ Feature: PRC-219 Content Categorization - Standard
   @javascript
   Scenario: PRC-405 Standard select triggers leave confirmation
     Given I am logged in as a user with the "Content Contributor" role
-    And I am viewing my "Digital Library Content" node with the title "PRC-29 Subject"
+    And I am viewing my "Digital Library Content" node with the title "PRC-219 Standard"
     Then I click "Edit"
     And I click "Show Add More Information (Content Properties)"
     When I click on the element with css selector "#edit-field-standard-und-0-tid-select-1"

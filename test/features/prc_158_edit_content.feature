@@ -62,6 +62,108 @@ Feature: Edit Content (PRC-158)
     # AC10 is tested in PRC 251
 
   @javascript
+  Scenario: PRC-342 No sections filled in
+    Given I am logged in as a user with the "Content Contributor" role
+    And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
+    Then I follow "Edit"
+    Then I should see the link "Show Add More Information (Content Properties)"
+    Then I should see the link "Show Attach a File"
+    Then I should see the link "Show Link to URL"
+    Then I should not see the link "Show Add a Thumbnail"
+
+  @javascript
+  Scenario: PRC-342 Attach a file and it should be expanded
+    Given I am logged in as a user with the "Content Contributor" role
+    And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
+    Then I follow "Edit"
+    And I click "Attach a File"
+    Then I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-document-und-0-upload"
+    And I select the radio button "Public"
+    And I press "Save"
+    Then I follow "Edit"
+    Then I should see the link "Show Add More Information (Content Properties)"
+    Then I should not see the link "Show Attach a File"
+    Then I should see the link "Show Link to URL"
+    Then I should not see the link "Show Add a Thumbnail"
+
+  @javascript
+  Scenario: PRC-342 Set media and it should be expanded
+    Given I am logged in as a user with the "Content Contributor" role
+    And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
+    Then I follow "Edit"
+    Then I click "Show Add More Information (Content Properties)"
+    And I select "Audio" from "Media Type"
+    And I select the radio button "Public"
+    And I press "Save"
+    Then I follow "Edit"
+    Then I should not see the link "Show Add More Information (Content Properties)"
+    Then I should see the link "Show Attach a File"
+    Then I should see the link "Show Link to URL"
+    Then I should not see the link "Show Add a Thumbnail"
+
+  @javascript
+  Scenario: PRC-342 Set grade and it should be expanded
+    Given I am logged in as a user with the "Content Contributor" role
+    And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
+    Then I follow "Edit"
+    Then I click "Show Add More Information (Content Properties)"
+    And I select "PreK" from "Grade Level"
+    And I select the radio button "Public"
+    And I press "Save"
+    Then I follow "Edit"
+    Then I should not see the link "Show Add More Information (Content Properties)"
+    Then I should see the link "Show Attach a File"
+    Then I should see the link "Show Link to URL"
+    Then I should not see the link "Show Add a Thumbnail"
+
+  @javascript
+  Scenario: PRC-342 Set genre and it should be expanded
+    Given I am logged in as a user with the "Content Contributor" role
+    And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
+    Then I follow "Edit"
+    Then I click "Show Add More Information (Content Properties)"
+    And I select "Learning Fun" from "Genre"
+    And I select the radio button "Public"
+    And I press "Save"
+    Then I follow "Edit"
+    Then I should not see the link "Show Add More Information (Content Properties)"
+    Then I should see the link "Show Attach a File"
+    Then I should see the link "Show Link to URL"
+    Then I should not see the link "Show Add a Thumbnail"
+
+  @javascript
+  Scenario: PRC-342 Set subject and it should be expanded
+    Given I am logged in as a user with the "Content Contributor" role
+    And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
+    Then I follow "Edit"
+    Then I click "Show Add More Information (Content Properties)"
+    Then I select "Educational Leadership" from "edit-field-subject-und-0-tid-select-1"
+    Then I wait for AJAX to finish
+    And I select the radio button "Public"
+    And I press "Save"
+    Then I follow "Edit"
+    Then I should not see the link "Show Add More Information (Content Properties)"
+    Then I should see the link "Show Attach a File"
+    Then I should see the link "Show Link to URL"
+    Then I should not see the link "Show Add a Thumbnail"
+
+  @javascript
+  Scenario: PRC-342 Set standard and it should be expanded
+    Given I am logged in as a user with the "Content Contributor" role
+    And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
+    Then I follow "Edit"
+    Then I click "Show Add More Information (Content Properties)"
+    Then I select "National Council" from "edit-field-standard-und-0-tid-select-1"
+    Then I wait for AJAX to finish
+    And I select the radio button "Public"
+    And I press "Save"
+    Then I follow "Edit"
+    Then I should not see the link "Show Add More Information (Content Properties)"
+    Then I should see the link "Show Attach a File"
+    Then I should see the link "Show Link to URL"
+    Then I should not see the link "Show Add a Thumbnail"
+
+  @javascript
   Scenario: PRC-342 Edit Content- Expandable/collapsible controls when attachment are in sections
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
@@ -94,7 +196,4 @@ Feature: Edit Content (PRC-158)
     And I should see the success message containing "Digital Library Content Test-o-rama has been updated."
     Then I follow "edit"
     And I should see the text "Grade Level"
-
-
-
 
