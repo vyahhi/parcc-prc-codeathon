@@ -15,6 +15,7 @@ dependencies[] = module_filter
 dependencies[] = node_edit_protection
 dependencies[] = pathauto
 dependencies[] = prc_content_author_token
+dependencies[] = prc_digital_library_form
 dependencies[] = prc_digital_library_permissions
 dependencies[] = prc_invite_form
 dependencies[] = prc_login_form
