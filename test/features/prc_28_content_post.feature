@@ -22,10 +22,11 @@ Feature: Admin UI: Post Content (PRC-28)
     Then I should see the link "Content" in the "header" region
 
   Examples:
-    | role                 |
-    |  Content Contributor |
-    |  PRC Admin           |
-    |  administrator       |
+    | role                            |
+    | Content Contributor             |
+    | Content Administrator (Curator) |
+    | PRC Admin                       |
+    | administrator                   |
 
   Scenario: AC2 and AC3 Content tab invisibility for Educators
     Given I am logged in as a user with the "Educator" role

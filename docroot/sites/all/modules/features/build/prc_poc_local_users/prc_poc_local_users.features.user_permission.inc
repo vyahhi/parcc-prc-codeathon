@@ -604,6 +604,7 @@ function prc_poc_local_users_user_default_permissions() {
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -684,6 +685,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'delete any digital_library_content content',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -735,6 +737,7 @@ function prc_poc_local_users_user_default_permissions() {
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -1225,6 +1228,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'edit any digital_library_content content',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -1294,6 +1298,7 @@ function prc_poc_local_users_user_default_permissions() {
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );

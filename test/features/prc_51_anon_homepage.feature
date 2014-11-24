@@ -33,8 +33,8 @@ Feature: Anonymous User Home Page (PRC-51)
     Given I am an anonymous user
     And I am on the homepage
     Then I should see the link "Home"
-    And I should not see the link "Digital Library"
-    And I should not see the link "Assessments"
-    And I should not see the link "Professional Development"
+    And I should see the link "Digital Library"
+    And I should see the link "Assessments"
+    And I should see the link "Professional Development"
     And I should not see the link "Content"
     And I should not see the link "Users"

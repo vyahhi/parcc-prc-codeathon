@@ -7,7 +7,7 @@ Feature: View Content (PRC-32)
   Scenario: AC1 This story is about the content for Digital Library tab on the top navigation bar.
     Given I am an anonymous user
     And I am on the homepage
-    Then I should not see the link "Digital Library" in the "header" region
+    Then I should see the link "Digital Library" in the "header" region
 
   Scenario: AC2  At click, a new Digital Library page opens. All authenticated users have access to this page
     Given I am logged in as a user with the "authenticated user" role
