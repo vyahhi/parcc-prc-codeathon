@@ -107,3 +107,17 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
     And I fill in "Bad Account" for "State Account #"
     Then I press the "Create new account" button
     Then I should see the error message "Valid State Account # is required."
+
+  Scenario: User cannot edit his own Member State
+    Given I am logged in as a user with the "PARCC-Member Educator" role
+    And I am on the homepage
+    When I follow "My account"
+    And I follow "Edit"
+    Then I should not see the text "Member State"
+
+  Scenario: Admin can edit his own Member State
+    Given I am logged in as a user with the "PRC Admin" role
+    And I am on the homepage
+    When I follow "My account"
+    And I follow "Edit"
+    Then I should see the text "Member State"

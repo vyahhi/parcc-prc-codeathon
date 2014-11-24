@@ -20,6 +20,10 @@ function prc_user_edit_form_form_user_profile_form_alter(&$form, &$form_state) {
     $form['field_member_state']['#access'] = FALSE;
   }
 
+  if (user_access('administer users')) {
+    $form['field_member_state']['#access'] = TRUE;
+  }
+
   _prc_user_edit_form_title($form);
 
   $form['#validate'][] = 'prc_user_edit_Form_form_user_profile_form_validate';
