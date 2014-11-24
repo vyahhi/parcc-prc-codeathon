@@ -73,7 +73,6 @@ Feature: Admin UI: Post Content (PRC-28)
     And I press "Save"
     And I should see the success message containing "Digital Library Content Test-o-rama has been created."
     Then I follow "Edit"
-    And I click "Show Attach a File"
     And I should see the link "GreatLakesWater.pdf"
 
   @javascript
