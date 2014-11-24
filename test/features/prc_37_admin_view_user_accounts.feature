@@ -109,13 +109,16 @@ Feature: Admin UI: View User Accounts (PRC-37)
       | Joe Contributor | joe_prc_286b@timestamp@example.com | xyz123 | Joe              | Contributor     | 1      |
       | Joe Member      | joe_prc_286c@timestamp@example.com | xyz123 | Joe              | Member          | 1      |
       | Joe Admin       | joe_prc_286d@timestamp@example.com | xyz123 | Joe              | Admin           | 1      |
+      | Joe Curator     | joe_prc_286e@timestamp@example.com | xyz123 | Joe              | Curator         | 1      |
     And I am logged in as a user with the "PRC Admin" role
     Then I run drush "user-add-role" "'PRC Admin' joe_prc_286d@timestamp@example.com"
     Then I run drush "user-add-role" "'PARCC-Member Educator' joe_prc_286c@timestamp@example.com"
     Then I run drush "user-add-role" "'Content Contributor' joe_prc_286b@timestamp@example.com"
+    Then I run drush "user-add-role" "'Content Administrator (Curator)' joe_prc_286e@timestamp@example.com"
     Then I run drush "user-remove-role" "'Educator' joe_prc_286d@timestamp@example.com"
     Then I run drush "user-remove-role" "'Educator' joe_prc_286c@timestamp@example.com"
     Then I run drush "user-remove-role" "'Educator' joe_prc_286b@timestamp@example.com"
+    Then I run drush "user-remove-role" "'Educator' joe_prc_286e@timestamp@example.com"
     And I am at "admin-users"
     Then I click "User ID"
       # Then here add in the xpath to grab a link for each of the users we created above

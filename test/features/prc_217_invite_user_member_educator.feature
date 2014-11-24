@@ -33,6 +33,8 @@ Feature: PRC-217  Invite User with Additional Role Selection
     And I should see the text "State"
     But I select the radio button "PRC Admin"
     And I should not see the text "State"
+    When I select the radio button "Content Administrator (Curator)"
+    And I should not see the text "State"
 
   Scenario:  The State dropdown menu contains the following options (notice they're in alphabetical order):
     Given I am logged in as a user with the "PRC Admin" role
