@@ -44,6 +44,7 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
     If the "My State is a PARCC Member" checkbox is selected and a State Account # is correctly entered after the Create New Account button is selected, The system will add the user as a PARCC-Member Educator and display the following feedback on the top of the form:
     Registration successful. You are now logged in.
     The selected PARCC Member State will be saved and associated with the PARCC-Member Educator account.
+    Code is not case sensitive
     Given I am on the homepage
     And I follow "Join now!"
     Then I fill in "@timestamp@example.com" for "E-mail"
@@ -75,6 +76,9 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
     | NEWY1   | New York             |
     | OHIO1   | Ohio                 |
     | RHOD1   | Rhode Island         |
+    | arka1   | Arkansas             |
+    | colo1   | Colorado             |
+    | distr1  | District of Columbia |
 
   Scenario: AC6 Registration without member state means can't see member state
     Given I am on the homepage
