@@ -353,11 +353,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
   // Exported field_instance: 'node-digital_library_content-field_media_type'
   $field_instances['node-digital_library_content-field_media_type'] = array(
     'bundle' => 'digital_library_content',
-    'default_value' => array(
-      0 => array(
-        'tid' => 13,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -399,6 +395,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
       'module' => 'options',
       'settings' => array(
         'apply_chosen' => '',
+        'label_help_description' => '',
       ),
       'type' => 'options_select',
       'weight' => 14,
