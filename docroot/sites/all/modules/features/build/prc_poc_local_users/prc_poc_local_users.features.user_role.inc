@@ -10,6 +10,12 @@
 function prc_poc_local_users_user_default_roles() {
   $roles = array();
 
+  // Exported role: Content Administrator (Curator).
+  $roles['Content Administrator (Curator)'] = array(
+    'name' => 'Content Administrator (Curator)',
+    'weight' => 7,
+  );
+
   // Exported role: Content Contributor.
   $roles['Content Contributor'] = array(
     'name' => 'Content Contributor',

@@ -126,6 +126,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['access members-only content'] = array(
     'name' => 'access members-only content',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
       'PARCC-Member Educator' => 'PARCC-Member Educator',
       'PRC Admin' => 'PRC Admin',
@@ -600,6 +601,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['create digital_library_content content'] = array(
     'name' => 'create digital_library_content content',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
       'PRC Admin' => 'PRC Admin',
     ),
@@ -615,6 +617,7 @@ function prc_poc_local_users_user_default_permissions() {
       'PARCC-Member Educator' => 'PARCC-Member Educator',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -729,6 +732,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['delete own digital_library_content content'] = array(
     'name' => 'delete own digital_library_content content',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
       'PRC Admin' => 'PRC Admin',
     ),
@@ -744,6 +748,7 @@ function prc_poc_local_users_user_default_permissions() {
       'PARCC-Member Educator' => 'PARCC-Member Educator',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -818,6 +823,20 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete terms in media_type'.
   $permissions['delete terms in media_type'] = array(
     'name' => 'delete terms in media_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'delete terms in member_state'.
+  $permissions['delete terms in member_state'] = array(
+    'name' => 'delete terms in member_state',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'delete terms in standard'.
+  $permissions['delete terms in standard'] = array(
+    'name' => 'delete terms in standard',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -1272,6 +1291,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit own digital_library_content content'] = array(
     'name' => 'edit own digital_library_content content',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
       'PRC Admin' => 'PRC Admin',
     ),
@@ -1287,6 +1307,7 @@ function prc_poc_local_users_user_default_permissions() {
       'PARCC-Member Educator' => 'PARCC-Member Educator',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1361,6 +1382,20 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit terms in media_type'.
   $permissions['edit terms in media_type'] = array(
     'name' => 'edit terms in media_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in member_state'.
+  $permissions['edit terms in member_state'] = array(
+    'name' => 'edit terms in member_state',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in standard'.
+  $permissions['edit terms in standard'] = array(
+    'name' => 'edit terms in standard',
     'roles' => array(),
     'module' => 'taxonomy',
   );
