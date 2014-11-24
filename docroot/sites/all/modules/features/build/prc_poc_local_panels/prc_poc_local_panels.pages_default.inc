@@ -546,14 +546,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->path = 'admin-content';
   $page->access = array(
     'plugins' => array(
-      0 => array(
-        'name' => 'role',
+      1 => array(
+        'name' => 'perm',
         'settings' => array(
-          'rids' => array(
-            0 => 3,
-            1 => 6,
-            2 => 5,
-          ),
+          'perm' => 'create digital_library_content content',
         ),
         'context' => 'logged-in-user',
         'not' => FALSE,
