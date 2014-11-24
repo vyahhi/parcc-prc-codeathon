@@ -126,6 +126,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
     Then I should see 1 "//a[text()='@uname[Joe Contributor]']" elements
     Then I should see 1 "//a[text()='@uname[Joe Member]']" elements
     Then I should see 1 "//a[text()='@uname[Joe Admin]']" elements
+    Then I should see 1 "//a[text()='@uname[Joe Curator]']" elements
 
   Scenario: PRC-367 Accounts that are blocked do not show up in list
     Given users:
