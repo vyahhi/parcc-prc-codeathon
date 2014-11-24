@@ -443,18 +443,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_description = '';
   $page->path = 'assessments';
   $page->access = array(
-    'plugins' => array(
-      0 => array(
-        'name' => 'role',
-        'settings' => array(
-          'rids' => array(
-            0 => 1,
-          ),
-        ),
-        'context' => 'logged-in-user',
-        'not' => TRUE,
-      ),
-    ),
+    'plugins' => array(),
     'logic' => 'and',
   );
   $page->menu = array(
@@ -678,18 +667,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_description = 'This is the public view of our digital library content';
   $page->path = 'digital-library/!nid';
   $page->access = array(
-    'plugins' => array(
-      0 => array(
-        'name' => 'role',
-        'settings' => array(
-          'rids' => array(
-            0 => 2,
-          ),
-        ),
-        'context' => 'logged-in-user',
-        'not' => FALSE,
-      ),
-    ),
+    'plugins' => array(),
     'logic' => 'and',
   );
   $page->menu = array(
@@ -1225,18 +1203,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_description = 'Professional Development placeholder';
   $page->path = 'professional-development';
   $page->access = array(
-    'plugins' => array(
-      0 => array(
-        'name' => 'role',
-        'settings' => array(
-          'rids' => array(
-            0 => 1,
-          ),
-        ),
-        'context' => 'logged-in-user',
-        'not' => TRUE,
-      ),
-    ),
+    'plugins' => array(),
     'logic' => 'and',
   );
   $page->menu = array(
