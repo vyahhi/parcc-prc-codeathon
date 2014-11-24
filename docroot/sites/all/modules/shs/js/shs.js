@@ -44,7 +44,6 @@
               }
               $select.appendTo($field.parent());
               Drupal.attachBehaviors($select, settings);
-
               // Retrieve data for this level.
               getTermChildren($select, fieldSettings, parent_id, parent.tid, $field.attr('id'));
               // Use current term id as parent id for the next level.
