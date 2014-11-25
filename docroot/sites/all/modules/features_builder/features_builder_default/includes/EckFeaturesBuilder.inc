@@ -38,6 +38,9 @@ class EckFeaturesBuilder extends EntityFeaturesBuilder {
       $this->setNamedComponents('eck_bundle', array($bundle->machine_name));
       $this->setFields($entity_type->name, $bundle->name);
     }
+
+    // Last but not least, add the dependency to eck.
+    $this->setNamedComponents('dependencies', array('eck'));
   }
 
 }

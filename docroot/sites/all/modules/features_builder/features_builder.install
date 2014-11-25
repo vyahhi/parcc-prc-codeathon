@@ -30,6 +30,7 @@ function features_builder_uninstsall() {
  */
 function features_builder_requirements($phase) {
   $t = get_t();
+  $requirements = array();
 
   if ($phase == 'runtime' && !count(features_builder_get_builders())) {
     $requirements['features_builder_no_builders'] = array(

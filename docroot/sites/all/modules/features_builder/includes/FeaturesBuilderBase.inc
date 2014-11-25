@@ -199,55 +199,19 @@ abstract class FeaturesBuilderBase implements FeaturesBuilderInterface {
    * additional adjustments here as well.
    */
   protected function alterExport(&$export) {
-    // @todo: make these aware of the version they're declaring.
-    if (!empty($export['features']['context'])) {
-      $export['features']['ctools'][] = 'context:context:3';
-      $export['dependencies'][] = 'context';
-      $export['dependencies'][] = 'ctools';
-    }
-    if (!empty($export['features']['ctools_custom_content'])) {
-      $export['features']['ctools'][] = 'ctools_custom_content:ctools_content:1';
-      $export['dependencies'][] = 'ctools';
-    }
-    if (!empty($export['features']['environment_indicator_environment'])) {
-      $export['features']['ctools'][] = 'environment_indicator:default_environment_indicator_environments:1';
-      $export['dependencies'][] = 'environment_indicator';
-      $export['dependencies'][] = 'ctools';
-    }
-    if (!empty($export['features']['field_group'])) {
-      $export['features']['ctools'][] = 'field_group:field_group:1';
-      $export['dependencies'][] = 'field_group';
-      $export['dependencies'][] = 'ctools';
-    }
-    if (!empty($export['features']['linkit_profiles'])) {
-      $export['features']['ctools'][] = 'linkit:linkit_profiles:1';
-      $export['dependencies'][] = 'linkit';
-      $export['dependencies'][] = 'ctools';
-    }
-    if (!empty($export['features']['page_manager_handlers'])) {
-      $export['features']['ctools'][] = 'page_manager:pages_default:1';
-      $export['dependencies'][] = 'page_manager';
-      $export['dependencies'][] = 'ctools';
-    }
-    if (!empty($export['features']['panelizer_defaults'])) {
-      $export['features']['ctools'][] = 'panelizer:panelizer:1';
-      $export['dependencies'][] = 'panelizer';
-      $export['dependencies'][] = 'ctools';
-    }
-    if (!empty($export['features']['panels_renderer_pipeline'])) {
-      $export['features']['ctools'][] = 'panels:pipelines:1';
-      $export['dependencies'][] = 'panels';
-      $export['dependencies'][] = 'ctools';
-    }
-    if (!empty($export['features']['variable'])) {
-      $export['features']['ctools'][] = 'strongarm:strongarm:1';
-      $export['dependencies'][] = 'strongarm';
-      $export['dependencies'][] = 'ctools';
-    }
-    if (!empty($export['features']['views_view'])) {
-      $export['features']['ctools'][] = 'views:views_default:3.0';
-      $export['dependencies'][] = 'views';
-      $export['dependencies'][] = 'ctools';
+
+    // Add in the appropriate CTools components.
+    ctools_include('export');
+    foreach (ctools_export_get_schemas() as $table => $info  ) {
+      if (!empty($export['features'][$table])) {
+        // Add the ctools export API.
+        $export['features']['ctools'][] = "{$info['export']['api']['owner']}:{$info['export']['api']['api']}:{$info['export']['api']['current_version']}";
+        // Add dependencies to the module providing the exportable and ctools.
+        if (!empty($info['export']['api']['owner'])) {
+          $export['dependencies'][] = $info['export']['api']['owner'];
+        }
+        $export['dependencies'][] = 'ctools';
+      }
     }
   }
 
@@ -267,7 +231,7 @@ abstract class FeaturesBuilderBase implements FeaturesBuilderInterface {
    * This code is borrowed heavily from features_export_build_form_submit().
    */
   protected function writeFeature($export, $directory) {
-    // Export may be NULL in the case that it had no componets.
+    // Export may be NULL in the case that it had no components.
     if (!$export) {
       return;
     }

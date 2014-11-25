@@ -10,9 +10,9 @@ files[] = includes/FeaturesBuilderBase.inc
 
 configure = admin/structure/features/build
 
-; Information added by Drupal.org packaging script on 2014-08-27
+; Information added by Drupal.org packaging script on 2014-10-30
 version = "7.x-1.x-dev"
 core = "7.x"
 project = "features_builder"
-datestamp = "1409166837"
+datestamp = "1414678430"
 

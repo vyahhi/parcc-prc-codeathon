@@ -12,6 +12,9 @@ class SiteFeaturesBuilder extends FeaturesBuilderBase {
     'dblog_row_limit',
     'default_nodes_main',
     'error_level',
+    'features_builder_base_dir',
+    'features_builder_prefix_label',
+    'features_builder_prefix_name',
     'node_admin_theme',
     'page_cache_maximum_age',
     'page_compression',
@@ -62,6 +65,11 @@ class SiteFeaturesBuilder extends FeaturesBuilderBase {
     if (module_exists('honeypot')) {
       $this->setNamedComponents('dependencies', array('honeypot'));
       $this->setRegexComponents('variable', '/^honeypot_/');
+    }
+
+    if (module_exists('module_filter')) {
+      $this->setNamedComponents('dependencies', array('module_filter'));
+      $this->setRegexComponents('variable', '/^module_filter_/');
     }
 
     if (module_exists('transliteration')) {

@@ -459,6 +459,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'ds',
         'settings' => array(
           'taxonomy_term_reference_view_mode' => 'full',
+          'use_content_language' => TRUE,
         ),
         'type' => 'ds_taxonomy_view_mode',
         'weight' => 10,
