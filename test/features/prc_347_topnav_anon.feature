@@ -13,3 +13,11 @@ Feature: PRC-347 Top Nav Bar for Anonymous Users
     And I should see the link "Professional Development"
     And I should not see the link "Content"
     And I should not see the link "Users"
+
+  Scenario: PRC-435 Anon should see DL content
+    Given "Digital Library Content" nodes:
+      | title          | body           | field_permissions | uid |
+      | Public PRC-435 | This is public | public            | 1   |
+    And I am an anonymous user
+    And I am on "digital-library"
+    Then I should see the link "Public PRC-435"

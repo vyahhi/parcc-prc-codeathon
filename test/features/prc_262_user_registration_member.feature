@@ -67,21 +67,21 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
     Examples:
     | account | state                |
     | ARKA1   | Arkansas             |
-#    | COLO1   | Colorado             |
-#    | DISTR1  | District of Columbia |
-#    | ILLI1   | Illinois             |
-#    | LOUS1   | Louisiana            |
-#    | MARY1   | Maryland             |
-#    | MASS1   | Massachusetts        |
-#    | MISS1   | Mississippi          |
-#    | NEWJ1   | New Jersey           |
-#    | NEWM1   | New Mexico           |
-#    | NEWY1   | New York             |
-#    | OHIO1   | Ohio                 |
-#    | RHOD1   | Rhode Island         |
-#    | arka1   | Arkansas             |
-#    | colo1   | Colorado             |
-#    | distr1  | District of Columbia |
+    | COLO1   | Colorado             |
+    | DISTR1  | District of Columbia |
+    | ILLI1   | Illinois             |
+    | LOUS1   | Louisiana            |
+    | MARY1   | Maryland             |
+    | MASS1   | Massachusetts        |
+    | MISS1   | Mississippi          |
+    | NEWJ1   | New Jersey           |
+    | NEWM1   | New Mexico           |
+    | NEWY1   | New York             |
+    | OHIO1   | Ohio                 |
+    | RHOD1   | Rhode Island         |
+    | arka1   | Arkansas             |
+    | colo1   | Colorado             |
+    | distr1  | District of Columbia |
 
   Scenario: AC6 Registration without member state means can't see member state
     Given I am on the homepage
