@@ -75,12 +75,25 @@ function prc_login_form_user_update(&$edit, $account, $category) {
  */
 function prc_login_form_user_insert(&$edit, $account, $category) {
   //TODO: Check that this user is self-registering and not coming through an invitation
-  // Get the rid from the roles table.
-  $role_name = 'Educator';
   $roles = user_roles(TRUE);
-  $rid = array_search($role_name, $roles);
-  if ($rid != FALSE) {
-    $new_role[$rid] = $role_name;
+  $educator_role_name = 'Educator';
+  $new_rid = array_search($educator_role_name, $roles);
+  $new_role_name = $educator_role_name;
+
+  if ($new_rid != FALSE) {
+    // If a state account number was given, we create this user as
+    // a PARCC-Member Educator
+    if (array_key_exists('state_account_number', $edit)) {
+      $account_number_provided = $edit['state_account_number'];
+      if ($account_number_provided) {
+        $member_role_name = 'PARCC-Member Educator';
+        $member_rid = array_search($member_role_name, $roles);
+        $new_rid = $member_rid;
+        $new_role_name = $member_role_name;
+      }
+    }
+
+    $new_role[$new_rid] = $new_role_name;
     $all_roles = $account->roles + $new_role; // Add new role to existing roles.
     $account->roles = $all_roles;
   }
