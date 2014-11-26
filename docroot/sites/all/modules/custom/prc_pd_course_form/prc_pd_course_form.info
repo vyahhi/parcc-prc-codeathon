@@ -1,0 +1,4 @@
+name = PRC Registration
+description = Changes to User Registration
+package = PRC
+core = 7.x

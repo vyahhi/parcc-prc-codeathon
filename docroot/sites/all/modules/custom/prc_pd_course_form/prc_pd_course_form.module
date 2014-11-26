@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Alters to registration forms.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter
+ *
+ * Changes the title of the PD Course form
+ *
+ * @param $form
+ * @param $form_state
+ */
+
+function prc_pd_course_form_form_pd_course_node_form_alter(&$form, &$form_state) {
+  $title = drupal_get_title();
+  $title = str_replace('PD Course', 'Course', $title);
+  drupal_set_title($title, PASS_THROUGH);
+}
