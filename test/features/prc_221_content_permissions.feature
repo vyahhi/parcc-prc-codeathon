@@ -60,12 +60,13 @@ Feature: Content Permissions
     And I visit the last node created
     Then I should see the text "This is public"
     Examples:
-    | role                |
-    | Educator            |
-    | Content Contributor |
-    | PRC Admin           |
-    | administrator       |
-    | authenticated user  |
+    | role                            |
+    | Educator                        |
+    | Content Contributor             |
+    | PRC Admin                       |
+    | administrator                   |
+    | Content Administrator (Curator) |
+    | authenticated user              |
 
   Scenario Outline: Saving content as Members Only; hidden from role
     Given "Digital Library Content" nodes:
@@ -85,10 +86,11 @@ Feature: Content Permissions
     And I am logged in as a user with the "<role>" role
     And I visit the last node created
   Examples:
-    | role                |
-    | Content Contributor |
-    | PRC Admin           |
-    | administrator       |
+    | role                            |
+    | Content Contributor             |
+    | Content Administrator (Curator) |
+    | PRC Admin                       |
+    | administrator                   |
 
 #  Public: No restrictions; any anonymous user or logged in user with any role, including Educator role shall see the content
 #  PARCC members ONLY: PRC Admin, Content Contributor, PARCC-Member Educators shall see the content (not accessible to anonymous users or logged in users with Educator role).

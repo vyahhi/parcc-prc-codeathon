@@ -28,6 +28,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'system',
   );
 
+  // Exported permission: 'access all course reports'.
+  $permissions['access all course reports'] = array(
+    'name' => 'access all course reports',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'course',
+  );
+
   // Exported permission: 'access all views'.
   $permissions['access all views'] = array(
     'name' => 'access all views',
@@ -75,6 +84,24 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'contextual',
+  );
+
+  // Exported permission: 'access course'.
+  $permissions['access course'] = array(
+    'name' => 'access course',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'course',
+  );
+
+  // Exported permission: 'access course reports'.
+  $permissions['access course reports'] = array(
+    'name' => 'access course reports',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'course',
   );
 
   // Exported permission: 'access dashboard'.
@@ -241,6 +268,17 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'administer course'.
+  $permissions['administer course'] = array(
+    'name' => 'administer course',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'course',
   );
 
   // Exported permission: 'administer environment indicator settings'.
@@ -524,6 +562,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'administer uuid'.
+  $permissions['administer uuid'] = array(
+    'name' => 'administer uuid',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'uuid',
+  );
+
   // Exported permission: 'administer views'.
   $permissions['administer views'] = array(
     'name' => 'administer views',
@@ -597,6 +644,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'invite',
   );
 
+  // Exported permission: 'create course content'.
+  $permissions['create course content'] = array(
+    'name' => 'create course content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create digital_library_content content'.
   $permissions['create digital_library_content content'] = array(
     'name' => 'create digital_library_content content',
@@ -657,6 +711,17 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'panels_node',
   );
 
+  // Exported permission: 'create pd_course content'.
+  $permissions['create pd_course content'] = array(
+    'name' => 'create pd_course content',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create practice_test content'.
   $permissions['create practice_test content'] = array(
     'name' => 'create practice_test content',
@@ -678,6 +743,13 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'path',
+  );
+
+  // Exported permission: 'delete any course content'.
+  $permissions['delete any course content'] = array(
+    'name' => 'delete any course content',
+    'roles' => array(),
+    'module' => 'node',
   );
 
   // Exported permission: 'delete any digital_library_content content'.
@@ -716,6 +788,17 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'panels_node',
   );
 
+  // Exported permission: 'delete any pd_course content'.
+  $permissions['delete any pd_course content'] = array(
+    'name' => 'delete any pd_course content',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any practice_test content'.
   $permissions['delete any practice_test content'] = array(
     'name' => 'delete any practice_test content',
@@ -726,6 +809,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any test_item content'.
   $permissions['delete any test_item content'] = array(
     'name' => 'delete any test_item content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own course content'.
+  $permissions['delete own course content'] = array(
+    'name' => 'delete own course content',
     'roles' => array(),
     'module' => 'node',
   );
@@ -770,6 +860,17 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'panels_node',
+  );
+
+  // Exported permission: 'delete own pd_course content'.
+  $permissions['delete own pd_course content'] = array(
+    'name' => 'delete own pd_course content',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'delete own practice_test content'.
@@ -1223,6 +1324,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'edit any course content'.
+  $permissions['edit any course content'] = array(
+    'name' => 'edit any course content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any digital_library_content content'.
   $permissions['edit any digital_library_content content'] = array(
     'name' => 'edit any digital_library_content content',
@@ -1268,6 +1376,17 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'panels_node',
   );
 
+  // Exported permission: 'edit any pd_course content'.
+  $permissions['edit any pd_course content'] = array(
+    'name' => 'edit any pd_course content',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any practice_test content'.
   $permissions['edit any practice_test content'] = array(
     'name' => 'edit any practice_test content',
@@ -1289,6 +1408,13 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'comment',
+  );
+
+  // Exported permission: 'edit own course content'.
+  $permissions['edit own course content'] = array(
+    'name' => 'edit own course content',
+    'roles' => array(),
+    'module' => 'node',
   );
 
   // Exported permission: 'edit own digital_library_content content'.
@@ -1340,6 +1466,17 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'panels_node',
+  );
+
+  // Exported permission: 'edit own pd_course content'.
+  $permissions['edit own pd_course content'] = array(
+    'name' => 'edit own pd_course content',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'edit own practice_test content'.
@@ -1682,6 +1819,9 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['view own unpublished content'] = array(
     'name' => 'view own unpublished content',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'Content Contributor' => 'Content Contributor',
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',

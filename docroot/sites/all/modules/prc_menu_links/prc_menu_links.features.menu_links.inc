@@ -47,6 +47,26 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => -46,
     'customized' => 1,
   );
+  // Exported menu link: main-menu_course-management:admin-course
+  $menu_links['main-menu_course-management:admin-course'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'admin-course',
+    'router_path' => 'admin-course',
+    'link_title' => 'Course Management',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'main-menu_course-management:admin-course',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: main-menu_digital-library:digital-library
   $menu_links['main-menu_digital-library:digital-library'] = array(
     'menu_name' => 'main-menu',
@@ -138,6 +158,26 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-add-course_add-course:node/add/pd-course
+  $menu_links['menu-add-course_add-course:node/add/pd-course'] = array(
+    'menu_name' => 'menu-add-course',
+    'link_path' => 'node/add/pd-course',
+    'router_path' => 'node/add/pd-course',
+    'link_title' => 'Add course',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-add-course_add-course:node/add/pd-course',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-digital-library-left-nav_view-all:digital-library
   $menu_links['menu-digital-library-left-nav_view-all:digital-library'] = array(
     'menu_name' => 'menu-digital-library-left-nav',
@@ -181,8 +221,10 @@ function prc_menu_links_menu_default_menu_links() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Add content');
+  t('Add course');
   t('Assessments');
   t('Content');
+  t('Course Management');
   t('Digital Library');
   t('Home');
   t('Invite New User');

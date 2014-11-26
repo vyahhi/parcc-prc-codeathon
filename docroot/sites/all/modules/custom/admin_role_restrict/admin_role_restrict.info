@@ -1,4 +1,4 @@
 name = Administrator role restrictor
 description = Hides administrator role from user edit forms if the current user is not an administrator
-package = PRC
+package = Users
 core = 7.x

@@ -565,8 +565,26 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function iHaveNoNodes($type) {
     $command = 'genc';
+    $type = $this->nodeTypeByName($type);
     $arguments = "1 0 --types=$type --kill";
     $this->assertDrushCommandWithArgument($command, $arguments);
+  }
+
+  /**
+   * Finds the machine name of the node type. Matches either name or machine name.
+   * @param $name Name or machine name of node type to match
+   * @return string Machine name of node type
+   */
+  protected function nodeTypeByName($name) {
+    $found_type = '';
+    $types = node_type_get_types();
+    foreach ($types as $type) {
+      if ($type->name == $name || $type->type == $name) {
+        $found_type = $type->type;
+        break;
+      }
+    }
+    return $found_type;
   }
 
   /**
