@@ -31,10 +31,10 @@ Feature: PRC-348 Admin: View Courses List
     And I am on the homepage
     Then I should see the link "Course Management"
     Examples:
-      | role                    |
-      | administrator           |
-      | PRC Admin               |
-      | Content Admin (Curator) |
+      | role                            |
+      | administrator                   |
+      | PRC Admin                       |
+      | Content Administrator (Curator) |
 
   Scenario Outline: AC1 Does not have Course Management Tab by role
     Given I am logged in as a user with the "<role>" role
