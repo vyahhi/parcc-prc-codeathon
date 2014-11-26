@@ -566,7 +566,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   public function iHaveNoNodes($type) {
     $command = 'genc';
     $type = $this->nodeTypeByName($type);
-    $arguments = "1 0 --types=$type --kill";
+    $arguments = "0 0 --types=$type --kill";
     $this->assertDrushCommandWithArgument($command, $arguments);
   }
 
