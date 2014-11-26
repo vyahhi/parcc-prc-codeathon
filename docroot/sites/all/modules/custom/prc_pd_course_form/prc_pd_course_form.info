@@ -1,4 +1,4 @@
-name = PRC Registration
-description = Changes to User Registration
+name = PRC PD Course Form
+description = Changes to PD Course Form
 package = PRC
 core = 7.x
