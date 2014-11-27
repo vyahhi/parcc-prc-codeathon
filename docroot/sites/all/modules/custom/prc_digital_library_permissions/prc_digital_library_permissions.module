@@ -72,7 +72,7 @@ function prc_digital_library_permissions_node_access_records($node) {
       // have status unpublished.
       $grants[] = array(
         'realm' => 'prc_digital_library_permissions_author',
-        'gid' => $node->uid,
+        'gid' => $node->uid ? $node->uid : 1, // If the content is anonymous we'll make admin the gatekeeper. Samantha Franks (8) found this defect.
         'grant_view' => 1,
         'grant_update' => 1,
         'grant_delete' => 1,

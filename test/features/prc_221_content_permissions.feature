@@ -52,6 +52,13 @@ Feature: Content Permissions
     And I am an anonymous user
     And I cannot visit the last node created
 
+  Scenario: Saving anonymous content as Members Only; hidden from anonymous
+    Given "Digital Library Content" nodes:
+      | title        | body            | field_permissions  | uid |
+      | Members Only | This is private | members            | 0   |
+    And I am an anonymous user
+    And I cannot visit the last node created
+
   Scenario Outline: Saving content as Public; accessible to roles
     Given "Digital Library Content" nodes:
       | title      | body           | field_permissions | uid |
