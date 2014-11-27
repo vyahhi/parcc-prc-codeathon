@@ -21,19 +21,20 @@ function prc_poc_local_pd_course_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Course Length',
-    'weight' => '43',
+    'weight' => '5',
     'children' => array(
       0 => 'field_length_quantity',
       1 => 'field_length_unit',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Course Length',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-course-length field-group-fieldset',
         'required_fields' => 1,
+        'classes' => 'group-course-length field-group-fieldset container-inline',
+        'description' => '',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $export['group_course_length|node|pd_course|form'] = $field_group;

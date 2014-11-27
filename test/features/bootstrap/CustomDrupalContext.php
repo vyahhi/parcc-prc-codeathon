@@ -558,6 +558,12 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
   }
 
+  public function assertMessage($message) {
+    $message = $this->fixStepArgument($message);
+    parent::assertMessage($message);
+  }
+
+
   /**
    * @Then /^the node titled "(?P<label>[^"]*)" should not be published$/
    */

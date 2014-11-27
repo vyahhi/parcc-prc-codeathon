@@ -68,13 +68,13 @@ function prc_poc_local_pd_course_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'course' => array(
-          'weight' => '0',
+          'weight' => '7',
         ),
         'title' => array(
-          'weight' => '-5',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '8',
         ),
       ),
       'display' => array(),

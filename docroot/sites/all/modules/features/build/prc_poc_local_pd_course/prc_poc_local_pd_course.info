@@ -36,5 +36,5 @@ features[variable][] = menu_parent_pd_course
 features[variable][] = node_options_pd_course
 features[variable][] = node_preview_pd_course
 features[variable][] = node_submitted_pd_course
-mtime = 1417049226
+mtime = 1417049924
 project path = sites/all/modules/features/build

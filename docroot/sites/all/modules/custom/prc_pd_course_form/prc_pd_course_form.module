@@ -19,11 +19,23 @@ function prc_pd_course_form_form_pd_course_node_form_alter(&$form, &$form_state)
   $title = str_replace('PD Course', 'Course', $title);
   drupal_set_title($title, PASS_THROUGH);
 
+  $perm_weight = $form['field_permissions']['#weight'];
+
+  $form['field_length_quantity'][$form['field_length_quantity']['#language']]['#title'] = '';
+  $form['field_length_quantity'][$form['field_length_quantity']['#language']]['#suffix'] = '&nbsp;-&nbsp;';
+  $form['field_length_unit'][$form['field_length_unit']['#language']]['#title'] = '';
+
   $form['faux_published'] = array(
     '#title' => 'Published',
     '#type' => 'checkbox',
     '#default_value' => 1,
+    '#weight' => $perm_weight + 1,
   );
+
+  global $user;
+  if (!array_search('administrator', $user->roles)) {
+    $form['course']['#access'] = FALSE;
+  }
 
   $form['#validate'][] = 'prc_pd_course_form_form_pd_course_node_form_validate';
 
