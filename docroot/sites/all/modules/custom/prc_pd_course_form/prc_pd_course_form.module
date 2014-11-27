@@ -25,10 +25,15 @@ function prc_pd_course_form_form_pd_course_node_form_alter(&$form, &$form_state)
   $form['field_length_quantity'][$form['field_length_quantity']['#language']]['#suffix'] = '&nbsp;-&nbsp;';
   $form['field_length_unit'][$form['field_length_unit']['#language']]['#title'] = '';
 
+  $published = 1;
+  if (isset($form_state['node']->nid)) {
+    $published = $form_state['node']->status;
+  }
+
   $form['faux_published'] = array(
     '#title' => 'Published',
     '#type' => 'checkbox',
-    '#default_value' => 1,
+    '#default_value' => $published,
     '#weight' => $perm_weight + 1,
   );
 
