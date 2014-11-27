@@ -33,6 +33,11 @@ function prc_poc_local_node_digital_library_content_ds_field_settings_info() {
       ),
     ),
     'links' => array(
+      'weight' => '5',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'search_snippet' => array(
       'weight' => '4',
       'label' => 'hidden',
       'format' => 'default',
@@ -124,9 +129,10 @@ function prc_poc_local_node_digital_library_content_ds_layout_settings_info() {
       ),
       'right' => array(
         3 => 'body',
+        4 => 'search_snippet',
       ),
       'footer' => array(
-        4 => 'links',
+        5 => 'links',
       ),
     ),
     'fields' => array(
@@ -134,6 +140,7 @@ function prc_poc_local_node_digital_library_content_ds_layout_settings_info() {
       'submitted_by_author_name' => 'header',
       'field_thumbnail' => 'left',
       'body' => 'right',
+      'search_snippet' => 'right',
       'links' => 'footer',
     ),
     'classes' => array(),
