@@ -18,4 +18,24 @@ function prc_pd_course_form_form_pd_course_node_form_alter(&$form, &$form_state)
   $title = drupal_get_title();
   $title = str_replace('PD Course', 'Course', $title);
   drupal_set_title($title, PASS_THROUGH);
+
+  $form['faux_published'] = array(
+    '#title' => 'Published',
+    '#type' => 'checkbox',
+    '#default_value' => 1,
+  );
+
+  $form['#validate'][] = 'prc_pd_course_form_form_pd_course_node_form_validate';
+
+}
+
+/**
+ * Validate for user registration form
+ *
+ * @param $form
+ * @param $form_state
+ */
+function prc_pd_course_form_form_pd_course_node_form_validate(&$form, &$form_state) {
+  $faux_published = $form_state['values']['faux_published'];
+  $form_state['values']['status'] = $faux_published;
 }

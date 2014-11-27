@@ -515,6 +515,17 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Then /^I should see the radio button "(?P<label>[^"]*)"$/
+   */
+  public function assertRadioByIdPresent($label, $id = FALSE) {
+    $element = $this->getSession()->getPage();
+    $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
+    if ($radiobutton === NULL) {
+      throw new \Exception(sprintf('The radio button with "%s" was not found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
+    }
+  }
+
+  /**
    * @Then /^I should not see the radio button "(?P<label>[^"]*)"$/
    */
   public function assertRadioByIdNotPresent($label, $id = FALSE) {
@@ -522,6 +533,50 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
     if ($radiobutton !== NULL) {
       throw new \Exception(sprintf('The radio button with "%s" was found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
+    }
+  }
+
+  /**
+   * @Then /^the node titled "(?P<label>[^"]*)" should be published$/
+   */
+  public function assertNodePublished($title) {
+    $title = $this->fixStepArgument($title);
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', 'node')
+      ->propertyCondition('title', $title);
+    $result = $query->execute();
+    if (isset($result['node'])) {
+      $nids = array_keys($result['node']);
+      $items = entity_load('node', $nids);
+      $item = reset($items);
+      if (!$item->status) {
+        throw new \Exception(sprintf('The node with the title "%s" was not published', $title));
+      }
+    } else {
+      throw new \Exception(sprintf('The node with the title "%s" was not found', $title));
+    }
+  }
+
+  /**
+   * @Then /^the node titled "(?P<label>[^"]*)" should not be published$/
+   */
+  public function assertNodeNotPublished($title) {
+    $title = $this->fixStepArgument($title);
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', 'node')
+      ->propertyCondition('title', $title);
+    $result = $query->execute();
+    if (isset($result['node'])) {
+      $nids = array_keys($result['node']);
+      $items = entity_load('node', $nids);
+      $item = reset($items);
+      if ($item->status) {
+        throw new \Exception(sprintf('The node with the title "%s" was published', $title));
+      }
+    } else {
+      throw new \Exception(sprintf('The node with the title "%s" was not found', $title));
     }
   }
 
