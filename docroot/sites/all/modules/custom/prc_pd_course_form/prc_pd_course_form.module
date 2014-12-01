@@ -12,7 +12,7 @@ function prc_pd_course_form_form_course_outline_overview_form_alter(&$form, &$fo
 
   // Now rename the object types from their actual content type names to the ones specified in the story
   $form['more']['object_type']['#options']['course_content-pd_module'] = 'Module';
-  $form['more']['object_type']['#options']['course_content-quiz'] = 'Exam';
+  $form['more']['object_type']['#options']['course_quiz-quiz'] = 'Exam';
 
   if (count($form['course_outline']['objects']) <= 2) {
     // Always has #tree and #element_validate, so any more than these two means real objects
@@ -26,6 +26,7 @@ function prc_pd_course_form_form_course_outline_overview_form_alter(&$form, &$fo
     foreach ($form['course_outline']['objects'] as $key => $value) {
       if (strpos($key, '#') === FALSE) {
         $form['course_outline']['objects'][$key]['summary']['#access'] = FALSE;
+        $form['course_outline']['objects'][$key]['options'] = str_replace('>Settings<', '>Edit Settings<', $form['course_outline']['objects'][$key]['options']);
       }
     }
   }
@@ -98,62 +99,16 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
   $form['plugins']['access']['#access'] = FALSE;
   $form['node']['private']['#access'] = FALSE;
 
+  //$selected_node_type = $form['node']['node_type']['#default_value'];
+
+  $form['node']['use_existing_node']['#default_value'] = 1;
+//  $form['node']['use_existing_node']['#access'] = FALSE;
+//  unset($form['node']['instance']['#states']);
+
+//  $form['node']['node_type']['#access'] = FALSE;
+//  $form['node']['use_node_title']['#access'] = FALSE;
+
+  //$form['node']['instance']['#autocomplete_path']
+
   unset($form['course_tabs']);
-}
-
-/**
- * Adds a new step to a course
- * @param $course_id NID of the Course Node to add the step to
- * @param $step_node_id NID of the node to add as a step
- */
-function prc_pd_course_form_add_existing_step_to_course($course_id, $step_node_id) {
-  $node = node_load($course_id);
-  $course = course_get_course($node);
-
-  $new_weight = count($course->getObjects());
-
-  global $user;
-
-  $node_to_add = node_load($step_node_id);
-  $node_type = $node_to_add->type;
-
-  $module_types = array(
-    'pd_module' => 'course_content',
-    'quiz' => 'course_quiz',
-  );
-
-  $module_type = $module_types[$node_type];
-
-  $newObject = course_get_course_object($module_type, $node_type);
-  $newObject->setUser($user);
-  $newObject->setCourse($course);
-  $newObject->setCourse($node->nid);
-  $newObject->setModule($module_type);
-  $newObject->setComponent($node_type);
-
-
-  $newObject->setInstanceId($node_to_add->nid);
-  $newObject->setOption('title', $node_to_add->title);
-  $newObject->setOption('required', TRUE);
-  $newObject->setOption('enabled', TRUE);
-  $newObject->setOption('hidden', FALSE);
-
-  $newObject->setOption('weight', $new_weight);
-
-  $newObject->setOption(
-    'plugins', array(
-      'access' =>
-        array(
-          'conditional' =>
-            array(
-              'conditional_type' => 'completed',
-              'conditional_time' => 0,
-              'conditional_object' => $step_node_id,
-              'conditional_hidden' => 0,
-            )
-        )
-    )
-  );
-
-  $newObject->save();
 }

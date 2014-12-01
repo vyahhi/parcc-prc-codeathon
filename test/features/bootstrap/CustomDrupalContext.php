@@ -41,6 +41,21 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       $whole_token = "@uname[$uname]";
       $argument = str_replace($whole_token, $uid, $argument);
     }
+    if (strpos($argument, '@nid') !== FALSE) {
+      $start = strpos($argument, '@nid');
+      $bracket_open = strpos($argument, '[', $start);
+      $bracket_close = strpos($argument, ']', $start);
+      $node_name = substr($argument, $bracket_open + 1, $bracket_close - $bracket_open - 1);
+      $found_nid = 0;
+      foreach ($this->nodes as $node) {
+        if ($node->title == $node_name) {
+          $found_nid = $node->nid;
+          break;
+        }
+      }
+      $whole_token = "@nid[$node_name]";
+      $argument = str_replace($whole_token, $found_nid, $argument);
+    }
     if (strpos($argument, '@currentuid') !== FALSE) {
       if ($this->user) {
         $current_uid = $this->user->uid;

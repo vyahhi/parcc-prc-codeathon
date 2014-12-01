@@ -20,11 +20,11 @@ Feature: PRC-360 Admin: Add Object to a Course
     #  Module
     #  Exam
     # The type dropdown has no label...
-    And I should see an "edit-faux-more-faux-object-type" field
-    And I select "Module" from "edit-faux-more-faux-object-type"
-    And I select "Exam" from "edit-faux-more-faux-object-type"
+    And I should see an "edit-more-object-type" field
+    And I select "Module" from "edit-more-object-type"
+    And I select "Exam" from "edit-more-object-type"
     
-    And "Module" should precede "Exam" for the query "#edit-faux-more-faux-object-type option"
+    And "Module" should precede "Exam" for the query "#edit-more-object-type option"
     
     # AC5 The Add object button shall be enabled when an object is selected from the drop down menu
     Then I should see an "Add object" button
