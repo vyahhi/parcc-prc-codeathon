@@ -5,6 +5,32 @@
  * Alters to registration forms.
  */
 
+function prc_pd_course_form_form_course_outline_overview_form_alter(&$form, &$form_state) {
+
+  // Change the order from alpha to the order specified in the story
+  unset($form['more']['object_type']['#options']['course_content-quiz']);
+
+  // Now rename the object types from their actual content type names to the ones specified in the story
+  $form['more']['object_type']['#options']['course_content-pd_module'] = 'Module';
+  $form['more']['object_type']['#options']['course_content-quiz'] = 'Exam';
+
+  if (count($form['course_outline']['objects']) <= 2) {
+    // Always has #tree and #element_validate, so any more than these two means real objects
+    $form['no_objects'] = array(
+      '#type' => 'markup',
+      '#markup' => t('No objects are assigned to this course.'),
+      '#weight' => -10,
+    );
+  } else {
+    // Remove the summary text from each object
+    foreach ($form['course_outline']['objects'] as $key => $value) {
+      if (strpos($key, '#') === FALSE) {
+        $form['course_outline']['objects'][$key]['summary']['#access'] = FALSE;
+      }
+    }
+  }
+}
+
 /**
  * Implements hook_form_FORM_ID_alter
  *
@@ -55,4 +81,79 @@ function prc_pd_course_form_form_pd_course_node_form_alter(&$form, &$form_state)
 function prc_pd_course_form_form_pd_course_node_form_validate(&$form, &$form_state) {
   $faux_published = $form_state['values']['faux_published'];
   $form_state['values']['status'] = $faux_published;
+}
+
+/**
+ *  Implements hook_form_FORM_ID_alter().
+ */
+function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form_state) {
+  // We can't hide pd_module or the form token doesn't get set correctly
+
+//  $form['pd_module']['#access'] = FALSE;
+  $title_weight = $form['title']['#weight'];
+  $form['pd_module']['#weight'] = $title_weight;
+  $form['title']['#weight'] = $title_weight + 1;
+
+  $form['outline']['#access'] = FALSE;
+  $form['plugins']['access']['#access'] = FALSE;
+  $form['node']['private']['#access'] = FALSE;
+
+  unset($form['course_tabs']);
+}
+
+/**
+ * Adds a new step to a course
+ * @param $course_id NID of the Course Node to add the step to
+ * @param $step_node_id NID of the node to add as a step
+ */
+function prc_pd_course_form_add_existing_step_to_course($course_id, $step_node_id) {
+  $node = node_load($course_id);
+  $course = course_get_course($node);
+
+  $new_weight = count($course->getObjects());
+
+  global $user;
+
+  $node_to_add = node_load($step_node_id);
+  $node_type = $node_to_add->type;
+
+  $module_types = array(
+    'pd_module' => 'course_content',
+    'quiz' => 'course_quiz',
+  );
+
+  $module_type = $module_types[$node_type];
+
+  $newObject = course_get_course_object($module_type, $node_type);
+  $newObject->setUser($user);
+  $newObject->setCourse($course);
+  $newObject->setCourse($node->nid);
+  $newObject->setModule($module_type);
+  $newObject->setComponent($node_type);
+
+
+  $newObject->setInstanceId($node_to_add->nid);
+  $newObject->setOption('title', $node_to_add->title);
+  $newObject->setOption('required', TRUE);
+  $newObject->setOption('enabled', TRUE);
+  $newObject->setOption('hidden', FALSE);
+
+  $newObject->setOption('weight', $new_weight);
+
+  $newObject->setOption(
+    'plugins', array(
+      'access' =>
+        array(
+          'conditional' =>
+            array(
+              'conditional_type' => 'completed',
+              'conditional_time' => 0,
+              'conditional_object' => $step_node_id,
+              'conditional_hidden' => 0,
+            )
+        )
+    )
+  );
+
+  $newObject->save();
 }
