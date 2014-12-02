@@ -6,12 +6,22 @@ Feature: Anonymous User Home Page (PRC-51)
 
   Scenario: When a user types the PRC URL in their browser, the PRC home page opens # AC1 AC2
     Given I am an anonymous user
+    And I have no "Favorites List" nodes
     And I have no "Digital Library Content" nodes
     And I have no "PD Course" nodes
-    And I have no "Favorites List" nodes
+    And I have no "PD Module" nodes
+    And I have no "Quiz" nodes
+    And I have no "Multiple choice question" nodes
+    And I have no "Exam directions" nodes
+    And I have no "Short answer question" nodes
+    And I have no "True/false question" nodes
+    And I have no "Panel" nodes
+    And I have no "Course" nodes
+    And I have no "Practice Test" nodes
+    And I have no "Test Item" nodes
     And "Digital Library Content" nodes:
-      | title         | body      | created            | published on       | status | promote | uid | language | tags         |
-      | Africa        | Continent | 07/07/2014 12:03am | 08/07/2014 12:03am | 1      | 1       | 1   | und      | North        |
+      | title         | body      | created            | published on       | status | promote | uid | language | tags         | field_permissions |
+      | Africa        | Continent | 07/07/2014 12:03am | 08/07/2014 12:03am | 1      | 1       | 1   | und      | North        | public            |
     And I go to "/"
     Then I should see "Welcome!"
     And I should see a "logo" link

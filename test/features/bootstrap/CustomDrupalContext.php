@@ -981,8 +981,16 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $url = $session->getCurrentUrl();
     $html = $page->getContent();
 
-    if (isset($event->getScenario)) {
-      $feature_file_full = $event->getScenario()->getFeature()->getFile();
+
+    $event_class = get_class($event);
+    if (strpos($event_class, 'OutlineExampleEvent') !== FALSE) {
+      $scenario = $event->getOutline();
+    }
+    elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
+      $scenario = $event->getScenario();
+    }
+    if ($scenario) {
+      $feature_file_full = $scenario->getFeature()->getFile();
     } else {
       $feature_file_full = 'failure';
     }
