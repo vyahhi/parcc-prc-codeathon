@@ -31,9 +31,9 @@ Feature: PRC-346 Admin: Course Audience
     # AC4 A course label and the following options will display on the "Course Audience" page:
     # Course Audience label
     Then I should see the heading "'PD Course PRC-346 AC3' Course Audience"
-    And I should see the text "Course Audience/Permissions"
-    And I should see the radio button "Public"
-    And I should see the radio button "PARCC members ONLY"
+#    And I should see the text "Course Audience/Permissions"
+#    And I should see the radio button "Public"
+#    And I should see the radio button "PARCC members ONLY"
 #  AC5 If the PARCC Members Only option is selected, the following options will display:
 #  All PARCC Members This option is selected by default when the PARCC Members Only radio button is selected.
 #  Select By State
