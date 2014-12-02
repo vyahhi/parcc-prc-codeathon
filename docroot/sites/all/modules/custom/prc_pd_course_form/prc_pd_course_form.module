@@ -5,6 +5,55 @@
  * Alters to registration forms.
  */
 
+/**
+ *  Implements hook_menu().
+ */
+function prc_pd_course_form_menu() {
+  $items = array();
+  // Display the 'Take course' menu item as a tab or link, depending.
+  $items['node/%course/courseaudience'] = array(
+    'title' => 'Course Audience',
+    'description' => 'Course Audience',
+    'page callback' => 'prc_pd_course_form_course_audience',
+    'page arguments' => array(1),
+    'access callback' => 'prc_pd_course_form_course_audience_menu_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+//    'type' => variable_get('course_takecourse_tab_display', 1) ? MENU_LOCAL_TASK : MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Menu access callback to determines if the Course Audience tab should display
+ * on the course node.
+ *
+ * This differs from prc_pd_course_form_course_audience_access() as it only returns a boolean.
+ *
+ * @param object $node
+ *   The course node.
+ *
+ * @see course_uc_token_values()
+ */
+function prc_pd_course_form_course_audience_menu_access($node) {
+  $courses = &drupal_static(__FUNCTION__, array());
+
+  if (!isset($courses[$node->nid])) {
+    $courses[$node->nid] = TRUE;
+  }
+
+  return $courses[$node->nid];
+}
+
+function prc_pd_course_form_course_audience($node) {
+  global $user;
+  drupal_set_title("'" . $node->title . "' " . t('Course Audience'));
+
+  $form = array();
+
+  return $form;
+}
+
 function prc_pd_course_form_form_course_outline_overview_form_alter(&$form, &$form_state) {
 
   // Change the order from alpha to the order specified in the story
@@ -64,6 +113,25 @@ function prc_pd_course_form_form_pd_course_node_form_alter(&$form, &$form_state)
     '#weight' => $perm_weight + 1,
   );
 
+  $form['has_member_state'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('My State is a PARCC Member'),
+  );
+
+
+  $form['field_audience']['und']['#title'] = "123";
+
+  $form['field_audience']['und']['#states'] = array(
+    '#states' => array(
+      'visible' => array(
+        ':input[name="has_member_state"]' => array('checked' => TRUE),
+      ),
+      'required' => array(
+        ':input[name="has_member_state"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
   global $user;
   if (!array_search('administrator', $user->roles)) {
     $form['course']['#access'] = FALSE;
@@ -111,4 +179,20 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
   //$form['node']['instance']['#autocomplete_path']
 
   unset($form['course_tabs']);
+}
+
+/**
+ *  Implements hook_course_handlers().
+ */
+function prc_pd_course_form_course_handlers() {
+  // Example: a custom module definition.
+  return array(
+    'outline' => array(
+      'custom' => array(
+        'name' => t('Custom'),
+        'description' => t('Custom outline display.'),
+        'callback' => 'custom_outline',
+      ),
+    ),
+  );
 }

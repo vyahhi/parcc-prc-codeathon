@@ -1,0 +1,9 @@
+name = PARCC PRC Course Views Handlers
+description = Custom handlers for PRC Courses
+package = PRC
+core = 7.x
+
+dependencies[] = views
+dependencies[] = course
+
+files[] = views/prc_course_views_views_handler_field_node_course_object_count.inc

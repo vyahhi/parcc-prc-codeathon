@@ -52,7 +52,7 @@ Feature: PRC-348 Admin: View Courses List
     And I should see the link "Last Updated"
     And I should see the link "Permission"
     And I should see the link "Published"
-    And I should see the text "# of Modules/Quizzes"
+    And I should see the link "# of Modules/Quizzes"
     And I should see the text "Actions"
 
   Scenario: Curator should be able to see all published courses, not just their own
@@ -122,6 +122,7 @@ Feature: PRC-348 Admin: View Courses List
     And I should see the text "Fifty One"
     And I should see the text "Two"
     And I should see the text "Three"
+    And I should see the text "0"
     And I should see a "Filter all columns" field
     And I should see an "Apply" button
     When I fill in "Filter all columns" with "one"
