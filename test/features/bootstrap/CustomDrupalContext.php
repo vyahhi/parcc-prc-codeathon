@@ -1049,12 +1049,11 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
       $scenario = $event->getScenario();
     }
-    else {
-      print $event_class;
-    }
-    $has_js_tag = $scenario->hasTag('javascript');
-    if ($has_js_tag) {
-      $this->getSession()->stop();
+    if ($scenario) {
+      $has_js_tag = $scenario->hasTag('javascript');
+      if ($has_js_tag) {
+        $this->getSession()->stop();
+      }
     }
   }
 }
