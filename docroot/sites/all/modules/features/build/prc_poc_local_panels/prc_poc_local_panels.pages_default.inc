@@ -661,6 +661,113 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
+  $page->name = 'course_management';
+  $page->task = 'page';
+  $page->admin_title = 'Course Management';
+  $page->admin_description = 'List of courses for course managers. Not for end-users.';
+  $page->path = 'admin-course';
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'perm',
+        'settings' => array(
+          'perm' => 'administer course',
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+    ),
+    'logic' => 'and',
+  );
+  $page->menu = array();
+  $page->arguments = array();
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_course_management_panel_context';
+  $handler->task = 'page';
+  $handler->subtask = 'course_management';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+  );
+  $display = new panels_display();
+  $display->layout = 'flexible';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'center' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = 'PRC Courses';
+  $display->uuid = 'bff662e2-112a-4fe0-8fd6-22043e23f452';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-018fbe71-12ea-4e52-a5ba-d792d2e7b24c';
+    $pane->panel = 'center';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-add-course';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '018fbe71-12ea-4e52-a5ba-d792d2e7b24c';
+    $display->content['new-018fbe71-12ea-4e52-a5ba-d792d2e7b24c'] = $pane;
+    $display->panels['center'][0] = 'new-018fbe71-12ea-4e52-a5ba-d792d2e7b24c';
+    $pane = new stdClass();
+    $pane->pid = 'new-2bb05a6e-517a-4e52-a106-1c21bc834663';
+    $pane->panel = 'center';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'course_management-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '2bb05a6e-517a-4e52-a106-1c21bc834663';
+    $display->content['new-2bb05a6e-517a-4e52-a106-1c21bc834663'] = $pane;
+    $display->panels['center'][1] = 'new-2bb05a6e-517a-4e52-a106-1c21bc834663';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['course_management'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
   $page->name = 'digital_library';
   $page->task = 'page';
   $page->admin_title = 'Digital Library';

@@ -97,6 +97,35 @@ function prc_poc_local_fields_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_course_objectives'
+  $field_bases['field_course_objectives'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_course_objectives',
+    'foreign keys' => array(
+      'format' => array(
+        'columns' => array(
+          'format' => 'format',
+        ),
+        'table' => 'filter_format',
+      ),
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'course_enrollment' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_document'
   $field_bases['field_document'] = array(
     'active' => 1,
@@ -263,6 +292,7 @@ function prc_poc_local_fields_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
+      'course_enrollment' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
@@ -446,6 +476,85 @@ function prc_poc_local_fields_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_length_quantity'
+  $field_bases['field_length_quantity'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_length_quantity',
+    'foreign keys' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        1 => 1,
+        2 => 2,
+        3 => 3,
+        4 => 4,
+        5 => 5,
+        6 => 6,
+        7 => 7,
+        8 => 8,
+        9 => 9,
+        10 => 10,
+        11 => 11,
+        12 => 12,
+        13 => 13,
+        14 => 14,
+        15 => 15,
+        16 => 16,
+        17 => 17,
+        18 => 18,
+        19 => 19,
+        20 => 20,
+        21 => 21,
+        22 => 22,
+        23 => 23,
+        24 => 24,
+      ),
+      'allowed_values_function' => '',
+      'course_enrollment' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_integer',
+  );
+
+  // Exported field_base: 'field_length_unit'
+  $field_bases['field_length_unit'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_length_unit',
+    'foreign keys' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'hour' => 'Hour',
+        'day' => 'Day',
+        'week' => 'Week',
+        'month' => 'Month',
+        'year' => 'Year',
+      ),
+      'allowed_values_function' => '',
+      'course_enrollment' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_link_to_a_url'
   $field_bases['field_link_to_a_url'] = array(
     'active' => 1,
@@ -531,6 +640,7 @@ function prc_poc_local_fields_field_default_field_bases() {
         'members' => 'PARCC members ONLY',
       ),
       'allowed_values_function' => '',
+      'course_enrollment' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'list_text',
@@ -563,24 +673,6 @@ function prc_poc_local_fields_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
-  );
-
-  // Exported field_base: 'field_rating'
-  $field_bases['field_rating'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_rating',
-    'foreign keys' => array(),
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'fivestar',
-    'settings' => array(
-      'axis' => 'vote',
-    ),
-    'translatable' => 0,
-    'type' => 'fivestar',
   );
 
   // Exported field_base: 'field_role_id'
@@ -691,6 +783,7 @@ function prc_poc_local_fields_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
+      'course_enrollment' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
@@ -725,6 +818,7 @@ function prc_poc_local_fields_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
+      'course_enrollment' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',

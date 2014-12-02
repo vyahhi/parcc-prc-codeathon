@@ -24,8 +24,14 @@ function prc_digital_library_permissions_permission() {
 function prc_digital_library_permissions_node_grants($account, $op) {
   if (user_access('access members-only content', $account)) {
     $grants['prc_digital_library_permissions'] = array(1);
+    $grants['prc_pd_course_permissions'] = array(1);
   }
   $grants['prc_digital_library_permissions_author'] = array($account->uid);
+  $grants['prc_pd_course_permissions_author'] = array($account->uid);
+
+  if (user_access('create pd_course content', $account)) {
+    $grants['prc_pd_course_permissions_unpub_nonauthor'] = array(1);
+  }
   return $grants;
 
 }
@@ -36,9 +42,15 @@ function prc_digital_library_permissions_node_grants($account, $op) {
 function prc_digital_library_permissions_node_access_records($node) {
   // We only care about the node if it has been marked private. If not, it is
   // treated just like any other node and we completely ignore it.
-  if ($node->type == 'digital_library_content') {
+  $check_types = array(
+    'digital_library_content',
+    'pd_course',
+  );
+
+  if (array_search($node->type, $check_types) !== FALSE) {
     $w = entity_metadata_wrapper('node', $node);
     $is_members_only = $w->field_permissions->value() == 'members';
+    $grants = array();
 
     if ($is_members_only) {
       $grants = array();
@@ -46,7 +58,7 @@ function prc_digital_library_permissions_node_access_records($node) {
       // blindly here, then all users could view an unpublished node.
       if ($node->status) {
         $grants[] = array(
-          'realm' => 'prc_digital_library_permissions',
+          'realm' => "prc_digital_library_permissions",
           'gid' => 1,
           'grant_view' => 1,
           'grant_update' => 0,
@@ -60,14 +72,26 @@ function prc_digital_library_permissions_node_access_records($node) {
       // have status unpublished.
       $grants[] = array(
         'realm' => 'prc_digital_library_permissions_author',
-        'gid' => $node->uid,
+        'gid' => $node->uid ? $node->uid : 1, // If the content is anonymous we'll make admin the gatekeeper. Samantha Franks (8) found this defect.
         'grant_view' => 1,
         'grant_update' => 1,
         'grant_delete' => 1,
         'priority' => 0,
       );
-
-      return $grants;
     }
+
+    // Unpublished PD modules are accessible by any PD creator
+    if ($node->type == 'pd_course') {
+      $grants[] = array(
+        'realm' => 'prc_pd_course_permissions_unpub_nonauthor',
+        'gid' => 1,
+        'grant_view' => 1,
+        'grant_update' => 1,
+        'grant_delete' => 1,
+        'priority' => 0,
+      );
+    }
+
+    return $grants;
   }
 }

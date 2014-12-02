@@ -21,6 +21,7 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
   Scenario: AC5. When the "My State is a PARCC Member" checkbox is selected, the State Account # field will be required.
     Given I am on the homepage
     And I follow "Join now!"
+    Then I should not see a "State Account # *" field
     Then I check the box "My State is a PARCC Member"
     And I should see a "State Account # *" field
 
@@ -124,4 +125,3 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
     When I follow "My account"
     And I follow "Edit"
     Then I should see the text "Member State"
-

@@ -40,6 +40,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Add content',
     'description' => '',
   );
+  // Exported menu: menu-add-course.
+  $menus['menu-add-course'] = array(
+    'menu_name' => 'menu-add-course',
+    'title' => 'Add Course',
+    'description' => '',
+  );
   // Exported menu: menu-digital-library-left-nav.
   $menus['menu-digital-library-left-nav'] = array(
     'menu_name' => 'menu-digital-library-left-nav',
@@ -66,6 +72,7 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   );
   // Translatables
   // Included for use with string extractors like potx.
+  t('Add Course');
   t('Add content');
   t('Development');
   t('Development link');

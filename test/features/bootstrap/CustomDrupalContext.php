@@ -41,6 +41,21 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       $whole_token = "@uname[$uname]";
       $argument = str_replace($whole_token, $uid, $argument);
     }
+    if (strpos($argument, '@nid') !== FALSE) {
+      $start = strpos($argument, '@nid');
+      $bracket_open = strpos($argument, '[', $start);
+      $bracket_close = strpos($argument, ']', $start);
+      $node_name = substr($argument, $bracket_open + 1, $bracket_close - $bracket_open - 1);
+      $found_nid = 0;
+      foreach ($this->nodes as $node) {
+        if ($node->title == $node_name) {
+          $found_nid = $node->nid;
+          break;
+        }
+      }
+      $whole_token = "@nid[$node_name]";
+      $argument = str_replace($whole_token, $found_nid, $argument);
+    }
     if (strpos($argument, '@currentuid') !== FALSE) {
       if ($this->user) {
         $current_uid = $this->user->uid;
@@ -515,6 +530,17 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Then /^I should see the radio button "(?P<label>[^"]*)"$/
+   */
+  public function assertRadioByIdPresent($label, $id = FALSE) {
+    $element = $this->getSession()->getPage();
+    $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
+    if ($radiobutton === NULL) {
+      throw new \Exception(sprintf('The radio button with "%s" was not found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
+    }
+  }
+
+  /**
    * @Then /^I should not see the radio button "(?P<label>[^"]*)"$/
    */
   public function assertRadioByIdNotPresent($label, $id = FALSE) {
@@ -522,6 +548,56 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
     if ($radiobutton !== NULL) {
       throw new \Exception(sprintf('The radio button with "%s" was found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
+    }
+  }
+
+  /**
+   * @Then /^the node titled "(?P<label>[^"]*)" should be published$/
+   */
+  public function assertNodePublished($title) {
+    $title = $this->fixStepArgument($title);
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', 'node')
+      ->propertyCondition('title', $title);
+    $result = $query->execute();
+    if (isset($result['node'])) {
+      $nids = array_keys($result['node']);
+      $items = entity_load('node', $nids);
+      $item = reset($items);
+      if (!$item->status) {
+        throw new \Exception(sprintf('The node with the title "%s" was not published', $title));
+      }
+    } else {
+      throw new \Exception(sprintf('The node with the title "%s" was not found', $title));
+    }
+  }
+
+  public function assertMessage($message) {
+    $message = $this->fixStepArgument($message);
+    parent::assertMessage($message);
+  }
+
+
+  /**
+   * @Then /^the node titled "(?P<label>[^"]*)" should not be published$/
+   */
+  public function assertNodeNotPublished($title) {
+    $title = $this->fixStepArgument($title);
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', 'node')
+      ->propertyCondition('title', $title);
+    $result = $query->execute();
+    if (isset($result['node'])) {
+      $nids = array_keys($result['node']);
+      $items = entity_load('node', $nids);
+      $item = reset($items);
+      if ($item->status) {
+        throw new \Exception(sprintf('The node with the title "%s" was published', $title));
+      }
+    } else {
+      throw new \Exception(sprintf('The node with the title "%s" was not found', $title));
     }
   }
 
@@ -565,8 +641,26 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function iHaveNoNodes($type) {
     $command = 'genc';
-    $arguments = "1 0 --types=$type --kill";
+    $type = $this->nodeTypeByName($type);
+    $arguments = "0 0 --types=$type --kill";
     $this->assertDrushCommandWithArgument($command, $arguments);
+  }
+
+  /**
+   * Finds the machine name of the node type. Matches either name or machine name.
+   * @param $name Name or machine name of node type to match
+   * @return string Machine name of node type
+   */
+  protected function nodeTypeByName($name) {
+    $found_type = '';
+    $types = node_type_get_types();
+    foreach ($types as $type) {
+      if ($type->name == $name || $type->type == $name) {
+        $found_type = $type->type;
+        break;
+      }
+    }
+    return $found_type;
   }
 
   /**
@@ -865,6 +959,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     parent::afterScenario($event);
     // Taking this out for the moment, because the dev machines can revert Features to get back to where we should be
 //    $this->theDefaultEmailSystemIsEnabled();
+
+    $this->stopJavascriptSession($event);
   }
 
   public function beforeScenario($event) {
@@ -885,8 +981,16 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $url = $session->getCurrentUrl();
     $html = $page->getContent();
 
-    if (isset($event->getScenario)) {
-      $feature_file_full = $event->getScenario()->getFeature()->getFile();
+
+    $event_class = get_class($event);
+    if (strpos($event_class, 'OutlineExampleEvent') !== FALSE) {
+      $scenario = $event->getOutline();
+    }
+    elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
+      $scenario = $event->getScenario();
+    }
+    if ($scenario) {
+      $feature_file_full = $scenario->getFeature()->getFile();
     } else {
       $feature_file_full = 'failure';
     }
@@ -940,6 +1044,25 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       $new_rows[] = $nodeHash;
     }
     $table->setRows($new_rows);
+  }
+
+  /**
+   * @param $event
+   */
+  protected function stopJavascriptSession($event) {
+    $event_class = get_class($event);
+    if (strpos($event_class, 'OutlineExampleEvent') !== FALSE) {
+      $scenario = $event->getOutline();
+    }
+    elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
+      $scenario = $event->getScenario();
+    }
+    if ($scenario) {
+      $has_js_tag = $scenario->hasTag('javascript');
+      if ($has_js_tag) {
+        $this->getSession()->stop();
+      }
+    }
   }
 }
 

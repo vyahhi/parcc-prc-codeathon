@@ -2,20 +2,34 @@
 
 /**
  * @file
- * Alters to user edit forms.
+ * Modifies the user edit form so that users that do have permission to administer users,
+ * but do NOT have the administrator role (defined in the user_admin_role variable,
+ * "administrator" for standard installations) are not allowed to give the administrator
+ * role to users they edit or create.
+ *
+ * Pseudo-Behat tests
+ * Given I am logged in as a user with the "Administer users" permissions
+ * And I do not have the "administrator" role
+ * When I edit a user
+ * Then I do not see an "administrator" option
+
+ * Given I am logged in as a user with the "Administer users" permissions
+ * And I have the "administrator" role
+ * When I edit a user
+ * Then I see an "administrator" option
  */
 
 /**
  * Implements hook_form_alter().
- * @param $form
- * @param $form_state
  */
 function admin_role_restrict_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'user_profile_form' || $form_id == 'user_registration_form') {
-
+  // Make sure this is a user edit form, and that the user_admin_role role actually exists
+  if (($form_id == 'user_profile_form' || $form_id == 'user_registration_form') && $user_admin_role = variable_get('user_admin_role')) {
     global $user;
-    if (!array_search('administrator', $user->roles)) {
-      unset($form['account']['roles']['#options'][3]);
+    $user_is_admin = array_key_exists($user_admin_role, $user->roles);
+
+    if (!$user_is_admin) {
+      unset($form['account']['roles']['#options'][$user_admin_role]);
     }
   }
 }
