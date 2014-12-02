@@ -960,12 +960,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     // Taking this out for the moment, because the dev machines can revert Features to get back to where we should be
 //    $this->theDefaultEmailSystemIsEnabled();
 
-    $scenario = $event->getScenario();
-    $has_js_tag = $scenario->hasTag('javascript');
-    if ($has_js_tag) {
-      $this->getSession()->stop();
-    }
-
+    $this->stopJavascriptSession($event);
   }
 
   public function beforeScenario($event) {
@@ -1041,6 +1036,26 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       $new_rows[] = $nodeHash;
     }
     $table->setRows($new_rows);
+  }
+
+  /**
+   * @param $event
+   */
+  protected function stopJavascriptSession($event) {
+    $event_class = get_class($event);
+    if (strpos($event_class, 'OutlineExampleEvent') !== FALSE) {
+      $scenario = $event->getOutline();
+    }
+    elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
+      $scenario = $event->getScenario();
+    }
+    else {
+      print $event_class;
+    }
+    $has_js_tag = $scenario->hasTag('javascript');
+    if ($has_js_tag) {
+      $this->getSession()->stop();
+    }
   }
 }
 
