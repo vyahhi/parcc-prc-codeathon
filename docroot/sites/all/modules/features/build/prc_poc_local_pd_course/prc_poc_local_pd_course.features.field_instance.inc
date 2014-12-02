@@ -10,49 +10,6 @@
 function prc_poc_local_pd_course_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-pd_course-field_audience'
-  $field_instances['node-pd_course-field_audience'] = array(
-    'bundle' => 'pd_course',
-    'default_value' => array(
-      0 => array(
-        'value' => 'all',
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 8,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_audience',
-    'label' => 'Audience',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'label_help_description' => '',
-      ),
-      'type' => 'options_buttons',
-      'weight' => 43,
-    ),
-  );
-
   // Exported field_instance: 'node-pd_course-field_course_objectives'
   $field_instances['node-pd_course-field_course_objectives'] = array(
     'bundle' => 'pd_course',
@@ -342,7 +299,6 @@ function prc_poc_local_pd_course_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Audience');
   t('Course Objectives');
   t('Enter a comma-separated list of words to describe your content.');
   t('Grade Level');

@@ -113,25 +113,6 @@ function prc_pd_course_form_form_pd_course_node_form_alter(&$form, &$form_state)
     '#weight' => $perm_weight + 1,
   );
 
-  $form['has_member_state'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('My State is a PARCC Member'),
-  );
-
-
-  $form['field_audience']['und']['#title'] = "123";
-
-  $form['field_audience']['und']['#states'] = array(
-    '#states' => array(
-      'visible' => array(
-        ':input[name="has_member_state"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="has_member_state"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-
   global $user;
   if (!array_search('administrator', $user->roles)) {
     $form['course']['#access'] = FALSE;
