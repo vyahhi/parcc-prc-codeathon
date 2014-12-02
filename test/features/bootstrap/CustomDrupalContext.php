@@ -959,6 +959,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     parent::afterScenario($event);
     // Taking this out for the moment, because the dev machines can revert Features to get back to where we should be
 //    $this->theDefaultEmailSystemIsEnabled();
+
+    $scenario = $event->getScenario();
+    $has_js_tag = $scenario->hasTag('javascript');
+    if ($has_js_tag) {
+      $this->getSession()->stop();
+    }
+
   }
 
   public function beforeScenario($event) {
