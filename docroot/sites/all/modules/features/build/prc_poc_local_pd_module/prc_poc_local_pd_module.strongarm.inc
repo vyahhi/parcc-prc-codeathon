@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * prc_poc_local_digital_pd_module.strongarm.inc
+ * prc_poc_local_pd_module.strongarm.inc
  */
 
 /**
  * Implements hook_strongarm().
  */
-function prc_poc_local_digital_pd_module_strongarm() {
+function prc_poc_local_pd_module_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();

@@ -22,5 +22,4 @@ features[variable][] = menu_parent_pd_module
 features[variable][] = node_options_pd_module
 features[variable][] = node_preview_pd_module
 features[variable][] = node_submitted_pd_module
-mtime = 1417062643
 project path = sites/all/modules/features/build

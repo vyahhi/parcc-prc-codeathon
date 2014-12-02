@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * prc_poc_local_digital_pd_module.features.field_instance.inc
+ * prc_poc_local_pd_module.features.field_instance.inc
  */
 
 /**
  * Implements hook_field_default_field_instances().
  */
-function prc_poc_local_digital_pd_module_field_default_field_instances() {
+function prc_poc_local_pd_module_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance: 'node-pd_module-body'

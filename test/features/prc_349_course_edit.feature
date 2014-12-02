@@ -68,7 +68,7 @@ Feature: PRC-349 Admin: Edit Course
     And I should see the radio button "PARCC members ONLY"
 
     And I should see a "Published" field
-    And the "Published" checkbox should be checked
+    And the "Published" checkbox should not be checked
 
   Scenario: AC4. Validations: If a required field is NOT entered after the Save button is selected, The system will display the following feedback on the top of the form:
     Given I am logged in as a user with the "Content Administrator (Curator)" role

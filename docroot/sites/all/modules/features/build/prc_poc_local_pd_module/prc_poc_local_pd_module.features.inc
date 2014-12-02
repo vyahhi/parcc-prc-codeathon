@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * prc_poc_local_digital_pd_module.features.inc
+ * prc_poc_local_pd_module.features.inc
  */
 
 /**
  * Implements hook_ctools_plugin_api().
  */
-function prc_poc_local_digital_pd_module_ctools_plugin_api($module = NULL, $api = NULL) {
+function prc_poc_local_pd_module_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
@@ -16,7 +16,7 @@ function prc_poc_local_digital_pd_module_ctools_plugin_api($module = NULL, $api 
 /**
  * Implements hook_node_info().
  */
-function prc_poc_local_digital_pd_module_node_info() {
+function prc_poc_local_pd_module_node_info() {
   $items = array(
     'pd_module' => array(
       'name' => t('PD Module'),
