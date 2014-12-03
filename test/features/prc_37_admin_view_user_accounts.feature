@@ -44,6 +44,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
     Then I should see the text "First Name"
     Then I should see the text "Last Name"
     Then I should see the text "E-mail Address"
+    Then I should see the text "State"
     Then I should see the text "Role(s)"
     Then I should see the text "Profession"
     Then I should see the text "Active"
@@ -55,6 +56,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
     Then I should see the link "Last Name"
     Then I should see the link "First Name"
     Then I should see the link "E-mail"
+    And I should see the link "State"
     # Multivalue fields are not sortable
     Then I should not see the link "Role(s)"
     Then I should see the link "Profession"
@@ -127,6 +129,22 @@ Feature: Admin UI: View User Accounts (PRC-37)
     Then I should see 1 "//a[text()='@uname[Joe Member]']" elements
     Then I should see 1 "//a[text()='@uname[Joe Admin]']" elements
     Then I should see 1 "//a[text()='@uname[Joe Curator]']" elements
+
+  Scenario: PRC-436 - State appears in the view
+    Given users:
+      | name            | mail                              | pass   | field_first_name | field_last_name | status |
+      | Joe Member      | joe_prc_436@timestamp@example.com | xyz123 | Joe              | Member          | 1      |
+    And I am logged in as a user with the "PRC Admin" role
+    Then I run drush "user-add-role" "'PARCC-Member Educator' joe_prc_436@timestamp@example.com"
+    Then I run drush "user-remove-role" "'Educator' joe_prc_436@timestamp@example.com"
+    And I am at "admin-users"
+    Then I should not see the text "Illinois"
+    Then I click "User ID"
+      # Then here add in the xpath to grab a link for each of the users we created above
+    Then I click "@uname[Joe Member]"
+    Then I select "Illinois" from "Member State"
+    And I press "Save"
+    Then I should see the text "Illinois"
 
   Scenario: PRC-367 Accounts that are blocked do not show up in list
     Given users:
