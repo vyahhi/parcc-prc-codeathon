@@ -1,4 +1,4 @@
-@api
+@api @diglib @favorites
 Feature: PRC-53 New Custom List Creation (End user)
   As an authenticated user,
   I want to create a new customized list,

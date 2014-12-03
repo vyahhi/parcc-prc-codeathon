@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @user
 Feature: PRC ??? - User edits own account
   As an educator,
   I want to edit my account,

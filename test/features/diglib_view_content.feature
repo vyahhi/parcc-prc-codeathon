@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @diglib
 Feature: View Content (PRC-32)
   As an educator,
   I want to view content posted to the Digital Library,

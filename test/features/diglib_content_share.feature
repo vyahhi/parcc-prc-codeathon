@@ -1,4 +1,4 @@
-@api @d7 @diglib
+@api @d7 @diglib @share
 Feature: Share Content (end user) (PRC-59)
   As an educator,
   I want to share content,

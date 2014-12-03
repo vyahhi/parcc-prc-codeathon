@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @user
 Feature: Admin UI: View User Accounts (PRC-37)
   As a PRC Administrator,
   I want to view and manage PRC website user accounts,

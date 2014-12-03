@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @anonymous
 Feature: PRC-347 Top Nav Bar for Anonymous Users
   As an anonymous user,
   I want to navigate within various PRC content using the top navigation bar,

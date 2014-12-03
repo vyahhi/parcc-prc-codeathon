@@ -1,4 +1,4 @@
-@api
+@api @diglib
 Feature: PRC-29 Content Categorization - Subject
   As a Content Contributor,
   I want to do a more specialized categorization for content,

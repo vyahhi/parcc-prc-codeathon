@@ -1,4 +1,4 @@
-@api
+@api @diglib @favorites
 Feature: PRC-253 - Organize Content: Filter by Custom List
   As an Educator,
   I want to filter the listed content to include the ones I organized into my custom list,

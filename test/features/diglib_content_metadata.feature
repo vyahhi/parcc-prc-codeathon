@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @diglib
 Feature: Admin UI: Define Content Metadata (PRC-30)
   As a Content Contributor,
   I want to define the metadata associated to a content I'm posting to PRC digital library,

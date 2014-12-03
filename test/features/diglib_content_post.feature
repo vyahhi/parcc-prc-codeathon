@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @diglib
 Feature: Admin UI: Post Content (PRC-28)
   As a Content Contributor,
   I want to post a new content to PRC Website,
