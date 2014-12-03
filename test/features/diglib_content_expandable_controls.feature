@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @diglib
 Feature: Add Content: Expandable/Collapsible Controls (PRC-157)
   As a Content Contributor,
   I want to expand and collapse different attribute sections within the Add Content page,

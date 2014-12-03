@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @diglib
 Feature: Edit Content (PRC-158)
   As a Content Contributor,
   I want to view and modify existing content within the PRC Digital Library,

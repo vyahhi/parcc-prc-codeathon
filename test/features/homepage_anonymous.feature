@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @anonymous
 Feature: Anonymous User Home Page (PRC-51)
   As an anonymous user,
   I want to access the PRC website,

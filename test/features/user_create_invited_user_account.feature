@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @user @invite
 Feature: Create User Account Following an Invite (PRC-73)
   As a potential PRC Administrator,
   I want to create a new user account for myself after having received the create user account invitation from my fellow PRC Administrators,

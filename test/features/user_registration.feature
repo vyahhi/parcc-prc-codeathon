@@ -1,4 +1,4 @@
-@d7 @api
+@d7 @api @user
 Feature: Login & Public Registration (PRC-48)
   As an educator,
   I want to register and log in to the PRC website,

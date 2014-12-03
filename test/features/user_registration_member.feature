@@ -1,4 +1,4 @@
-@api
+@api @user
 Feature: PRC-262 PARCC-Member Educator- Self Registration
   As a PARCC-Member Educator,
   I want to self-register for access to the PRC website,

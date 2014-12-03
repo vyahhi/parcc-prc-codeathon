@@ -1,4 +1,4 @@
-@api
+@api @course
 Feature: PRC-348 Admin: View Courses List
   As a Content Admin,
   I want to view the PD courses already created in PRC,

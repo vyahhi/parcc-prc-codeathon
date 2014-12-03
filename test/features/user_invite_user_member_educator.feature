@@ -1,4 +1,4 @@
-@api
+@api @user @invite
 Feature: PRC-217  Invite User with Additional Role Selection
   As a PRC Admin,
   I want to specify the user's state when I invite a state lead as Content Contributor role,

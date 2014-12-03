@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @user
 Feature: Admin UI: Edit User (PRC-105)
   As a PRC Administrator,
   I want to edit an existing user account,

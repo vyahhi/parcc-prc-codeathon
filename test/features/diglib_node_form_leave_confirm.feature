@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @diglib
 Feature: PRC-251 Edit Content - Leaving page without saving
   There is no story for this yet, but we get the feature for free with node_edit_protection, which we
   are customizing for user_edit_protection.

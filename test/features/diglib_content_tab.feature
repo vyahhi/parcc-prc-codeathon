@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @diglib
 Feature: Admin UI: Content Tab (PRC-169)
   As a Content Contributor,
   I want to view the content posted to Digital Library,

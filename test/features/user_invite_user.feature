@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @user @invite
 Feature: Invite User (PRC-92)
   As a PRC Administrator,
   I want to invite a new user with a pre-defined role/permission,

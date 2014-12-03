@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @user
 Feature: PRC Administrators (PRC-61)
   As a PRC Administrator,
   I want to log into PRC website, so that I can manage content and users later.
