@@ -1,4 +1,4 @@
-@api
+@api @course
 Feature: PRC-350 Admin: View Course
   As a Content Admin,
   I want to view existing modules and exams within an existing course,

@@ -1,4 +1,4 @@
-@api
+@api @course
 Feature: PRC-360 Admin: Add Object to a Course
   As a Content Admin,
   I want to add a new module or exam to an existing course,

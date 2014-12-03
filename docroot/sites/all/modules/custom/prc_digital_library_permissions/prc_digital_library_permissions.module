@@ -81,7 +81,7 @@ function prc_digital_library_permissions_node_access_records($node) {
     }
 
     // Unpublished PD modules are accessible by any PD creator
-    if ($node->type == 'pd_course') {
+    if ($node->type == 'pd_course' && !$node->status) {
       $grants[] = array(
         'realm' => 'prc_pd_course_permissions_unpub_nonauthor',
         'gid' => 1,
