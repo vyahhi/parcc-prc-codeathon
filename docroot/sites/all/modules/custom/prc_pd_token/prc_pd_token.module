@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Token to include content author and byline
+ */
+
+/**
+ *  Implements hook_token_info().
+ */
+function prc_pd_token_token_info() {
+  $types = array();
+  $tokens = array();
+
+  $tokens['node']['field_length_formatted'] = array(
+    'name' => t('Course Length (Formatted)'),
+    'description' => t('Displays the course length as specified in the field_length_quantity and field_length_unit fields.'),
+  );
+
+  return array(
+    'types' => $types,
+    'tokens' => $tokens,
+  );
+}
+
+/**
+ *  Implements hook_tokens().
+ */
+function prc_pd_token_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  // URL tokens.
+  if ($type == 'node' && !empty($data['node'])) {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'field_length_formatted':
+          $node = $data['node'];
+          $w = entity_metadata_wrapper('node', $node);
+          $qty = $w->field_length_quantity->value();
+          $unit = $w->field_length_unit->value();
+          if ($qty && $unit) {
+            $replacements[$original] = '(' . $qty . '-' . $unit . ')';
+          }
+          break;
+      }
+    }
+  }
+  return $replacements;
+}
