@@ -1348,12 +1348,14 @@ function prc_poc_local_panels_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display();
-  $display->layout = 'flexible';
+  $display->layout = 'twocol';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'center' => NULL,
+      'left' => NULL,
+      'right' => NULL,
     ),
   );
   $display->cache = array();
@@ -1362,19 +1364,13 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-94e1e2e4-d5f1-4c3b-bff0-b07ad7be29cd';
-    $pane->panel = 'center';
-    $pane->type = 'custom';
-    $pane->subtype = 'custom';
+    $pane->pid = 'new-45f1600e-7e23-47e8-bf89-dbf7817fa882';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'professional_development_view-panel_pane_1';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array(
-      'admin_title' => 'Placeholder',
-      'title' => 'Placeholder',
-      'body' => 'Placeholder',
-      'format' => 'filtered_html',
-      'substitute' => TRUE,
-    );
+    $pane->configuration = array();
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
@@ -1383,11 +1379,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '94e1e2e4-d5f1-4c3b-bff0-b07ad7be29cd';
-    $display->content['new-94e1e2e4-d5f1-4c3b-bff0-b07ad7be29cd'] = $pane;
-    $display->panels['center'][0] = 'new-94e1e2e4-d5f1-4c3b-bff0-b07ad7be29cd';
+    $pane->uuid = '45f1600e-7e23-47e8-bf89-dbf7817fa882';
+    $display->content['new-45f1600e-7e23-47e8-bf89-dbf7817fa882'] = $pane;
+    $display->panels['right'][0] = 'new-45f1600e-7e23-47e8-bf89-dbf7817fa882';
   $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = 'new-94e1e2e4-d5f1-4c3b-bff0-b07ad7be29cd';
+  $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['professional_development'] = $page;
