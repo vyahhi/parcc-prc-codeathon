@@ -717,12 +717,11 @@ function prc_poc_local_views_views_default_views() {
     'changed' => 'changed',
     'field_permissions' => 'field_permissions',
     'status' => 'status',
-    'edit_node' => 'edit_node',
-    'nothing_1' => 'nothing_1',
-    'nothing' => 'nothing',
     'course_object_count' => 'course_object_count',
+    'edit_node' => 'edit_node',
+    'nothing' => 'nothing',
   );
-  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['default'] = 'nid';
   $handler->display->display_options['style_options']['info'] = array(
     'nid' => array(
       'sortable' => 1,
@@ -766,24 +765,19 @@ function prc_poc_local_views_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'course_object_count' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'edit_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing_1' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'nothing' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'course_object_count' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -840,10 +834,10 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[edit_node]';
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  /* Sort criterion: Content revision: Nid */
+  $handler->display->display_options['sorts']['nid']['id'] = 'nid';
+  $handler->display->display_options['sorts']['nid']['table'] = 'node_revision';
+  $handler->display->display_options['sorts']['nid']['field'] = 'nid';
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
