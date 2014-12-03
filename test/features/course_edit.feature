@@ -1,25 +1,24 @@
-@api
-Feature: PRC-69 Admin: Create a Course
-  As a Content Administrator,
-  I want to define all courses for the PRC website,
-  so that these courses will be available for users as needed.
+@api @course
+Feature: PRC-349 Admin: Edit Course
+  As a Content Admin,
+  I want to edit an existing course,
+  so that I can update the course attributes and course audience when needed.
 
   Acceptance Criteria:
-  AC1 A new tab Course Management shall be added to the top navigation bar for the following roles:
+  1. The tab Course Management shall be available in the top navigation bar for the following roles:
   Content Administrator (Curator)
   PRC Admin
   Tested in prc_348_curator_view_courses.feature
 
-
-  6. If the user navigates away without saving changes, the system prompts the user to confirm by displaying the following:
-  Stay On Page - this will keep the Admin UI on the "Create Course" page.
-  Leave Page - this will direct the Admin UI to navigate away from the page.
+  Background:
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And I have no "PD Course" nodes
+    And I am viewing my "PD Course" node with the title "PRC-349 AC2"
+    And I am on "admin-course"
+    When I click "edit"
+    Then I should see the heading "Edit Course PRC-349 AC2" in the "content" region
 
   Scenario: AC2 Create course fields
-    Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
-    When I click "Add course"
-    Then I should see the heading "Create Course" in the "content" region
     And I should see a "Course Title *" field
     And I should see a "Course Objectives *" field
     And I should not see a "Body" field
@@ -29,7 +28,7 @@ Feature: PRC-69 Admin: Create a Course
     And I should see the text "Subject"
 
     And I should see the text "Course Length"
-    # Course length doesn't have a label
+  # Course length doesn't have a label
     And I should see 1 "#edit-field-length-quantity-und" elements
     And I select "1" from "edit-field-length-quantity-und"
     And I select "2" from "edit-field-length-quantity-und"
@@ -56,7 +55,7 @@ Feature: PRC-69 Admin: Create a Course
     And I select "23" from "edit-field-length-quantity-und"
     And I select "24" from "edit-field-length-quantity-und"
 
-    # Neither does unit
+  # Neither does unit
     And I should see 1 "#edit-field-length-unit-und" elements
     And I select "Hour" from "edit-field-length-unit-und"
     And I select "Day" from "edit-field-length-unit-und"
@@ -69,9 +68,9 @@ Feature: PRC-69 Admin: Create a Course
     And I should see the radio button "PARCC members ONLY"
 
     And I should see a "Published" field
-    And the "Published" checkbox should be checked
+    And the "Published" checkbox should not be checked
 
-  Scenario: AC3. Validations: If a required field is NOT entered after the Save button is selected, The system will display the following feedback on the top of the form:
+  Scenario: AC4. Validations: If a required field is NOT entered after the Save button is selected, The system will display the following feedback on the top of the form:
     Given I am logged in as a user with the "Content Administrator (Curator)" role
     And I am on "admin-course"
     When I click "Add course"
@@ -80,35 +79,23 @@ Feature: PRC-69 Admin: Create a Course
     Then I should see the error message containing "Permissions field is required."
     Then I should see the error message containing "Course Objectives field is required."
 
-  Scenario: AC4. The Save button will allow the user to save the entries for all the course information.
-    Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
-    When I click "Add course"
-    And I fill in "Course Title" with "Title PRC-69 AC4 @timestamp"
-    And I fill in "Course Objectives" with "Obj PRC-69 AC4 @timestamp"
+  Scenario: AC5. The Save button will allow the user to save the entries for all the course information.
+    And I fill in "Course Title" with "Title PRC-349 AC5 @timestamp"
+    And I fill in "Course Objectives" with "Obj PRC-349 AC5 @timestamp"
     And I select the radio button "Public"
     And I press "Save"
-    # AC5 Once Saved, the system will provide confirmation that the course information has been successfully saved.
-    Then I should see the message containing "PD Course Title PRC-69 AC4 @timestamp has been created."
+    # AC6 Once Saved, the system will provide confirmation that the course information has been successfully saved.
+    Then I should see the message containing "PD Course Title PRC-349 AC5 @timestamp has been updated."
 
-  Scenario: Published checked makes a PD Course published
-    Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
-    When I click "Add course"
-    And I fill in "Course Title" with "Title PRC-69 Published @timestamp"
-    And I fill in "Course Objectives" with "Obj PRC-69 Published @timestamp"
+  Scenario: Published reflects published status
+    And the "Published" checkbox should not be checked
+    And I check the box "Published"
+    And I fill in "Course Objectives" with "@timestamp"
     And I select the radio button "Public"
+    And I press "Save"
+    Then I click "edit"
     And the "Published" checkbox should be checked
-    And I press "Save"
-    Then the node titled "Title PRC-69 Published @timestamp" should be published
-
-  Scenario: Published unchecked makes a PD Course not published
-    Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
-    When I click "Add course"
-    And I fill in "Course Title" with "Title PRC-69 Published @timestamp"
-    And I fill in "Course Objectives" with "Obj PRC-69 Published @timestamp"
-    And I select the radio button "Public"
     And I uncheck the box "Published"
     And I press "Save"
-    Then the node titled "Title PRC-69 Published @timestamp" should not be published
+    Then I click "edit"
+    And the "Published" checkbox should not be checked

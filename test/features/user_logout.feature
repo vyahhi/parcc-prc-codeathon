@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @user
 Feature: Log Out (PRC-147)
   As a logged in user,
   I want to log out of the PRC website,

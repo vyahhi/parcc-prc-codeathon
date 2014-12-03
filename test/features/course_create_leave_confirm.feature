@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @course
 Feature: PRC-69 Admin: Create a Course
 
   Background:

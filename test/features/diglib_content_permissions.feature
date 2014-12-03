@@ -1,4 +1,4 @@
-@api
+@api @diglib
 Feature: Content Permissions
   As a Content Contributor,
   I want to define the content permissions,

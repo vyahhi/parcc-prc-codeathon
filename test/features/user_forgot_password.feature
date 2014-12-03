@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @user
 Feature: Forgot Password (PRC-146)
   As an educator,
   I want to reset my login password,

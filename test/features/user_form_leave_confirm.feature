@@ -1,4 +1,4 @@
-@api @d7
+@api @d7 @user
 Feature: Edit User - Leaving Page Without Saving Changes (PRC-213)
   As a PRC Admin,
   I want the system to show a message when I attempt to navigate away from a page without saving changes,
