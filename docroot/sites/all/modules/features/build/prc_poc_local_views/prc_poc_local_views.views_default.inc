@@ -328,6 +328,7 @@ function prc_poc_local_views_views_default_views() {
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'mail' => 'mail',
+    'field_member_state' => 'field_member_state',
     'rid' => 'rid',
     'field_profession' => 'field_profession',
     'status' => 'status',
@@ -356,6 +357,13 @@ function prc_poc_local_views_views_default_views() {
       'empty_column' => 0,
     ),
     'mail' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_member_state' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -405,6 +413,12 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['mail']['table'] = 'users';
   $handler->display->display_options['fields']['mail']['field'] = 'mail';
   $handler->display->display_options['fields']['mail']['label'] = 'E-mail Address';
+  /* Field: Field: Member State */
+  $handler->display->display_options['fields']['field_member_state']['id'] = 'field_member_state';
+  $handler->display->display_options['fields']['field_member_state']['table'] = 'field_data_field_member_state';
+  $handler->display->display_options['fields']['field_member_state']['field'] = 'field_member_state';
+  $handler->display->display_options['fields']['field_member_state']['label'] = 'State';
+  $handler->display->display_options['fields']['field_member_state']['type'] = 'taxonomy_term_reference_plain';
   /* Field: User: Roles */
   $handler->display->display_options['fields']['rid']['id'] = 'rid';
   $handler->display->display_options['fields']['rid']['table'] = 'users_roles';
