@@ -27,6 +27,26 @@ function prc_poc_local_pd_course_ds_field_settings_info() {
 
   $ds_fieldsetting = new stdClass();
   $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|pd_course|search_result';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'pd_course';
+  $ds_fieldsetting->view_mode = 'search_result';
+  $ds_fieldsetting->settings = array(
+    'formatted_course_length' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'title' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+  );
+  $export['node|pd_course|search_result'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
   $ds_fieldsetting->id = 'node|pd_course|teaser';
   $ds_fieldsetting->entity_type = 'node';
   $ds_fieldsetting->bundle = 'pd_course';
@@ -130,6 +150,100 @@ function prc_poc_local_pd_course_ds_layout_settings_info() {
     'layout_link_custom' => '',
   );
   $export['node|pd_course|default'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|pd_course|search_index';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'pd_course';
+  $ds_layout->view_mode = 'search_index';
+  $ds_layout->layout = 'ds_2col_stacked';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'left' => array(
+        0 => 'field_thumbnail',
+      ),
+      'header' => array(
+        1 => 'title',
+        2 => 'formatted_course_length',
+      ),
+      'right' => array(
+        3 => 'field_course_objectives',
+      ),
+      'footer' => array(
+        4 => 'course',
+        5 => 'sharethis',
+      ),
+    ),
+    'fields' => array(
+      'field_thumbnail' => 'left',
+      'title' => 'header',
+      'formatted_course_length' => 'header',
+      'field_course_objectives' => 'right',
+      'course' => 'footer',
+      'sharethis' => 'footer',
+    ),
+    'classes' => array(),
+    'wrappers' => array(
+      'header' => 'div',
+      'left' => 'div',
+      'right' => 'div',
+      'footer' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+  );
+  $export['node|pd_course|search_index'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|pd_course|search_result';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'pd_course';
+  $ds_layout->view_mode = 'search_result';
+  $ds_layout->layout = 'ds_2col_stacked';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'header' => array(
+        0 => 'title',
+        1 => 'formatted_course_length',
+      ),
+      'left' => array(
+        2 => 'field_thumbnail',
+      ),
+      'right' => array(
+        3 => 'field_course_objectives',
+      ),
+      'footer' => array(
+        4 => 'course',
+        5 => 'sharethis',
+      ),
+    ),
+    'fields' => array(
+      'title' => 'header',
+      'formatted_course_length' => 'header',
+      'field_thumbnail' => 'left',
+      'field_course_objectives' => 'right',
+      'course' => 'footer',
+      'sharethis' => 'footer',
+    ),
+    'classes' => array(),
+    'wrappers' => array(
+      'header' => 'div',
+      'left' => 'div',
+      'right' => 'div',
+      'footer' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+  );
+  $export['node|pd_course|search_result'] = $ds_layout;
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
