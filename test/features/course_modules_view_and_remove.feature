@@ -39,7 +39,7 @@ Scenario Outline: AC1 When an existing course is selected, in addition to the ex
     And I follow "Course outline"
     Then I should see the text "No objects are assigned to this course."
 
-  Scenario: AC5 List of objects contain:
+  Scenario: Use existing title
     Given I am logged in as a user with the "Content Administrator (Curator)" role
     And I am viewing my "PD Module" node with the title "PD Module PRC-350 AC5"
     And I am viewing my "PD Course" node with the title "PD Course PRC-350 AC4"
@@ -54,6 +54,34 @@ Scenario Outline: AC1 When an existing course is selected, in addition to the ex
     And I press "Update"
     # Object Name (examples: Module 1: Getting Started or End of Course Exam )
     Then I should see the text "PD Module PRC-350 AC5"
+    Then I press "Save outline"
+    # The ability to move the order of objects within the course by drag & drop handle by the module title
+    # We are not Javascripting the functionality of Drupal's drag handles.
+    #  A link or button for Remove (story PRC-362)
+    Then I click "Edit Settings"
+    Then I check the box "Delete"
+    Then I should not see the text "Also delete the referenced content."
+    And I press "Update"
+    Then I press "Save outline"
+    And I should not see the text "PD Module PRC-350 AC5"
+
+  Scenario: Enter a new title
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And I am viewing my "PD Module" node with the title "PD Module PRC-350 AC5"
+    And I am viewing my "PD Course" node with the title "PD Course PRC-350 AC4"
+    And I follow "Course outline"
+    And I select "Module" from "edit-more-object-type"
+    And I press "Add object"
+    Then I should see the text "Changes to this course have not yet been saved."
+    # A link or button for Edit Settings (story PRC-361 and PRC-351)
+    And I click "Edit Settings"
+    And I fill in "PD Module PRC-350 AC5 [nid:@nid[PD Module PRC-350 AC5]]" for "Existing node"
+    And the "Use existing title" checkbox should not be checked
+    And I fill in "Module Title" with "Step 1: New Module"
+    And I press "Update"
+    # Object Name (examples: Module 1: Getting Started or End of Course Exam )
+    Then I should see the text "Step 1: New Module"
+    But I should not see the text "PD Module PRC-350 AC5"
     Then I press "Save outline"
     # The ability to move the order of objects within the course by drag & drop handle by the module title
     # We are not Javascripting the functionality of Drupal's drag handles.

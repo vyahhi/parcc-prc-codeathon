@@ -140,6 +140,8 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
   // We can't hide pd_module or the form token doesn't get set correctly
 
   $title_weight = $form['title']['#weight'];
+  $form['title']['title']['#title'] = "Module Title";
+
   $form['pd_module']['#weight'] = $title_weight;
   $form['title']['#weight'] = $title_weight + 1;
 
