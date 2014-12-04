@@ -1,15 +1,15 @@
-@api
+@api @course
 Feature: PRC-360 Admin: Add Object to a Course
   As a Content Admin,
   I want to add a new module or exam to an existing course,
   so that my educators can access them when taking a course.
 
   #  Acceptance Criteria
-  # Tested in PRC-350 - course_modules_add.feature
-  # AC1 When an existing course is selected, in addition to the existing tabs, a Course Outline tab shall be available to the user.
-  # AC2 The following roles are permitted to access this page:
-  #   Content Administrator (Curator)
-  #   PRC Admin
+  #  When an existing course is selected, in addition to the existing tabs, a Course Outline tab will be available to the user.
+  #  The following roles are permitted to access this page:
+  #  Content Administrator (Curator)
+  #  PRC Admin
+  #  Tested in PRC-350 - course_modules_add.feature
 
   Scenario: AC3 In the Course Outline tab defined in PRC-350, add a pair of dropdown menu and button.
     Given I am logged in as a user with the "Content Administrator (Curator)" role
@@ -26,8 +26,17 @@ Feature: PRC-360 Admin: Add Object to a Course
     
     And "Module" should precede "Exam" for the query "#edit-more-object-type option"
     
-    # AC5 The Add object button shall be enabled when an object is selected from the drop down menu
+    # AC5 Once an option has been selected from the drop-down menu, selecting the Add object button will add another Object to the Course Outline page and display it within the list of objects on the page.(defined in PRC-350) .
     Then I should see an "Add object" button
     # AC6 A Save outline button shall be available at all time
     Then I should see an "Save outline" button
-    # AC7 At click, it will save the new object, and lists it in the list of objects above (defined in PRC-350)
+
+  Scenario: AC7 Once the Save Outline button is selected, the system will display the following message:
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And I am viewing my "PD Course" node with the title "PRC-350 AC4"
+    And I follow "Course outline"
+    Then I select "Module" from "edit-more-object-type"
+    And I press "Add object"
+    And I press "Save outline"
+    Then I should see the message containing "Updated course."
+

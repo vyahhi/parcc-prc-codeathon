@@ -13,6 +13,13 @@ function prc_custom_modules_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'ds_search_node_limit';
+  $strongarm->value = '25000';
+  $export['ds_search_node_limit'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'realname_pattern';
   $strongarm->value = '[user:field-first-name] [user:field-last-name]';
   $export['realname_pattern'] = $strongarm;
@@ -72,11 +79,18 @@ function prc_custom_modules_strongarm() {
   $strongarm->name = 'sharethis_node_types';
   $strongarm->value = array(
     'digital_library_content' => 'digital_library_content',
-    'document' => 0,
+    'pd_course' => 'pd_course',
+    'course' => 0,
+    'quiz_directions' => 0,
     'favorites_list' => 0,
+    'multichoice' => 0,
+    'pd_module' => 0,
     'panel' => 0,
     'practice_test' => 0,
+    'quiz' => 0,
+    'short_answer' => 0,
     'test_item' => 0,
+    'truefalse' => 0,
   );
   $export['sharethis_node_types'] = $strongarm;
 

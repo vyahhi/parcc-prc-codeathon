@@ -1,0 +1,4 @@
+name = PRC Professional Development Token
+description = Tokens to display PD Course information
+package = PRC
+core = 7.x

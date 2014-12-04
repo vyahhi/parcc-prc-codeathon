@@ -1,4 +1,4 @@
-@api
+@api @course
 Feature: PRC-346 Admin: Course Audience
   As a Content Admin,
   I want to manage the course enrollment process for anonymous and authenticated users,
