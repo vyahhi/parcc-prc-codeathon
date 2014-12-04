@@ -12,7 +12,6 @@ Feature: Anonymous User Home Page (PRC-51)
     And I have no "PD Module" nodes
     And I have no "Quiz" nodes
     And I have no "Multiple choice question" nodes
-    And I have no "Exam directions" nodes
     And I have no "Short answer question" nodes
     And I have no "True/false question" nodes
     And I have no "Panel" nodes
