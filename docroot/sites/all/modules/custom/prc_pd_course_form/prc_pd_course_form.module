@@ -139,7 +139,6 @@ function prc_pd_course_form_form_pd_course_node_form_validate(&$form, &$form_sta
 function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form_state) {
   // We can't hide pd_module or the form token doesn't get set correctly
 
-//  $form['pd_module']['#access'] = FALSE;
   $title_weight = $form['title']['#weight'];
   $form['pd_module']['#weight'] = $title_weight;
   $form['title']['#weight'] = $title_weight + 1;
@@ -148,16 +147,9 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
   $form['plugins']['access']['#access'] = FALSE;
   $form['node']['private']['#access'] = FALSE;
 
-  //$selected_node_type = $form['node']['node_type']['#default_value'];
-
   $form['node']['use_existing_node']['#default_value'] = 1;
-//  $form['node']['use_existing_node']['#access'] = FALSE;
-//  unset($form['node']['instance']['#states']);
 
-//  $form['node']['node_type']['#access'] = FALSE;
-//  $form['node']['use_node_title']['#access'] = FALSE;
-
-  //$form['node']['instance']['#autocomplete_path']
+  $form['delete']['delete_instance']['#access'] = FALSE;
 
   unset($form['course_tabs']);
 }

@@ -60,6 +60,7 @@ Scenario Outline: AC1 When an existing course is selected, in addition to the ex
     #  A link or button for Remove (story PRC-362)
     Then I click "Edit Settings"
     Then I check the box "Delete"
+    Then I should not see the text "Also delete the referenced content."
     And I press "Update"
     Then I press "Save outline"
     And I should not see the text "PD Module PRC-350 AC5"
