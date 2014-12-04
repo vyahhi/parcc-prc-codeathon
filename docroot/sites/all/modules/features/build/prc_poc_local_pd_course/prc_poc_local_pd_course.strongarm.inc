@@ -14,7 +14,7 @@ function prc_poc_local_pd_course_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_pd_course';
-  $strongarm->value = 'edit-submission';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_pd_course'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -157,7 +157,7 @@ function prc_poc_local_pd_course_strongarm() {
             'visible' => TRUE,
           ),
           'teaser' => array(
-            'weight' => '3',
+            'weight' => '4',
             'visible' => TRUE,
           ),
           'search_index' => array(
@@ -175,7 +175,7 @@ function prc_poc_local_pd_course_strongarm() {
             'visible' => FALSE,
           ),
           'teaser' => array(
-            'weight' => '15',
+            'weight' => '16',
             'visible' => FALSE,
           ),
           'search_index' => array(
@@ -193,7 +193,7 @@ function prc_poc_local_pd_course_strongarm() {
             'visible' => TRUE,
           ),
           'teaser' => array(
-            'weight' => '4',
+            'weight' => '6',
             'visible' => TRUE,
           ),
           'search_index' => array(

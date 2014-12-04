@@ -218,6 +218,26 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-professional-development-le_view-all:professional-development
+  $menu_links['menu-professional-development-le_view-all:professional-development'] = array(
+    'menu_name' => 'menu-professional-development-le',
+    'link_path' => 'professional-development',
+    'router_path' => 'professional-development',
+    'link_title' => 'View All',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-professional-development-le_view-all:professional-development',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Translatables
   // Included for use with string extractors like potx.
   t('Add content');

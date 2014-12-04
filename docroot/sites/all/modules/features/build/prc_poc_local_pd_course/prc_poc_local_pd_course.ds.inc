@@ -12,6 +12,31 @@ function prc_poc_local_pd_course_ds_field_settings_info() {
 
   $ds_fieldsetting = new stdClass();
   $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|digital_library_content|search_index';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'digital_library_content';
+  $ds_fieldsetting->view_mode = 'search_index';
+  $ds_fieldsetting->settings = array(
+    'submitted_by_author_name' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'title' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'links' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+  );
+  $export['node|digital_library_content|search_index'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
   $ds_fieldsetting->id = 'node|pd_course|default';
   $ds_fieldsetting->entity_type = 'node';
   $ds_fieldsetting->bundle = 'pd_course';
@@ -67,6 +92,11 @@ function prc_poc_local_pd_course_ds_field_settings_info() {
         'class' => '',
       ),
     ),
+    'links' => array(
+      'weight' => '5',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
   );
   $export['node|pd_course|teaser'] = $ds_fieldsetting;
 
@@ -105,6 +135,53 @@ function prc_poc_local_pd_course_ds_custom_fields_info() {
  */
 function prc_poc_local_pd_course_ds_layout_settings_info() {
   $export = array();
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|digital_library_content|search_index';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'digital_library_content';
+  $ds_layout->view_mode = 'search_index';
+  $ds_layout->layout = 'ds_2col_stacked';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'footer' => array(
+        0 => 'links',
+        5 => 'sharethis',
+      ),
+      'header' => array(
+        1 => 'title',
+        2 => 'submitted_by_author_name',
+      ),
+      'left' => array(
+        3 => 'field_thumbnail',
+      ),
+      'right' => array(
+        4 => 'body',
+      ),
+    ),
+    'fields' => array(
+      'links' => 'footer',
+      'title' => 'header',
+      'submitted_by_author_name' => 'header',
+      'field_thumbnail' => 'left',
+      'body' => 'right',
+      'sharethis' => 'footer',
+    ),
+    'classes' => array(),
+    'wrappers' => array(
+      'header' => 'div',
+      'left' => 'div',
+      'right' => 'div',
+      'footer' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+  );
+  $export['node|digital_library_content|search_index'] = $ds_layout;
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
@@ -254,27 +331,29 @@ function prc_poc_local_pd_course_ds_layout_settings_info() {
   $ds_layout->layout = 'ds_2col_stacked';
   $ds_layout->settings = array(
     'regions' => array(
-      'left' => array(
-        0 => 'field_thumbnail',
-      ),
       'header' => array(
-        1 => 'title',
-        2 => 'formatted_course_length',
+        0 => 'title',
+        1 => 'formatted_course_length',
+      ),
+      'left' => array(
+        2 => 'field_thumbnail',
       ),
       'right' => array(
         3 => 'field_course_objectives',
       ),
       'footer' => array(
         4 => 'course',
-        5 => 'sharethis',
+        5 => 'links',
+        6 => 'sharethis',
       ),
     ),
     'fields' => array(
-      'field_thumbnail' => 'left',
       'title' => 'header',
       'formatted_course_length' => 'header',
+      'field_thumbnail' => 'left',
       'field_course_objectives' => 'right',
       'course' => 'footer',
+      'links' => 'footer',
       'sharethis' => 'footer',
     ),
     'classes' => array(),

@@ -146,3 +146,12 @@ Feature: Search Content - Quick Search (PRC-31)
     And I press "Search" in the "header" region
     Then the url should match "search/content/comis"
 
+  Scenario: PRC-462 Search from block and then change pages gives an error
+    Given I am logged in as a user with the "Educator" role
+    And I am on the homepage
+    When I fill in "seven" for "Search" in the "header" region
+    And I press "Search" in the "header" region
+    Then the url should match "search/content/seven"
+    And I should not see the error message containing "Warning: Invalid argument supplied for foreach() in element_children()"
+    Then I follow "Digital Library"
+    And I should not see the error message containing "Warning: Invalid argument supplied for foreach() in element_children()"

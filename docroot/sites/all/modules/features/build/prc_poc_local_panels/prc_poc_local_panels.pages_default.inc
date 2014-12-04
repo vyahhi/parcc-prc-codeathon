@@ -879,7 +879,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->subtype = 'my_lists-panel_pane_1';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_content_type_value' => 'digital_library_content',
+      ),
+    );
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
@@ -997,7 +1001,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->subtype = 'my_lists-panel_pane_1';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_content_type_value' => 'digital_library_content',
+      ),
+    );
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
@@ -1308,7 +1316,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->task = 'page';
   $page->admin_title = 'Professional Development';
   $page->admin_description = 'Professional Development placeholder';
-  $page->path = 'professional-development';
+  $page->path = 'professional-development/!nid';
   $page->access = array(
     'plugins' => array(),
     'logic' => 'and',
@@ -1325,8 +1333,17 @@ function prc_poc_local_panels_default_page_manager_pages() {
       'name' => 'navigation',
     ),
   );
-  $page->arguments = array();
-  $page->conf = array();
+  $page->arguments = array(
+    'nid' => array(
+      'id' => 1,
+      'identifier' => 'Node: ID',
+      'name' => 'entity_id:node',
+      'settings' => array(),
+    ),
+  );
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
   $page->default_handlers = array();
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
@@ -1337,8 +1354,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $handler->handler = 'panel_context';
   $handler->weight = 0;
   $handler->conf = array(
-    'title' => 'Landing page',
-    'no_blocks' => FALSE,
+    'title' => 'Professional Development',
+    'no_blocks' => 0,
     'pipeline' => 'ipe',
     'body_classes_to_remove' => '',
     'body_classes_to_add' => '',
@@ -1346,6 +1363,20 @@ function prc_poc_local_panels_default_page_manager_pages() {
     'css' => '',
     'contexts' => array(),
     'relationships' => array(),
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => 'professional-development',
+          ),
+          'context' => 'empty',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
   );
   $display = new panels_display();
   $display->layout = 'twocol';
@@ -1364,6 +1395,51 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
+    $pane->pid = 'new-1c34a962-b726-4457-a670-21564e8399e3';
+    $pane->panel = 'left';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-professional-development-le';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '1c34a962-b726-4457-a670-21564e8399e3';
+    $display->content['new-1c34a962-b726-4457-a670-21564e8399e3'] = $pane;
+    $display->panels['left'][0] = 'new-1c34a962-b726-4457-a670-21564e8399e3';
+    $pane = new stdClass();
+    $pane->pid = 'new-29252795-aee5-41ca-a70f-a7b137977ba6';
+    $pane->panel = 'left';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'my_lists-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_content_type_value' => 'pd_course',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '29252795-aee5-41ca-a70f-a7b137977ba6';
+    $display->content['new-29252795-aee5-41ca-a70f-a7b137977ba6'] = $pane;
+    $display->panels['left'][1] = 'new-29252795-aee5-41ca-a70f-a7b137977ba6';
+    $pane = new stdClass();
     $pane->pid = 'new-45f1600e-7e23-47e8-bf89-dbf7817fa882';
     $pane->panel = 'right';
     $pane->type = 'views_panes';
@@ -1375,7 +1451,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'digital-library-content-pane',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
@@ -1384,6 +1463,126 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $display->panels['right'][0] = 'new-45f1600e-7e23-47e8-bf89-dbf7817fa882';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_professional_development_panel_context_2';
+  $handler->task = 'page';
+  $handler->subtask = 'professional_development';
+  $handler->handler = 'panel_context';
+  $handler->weight = 1;
+  $handler->conf = array(
+    'title' => 'Professional Development Favorites',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => 'professional-development/*',
+          ),
+          'context' => 'empty',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'twocol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'left' => NULL,
+      'right' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = 'Professional Development Favorites';
+  $display->uuid = '16e9b363-4da6-4914-bb34-05186e577184';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-96916d0f-f201-4613-9211-d203959fbb4b';
+    $pane->panel = 'left';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-professional-development-le';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '96916d0f-f201-4613-9211-d203959fbb4b';
+    $display->content['new-96916d0f-f201-4613-9211-d203959fbb4b'] = $pane;
+    $display->panels['left'][0] = 'new-96916d0f-f201-4613-9211-d203959fbb4b';
+    $pane = new stdClass();
+    $pane->pid = 'new-3fa14771-425a-4491-a80d-e09baa64bb35';
+    $pane->panel = 'left';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'my_lists-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_content_type_value' => 'pd_course',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '3fa14771-425a-4491-a80d-e09baa64bb35';
+    $display->content['new-3fa14771-425a-4491-a80d-e09baa64bb35'] = $pane;
+    $display->panels['left'][1] = 'new-3fa14771-425a-4491-a80d-e09baa64bb35';
+    $pane = new stdClass();
+    $pane->pid = 'new-93fcb318-4639-4227-88ba-8fc9a6601c33';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'professional_development_favorites-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'nid' => '%nid:nid',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '93fcb318-4639-4227-88ba-8fc9a6601c33';
+    $display->content['new-93fcb318-4639-4227-88ba-8fc9a6601c33'] = $pane;
+    $display->panels['right'][0] = 'new-93fcb318-4639-4227-88ba-8fc9a6601c33';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-3fa14771-425a-4491-a80d-e09baa64bb35';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['professional_development'] = $page;

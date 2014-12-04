@@ -17,4 +17,5 @@ features[menu_links][] = menu-add-content_add-content:node/add/digital-library-c
 features[menu_links][] = menu-add-course_add-course:node/add/pd-course
 features[menu_links][] = menu-digital-library-left-nav_view-all:digital-library
 features[menu_links][] = menu-invite-users_invite-new-user:invite/add/invite_by_email
-mtime = 1417018316
+features[menu_links][] = menu-professional-development-le_view-all:professional-development
+mtime = 1417562905

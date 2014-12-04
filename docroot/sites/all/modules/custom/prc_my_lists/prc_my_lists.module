@@ -63,30 +63,50 @@ function prc_my_lists_permission() {
  *  Implements hook_node_view().
  */
 function prc_my_lists_node_view($node, $view_mode, $langcode) {
-  if ($node->type == 'digital_library_content') {
+  global $user;
+  if (user_access('add to my lists', $user)) {
 
-    global $user;
-    if (user_access('add to my lists', $user)) {
+    $listable_types = array(
+      'digital_library_content' => array(
+        'link_id' => 'prc_digital_library_add_to_favorites',
+        'link_title' => 'Add to My Lists',
+      ),
+      'pd_course' => array(
+        'link_id' => 'prc_pd_course_add_to_favorites',
+        'link_title' => 'Add to My PD Lists',
+      ),
+    );
 
-      $nid = $node->nid;
-
-      ctools_include('modal');
-      ctools_modal_add_js();
-
-      $links['prc_digital_library_add_to_favorites'] = array(
-        'title' => t('Add to My Lists'),
-        'href' => "favorites-list/$nid/nojs/add-to-list",
-        'attributes' => array(
-          'title' => t('Add to My Lists'),
-          'class' => array('ctools-use-modal'),
-        ),
-      );
-
-      $node->content['links']['prc_digital_library_content'] = array(
-        '#theme' => 'links__node__favorites',
-        '#links' => $links,
-        '#attributes' => array('class' => array('links', 'inline')),
-      );
+    if (array_key_exists($node->type, $listable_types)) {
+      $link_id = $listable_types[$node->type]['link_id'];
+      $link_title = $listable_types[$node->type]['link_title'];
+      _prc_my_lists_add_to_lists_link($node, $link_title, $link_id);
     }
   }
+}
+
+/**
+ * @param $node
+ * @param $link_title
+ * @param $link_id
+ */
+function _prc_my_lists_add_to_lists_link($node, $link_title, $link_id) {
+  ctools_include('modal');
+  ctools_modal_add_js();
+  $nid = $node->nid;
+
+  $links[$link_id] = array(
+    'title' => t($link_title),
+    'href' => "favorites-list/$nid/nojs/add-to-list",
+    'attributes' => array(
+      'title' => t($link_title),
+      'class' => array('ctools-use-modal'),
+    ),
+  );
+
+  $node->content['links'][$link_id] = array(
+    '#theme' => 'links__node__favorites',
+    '#links' => $links,
+    '#attributes' => array('class' => array('links', 'inline')),
+  );
 }

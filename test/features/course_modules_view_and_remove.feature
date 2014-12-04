@@ -15,7 +15,7 @@ Feature: PRC-350 Admin: View Course
 #  AC2 At click, a new page Settings opens.
 #  AC3 A Module drop down menu allows a user to start typing an existing content name
 #  AC4 The system provides a list of available content based on entered characters (auto-complete list)
-#  AC5 A Module Title* textbox allows the user to define a different display title from its original title. Once a content is selected, the Title textbox is populated with the current title of the content although the user can change it. Changing the title here will NOT change the content's original title
+#  AC5 A Module Title textbox allows the user to define a different display title from its original title. Once a content is selected, the Title textbox is populated with the current title of the content although the user can change it. Changing the title here will NOT change the content's original title
 #  AC7 A Save button allows the user to associate the selected content as the content of this module.
 
 Scenario Outline: AC1 When an existing course is selected, in addition to the existing tabs, a Course Outline tab shall be available to the user.
@@ -30,14 +30,13 @@ Scenario Outline: AC1 When an existing course is selected, in addition to the ex
   | Content Administrator (Curator) |
   | PRC Admin                       |
 
-
-#  AC3 At click, the system shall list the objects that have already been added to the course.
-
   Scenario: AC4 When there are no objects in the course, the system shall display:
     Given I am logged in as a user with the "Content Administrator (Curator)" role
     And I am viewing my "PD Course" node with the title "PRC-350 AC4"
     And I follow "Course outline"
     Then I should see the text "No objects are assigned to this course."
+
+  #  AC3 At click, the system shall list the objects that have already been added to the course.
 
   Scenario: Use existing title
     Given I am logged in as a user with the "Content Administrator (Curator)" role

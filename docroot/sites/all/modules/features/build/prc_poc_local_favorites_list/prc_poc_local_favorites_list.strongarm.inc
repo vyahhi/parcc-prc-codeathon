@@ -70,6 +70,9 @@ function prc_poc_local_favorites_list_strongarm() {
         'title' => array(
           'weight' => '-5',
         ),
+        'path' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),
