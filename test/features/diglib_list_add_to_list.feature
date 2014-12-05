@@ -94,7 +94,9 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     And I should see the heading "My Only List" in the "content" region
     And I should see the text "Favorite Content:"
     And I should see the text "To Add To Lists"
-    And I should see 1 ".field-item" elements
+    And I should see the text "Content Type:"
+    And I should see the text "Digital Library Content"
+    And I should see 2 ".field-item" elements
 
   Scenario: AC8 Item can only be added to a list once
     Given I am logged in as a user with the "Educator" role
@@ -112,7 +114,9 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     And I should see the heading "My Only List" in the "content" region
     And I should see the text "Favorite Content:"
     And I should see the text "To Add To Lists"
-    And I should see 1 ".field-item" elements
+    And I should see the text "Content Type:"
+    And I should see the text "Digital Library Content"
+    And I should see 2 ".field-item" elements
 
   Scenario: AC8? Multiple items can be added to a list
     Given I am logged in as a user with the "Educator" role
@@ -124,7 +128,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     Then I should see the message containing "The content is now associated with "
     And I should see the message containing "My Only List"
     Then I visit the first node created
-    And I should see 1 ".field-item" elements
+    And I should see 2 ".field-item" elements
     # View another node and add it
     And I am viewing a "Digital Library Content" node with the title "Another Favorite Item"
     Then I click "Add to My Lists"
@@ -134,7 +138,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     And I should see the message containing "My Only List"
     Then I visit the first node created
     Then I reload the page
-    And I should see 2 ".field-item" elements
+    And I should see 3 ".field-item" elements
 
 #  Acceptance Criteria
 #  AC1 In the Digital Library page where all the content is listed, a new link called Add to My Lists will be available.

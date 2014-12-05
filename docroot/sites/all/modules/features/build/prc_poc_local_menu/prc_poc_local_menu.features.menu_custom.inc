@@ -58,6 +58,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Invite Users',
     'description' => '',
   );
+  // Exported menu: menu-professional-development-le.
+  $menus['menu-professional-development-le'] = array(
+    'menu_name' => 'menu-professional-development-le',
+    'title' => 'Professional Development Left Nav',
+    'description' => 'Navigation menu for Professional Development view',
+  );
   // Exported menu: navigation.
   $menus['navigation'] = array(
     'menu_name' => 'navigation',
@@ -83,6 +89,8 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Management');
   t('Menu items for any enabled features.');
   t('Navigation');
+  t('Navigation menu for Professional Development view');
+  t('Professional Development Left Nav');
   t('The <em>Main</em> menu is used on many sites to show the major sections of the site, often in a top navigation bar.');
   t('The <em>Management</em> menu contains links for administrative tasks.');
   t('The <em>Navigation</em> menu contains links intended for site visitors. Links are added to the <em>Navigation</em> menu automatically by some modules.');

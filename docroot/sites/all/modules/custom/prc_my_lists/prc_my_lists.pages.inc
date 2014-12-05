@@ -107,6 +107,7 @@ function modal_add_a_list($type, $js = NULL, $node = NULL) {
 function prc_my_lists_view_lists_form($form, &$form_state) {
   $ajax = array_key_exists('ajax', $form_state) && $form_state['ajax'];
   $nid = array_key_exists('node', $form_state) ? $form_state['node']->nid : 0;
+  $type = array_key_exists('node', $form_state) ? $form_state['node']->type : NULL;
   $href = "favorites-list/$nid/nojs/create-list";
 
   if ($ajax) {
@@ -120,7 +121,7 @@ function prc_my_lists_view_lists_form($form, &$form_state) {
     '#markup' => $markup,
   );
 
-  $lists = _prc_my_lists_current_user_lists();
+  $lists = _prc_my_lists_current_user_lists($type);
 
   $list_titles = array();
   foreach ($lists as $key => $list) {
@@ -151,7 +152,7 @@ function prc_my_lists_view_lists_form($form, &$form_state) {
   return $form;
 }
 
-function _prc_my_lists_current_user_lists() {
+function _prc_my_lists_current_user_lists($content_type = NULL) {
   global $user;
   $uid = $user->uid;
 
@@ -162,6 +163,10 @@ function _prc_my_lists_current_user_lists() {
     ->propertyCondition('status', NODE_PUBLISHED)
     ->propertyCondition('uid', $uid)
     ->propertyOrderBy('title');
+
+  if ($content_type) {
+    $query->fieldCondition('field_content_type', 'value', $content_type);
+  }
 
   $result = $query->execute();
 
@@ -216,6 +221,7 @@ function prc_my_lists_create_list_form_submit(&$form, &$form_state) {
 
   if (is_array($form_state) && array_key_exists('values', $form_state) && array_key_exists('list_name', $form_state['values'])) {
     $list_name = $form_state['values']['list_name'];
+    $type = array_key_exists('node', $form_state) ? $form_state['node']->type : NULL;
     if ($list_name) {
       // We have a valid list name. Create the new list node.
       global $user;
@@ -227,6 +233,7 @@ function prc_my_lists_create_list_form_submit(&$form, &$form_state) {
       $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
       $node->uid = $user->uid;
       $node->status = 1; //(1 or 0): published or not
+      $node->field_content_type[$node->language][0]['value'] = $type;
       $node = node_submit($node); // Prepare node for saving
       node_save($node);
 

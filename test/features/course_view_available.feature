@@ -24,7 +24,7 @@ Feature: PRC-34 View Available PD Courses
     # AC4 Only the Published courses that the user has permission to shall be displayed. The layout of PD page is similar to Digital Library layout implemented in PRC-32 (specified in the following AC). Variances from Digital Library functionality are in green font.
     And I should not see the link "PD Course 3"
     # AC5 In this page, the courses are listed based on the sort definition. Default by date: the most recent on the top
-    And "PD Course 1" should precede "PD Course 2" for the query "a"
+    And "PD Course 2" should precede "PD Course 1" for the query "a"
     # Course Length (if available), such as:
     # (12-week)
     And I should see the text "(1-week)"

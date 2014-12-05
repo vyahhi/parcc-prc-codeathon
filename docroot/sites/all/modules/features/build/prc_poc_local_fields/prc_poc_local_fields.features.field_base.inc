@@ -97,6 +97,33 @@ function prc_poc_local_fields_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_content_type'
+  $field_bases['field_content_type'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_content_type',
+    'foreign keys' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'digital_library_content' => 'Digital Library Content',
+        'pd_course' => 'PD Course',
+      ),
+      'allowed_values_function' => '',
+      'course_enrollment' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_course_objectives'
   $field_bases['field_course_objectives'] = array(
     'active' => 1,
@@ -847,6 +874,7 @@ function prc_poc_local_fields_field_default_field_bases() {
     'locked' => 0,
     'module' => 'image',
     'settings' => array(
+      'course_enrollment' => FALSE,
       'default_image' => 0,
       'uri_scheme' => 'public',
     ),
