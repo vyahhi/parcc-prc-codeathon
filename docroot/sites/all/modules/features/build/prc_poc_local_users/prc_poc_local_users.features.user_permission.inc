@@ -90,6 +90,8 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['access course'] = array(
     'name' => 'access course',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'course',

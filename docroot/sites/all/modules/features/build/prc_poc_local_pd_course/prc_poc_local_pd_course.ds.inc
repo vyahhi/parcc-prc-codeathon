@@ -42,8 +42,8 @@ function prc_poc_local_pd_course_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'pd_course';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'title' => array(
-      'weight' => '0',
+    'formatted_course_length' => array(
+      'weight' => '1',
       'label' => 'hidden',
       'format' => 'default',
     ),
@@ -189,36 +189,23 @@ function prc_poc_local_pd_course_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'pd_course';
   $ds_layout->view_mode = 'default';
-  $ds_layout->layout = 'ds_2col_stacked';
+  $ds_layout->layout = 'ds_1col_wrapper';
   $ds_layout->settings = array(
     'regions' => array(
-      'header' => array(
-        0 => 'title',
-        1 => 'field_length_quantity',
-        2 => 'field_length_unit',
-      ),
-      'right' => array(
-        3 => 'field_course_objectives',
-      ),
-      'footer' => array(
-        4 => 'course',
-        5 => 'sharethis',
+      'ds_content' => array(
+        0 => 'field_course_objectives',
+        1 => 'formatted_course_length',
+        2 => 'course',
       ),
     ),
     'fields' => array(
-      'title' => 'header',
-      'field_length_quantity' => 'header',
-      'field_length_unit' => 'header',
-      'field_course_objectives' => 'right',
-      'course' => 'footer',
-      'sharethis' => 'footer',
+      'field_course_objectives' => 'ds_content',
+      'formatted_course_length' => 'ds_content',
+      'course' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(
-      'header' => 'div',
-      'left' => 'div',
-      'right' => 'div',
-      'footer' => 'div',
+      'ds_content' => 'div',
     ),
     'layout_wrapper' => 'div',
     'layout_attributes' => '',

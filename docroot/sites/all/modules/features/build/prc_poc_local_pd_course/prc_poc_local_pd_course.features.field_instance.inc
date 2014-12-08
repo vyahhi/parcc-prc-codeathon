@@ -22,7 +22,7 @@ function prc_poc_local_pd_course_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 0,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -77,7 +77,7 @@ function prc_poc_local_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 19,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -126,10 +126,9 @@ function prc_poc_local_pd_course_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 1,
+        'type' => 'hidden',
+        'weight' => 15,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -178,10 +177,9 @@ function prc_poc_local_pd_course_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 2,
+        'type' => 'hidden',
+        'weight' => 14,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -232,7 +230,7 @@ function prc_poc_local_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -282,7 +280,7 @@ function prc_poc_local_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 20,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -339,7 +337,7 @@ function prc_poc_local_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 18,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -390,7 +388,7 @@ function prc_poc_local_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 21,
       ),
       'search_index' => array(
         'label' => 'above',

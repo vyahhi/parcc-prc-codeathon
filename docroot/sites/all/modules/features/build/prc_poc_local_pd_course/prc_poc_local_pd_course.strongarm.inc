@@ -153,7 +153,7 @@ function prc_poc_local_pd_course_strongarm() {
       'display' => array(
         'course' => array(
           'default' => array(
-            'weight' => '4',
+            'weight' => '2',
             'visible' => TRUE,
           ),
           'teaser' => array(
@@ -171,7 +171,7 @@ function prc_poc_local_pd_course_strongarm() {
         ),
         'course_messages' => array(
           'default' => array(
-            'weight' => '15',
+            'weight' => '16',
             'visible' => FALSE,
           ),
           'teaser' => array(
@@ -189,8 +189,8 @@ function prc_poc_local_pd_course_strongarm() {
         ),
         'sharethis' => array(
           'default' => array(
-            'weight' => '5',
-            'visible' => TRUE,
+            'weight' => '13',
+            'visible' => FALSE,
           ),
           'teaser' => array(
             'weight' => '6',
