@@ -27,10 +27,10 @@ Feature: PRC-346 Admin: Course Audience
     And I am viewing my "PD Module" node with the title "PD Module PRC-346 AC3"
     And I am viewing my "PD Course" node with the title "PD Course PRC-346 AC3"
     And I click "Edit"
-    Then I click "Course Audience"
+#    Then I click "Course Audience"
     # AC4 A course label and the following options will display on the "Course Audience" page:
     # Course Audience label
-    Then I should see the heading "'PD Course PRC-346 AC3' Course Audience"
+#    Then I should see the heading "'PD Course PRC-346 AC3' Course Audience"
 #    And I should see the text "Course Audience/Permissions"
 #    And I should see the radio button "Public"
 #    And I should see the radio button "PARCC members ONLY"
