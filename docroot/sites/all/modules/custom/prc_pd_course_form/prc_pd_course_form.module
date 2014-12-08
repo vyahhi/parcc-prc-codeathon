@@ -131,6 +131,8 @@ function prc_pd_course_form_form_pd_course_node_form_alter(&$form, &$form_state)
 function prc_pd_course_form_form_pd_course_node_form_validate(&$form, &$form_state) {
   $faux_published = $form_state['values']['faux_published'];
   $form_state['values']['status'] = $faux_published;
+  $form_state['values']['course']['outline'] = 'course';
+  $form_state['values']['enrollment_type'] = 'course_enrollment';
 }
 
 /**
@@ -154,8 +156,4 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
   $form['delete']['delete_instance']['#access'] = FALSE;
 
   unset($form['course_tabs']);
-}
-
-function prc_pd_course_form_override_outline_list_item(&$item, CourseObject $courseObject, $type) {
-$x = 'x';
 }
