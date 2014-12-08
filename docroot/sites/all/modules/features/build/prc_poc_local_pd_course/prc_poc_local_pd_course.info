@@ -58,5 +58,5 @@ features[variable][] = node_preview_pd_course
 features[variable][] = node_submitted_pd_course
 features[variable][] = save_continue_pd_course
 features[variable][] = sharethis_pd_course_options
-mtime = 1417655097
+mtime = 1417737653
 project path = sites/all/modules/features/build

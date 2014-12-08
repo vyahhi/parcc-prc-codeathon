@@ -41,6 +41,49 @@ function prc_poc_local_site_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'color_prc_responsive_bartik_files';
+  $strongarm->value = array(
+    0 => 'public://color/prc_responsive_bartik-e1440273/logo.png',
+    1 => 'public://color/prc_responsive_bartik-e1440273/colors.css',
+  );
+  $export['color_prc_responsive_bartik_files'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'color_prc_responsive_bartik_logo';
+  $strongarm->value = 'public://color/prc_responsive_bartik-e1440273/logo.png';
+  $export['color_prc_responsive_bartik_logo'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'color_prc_responsive_bartik_palette';
+  $strongarm->value = array(
+    'top' => '#ffffff',
+    'bottom' => '#c2c4c5',
+    'bg' => '#ffffff',
+    'sidebar' => '#f6f6f2',
+    'sidebarborders' => '#cccccc',
+    'footer' => '#292929',
+    'titleslogan' => '#000000',
+    'text' => '#4a4a4a',
+    'link' => '#019dbf',
+  );
+  $export['color_prc_responsive_bartik_palette'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'color_prc_responsive_bartik_stylesheets';
+  $strongarm->value = array(
+    0 => 'public://color/prc_responsive_bartik-e1440273/colors.css',
+  );
+  $export['color_prc_responsive_bartik_stylesheets'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'date_default_timezone';
   $strongarm->value = 'America/Chicago';
   $export['date_default_timezone'] = $strongarm;
@@ -112,7 +155,7 @@ function prc_poc_local_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'theme_default';
-  $strongarm->value = 'responsive_bartik';
+  $strongarm->value = 'prc_responsive_bartik';
   $export['theme_default'] = $strongarm;
 
   $strongarm = new stdClass();
