@@ -92,6 +92,7 @@ function prc_pd_course_form_course_audience_form($form, &$form_state) {
   $s = taxonomy_vocabulary_machine_name_load('member_state');
   if ($s) {
     $state_options = array();
+    $state_options[] = '- ' . t('Select a state') . ' -';
     $state_vid = $s->vid;
     $states = taxonomy_get_tree($state_vid);
     foreach ($states as $state) {
@@ -143,41 +144,62 @@ function prc_pd_course_form_course_audience_form($form, &$form_state) {
 
 function prc_pd_course_form_course_audience_form_validate(&$form, &$form_state) {
   if (array_key_exists('input', $form_state) &&
-      array_key_exists('course_audience', $form_state['input']) &&
-      array_key_exists('select_by', $form_state['input'])
-      )
-  {
+    array_key_exists('course_audience', $form_state['input']) &&
+    array_key_exists('select_by', $form_state['input'])
+  ) {
     $course_audience = $form_state['input']['course_audience'];
     $select_by = $form_state['input']['select_by'];
-    if ($course_audience == 'members' && $select_by == 'by_rostering') {
-      $emails = $form_state['input']['by_rostering'];
-      if (!$emails) {
-        form_set_error('by_rostering', t('E-mail field is required.'));
-      } else {
-        $valid_emails = array();
-        $form_state = _prc_invite_form_validate_email_address_format($form_state, 'by_rostering', $valid_emails);
-        if ($valid_emails) {
-          $query = new EntityFieldQuery();
+    if ($course_audience == 'members') {
+    }
+    switch ($select_by) {
+      case 'by_state':
+        $state = $form_state['input']['by_state'];
+        if (!$state) {
+          form_set_error('by_state', t('State field is required.'));
+        }
+        break;
 
-          $query->entityCondition('entity_type', 'user')
-            ->entityCondition('mail', $valid_emails, 'IN')
-            ->propertyCondition('uid', array(0, 1), 'NOT IN')
-          ;
-          $result = $query->execute();
-          if (isset($result['user'])) {
-            $uids = array_keys($result['user']);
-            $users = entity_load('user', $uids);
-            if (count($users) != count($valid_emails)) {
-              form_set_error('by_rostering', t('Email address does not exist.'));
-// TODO: Loop through emails and remove the ones that have users, then use the remainder for displaying the errors
+      case 'by_rostering':
+        $emails = $form_state['input']['by_rostering'];
+        if (!$emails) {
+          form_set_error('by_rostering', t('E-mail field is required.'));
+        }
+        else {
+          $valid_emails = array();
+          $form_state = _prc_invite_form_validate_email_address_format($form_state, 'by_rostering', $valid_emails);
+          if ($valid_emails) {
+            $query = new EntityFieldQuery();
+
+            $query->entityCondition('entity_type', 'user')
+              ->entityCondition('mail', $valid_emails, 'IN')
+              ->propertyCondition('uid', array(0, 1), 'NOT IN');
+            $result = $query->execute();
+            if (isset($result['user'])) {
+              $uids = array_keys($result['user']);
+              $users = entity_load('user', $uids);
+              $existing_emails = array();
+              foreach ($users as $user) {
+                $existing_emails[] = $user->mail;
+              }
+              $not_existing = array_diff($valid_emails, $existing_emails);
+
+              if (count($users) != count($valid_emails)) {
+                if (count($not_existing) == 1) {
+                  $error = reset($not_existing) . t(' does not exist.');
+                }
+                else {
+                  $error = implode($not_existing, ', ') . t(' do not exist.');
+                }
+                form_set_error('by_rostering', $error);
+              }
             }
           }
-
         }
-      }
+        break;
     }
   }
 }
+
 function prc_pd_course_form_form_course_outline_overview_form_alter(&$form, &$form_state) {
 
   // Change the order from alpha to the order specified in the story
@@ -194,7 +216,8 @@ function prc_pd_course_form_form_course_outline_overview_form_alter(&$form, &$fo
       '#markup' => t('No objects are assigned to this course.'),
       '#weight' => -10,
     );
-  } else {
+  }
+  else {
     // Remove the summary text from each object
     foreach ($form['course_outline']['objects'] as $key => $value) {
       if (strpos($key, '#') === FALSE) {

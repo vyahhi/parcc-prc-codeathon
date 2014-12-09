@@ -70,7 +70,8 @@ Feature: PRC-346 Admin: Course Audience
     #  AC7 The State drop down menu will contain the following options in alphabetical order:
     #  Select a state (default- keeps (or resets value to: NULL)
     And I should see 1 "#edit-by-state" elements
-    And I should see 13 "#edit-by-state option" elements
+    And I should see 14 "#edit-by-state option" elements
+    And I select "- Select a state -" from "edit-by-state"
     And I select "Arkansas" from "edit-by-state"
     And I select "Colorado" from "edit-by-state"
     And I select "District of Columbia" from "edit-by-state"
@@ -85,18 +86,16 @@ Feature: PRC-346 Admin: Course Audience
     And I select "Ohio" from "edit-by-state"
     And I select "Rhode Island" from "edit-by-state"
 
-  Scenario: AC8 Validations: state
+  Scenario: AC8 Validations: state is required
     Given I am logged in as a user with the "Content Administrator (Curator)" role
     And I am viewing my "PD Course" node with the title "PD Course PRC-346 AC3"
     Then I click "Course Audience"
     And I select the radio button "PARCC members ONLY"
     And I select the radio button "Select By State"
     Then I press "Save audience"
-    Then I should see the error message containing "State is required."
-    #  If the Admin does not select a State from the drop down , the system will provide feedback on the top of the form:
-    #  <State> is required
+    Then I should see the error message containing "State field is required."
 
-  Scenario: AC8 Validations: rostering
+  Scenario: AC8 Validations: email is required
     Given I am logged in as a user with the "Content Administrator (Curator)" role
     And I am viewing my "PD Course" node with the title "PD Course PRC-346 AC3"
     Then I click "Course Audience"
@@ -112,9 +111,7 @@ Feature: PRC-346 Admin: Course Audience
     And I select the radio button "PARCC members ONLY"
     And I select the radio button "Select By Rostering"
     And I fill in "E-mail" with "badaddress.com"
-    Then I press "Save audience"
-    # AC10 Validations: The following validations will occur when the Select By Rostering option is selected:
-    # E-mail address must be in email format (built-in functionality on validating @ and dot within the string). If the user does not provide a valid format for all emails listed, the system provides feedback on the top of the form:
+    When I press "Save audience"
     Then I should see the error message containing "badaddress.com is not a valid e-mail address."
     And I fill in "E-mail" with "otherbadone,badaddress.com"
     Then I press "Save audience"
@@ -131,8 +128,11 @@ Feature: PRC-346 Admin: Course Audience
     And I select the radio button "PARCC members ONLY"
     And I select the radio button "Select By Rostering"
     And I fill in "E-mail" with "joe_prc_356fake@example.com"
-    Then I press "Save audience"
+    When I press "Save audience"
     Then I should see the error message containing "joe_prc_356fake@example.com does not exist."
+    And I fill in "E-mail" with "joe_prc_356fake@example.com, joe_prc_356other@example.com"
+    Then I press "Save audience"
+    Then I should see the error message containing "joe_prc_356fake@example.com, joe_prc_356other@example.com do not exist."
 
 #  The E-mail address must be an existing E-mail associated with current users. If the entered E-mail does not exists, the system provides feedback on the top of the form:
 #  <wrong email format displayed here> does not exist
