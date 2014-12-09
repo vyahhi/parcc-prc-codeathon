@@ -134,8 +134,13 @@ Feature: PRC-346 Admin: Course Audience
     Then I press "Save audience"
     Then I should see the error message containing "joe_prc_356fake@example.com, joe_prc_356other@example.com do not exist."
 
-#  The E-mail address must be an existing E-mail associated with current users. If the entered E-mail does not exists, the system provides feedback on the top of the form:
-#  <wrong email format displayed here> does not exist
-#  AC11 A Save Audience button is provided at the end. Once selected, the system will:
-#  Validate that all required fields contain valid values. If not, the system displays a red frame around the section or field text box, and provides feedback on the top of the form:
-#  <Missing required> field is required.
+  Scenario: Public saves
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And I am viewing my "PD Course" node with the title "PD Course PRC-346 OKAY"
+    When I click "Course Audience"
+    And I select the radio button "Public"
+    And the "Public" radio button should be selected
+    And I press "Save audience"
+    Then I should see the message containing "PD Course PRC-346 OKAY"
+    Then I should see the message containing "course audience updated."
+    And the "Public" radio button should be selected

@@ -58,6 +58,8 @@ function prc_pd_course_form_course_audience_form($form, &$form_state) {
     $node = node_load(arg(1));
   }
 
+  $form_state['build_info']['node'] = $node;
+
   drupal_set_title("'" . $node->title . "' " . t('Course Audience'));
 
   $form = array();
@@ -139,6 +141,9 @@ function prc_pd_course_form_course_audience_form($form, &$form_state) {
     'prc_pd_course_form_course_audience_form_validate',
   );
 
+  $form['#submit'] = array(
+    'prc_pd_course_form_course_audience_form_submit',
+  );
   return $form;
 }
 
@@ -198,6 +203,12 @@ function prc_pd_course_form_course_audience_form_validate(&$form, &$form_state) 
         break;
     }
   }
+}
+
+function prc_pd_course_form_course_audience_form_submit(&$form, &$form_state) {
+  $node = $form_state['build_info']['node'];
+  $success_message = $node->title . ' ' . t('course audience'). ' ' . t('updated') . '.';
+  drupal_set_message($success_message);
 }
 
 function prc_pd_course_form_form_course_outline_overview_form_alter(&$form, &$form_state) {
