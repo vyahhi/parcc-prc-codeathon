@@ -130,6 +130,12 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
   }
 
+  public function assertLoggedInByName($name) {
+    $name = $this->fixStepArgument($name);
+    parent::assertLoggedInByName($name);
+  }
+
+
   /**
    * @Then /^"([^"]*)" in "([^"]*)" should be selected$/
    */

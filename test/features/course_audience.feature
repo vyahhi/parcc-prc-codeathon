@@ -203,3 +203,147 @@ Feature: PRC-346 Admin: Course Audience
       | Members Only | This is private         | members            | 1   | 1      |
     And I am an anonymous user
     And I cannot visit the last node created
+
+  Scenario: Saving anonymous content as Members Only; hidden from anonymous
+    Given "PD Course" nodes:
+      | title        | field_course_objectives | field_permissions  | uid | status |
+      | Members Only | This is private         | members            | 0   | 1      |
+    And I am an anonymous user
+    And I cannot visit the last node created
+
+  Scenario Outline: Saving content as Public; accessible to roles
+    Given "PD Course" nodes:
+      | title      | field_course_objectives | field_permissions | uid | status |
+      | Public     | This is public          | public            | 1   | 1      |
+    And I am logged in as a user with the "<role>" role
+    And I visit the last node created
+    Then I should see the text "This is public"
+    Examples:
+      | role                            |
+      | Educator                        |
+      | Content Contributor             |
+      | PRC Admin                       |
+      | administrator                   |
+      | Content Administrator (Curator) |
+      | authenticated user              |
+
+  Scenario Outline: Saving content as Members Only; hidden from role
+    Given "PD Course" nodes:
+      | title        | field_course_objectives | field_permissions  | uid | status |
+      | Members Only | This is private         | members            | 1   | 1      |
+    And I am logged in as a user with the "<role>" role
+    And I cannot visit the last node created
+    Examples:
+      | role                |
+      | Educator            |
+      | authenticated user  |
+
+  Scenario Outline: Saving content as Members Only - All members; hidden from role
+    Given "PD Course" nodes:
+      | title        | field_course_objectives | field_permissions  | uid | status |
+      | Members Only | This is private         | members            | 1   | 1      |
+    And I am logged in as a user with the "<role>" role
+    And I visit the last node created
+    Examples:
+      | role                            |
+      | Content Contributor             |
+      | Content Administrator (Curator) |
+      | PRC Admin                       |
+      | administrator                   |
+
+  Scenario Outline: Saving content as Members Only - All members; hidden from role
+    Given "PD Course" nodes:
+      | title        | field_course_objectives | field_permissions  | uid | status |
+      | Members Only | This is private         | members            | 1   | 1      |
+    And I am logged in as a user with the "<role>" role
+    And I visit the last node created
+    Examples:
+      | role                            |
+      | Content Contributor             |
+      | Content Administrator (Curator) |
+      | PRC Admin                       |
+      | administrator                   |
+
+  Scenario: Audience by state
+    Given "PD Course" nodes:
+      | title         | field_course_objectives | field_permissions  | uid | status |
+      | Illinois Only | This is private         | public             | 1   | 1      |
+    Given users:
+      | name         | mail                                | pass   | field_first_name | field_last_name | status |
+      | Joe Illinois | joe_prc_346il@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
+      | Joe Arkansas | joe_prc_346ar@timestamp@example.com | xyz123 | Joe              | Arkansas        | 1      |
+    And I am logged in as a user with the "PRC Admin" role
+    And I am on "admin-users"
+    Then I click "User ID"
+    Then I click on the edit link for the user "Joe Illinois"
+    Then I select the radio button "PARCC-Member Educator"
+    Then I select "Illinois" from "Member State"
+    Then I press "Save"
+    And I am on "admin-users"
+    Then I click "User ID"
+    Then I click on the edit link for the user "Joe Arkansas"
+    Then I select the radio button "PARCC-Member Educator"
+    Then I select "Arkansas" from "Member State"
+    Then I press "Save"
+    Then I visit the last node created
+    When I click "Course Audience"
+    And I select the radio button "PARCC members ONLY"
+    And I select the radio button "Select By State"
+    And I select "Illinois" from "edit-by-state"
+    And I press "Save audience"
+    Then I click "Log out"
+    Then the url should match "/"
+    Then I fill in "E-mail *" with "joe_prc_346il@timestamp@example.com"
+    Then I fill in "Password *" with "xyz123"
+    And I press "Log in"
+    When I click "Professional Development"
+    Then I should see the link "Illinois Only"
+    Then I click "Log out"
+    Then the url should match "/"
+    Then I fill in "E-mail *" with "joe_prc_346ar@timestamp@example.com"
+    Then I fill in "Password *" with "xyz123"
+    And I press "Log in"
+    When I click "Professional Development"
+    Then I should not see the link "Illinois Only"
+
+  Scenario: Audience by roster
+    Given "PD Course" nodes:
+      | title         | field_course_objectives | field_permissions  | uid | status |
+      | Illinois Only | This is private         | public             | 1   | 1      |
+    Given users:
+      | name         | mail                                | pass   | field_first_name | field_last_name | status |
+      | Joe Illinois | joe_prc_346il@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
+      | Joe Arkansas | joe_prc_346ar@timestamp@example.com | xyz123 | Joe              | Arkansas        | 1      |
+    And I am logged in as a user with the "PRC Admin" role
+    And I am on "admin-users"
+    Then I click "User ID"
+    Then I click on the edit link for the user "Joe Illinois"
+    Then I select the radio button "PARCC-Member Educator"
+    Then I select "Illinois" from "Member State"
+    Then I press "Save"
+    And I am on "admin-users"
+    Then I click "User ID"
+    Then I click on the edit link for the user "Joe Arkansas"
+    Then I select the radio button "PARCC-Member Educator"
+    Then I select "Arkansas" from "Member State"
+    Then I press "Save"
+    Then I visit the last node created
+    When I click "Course Audience"
+    And I select the radio button "PARCC members ONLY"
+    And I select the radio button "Select By Rostering"
+    And I fill in "E-mail" with "joe_prc_346il@timestamp@example.com"
+    When I press "Save audience"
+    Then I click "Log out"
+    Then the url should match "/"
+    Then I fill in "E-mail *" with "joe_prc_346il@timestamp@example.com"
+    Then I fill in "Password *" with "xyz123"
+    And I press "Log in"
+    When I click "Professional Development"
+    Then I should see the link "Illinois Only"
+    Then I click "Log out"
+    Then the url should match "/"
+    Then I fill in "E-mail *" with "joe_prc_346ar@timestamp@example.com"
+    Then I fill in "Password *" with "xyz123"
+    And I press "Log in"
+    When I click "Professional Development"
+    Then I should not see the link "Illinois Only"
