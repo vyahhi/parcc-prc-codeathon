@@ -147,6 +147,9 @@ function prc_pd_course_form_course_audience_form($form, &$form_state) {
     '#type' => 'textarea',
     '#title' => 'E-mail',
     '#default_value' => implode(PHP_EOL, $users_default_values),
+    '#theme_options' => array(
+      'description at top' => t('Input all email addresses of those you want to roster.'),
+    ),
     '#states' => array(
       'visible' => array(
         ':input[name="select_by"]' => array('value' => 'by_rostering'),

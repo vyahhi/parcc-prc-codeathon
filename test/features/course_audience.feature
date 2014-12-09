@@ -86,6 +86,8 @@ Feature: PRC-346 Admin: Course Audience
     And I select "Ohio" from "edit-by-state"
     And I select "Rhode Island" from "edit-by-state"
 
+    And I should see the text "Input all email addresses of those you want to roster."
+
   Scenario: AC8 Validations: state is required
     Given I am logged in as a user with the "Content Administrator (Curator)" role
     And I am viewing my "PD Course" node with the title "PD Course PRC-346 AC3"

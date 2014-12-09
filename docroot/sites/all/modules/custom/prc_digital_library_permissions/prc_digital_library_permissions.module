@@ -93,25 +93,43 @@ function prc_digital_library_permissions_node_access_records($node) {
         $users = $w->field_users_allowed->value();
         foreach($states as $state) {
           $tid = $state->tid;
-          $grants[] = array(
-            'realm' => 'prc_state_audience',
-            'gid' => $tid,
-            'grant_view' => 1,
-            'grant_update' => 0,
-            'grant_delete' => 0,
-            'priority' => 0,
-          );
+          $found = FALSE;
+          foreach($grants as $grant) {
+            if ($grant['realm'] == 'prc_state_audience' && $grant['gid'] = $tid) {
+              $found = TRUE;
+              break;
+            }
+          }
+          if ($found) {
+            $grants[] = array(
+              'realm' => 'prc_state_audience',
+              'gid' => $tid,
+              'grant_view' => 1,
+              'grant_update' => 0,
+              'grant_delete' => 0,
+              'priority' => 0,
+            );
+          }
         }
         foreach($users as $u) {
           $uid = $u->uid;
-          $grants[] = array(
-            'realm' => 'prc_user_audience',
-            'gid' => $uid,
-            'grant_view' => 1,
-            'grant_update' => 0,
-            'grant_delete' => 0,
-            'priority' => 0,
-          );
+          $found = FALSE;
+          foreach($grants as $grant) {
+            if ($grant['realm'] == 'prc_user_audience' && $grant['gid'] = $uid) {
+              $found = TRUE;
+              break;
+            }
+          }
+          if ($found) {
+            $grants[] = array(
+              'realm' => 'prc_user_audience',
+              'gid' => $uid,
+              'grant_view' => 1,
+              'grant_update' => 0,
+              'grant_delete' => 0,
+              'priority' => 0,
+            );
+          }
         }
       }
 
