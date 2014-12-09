@@ -170,3 +170,21 @@ Feature: PRC-346 Admin: Course Audience
     And the "PARCC members ONLY" radio button should be selected
     And the "Select By State" radio button should be selected
     And "Illinois" in "edit-by-state" should be selected
+
+  Scenario: Rostering saves
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    Given users:
+      | name            | mail                               | pass   | field_first_name | field_last_name | status |
+      | Joe Educator    | joe_prc_346a@timestamp@example.com | xyz123 | Joe              | Educator        | 1      |
+      | Joe Contributor | joe_prc_346b@timestamp@example.com | xyz123 | Joe              | Contributor     | 1      |
+    And I am viewing my "PD Course" node with the title "PD Course PRC-346 Rostering"
+    Then I click "Course Audience"
+    And I select the radio button "PARCC members ONLY"
+    And I select the radio button "Select By Rostering"
+    And I fill in "E-mail" with "joe_prc_346a@timestamp@example.com"
+    When I press "Save audience"
+    Then I should see the message containing "PD Course PRC-346 Rostering"
+    Then I should see the message containing "course audience updated."
+    And the "PARCC members ONLY" radio button should be selected
+    And the "Select By Rostering" radio button should be selected
+    And I should see "joe_prc_346a@timestamp@example.com" in the "E-mail" field

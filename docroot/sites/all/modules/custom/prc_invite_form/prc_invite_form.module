@@ -159,11 +159,8 @@ function _prc_invite_form_validate_email_address_format(&$form_state, $field_nam
     }
     if (empty($valid) && empty($invalid)) {
       form_set_error($field_name, t('Please input one or more email addresses'));
-      return $form_state;
     }
-    return $form_state;
   }
-  return $form_state;
 }
 
 // each email address needs its own invite object
