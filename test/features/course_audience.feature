@@ -136,11 +136,37 @@ Feature: PRC-346 Admin: Course Audience
 
   Scenario: Public saves
     Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am viewing my "PD Course" node with the title "PD Course PRC-346 OKAY"
+    And I am viewing my "PD Course" node with the title "PD Course PRC-346 Public"
     When I click "Course Audience"
     And I select the radio button "Public"
     And the "Public" radio button should be selected
     And I press "Save audience"
-    Then I should see the message containing "PD Course PRC-346 OKAY"
+    Then I should see the message containing "PD Course PRC-346 Public"
     Then I should see the message containing "course audience updated."
     And the "Public" radio button should be selected
+
+  Scenario: Members only all saves
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And I am viewing my "PD Course" node with the title "PD Course PRC-346 All Members"
+    When I click "Course Audience"
+    And I select the radio button "PARCC members ONLY"
+    And I select the radio button "All PARCC Members"
+    And I press "Save audience"
+    Then I should see the message containing "PD Course PRC-346 All Members"
+    Then I should see the message containing "course audience updated."
+    And the "PARCC members ONLY" radio button should be selected
+    And the "All PARCC Members" radio button should be selected
+
+  Scenario: Members only state saves
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And I am viewing my "PD Course" node with the title "PD Course PRC-346 All Members"
+    When I click "Course Audience"
+    And I select the radio button "PARCC members ONLY"
+    And I select the radio button "Select By State"
+    And I select "Illinois" from "edit-by-state"
+    And I press "Save audience"
+    Then I should see the message containing "PD Course PRC-346 All Members"
+    Then I should see the message containing "course audience updated."
+    And the "PARCC members ONLY" radio button should be selected
+    And the "Select By State" radio button should be selected
+    And "Illinois" in "edit-by-state" should be selected

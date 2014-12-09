@@ -131,6 +131,21 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Then /^"([^"]*)" in "([^"]*)" should be selected$/
+   */
+  public function inShouldBeSelected($optionValue, $select) {
+    $selectElement = $this->getSession()->getPage()->find('named', array('select', "\"{$select}\""));
+    $optionElement = $selectElement->find('named', array('option', "\"{$optionValue}\""));
+    //it should have the attribute selected and it should be set to selected
+    if (!$optionElement->hasAttribute("selected")) {
+      throw new \Exception(sprintf('The select box with "%s" has nothing selected', $select));
+    }
+    if (!$optionElement->getAttribute("selected") == "selected") {
+      throw new \Exception(sprintf('The select box "%s" should have had %s selected.', $select, $optionValue));
+    }
+  }
+
+  /**
    * Checks for a field with specified id|name|title|alt|value.
    *
    * @Then /^(?:|I )should see an? "(?P<element>[^"]*)" field$/
