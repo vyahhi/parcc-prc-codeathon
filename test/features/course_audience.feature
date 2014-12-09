@@ -188,3 +188,18 @@ Feature: PRC-346 Admin: Course Audience
     And the "PARCC members ONLY" radio button should be selected
     And the "Select By Rostering" radio button should be selected
     And I should see "joe_prc_346a@timestamp@example.com" in the "E-mail" field
+
+  Scenario: Saving content as Public; accessible to anonymous
+    Given "PD Course" nodes:
+      | title      | field_course_objectives | field_permissions | uid | status |
+      | Public     | This is public          | public            | 1   | 1      |
+    And I am an anonymous user
+    And I visit the last node created
+    Then I should see the text "This is public"
+
+  Scenario: Saving content as Members Only; hidden from anonymous
+    Given "PD Course" nodes:
+      | title        | field_course_objectives | field_permissions  | uid | status |
+      | Members Only | This is private         | members            | 1   | 1      |
+    And I am an anonymous user
+    And I cannot visit the last node created
