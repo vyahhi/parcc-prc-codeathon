@@ -5,55 +5,179 @@
  * Alters to registration forms.
  */
 
-///**
-// *  Implements hook_menu().
-// */
-//function prc_pd_course_form_menu() {
-//  $items = array();
-//  // Display the 'Take course' menu item as a tab or link, depending.
-//  $items['node/%course/courseaudience'] = array(
-//    'title' => 'Course Audience',
-//    'description' => 'Course Audience',
-//    'page callback' => 'prc_pd_course_form_course_audience',
-//    'page arguments' => array(1),
-//    'access callback' => 'prc_pd_course_form_course_audience_menu_access',
-//    'access arguments' => array(1),
-//    'type' => MENU_LOCAL_TASK,
-////    'type' => variable_get('course_takecourse_tab_display', 1) ? MENU_LOCAL_TASK : MENU_CALLBACK,
-//  );
-//  return $items;
-//}
+/**
+ *  Implements hook_menu().
+ */
+function prc_pd_course_form_menu() {
+  $items = array();
+  // Display the 'Take course' menu item as a tab or link, depending.
+  $items['node/%course/courseaudience'] = array(
+    'title' => 'Course Audience',
+    'description' => 'Course Audience',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('prc_pd_course_form_course_audience_form'),
+    'access callback' => 'prc_pd_course_form_course_audience_menu_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
 
-///**
-// * Menu access callback to determines if the Course Audience tab should display
-// * on the course node.
-// *
-// * This differs from prc_pd_course_form_course_audience_access() as it only returns a boolean.
-// *
-// * @param object $node
-// *   The course node.
-// *
-// * @see course_uc_token_values()
-// */
-//function prc_pd_course_form_course_audience_menu_access($node) {
-//  $courses = &drupal_static(__FUNCTION__, array());
-//
-//  if (!isset($courses[$node->nid])) {
-//    $courses[$node->nid] = TRUE;
-//  }
-//
-//  return $courses[$node->nid];
-//}
-//
-//function prc_pd_course_form_course_audience($node) {
-//  global $user;
-//  drupal_set_title("'" . $node->title . "' " . t('Course Audience'));
-//
-//  $form = array();
-//
-//  return $form;
-//}
+/**
+ * Menu access callback to determines if the Course Audience tab should display
+ * on the course node.
+ *
+ * This differs from prc_pd_course_form_course_audience_access() as it only returns a boolean.
+ *
+ * @param object $node
+ *   The course node.
+ *
+ * @see course_uc_token_values()
+ */
+function prc_pd_course_form_course_audience_menu_access($node) {
+  global $user;
+  if (user_access('edit any pd_course content')) {
 
+    $courses = &drupal_static(__FUNCTION__, array());
+
+    if (!isset($courses[$node->nid])) {
+      // Only show tab for course nodes
+      $courses[$node->nid] = course_node_is_course($node);
+    }
+
+    return $courses[$node->nid];
+  }
+}
+
+function prc_pd_course_form_course_audience_form($form, &$form_state) {
+  global $user;
+  if (isset($form_state['values']['nid'])) {
+    $node = node_load($form_state['values']['nid']);
+  }
+  else {
+    $node = node_load(arg(1));
+  }
+
+  drupal_set_title("'" . $node->title . "' " . t('Course Audience'));
+
+  $form = array();
+  $audience_options = array(
+    'public' => t('Public'),
+    'members' => t('PARCC members ONLY'),
+  );
+  $form['course_audience'] = array(
+    '#type' => 'radios',
+    '#title' => 'Course Audience/Permissions',
+    '#required' => FALSE,
+    '#access' => TRUE,
+    '#options' => $audience_options,
+  );
+
+  $select_options = array(
+    'all' => t('All PARCC Members'),
+    'by_state' => t('Select By State'),
+    'by_rostering' => t('Select By Rostering'),
+  );
+  $form['select_by'] = array(
+    '#type' => 'radios',
+    '#title' => t('Who may view this course?'),
+    '#options' => $select_options,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="course_audience"]' => array('value' => 'members'),
+      ),
+    ),
+  );
+
+  $s = taxonomy_vocabulary_machine_name_load('member_state');
+  if ($s) {
+    $state_options = array();
+    $state_vid = $s->vid;
+    $states = taxonomy_get_tree($state_vid);
+    foreach ($states as $state) {
+      $state_options[$state->tid] = $state->name;
+    }
+    $form['by_state'] = array(
+      '#type' => 'select',
+      '#title' => t('Select state(s)'),
+      '#options' => $state_options,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="select_by"]' => array('value' => 'by_state'),
+          ':input[name="course_audience"]' => array('value' => 'members'),
+        ),
+        'required' => array(
+          ':input[name="select_by"]' => array('value' => 'by_state'),
+          ':input[name="course_audience"]' => array('value' => 'members'),
+        ),
+      ),
+    );
+  }
+
+  $form['by_rostering'] = array(
+    '#type' => 'textarea',
+    '#title' => 'E-mail',
+    '#states' => array(
+      'visible' => array(
+        ':input[name="select_by"]' => array('value' => 'by_rostering'),
+        ':input[name="course_audience"]' => array('value' => 'members'),
+      ),
+      'required' => array(
+        ':input[name="select_by"]' => array('value' => 'by_rostering'),
+        ':input[name="course_audience"]' => array('value' => 'members'),
+      ),
+    ),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Save audience',
+  );
+
+  $form['#validate'] = array(
+    'prc_pd_course_form_course_audience_form_validate',
+  );
+
+  return $form;
+}
+
+function prc_pd_course_form_course_audience_form_validate(&$form, &$form_state) {
+  if (array_key_exists('input', $form_state) &&
+      array_key_exists('course_audience', $form_state['input']) &&
+      array_key_exists('select_by', $form_state['input'])
+      )
+  {
+    $course_audience = $form_state['input']['course_audience'];
+    $select_by = $form_state['input']['select_by'];
+    if ($course_audience == 'members' && $select_by == 'by_rostering') {
+      $emails = $form_state['input']['by_rostering'];
+      if (!$emails) {
+        form_set_error('by_rostering', t('E-mail field is required.'));
+      } else {
+        $valid_emails = array();
+        $form_state = _prc_invite_form_validate_email_address_format($form_state, 'by_rostering', $valid_emails);
+        if ($valid_emails) {
+          $query = new EntityFieldQuery();
+
+          $query->entityCondition('entity_type', 'user')
+            ->entityCondition('mail', $valid_emails, 'IN')
+            ->propertyCondition('uid', array(0, 1), 'NOT IN')
+          ;
+          $result = $query->execute();
+          if (isset($result['user'])) {
+            $uids = array_keys($result['user']);
+            $users = entity_load('user', $uids);
+            if (count($users) != count($valid_emails)) {
+              form_set_error('by_rostering', t('Email address does not exist.'));
+// TODO: Loop through emails and remove the ones that have users, then use the remainder for displaying the errors
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
 function prc_pd_course_form_form_course_outline_overview_form_alter(&$form, &$form_state) {
 
   // Change the order from alpha to the order specified in the story
