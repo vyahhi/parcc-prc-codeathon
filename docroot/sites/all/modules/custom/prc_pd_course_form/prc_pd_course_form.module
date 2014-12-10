@@ -127,7 +127,7 @@ function prc_pd_course_form_course_audience_form($form, &$form_state) {
     }
     $form['by_state'] = array(
       '#type' => 'select',
-      '#title' => t('Select state(s)'),
+      '#title' => t('Select state'),
       '#options' => $state_options,
       '#default_value' => $states_default_values,
       '#states' => array(
@@ -353,6 +353,9 @@ function prc_pd_course_form_form_pd_course_node_form_alter(&$form, &$form_state)
   if (!array_search('administrator', $user->roles)) {
     $form['course']['#access'] = FALSE;
   }
+
+  $form['field_member_state_unlimited']['#access'] = FALSE;
+  $form['field_users_allowed']['#access'] = FALSE;
 
   $form['#validate'][] = 'prc_pd_course_form_form_pd_course_node_form_validate';
 
