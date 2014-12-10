@@ -102,3 +102,11 @@ Feature: PRC-406 PD Custom List
       | My DLC List   | @currentuid | 1      | pd_course          |
     When I visit "professional-development"
     Then I should see the text "My PD Lists"
+
+  Scenario: PRC-482 PD Custom List- AC#3 "All Available Courses" link has wrong name.
+    Given I am logged in as a user with the "Educator" role
+    And "Favorites List" nodes:
+      | title         | uid         | status | field_content_type |
+      | My DLC List   | @currentuid | 1      | pd_course          |
+    When I visit "professional-development"
+    Then I should see the text "All Available Courses"

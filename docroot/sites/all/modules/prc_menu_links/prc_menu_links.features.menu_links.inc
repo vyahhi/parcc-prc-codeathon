@@ -218,17 +218,17 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
-  // Exported menu link: menu-professional-development-le_view-all:professional-development
-  $menu_links['menu-professional-development-le_view-all:professional-development'] = array(
+  // Exported menu link: menu-professional-development-le_all-available-courses:professional-development
+  $menu_links['menu-professional-development-le_all-available-courses:professional-development'] = array(
     'menu_name' => 'menu-professional-development-le',
     'link_path' => 'professional-development',
     'router_path' => 'professional-development',
-    'link_title' => 'View All',
+    'link_title' => 'All Available Courses',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'menu-professional-development-le_view-all:professional-development',
+      'identifier' => 'menu-professional-development-le_all-available-courses:professional-development',
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -242,6 +242,7 @@ function prc_menu_links_menu_default_menu_links() {
   // Included for use with string extractors like potx.
   t('Add content');
   t('Add course');
+  t('All Available Courses');
   t('Assessments');
   t('Content');
   t('Course Management');
