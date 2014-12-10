@@ -117,50 +117,6 @@ function prc_poc_local_pd_module_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pd_module-body'
-  $field_instances['node-pd_module-body'] = array(
-    'bundle' => 'pd_module',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
-    'settings' => array(
-      'display_summary' => TRUE,
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 20,
-        'summary_rows' => 5,
-      ),
-      'type' => 'text_textarea_with_summary',
-      'weight' => 31,
-    ),
-  );
-
   // Exported field_instance: 'node-pd_module-field_course_objectives'
   $field_instances['node-pd_module-field_course_objectives'] = array(
     'bundle' => 'pd_module',
@@ -184,8 +140,8 @@ function prc_poc_local_pd_module_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_course_objectives',
-    'label' => 'Objectives',
-    'required' => 0,
+    'label' => 'Module Objectives',
+    'required' => 1,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -202,8 +158,8 @@ function prc_poc_local_pd_module_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pd_module-field_length_quantity'
-  $field_instances['node-pd_module-field_length_quantity'] = array(
+  // Exported field_instance: 'node-pd_module-field_length'
+  $field_instances['node-pd_module-field_length'] = array(
     'bundle' => 'pd_module',
     'default_value' => NULL,
     'deleted' => 0,
@@ -211,10 +167,10 @@ function prc_poc_local_pd_module_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 3,
+        'type' => 'text_default',
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -224,26 +180,27 @@ function prc_poc_local_pd_module_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_length_quantity',
-    'label' => 'Length Quantity',
-    'required' => 0,
+    'field_name' => 'field_length',
+    'label' => 'Module Length',
+    'required' => 1,
     'settings' => array(
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
+      'module' => 'text',
       'settings' => array(
-        'apply_chosen' => '',
         'label_help_description' => '',
+        'size' => 60,
       ),
-      'type' => 'options_select',
-      'weight' => 36,
+      'type' => 'text_textfield',
+      'weight' => 38,
     ),
   );
 
-  // Exported field_instance: 'node-pd_module-field_length_unit'
-  $field_instances['node-pd_module-field_length_unit'] = array(
+  // Exported field_instance: 'node-pd_module-field_module_type'
+  $field_instances['node-pd_module-field_module_type'] = array(
     'bundle' => 'pd_module',
     'default_value' => NULL,
     'deleted' => 0,
@@ -251,10 +208,10 @@ function prc_poc_local_pd_module_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 2,
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -264,32 +221,32 @@ function prc_poc_local_pd_module_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_length_unit',
-    'label' => 'Length Unit',
+    'field_name' => 'field_module_type',
+    'label' => 'Module Type',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'options',
+      'active' => 0,
+      'module' => 'taxonomy',
       'settings' => array(
-        'apply_chosen' => '',
+        'autocomplete_path' => 'taxonomy/autocomplete',
         'label_help_description' => '',
+        'size' => 60,
       ),
-      'type' => 'options_select',
-      'weight' => 37,
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 39,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('Allowed Users');
-  t('Body');
-  t('Length Quantity');
-  t('Length Unit');
   t('Member State');
-  t('Objectives');
+  t('Module Length');
+  t('Module Objectives');
+  t('Module Type');
 
   return $field_instances;
 }
