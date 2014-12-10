@@ -308,7 +308,6 @@ Feature: PRC-346 Admin: Course Audience
     When I click "Professional Development"
     Then I should not see the link "Illinois Only"
 
-  @javascript
   Scenario: Audience by roster
     Given "PD Course" nodes:
       | title         | field_course_objectives | field_permissions  | uid | status |
