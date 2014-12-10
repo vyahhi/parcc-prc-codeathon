@@ -1528,6 +1528,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
       'arguments' => array(
         'field_content_type_value' => 'pd_course',
       ),
+      'override_title' => 1,
+      'override_title_text' => 'My PD Lists',
     );
     $pane->cache = array();
     $pane->style = array(

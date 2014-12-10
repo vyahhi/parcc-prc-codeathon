@@ -94,3 +94,11 @@ Feature: PRC-406 PD Custom List
     Then I click "My PDC List b"
     And I should not see the link "PRC-406-2"
     And I should see the link "PRC-406-1"
+
+  Scenario: PRC-481 PD Custom List- AC#2 section name should be "My PD Lists".
+    Given I am logged in as a user with the "Educator" role
+    And "Favorites List" nodes:
+      | title         | uid         | status | field_content_type |
+      | My DLC List   | @currentuid | 1      | pd_course          |
+    When I visit "professional-development"
+    Then I should see the text "My PD Lists"
