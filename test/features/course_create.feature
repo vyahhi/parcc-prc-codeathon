@@ -71,6 +71,9 @@ Feature: PRC-69 Admin: Create a Course
     And I should see a "Published" field
     And the "Published" checkbox should be checked
 
+    And I should not see the text "Member State"
+    And I should not see the text "Allowed Users"
+
   Scenario: AC3. Validations: If a required field is NOT entered after the Save button is selected, The system will display the following feedback on the top of the form:
     Given I am logged in as a user with the "Content Administrator (Curator)" role
     And I am on "admin-course"

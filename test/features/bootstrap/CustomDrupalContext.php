@@ -9,6 +9,7 @@
 
 use Behat\Behat\Context\Step\Then;
 use Behat\Behat\Context\Step\Given;
+use Behat\Mink\Exception\ExpectationException;
 use Drupal\DrupalExtension\Event\EntityEvent;
 use Behat\Gherkin\Node\TableNode;
 
@@ -103,6 +104,50 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       throw new Exception("Element ({$selector}) not found");
     } elseif ($el->isVisible()) {
       throw new Exception("Element ({$selector}) is visible");
+    }
+  }
+
+  /**
+   * @Then /^the "([^"]*)" radio button should be selected$/
+   * @When /^the radio button "(?P<label>[^"]*)" with the id "(?P<id>[^"]*)" should be selected$/
+   */
+  public function assertRadioButtonSelected($label, $id = FALSE)
+  {
+    $element = $this->getSession()->getPage();
+    $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
+    if ($radiobutton === NULL) {
+      throw new \Exception(sprintf('The radio button with "%s" was not found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
+    }
+    $value = $radiobutton->getAttribute('value');
+    $labelonpage = $radiobutton->getParent()->getText();
+    if ($label != $labelonpage) {
+      throw new \Exception(sprintf("Button with id '%s' has label '%s' instead of '%s' on the page %s", $id, $labelonpage, $label, $this->getSession()->getCurrentUrl()));
+    }
+    $checked = $radiobutton->isChecked();
+    if (!$checked) {
+      $message = sprintf('Radio button "%s" is not selected, but it should be.', $label);
+      throw new ExpectationException($message, $this->getSession());
+    }
+  }
+
+  public function assertLoggedInByName($name) {
+    $name = $this->fixStepArgument($name);
+    parent::assertLoggedInByName($name);
+  }
+
+
+  /**
+   * @Then /^"([^"]*)" in "([^"]*)" should be selected$/
+   */
+  public function inShouldBeSelected($optionValue, $select) {
+    $selectElement = $this->getSession()->getPage()->find('named', array('select', "\"{$select}\""));
+    $optionElement = $selectElement->find('named', array('option', "\"{$optionValue}\""));
+    //it should have the attribute selected and it should be set to selected
+    if (!$optionElement->hasAttribute("selected")) {
+      throw new \Exception(sprintf('The select box with "%s" has nothing selected', $select));
+    }
+    if (!$optionElement->getAttribute("selected") == "selected") {
+      throw new \Exception(sprintf('The select box "%s" should have had %s selected.', $select, $optionValue));
     }
   }
 

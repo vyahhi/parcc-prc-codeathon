@@ -113,11 +113,24 @@ function prc_invite_form_form_invite_form_validate($form, &$form_state)
     $form_state['values']['field_invitation_email_address'] = $form_state['input']['field_invitation_email_address'];
   }
 
-  if (isset($form_state['values']['field_invitation_email_address'])) {
+  $valid_emails = array();
+  _prc_invite_form_validate_email_address_format($form_state, 'field_multi_emails', $valid_emails);
+  $form_state['invitees'] = $valid_emails;
+
+  // Notify field widgets to validate their data.
+  field_attach_form_validate('invite', $form_state['invite'], $form, $form_state);
+}
+
+/**
+ * @param $form_state
+ * @return mixed
+ */
+function _prc_invite_form_validate_email_address_format(&$form_state, $field_name, &$valid_emails) {
+  if (isset($form_state['values'][$field_name])) {
     $valid = array();
     $invalid = array();
 
-    $trimmed_emails = trim($form_state['values']['field_multi_emails']);
+    $trimmed_emails = trim($form_state['values'][$field_name]);
 
     // Allow multiple delimiters. Fixes DEU problems and currently the Behat test can't put a linebreak into the textarea
     $trimmed_emails = str_replace(',', "\n", $trimmed_emails);
@@ -128,25 +141,26 @@ function prc_invite_form_form_invite_form_validate($form, &$form_state)
       if (!empty($email)) {
         if (valid_email_address($email)) {
           $valid[] = $email;
-        } else {
+        }
+        else {
           $invalid[] = $email;
         }
       }
     }
     if (empty($invalid)) {
-      $form_state['invitees'] = $valid;
-    } elseif (count($invalid) == 1) {
-      form_set_error('field_invitation_email_address', t('%email is not a valid e-mail address.', array('%email' => reset($invalid))));
-    } else {
-      form_set_error('field_invitation_email_address', t('%emails are not valid e-mail addresses.', array('%emails' => implode(', ', $invalid))));
+      //$form_state['invitees'] = $valid;
+      $valid_emails = $valid;
+    }
+    elseif (count($invalid) == 1) {
+      form_set_error($field_name, t('%email is not a valid e-mail address.', array('%email' => reset($invalid))));
+    }
+    else {
+      form_set_error($field_name, t('%emails are not valid e-mail addresses.', array('%emails' => implode(', ', $invalid))));
     }
     if (empty($valid) && empty($invalid)) {
-      form_set_error('field_invitation_email_address', t('Please input one or more email addresses'));
+      form_set_error($field_name, t('Please input one or more email addresses'));
     }
   }
-
-  // Notify field widgets to validate their data.
-  field_attach_form_validate('invite', $form_state['invite'], $form, $form_state);
 }
 
 // each email address needs its own invite object

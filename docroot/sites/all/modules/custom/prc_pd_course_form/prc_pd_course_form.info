@@ -2,3 +2,5 @@ name = PRC PD Course Form
 description = Changes to PD Course Form
 package = PRC
 core = 7.x
+
+dependencies[] = prc_invite_form

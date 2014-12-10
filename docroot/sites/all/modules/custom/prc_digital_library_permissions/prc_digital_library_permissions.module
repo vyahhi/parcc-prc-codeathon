@@ -29,6 +29,15 @@ function prc_digital_library_permissions_node_grants($account, $op) {
   $grants['prc_digital_library_permissions_author'] = array($account->uid);
   $grants['prc_pd_course_permissions_author'] = array($account->uid);
 
+  $w = entity_metadata_wrapper('user', $account);
+  $state = $w->field_member_state->value();
+  if ($state) {
+    $grants['prc_state_audience'] = array($state->tid);
+  }
+
+  $uid = $account->uid;
+  $grants['prc_user_audience'] = array($uid);
+
   if (user_access('create pd_course content', $account)) {
     $grants['prc_pd_course_permissions_unpub_nonauthor'] = array(1);
   }
@@ -54,9 +63,9 @@ function prc_digital_library_permissions_node_access_records($node) {
 
     if ($is_members_only) {
       $grants = array();
-      // Only published nodes should be viewable to all users. If we allow access
+      // Only published DLC nodes should be viewable to all users. If we allow access
       // blindly here, then all users could view an unpublished node.
-      if ($node->status) {
+      if ($node->type == 'digital_library_content' && $node->status) {
         $grants[] = array(
           'realm' => "prc_digital_library_permissions",
           'gid' => 1,
@@ -72,12 +81,58 @@ function prc_digital_library_permissions_node_access_records($node) {
       // have status unpublished.
       $grants[] = array(
         'realm' => 'prc_digital_library_permissions_author',
-        'gid' => $node->uid ? $node->uid : 1, // If the content is anonymous we'll make admin the gatekeeper. Samantha Franks (8) found this defect.
+        'gid' => $node->uid ? $node->uid : 1, // If the content is anonymous we'll make admin the gatekeeper. Samantha Franks (age 8) found this defect.
         'grant_view' => 1,
         'grant_update' => 1,
         'grant_delete' => 1,
         'priority' => 0,
       );
+
+      if ($node->type == 'pd_course') {
+        $states = $w->field_member_state_unlimited->value();
+        $users = $w->field_users_allowed->value();
+        foreach($states as $state) {
+          $tid = $state->tid;
+          $found = FALSE;
+          foreach($grants as $grant) {
+            if ($grant['realm'] == 'prc_state_audience' && $grant['gid'] = $tid) {
+              $found = TRUE;
+              break;
+            }
+          }
+          if (!$found) {
+            $grants[] = array(
+              'realm' => 'prc_state_audience',
+              'gid' => $tid,
+              'grant_view' => 1,
+              'grant_update' => 0,
+              'grant_delete' => 0,
+              'priority' => 0,
+            );
+          }
+        }
+        foreach($users as $u) {
+          $uid = $u->uid;
+          $found = FALSE;
+          foreach($grants as $grant) {
+            if ($grant['realm'] == 'prc_user_audience' && $grant['gid'] = $uid) {
+              $found = TRUE;
+              break;
+            }
+          }
+          if (!$found) {
+            $grants[] = array(
+              'realm' => 'prc_user_audience',
+              'gid' => $uid,
+              'grant_view' => 1,
+              'grant_update' => 0,
+              'grant_delete' => 0,
+              'priority' => 0,
+            );
+          }
+        }
+      }
+
     }
 
     // Unpublished PD modules are accessible by any PD creator
