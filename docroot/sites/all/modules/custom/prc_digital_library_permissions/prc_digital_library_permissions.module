@@ -100,7 +100,7 @@ function prc_digital_library_permissions_node_access_records($node) {
               break;
             }
           }
-          if ($found) {
+          if (!$found) {
             $grants[] = array(
               'realm' => 'prc_state_audience',
               'gid' => $tid,
@@ -120,7 +120,7 @@ function prc_digital_library_permissions_node_access_records($node) {
               break;
             }
           }
-          if ($found) {
+          if (!$found) {
             $grants[] = array(
               'realm' => 'prc_user_audience',
               'gid' => $uid,
