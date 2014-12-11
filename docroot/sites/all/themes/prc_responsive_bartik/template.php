@@ -179,10 +179,15 @@ function prc_responsive_bartik_course_outline_item($variables) {
   $node = $object->getNode();
   $w = entity_metadata_wrapper('node', $node);
 
-  $length = $w->field_length->value() ?
-    '<span>' . '(' . $w->field_length->value() . ')</span><br/>' :
-    '';
-  $objectives = $w->field_course_objectives->value() ? '<span>' . t('Module Objectives') . ': ' . $w->field_course_objectives->value() . '</span><br/>' : '';
+  if ($node->type == 'pd_module') {
+    $length = $w->field_length->value() ?
+      '<span>' . '(' . $w->field_length->value() . ')</span><br/>' :
+      '';
+    $objectives = $w->field_course_objectives->value() ? '<span>' . t('Module Objectives') . ': ' . $w->field_course_objectives->value() . '</span><br/>' : '';
+  } else {
+    $length = '';
+    $objectives = '';
+  }
 
   if (empty($step['link'])) {
     $output = $object->getTitle() . '<br/>' .
@@ -191,11 +196,6 @@ function prc_responsive_bartik_course_outline_item($variables) {
       '<span class="course-outline-status">' . $status . '</span>';
   }
   else {
-
-    $length = $w->field_length->value() ?
-      '<span>' . '(' . $w->field_length->value() . ')</span><br/>' :
-      '';
-    $objectives = $w->field_course_objectives->value() ? '<span>' . t('Module Objectives') . ': ' . $w->field_course_objectives->value() . '</span><br/>' : '';
     $output = $img . ' ' .
       l("{$object->getTitle()}<br/>", $step['link'], array('html' => TRUE)) .
       $length .
