@@ -91,6 +91,17 @@ function prc_digital_library_permissions_node_access_records($node) {
       if ($node->type == 'pd_course') {
         $states = $w->field_member_state_unlimited->value();
         $users = $w->field_users_allowed->value();
+        if (!count($states) && !count($users) && $node->status) {
+          $grants[] = array(
+            'realm' => "prc_digital_library_permissions",
+            'gid' => 1,
+            'grant_view' => 1,
+            'grant_update' => 0,
+            'grant_delete' => 0,
+            'priority' => 0,
+          );
+        }
+
         foreach($states as $state) {
           $tid = $state->tid;
           $found = FALSE;
