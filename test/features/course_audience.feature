@@ -349,3 +349,24 @@ Feature: PRC-346 Admin: Course Audience
     And I press "Log in"
     When I click "Professional Development"
     Then I should not see the link "Illinois Only"
+
+  Scenario: PRC-480 Admin: Course Audience- Course disappears after rostering audience
+    Given "PD Course" nodes:
+      | title         | field_course_objectives | field_permissions  | uid | status |
+      | PRC-480 Allow | This is private         | public             | 1   | 1      |
+    Given users:
+      | name       | mail                          | pass   | field_first_name | field_last_name | status |
+      | Joe PRC480 | prc_480@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
+    And I am logged in as a user with the "PRC Admin" role
+    When I click "Course Management"
+    Then I click "ID"
+    Then I should see the text "PRC-480 Allow"
+    Then I visit the last node created
+    When I click "Course Audience"
+    And I select the radio button "PARCC members ONLY"
+    And I select the radio button "Select By Rostering"
+    And I fill in "E-mail" with "prc_480@timestamp@example.com"
+    When I press "Save audience"
+    Then I click "Course Management"
+    Then I click "ID"
+    Then I should see the text "PRC-480 Allow"

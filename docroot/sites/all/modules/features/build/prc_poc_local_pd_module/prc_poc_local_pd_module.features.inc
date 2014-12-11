@@ -26,7 +26,7 @@ function prc_poc_local_pd_module_node_info() {
       'base' => 'node_content',
       'description' => t('Professional Development Module'),
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Module Title'),
       'help' => '',
     ),
   );

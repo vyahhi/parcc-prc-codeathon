@@ -39,7 +39,7 @@ function prc_digital_library_permissions_node_grants($account, $op) {
   $grants['prc_user_audience'] = array($uid);
 
   if (user_access('create pd_course content', $account)) {
-    $grants['prc_pd_course_permissions_unpub_nonauthor'] = array(1);
+    $grants['prc_pd_course_permissions_editor'] = array(1);
   }
   return $grants;
 
@@ -136,9 +136,9 @@ function prc_digital_library_permissions_node_access_records($node) {
     }
 
     // Unpublished PD modules are accessible by any PD creator
-    if ($node->type == 'pd_course' && !$node->status) {
+    if ($node->type == 'pd_course' && (!$node->status || $is_members_only)) {
       $grants[] = array(
-        'realm' => 'prc_pd_course_permissions_unpub_nonauthor',
+        'realm' => 'prc_pd_course_permissions_editor',
         'gid' => 1,
         'grant_view' => 1,
         'grant_update' => 1,

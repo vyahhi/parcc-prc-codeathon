@@ -6,8 +6,8 @@ Feature: PRC-35 LMS: Take a Course
 
   Scenario: Take course
     Given "PD Module" nodes:
-      | title       | field_course_objectives | status | uid | field_length_quantity | field_length_unit | language |
-      | PD Module 1 | Obj1                    | 1      | 1   | 4                     |day                | und      |
+      | title       | field_course_objectives | status | uid | field_length | language |
+      | PD Module 1 | Obj1                    | 1      | 1   | 4 day        | und      |
     And I am logged in as a user with the "Content Administrator (Curator)" role
 
     # TODO: Turn attaching modules to a course into step definitions
@@ -47,7 +47,7 @@ Feature: PRC-35 LMS: Take a Course
     #  Module Objectives: <Module Objectives>
     And I should see the text "Obj1"
     #  Duration
-    And I should see the text "(4-day)"
+    And I should see the text "(4 day)"
     #  Status (all modules for this story shall have a Not Started status)
     And I should see the text "Not started"
     And I should not see the text "Complete"

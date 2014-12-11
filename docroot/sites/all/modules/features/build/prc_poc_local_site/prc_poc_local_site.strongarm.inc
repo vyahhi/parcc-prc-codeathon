@@ -51,13 +51,6 @@ function prc_poc_local_site_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'color_prc_responsive_bartik_logo';
-  $strongarm->value = 'public://color/prc_responsive_bartik-e1440273/logo.png';
-  $export['color_prc_responsive_bartik_logo'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'color_prc_responsive_bartik_palette';
   $strongarm->value = array(
     'top' => '#ffffff',

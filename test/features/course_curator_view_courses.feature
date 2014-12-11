@@ -131,3 +131,14 @@ Feature: PRC-348 Admin: View Courses List
     Then I should see the text "Fifty One"
     But I should not see the text "Two"
     But I should not see the text "Three"
+
+  Scenario: PRC-479 Date format
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And I have no "PD Course" nodes
+    And "PD Course" nodes:
+      | title     | body            | uid         | created    | status |
+      | One       | One@timestamp   | @currentuid | 1410000100 | 1      |
+    Then I visit "admin-course"
+    Then I should see the text "One"
+    And I should not see the text "Saturday, September 6, 2014"
+    And I should see the text "09/06/2014 - 05:41"
