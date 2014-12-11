@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Multiple choice question feature.
+ */
+
+include_once 'prc_poc_local_node_multichoice.features.inc';

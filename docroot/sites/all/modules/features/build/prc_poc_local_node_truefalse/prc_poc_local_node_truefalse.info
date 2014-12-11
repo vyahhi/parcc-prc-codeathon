@@ -1,0 +1,12 @@
+name = prc-poc.local True/false question
+core = 7.x
+package = Content
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = prc_poc_local_fields
+dependencies[] = strongarm
+features[field_instance][] = node-truefalse-body
+features[node][] = truefalse
+features[variable][] = node_options_truefalse
+features[features_api][] = api:2
+mtime = 1418313200

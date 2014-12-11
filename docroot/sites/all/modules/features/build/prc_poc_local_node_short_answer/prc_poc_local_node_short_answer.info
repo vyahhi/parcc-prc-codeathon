@@ -1,0 +1,12 @@
+name = prc-poc.local Short answer question
+core = 7.x
+package = Content
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = prc_poc_local_fields
+dependencies[] = strongarm
+features[field_instance][] = node-short_answer-body
+features[node][] = short_answer
+features[variable][] = node_options_short_answer
+features[features_api][] = api:2
+mtime = 1418313200

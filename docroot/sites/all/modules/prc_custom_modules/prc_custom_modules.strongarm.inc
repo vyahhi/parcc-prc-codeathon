@@ -14,7 +14,7 @@ function prc_custom_modules_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'ds_search_node_limit';
-  $strongarm->value = '25000';
+  $strongarm->value = '2500';
   $export['ds_search_node_limit'] = $strongarm;
 
   $strongarm = new stdClass();

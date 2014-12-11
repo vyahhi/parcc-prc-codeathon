@@ -11,5 +11,7 @@ features[filter][] = plain_text
 features[image][] = large
 features[image][] = medium
 features[image][] = thumbnail
+features[variable][] = file_default_scheme
 features[variable][] = filter_fallback_format
 features[features_api][] = api:2
+mtime = 1418313198
