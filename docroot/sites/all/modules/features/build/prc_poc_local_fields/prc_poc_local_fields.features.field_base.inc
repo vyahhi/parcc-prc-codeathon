@@ -34,7 +34,9 @@ function prc_poc_local_fields_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(),
+    'settings' => array(
+      'course_enrollment' => FALSE,
+    ),
     'translatable' => 0,
     'type' => 'text_with_summary',
   );

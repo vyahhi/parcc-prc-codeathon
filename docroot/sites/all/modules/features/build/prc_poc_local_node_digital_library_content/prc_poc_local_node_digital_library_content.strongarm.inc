@@ -71,7 +71,7 @@ function prc_poc_local_node_digital_library_content_strongarm() {
             'visible' => TRUE,
           ),
           'search_result' => array(
-            'weight' => '20',
+            'weight' => '22',
             'visible' => FALSE,
           ),
         ),
