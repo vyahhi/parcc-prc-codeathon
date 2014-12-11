@@ -15,3 +15,5 @@ Feature: PRC-107 Admin - Add PD Module (Backend)
     And I should not see "Module Type *"
     And I should see "Tags"
     And I should not see "Tags *"
+    And I should see "Body"
+    And I should not see "Body *"
