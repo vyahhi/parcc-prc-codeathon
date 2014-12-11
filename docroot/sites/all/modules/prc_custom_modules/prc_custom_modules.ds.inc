@@ -1,14 +1,74 @@
 <?php
 /**
  * @file
- * prc_poc_local_node_pd_course.ds.inc
+ * prc_custom_modules.ds.inc
  */
 
 /**
  * Implements hook_ds_field_settings_info().
  */
-function prc_poc_local_node_pd_course_ds_field_settings_info() {
+function prc_custom_modules_ds_field_settings_info() {
   $export = array();
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|digital_library_content|search_index';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'digital_library_content';
+  $ds_fieldsetting->view_mode = 'search_index';
+  $ds_fieldsetting->settings = array(
+    'submitted_by_author_name' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'title' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'links' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+  );
+  $export['node|digital_library_content|search_index'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|digital_library_content|search_result';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'digital_library_content';
+  $ds_fieldsetting->view_mode = 'search_result';
+  $ds_fieldsetting->settings = array(
+    'formatted_author_and_date' => array(
+      'weight' => '1',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'title' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '1',
+        'wrapper' => 'h2',
+        'class' => '',
+      ),
+    ),
+    'links' => array(
+      'weight' => '8',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'search_snippet' => array(
+      'weight' => '7',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+  );
+  $export['node|digital_library_content|search_result'] = $ds_fieldsetting;
 
   $ds_fieldsetting = new stdClass();
   $ds_fieldsetting->api_version = 1;
@@ -101,8 +161,26 @@ function prc_poc_local_node_pd_course_ds_field_settings_info() {
 /**
  * Implements hook_ds_custom_fields_info().
  */
-function prc_poc_local_node_pd_course_ds_custom_fields_info() {
+function prc_custom_modules_ds_custom_fields_info() {
   $export = array();
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'formatted_author_and_date';
+  $ds_field->label = 'Formatted Author And Date';
+  $ds_field->field_type = 5;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = '';
+  $ds_field->properties = array(
+    'code' => array(
+      'value' => 'Created [node:created:long] by [node:field_author_name]',
+      'format' => 'plain_text',
+    ),
+    'use_token' => 1,
+  );
+  $export['formatted_author_and_date'] = $ds_field;
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
@@ -128,8 +206,102 @@ function prc_poc_local_node_pd_course_ds_custom_fields_info() {
 /**
  * Implements hook_ds_layout_settings_info().
  */
-function prc_poc_local_node_pd_course_ds_layout_settings_info() {
+function prc_custom_modules_ds_layout_settings_info() {
   $export = array();
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|digital_library_content|search_index';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'digital_library_content';
+  $ds_layout->view_mode = 'search_index';
+  $ds_layout->layout = 'ds_2col_stacked';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'footer' => array(
+        0 => 'links',
+        5 => 'sharethis',
+      ),
+      'header' => array(
+        1 => 'title',
+        2 => 'submitted_by_author_name',
+      ),
+      'left' => array(
+        3 => 'field_thumbnail',
+      ),
+      'right' => array(
+        4 => 'body',
+      ),
+    ),
+    'fields' => array(
+      'links' => 'footer',
+      'title' => 'header',
+      'submitted_by_author_name' => 'header',
+      'field_thumbnail' => 'left',
+      'body' => 'right',
+      'sharethis' => 'footer',
+    ),
+    'classes' => array(),
+    'wrappers' => array(
+      'header' => 'div',
+      'left' => 'div',
+      'right' => 'div',
+      'footer' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+  );
+  $export['node|digital_library_content|search_index'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|digital_library_content|search_result';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'digital_library_content';
+  $ds_layout->view_mode = 'search_result';
+  $ds_layout->layout = 'ds_2col_stacked';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'header' => array(
+        0 => 'title',
+        1 => 'formatted_author_and_date',
+      ),
+      'left' => array(
+        2 => 'field_thumbnail',
+      ),
+      'right' => array(
+        3 => 'body',
+        4 => 'search_snippet',
+      ),
+      'footer' => array(
+        5 => 'links',
+      ),
+    ),
+    'fields' => array(
+      'title' => 'header',
+      'formatted_author_and_date' => 'header',
+      'field_thumbnail' => 'left',
+      'body' => 'right',
+      'search_snippet' => 'right',
+      'links' => 'footer',
+    ),
+    'classes' => array(),
+    'wrappers' => array(
+      'header' => 'div',
+      'left' => 'div',
+      'right' => 'div',
+      'footer' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+  );
+  $export['node|digital_library_content|search_result'] = $ds_layout;
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;

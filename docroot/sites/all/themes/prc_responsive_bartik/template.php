@@ -170,6 +170,13 @@ function prc_responsive_bartik_field__taxonomy_term_reference($variables)
   return $output;
 }
 
+function prc_responsive_bartik_ds_search_page($build) {
+  if (isset($build['theme_hook_original'])) {
+    unset($build['theme_hook_original']);
+  }
+  return $build;
+}
+
 function prc_responsive_bartik_course_outline_item($variables) {
   $output = '';
   $step = $variables['step'];
