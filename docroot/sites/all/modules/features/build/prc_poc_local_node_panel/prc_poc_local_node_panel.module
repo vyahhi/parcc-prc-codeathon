@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the prc-poc.local Panel feature.
  */
+
+include_once 'prc_poc_local_node_panel.features.inc';

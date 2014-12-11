@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Short answer question feature.
+ */
+
+include_once 'prc_poc_local_node_short_answer.features.inc';

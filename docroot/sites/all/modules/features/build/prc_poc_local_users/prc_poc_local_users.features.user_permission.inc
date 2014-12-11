@@ -200,6 +200,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'add to my lists'.
+  $permissions['add to my lists'] = array(
+    'name' => 'add to my lists',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'prc_my_lists',
+  );
+
   // Exported permission: 'admin_classes'.
   $permissions['admin_classes'] = array(
     'name' => 'admin_classes',
@@ -470,6 +479,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'panels',
+  );
+
+  // Exported permission: 'administer pathauto'.
+  $permissions['administer pathauto'] = array(
+    'name' => 'administer pathauto',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'pathauto',
   );
 
   // Exported permission: 'administer permissions'.
@@ -1117,6 +1135,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete terms in member_state'.
   $permissions['delete terms in member_state'] = array(
     'name' => 'delete terms in member_state',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'delete terms in module_type'.
+  $permissions['delete terms in module_type'] = array(
+    'name' => 'delete terms in module_type',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -1823,6 +1848,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'edit terms in module_type'.
+  $permissions['edit terms in module_type'] = array(
+    'name' => 'edit terms in module_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'edit terms in standard'.
   $permissions['edit terms in standard'] = array(
     'name' => 'edit terms in standard',
@@ -1923,6 +1955,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'quiz',
+  );
+
+  // Exported permission: 'notify of path changes'.
+  $permissions['notify of path changes'] = array(
+    'name' => 'notify of path changes',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'pathauto',
   );
 
   // Exported permission: 'post comments'.
