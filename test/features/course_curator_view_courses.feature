@@ -52,7 +52,7 @@ Feature: PRC-348 Admin: View Courses List
     And I should see the link "Last Updated"
     And I should see the link "Permission"
     And I should see the link "Published"
-    And I should see the link "# of Modules/Quizzes"
+    And I should see the text "# of Modules/Quizzes"
     And I should see the text "Actions"
 
   Scenario: Curator should be able to see all published courses, not just their own
