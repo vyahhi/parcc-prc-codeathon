@@ -13,6 +13,107 @@ function prc_custom_modules_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'course_content_use_pd_course';
+  $strongarm->value = 0;
+  $export['course_content_use_pd_course'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'course_content_use_pd_module';
+  $strongarm->value = 1;
+  $export['course_content_use_pd_module'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'course_content_use_quiz';
+  $strongarm->value = 0;
+  $export['course_content_use_quiz'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'course_default_enrollment_type';
+  $strongarm->value = 'course_enrollment';
+  $export['course_default_enrollment_type'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'course_disable_regions';
+  $strongarm->value = array(
+    'header' => 0,
+    'help' => 0,
+    'page_top' => 0,
+    'page_bottom' => 0,
+    'highlighted' => 0,
+    'featured' => 0,
+    'content' => 0,
+    'sidebar_first' => 0,
+    'sidebar_second' => 0,
+    'triptych_first' => 0,
+    'triptych_middle' => 0,
+    'triptych_last' => 0,
+    'footer_firstcolumn' => 0,
+    'footer_secondcolumn' => 0,
+    'footer_thirdcolumn' => 0,
+    'footer_fourthcolumn' => 0,
+    'footer' => 0,
+    'dashboard_main' => 0,
+    'dashboard_sidebar' => 0,
+    'dashboard_inactive' => 0,
+  );
+  $export['course_disable_regions'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'course_takecourse_tab_display';
+  $strongarm->value = 0;
+  $export['course_takecourse_tab_display'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'course_take_course_button_show';
+  $strongarm->value = array(
+    'full' => 'full',
+    'teaser' => 0,
+  );
+  $export['course_take_course_button_show'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'course_use_course';
+  $strongarm->value = 1;
+  $export['course_use_course'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'course_use_pd_course';
+  $strongarm->value = 1;
+  $export['course_use_pd_course'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'course_use_pd_module';
+  $strongarm->value = 0;
+  $export['course_use_pd_module'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'course_use_quiz';
+  $strongarm->value = 0;
+  $export['course_use_quiz'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'ds_search_node_limit';
   $strongarm->value = '2500';
   $export['ds_search_node_limit'] = $strongarm;
