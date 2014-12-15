@@ -371,6 +371,62 @@ Feature: PRC-346 Admin: Course Audience
     Then I click "ID"
     Then I should see the text "PRC-480 Allow"
 
+  Scenario: Multiple roster emails
+    Given "PD Course" nodes:
+      | title         | field_course_objectives | field_permissions  | uid | status |
+      | Two Emails    | This is private         | public             | 1   | 1      |
+    Given users:
+      | name         | mail                                | pass   | field_first_name | field_last_name | status |
+      | Joe Illinois | joe_prc_346il@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
+      | Joe Arkansas | joe_prc_346ar@timestamp@example.com | xyz123 | Joe              | Arkansas        | 1      |
+      | Joe Rhode    | joe_prc_346ri@timestamp@example.com | xyz123 | Joe              | Rhode           | 1      |
+    And I am logged in as a user with the "PRC Admin" role
+    And I am on "admin-users"
+    Then I click "User ID"
+    Then I click on the edit link for the user "Joe Illinois"
+    Then I select the radio button "PARCC-Member Educator"
+    Then I select "Illinois" from "Member State"
+    Then I press "Save"
+    And I am on "admin-users"
+    Then I click "User ID"
+    Then I click on the edit link for the user "Joe Arkansas"
+    Then I select the radio button "PARCC-Member Educator"
+    Then I select "Arkansas" from "Member State"
+    Then I press "Save"
+    And I am on "admin-users"
+    Then I click "User ID"
+    Then I click on the edit link for the user "Joe Rhode"
+    Then I select the radio button "PARCC-Member Educator"
+    Then I select "Rhode Island" from "Member State"
+    Then I press "Save"
+    Then I visit the last node created
+    When I click "Course Audience"
+    And I select the radio button "PARCC members ONLY"
+    And I select the radio button "Select By Rostering"
+    And I fill in "E-mail" with "joe_prc_346il@timestamp@example.com,joe_prc_346ar@timestamp@example.com"
+    When I press "Save audience"
+    Then I click "Log out"
+    Then the url should match "/"
+    Then I fill in "E-mail *" with "joe_prc_346il@timestamp@example.com"
+    Then I fill in "Password *" with "xyz123"
+    And I press "Log in"
+    When I click "Professional Development"
+    Then I should see the link "Two Emails"
+    Then I click "Log out"
+    Then the url should match "/"
+    Then I fill in "E-mail *" with "joe_prc_346ar@timestamp@example.com"
+    Then I fill in "Password *" with "xyz123"
+    And I press "Log in"
+    When I click "Professional Development"
+    Then I should see the link "Two Emails"
+    Then I click "Log out"
+    Then the url should match "/"
+    Then I fill in "E-mail *" with "joe_prc_346ri@timestamp@example.com"
+    Then I fill in "Password *" with "xyz123"
+    And I press "Log in"
+    When I click "Professional Development"
+    Then I should not see the link "Two Emails"
+
   Scenario: All PARCC Members displays for PARCC-Member Educator with a state
     Given "PD Course" nodes:
       | title         | field_course_objectives | field_permissions  | uid | status |
@@ -396,7 +452,7 @@ Feature: PRC-346 Admin: Course Audience
     When I click "Course Audience"
     And I select the radio button "PARCC members ONLY"
     And I select the radio button "All PARCC Members"
-   When I press "Save audience"
+    When I press "Save audience"
     Then I click "Log out"
     Then the url should match "/"
     Then I fill in "E-mail *" with "joe_prc_346il@timestamp@example.com"
@@ -411,3 +467,24 @@ Feature: PRC-346 Admin: Course Audience
     And I press "Log in"
     When I click "Professional Development"
     Then I should see the link "Illinois Only"
+
+  @javascript
+  Scenario: PRC-488 All members doesn't save after another audience selected
+    Given "PD Course" nodes:
+      | title         | field_course_objectives | field_permissions  | uid | status |
+      | Illinois Only | This is private         | public             | 1   | 1      |
+    And I am logged in as a user with the "PRC Admin" role
+    Then I visit the last node created
+    When I click "Course Audience"
+    And I select the radio button "PARCC members ONLY"
+    And I select the radio button "Select By State"
+    And I select "Illinois" from "edit-by-state"
+    When I press "Save audience"
+    Then I should see the message containing "course audience updated."
+    And the "PARCC members ONLY" radio button should be selected
+    And the "Select By State" radio button should be selected
+    Then I select the radio button "All PARCC Members"
+    When I press "Save audience"
+    Then I should see the message containing "course audience updated."
+    And the "PARCC members ONLY" radio button should be selected
+    And the "All PARCC Members" radio button should be selected

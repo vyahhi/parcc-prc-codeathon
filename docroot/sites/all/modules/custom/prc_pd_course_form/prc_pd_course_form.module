@@ -252,6 +252,10 @@ function prc_pd_course_form_course_audience_form_submit(&$form, &$form_state) {
 
     if ($course_audience == 'members') {
       switch ($select_by) {
+        case 'all';
+          $w->field_member_state_unlimited->set(array());
+          $w->field_users_allowed->set(array()); // Clear this option
+          break;
         case 'by_state':
           $state = $form_state['input']['by_state'];
           $w->field_member_state_unlimited->set(array($state));
@@ -395,4 +399,20 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
   $form['delete']['delete_instance']['#access'] = FALSE;
 
   unset($form['course_tabs']);
+}
+
+/**
+ *  Implements hook_node_view().
+ */
+function prc_pd_course_form_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'pd_module') {
+    if (array_key_exists('course', $_SESSION) &&
+      array_key_exists('active', $_SESSION['course']) &&
+      array_key_exists($_SESSION['course']['active'], $_SESSION['course'])
+    )
+    $active_course_id = $_SESSION['course']['active'];
+    $active_course_object_id = $_SESSION['course'][$active_course_id]['taking']['active'];
+    $title = course_get_course_object_by_id($active_course_object_id)->getTitle();
+    drupal_set_title($title);
+  }
 }
