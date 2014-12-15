@@ -126,7 +126,7 @@ function prc_digital_library_permissions_node_access_records($node) {
           $uid = $u->uid;
           $found = FALSE;
           foreach($grants as $grant) {
-            if ($grant['realm'] == 'prc_user_audience' && $grant['gid'] = $uid) {
+            if ($grant['realm'] == 'prc_user_audience' && $grant['gid'] == $uid) {
               $found = TRUE;
               break;
             }

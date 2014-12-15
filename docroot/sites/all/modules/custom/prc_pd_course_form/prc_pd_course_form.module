@@ -412,7 +412,10 @@ function prc_pd_course_form_node_view($node, $view_mode, $langcode) {
     )
     $active_course_id = $_SESSION['course']['active'];
     $active_course_object_id = $_SESSION['course'][$active_course_id]['taking']['active'];
-    $title = course_get_course_object_by_id($active_course_object_id)->getTitle();
-    drupal_set_title($title);
+    $course_object = course_get_course_object_by_id($active_course_object_id);
+    if ($course_object) {
+      $title = $course_object->getTitle();
+      drupal_set_title($title);
+    }
   }
 }
