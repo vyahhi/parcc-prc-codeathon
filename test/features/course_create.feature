@@ -69,7 +69,7 @@ Feature: PRC-69 Admin: Create a Course
     And I should see the radio button "PARCC members ONLY"
 
     And I should see a "Published" field
-    And the "Published" checkbox should be checked
+    And the "Published" checkbox should not be checked
 
     And I should not see the text "Member State"
     And I should not see the text "Allowed Users"
@@ -101,7 +101,8 @@ Feature: PRC-69 Admin: Create a Course
     And I fill in "Course Title" with "Title PRC-69 Published @timestamp"
     And I fill in "Course Objectives" with "Obj PRC-69 Published @timestamp"
     And I select the radio button "Public"
-    And the "Published" checkbox should be checked
+    And the "Published" checkbox should not be checked
+    When I check the box "Published"
     And I press "Save"
     Then the node titled "Title PRC-69 Published @timestamp" should be published
 
