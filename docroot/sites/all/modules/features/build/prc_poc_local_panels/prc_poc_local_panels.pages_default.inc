@@ -582,12 +582,14 @@ function prc_poc_local_panels_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display();
-  $display->layout = 'flexible';
+  $display->layout = 'twocol';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'center' => NULL,
+      'left' => NULL,
+      'right' => NULL,
     ),
   );
   $display->cache = array();
@@ -596,19 +598,13 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-33ec2778-1ce4-45b6-84cb-7252cba84429';
-    $pane->panel = 'center';
-    $pane->type = 'custom';
-    $pane->subtype = 'custom';
+    $pane->pid = 'new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'assessments-panel_pane_1';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array(
-      'admin_title' => 'Placeholder',
-      'title' => 'Placeholder',
-      'body' => 'Placeholder',
-      'format' => 'filtered_html',
-      'substitute' => TRUE,
-    );
+    $pane->configuration = array();
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
@@ -617,11 +613,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '33ec2778-1ce4-45b6-84cb-7252cba84429';
-    $display->content['new-33ec2778-1ce4-45b6-84cb-7252cba84429'] = $pane;
-    $display->panels['center'][0] = 'new-33ec2778-1ce4-45b6-84cb-7252cba84429';
+    $pane->uuid = 'fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
+    $display->content['new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e'] = $pane;
+    $display->panels['right'][0] = 'new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
   $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = 'new-33ec2778-1ce4-45b6-84cb-7252cba84429';
+  $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['assessments'] = $page;

@@ -209,6 +209,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'prc_my_lists',
   );
 
+  // Exported permission: 'admin node search exlusions'.
+  $permissions['admin node search exlusions'] = array(
+    'name' => 'admin node search exlusions',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
+  );
+
   // Exported permission: 'admin_classes'.
   $permissions['admin_classes'] = array(
     'name' => 'admin_classes',
@@ -682,6 +691,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'invite',
   );
 
+  // Exported permission: 'create assessment content'.
+  $permissions['create assessment content'] = array(
+    'name' => 'create assessment content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create course content'.
   $permissions['create course content'] = array(
     'name' => 'create course content',
@@ -832,6 +848,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'path',
   );
 
+  // Exported permission: 'delete any assessment content'.
+  $permissions['delete any assessment content'] = array(
+    'name' => 'delete any assessment content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any course content'.
   $permissions['delete any course content'] = array(
     'name' => 'delete any course content',
@@ -952,6 +975,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any truefalse content'.
   $permissions['delete any truefalse content'] = array(
     'name' => 'delete any truefalse content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own assessment content'.
+  $permissions['delete own assessment content'] = array(
+    'name' => 'delete own assessment content',
     'roles' => array(),
     'module' => 'node',
   );
@@ -1532,6 +1562,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'edit any assessment content'.
+  $permissions['edit any assessment content'] = array(
+    'name' => 'edit any assessment content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any course content'.
   $permissions['edit any course content'] = array(
     'name' => 'edit any course content',
@@ -1652,6 +1689,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit any truefalse content'.
   $permissions['edit any truefalse content'] = array(
     'name' => 'edit any truefalse content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own assessment content'.
+  $permissions['edit own assessment content'] = array(
+    'name' => 'edit own assessment content',
     'roles' => array(),
     'module' => 'node',
   );
@@ -2031,6 +2075,35 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'quiz',
   );
 
+  // Exported permission: 'search all content'.
+  $permissions['search all content'] = array(
+    'name' => 'search all content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search all excluded entities'.
+  $permissions['search all excluded entities'] = array(
+    'name' => 'search all excluded entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search assessment content'.
+  $permissions['search assessment content'] = array(
+    'name' => 'search assessment content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'search_config',
+  );
+
   // Exported permission: 'search content'.
   $permissions['search content'] = array(
     'name' => 'search content',
@@ -2040,6 +2113,127 @@ function prc_poc_local_users_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'search',
+  );
+
+  // Exported permission: 'search course content'.
+  $permissions['search course content'] = array(
+    'name' => 'search course content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search digital_library_content content'.
+  $permissions['search digital_library_content content'] = array(
+    'name' => 'search digital_library_content content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search favorites_list content'.
+  $permissions['search favorites_list content'] = array(
+    'name' => 'search favorites_list content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search multichoice content'.
+  $permissions['search multichoice content'] = array(
+    'name' => 'search multichoice content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search panel content'.
+  $permissions['search panel content'] = array(
+    'name' => 'search panel content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search pd_course content'.
+  $permissions['search pd_course content'] = array(
+    'name' => 'search pd_course content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search pd_module content'.
+  $permissions['search pd_module content'] = array(
+    'name' => 'search pd_module content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search practice_test content'.
+  $permissions['search practice_test content'] = array(
+    'name' => 'search practice_test content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search quiz content'.
+  $permissions['search quiz content'] = array(
+    'name' => 'search quiz content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search quiz_directions content'.
+  $permissions['search quiz_directions content'] = array(
+    'name' => 'search quiz_directions content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search short_answer content'.
+  $permissions['search short_answer content'] = array(
+    'name' => 'search short_answer content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search test_item content'.
+  $permissions['search test_item content'] = array(
+    'name' => 'search test_item content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search truefalse content'.
+  $permissions['search truefalse content'] = array(
+    'name' => 'search truefalse content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_config',
   );
 
   // Exported permission: 'select account cancellation method'.

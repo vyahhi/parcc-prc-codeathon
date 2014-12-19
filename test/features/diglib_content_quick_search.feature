@@ -1,4 +1,4 @@
-@api @diglib
+@api @diglib @search
 Feature: Search Content - Quick Search (PRC-31)
   As an educator,
   I want to search for content by entering a keyword,

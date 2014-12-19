@@ -46,6 +46,12 @@ function prc_poc_local_node_digital_library_content_strongarm() {
       'digital_library_item' => array(
         'custom_settings' => TRUE,
       ),
+      'gallery_view' => array(
+        'custom_settings' => TRUE,
+      ),
+      'question' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -74,6 +80,10 @@ function prc_poc_local_node_digital_library_content_strongarm() {
             'weight' => '22',
             'visible' => FALSE,
           ),
+          'gallery_view' => array(
+            'weight' => '6',
+            'visible' => TRUE,
+          ),
         ),
         'field_author_name' => array(
           'teaser' => array(
@@ -81,6 +91,7 @@ function prc_poc_local_node_digital_library_content_strongarm() {
             'visible' => FALSE,
           ),
           'search_result' => NULL,
+          'gallery_view' => NULL,
         ),
       ),
     ),
