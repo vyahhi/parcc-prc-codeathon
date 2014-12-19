@@ -40,3 +40,23 @@ Feature: PRC-360 Admin: Add Object to a Course
     And I press "Save outline"
     Then I should see the message containing "Updated course."
 
+  Scenario: Order of groups on form
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And I am viewing my "PD Course" node with the title "PRC-350 AC4"
+    And I follow "Course outline"
+    Then I select "Module" from "edit-more-object-type"
+    And I press "Add object"
+    Then I click "Edit Settings"
+    Then "Content" should precede "Title & description" for the query ".fieldset-legend"
+    Then "Title & Description" should precede "Delete" for the query ".fieldset-legend"
+    And I should see the text "Use existing content's title"
+
+  @javascript
+  Scenario: Title field enabled and required when Use existing title unchecked
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And I am viewing my "PD Course" node with the title "PRC-350 AC4"
+    And I follow "Course outline"
+    Then I select "Module" from "edit-more-object-type"
+    And I press "Add object"
+    Then I click "Edit Settings"
+    Then the "Use existing content's title" checkbox should be checked

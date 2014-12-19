@@ -398,6 +398,21 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
 
   $form['delete']['delete_instance']['#access'] = FALSE;
 
+  $form['node']['#weight'] = 1;
+  $form['title']['#weight'] = 2;
+
+  $form['node']['use_node_title']['#title'] = "Use existing content's title";
+  $form['node']['use_node_title']['#default_value'] = TRUE;
+
+  $form['title']['title']['#states'] = array(
+    'enabled' => array(
+      ':input[id="edit-use-node-title"]' => array('checked' => FALSE),
+    ),
+    'required' => array(
+      ':input[id="edit-use-node-title"]' => array('checked' => FALSE),
+    ),
+  );
+
   unset($form['course_tabs']);
 }
 

@@ -25,7 +25,7 @@ Feature: PRC-35 LMS: Take a Course
     And I press "Add object"
     And I click "Edit Settings"
     And I fill in "PD Module 1 [nid:@nid[PD Module 1]]" for "Existing node"
-    And I check the box "Use existing title"
+    And I check the box "Use existing content's title"
     And I press "Update"
     Then I should see the text "PD Module 1"
     Then I press "Save outline"
