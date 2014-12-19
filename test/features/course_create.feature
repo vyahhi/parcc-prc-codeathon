@@ -69,6 +69,7 @@ Feature: PRC-69 Admin: Create a Course
     And I should see the radio button "PARCC members ONLY"
 
     And I should see a "Published" field
+    # PRC-495 Make unchecked the default
     And the "Published" checkbox should not be checked
 
     And I should not see the text "Member State"
