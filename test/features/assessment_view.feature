@@ -25,11 +25,12 @@ Feature: PRC-489 View A List of Tests
       | Educator                        |
       | PARCC-Member Educator           |
 
+
   Scenario: Assessment View
-    Given I am logged in as a user with the "Educator" role
+    Given I am logged in as a user with the "PRC Admin" role
     And "Assessment" nodes:
-    | title                      | body   |
-    | PRC-489 Assessment Title 1 | Body 1 |
+    | title                      | body   | field_grade_level | field_subject                |
+    | PRC-489 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math |
     And I click "Assessments"
     # AC4 The assessment title shall be a link that opens the test (future story)
     Then I should see the link "PRC-489 Assessment Title 1"
@@ -42,11 +43,18 @@ Feature: PRC-489 View A List of Tests
     #  AC2 Similar to Digital Library and Professional Development pages, the Assessments page contains a list of available tests, displaying the following components for each assessment:
     #    Assessment Title
     And I should see the text "PRC-489 Assessment Title 1"
+    
     #    Publish date
+    # TODO: Write a date formatter for last updated date
+
     #    Summary/Description
     And I should see the text "Body 1"
     #    Grade
+    And I should see the text "Grade Level:"
+    And I should see the text "Middle School"
     #    Subject (comma-separated if more than one subject)
+    And I should see the text "Subject:"
+    And I should see the text "Educational Leadership, Math"
     #    (Actions are NOT part of this story).
 
     #  AC5 Left panel is NOT part of this story. Therefore, no filtering. All available assessments are listed.

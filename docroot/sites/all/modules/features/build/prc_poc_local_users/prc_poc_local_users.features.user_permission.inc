@@ -694,7 +694,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'create assessment content'.
   $permissions['create assessment content'] = array(
     'name' => 'create assessment content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -851,7 +854,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any assessment content'.
   $permissions['delete any assessment content'] = array(
     'name' => 'delete any assessment content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -982,7 +988,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete own assessment content'.
   $permissions['delete own assessment content'] = array(
     'name' => 'delete own assessment content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1565,7 +1574,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit any assessment content'.
   $permissions['edit any assessment content'] = array(
     'name' => 'edit any assessment content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1696,7 +1708,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit own assessment content'.
   $permissions['edit own assessment content'] = array(
     'name' => 'edit own assessment content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
