@@ -43,7 +43,7 @@ Feature: PRC-489 View A List of Tests
     #  AC2 Similar to Digital Library and Professional Development pages, the Assessments page contains a list of available tests, displaying the following components for each assessment:
     #    Assessment Title
     And I should see the text "PRC-489 Assessment Title 1"
-    
+
     #    Publish date
     # TODO: Write a date formatter for last updated date
 
