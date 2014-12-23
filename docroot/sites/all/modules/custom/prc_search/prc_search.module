@@ -51,7 +51,7 @@ function prc_search_form_search_form_submit($form, &$form_state) {
   // to go to our super awesome search view.
   // We hijack the redirect and set our own URL here.
   $form_id = $form['form_id']['#value'];
-  $form_state['redirect'] = array('search-test/search_api_views_fulltext', array('query' => array('search_api_views_fulltext' => trim($form_state['values'][$form_id]))));
+  $form_state['redirect'] = array('search-content/search_api_views_fulltext', array('query' => array('search_api_views_fulltext' => trim($form_state['values'][$form_id]))));
 }
 
 
