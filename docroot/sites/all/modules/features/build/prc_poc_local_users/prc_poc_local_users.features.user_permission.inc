@@ -169,6 +169,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'access quiz',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'quiz',
   );
@@ -1141,6 +1142,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'delete results for own quiz',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'quiz',
   );
@@ -2085,6 +2087,8 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['score any quiz'] = array(
     'name' => 'score any quiz',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'quiz',
@@ -2095,6 +2099,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'score own quiz',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'quiz',
   );
@@ -2103,6 +2108,8 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['score taken quiz answer'] = array(
     'name' => 'score taken quiz answer',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'quiz',
@@ -2429,6 +2436,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['view any quiz results'] = array(
     'name' => 'view any quiz results',
     'roles' => array(
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'quiz',
@@ -2439,6 +2447,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'view own quiz results',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'quiz',
   );
@@ -2477,6 +2486,8 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['view results for own quiz'] = array(
     'name' => 'view results for own quiz',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'quiz',
