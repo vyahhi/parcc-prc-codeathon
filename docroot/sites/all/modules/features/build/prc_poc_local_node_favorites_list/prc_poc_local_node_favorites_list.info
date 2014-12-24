@@ -18,4 +18,4 @@ features[variable][] = node_preview_favorites_list
 features[variable][] = node_submitted_favorites_list
 features[variable][] = field_bundle_settings_node__favorites_list
 features[features_api][] = api:2
-mtime = 1419378554
+mtime = 1419379421
