@@ -5,6 +5,7 @@ class SearchAPIFeaturesBuilder extends FeaturesBuilderBase {
   protected $dependencies = array(
     'search_api',
     'search_api_facetapi',
+    'search_api_views',
     'facetapi',
     'facetapi_bonus',
     'entity',
