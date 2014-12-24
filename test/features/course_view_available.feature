@@ -58,3 +58,16 @@ Feature: PRC-34 View Available PD Courses
     And I select "Date" from "Sort by"
     And I select "most recent on top" from "Order"
     And I select "oldest on top" from "Order"
+
+  Scenario: PRC-519 Add a Thumbnail Image text in results
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And I am viewing my "PD Course" node with the title "PRC-519"
+    When I click "Edit"
+    Then I check the box "Published"
+    Then I attach the file "testfiles/lovelythumbnail.png" to "edit-field-thumbnail-und-0-upload"
+    And I select the radio button "Public"
+    And I fill in "Course Objectives" with "Objectives"
+    And I press "Save"
+    And I should see the success message containing "PD Course PRC-519 has been updated."
+    Then I click "Professional Development"
+    And I should not see the text "Add a Thumbnail Image"
