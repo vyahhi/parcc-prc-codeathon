@@ -78,8 +78,9 @@ function prc_poc_local_site_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'module_filter_recent_modules';
   $strongarm->value = array(
-    'course_quiz' => 1417467049,
-    'course_content' => 1417807381,
+    'search_api_views' => 1419284121,
+    'search_api_page' => 1419295451,
+    'current_search' => 1419363601,
   );
   $export['module_filter_recent_modules'] = $strongarm;
 

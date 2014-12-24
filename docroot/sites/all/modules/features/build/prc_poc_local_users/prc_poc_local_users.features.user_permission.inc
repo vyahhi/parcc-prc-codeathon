@@ -319,6 +319,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'environment_indicator',
   );
 
+  // Exported permission: 'administer facets'.
+  $permissions['administer facets'] = array(
+    'name' => 'administer facets',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'facetapi',
+  );
+
   // Exported permission: 'administer features'.
   $permissions['administer features'] = array(
     'name' => 'administer features',
@@ -534,6 +543,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'search',
+  );
+
+  // Exported permission: 'administer search_api'.
+  $permissions['administer search_api'] = array(
+    'name' => 'administer search_api',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_api',
   );
 
   // Exported permission: 'administer sharethis'.
