@@ -1,6 +1,6 @@
-//(function ($) {
-//  Drupal.behaviors.interact = {
-  //  attach: function (context) {
+// (function ($) {
+// Drupal.behaviors.interact = {
+//   attach: function (context) {
 
       var TexthelpSpeechStream = new function () {};
 
@@ -60,10 +60,10 @@
         catch (err) {
         }
       }
-//if ($(context).hasClass('texttospeech')) {
+//if (context.hasClass('texttospeech')) {
   TexthelpSpeechStream.addToolbar();
 //}
-   // }
- // }
+//   }
+//  }
 //})(jQuery);
 
