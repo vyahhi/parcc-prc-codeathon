@@ -554,6 +554,85 @@ function prc_poc_local_views_views_default_views() {
   $export['archive'] = $view;
 
   $view = new view();
+  $view->name = 'assessment_item_list';
+  $view->description = 'Item List for Assessment Detail Page';
+  $view->tag = 'default';
+  $view->base_table = 'quiz_node_relationship';
+  $view->human_name = 'Assessment Item List';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'grid';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: Quiz question relationship: Child_nid */
+  $handler->display->display_options['relationships']['child_nid']['id'] = 'child_nid';
+  $handler->display->display_options['relationships']['child_nid']['table'] = 'quiz_node_relationship';
+  $handler->display->display_options['relationships']['child_nid']['field'] = 'child_nid';
+  $handler->display->display_options['relationships']['child_nid']['label'] = 'Question';
+  $handler->display->display_options['relationships']['child_nid']['required'] = TRUE;
+  /* Relationship: Content: Standard (field_standard) */
+  $handler->display->display_options['relationships']['field_standard_tid']['id'] = 'field_standard_tid';
+  $handler->display->display_options['relationships']['field_standard_tid']['table'] = 'field_data_field_standard';
+  $handler->display->display_options['relationships']['field_standard_tid']['field'] = 'field_standard_tid';
+  $handler->display->display_options['relationships']['field_standard_tid']['relationship'] = 'child_nid';
+  /* Field: Quiz question relationship: Weight */
+  $handler->display->display_options['fields']['weight']['id'] = 'weight';
+  $handler->display->display_options['fields']['weight']['table'] = 'quiz_node_relationship';
+  $handler->display->display_options['fields']['weight']['field'] = 'weight';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'child_nid';
+  /* Field: Content: Type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['relationship'] = 'child_nid';
+  /* Field: Taxonomy term: Term description */
+  $handler->display->display_options['fields']['description']['id'] = 'description';
+  $handler->display->display_options['fields']['description']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['description']['field'] = 'description';
+  $handler->display->display_options['fields']['description']['relationship'] = 'field_standard_tid';
+  $handler->display->display_options['fields']['description']['label'] = '';
+  $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
+  /* Contextual filter: Quiz question relationship: Parent_vid */
+  $handler->display->display_options['arguments']['parent_vid']['id'] = 'parent_vid';
+  $handler->display->display_options['arguments']['parent_vid']['table'] = 'quiz_node_relationship';
+  $handler->display->display_options['arguments']['parent_vid']['field'] = 'parent_vid';
+  $handler->display->display_options['arguments']['parent_vid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['parent_vid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['parent_vid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['parent_vid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['parent_vid']['summary_options']['items_per_page'] = '25';
+
+  /* Display: Item List */
+  $handler = $view->new_display('panel_pane', 'Item List', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'PRC View panes';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'parent_vid' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Quiz question relationship: Parent_vid',
+    ),
+  );
+  $handler->display->display_options['inherit_panels_path'] = '1';
+  $export['assessment_item_list'] = $view;
+
+  $view = new view();
   $view->name = 'assessments';
   $view->description = 'Assessments tab view';
   $view->tag = 'PRC';
@@ -603,8 +682,18 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'assessment' => 'assessment',
+    'quiz' => 'quiz',
   );
+  /* Filter criterion: Content: Has taxonomy term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    9792 => '9792',
+    9793 => '9793',
+  );
+  $handler->display->display_options['filters']['tid']['type'] = 'select';
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'quiz_type';
 
   /* Display: Assessments View All */
   $handler = $view->new_display('panel_pane', 'Assessments View All', 'panel_pane_1');

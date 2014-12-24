@@ -1205,6 +1205,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'delete terms in quiz_type'.
+  $permissions['delete terms in quiz_type'] = array(
+    'name' => 'delete terms in quiz_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'delete terms in standard'.
   $permissions['delete terms in standard'] = array(
     'name' => 'delete terms in standard',
@@ -1930,6 +1937,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit terms in module_type'.
   $permissions['edit terms in module_type'] = array(
     'name' => 'edit terms in module_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in quiz_type'.
+  $permissions['edit terms in quiz_type'] = array(
+    'name' => 'edit terms in quiz_type',
     'roles' => array(),
     'module' => 'taxonomy',
   );

@@ -538,6 +538,134 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
+  $page->name = 'assessment_detail';
+  $page->task = 'page';
+  $page->admin_title = 'Assessment Detail';
+  $page->admin_description = '';
+  $page->path = 'assessment/%node';
+  $page->access = array();
+  $page->menu = array();
+  $page->arguments = array(
+    'node' => array(
+      'id' => 1,
+      'identifier' => 'Node: ID',
+      'name' => 'entity_id:node',
+      'settings' => array(),
+    ),
+  );
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_assessment_detail_panel_context';
+  $handler->task = 'page';
+  $handler->subtask = 'assessment_detail';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'quiz' => 'quiz',
+            ),
+          ),
+          'context' => 'argument_entity_id:node_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = 'ffe8d8e1-421f-40e2-b345-60727fcc4495';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-f49effc7-af16-4c26-a6d0-58bc154fd144';
+    $pane->panel = 'middle';
+    $pane->type = 'node_content';
+    $pane->subtype = 'node_content';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'links' => 1,
+      'no_extras' => 1,
+      'override_title' => 0,
+      'override_title_text' => '',
+      'identifier' => '',
+      'link' => 0,
+      'leave_node_title' => 0,
+      'build_mode' => 'detail',
+      'context' => 'argument_entity_id:node_1',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'f49effc7-af16-4c26-a6d0-58bc154fd144';
+    $display->content['new-f49effc7-af16-4c26-a6d0-58bc154fd144'] = $pane;
+    $display->panels['middle'][0] = 'new-f49effc7-af16-4c26-a6d0-58bc154fd144';
+    $pane = new stdClass();
+    $pane->pid = 'new-187ccba2-3aa0-465a-86b4-f72d78b151c3';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'assessment_item_list-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'parent_vid' => '%node:vid',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '187ccba2-3aa0-465a-86b4-f72d78b151c3';
+    $display->content['new-187ccba2-3aa0-465a-86b4-f72d78b151c3'] = $pane;
+    $display->panels['middle'][1] = 'new-187ccba2-3aa0-465a-86b4-f72d78b151c3';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-f49effc7-af16-4c26-a6d0-58bc154fd144';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['assessment_detail'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
   $page->name = 'assessments';
   $page->task = 'page';
   $page->admin_title = 'Assessments';
@@ -582,7 +710,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display();
-  $display->layout = 'twocol';
+  $display->layout = 'onecol';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -590,6 +718,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
       'center' => NULL,
       'left' => NULL,
       'right' => NULL,
+      'middle' => NULL,
     ),
   );
   $display->cache = array();
@@ -599,7 +728,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
-    $pane->panel = 'right';
+    $pane->panel = 'middle';
     $pane->type = 'views_panes';
     $pane->subtype = 'assessments-panel_pane_1';
     $pane->shown = TRUE;
@@ -615,7 +744,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->locks = array();
     $pane->uuid = 'fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
     $display->content['new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e'] = $pane;
-    $display->panels['right'][0] = 'new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
+    $display->panels['middle'][0] = 'new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

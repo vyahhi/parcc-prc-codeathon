@@ -840,6 +840,41 @@ function prc_poc_local_fields_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_quiz_type'
+  $field_bases['field_quiz_type'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_quiz_type',
+    'foreign keys' => array(
+      'tid' => array(
+        'columns' => array(
+          'tid' => 'tid',
+        ),
+        'table' => 'taxonomy_term_data',
+      ),
+    ),
+    'indexes' => array(
+      'tid' => array(
+        0 => 'tid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'taxonomy',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'quiz_type',
+          'parent' => 0,
+        ),
+      ),
+      'course_enrollment' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'taxonomy_term_reference',
+  );
+
   // Exported field_base: 'field_role_id'
   $field_bases['field_role_id'] = array(
     'active' => 1,
@@ -885,6 +920,7 @@ function prc_poc_local_fields_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
+      'course_enrollment' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
