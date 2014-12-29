@@ -28,9 +28,9 @@ Feature: PRC-489 View A List of Tests
 
   Scenario: Assessment View
     Given I am logged in as a user with the "PRC Admin" role
-    And "Assessment" nodes:
-    | title                      | body   | field_grade_level | field_subject                |
-    | PRC-489 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math |
+    And "Quiz" nodes:
+      | title                      | body   | field_grade_level | field_subject                | field_quiz_type   |
+      | PRC-489 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | Custom Assessment |
     And I click "Assessments"
     # AC4 The assessment title shall be a link that opens the test (future story)
     Then I should see the link "PRC-489 Assessment Title 1"
