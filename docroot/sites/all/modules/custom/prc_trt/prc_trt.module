@@ -1,0 +1,129 @@
+<?php
+/**
+ * @file
+ * PRC Technology Readiness Tool module code.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function prc_trt_menu() {
+	$items = array();
+
+	$items['technology-readiness'] = array(
+		'title' => 'Technology Readiness',
+		'description' => 'Determine whether a computer is capable of executing PARCC test assessments',
+		'type' => MENU_NORMAL_ITEM,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('prc_trt_form'),
+		'access arguments' => array('access trt'),
+	);
+
+	$items['technology-readiness/test'] = array(
+		'title' => 'Technology Readiness',
+		'type' => MENU_CALLBACK,
+		'page callback' => 'prc_trt_test',
+		'access arguments' => array('access trt'),
+	);
+
+	return $items;
+}
+
+
+/**
+ * Implements hook_permission().
+ */
+function prc_trt_permission() {
+	return array(
+		'access trt' => array(
+			'title' => t('Access Technology Readiness Tool'),
+			'description' => t('Access the Technology Readiness Tool to run a test to determine whether a computer is capable of executing PARCC test assessments'),
+		),
+	);
+}
+
+
+/**
+ * Implements hook_form().
+ * Defines the initial information form required to begin the TRT.
+ */
+function prc_trt_form($form, &$form_state) {
+	$form['trt_intro_text'] = array(
+		'#markup' => t('<p>The purpose of the Technology Readiness Tool is to provide a way for districts and schools to determine if the needed technical requirements are currently available to perform the PARCC Assessments online. This tool will check the following information for the specific device being tested.</p><ul><li>IP Address</li><li>Browser</li><li>Operating System</li><li>Internet Connectivity</li><li>Testing Capacity</li></ul>'),
+	);
+
+	$form['trt_instructions'] = array(
+		'#markup' => t('<p>To start this Technology Readiness test, simply enter the information below and select the "Begin Test" button.</p>'),
+	);
+
+	$form['trt_device'] = array(
+		'#type' => 'select',
+		'#title' => t('Hardware/Device'),
+		'#options' => array(
+			'desktop' => 'Desktop',
+			'laptop' => 'Laptop',
+			'tablet' => 'Tablet',
+		),
+		'#required' => TRUE,
+	);
+
+	$form['trt_student_count'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Total # of Students'),
+		'#size' => 5,
+		'#required' => TRUE,
+	);
+
+	$form['trt_device_count'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Total # of Hardware/Devices'),
+		'#size' => 5,
+		'#required' => TRUE,
+	);
+
+	$form['trt_user_comments'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Additional Comments (optional)'),
+	);
+
+	$form['trt_submit'] = array(
+		'#type' => 'submit',
+		'#value' => t('Begin Test'),
+	);
+
+	return $form;
+}
+
+
+/**
+ * Implements hook_form_validate().
+ * Validates the initial information form required to begin the TRT.
+ */
+function prc_trt_form_validate($form, &$form_state) {
+	if(!(is_numeric($form_state['values']['trt_student_count']))) {
+		form_set_error('trt_student_count', t('Total # of Students must be a positive integer.'));
+	}
+
+	if(!(is_numeric($form_state['values']['trt_device_count']))) {
+		form_set_error('trt_device_count', t('Total # of Hardware/Devices must be a positive integer.'));
+	}
+}
+
+
+/**
+ * Implements hook_form_submit().
+ * Executes the TRT upon valid submission of the initial information form.
+ */
+function prc_trt_form_submit($form, &$form_state) {
+	$form_state['redirect'] = 'technology-readiness/test';
+}
+
+
+/**
+ * @TODO
+ */
+function prc_trt_test() {
+	return array(
+		'#markup' => 'Time to execute the test',
+	);
+}

@@ -191,6 +191,17 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'system',
   );
 
+  // Exported permission: 'access trt'.
+  $permissions['access trt'] = array(
+    'name' => 'access trt',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'prc_trt',
+  );
+
   // Exported permission: 'access user profiles'.
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',

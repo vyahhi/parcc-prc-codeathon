@@ -121,6 +121,26 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => -47,
     'customized' => 1,
   );
+  // Exported menu link: main-menu_technology-readiness:technology-readiness
+  $menu_links['main-menu_technology-readiness:technology-readiness'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'technology-readiness',
+    'router_path' => 'technology-readiness',
+    'link_title' => 'Technology Readiness',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'main-menu_technology-readiness:technology-readiness',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: main-menu_users:admin-users
   $menu_links['main-menu_users:admin-users'] = array(
     'menu_name' => 'main-menu',
@@ -250,6 +270,7 @@ function prc_menu_links_menu_default_menu_links() {
   t('Home');
   t('Invite New User');
   t('Professional Development');
+  t('Technology Readiness');
   t('Users');
   t('View All');
 
