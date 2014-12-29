@@ -46,4 +46,3 @@ Feature: View Content (PRC-32)
      And I should see "Sort by"
      And I should see "Date" in the "#edit-sort-by" element
      And I should see "DESC" in the "edit-sort-order" field
-    

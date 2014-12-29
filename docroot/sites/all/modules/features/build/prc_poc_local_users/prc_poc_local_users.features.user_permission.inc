@@ -710,16 +710,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'invite',
   );
 
-  // Exported permission: 'create assessment content'.
-  $permissions['create assessment content'] = array(
-    'name' => 'create assessment content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'create course content'.
   $permissions['create course content'] = array(
     'name' => 'create course content',
@@ -883,16 +873,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'path',
   );
 
-  // Exported permission: 'delete any assessment content'.
-  $permissions['delete any assessment content'] = array(
-    'name' => 'delete any assessment content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete any course content'.
   $permissions['delete any course content'] = array(
     'name' => 'delete any course content',
@@ -1023,16 +1003,6 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any truefalse content'.
   $permissions['delete any truefalse content'] = array(
     'name' => 'delete any truefalse content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own assessment content'.
-  $permissions['delete own assessment content'] = array(
-    'name' => 'delete own assessment content',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
@@ -1637,16 +1607,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
-  // Exported permission: 'edit any assessment content'.
-  $permissions['edit any assessment content'] = array(
-    'name' => 'edit any assessment content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit any course content'.
   $permissions['edit any course content'] = array(
     'name' => 'edit any course content',
@@ -1777,16 +1737,6 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit any truefalse content'.
   $permissions['edit any truefalse content'] = array(
     'name' => 'edit any truefalse content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit own assessment content'.
-  $permissions['edit own assessment content'] = array(
-    'name' => 'edit own assessment content',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
@@ -2209,17 +2159,6 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'search all excluded entities',
     'roles' => array(
       'administrator' => 'administrator',
-    ),
-    'module' => 'search_config',
-  );
-
-  // Exported permission: 'search assessment content'.
-  $permissions['search assessment content'] = array(
-    'name' => 'search assessment content',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'search_config',
   );
