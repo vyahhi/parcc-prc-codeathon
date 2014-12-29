@@ -59,3 +59,20 @@ Feature: PRC-489 View A List of Tests
 
     #  AC5 Left panel is NOT part of this story. Therefore, no filtering. All available assessments are listed.
 
+  Scenario: PRC-534 Assessment update date sorting
+    Given I am logged in as a user with the "PRC Admin" role
+    And "Quiz" nodes:
+      | title                      | body   | field_grade_level | field_subject                | field_quiz_type   |
+      | PRC-534 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | Custom Assessment |
+      | PRC-534 Assessment Title 2 | Body 2 | Middle School     | Educational Leadership, Math | Custom Assessment |
+      | PRC-534 Assessment Title 3 | Body 3 | Middle School     | Educational Leadership, Math | Custom Assessment |
+    And I click "Assessments"
+    Then "PRC-534 Assessment Title 3" should precede "PRC-534 Assessment Title 2" for the query "a"
+    Then "PRC-534 Assessment Title 2" should precede "PRC-534 Assessment Title 1" for the query "a"
+    When I click "PRC-534 Assessment Title 2"
+    Then I click "Edit"
+    And I fill in "Body" with "Body 2 Update"
+    Then I press "Save"
+    When I click "Assessments"
+    Then "PRC-534 Assessment Title 2" should precede "PRC-534 Assessment Title 3" for the query "a"
+    Then "PRC-534 Assessment Title 3" should precede "PRC-534 Assessment Title 1" for the query "a"
