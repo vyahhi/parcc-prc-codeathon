@@ -24,13 +24,37 @@ Feature: PRC-490 View Test Details
     And "Quiz" nodes:
     | title        | field_subject | field_grade_level |
     | PRC-490 View | subj1, subj2  | Grade 490         |
-    When I am on "content/prc-490-view"
+    When I visit the last node created
     Then I should see the heading "PRC-490 View" in the "content" region
     And I should see the link "subj1"
     And I should see the link "subj2"
     And I should see the text "subj1, subj2"
     And I should see the link "Grade 490"
-  #  A list of items (may be thumbnails or rows) along with the following components for each item:
-  #    Item order
-  #    Item Type
-  #    Item Standard
+
+  Scenario: AC2 A list of items (may be thumbnails or rows) along with the following components for each item:
+    Given "Subject" terms:
+      | name  |
+      | subj1 |
+      | subj2 |
+    And "Grade Level" terms:
+      | name      |
+      | Grade 490 |
+    And "Quiz" nodes:
+      | title        | field_subject | field_grade_level |
+      | PRC-490 View | subj1, subj2  | Grade 490         |
+    And I am logged in as a user with the "PRC Admin" role
+    When I visit the last node created
+    And I click "Quiz"
+    Then I click "Manage questions"
+    Then I click "Exam directions"
+    And I fill in "edit-body-und-0-value" with "PRC-490 Directions 1"
+    And I fill in "Title" with "PRC-490 Directions 1"
+    And I press "Save"
+    Then I click "Exam directions"
+    And I fill in "edit-body-und-0-value" with "PRC-490 Directions 2"
+    And I fill in "Title" with "PRC-490 Directions 2"
+    And I press "Save"
+    Then I visit the last node created
+    And I should see the text "Item Order"
+    And I should see the text "Item Type"
+    And I should see the text "Item Standard"

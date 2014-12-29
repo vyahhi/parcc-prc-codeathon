@@ -1,9 +1,16 @@
 name = prc-poc.local Exam directions
 core = 7.x
 package = Content
+dependencies[] = ctools
 dependencies[] = features
 dependencies[] = prc_poc_local_fields
+dependencies[] = strongarm
 features[field_instance][] = node-quiz_directions-body
 features[node][] = quiz_directions
+features[variable][] = menu_options_quiz_directions
+features[variable][] = menu_parent_quiz_directions
+features[variable][] = node_options_quiz_directions
+features[variable][] = node_preview_quiz_directions
+features[variable][] = node_submitted_quiz_directions
 features[features_api][] = api:2
-mtime = 1419461503
+mtime = 1419871639

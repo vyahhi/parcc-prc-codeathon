@@ -774,7 +774,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'create multichoice content'.
   $permissions['create multichoice content'] = array(
     'name' => 'create multichoice content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -829,6 +832,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -836,14 +840,20 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'create quiz_directions content'.
   $permissions['create quiz_directions content'] = array(
     'name' => 'create quiz_directions content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create short_answer content'.
   $permissions['create short_answer content'] = array(
     'name' => 'create short_answer content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -857,7 +867,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'create truefalse content'.
   $permissions['create truefalse content'] = array(
     'name' => 'create truefalse content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -910,7 +923,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any multichoice content'.
   $permissions['delete any multichoice content'] = array(
     'name' => 'delete any multichoice content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -963,6 +979,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'delete any quiz content',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -979,14 +996,20 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any quiz_directions content'.
   $permissions['delete any quiz_directions content'] = array(
     'name' => 'delete any quiz_directions content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any short_answer content'.
   $permissions['delete any short_answer content'] = array(
     'name' => 'delete any short_answer content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1000,7 +1023,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any truefalse content'.
   $permissions['delete any truefalse content'] = array(
     'name' => 'delete any truefalse content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1050,7 +1076,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete own multichoice content'.
   $permissions['delete own multichoice content'] = array(
     'name' => 'delete own multichoice content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1105,6 +1134,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -1112,14 +1142,20 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete own quiz_directions content'.
   $permissions['delete own quiz_directions content'] = array(
     'name' => 'delete own quiz_directions content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own short_answer content'.
   $permissions['delete own short_answer content'] = array(
     'name' => 'delete own short_answer content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1133,7 +1169,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete own truefalse content'.
   $permissions['delete own truefalse content'] = array(
     'name' => 'delete own truefalse content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1647,7 +1686,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit any multichoice content'.
   $permissions['edit any multichoice content'] = array(
     'name' => 'edit any multichoice content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1700,6 +1742,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'edit any quiz content',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -1707,14 +1750,20 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit any quiz_directions content'.
   $permissions['edit any quiz_directions content'] = array(
     'name' => 'edit any quiz_directions content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any short_answer content'.
   $permissions['edit any short_answer content'] = array(
     'name' => 'edit any short_answer content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1728,7 +1777,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit any truefalse content'.
   $permissions['edit any truefalse content'] = array(
     'name' => 'edit any truefalse content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1796,7 +1848,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit own multichoice content'.
   $permissions['edit own multichoice content'] = array(
     'name' => 'edit own multichoice content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1851,6 +1906,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -1858,14 +1914,20 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit own quiz_directions content'.
   $permissions['edit own quiz_directions content'] = array(
     'name' => 'edit own quiz_directions content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own short_answer content'.
   $permissions['edit own short_answer content'] = array(
     'name' => 'edit own short_answer content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1879,7 +1941,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit own truefalse content'.
   $permissions['edit own truefalse content'] = array(
     'name' => 'edit own truefalse content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1887,6 +1952,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit question titles'] = array(
     'name' => 'edit question titles',
     'roles' => array(
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'quiz',
@@ -2441,6 +2507,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['view any quiz question correct response'] = array(
     'name' => 'view any quiz question correct response',
     'roles' => array(
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'quiz',
@@ -2491,6 +2558,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['view quiz question outside of a quiz'] = array(
     'name' => 'view quiz question outside of a quiz',
     'roles' => array(
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'quiz',

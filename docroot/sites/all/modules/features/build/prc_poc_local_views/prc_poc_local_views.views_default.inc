@@ -571,7 +571,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['style_plugin'] = 'grid';
+  $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Relationship: Quiz question relationship: Child_nid */
   $handler->display->display_options['relationships']['child_nid']['id'] = 'child_nid';
@@ -588,23 +588,26 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['weight']['id'] = 'weight';
   $handler->display->display_options['fields']['weight']['table'] = 'quiz_node_relationship';
   $handler->display->display_options['fields']['weight']['field'] = 'weight';
+  $handler->display->display_options['fields']['weight']['label'] = 'Item order';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'child_nid';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   /* Field: Content: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'node';
   $handler->display->display_options['fields']['type']['field'] = 'type';
   $handler->display->display_options['fields']['type']['relationship'] = 'child_nid';
+  $handler->display->display_options['fields']['type']['label'] = 'Item Type';
   /* Field: Taxonomy term: Term description */
   $handler->display->display_options['fields']['description']['id'] = 'description';
   $handler->display->display_options['fields']['description']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['description']['field'] = 'description';
   $handler->display->display_options['fields']['description']['relationship'] = 'field_standard_tid';
-  $handler->display->display_options['fields']['description']['label'] = '';
-  $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['description']['label'] = 'Item Standard';
+  $handler->display->display_options['fields']['description']['hide_empty'] = TRUE;
   /* Contextual filter: Quiz question relationship: Parent_vid */
   $handler->display->display_options['arguments']['parent_vid']['id'] = 'parent_vid';
   $handler->display->display_options['arguments']['parent_vid']['table'] = 'quiz_node_relationship';

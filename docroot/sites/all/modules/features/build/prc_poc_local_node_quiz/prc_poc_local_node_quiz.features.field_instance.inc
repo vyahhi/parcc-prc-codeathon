@@ -31,6 +31,13 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -88,6 +95,16 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
         'type' => 'ds_taxonomy_separator',
         'weight' => 2,
       ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'ds',
+        'settings' => array(
+          'taxonomy_term_link' => 1,
+          'taxonomy_term_separator' => ', ',
+        ),
+        'type' => 'ds_taxonomy_separator',
+        'weight' => 3,
+      ),
       'teaser' => array(
         'label' => 'above',
         'module' => 'ds',
@@ -139,6 +156,13 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
         'type' => 'taxonomy_term_reference_link',
         'weight' => 3,
       ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 4,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -185,6 +209,16 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 1,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'ds',
+        'settings' => array(
+          'taxonomy_term_link' => TRUE,
+          'taxonomy_term_separator' => ', ',
+        ),
+        'type' => 'ds_taxonomy_separator',
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',

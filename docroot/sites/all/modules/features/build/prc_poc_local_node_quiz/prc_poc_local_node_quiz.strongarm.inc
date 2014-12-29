@@ -20,7 +20,7 @@ function prc_poc_local_node_quiz_strongarm() {
         'custom_settings' => TRUE,
       ),
       'full' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
       'rss' => array(
         'custom_settings' => FALSE,
@@ -94,6 +94,10 @@ function prc_poc_local_node_quiz_strongarm() {
             'weight' => '15',
             'visible' => FALSE,
           ),
+          'full' => array(
+            'weight' => '6',
+            'visible' => FALSE,
+          ),
         ),
         'stats' => array(
           'default' => array(
@@ -108,6 +112,10 @@ function prc_poc_local_node_quiz_strongarm() {
             'weight' => '14',
             'visible' => FALSE,
           ),
+          'full' => array(
+            'weight' => '18',
+            'visible' => FALSE,
+          ),
         ),
         'sharethis' => array(
           'default' => array(
@@ -119,6 +127,10 @@ function prc_poc_local_node_quiz_strongarm() {
             'visible' => TRUE,
           ),
           'teaser' => array(
+            'weight' => '5',
+            'visible' => TRUE,
+          ),
+          'full' => array(
             'weight' => '5',
             'visible' => TRUE,
           ),
