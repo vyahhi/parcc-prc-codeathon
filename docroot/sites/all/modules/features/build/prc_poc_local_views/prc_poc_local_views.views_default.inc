@@ -579,11 +579,11 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['relationships']['child_nid']['field'] = 'child_nid';
   $handler->display->display_options['relationships']['child_nid']['label'] = 'Question';
   $handler->display->display_options['relationships']['child_nid']['required'] = TRUE;
-  /* Relationship: Content: Standard (field_standard) */
-  $handler->display->display_options['relationships']['field_standard_tid']['id'] = 'field_standard_tid';
-  $handler->display->display_options['relationships']['field_standard_tid']['table'] = 'field_data_field_standard';
-  $handler->display->display_options['relationships']['field_standard_tid']['field'] = 'field_standard_tid';
-  $handler->display->display_options['relationships']['field_standard_tid']['relationship'] = 'child_nid';
+  /* Relationship: Content: Standard (field_standard_single) */
+  $handler->display->display_options['relationships']['field_standard_single_tid']['id'] = 'field_standard_single_tid';
+  $handler->display->display_options['relationships']['field_standard_single_tid']['table'] = 'field_data_field_standard_single';
+  $handler->display->display_options['relationships']['field_standard_single_tid']['field'] = 'field_standard_single_tid';
+  $handler->display->display_options['relationships']['field_standard_single_tid']['relationship'] = 'child_nid';
   /* Field: Content: Item Order */
   $handler->display->display_options['fields']['field_item_order']['id'] = 'field_item_order';
   $handler->display->display_options['fields']['field_item_order']['table'] = 'field_data_field_item_order';
@@ -614,13 +614,13 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['type']['field'] = 'type';
   $handler->display->display_options['fields']['type']['relationship'] = 'child_nid';
   $handler->display->display_options['fields']['type']['label'] = 'Item Type';
-  /* Field: Taxonomy term: Term description */
-  $handler->display->display_options['fields']['description']['id'] = 'description';
-  $handler->display->display_options['fields']['description']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['fields']['description']['field'] = 'description';
-  $handler->display->display_options['fields']['description']['relationship'] = 'field_standard_tid';
-  $handler->display->display_options['fields']['description']['label'] = 'Item Standard';
-  $handler->display->display_options['fields']['description']['hide_empty'] = TRUE;
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'field_standard_single_tid';
+  $handler->display->display_options['fields']['name']['label'] = 'Item Standard';
+  $handler->display->display_options['fields']['name']['hide_empty'] = TRUE;
   /* Contextual filter: Quiz question relationship: Parent_vid */
   $handler->display->display_options['arguments']['parent_vid']['id'] = 'parent_vid';
   $handler->display->display_options['arguments']['parent_vid']['table'] = 'quiz_node_relationship';

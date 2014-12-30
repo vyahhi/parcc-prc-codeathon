@@ -45,6 +45,14 @@ function prc_question_view_question_preview_form($form, $form_state, $nodes, $re
   // The 15 is completely arbitrary here.
   // TODO: Find out what this 15 can be substituted with
   $form = drupal_get_form('quiz_question_answering_form', $nodes, 15);
+
+  // Have to replace the taxonomy term name with description
+  $nid = $nodes->nid;
+  foreach($form['question'][$nid]['header']['field_standard']['#items'] as $key => $value) {
+    $desc = $form['question'][$nid]['header']['field_standard']['#object']->field_standard['und'][$key]['taxonomy_term']->description;
+    $form['question'][$nid]['header']['field_standard'][$key]['#title'] = $desc;
+  }
+
   // Kill the buttons!
   unset($form['navigation']);
   return $form;
