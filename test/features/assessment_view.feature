@@ -72,6 +72,7 @@ Feature: PRC-489 View A List of Tests
     When I click "PRC-534 Assessment Title 2"
     Then I click "Edit"
     And I fill in "Body" with "Body 2 Update"
+    Then I wait 3 seconds
     Then I press "Save"
     When I click "Assessments"
     Then "PRC-534 Assessment Title 2" should precede "PRC-534 Assessment Title 3" for the query "a"
