@@ -1,0 +1,4 @@
+name = PRC Question Item Preview handlers
+description = Allows users to preview Quiz questions and items
+package = PRC
+core = 7.x

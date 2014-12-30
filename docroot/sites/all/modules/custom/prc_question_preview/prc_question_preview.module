@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * Allows users to add content to favorites lists
+ */
+
+/**
+ *  Implements hook_menu().
+ */
+function prc_question_preview_menu() {
+  // Display a node add form in ctools modal.
+  $items = array();
+  $items['question-preview/%ctools_js/%node'] = array(
+    'type' => MENU_CALLBACK,
+    'title' => t('Item Preview'),
+    'description' => t('Question Item Preview'),
+    'page callback' => 'prc_question_preview_menu_item_preview',
+    'file' => 'prc_question_preview.ajax.inc',
+    'page arguments' => array(1, 2),
+    'access arguments' => array('access content'),
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function prc_question_preview_views_pre_render(&$view) {
+  if ($view->name == 'assessment_item_list') {
+    // The item list has AJAXy links so we need ajax!
+    drupal_add_library('system', 'drupal.ajax');
+  }
+}
+
+/**
+ * Get the form to show to the quiz taker.
+ *
+ * @param $nodes
+ *   A list of question nodes to get answers from.
+ * @param $result_id
+ *   The result ID for this attempt.
+ */
+function prc_question_view_question_preview_form($form, $form_state, $nodes, $result_id) {
+  // The 15 is completely arbitrary here.
+  // TODO: Find out what this 15 can be substituted with
+  $form = drupal_get_form('quiz_question_answering_form', $nodes, 15);
+  // Kill the buttons!
+  unset($form['navigation']);
+  return $form;
+}
