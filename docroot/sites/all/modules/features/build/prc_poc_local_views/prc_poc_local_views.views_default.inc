@@ -584,24 +584,29 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['relationships']['field_standard_tid']['table'] = 'field_data_field_standard';
   $handler->display->display_options['relationships']['field_standard_tid']['field'] = 'field_standard_tid';
   $handler->display->display_options['relationships']['field_standard_tid']['relationship'] = 'child_nid';
-  /* Field: Quiz question relationship: Weight */
-  $handler->display->display_options['fields']['weight']['id'] = 'weight';
-  $handler->display->display_options['fields']['weight']['table'] = 'quiz_node_relationship';
-  $handler->display->display_options['fields']['weight']['field'] = 'weight';
-  $handler->display->display_options['fields']['weight']['label'] = 'Item Order';
+  /* Field: Content: Item Order */
+  $handler->display->display_options['fields']['field_item_order']['id'] = 'field_item_order';
+  $handler->display->display_options['fields']['field_item_order']['table'] = 'field_data_field_item_order';
+  $handler->display->display_options['fields']['field_item_order']['field'] = 'field_item_order';
+  $handler->display->display_options['fields']['field_item_order']['relationship'] = 'child_nid';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['relationship'] = 'child_nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'child_nid';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = 'Preview';
   $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['path'] = 'question-preview/nojs/[nid]';
   $handler->display->display_options['fields']['title']['alter']['link_class'] = 'use-ajax';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';

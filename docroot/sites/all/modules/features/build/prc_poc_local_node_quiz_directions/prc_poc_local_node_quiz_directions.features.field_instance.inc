@@ -57,12 +57,54 @@ function prc_poc_local_node_quiz_directions_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => -10,
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-quiz_directions-field_item_order'
+  $field_instances['node-quiz_directions-field_item_order'] = array(
+    'bundle' => 'quiz_directions',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_item_order',
+    'label' => 'Item Order',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'label_help_description' => '',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 0,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Item Order');
   t('Question');
 
   return $field_instances;

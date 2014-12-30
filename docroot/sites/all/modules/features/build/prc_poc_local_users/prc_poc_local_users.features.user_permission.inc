@@ -2499,6 +2499,8 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'quiz',
   );
