@@ -42,8 +42,6 @@ function prc_question_preview_views_pre_render(&$view) {
   }
 }
 
-
-
 /**
  * Get the form to show to the quiz taker.
  *
@@ -67,10 +65,6 @@ function prc_question_view_question_preview_form($form, $form_state, $nodes, $re
   // Kill the buttons!
   unset($form['navigation']);
   return $form;
-}
-
-function prc_question_preview_form_quiz_questions_form_alter(&$form, &$form_state) {
-  $x = 'x';
 }
 
 /**

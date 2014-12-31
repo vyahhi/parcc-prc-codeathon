@@ -71,6 +71,8 @@ Feature: PRC-34 View Available PD Courses
     And I should see the success message containing "PD Course PRC-519 has been updated."
     Then I click "Professional Development"
     And I should not see the text "Add a Thumbnail Image"
+    When I click "PRC-519"
+    Then I should not see the text "Add a Thumbnail Image"
 
   Scenario: PRC-520 Add a Thumbnail Image text in results
     Given I am logged in as a user with the "Content Administrator (Curator)" role

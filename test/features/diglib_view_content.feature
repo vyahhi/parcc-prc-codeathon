@@ -46,3 +46,16 @@ Feature: View Content (PRC-32)
      And I should see "Sort by"
      And I should see "Date" in the "#edit-sort-by" element
      And I should see "DESC" in the "edit-sort-order" field
+
+  Scenario: PRC-519 Add a Thumbnail Image text in results
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And I am viewing my "Digital Library Content" node with the title "PRC-519"
+    When I click "Edit"
+    Then I attach the file "testfiles/lovelythumbnail.png" to "edit-field-thumbnail-und-0-upload"
+    And I select the radio button "Public"
+    And I press "Save"
+    And I should see the success message containing "Digital Library Content PRC-519 has been updated."
+    Then I click "Digital Library"
+    And I should not see the text "Add a Thumbnail Image"
+    When I click "PRC-519"
+    Then I should not see the text "Add a Thumbnail Image"

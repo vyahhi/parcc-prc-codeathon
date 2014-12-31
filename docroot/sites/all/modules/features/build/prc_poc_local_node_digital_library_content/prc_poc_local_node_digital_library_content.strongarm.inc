@@ -52,6 +52,9 @@ function prc_poc_local_node_digital_library_content_strongarm() {
       'question' => array(
         'custom_settings' => FALSE,
       ),
+      'detail' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
