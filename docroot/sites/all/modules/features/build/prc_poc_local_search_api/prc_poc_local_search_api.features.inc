@@ -36,7 +36,7 @@ function prc_poc_local_search_api_default_search_api_index() {
       "fields" : {
         "author" : { "type" : "integer", "entity_type" : "user" },
         "changed" : { "type" : "date" },
-        "field_author_name" : { "type" : "text" },
+        "field_author_name" : { "type" : "string" },
         "field_genre" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_grade_level" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_media_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },
@@ -178,9 +178,10 @@ function prc_poc_local_search_api_default_search_api_server() {
             "boost" : "1.0"
           },
           "field_author_name" : {
-            "table" : "search_api_db_digital_library_content_index_text",
-            "type" : "text",
-            "boost" : "1.0"
+            "table" : "search_api_db_digital_library_content_index",
+            "type" : "string",
+            "boost" : "1.0",
+            "column" : "field_author_name"
           },
           "field_media_type" : {
             "table" : "search_api_db_digital_library_content_index",

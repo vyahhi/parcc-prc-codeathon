@@ -43,9 +43,6 @@ Feature: PRC-106 Search Content- Advanced
     And "PD Course" nodes:
       | title         | body      | status | promote | uid | language |
       | Africa PDC    | Continent | 1      | 0       | 1   | und      |
-    And "Assessment" nodes:
-      | title         | body      | status | promote | uid | language |
-      | Africa Ast    | Continent | 1      | 0       | 1   | und      |
     And "PD Module" nodes:
       | title         | body      | status | promote | uid | language |
       | Africa PDM    | Continent | 1      | 0       | 1   | und      |
@@ -56,11 +53,26 @@ Feature: PRC-106 Search Content- Advanced
     And I press "Apply"
     Then I should see the link "Africa DLC"
     And I should see the link "Africa PDC"
-    And I should see the link "Africa Ast"
     But I should not see the link "Africa PDM"
 
   Scenario: AC3 The system shall provide each the following filters:
-    Given I am on "search-content"
+    Given "Media Type" terms:
+      | name   |
+      | AC3 MT |
+    And "Subject" terms:
+      | name   |
+      | AC3 Su |
+    Given "Digital Library Content" nodes:
+      | title         | body      | status | promote | uid | language | field_author_name | field_media_type | field_subject | field_standard |
+      | Africa DLC    | Continent | 1      | 0       | 1   | und      | Author One        | AC3 MT           | AC3 Su        | s1000876       |
+    And "PD Course" nodes:
+      | title         | body      | status | promote | uid | language |
+      | Africa PDC    | Continent | 1      | 0       | 1   | und      |
+    And "PD Module" nodes:
+      | title         | body      | status | promote | uid | language |
+      | Africa PDM    | Continent | 1      | 0       | 1   | und      |
+    And I run drush "sapi-i"
+    When I visit "search-content"
     Then I should see the text "By Content Type"
     Then I should see the text "By Author"
     Then I should see the text "By Media Type"
@@ -127,3 +139,18 @@ Feature: PRC-106 Search Content- Advanced
     When I fill in "something" for "Search" in the "header" region
     And I press "Search" in the "header" region
     Then I should be on "search-content/search_api_views_fulltext?search_api_views_fulltext=something"
+
+  Scenario: PRC-560 Index field_author_name as string rather than fulltext
+    Given I have no "Digital Library Content" nodes
+    And "Digital Library Content" nodes:
+      | title         | body      | status | promote | uid | language | field_author_name |
+      | Africa        | Continent | 1      | 0       | 1   | und      | Auth One Alpha    |
+      | Europe        | Continent | 1      | 0       | 1   | und      | Auth Two Beta     |
+    And I run drush "sapi-i"
+    When I visit "search-content"
+    Then I should see the link "auth one alpha"
+    And I should see the link "auth two beta"
+    When I click "auth one alpha"
+    Then I should see the link "Africa"
+    But I should not see the link "Europe"
+    And I should not see the text "auth two beta"
