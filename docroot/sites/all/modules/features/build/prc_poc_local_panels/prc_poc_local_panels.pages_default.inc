@@ -342,7 +342,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->configuration = array(
       'admin_title' => 'Empty Placeholder for Item Preview',
       'title' => '',
-      'body' => '&nbsp;',
+      'body' => '&nbsp;Hi',
       'format' => 'filtered_html',
       'substitute' => 0,
     );

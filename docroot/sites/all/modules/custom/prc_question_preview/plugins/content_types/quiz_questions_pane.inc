@@ -14,9 +14,8 @@ function quiz_questions_pane_render($subtype, $conf, $args, $contexts) {
   $node = $contexts['argument_entity_id:node_1']->data;
 
   module_load_include('inc', 'quiz', 'quiz.admin');
-  $form = drupal_get_form('quiz_questions_form', $node);
-
-  // http://prc-poc.local:8083/question-preview/nojs/15802
+  // $form = drupal_get_form('quiz_questions_form', $node);
+  $form = drupal_get_form('prc_question_preview_quiz_questions_form', $node);
 
   foreach($form['question_list']['titles'] as $key => $value) {
     if (strpos($key, '-')) {

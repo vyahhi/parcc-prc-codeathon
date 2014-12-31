@@ -20,15 +20,6 @@ function prc_question_preview_menu() {
     'page arguments' => array(1, 2),
     'access arguments' => array('access content'),
   );
-  $items['prc-quiz-preview/%node'] = array(
-    'type' => MENU_CALLBACK,
-    'title' => t('Exam Preview'),
-    'description' => t('Exam Preview'),
-    'page callback' => 'prc_question_preview_quiz_detail',
-    'file' => 'prc_question_preview.ajax.inc',
-    'page arguments' => array(1),
-    'access arguments' => array('access content'),
-  );
   return $items;
 }
 
@@ -51,6 +42,8 @@ function prc_question_preview_views_pre_render(&$view) {
   }
 }
 
+
+
 /**
  * Get the form to show to the quiz taker.
  *
@@ -64,6 +57,13 @@ function prc_question_view_question_preview_form($form, $form_state, $nodes, $re
   // TODO: Find out what this 15 can be substituted with
   $form = drupal_get_form('quiz_question_answering_form', $nodes, 15);
 
+  // Have to replace the taxonomy term name with description
+  $nid = $nodes->nid;
+  foreach($form['question'][$nid]['header']['field_standard']['#items'] as $key => $value) {
+    $desc = $form['question'][$nid]['header']['field_standard']['#object']->field_standard['und'][$key]['taxonomy_term']->description;
+    $form['question'][$nid]['header']['field_standard'][$key]['#title'] = $desc;
+  }
+
   // Kill the buttons!
   unset($form['navigation']);
   return $form;
@@ -71,7 +71,6 @@ function prc_question_view_question_preview_form($form, $form_state, $nodes, $re
 
 function prc_question_preview_form_quiz_questions_form_alter(&$form, &$form_state) {
   $x = 'x';
-
 }
 
 /**
@@ -82,4 +81,273 @@ function prc_question_preview_ctools_plugin_directory($owner, $plugin_type) {
   if (in_array($owner, $modules) && !empty($plugin_type) && ($plugin_type == 'content_types' || $plugin_type == 'access' || $plugin_type == 'layouts')) {
     return 'plugins/' . $plugin_type;
   }
+}
+
+/**
+ * Handles "manage questions" tab.
+ *
+ * Displays form which allows questions to be assigned to the given quiz.
+ *
+ * This function is not used if the question assignment type "categorized random questions" is chosen
+ *
+ * @param $form_state
+ *  The form state variable
+ * @param $quiz
+ *  The quiz node.
+ * @return
+ *  HTML output to create page.
+ */
+function prc_question_preview_quiz_questions_form($form, $form_state, $quiz) {
+
+  $types = quiz_get_question_types();
+
+  _quiz_add_fields_for_creating_questions($form, $types, $quiz);
+
+  // Display questions in this quiz.
+  $form['question_list'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Questions in this @quiz', array('@quiz' => QUIZ_NAME)),
+    '#theme' => 'question_selection_table',
+    '#collapsible' => TRUE,
+    '#attributes' => array('id' => 'mq-fieldset'),
+    'question_status' => array('#tree' => TRUE),
+  );
+
+  // Add randomization settings if this quiz allows randomized questions
+  _quiz_add_fields_for_random_quiz($form, $quiz);
+
+  $include_random = $quiz->randomization == 2;
+  // @todo deal with $include_random
+  $questions = quiz_get_questions($quiz->nid, $quiz->vid);
+
+  if (empty($questions)) {
+    $form['question_list']['no_questions'] = array(
+      '#markup' => '<div id = "no-questions">' . t('There are currently no questions in this @quiz. Assign existing questions by using the question browser below. You can also use the links above to create new questions.', array('@quiz' => QUIZ_NAME)) . '</div>',
+    );
+  }
+
+  // We add the questions to the form array
+  _prc_question_preview_quiz_add_questions_to_form($form, $questions, $quiz, $types);
+
+  // Show the number of questions in the table header.
+  $always_count = isset($form['question_list']['titles']) ? count($form['question_list']['titles']) : 0;
+  $form['question_list']['#title'] .= ' (' . $always_count . ')';
+
+  // Give the user the option to create a new revision of the quiz
+  _quiz_add_revision_checkbox($form, $quiz);
+
+  // Timestamp is needed to avoid multiple users editing the same quiz at the same time.
+  $form['timestamp'] = array('#type' => 'hidden', '#default_value' => REQUEST_TIME);
+
+  $form['actions']['#type'] = 'actions';
+
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+    '#submit' => array('quiz_questions_form_submit'),
+  );
+  return $form;
+}
+
+/**
+ * Adds the questions in the $questions array to the form
+ *
+ * @param $form
+ *   FAPI form(array)
+ * @param $questions
+ *   The questions to be added to the question list(array)
+ * @param $quiz
+ *   The quiz node(object)
+ * @param $question_types
+ *   array of all available question types
+ */
+function _prc_question_preview_quiz_add_questions_to_form(&$form, &$questions, &$quiz, &$question_types) {
+  $form['question_list']['weights'] = array('#tree' => TRUE);
+  $form['question_list']['qnr_ids'] = array('#tree' => TRUE);
+  $form['question_list']['qnr_pids'] = array('#tree' => TRUE);
+  $form['question_list']['max_scores'] = array('#tree' => TRUE);
+  $form['question_list']['auto_update_max_scores'] = array('#tree' => TRUE);
+  $form['question_list']['stayers'] = array('#tree' => TRUE);
+  $form['question_list']['revision'] = array('#tree' => TRUE);
+  if ($quiz->randomization == 2) {
+    $form['question_list']['compulsories'] = array('#tree' => TRUE);
+  }
+
+  foreach ($questions as $question) {
+    // @todo replace entire form with usage of question instance
+    $question_node = node_load($question->nid, $question->vid);
+    $instance = _quiz_question_get_instance($question_node);
+    $fieldset = 'question_list';
+    $id = $question->nid . '-' . $question->vid;
+
+    $form[$fieldset]['weights'][$id] = array(
+      '#type' => 'textfield',
+      '#size' => 3,
+      '#maxlength' => 4,
+      '#default_value' => isset($question->weight) ? $question->weight : 0,
+    );
+
+    $form[$fieldset]['qnr_pids'][$id] = array(
+      '#type' => 'textfield',
+      '#size' => 3,
+      '#maxlength' => 4,
+      '#default_value' => $question->qnr_pid,
+    );
+
+    $form[$fieldset]['qnr_ids'][$id] = array(
+      '#type' => 'textfield',
+      '#size' => 3,
+      '#maxlength' => 4,
+      '#default_value' => $question->qnr_id,
+    );
+
+    // Quiz directions don't have scoring...
+    $form[$fieldset]['max_scores'][$id] = array(
+      '#type' => $instance->isGraded() ? 'textfield' : 'hidden',
+      '#size' => 2,
+      '#maxlength' => 2,
+      '#disabled' => isset($question->auto_update_max_score) ? $question->auto_update_max_score : FALSE,
+      '#default_value' => isset($question->max_score) ? $question->max_score : 0,
+      '#states' => array(
+        'disabled' => array(
+          "#edit-auto-update-max-scores-$id" => array('checked' => TRUE),
+        )
+      ),
+    );
+
+    $form[$fieldset]['auto_update_max_scores'][$id] = array(
+      '#type' => $instance->isGraded() ? 'checkbox' : 'hidden',
+      '#default_value' => isset($question->auto_update_max_score) ? $question->auto_update_max_score : 0,
+    );
+
+    // Add checkboxes to remove questions in js disabled browsers...
+    $form[$fieldset]['stayers'][$id] = array(
+      '#type' => 'checkbox',
+      '#default_value' => 0,
+      '#attributes' => array('class' => array('q-staying')),
+    );
+
+    //Add checkboxes to mark compulsory questions for randomized quizzes.
+    if ($quiz->randomization == 2) {
+      $form[$fieldset]['compulsories'][$id] = array(
+        '#type' => 'checkbox',
+        '#default_value' => isset($question->question_status) ? ($question->question_status == QUIZ_QUESTION_ALWAYS) ? 1 : 0 : 0,
+        '#attributes' => array('class' => array('q-compulsory')),
+      );
+    }
+
+    if (user_access('view quiz question outside of a quiz')) {
+      $link_options = array(
+        'attributes' => array('class' => array('handle-changes')),
+      );
+      $question_titles = l($question->title, 'node/' . $question->nid, $link_options);
+    }
+    else {
+      $question_titles = check_plain($question->title);
+    }
+
+    $form[$fieldset]['titles'][$id] = array('#markup' => $question_titles);
+
+    $question_wrapper = entity_metadata_wrapper('node', $question);
+    $item_order = $question_wrapper->field_item_order->value();
+    $item_standard = isset($question->field_standard_single) ? $question_wrapper->field_standard_single->value()->name : '';
+    $form[$fieldset]['item_orders'][$id] = array('#markup' => $item_order);
+    $form[$fieldset]['item_standards'][$id] = array('#markup' => $item_standard);
+
+
+    $form[$fieldset]['types'][$id] = array(
+      '#markup' => $question_types[$question->type]['name'],
+      '#question_type' => $question->type,
+    );
+
+    $form[$fieldset]['view_links'][$id] = array(
+      '#markup' => l(
+        t('Edit'), 'node/' . $question->nid . '/edit', array(
+          'query' => drupal_get_destination(),
+          'attributes' => array('class' => array('handle-changes')),
+        )
+      ),
+      '#access' => node_access('update', node_load($question->nid, $question->vid)),
+    );
+    // For js enabled browsers questions are removed by pressing a remove link
+    $form[$fieldset]['remove_links'][$id] = array(
+      '#markup' => '<a href="#" class="rem-link">' . t('Remove') . '</a>',
+    );
+    // Add a checkbox to update to the latest revision of the question
+    if ($question->vid == $question->latest_vid) {
+      $update_cell = array(
+        '#markup' => t('<em>Up to date</em>'),
+      );
+    }
+    else {
+      $update_cell = array(
+        '#type' => 'checkbox',
+        '#title' => (l(t('Latest'), 'node/' . $question->nid . '/revisions/' . $question->latest_vid . '/view')
+          . ' of ' .
+          l(t('revisions'), 'node/' . $question->nid . '/revisions')
+        ),
+      );
+    }
+    $form[$fieldset]['revision'][$id] = $update_cell;
+  }
+}
+
+/**
+ * Helper function for theme_question_selection_table
+ *
+ * TODO: DELETE
+ *
+ * @see quiz_questions_form()
+ * @see theme_question_selection_table()
+ *
+ * @param $sub_form
+ *   Form definition array for a filtered questions list
+ * @param $id
+ *   Identifier used in $sub_form
+ * @return table row
+ *   Array defining a table row
+ */
+function _prc_question_preview_quiz_get_question_row($sub_form, $id) {
+  $question_types = quiz_get_question_types();
+  $type = $sub_form['types'][$id]['#markup'];
+
+  $action = theme('item_list', array(
+    'items' => array(
+      drupal_render($sub_form['view_links'][$id]),
+      '<SPAN CLASS="q-remove" STYLE="display:none">' . drupal_render($sub_form['remove_links'][$id]) . '</SPAN>',
+    ),
+    'attributes' => array(
+      'class' => array('links', 'inline'),
+    ),
+  ));
+  $qnr_pid = $sub_form['qnr_pids'][$id]['#default_value'];
+  $data_array = array(
+    // The checkbox and the title
+    ($qnr_pid ? theme('indentation', array('size' => 1)) : NULL) . drupal_render($sub_form['titles'][$id]),
+    $type,
+    $action,
+    isset($sub_form['revision'][$id]) ? drupal_render($sub_form['revision'][$id]) : t("Up to date"),
+    drupal_render($sub_form['item_orders'][$id]),
+    drupal_render($sub_form['item_standards'][$id]),
+//    drupal_render($sub_form['max_scores'][$id]),
+//    drupal_render($sub_form['auto_update_max_scores'][$id]),
+    drupal_render($sub_form['stayers'][$id]),
+  );
+  if (isset($sub_form['compulsories'])) {
+    $data_array[] = drupal_render($sub_form['compulsories'][$id]);
+  }
+  $data_array[] = drupal_render($sub_form['weights'][$id]);
+  $data_array[] = drupal_render($sub_form['qnr_pids'][$id]);
+  $data_array[] = array(
+    'class' => array('tabledrag-hide'),
+    'data' => drupal_render($sub_form['qnr_ids'][$id]),
+  );
+
+  $leaf_class = $sub_form['types'][$id]['#question_type'] != 'quiz_page' ? 'tabledrag-leaf' : '';
+
+  return array(
+    'class' => array('q-row', 'draggable', $leaf_class),
+    'id' => 'q-' . $id,
+    'data' => $data_array
+  );
 }
