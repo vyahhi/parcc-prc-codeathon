@@ -20,7 +20,25 @@ function prc_question_preview_menu() {
     'page arguments' => array(1, 2),
     'access arguments' => array('access content'),
   );
+  $items['prc-quiz-preview/%node'] = array(
+    'type' => MENU_CALLBACK,
+    'title' => t('Exam Preview'),
+    'description' => t('Exam Preview'),
+    'page callback' => 'prc_question_preview_quiz_detail',
+    'file' => 'prc_question_preview.ajax.inc',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+  );
   return $items;
+}
+
+function prc_question_preview_quiz_detail($node) {
+  module_load_include('inc', 'quiz', 'quiz.admin');
+  $form = drupal_get_form('quiz_questions_form', $node);
+
+  $form['additional_questions']['#access'] = FALSE;
+
+  return $form;
 }
 
 /**
@@ -46,14 +64,22 @@ function prc_question_view_question_preview_form($form, $form_state, $nodes, $re
   // TODO: Find out what this 15 can be substituted with
   $form = drupal_get_form('quiz_question_answering_form', $nodes, 15);
 
-  // Have to replace the taxonomy term name with description
-  $nid = $nodes->nid;
-  foreach($form['question'][$nid]['header']['field_standard']['#items'] as $key => $value) {
-    $desc = $form['question'][$nid]['header']['field_standard']['#object']->field_standard['und'][$key]['taxonomy_term']->description;
-    $form['question'][$nid]['header']['field_standard'][$key]['#title'] = $desc;
-  }
-
   // Kill the buttons!
   unset($form['navigation']);
   return $form;
+}
+
+function prc_question_preview_form_quiz_questions_form_alter(&$form, &$form_state) {
+  $x = 'x';
+
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function prc_question_preview_ctools_plugin_directory($owner, $plugin_type) {
+  $modules = array('panels', 'ctools');
+  if (in_array($owner, $modules) && !empty($plugin_type) && ($plugin_type == 'content_types' || $plugin_type == 'access' || $plugin_type == 'layouts')) {
+    return 'plugins/' . $plugin_type;
+  }
 }
