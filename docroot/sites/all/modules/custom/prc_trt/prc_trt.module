@@ -115,15 +115,104 @@ function prc_trt_form_validate($form, &$form_state) {
  * Executes the TRT upon valid submission of the initial information form.
  */
 function prc_trt_form_submit($form, &$form_state) {
+	$trt_data = array(
+		'trtDevice' => $form_state['values']['trt_device'],
+		'trtStudentCount' => $form_state['values']['trt_student_count'],
+		'trtDeviceCount' => $form_state['values']['trt_device_count'],
+		'trtUserComments' => $form_state['values']['trt_user_comments'],
+	);
+	$_SESSION['trt_data'] = $trt_data;
+
 	$form_state['redirect'] = 'technology-readiness/test';
 }
 
 
 /**
- * @TODO
+ * Delivers the main test page.
  */
 function prc_trt_test() {
+	// Redirect to the test form page if user data is not present,
+	// such as if this URL was entered directly with bypassing the user form
+	if(!isset($_SESSION['trt_data'])) {
+		drupal_goto('technology-readiness');
+	}
+
+	drupal_add_library('system', 'ui.progressbar');
+	drupal_add_js(drupal_get_path('module', 'prc_trt') . '/prc_trt.js');
+	drupal_add_js('var trtData = ' . json_encode($_SESSION['trt_data']) . ';', 'inline');
+
 	return array(
-		'#markup' => 'Time to execute the test',
-	);
+		'#markup' => '
+<div id="trtInProgress" style="display: none;">
+	<h2>Technology Readiness System Check</h2>
+	<div id="trtInProgressMessage">In Progress...</div>
+	<div id="trtProgressBar"></div>
+	<span id="trtProgressBarLabel"></span>
+</div>
+<div id="trtResults" style="display: none;">
+	<h3>IP Address, Browser, and Operating System</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Checks Performed</th>
+				<th>Results</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>IP Address</td>
+				<td><span id="trtResultIPAddress"></span></td>
+			</tr>
+			<tr>
+				<td>Browser</td>
+				<td><span id="trtResultBrowser"></span></td>
+			</tr>
+			<tr>
+				<td>Operating System</td>
+				<td><span id="trtResultOS"></span></td>
+			</tr>
+		</tbody>
+	</table>
+	<h3>Internet Connectivity</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Needs Attention</th>
+				<th>Ok</th>
+				<th>Good</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><span id="trtResultInetConnectNeedsAttention"></span></td>
+				<td><span id="trtResultInetConnectOk"></span></td>
+				<td><span id="trtResultInetConnectGood"></span></td>
+			</tr>
+		</tbody>
+	</table>
+	<div id="trtResultInetConnectMessage">Internet connectivity requirements copy here</div>
+	<h3>Testing Capacity</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Hardware/Device</th>
+				<th>Total # of Devices</th>
+				<th>Total # of Students</th>
+				<th>Download Speed</th>
+				<th>Testing Capacity Estimate</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><span id="trtResultTestCapHardwareDevice"></span></td>
+				<td><span id="trtResultTestCapDeviceCount"></span></td>
+				<td><span id="trtResultTestCapStudentCount"></span></td>
+				<td><span id="trtResultTestCapDownloadSpeed"></span></td>
+				<td><span id="trtResultTestCapCapacityEstimate"></span></td>
+			</tr>
+		</tbody>
+	</table>
+	<h4>Additional Comments</h4>
+	<div id="trtResultUserComments"></div>
+</div>');
 }
