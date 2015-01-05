@@ -360,10 +360,28 @@ function prc_question_preview_quiz_questions_form_submit($form, &$form_state) {
   $quiz_type = $w->field_quiz_type->value();
 
   if ($quiz_type->name == 'PRC Released Practice Test') {
+    $original_quiz = clone $quiz;
     unset($quiz->vid);
     unset($quiz->nid);
     $quiz->title .= ' - ' . t('Copy');
+
+
+    $custom_assessment_terms = taxonomy_get_term_by_name('Custom Assessment', 'quiz_type');
+    if (is_array($custom_assessment_terms)) {
+      $keys = array_keys($custom_assessment_terms);
+      $tid = reset($keys);
+      $quiz->field_quiz_type[$quiz->language][0]['tid'] = $tid;
+    }
     node_save($quiz);
+
+    prc_question_preview_copy_questions_to_new_quiz($original_quiz, $quiz);
+
+    $quiz_questions = quiz_get_questions($quiz->nid, $quiz->vid);
+
+    foreach($quiz_questions as $qq) {
+      $id = $qq->nid . '-' . $qq->vid;
+      $form_state['values']['qnr_ids'][$id] = $qq->qnr_id;
+    }
   }
 
   // Update the refresh latest quizzes table so that we know what the users latest quizzes are
@@ -451,4 +469,37 @@ function prc_question_preview_quiz_questions_form_submit($form, &$form_state) {
   else {
     drupal_set_message(t('There was an error updating the @quiz.', array('@quiz' => QUIZ_NAME)), 'error');
   }
+}
+
+/**
+ * Action to add questions to the current quiz.
+ */
+function prc_question_preview_copy_questions_to_new_quiz($original_quiz, $new_quiz) {
+  $quiz_questions = quiz_get_questions($original_quiz->nid, $original_quiz->vid);
+  // Do not add a question if it's already been added (selected in an earlier checkbox)
+  foreach ($quiz_questions as $question) {
+    // Otherwise let's add a relationship!
+    $question->quiz_nid = $new_quiz->nid;
+    $question->quiz_vid = $new_quiz->vid;
+    _quiz_question_get_instance($question)->saveRelationships();
+    quiz_update_max_score_properties(array($new_quiz->vid));
+  }
+}
+
+/**
+ * Copies questions when a quiz is translated.
+ *
+ * @param $node
+ *   The new translated quiz node.
+ */
+function prc_question_preview_copy_questions($original_quiz, $new_quiz) {
+  $questions = quiz_get_questions($original_quiz->nid, $original_quiz->vid, TRUE, TRUE, FALSE, TRUE);
+
+  // Format the current questions for referencing
+  foreach ($questions as $nid => $q) {
+    $questions[$nid]->state = $q->question_status;
+    $questions[$nid]->refresh = 0;
+  }
+
+  quiz_set_questions($new_quiz, $questions, TRUE);
 }
