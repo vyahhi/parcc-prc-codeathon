@@ -382,6 +382,10 @@ function prc_question_preview_quiz_questions_form_submit($form, &$form_state) {
       $id = $qq->nid . '-' . $qq->vid;
       $form_state['values']['qnr_ids'][$id] = $qq->qnr_id;
     }
+
+    $new_path = drupal_lookup_path('alias', "node/" . $quiz->nid);
+    $form_state['redirect'] = $new_path;
+
   }
 
   // Update the refresh latest quizzes table so that we know what the users latest quizzes are
@@ -462,6 +466,8 @@ function prc_question_preview_quiz_questions_form_submit($form, &$form_state) {
       ->condition('vid', $quiz->vid)
       ->execute();
   }
+
+
 
   if (isset($success) && isset($success2)) {
     drupal_set_message(t('Questions updated successfully.'));
