@@ -14,8 +14,8 @@ function prc_text_to_speech_menu() {
 
 function tts_callback($ajax) {
   $commands = array();
-  // We need Drupal behaviors to kick off again. Should happen automatically.
-  //$commands[] = ajax_command_alert('Hello world');
+  //We need Drupal behaviors to kick off again. Should happen automatically.
+  $commands[] = ajax_command_html('.texttospeech', '<a onclick="TexthelpSpeechStream.addToolbar()" href="javascript:void(0)">Open Text to Speech</a>');
   $page = array('#type' => 'ajax', '#commands' => $commands);
   ajax_deliver($page);
 }
@@ -52,7 +52,7 @@ function _prc_text_to_speech_link($node, $link_title, $link_id) {
   drupal_add_library('system', 'drupal.ajax');
   $links[$link_id] = array(
     'title' => t($link_title),
-    'href' => "tts/nojs",
+    'href' => "tts",
     'attributes' => array(
       'title' => t($link_title),
       'class' => array('use-ajax'),
@@ -62,12 +62,10 @@ function _prc_text_to_speech_link($node, $link_title, $link_id) {
   // Set the path to script.
   $script = drupal_get_path('module', 'prc_text_to_speech') . '/prc_text_to_speech.js';
 
-  $js = drupal_add_js($script, array('scope' => 'footer'));
-/*
-  drupal_add_js('$(".texttospeech").click(function () {
-    alert("You just clicked on a paragraph");
-  })', array('type' => 'inline'));
-*/
+  drupal_add_js($script, array('scope' => 'header'));
+
+  drupal_add_js('TexthelpSpeechStream()', array('type' => 'inline'));
+
   $node->content['links'][$link_id] = array(
     '#theme' => 'links__node__favorites',
     '#links' => $links,

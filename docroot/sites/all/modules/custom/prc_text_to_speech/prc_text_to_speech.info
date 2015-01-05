@@ -2,4 +2,4 @@
 name = prc_text_to_speech
 description = "Text to Speech (SpeechStream) Module"
 package = PRC
-core = 7.xscripts[] = prc_text_to_speech.js
+core = 7.x
