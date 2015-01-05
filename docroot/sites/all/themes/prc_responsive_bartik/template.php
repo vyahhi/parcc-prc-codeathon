@@ -222,7 +222,7 @@ function prc_responsive_bartik_question_selection_table($variables) {
   drupal_add_tabledrag('question-list', 'order', 'sibling', 'question-list-weight');
 
   // Building headers
-  $headers = array(t('Preview'), t('Item Type'), t('Actions'), t('Update'), t('Item Order'), t('Item Standard'), t('Delete'));
+  $headers = array(t('Preview'), t('Item Type'), t('Actions'), t('Item Order'), t('Item Standard'), t('Delete'));
   if (isset($form['compulsories'])) {
     $headers[] = t('Compulsory');
   }
@@ -248,7 +248,7 @@ function prc_responsive_bartik_question_selection_table($variables) {
   }
   $html_attr = array('id' => 'question-list');
 
-  // We hide the table if no questions have been added so that jQuery can show it the moment the first question is beeing added.
+  // We hide the table if no questions have been added so that jQuery can show it the moment the first question is being added.
   if (isset($form['no_questions'])) {
     $html_attr['style'] = "display:none;";
   }

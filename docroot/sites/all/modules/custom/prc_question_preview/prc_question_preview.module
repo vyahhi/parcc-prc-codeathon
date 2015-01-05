@@ -320,7 +320,6 @@ function _prc_question_preview_quiz_get_question_row($sub_form, $id) {
     ($qnr_pid ? theme('indentation', array('size' => 1)) : NULL) . drupal_render($sub_form['titles'][$id]),
     $type,
     $action,
-    isset($sub_form['revision'][$id]) ? drupal_render($sub_form['revision'][$id]) : t("Up to date"),
     drupal_render($sub_form['item_orders'][$id]),
     drupal_render($sub_form['item_standards'][$id]),
     drupal_render($sub_form['stayers'][$id]),

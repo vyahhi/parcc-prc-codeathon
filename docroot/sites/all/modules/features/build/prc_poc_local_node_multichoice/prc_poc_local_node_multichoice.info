@@ -18,4 +18,4 @@ features[variable][] = node_preview_multichoice
 features[variable][] = node_submitted_multichoice
 features[variable][] = field_bundle_settings_node__multichoice
 features[features_api][] = api:2
-mtime = 1420066506
+mtime = 1420486681
