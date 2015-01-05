@@ -222,7 +222,7 @@ function prc_responsive_bartik_question_selection_table($variables) {
   drupal_add_tabledrag('question-list', 'order', 'sibling', 'question-list-weight');
 
   // Building headers
-  $headers = array(t('Question'), t('Type'), t('Actions'), t('Update'), t('Item Order'), t('Item Standard'), t('Delete'));
+  $headers = array(t('Preview'), t('Item Type'), t('Actions'), t('Update'), t('Item Order'), t('Item Standard'), t('Delete'));
   if (isset($form['compulsories'])) {
     $headers[] = t('Compulsory');
   }

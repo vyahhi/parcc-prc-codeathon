@@ -56,15 +56,15 @@ Feature: PRC-527 Preview an item in Assessment Details page
     And I should see the text "Item Type"
 
     And I should not see the text "Body Body Directions Directions"
-    But I should see the link "Preview"
+    But I should see the link "PRC-527 Directions 1"
     And I should not see the text "Multi Multi Question Question"
-    But I should see the link "Preview"
+    But I should see the link "PRC-527 Multi"
 
-    When I follow "Preview" number "0"
+    When I follow "PRC-527 Directions 1"
     Then I should see the text "Body Body Directions Directions"
     Then I move backward one page
 
-    When I follow "Preview" number "1"
+    When I follow "PRC-527 Multi"
     Then I should see the text "Multi Multi Question Question"
 
     When I am an anonymous user
@@ -73,13 +73,13 @@ Feature: PRC-527 Preview an item in Assessment Details page
     And I should see the text "Item Type"
 
     And I should not see the text "Body Body Directions Directions"
-    But I should see the link "Preview"
+    But I should see the link "PRC-527 Directions 1"
     And I should not see the text "Multi Multi Question Question"
-    But I should see the link "Preview"
+    But I should see the link "PRC-527 Multi"
 
-    When I follow "Preview" number "0"
+    When I follow "PRC-527 Directions 1"
     Then I should see the text "Body Body Directions Directions"
     Then I move backward one page
 
-    When I follow "Preview" number "1"
+    When I follow "PRC-527 Multi"
     Then I should see the text "Multi Multi Question Question"
