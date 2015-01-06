@@ -19,6 +19,10 @@ Feature: PRC-528 Delete Item in Test Customization
 
   Scenario: Delete an item in a Custom Assessment, no copy
     Given I am logged in as a user with the "PRC Admin" role
+    And "Subject" terms:
+      | name  |
+      | subj1 |
+      | subj2 |
     And "Quiz" nodes:
       | title          | field_subject | field_quiz_type   | author      |
       | PRC-528 Delete | subj1, subj2  | Custom Assessment | @currentuid |
@@ -50,6 +54,10 @@ Feature: PRC-528 Delete Item in Test Customization
 
   Scenario: Delete an item in a PRC Assessment, no copy
     Given I am logged in as a user with the "PRC Admin" role
+    And "Subject" terms:
+      | name  |
+      | subj1 |
+      | subj2 |
     And "Quiz" nodes:
       | title          | field_subject | field_quiz_type            | author      |
       | PRC-528 Delete | subj1, subj2  | PRC Released Practice Test | @currentuid |
