@@ -56,13 +56,13 @@ function prc_poc_local_node_multichoice_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'alternatives' => array(
-          'weight' => '4',
+          'weight' => '5',
         ),
         'title' => array(
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '5',
+          'weight' => '6',
         ),
       ),
       'display' => array(
