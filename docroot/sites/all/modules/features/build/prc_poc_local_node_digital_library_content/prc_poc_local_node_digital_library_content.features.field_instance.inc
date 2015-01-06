@@ -33,6 +33,15 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'text_summary_or_trimmed',
         'weight' => 4,
       ),
+      'gallery_view' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 300,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 3,
+      ),
       'search_result' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -93,6 +102,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'gallery_view' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
+      ),
       'search_result' => array(
         'label' => 'above',
         'settings' => array(),
@@ -143,6 +158,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 14,
+      ),
+      'gallery_view' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
       ),
       'search_result' => array(
         'label' => 'above',
@@ -199,6 +220,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'hidden',
         'weight' => 17,
       ),
+      'gallery_view' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 16,
+      ),
       'search_result' => array(
         'label' => 'above',
         'settings' => array(),
@@ -250,6 +277,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'hidden',
         'weight' => 15,
       ),
+      'gallery_view' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
       'search_result' => array(
         'label' => 'above',
         'settings' => array(),
@@ -300,6 +333,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 12,
+      ),
+      'gallery_view' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
       ),
       'search_result' => array(
         'label' => 'above',
@@ -370,6 +409,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'hidden',
         'weight' => 18,
       ),
+      'gallery_view' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
       'search_result' => array(
         'label' => 'above',
         'settings' => array(),
@@ -415,6 +460,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'settings' => array(),
         'type' => 'list_default',
         'weight' => 12,
+      ),
+      'gallery_view' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
       ),
       'search_result' => array(
         'label' => 'above',
@@ -463,6 +514,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         ),
         'type' => 'ds_taxonomy_view_mode',
         'weight' => 10,
+      ),
+      'gallery_view' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
       ),
       'search_result' => array(
         'label' => 'above',
@@ -521,6 +578,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 16,
+      ),
+      'gallery_view' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
       ),
       'search_result' => array(
         'label' => 'above',
@@ -581,6 +644,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'type' => 'hidden',
         'weight' => 11,
       ),
+      'gallery_view' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 21,
+      ),
       'search_result' => array(
         'label' => 'above',
         'settings' => array(),
@@ -620,7 +689,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -638,6 +707,16 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         ),
         'type' => 'image',
         'weight' => 3,
+      ),
+      'gallery_view' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => 'content',
+          'image_style' => 'medium',
+        ),
+        'type' => 'image',
+        'weight' => 0,
       ),
       'search_result' => array(
         'label' => 'above',

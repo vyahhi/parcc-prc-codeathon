@@ -114,13 +114,6 @@ function prc_custom_modules_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'ds_search_node_limit';
-  $strongarm->value = '2500';
-  $export['ds_search_node_limit'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'realname_pattern';
   $strongarm->value = '[user:field-first-name] [user:field-last-name]';
   $export['realname_pattern'] = $strongarm;

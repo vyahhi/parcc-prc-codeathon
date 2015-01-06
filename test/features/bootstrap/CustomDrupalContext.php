@@ -759,10 +759,20 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $contents = $this->fixStepArgument($contents);
     $message = $this->activeEmail;
     if (strpos($message['body'], $contents) !== FALSE ||
-      strpos($message['subject'], $contents) !== FALSE) {
+      strpos($message['subject'], $contents) !== FALSE)   {
       throw new \Exception('Expected content was present in message body or subject.');
     }
     return TRUE;
+  }
+
+  /**
+   * @When /^I follow "(?P<link>(?:[^"]|\\")*)" number "(?P<number>[^"]*)"$/
+   */
+  public function followLinkTextIndex($text, $index) {
+    $page = $this->getSession()->getPage();
+    $links = $page->findAll('xpath', "//a[text()='" . $text . "']");
+    $link = $links[$index];
+    $link->click();
   }
 
   /**
@@ -953,6 +963,26 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
 
     $element->click();
+
+  }
+
+
+  /**
+   * Check the element with the provided XPath Selector
+   *
+   * @When /^I check the element with xpath selector "([^"]*)"$/
+   */
+  public function iCheckTheElementWithXPathSelector($xpathSelector)
+  {
+    $session = $this->getSession();
+    $element = $session->getPage()->find(
+      'xpath',
+      $session->getSelectorsHandler()->selectorToXpath('xpath', $xpathSelector)
+    );
+    if (null === $element) {
+      throw new \InvalidArgumentException(sprintf('Could not evaluate XPath Selector: "%s"', $xpathSelector));
+    }
+    $element->check();
 
   }
 

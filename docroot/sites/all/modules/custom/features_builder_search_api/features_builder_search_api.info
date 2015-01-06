@@ -1,0 +1,9 @@
+name = Features Builder Search API
+description = "Search API Features builder for use with Features Builder."
+package = "Features"
+core = 7.x
+
+dependencies[] = features_builder
+
+files[] = includes/SearchAPIFeaturesBuilder.inc
+

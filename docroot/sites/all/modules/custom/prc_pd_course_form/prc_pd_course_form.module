@@ -341,7 +341,7 @@ function prc_pd_course_form_form_pd_course_node_form_alter(&$form, &$form_state)
   $form['field_length_quantity'][$form['field_length_quantity']['#language']]['#suffix'] = '&nbsp;-&nbsp;';
   $form['field_length_unit'][$form['field_length_unit']['#language']]['#title'] = '';
 
-  $published = 1;
+  $published = 0;
   if (isset($form_state['node']->nid)) {
     $published = $form_state['node']->status;
   }
@@ -397,6 +397,21 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
   $form['node']['use_existing_node']['#default_value'] = 1;
 
   $form['delete']['delete_instance']['#access'] = FALSE;
+
+  $form['node']['#weight'] = 1;
+  $form['title']['#weight'] = 2;
+
+  $form['node']['use_node_title']['#title'] = "Use existing content's title";
+  $form['node']['use_node_title']['#default_value'] = TRUE;
+
+  $form['title']['title']['#states'] = array(
+    'enabled' => array(
+      ':input[id="edit-use-node-title"]' => array('checked' => FALSE),
+    ),
+    'required' => array(
+      ':input[id="edit-use-node-title"]' => array('checked' => FALSE),
+    ),
+  );
 
   unset($form['course_tabs']);
 }

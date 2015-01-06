@@ -49,7 +49,7 @@ Scenario Outline: AC1 When an existing course is selected, in addition to the ex
     # A link or button for Edit Settings (story PRC-361 and PRC-351)
     And I click "Edit Settings"
     And I fill in "PD Module PRC-350 AC5 [nid:@nid[PD Module PRC-350 AC5]]" for "Existing node"
-    And I check the box "Use existing title"
+    And I check the box "Use existing content's title"
     And I press "Update"
     # Object Name (examples: Module 1: Getting Started or End of Course Exam )
     Then I should see the text "PD Module PRC-350 AC5"
@@ -75,7 +75,8 @@ Scenario Outline: AC1 When an existing course is selected, in addition to the ex
     # A link or button for Edit Settings (story PRC-361 and PRC-351)
     And I click "Edit Settings"
     And I fill in "PD Module PRC-350 AC5 [nid:@nid[PD Module PRC-350 AC5]]" for "Existing node"
-    And the "Use existing title" checkbox should not be checked
+    And the "Use existing content's title" checkbox should be checked
+    And I uncheck the box "Use existing content's title"
     And I fill in "Module Title" with "Step 1: New Module"
     And I press "Update"
     # Object Name (examples: Module 1: Getting Started or End of Course Exam )
