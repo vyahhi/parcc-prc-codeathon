@@ -579,11 +579,12 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['relationships']['child_nid']['field'] = 'child_nid';
   $handler->display->display_options['relationships']['child_nid']['label'] = 'Question';
   $handler->display->display_options['relationships']['child_nid']['required'] = TRUE;
-  /* Relationship: Content: Standard (field_standard_single) */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['field_standard_single_tid']['id'] = 'field_standard_single_tid';
   $handler->display->display_options['relationships']['field_standard_single_tid']['table'] = 'field_data_field_standard_single';
   $handler->display->display_options['relationships']['field_standard_single_tid']['field'] = 'field_standard_single_tid';
   $handler->display->display_options['relationships']['field_standard_single_tid']['relationship'] = 'child_nid';
+  $handler->display->display_options['relationships']['field_standard_single_tid']['label'] = 'term from field_standard_single';
   /* Field: Content: Item Order */
   $handler->display->display_options['fields']['field_item_order']['id'] = 'field_item_order';
   $handler->display->display_options['fields']['field_item_order']['table'] = 'field_data_field_item_order';

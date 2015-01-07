@@ -244,7 +244,17 @@ function _prc_question_preview_quiz_add_questions_to_form(&$form, &$questions, &
 
     $question_wrapper = entity_metadata_wrapper('node', $question);
     $item_order = $question_wrapper->field_item_order->value();
-    $item_standard = isset($question->field_standard_single) && $question_wrapper->field_standard_single->value() ? $question_wrapper->field_standard_single->value()->name : '';
+    $item_standard = '';
+    if (isset($question->field_standard)) {
+      // && $question_wrapper->field_standard->value() ? $question_wrapper->field_standard->value()->name : '';
+      $standards_descriptions = array();
+      $standards = $question_wrapper->field_standard->value();
+      foreach ($standards as $tid => $term) {
+        $desc = $term->description;
+        $standards_descriptions[] = $desc;
+      }
+      $item_standard = implode('<br />', $standards_descriptions);
+    }
     $form[$fieldset]['item_orders'][$id] = array('#markup' => $item_order);
     $form[$fieldset]['item_standards'][$id] = array('#markup' => $item_standard);
 

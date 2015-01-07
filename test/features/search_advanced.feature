@@ -10,6 +10,10 @@ Feature: PRC-106 Search Content- Advanced
   #  iii. Assessments (Not implemented yet)
   #  Acceptance Criteria
 
+  Scenario: PRC-559 Filters header was missing
+    Given I am on "search-content"
+    Then I should see the text "Filters"
+
   Scenario: AC2 A Clear All link shall be available by Filters title. At click, it resets the filters to no filter.
     Given "Subject" terms:
       | name     |

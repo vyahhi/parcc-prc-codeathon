@@ -102,8 +102,8 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-multichoice-field_standard_single'
-  $field_instances['node-multichoice-field_standard_single'] = array(
+  // Exported field_instance: 'node-multichoice-field_standard'
+  $field_instances['node-multichoice-field_standard'] = array(
     'bundle' => 'multichoice',
     'default_value' => NULL,
     'deleted' => 0,
@@ -114,7 +114,7 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -124,7 +124,7 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_standard_single',
+    'field_name' => 'field_standard',
     'label' => 'Standard',
     'required' => 0,
     'settings' => array(
@@ -140,7 +140,7 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
           'create_new_terms' => 0,
           'force_deepest' => 0,
           'node_count' => 0,
-          'use_chosen' => 'never',
+          'use_chosen' => 'chosen',
         ),
       ),
       'type' => 'taxonomy_shs',

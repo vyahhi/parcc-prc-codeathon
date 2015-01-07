@@ -44,7 +44,7 @@ Feature: PRC-527 Preview an item in Assessment Details page
     And I fill in "Item Order" with "D1"
     And I press "Save"
     Then I click "Multiple choice question"
-    And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question"
+    And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
     And I fill in "Item Order" with "Q2"
     And I fill in "Title" with "PRC-527 Multi"
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
@@ -83,3 +83,4 @@ Feature: PRC-527 Preview an item in Assessment Details page
 
     When I follow "PRC-527 Multi"
     Then I should see the text "Multi Multi Question Question"
+    And I should not see the text "<p>"
