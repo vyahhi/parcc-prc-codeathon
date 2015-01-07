@@ -15,6 +15,8 @@ Feature: PRC-521 Create a New Quiz
   AC4 If a user navigates away from the page without saving the changes, the system prompts the user to confirm.
   AC5 Permissions: All the above features are available to all roles, except for anonymous users (Future stories: e.g. PRC-526)
 
+  Scenario: Anonymous can't add quiz
+
   Scenario Outline: Add quiz - form
     Given I am logged in as a user with the "<role>" role
     And I am on "assessments"
