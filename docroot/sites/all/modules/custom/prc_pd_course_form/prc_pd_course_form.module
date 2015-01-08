@@ -415,13 +415,41 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
 
   unset($form['course_tabs']);
 
-  $quiz_options = _prc_pd_course_form_course_quiz_list();
-
-  $default_nid = $form_state['build_info']['args'][0]->getNode()->nid;
-  $form['node']['instance']['#default_value'] = $default_nid;
+  $is_quiz_step = strpos($form['node']['instance']['#autocomplete_path'], 'quiz');
+  if ($is_quiz_step) {
+    $options = _prc_pd_course_form_course_quiz_list();
+  } else {
+    $options = _prc_pd_course_form_course_module_list();
+  }
+  $selected_node = $form_state['build_info']['args'][0]->getNode();
+  if ($selected_node) {
+    $default_nid = $form_state['build_info']['args'][0]->getNode()->nid;
+    $form['node']['instance']['#default_value'] = $default_nid;
+  }
   $form['node']['instance']['#type'] = 'select';
   $form['node']['instance']['#chosen'] = TRUE;
-  $form['node']['instance']['#options'] = $quiz_options;
+  $form['node']['instance']['#options'] = $options;
+}
+
+function _prc_pd_course_form_course_module_list() {
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'pd_module')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyOrderBy('title', 'ASC')
+  ;
+  $result = $query->execute();
+
+  $list = array();
+  if (isset($result['node'])) {
+    $items_nids = array_keys($result['node']);
+    $items = entity_load('node', $items_nids);
+    foreach ($items as $nid => $node) {
+      $list[$nid] = $node->title;
+    }
+  }
+  return $list;
+
 }
 
 function _prc_pd_course_form_course_quiz_list() {
