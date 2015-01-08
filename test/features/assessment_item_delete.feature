@@ -24,7 +24,7 @@ Feature: PRC-528 Delete Item in Test Customization
       | subj1 |
       | subj2 |
     And "Quiz" nodes:
-      | title          | field_subject | field_quiz_type   | author      |
+      | title          | field_subject | field_quiz_type   | uid         |
       | PRC-528 Delete | subj1, subj2  | Custom Assessment | @currentuid |
     And I am on "assessments"
     Then I click "PRC-528 Delete"
