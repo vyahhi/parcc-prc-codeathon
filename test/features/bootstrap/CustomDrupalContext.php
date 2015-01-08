@@ -135,6 +135,11 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     parent::assertLoggedInByName($name);
   }
 
+  public function assertLinkVisible($link) {
+    $link = $this->fixStepArgument($link);
+    parent::assertLinkVisible($link);
+  }
+
 
   /**
    * @Then /^"([^"]*)" in "([^"]*)" should be selected$/

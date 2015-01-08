@@ -21,7 +21,8 @@ Feature: PRC-527 Preview an item in Assessment Details page
   AC5 Selecting elsewhere in the items list area shall de-select the item; therefore the item metadata and preview disappear. ADDED 12/21/14
 
   Scenario: AC1 Clicking an item in the Assessment Details page (implemented in PRC-490) provides a new section underneath the test metadata for the selected item metadata and preview.
-    Given "Subject" terms:
+    Given I am logged in as a user with the "PRC Admin" role
+    And "Subject" terms:
       | name  |
       | subj1 |
       | subj2 |
@@ -29,12 +30,11 @@ Feature: PRC-527 Preview an item in Assessment Details page
       | name      |
       | Grade 527 |
     And "Quiz" nodes:
-      | title        | field_subject | field_grade_level | field_quiz_type   |
-      | PRC-527 View | subj1, subj2  | Grade 527         | Custom Assessment |
+      | title        | field_subject | field_grade_level | field_quiz_type            | uid         |
+      | PRC-527 View | subj1, subj2  | Grade 527         | PRC Released Practice Test | @currentuid |
   # That standard already exists, and I hate it, but I am getting an error
   # creating a Standard term is giving me an error.
   # We're cheating and using one that exists already.
-    And I am logged in as a user with the "PRC Admin" role
     When I visit the last node created
     And I click "Quiz"
     Then I click "Manage questions"

@@ -542,8 +542,12 @@ function prc_question_preview_form_quiz_node_form_alter(&$form, &$form_state) {
  */
 function prc_question_preview_form_quiz_node_form_submit($form, &$form_state) {
   $node = $form_state['node'];
+  // The modules aren't properly weighting like they should and the quiz alter is still superceding this.
+  // We need our redirect to happen last.
+  drupal_register_shutdown_function('_prc_question_preview_form_quiz_node_form_after_submit', $node);
+}
 
+function _prc_question_preview_form_quiz_node_form_after_submit($node) {
   $new_path = drupal_lookup_path('alias', "node/" . $node->nid);
-  $form_state['redirect'] = $new_path;
-
+  drupal_goto($new_path);
 }

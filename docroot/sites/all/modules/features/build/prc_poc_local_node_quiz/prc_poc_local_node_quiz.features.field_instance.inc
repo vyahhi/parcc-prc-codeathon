@@ -50,16 +50,18 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
+    'label' => 'Objectives',
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'label_help_description' => '',
         'rows' => 20,
         'summary_rows' => 5,
       ),
@@ -138,7 +140,11 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
   // Exported field_instance: 'node-quiz-field_quiz_type'
   $field_instances['node-quiz-field_quiz_type'] = array(
     'bundle' => 'quiz',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'tid' => 9792,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -258,8 +264,8 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Body');
   t('Grade Level');
+  t('Objectives');
   t('Quiz Type');
   t('Subject');
 

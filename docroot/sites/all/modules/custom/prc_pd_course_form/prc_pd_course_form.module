@@ -415,16 +415,70 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
 
   unset($form['course_tabs']);
 
-
-
-  $quiz_options = array(
-    'public' => t('Public'),
-    'members' => t('PARCC members ONLY'),
-  );
-
+  $is_quiz_step = strpos($form['node']['instance']['#autocomplete_path'], 'quiz');
+  if ($is_quiz_step) {
+    $options = _prc_pd_course_form_course_quiz_list();
+  } else {
+    $options = _prc_pd_course_form_course_module_list();
+  }
+  $selected_node = $form_state['build_info']['args'][0]->getNode();
+  if ($selected_node) {
+    $default_nid = $form_state['build_info']['args'][0]->getNode()->nid;
+    $form['node']['instance']['#default_value'] = $default_nid;
+  }
   $form['node']['instance']['#type'] = 'select';
   $form['node']['instance']['#chosen'] = TRUE;
-  $form['node']['instance']['#options'] = $quiz_options;
+  $form['node']['instance']['#options'] = $options;
+}
+
+function _prc_pd_course_form_course_module_list() {
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'pd_module')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyOrderBy('title', 'ASC')
+  ;
+  $result = $query->execute();
+
+  $list = array();
+  if (isset($result['node'])) {
+    $items_nids = array_keys($result['node']);
+    $items = entity_load('node', $items_nids);
+    foreach ($items as $nid => $node) {
+      $list[$nid] = $node->title;
+    }
+  }
+  return $list;
+
+}
+
+function _prc_pd_course_form_course_quiz_list() {
+  $tids = array();
+  $term = taxonomy_get_term_by_name('PD Exam', 'quiz_type');
+  $term = reset($term);
+  $tids[] = $term->tid;
+  $term = taxonomy_get_term_by_name('Custom Assessment', 'quiz_type');
+  $term = reset($term);
+  $tids[] = $term->tid;
+
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'quiz')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_quiz_type', 'tid', $tids, 'IN')
+    ->propertyOrderBy('title', 'ASC')
+  ;
+  $result = $query->execute();
+
+  $list = array();
+  if (isset($result['node'])) {
+    $items_nids = array_keys($result['node']);
+    $items = entity_load('node', $items_nids);
+    foreach ($items as $nid => $node) {
+      $list[$nid] = $node->title;
+    }
+  }
+  return $list;
 }
 
 /**
@@ -437,11 +491,13 @@ function prc_pd_course_form_node_view($node, $view_mode, $langcode) {
       array_key_exists($_SESSION['course']['active'], $_SESSION['course'])
     )
     $active_course_id = $_SESSION['course']['active'];
-    $active_course_object_id = $_SESSION['course'][$active_course_id]['taking']['active'];
-    $course_object = course_get_course_object_by_id($active_course_object_id);
-    if ($course_object) {
-      $title = $course_object->getTitle();
-      drupal_set_title($title);
+    if (isset($active_course_id) && $active_course_id && array_key_exists('taking', $_SESSION['course'][$active_course_id])) {
+      $active_course_object_id = $_SESSION['course'][$active_course_id]['taking']['active'];
+      $course_object = course_get_course_object_by_id($active_course_object_id);
+      if ($course_object) {
+        $title = $course_object->getTitle();
+        drupal_set_title($title);
+      }
     }
   }
 }

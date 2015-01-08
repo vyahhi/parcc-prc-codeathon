@@ -8,11 +8,11 @@ Feature: PRC-552 Use created test for course exam
   Scenario: PD Exam quizzes appear in list
     Given I am logged in as a user with the "Content Administrator (Curator)" role
     And "Quiz" nodes:
-      | title       | author      |
+      | title       | uid         |
       | Ny Untagged | @currentuid |
       | U1 Untagged | 1           |
     And "Quiz" nodes:
-      | title       | author      | field_quiz_type            |
+      | title       | uid         | field_quiz_type            |
       | My Custom   | @currentuid | Custom Assessment          |
       | My PD Exam  | @currentuid | PD Exam                    |
       | My PRC Q    | @currentuid | PRC Released Practice Test |
@@ -25,7 +25,6 @@ Feature: PRC-552 Use created test for course exam
     And I select "Exam" from "edit-more-object-type"
     And I press "Add object"
     And I follow "Edit Settings"
-    And I should see the text "PARCC members ONLY"
     And I should not see the text "My Untagged"
     And I should not see the text "U1 Untagged"
     And I should see the text "My Custom"
@@ -34,6 +33,12 @@ Feature: PRC-552 Use created test for course exam
     And I should not see the text "U1 Custom"
     And I should see the text "U1 PD Exam"
     And I should not see the text "U1 PRC Q"
+
+    And I select "My Custom" from "Existing node"
+    And I press "Update"
+    And I should see the text "My Custom"
+    And I follow "Edit Settings"
+    And "My Custom" in "Existing node" should be selected
 
 #  Given: I just created a quiz in Create New Quiz page,
 #  When: I get to the Edit Settings page for a Course Exam,
