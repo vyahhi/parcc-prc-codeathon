@@ -61,7 +61,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       if ($this->user) {
         $current_uid = $this->user->uid;
         $argument = str_replace('@currentuid', $current_uid, $argument);
-        print $argument . PHP_EOL;
       } else {
         throw new Exception("Must be logged in as a user");
       }
@@ -134,6 +133,11 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   public function assertLoggedInByName($name) {
     $name = $this->fixStepArgument($name);
     parent::assertLoggedInByName($name);
+  }
+
+  public function assertLinkVisible($link) {
+    $link = $this->fixStepArgument($link);
+    parent::assertLinkVisible($link);
   }
 
 
