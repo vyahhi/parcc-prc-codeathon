@@ -518,3 +518,32 @@ function prc_question_preview_copy_questions($original_quiz, $new_quiz) {
 
   quiz_set_questions($new_quiz, $questions, TRUE);
 }
+
+/**
+ * Implements hook_form_FORM_alter().
+ */
+function prc_question_preview_form_quiz_node_form_alter(&$form, &$form_state) {
+  $form['actions']['submit']['#value'] = t('Save Draft');
+  global $user;
+  if (!array_search('administrator', $user->roles)) {
+    $form['field_quiz_type']['#access'] = FALSE;
+    $form['remember_settings']['#access'] = FALSE;
+    $form['taking']['#access'] = FALSE;
+
+    $form['quiz_availability']['#access'] = FALSE;
+    $form['summaryoptions']['#access'] = FALSE;
+    $form['resultoptions']['#access'] = FALSE;
+  }
+  $form['actions']['submit']['#submit'][] = 'prc_question_preview_form_quiz_node_form_submit';
+}
+
+/**
+ * Quiz node form submit callback.
+ */
+function prc_question_preview_form_quiz_node_form_submit($form, &$form_state) {
+  $node = $form_state['node'];
+
+  $new_path = drupal_lookup_path('alias', "node/" . $node->nid);
+  $form_state['redirect'] = $new_path;
+
+}

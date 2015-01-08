@@ -414,6 +414,17 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
   );
 
   unset($form['course_tabs']);
+
+
+
+  $quiz_options = array(
+    'public' => t('Public'),
+    'members' => t('PARCC members ONLY'),
+  );
+
+  $form['node']['instance']['#type'] = 'select';
+  $form['node']['instance']['#chosen'] = TRUE;
+  $form['node']['instance']['#options'] = $quiz_options;
 }
 
 /**
