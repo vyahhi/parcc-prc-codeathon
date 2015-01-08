@@ -415,16 +415,42 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
 
   unset($form['course_tabs']);
 
+  $quiz_options = _prc_pd_course_form_course_quiz_list();
 
-
-  $quiz_options = array(
-    'public' => t('Public'),
-    'members' => t('PARCC members ONLY'),
-  );
-
+  $default_nid = $form_state['build_info']['args'][0]->getNode()->nid;
+  $form['node']['instance']['#default_value'] = $default_nid;
   $form['node']['instance']['#type'] = 'select';
   $form['node']['instance']['#chosen'] = TRUE;
   $form['node']['instance']['#options'] = $quiz_options;
+}
+
+function _prc_pd_course_form_course_quiz_list() {
+  $tids = array();
+  $term = taxonomy_get_term_by_name('PD Exam', 'quiz_type');
+  $term = reset($term);
+  $tids[] = $term->tid;
+  $term = taxonomy_get_term_by_name('Custom Assessment', 'quiz_type');
+  $term = reset($term);
+  $tids[] = $term->tid;
+
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'quiz')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_quiz_type', 'tid', $tids, 'IN')
+    ->propertyOrderBy('title', 'ASC')
+  ;
+  $result = $query->execute();
+
+  $list = array();
+  if (isset($result['node'])) {
+    $items_nids = array_keys($result['node']);
+    $items = entity_load('node', $items_nids);
+    foreach ($items as $nid => $node) {
+      $list[$nid] = $node->title;
+    }
+  }
+  return $list;
 }
 
 /**
