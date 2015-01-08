@@ -61,6 +61,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       if ($this->user) {
         $current_uid = $this->user->uid;
         $argument = str_replace('@currentuid', $current_uid, $argument);
+        print $argument . PHP_EOL;
       } else {
         throw new Exception("Must be logged in as a user");
       }
