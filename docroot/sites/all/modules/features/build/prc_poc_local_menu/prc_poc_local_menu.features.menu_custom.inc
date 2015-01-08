@@ -46,6 +46,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Add Course',
     'description' => '',
   );
+  // Exported menu: menu-add-quiz.
+  $menus['menu-add-quiz'] = array(
+    'menu_name' => 'menu-add-quiz',
+    'title' => 'Add Quiz',
+    'description' => 'Menu for Assessments page to let users add quizzes',
+  );
   // Exported menu: menu-digital-library-left-nav.
   $menus['menu-digital-library-left-nav'] = array(
     'menu_name' => 'menu-digital-library-left-nav',
@@ -79,6 +85,7 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Add Course');
+  t('Add Quiz');
   t('Add content');
   t('Development');
   t('Development link');
@@ -87,6 +94,7 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Invite Users');
   t('Main menu');
   t('Management');
+  t('Menu for Assessments page to let users add quizzes');
   t('Menu items for any enabled features.');
   t('Navigation');
   t('Navigation menu for Professional Development view');

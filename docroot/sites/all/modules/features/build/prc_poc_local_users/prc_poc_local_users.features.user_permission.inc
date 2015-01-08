@@ -823,6 +823,7 @@ function prc_poc_local_users_user_default_permissions() {
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1105,6 +1106,7 @@ function prc_poc_local_users_user_default_permissions() {
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1857,6 +1859,7 @@ function prc_poc_local_users_user_default_permissions() {
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );

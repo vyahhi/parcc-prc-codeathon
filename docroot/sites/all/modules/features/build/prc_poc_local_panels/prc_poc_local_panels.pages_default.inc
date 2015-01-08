@@ -879,6 +879,28 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
+    $pane->pid = 'new-24cadd88-1bc8-413e-aec2-65f3645d9c0c';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-add-quiz';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '24cadd88-1bc8-413e-aec2-65f3645d9c0c';
+    $display->content['new-24cadd88-1bc8-413e-aec2-65f3645d9c0c'] = $pane;
+    $display->panels['middle'][0] = 'new-24cadd88-1bc8-413e-aec2-65f3645d9c0c';
+    $pane = new stdClass();
     $pane->pid = 'new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
     $pane->panel = 'middle';
     $pane->type = 'views_panes';
@@ -892,11 +914,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 1;
     $pane->locks = array();
     $pane->uuid = 'fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
     $display->content['new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e'] = $pane;
-    $display->panels['middle'][0] = 'new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
+    $display->panels['middle'][1] = 'new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
