@@ -22,8 +22,8 @@ Feature: PRC-490 View Test Details
     | name      |
     | Grade 490 |
     And "Quiz" nodes:
-    | title        | field_subject | field_grade_level |
-    | PRC-490 View | subj1, subj2  | Grade 490         |
+    | title        | field_subject | field_grade_level | field_quiz_type            |
+    | PRC-490 View | subj1, subj2  | Grade 490         | PRC Released Practice Test |
     When I visit the last node created
     Then I should see the heading "PRC-490 View" in the "content" region
     And I should see the link "subj1"
@@ -40,8 +40,8 @@ Feature: PRC-490 View Test Details
       | name      |
       | Grade 490 |
     And "Quiz" nodes:
-      | title        | field_subject | field_grade_level | field_quiz_type   |
-      | PRC-490 View | subj1, subj2  | Grade 490         | Custom Assessment |
+      | title        | field_subject | field_grade_level | field_quiz_type            |
+      | PRC-490 View | subj1, subj2  | Grade 490         | PRC Released Practice Test |
     # That standard already exists, and I hate it, but I am getting an error
     # creating a Standard term is giving me an error.
     # We're cheating and using one that exists already.
