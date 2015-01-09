@@ -429,6 +429,18 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
   $form['node']['instance']['#type'] = 'select';
   $form['node']['instance']['#chosen'] = TRUE;
   $form['node']['instance']['#options'] = $options;
+
+  // Force quiz to go to take, rather than view
+  if (array_key_exists('quiz_goto', $form)) {
+    $form['quiz_goto']['#default_value'] = 'take';
+    $form['quiz_goto']['#access'] = FALSE;
+  }
+  if (array_key_exists('grading', $form)) {
+    $form['grading']['grade_include']['#access'] = FALSE;
+  }
+  if (array_key_exists('quiz', $form)) {
+    $form['quiz']['#weight'] = 0;
+  }
 }
 
 function _prc_pd_course_form_course_module_list() {
