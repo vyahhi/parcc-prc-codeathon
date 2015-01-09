@@ -514,3 +514,27 @@ function prc_pd_course_form_node_view($node, $view_mode, $langcode) {
     }
   }
 }
+
+function prc_pd_course_form_form_quiz_report_form_alter(&$form, &$form_state) {
+  // TODO: Replace the theme and remove the template, redraw this form in this alter.
+  $result_id = $form[0]['result_id']['#value'];
+  $result = quiz_result_load($result_id);
+  $score = $result->score;
+  $nid = $result->nid;
+  $quiz = node_load($nid);
+  global $user;
+  $courseObject = course_get_course_object('course_quiz', 'quiz', $nid, $user);
+  $passing_grade = $courseObject->getOption('passing_grade');
+  $form[0]['quiz_title'] = array(
+    '#type' => 'value',
+    '#value' => $quiz->title,
+  );
+  $form[0]['passing_grade'] = array(
+    '#type' => 'value',
+    '#value' => $passing_grade,
+  );
+  $form[0]['score'] = array(
+    '#type' => 'value',
+    '#value' => $score,
+  );
+}
