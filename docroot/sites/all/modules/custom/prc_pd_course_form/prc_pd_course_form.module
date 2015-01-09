@@ -486,7 +486,8 @@ function _prc_pd_course_form_course_quiz_list() {
  */
 function prc_pd_course_form_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'pd_module') {
-    if (array_key_exists('course', $_SESSION) &&
+    if (isset($_SESSION) &&
+      array_key_exists('course', $_SESSION) &&
       array_key_exists('active', $_SESSION['course']) &&
       array_key_exists($_SESSION['course']['active'], $_SESSION['course'])
     )
