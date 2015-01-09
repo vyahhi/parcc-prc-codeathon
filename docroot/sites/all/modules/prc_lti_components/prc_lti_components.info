@@ -1,0 +1,11 @@
+name = PRC LTI Components
+core = 7.x
+package = PRC
+dependencies[] = ctools
+dependencies[] = libraries
+dependencies[] = lti_tool_provider
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = lti_tool_provider_global_role_array
+features[variable][] = lti_tool_provider_user_attribute_mapping
