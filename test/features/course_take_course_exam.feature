@@ -30,14 +30,14 @@ Feature: PRC-476 Take Course Exam
   The Take Course page if there are other objects after this exam.
 
   Background: Set up the course and quiz
-    Given I am logged in as a user with the "PRC Admin" role
+    Given I am logged in as a user with the "administrator" role
     Given "PD Module" nodes:
       | title       | field_course_objectives | status | uid | field_length | language |
       | PD Module 1 | Obj1                    | 1      | 1   | 4 day        | und      |
-    And "Quiz" nodes:
-      | title        | field_quiz_type | uid |
-      | PRC-476 Exam | PD Exam         | 1   |
-    When I visit the last node created
+    And I visit "node/add/quiz"
+    And I fill in "Title" with "PRC-476 Exam"
+    And I select "PD Exam" from "Quiz Type"
+    And I press "Save Draft"
     And I click "Quiz"
     Then I click "Manage questions"
     Then I click "Exam directions"
@@ -126,7 +126,6 @@ Feature: PRC-476 Take Course Exam
   Scenario: Course with exam step - Fail
     Given I am logged in as a user with the "Educator" role
     And I am on the homepage
-    Then I break
     Then I click "Professional Development"
     Then I click "PRC-35 Take Course"
     Then I click "Take course"
@@ -177,4 +176,5 @@ Feature: PRC-476 Take Course Exam
     Then I click "Professional Development"
     Then I click "PRC-35 Take Course"
     And I should see the link "PRC-476 Exam"
-    And I should see the text "Page 3 of 3"
+    When I click "PRC-476 Exam"
+    And I should see the text "Page 1 of 3"

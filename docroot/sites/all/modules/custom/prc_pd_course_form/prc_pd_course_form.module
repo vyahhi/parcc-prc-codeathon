@@ -512,6 +512,8 @@ function prc_pd_course_form_node_view($node, $view_mode, $langcode) {
         drupal_set_title($title);
       }
     }
+  } elseif ($node->type == 'pd_course') {
+    unset($_SESSION['quiz']);
   }
 }
 
