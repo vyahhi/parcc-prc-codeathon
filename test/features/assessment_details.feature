@@ -22,14 +22,15 @@ Feature: PRC-490 View Test Details
     | name      |
     | Grade 490 |
     And "Quiz" nodes:
-    | title        | field_subject | field_grade_level | field_quiz_type            |
-    | PRC-490 View | subj1, subj2  | Grade 490         | PRC Released Practice Test |
+    | title        | field_subject | field_grade_level | field_quiz_type            | uid |
+    | PRC-490 View | subj1, subj2  | Grade 490         | PRC Released Practice Test | 1   |
     When I visit the last node created
     Then I should see the heading "PRC-490 View" in the "content" region
     And I should see the link "subj1"
     And I should see the link "subj2"
     And I should see the text "subj1, subj2"
     And I should see the link "Grade 490"
+    Then I break
 
   Scenario: AC2 A list of items (may be thumbnails or rows) along with the following components for each item:
     Given "Subject" terms:

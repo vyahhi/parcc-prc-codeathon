@@ -27,4 +27,8 @@
     You may revisit the course modules and retake the course exam when ready.
   <?php endif; ?>
 
+  <br/>
+
+  <?php print drupal_render($form['go_back']); ?>
+
 </div>

@@ -94,7 +94,6 @@ Feature: PRC-476 Take Course Exam
     Then I press "Save outline"
     Then I should see the message containing "Updated course."
 
-
   Scenario: Course with exam step - Pass
     Given I am logged in as a user with the "Educator" role
     And I am on the homepage
