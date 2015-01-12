@@ -151,6 +151,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'environment_indicator',
   );
 
+  // Exported permission: 'access lti_tool_provider_consumer entities'.
+  $permissions['access lti_tool_provider_consumer entities'] = array(
+    'name' => 'access lti_tool_provider_consumer entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'lti_tool_provider',
+  );
+
   // Exported permission: 'access members-only content'.
   $permissions['access members-only content'] = array(
     'name' => 'access members-only content',
@@ -401,6 +410,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'invite',
+  );
+
+  // Exported permission: 'administer lti_tool_provider module'.
+  $permissions['administer lti_tool_provider module'] = array(
+    'name' => 'administer lti_tool_provider module',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'lti_tool_provider',
   );
 
   // Exported permission: 'administer mailsystem'.
@@ -1223,6 +1241,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete terms in module_type'.
   $permissions['delete terms in module_type'] = array(
     'name' => 'delete terms in module_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'delete terms in quiz_type'.
+  $permissions['delete terms in quiz_type'] = array(
+    'name' => 'delete terms in quiz_type',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -2092,16 +2117,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'comment',
   );
 
-  // Exported permission: 'rate content'.
-  $permissions['rate content'] = array(
-    'name' => 'rate content',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'fivestar',
-  );
-
   // Exported permission: 'rename features'.
   $permissions['rename features'] = array(
     'name' => 'rename features',
@@ -2467,6 +2482,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'quiz',
+  );
+
+  // Exported permission: 'view lti info'.
+  $permissions['view lti info'] = array(
+    'name' => 'view lti info',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'lti_tool_provider',
   );
 
   // Exported permission: 'view own quiz results'.
