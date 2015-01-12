@@ -192,6 +192,17 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'system',
   );
 
+  // Exported permission: 'access trt'.
+  $permissions['access trt'] = array(
+    'name' => 'access trt',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'prc_trt',
+  );
+
   // Exported permission: 'access user profiles'.
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
@@ -1212,13 +1223,6 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete terms in module_type'.
   $permissions['delete terms in module_type'] = array(
     'name' => 'delete terms in module_type',
-    'roles' => array(),
-    'module' => 'taxonomy',
-  );
-
-  // Exported permission: 'delete terms in quiz_type'.
-  $permissions['delete terms in quiz_type'] = array(
-    'name' => 'delete terms in quiz_type',
     'roles' => array(),
     'module' => 'taxonomy',
   );
