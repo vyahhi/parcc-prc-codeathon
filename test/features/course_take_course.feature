@@ -67,6 +67,8 @@ Feature: PRC-35 LMS: Take a Course
     And I should see the text "Complete"
     And I should not see the text "Not started"
 
+    And I should not see the link "Take course"
+
   Scenario: Take course with exam
     Given "PD Module" nodes:
       | title       | field_course_objectives | status | uid | field_length_quantity | field_length_unit | language |
