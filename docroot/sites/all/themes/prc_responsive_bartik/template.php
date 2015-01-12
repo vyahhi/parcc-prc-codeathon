@@ -212,3 +212,50 @@ function prc_responsive_bartik_course_outline_item($variables) {
 
   return $output;
 }
+
+/**
+ * Theme a question selection table, adding drag and drop support.
+ */
+function prc_responsive_bartik_question_selection_table($variables) {
+  $form = $variables['form'];
+  drupal_add_tabledrag('question-list', 'match', 'parent', 'qnr-pid', 'qnr-pid', 'qnr-id', TRUE, 1);
+  drupal_add_tabledrag('question-list', 'order', 'sibling', 'question-list-weight');
+
+  // Building headers
+  $headers = array(t('Preview'), t('Item Type'), t('Actions'), t('Item Order'), t('Item Standard'), t('Delete'));
+  if (isset($form['compulsories'])) {
+    $headers[] = t('Compulsory');
+  }
+  $headers[] = t('Weight');
+  $headers[] = t('Parent ID');
+  $headers[] = array(
+    'data' => t('ID'),
+    'class' => array('tabledrag-hide'),
+  );
+
+  // Building table body
+  $rows = array();
+  if (!empty($form['titles'])) {
+    foreach (element_children($form['titles']) as $id) {
+      $form['weights'][$id]['#attributes']['class'] = array('question-list-weight');
+      $form['qnr_ids'][$id]['#attributes']['class'] = array('qnr-id');
+      $form['qnr_pids'][$id]['#attributes']['class'] = array('qnr-pid');
+      $rows[] = _prc_question_preview_quiz_get_question_row($form, $id);
+    }
+    // Make sure the same fields aren't rendered twice
+    unset($form['types'], $form['view_links'], $form['remove_links'], $form['stayers']);
+    unset($form['max_scores'], $form['auto_update_max_scores'], $form['revision'], $form['weights'], $form['titles'], $form['compulsories'], $form['qnr_ids'], $form['qnr_pids'], $form['item_orders'], $form['item_standards']);
+  }
+  $html_attr = array('id' => 'question-list');
+
+  // We hide the table if no questions have been added so that jQuery can show it the moment the first question is being added.
+  if (isset($form['no_questions'])) {
+    $html_attr['style'] = "display:none;";
+  }
+
+  $table = theme('table', array('header' => $headers, 'rows' => $rows, 'attributes' => $html_attr));
+
+  return drupal_render($form['random_settings'])
+  . $table
+  . drupal_render_children($form);
+}

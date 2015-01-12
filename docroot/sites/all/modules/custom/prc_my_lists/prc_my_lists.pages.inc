@@ -11,7 +11,7 @@
  *   Node type being created.
  *
  * @param null $js
- *   If Javascript is not support, $js is NULL.
+ *   If Javascript is not supported, $js is NULL.
  */
 function modal_add_to_list($type, $js = NULL, $node = NULL) {
   // Fall back if $js is not set.

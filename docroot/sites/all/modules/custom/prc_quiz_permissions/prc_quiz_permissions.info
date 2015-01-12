@@ -1,0 +1,4 @@
+name = PRC Quiz Permissions
+description = Permission settings for Quizzes
+package = PRC
+core = 7.x

@@ -1,4 +1,4 @@
-@api @d7 @diglib
+@api @diglib
 Feature: View Content (PRC-32)
   As an educator,
   I want to view content posted to the Digital Library,
@@ -41,7 +41,21 @@ Feature: View Content (PRC-32)
     #  AC4b. statement containing date and author (if available), such as: Created Feb 14, 2014 10:37 AM by Joe Admin
     #  AC4c. Summary
     #  AC4d. Thumbnail (when available)
-   Scenario: AC5. A Sort dropdown menu allows the user to change the order. The only available option for now is: Date: most recent on the top
+
+  Scenario: AC5. A Sort dropdown menu allows the user to change the order. The only available option for now is: Date: most recent on the top
      And I should see "Sort by"
      And I should see "Date" in the "#edit-sort-by" element
      And I should see "DESC" in the "edit-sort-order" field
+
+  Scenario: PRC-519 Add a Thumbnail Image text in results
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And I am viewing my "Digital Library Content" node with the title "PRC-519"
+    When I click "Edit"
+    Then I attach the file "testfiles/lovelythumbnail.png" to "edit-field-thumbnail-und-0-upload"
+    And I select the radio button "Public"
+    And I press "Save"
+    And I should see the success message containing "Digital Library Content PRC-519 has been updated."
+    Then I click "Digital Library"
+    And I should not see the text "Add a Thumbnail Image"
+    When I click "PRC-519"
+    Then I should not see the text "Add a Thumbnail Image"

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Search API feature.
+ */
+
+include_once 'prc_poc_local_search_api.features.inc';

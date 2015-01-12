@@ -373,8 +373,8 @@ Feature: PRC-346 Admin: Course Audience
 
   Scenario: Multiple roster emails
     Given "PD Course" nodes:
-      | title         | field_course_objectives | field_permissions  | uid | status |
-      | Two Emails    | This is private         | public             | 1   | 1      |
+      | title                 | field_course_objectives | field_permissions  | uid | status |
+      | Two Emails @timestamp | This is private         | public             | 1   | 1      |
     Given users:
       | name         | mail                                | pass   | field_first_name | field_last_name | status |
       | Joe Illinois | joe_prc_346il@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
@@ -411,21 +411,21 @@ Feature: PRC-346 Admin: Course Audience
     Then I fill in "Password *" with "xyz123"
     And I press "Log in"
     When I click "Professional Development"
-    Then I should see the link "Two Emails"
+    Then I should see the link "Two Emails @timestamp"
     Then I click "Log out"
     Then the url should match "/"
     Then I fill in "E-mail *" with "joe_prc_346ar@timestamp@example.com"
     Then I fill in "Password *" with "xyz123"
     And I press "Log in"
     When I click "Professional Development"
-    Then I should see the link "Two Emails"
+    Then I should see the link "Two Emails @timestamp"
     Then I click "Log out"
     Then the url should match "/"
     Then I fill in "E-mail *" with "joe_prc_346ri@timestamp@example.com"
     Then I fill in "Password *" with "xyz123"
     And I press "Log in"
     When I click "Professional Development"
-    Then I should not see the link "Two Emails"
+    Then I should not see the link "Two Emails @timestamp"
 
   Scenario: All PARCC Members displays for PARCC-Member Educator with a state
     Given "PD Course" nodes:

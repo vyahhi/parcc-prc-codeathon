@@ -114,9 +114,147 @@ function prc_custom_modules_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'ds_search_node_limit';
-  $strongarm->value = '2500';
-  $export['ds_search_node_limit'] = $strongarm;
+  $strongarm->name = 'quiz_autotitle_length';
+  $strongarm->value = '50';
+  $export['quiz_autotitle_length'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_auto_revisioning';
+  $strongarm->value = 1;
+  $export['quiz_auto_revisioning'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_default_close';
+  $strongarm->value = '30';
+  $export['quiz_default_close'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_durod';
+  $strongarm->value = 0;
+  $export['quiz_durod'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_email_results';
+  $strongarm->value = 0;
+  $export['quiz_email_results'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_email_results_body';
+  $strongarm->value = 'Dear !author
+
+!taker attended the Quiz !title on !date
+Test Description : !desc
+!taker got !correct out of !total points in !minutes minutes. Score given in percentage is !percentage
+You can access the result here !url
+';
+  $export['quiz_email_results_body'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_email_results_body_taker';
+  $strongarm->value = 'Dear !taker
+
+You attended the Quiz !title on !date
+Test Description : !desc
+You got !correct out of !total points in !minutes minutes. Score given in percentage is !percentage
+You can access the result here !url
+';
+  $export['quiz_email_results_body_taker'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_email_results_subject';
+  $strongarm->value = '!title Results Notice from !sitename';
+  $export['quiz_email_results_subject'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_email_results_subject_taker';
+  $strongarm->value = '!title Results Notice from !sitename';
+  $export['quiz_email_results_subject_taker'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_has_timer';
+  $strongarm->value = 0;
+  $export['quiz_has_timer'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_has_userpoints';
+  $strongarm->value = 0;
+  $export['quiz_has_userpoints'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_index_questions';
+  $strongarm->value = 1;
+  $export['quiz_index_questions'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_max_result_options';
+  $strongarm->value = '5';
+  $export['quiz_max_result_options'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_name';
+  $strongarm->value = 'Exam';
+  $export['quiz_name'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_pager_siblings';
+  $strongarm->value = '5';
+  $export['quiz_pager_siblings'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_pager_start';
+  $strongarm->value = '100';
+  $export['quiz_pager_start'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_remove_partial_quiz_record';
+  $strongarm->value = '0';
+  $export['quiz_remove_partial_quiz_record'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_results_to_quiz_author';
+  $strongarm->value = 0;
+  $export['quiz_results_to_quiz_author'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'quiz_use_passfail';
+  $strongarm->value = 1;
+  $export['quiz_use_passfail'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

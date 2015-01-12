@@ -28,7 +28,7 @@ Feature: Anonymous User Home Page (PRC-51)
     And I should see the heading "Welcome!" in the "content" region
     And I should see the heading "Slideshow" in the "content" region
     And I should see the heading "User login" in the "content" region
-    And I should see the heading "Africa" in the "content" region
+#    And I should see the heading "Africa" in the "content" region
     And I should see text matching "Join the discussions. Share tips and experiences. Connect with educators from all around the world."
 
   Scenario: The login block is present # AC3 AC4

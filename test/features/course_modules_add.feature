@@ -22,7 +22,7 @@ Feature: PRC-360 Admin: Add Object to a Course
     # The type dropdown has no label...
     And I should see an "edit-more-object-type" field
     And I select "Module" from "edit-more-object-type"
-    And I select "Exam" from "edit-more-object-type"
+      And I select "Exam" from "edit-more-object-type"
     
     And "Module" should precede "Exam" for the query "#edit-more-object-type option"
     

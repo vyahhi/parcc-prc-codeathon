@@ -1,0 +1,36 @@
+<?php
+/**
+ * @file
+ * prc_poc_local_search_api.strongarm.inc
+ */
+
+/**
+ * Implements hook_strongarm().
+ */
+function prc_poc_local_search_api_strongarm() {
+  $export = array();
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'facetapi:block_cache:search_api@digital_library_content_index';
+  $strongarm->value = -1;
+  $export['facetapi:block_cache:search_api@digital_library_content_index'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'search_api_facets_search_ids';
+  $strongarm->value = array(
+    'digital_library_content_index' => array(
+      'search_api_views:search_digital_library_content:panel_pane_1' => 'search_api_views:search_digital_library_content:panel_pane_1',
+      'search_api_views:search_digital_library_content:default' => 'search_api_views:search_digital_library_content:default',
+      'search_api_views:search_digital_library_content:page' => 'search_api_views:search_digital_library_content:page',
+      'search_api_views:test_search_two:default' => 'search_api_views:test_search_two:default',
+      'search_api_views:test_search_two:panel_pane_1' => 'search_api_views:test_search_two:panel_pane_1',
+    ),
+  );
+  $export['search_api_facets_search_ids'] = $strongarm;
+
+  return $export;
+}

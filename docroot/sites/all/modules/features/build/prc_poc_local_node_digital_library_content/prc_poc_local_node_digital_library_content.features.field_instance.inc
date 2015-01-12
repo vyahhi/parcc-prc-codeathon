@@ -689,7 +689,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',

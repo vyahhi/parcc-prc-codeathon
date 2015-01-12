@@ -22,7 +22,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -77,7 +77,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 20,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -128,7 +128,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -179,7 +179,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -228,9 +228,8 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'hidden',
         'weight' => 22,
       ),
       'search_index' => array(
@@ -281,7 +280,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 18,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -331,7 +330,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 21,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -388,7 +387,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 19,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -436,10 +435,14 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 21,
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 1,
       ),
       'search_index' => array(
         'label' => 'above',
@@ -462,7 +465,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
@@ -509,11 +512,8 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 23,
       ),
       'search_index' => array(

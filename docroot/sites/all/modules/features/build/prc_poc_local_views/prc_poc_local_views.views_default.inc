@@ -554,6 +554,102 @@ function prc_poc_local_views_views_default_views() {
   $export['archive'] = $view;
 
   $view = new view();
+  $view->name = 'assessment_item_list';
+  $view->description = 'Item List for Assessment Detail Page';
+  $view->tag = 'default';
+  $view->base_table = 'quiz_node_relationship';
+  $view->human_name = 'Assessment Item List';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: Quiz question relationship: Child_nid */
+  $handler->display->display_options['relationships']['child_nid']['id'] = 'child_nid';
+  $handler->display->display_options['relationships']['child_nid']['table'] = 'quiz_node_relationship';
+  $handler->display->display_options['relationships']['child_nid']['field'] = 'child_nid';
+  $handler->display->display_options['relationships']['child_nid']['label'] = 'Question';
+  $handler->display->display_options['relationships']['child_nid']['required'] = TRUE;
+  /* Relationship: Broken/missing handler */
+  $handler->display->display_options['relationships']['field_standard_single_tid']['id'] = 'field_standard_single_tid';
+  $handler->display->display_options['relationships']['field_standard_single_tid']['table'] = 'field_data_field_standard_single';
+  $handler->display->display_options['relationships']['field_standard_single_tid']['field'] = 'field_standard_single_tid';
+  $handler->display->display_options['relationships']['field_standard_single_tid']['relationship'] = 'child_nid';
+  $handler->display->display_options['relationships']['field_standard_single_tid']['label'] = 'term from field_standard_single';
+  /* Field: Content: Item Order */
+  $handler->display->display_options['fields']['field_item_order']['id'] = 'field_item_order';
+  $handler->display->display_options['fields']['field_item_order']['table'] = 'field_data_field_item_order';
+  $handler->display->display_options['fields']['field_item_order']['field'] = 'field_item_order';
+  $handler->display->display_options['fields']['field_item_order']['relationship'] = 'child_nid';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'child_nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'child_nid';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = 'Preview';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['path'] = 'question-preview/nojs/[nid]';
+  $handler->display->display_options['fields']['title']['alter']['link_class'] = 'use-ajax';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['relationship'] = 'child_nid';
+  $handler->display->display_options['fields']['type']['label'] = 'Item Type';
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'field_standard_single_tid';
+  $handler->display->display_options['fields']['name']['label'] = 'Item Standard';
+  $handler->display->display_options['fields']['name']['hide_empty'] = TRUE;
+  /* Contextual filter: Quiz question relationship: Parent_vid */
+  $handler->display->display_options['arguments']['parent_vid']['id'] = 'parent_vid';
+  $handler->display->display_options['arguments']['parent_vid']['table'] = 'quiz_node_relationship';
+  $handler->display->display_options['arguments']['parent_vid']['field'] = 'parent_vid';
+  $handler->display->display_options['arguments']['parent_vid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['parent_vid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['parent_vid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['parent_vid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['parent_vid']['summary_options']['items_per_page'] = '25';
+
+  /* Display: Item List */
+  $handler = $view->new_display('panel_pane', 'Item List', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'PRC View panes';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'parent_vid' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Quiz question relationship: Parent_vid',
+    ),
+  );
+  $handler->display->display_options['inherit_panels_path'] = '1';
+  $export['assessment_item_list'] = $view;
+
+  $view = new view();
   $view->name = 'assessments';
   $view->description = 'Assessments tab view';
   $view->tag = 'PRC';
@@ -570,8 +666,8 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'most recent on top';
-  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'oldest on top';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'oldest on top';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'most recent on top';
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'default';
@@ -584,13 +680,13 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  $handler->display->display_options['sorts']['created']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['created']['expose']['label'] = 'Date';
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['changed']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['changed']['expose']['label'] = 'Date';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -603,13 +699,24 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'assessment' => 'assessment',
+    'quiz' => 'quiz',
   );
+  /* Filter criterion: Content: Has taxonomy term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    9792 => '9792',
+    9793 => '9793',
+  );
+  $handler->display->display_options['filters']['tid']['type'] = 'select';
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'quiz_type';
 
   /* Display: Assessments View All */
   $handler = $view->new_display('panel_pane', 'Assessments View All', 'panel_pane_1');
   $handler->display->display_options['pane_category']['name'] = 'PRC View panes';
   $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['inherit_panels_path'] = '1';
   $export['assessments'] = $view;
 
   $view = new view();
@@ -2134,8 +2241,8 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'most recent on top';
-  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'oldest on top';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'oldest on top';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'most recent on top';
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '100';
@@ -2237,6 +2344,8 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['created']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['created']['expose']['label'] = 'Date';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -2303,14 +2412,6 @@ function prc_poc_local_views_views_default_views() {
     'image_style' => 'thumbnail',
     'image_link' => '',
   );
-  $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  $handler->display->display_options['sorts']['created']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['created']['expose']['label'] = 'Date';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['allow']['use_pager'] = 0;
   $handler->display->display_options['allow']['items_per_page'] = 0;
@@ -3889,6 +3990,65 @@ function prc_poc_local_views_views_default_views() {
     'default' => 0,
   );
   $export['taxonomy_term'] = $view;
+
+  $view = new view();
+  $view->name = 'test_search_two';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'search_api_index_digital_library_content_index';
+  $view->human_name = 'Test Search Two';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'oldest on top';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'most recent on top';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'entity';
+  $handler->display->display_options['row_options']['view_mode'] = 'teaser';
+  /* Field: Indexed Node: Node ID */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'search_api_index_digital_library_content_index';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  /* Sort criterion: Indexed Node: Date changed */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'search_api_index_digital_library_content_index';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['changed']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['changed']['expose']['label'] = 'Date changed';
+  /* Filter criterion: Search: Fulltext search */
+  $handler->display->display_options['filters']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['table'] = 'search_api_index_digital_library_content_index';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator_id'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['label'] = 'Fulltext search';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['identifier'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    6 => 0,
+    8 => 0,
+    5 => 0,
+  );
+
+  /* Display: Content pane */
+  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  $handler->display->display_options['inherit_panels_path'] = '1';
+  $export['test_search_two'] = $view;
 
   $view = new view();
   $view->name = 'top_content';
