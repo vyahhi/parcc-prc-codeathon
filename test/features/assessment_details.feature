@@ -30,7 +30,6 @@ Feature: PRC-490 View Test Details
     And I should see the link "subj2"
     And I should see the text "subj1, subj2"
     And I should see the link "Grade 490"
-    Then I break
 
   Scenario: AC2 A list of items (may be thumbnails or rows) along with the following components for each item:
     Given "Subject" terms:
