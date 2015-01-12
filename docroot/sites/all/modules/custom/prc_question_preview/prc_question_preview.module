@@ -524,6 +524,9 @@ function prc_question_preview_copy_questions($original_quiz, $new_quiz) {
  */
 function prc_question_preview_form_quiz_node_form_alter(&$form, &$form_state) {
   $form['actions']['submit']['#value'] = t('Save Draft');
+
+  $form['taking']['allow_resume']['#default_value'] = 0;
+
   global $user;
   if (!array_search('administrator', $user->roles)) {
     $form['field_quiz_type']['#access'] = FALSE;

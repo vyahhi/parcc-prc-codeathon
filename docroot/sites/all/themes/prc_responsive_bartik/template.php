@@ -191,24 +191,28 @@ function prc_responsive_bartik_course_outline_item($variables) {
       '<span>' . '(' . $w->field_length->value() . ')</span><br/>' :
       '';
     $objectives = $w->field_course_objectives->value() ? '<span>' . t('Module Objectives') . ': ' . $w->field_course_objectives->value() . '</span><br/>' : '';
+    if (empty($step['link'])) {
+      $output = $object->getTitle() . '<br/>' .
+        $length .
+        $objectives .
+        '<span class="course-outline-status">' . $status . '</span>';
+    }
+    else {
+      $output = $img . ' ' .
+        l("{$object->getTitle()}<br/>", $step['link'], array('html' => TRUE)) .
+        $length .
+        $objectives .
+        '<span class="course-outline-status">' . $step['status'] . '</span>';
+    }
   } else {
-    $length = '';
-    $objectives = '';
+    if ($status == 'Complete' || empty($step['link'])) {
+      $output = $object->getTitle();
+    }
+    else {
+      $output = l("{$object->getTitle()}", $step['link'], array('html' => TRUE));
+    }
   }
 
-  if (empty($step['link'])) {
-    $output = $object->getTitle() . '<br/>' .
-      $length .
-      $objectives .
-      '<span class="course-outline-status">' . $status . '</span>';
-  }
-  else {
-    $output = $img . ' ' .
-      l("{$object->getTitle()}<br/>", $step['link'], array('html' => TRUE)) .
-      $length .
-      $objectives .
-      '<span class="course-outline-status">' . $step['status'] . '</span>';
-  }
 
   return $output;
 }
@@ -259,3 +263,4 @@ function prc_responsive_bartik_question_selection_table($variables) {
   . $table
   . drupal_render_children($form);
 }
+

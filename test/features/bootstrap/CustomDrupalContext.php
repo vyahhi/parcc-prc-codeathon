@@ -781,6 +781,17 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @When /^I check radio button number "(?P<number>[^"]*)"$/
+   */
+  public function checkRadioIndex($index) {
+    $page = $this->getSession()->getPage();
+    $radios = $page->findAll('xpath', "//input[@type='radio']");
+    $radio = $radios[$index];
+    $value = $radio->getAttribute('value');
+    $radio->selectOption($value, FALSE);
+  }
+
+  /**
    * @Then /^I follow link "(?P<number>[^"]*)" in the email$/
    */
   public function followEmailLinkByIndex($number) {

@@ -429,6 +429,18 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
   $form['node']['instance']['#type'] = 'select';
   $form['node']['instance']['#chosen'] = TRUE;
   $form['node']['instance']['#options'] = $options;
+
+  // Force quiz to go to take, rather than view
+  if (array_key_exists('quiz_goto', $form)) {
+    $form['quiz_goto']['#default_value'] = 'take';
+    $form['quiz_goto']['#access'] = FALSE;
+  }
+  if (array_key_exists('grading', $form)) {
+    $form['grading']['grade_include']['#access'] = FALSE;
+  }
+  if (array_key_exists('quiz', $form)) {
+    $form['quiz']['#weight'] = 0;
+  }
 }
 
 function _prc_pd_course_form_course_module_list() {
@@ -500,5 +512,47 @@ function prc_pd_course_form_node_view($node, $view_mode, $langcode) {
         drupal_set_title($title);
       }
     }
+  } elseif ($node->type == 'pd_course') {
+    unset($_SESSION['quiz']);
   }
+}
+
+function prc_pd_course_form_form_quiz_report_form_alter(&$form, &$form_state) {
+  // TODO: Replace the theme and remove the template, redraw this form in this alter.
+  $result_id = $form[0]['result_id']['#value'];
+  $result = quiz_result_load($result_id);
+  $score = $result->score;
+  $nid = $result->nid;
+  $quiz = node_load($nid);
+  global $user;
+  $courseObject = course_get_course_object('course_quiz', 'quiz', $nid, $user);
+
+  $course_node =$courseObject->getCourse()->getNode();
+  $course_object_id = $courseObject->getId();
+  $course_object_ids = array_keys($course_node->course['objects']);
+  $last_object_id = array_pop($course_object_ids);
+  if ($course_object_id == $last_object_id) {
+    $new_path = 'professional-development';
+  } else {
+    $new_path = drupal_lookup_path('alias', "node/" . $course_node->nid);
+  }
+  $form['go_back'] = array(
+    '#type' => 'link',
+    '#title' => t('Go Back'),
+    '#href' => $new_path,
+  );
+
+  $passing_grade = $courseObject->getOption('passing_grade');
+  $form[0]['quiz_title'] = array(
+    '#type' => 'value',
+    '#value' => $quiz->title,
+  );
+  $form[0]['passing_grade'] = array(
+    '#type' => 'value',
+    '#value' => $passing_grade,
+  );
+  $form[0]['score'] = array(
+    '#type' => 'value',
+    '#value' => $score,
+  );
 }
