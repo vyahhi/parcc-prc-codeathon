@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the PRC Flags feature.
+ */
+
+include_once 'prc_flags.features.inc';

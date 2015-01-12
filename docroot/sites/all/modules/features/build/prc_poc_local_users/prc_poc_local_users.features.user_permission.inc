@@ -2046,6 +2046,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'flag',
   );
 
+  // Exported permission: 'flag like_content'.
+  $permissions['flag like_content'] = array(
+    'name' => 'flag like_content',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'flag',
+  );
+
   // Exported permission: 'flush caches'.
   $permissions['flush caches'] = array(
     'name' => 'flush caches',
@@ -2348,6 +2357,15 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'unflag bookmarks'.
   $permissions['unflag bookmarks'] = array(
     'name' => 'unflag bookmarks',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'flag',
+  );
+
+  // Exported permission: 'unflag like_content'.
+  $permissions['unflag like_content'] = array(
+    'name' => 'unflag like_content',
     'roles' => array(
       'authenticated user' => 'authenticated user',
     ),
