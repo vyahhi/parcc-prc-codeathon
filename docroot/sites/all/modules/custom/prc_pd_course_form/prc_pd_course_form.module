@@ -402,7 +402,8 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
   $form['title']['#weight'] = 2;
 
   $form['node']['use_node_title']['#title'] = "Use existing content's title";
-  $form['node']['use_node_title']['#default_value'] = TRUE;
+
+  $form['title']['title']['#default_value'] = decode_entities($form['title']['title']['#default_value']);
 
   $form['title']['title']['#states'] = array(
     'enabled' => array(
