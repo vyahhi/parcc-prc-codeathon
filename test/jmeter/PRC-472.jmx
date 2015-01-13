@@ -701,24 +701,28 @@
                   <stringProp name="Argument.name">sort_by</stringProp>
                   <stringProp name="Argument.value">created</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="sort_order" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">sort_order</stringProp>
                   <stringProp name="Argument.value">DESC</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="view_name" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">view_name</stringProp>
                   <stringProp name="Argument.value">digital_library_view</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="view_display_id" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">view_display_id</stringProp>
                   <stringProp name="Argument.value">panel_pane_2</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="view_args" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
