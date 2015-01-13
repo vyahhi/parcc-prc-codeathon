@@ -33,8 +33,10 @@ Feature: PRC-552 Use created test for course exam
     And I should not see the text "U1 Custom"
     And I should see the text "U1 PD Exam"
     And I should not see the text "U1 PRC Q"
+    And I should see the text "Course object settings"
 
     And I select "My Custom" from "Existing node"
+    And I fill in "Module Title" with "My Custom"
     And I press "Update"
     And I should see the text "My Custom"
     And I follow "Edit Settings"
