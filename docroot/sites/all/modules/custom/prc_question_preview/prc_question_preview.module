@@ -245,7 +245,7 @@ function _prc_question_preview_quiz_add_questions_to_form(&$form, &$questions, &
     $form[$fieldset]['titles'][$id] = array('#markup' => $question_titles);
 
     $question_wrapper = entity_metadata_wrapper('node', $question);
-    $item_order = $question_wrapper->field_item_order->value();
+    $item_order = isset($question->field_item_order) ? $question_wrapper->field_item_order->value() : '';
     $item_standard = '';
     if (isset($question->field_standard)) {
       // && $question_wrapper->field_standard->value() ? $question_wrapper->field_standard->value()->name : '';
