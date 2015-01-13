@@ -17,7 +17,7 @@ PRC-472.jmx (Anonymous User browsing the Digital Library)
 PRC-473.jmx (PARCC-Member Educator DLC viewing and favorites)
     1. If you haven't already, devel generate DL content from step 1 in PRC-472
     2. If it doesn't exist, create the following user in your environment:
-        a. Email: member@example.com
+        a. Email: educator@example.com
         b. Password: qa
         c. Role: PARCC-Member Educator
         e. First name: Peri
@@ -26,3 +26,15 @@ PRC-473.jmx (PARCC-Member Educator DLC viewing and favorites)
         h. Enter state account number: ILLI1
     3. Under the Recording Controller, change the URLs for the samplers 390, 444, 624 and 798 to URLs for digital
        library content on your system
+
+PRC-474.jmx (Educator DLC viewing and favorites)
+    1. If you haven't already, devel generate DL content from step 1 in PRC-472
+    2. If it doesn't exist, create the following user in your environment:
+        a. Email: educator@example.com
+        b. Password: qa
+        c. Role: Educator
+        e. First name: Jo
+        f. Last name: Grant
+        g. Do NOT check "my state is a PARCC member"
+    3. Under the Recording Controller, change the URLs for the samplers 264, 314, 513, and 649 to URLs for digital
+        library content on your system
