@@ -397,7 +397,7 @@ function prc_question_preview_quiz_questions_form_submit($form, &$form_state) {
     global $user;
     $quiz->uid = $user->uid;
 
-    $quiz->title .= ' - ' . t('Copy');
+    $quiz->title .= ' - ' . t('copy');
 
 
     $custom_assessment_terms = taxonomy_get_term_by_name('Custom Assessment', 'quiz_type');

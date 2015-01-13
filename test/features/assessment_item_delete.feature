@@ -49,7 +49,7 @@ Feature: PRC-528 Delete Item in Test Customization
     Then I check the element with xpath selector "//*[starts-with(@id, 'edit-stayers')]"
     And I press "Save Draft"
     Then I should not see the link "PRC-528 Directions 1"
-    Then I should not see the text "PRC-528 Delete - Copy"
+    Then I should not see the text "PRC-528 Delete - copy"
     But I should see the heading "PRC-528 Delete" in the "content" region
 
   Scenario: Delete an item in a PRC Assessment, copy
@@ -84,7 +84,7 @@ Feature: PRC-528 Delete Item in Test Customization
     Then I check the element with xpath selector "//*[starts-with(@id, 'edit-stayers')]"
     And I press "Save Draft"
     Then I should not see the link "PRC-528 Directions 1"
-    But I should see the heading "PRC-528 Delete - Copy" in the "content" region
+    But I should see the heading "PRC-528 Delete - copy" in the "content" region
 
   Scenario: User can't delete all questions
     Given I am logged in as a user with the "PRC Admin" role
