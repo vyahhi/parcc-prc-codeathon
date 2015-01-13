@@ -85,3 +85,30 @@ Feature: PRC-528 Delete Item in Test Customization
     And I press "Save Draft"
     Then I should not see the link "PRC-528 Directions 1"
     But I should see the heading "PRC-528 Delete - Copy" in the "content" region
+
+  Scenario: User can't delete all questions
+    Given I am logged in as a user with the "PRC Admin" role
+    And "Subject" terms:
+      | name  |
+      | subj1 |
+      | subj2 |
+    And "Quiz" nodes:
+      | title          | field_subject | field_quiz_type            | author      |
+      | PRC-528 Delete | subj1, subj2  | PRC Released Practice Test | @currentuid |
+    And I am on "assessments"
+    Then I click "PRC-528 Delete"
+    And I click "Quiz"
+    Then I click "Manage questions"
+    Then I click "Multiple choice question"
+    And I fill in "edit-body-und-0-value" with "PRC-528 Multi Multi Question Question"
+    And I fill in "Item Order" with "Q2"
+    And I fill in "Title" with "PRC-528 Multi"
+    And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
+    And I fill in "edit-alternatives-1-answer-value" with "Answer 2"
+    And I check the box "edit-alternatives-1-correct"
+    And I press "Save"
+    Then I click "View"
+    Then I should see the heading "PRC-528 Delete" in the "content" region
+    Then I check the element with xpath selector "//*[starts-with(@id, 'edit-stayers')]"
+    And I press "Save Draft"
+    Then I should see the error message containing "You may not delete every question in your quiz."
