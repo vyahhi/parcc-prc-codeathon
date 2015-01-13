@@ -402,7 +402,11 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
   $form['title']['#weight'] = 2;
 
   $form['node']['use_node_title']['#title'] = "Use existing content's title";
-  $form['node']['use_node_title']['#default_value'] = TRUE;
+
+  // Course does an unnecessary check_plain when it's building the form.
+  // The value comes back already checked, so we decode it so it isn't
+  // double-encoded.
+  $form['title']['title']['#default_value'] = decode_entities($form['title']['title']['#default_value']);
 
   $form['title']['title']['#states'] = array(
     'enabled' => array(
@@ -512,7 +516,24 @@ function prc_pd_course_form_node_view($node, $view_mode, $langcode) {
         drupal_set_title($title);
       }
     }
-  } elseif ($node->type == 'pd_course') {
+  } elseif ($node->type == 'pd_course' && isset($_SESSION)) {
+
+    global $user;
+    $course = course_get_course($node, $user, TRUE);
+    //$prev_obj->getFulfillment()->isComplete()
+
+    $enrollment = course_enrollment_load($node->nid, $user->uid);
+
+//    $objects = $course->getObjects();
+//    if (is_array($objects) && count($objects)) {
+    if ($enrollment) {
+//      $last_object = array_pop($objects);
+//      $is_complete = $last_object->getFulfillment()->isComplete();
+//      if ($is_complete) {
+        $node->content['course']['#access'] = FALSE;
+//      }
+    }
+
     unset($_SESSION['quiz']);
   }
 }

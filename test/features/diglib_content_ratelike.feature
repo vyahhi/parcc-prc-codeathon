@@ -21,6 +21,19 @@ Feature: PRC-39 Rate/Like Content (end user)
     Then I should see the link "Undo (1)"
     And I should not see the text "Like"
 
+    Then I am an anonymous user
+    Then I am logged in as a user with the "Educator" role
+    And I am on "digital-library"
+    Then I should see the link "Public"
+    And I should see the link "Like (1)"
+    And I should not see the text "Undo"
+    When I click "Like (1)"
+    Then I should see the link "Undo (2)"
+    And I should not see the text "Like"
+    Then I click "Undo (2)"
+    And I should not see the text "Undo"
+    And I should see the link "Like (1)"
+
   Scenario: Like link on Digital Library full view
     Given I have no "Digital Library Content" nodes
     Given "Digital Library Content" nodes:

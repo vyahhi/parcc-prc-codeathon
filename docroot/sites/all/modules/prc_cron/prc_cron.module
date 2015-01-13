@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the PRC Cron feature.
+ */
+
+include_once 'prc_cron.features.inc';

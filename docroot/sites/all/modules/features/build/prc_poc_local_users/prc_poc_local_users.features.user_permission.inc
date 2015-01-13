@@ -331,6 +331,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'course',
   );
 
+  // Exported permission: 'administer elysia_cron'.
+  $permissions['administer elysia_cron'] = array(
+    'name' => 'administer elysia_cron',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'elysia_cron',
+  );
+
   // Exported permission: 'administer environment indicator settings'.
   $permissions['administer environment indicator settings'] = array(
     'name' => 'administer environment indicator settings',
