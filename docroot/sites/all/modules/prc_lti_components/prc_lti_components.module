@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the PRC LTI Components feature.
+ */
+
+include_once 'prc_lti_components.features.inc';

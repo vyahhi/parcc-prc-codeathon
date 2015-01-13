@@ -151,6 +151,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'environment_indicator',
   );
 
+  // Exported permission: 'access lti_tool_provider_consumer entities'.
+  $permissions['access lti_tool_provider_consumer entities'] = array(
+    'name' => 'access lti_tool_provider_consumer entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'lti_tool_provider',
+  );
+
   // Exported permission: 'access members-only content'.
   $permissions['access members-only content'] = array(
     'name' => 'access members-only content',
@@ -190,6 +199,17 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'system',
+  );
+
+  // Exported permission: 'access trt'.
+  $permissions['access trt'] = array(
+    'name' => 'access trt',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'prc_trt',
   );
 
   // Exported permission: 'access user profiles'.
@@ -390,6 +410,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'invite',
+  );
+
+  // Exported permission: 'administer lti_tool_provider module'.
+  $permissions['administer lti_tool_provider module'] = array(
+    'name' => 'administer lti_tool_provider module',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'lti_tool_provider',
   );
 
   // Exported permission: 'administer mailsystem'.
@@ -2017,6 +2046,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'flag',
   );
 
+  // Exported permission: 'flag like_content'.
+  $permissions['flag like_content'] = array(
+    'name' => 'flag like_content',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'flag',
+  );
+
   // Exported permission: 'flush caches'.
   $permissions['flush caches'] = array(
     'name' => 'flush caches',
@@ -2086,16 +2124,6 @@ function prc_poc_local_users_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
-  );
-
-  // Exported permission: 'rate content'.
-  $permissions['rate content'] = array(
-    'name' => 'rate content',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'fivestar',
   );
 
   // Exported permission: 'rename features'.
@@ -2335,6 +2363,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'flag',
   );
 
+  // Exported permission: 'unflag like_content'.
+  $permissions['unflag like_content'] = array(
+    'name' => 'unflag like_content',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'flag',
+  );
+
   // Exported permission: 'use advanced search'.
   $permissions['use advanced search'] = array(
     'name' => 'use advanced search',
@@ -2463,6 +2500,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'quiz',
+  );
+
+  // Exported permission: 'view lti info'.
+  $permissions['view lti info'] = array(
+    'name' => 'view lti info',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'lti_tool_provider',
   );
 
   // Exported permission: 'view own quiz results'.
