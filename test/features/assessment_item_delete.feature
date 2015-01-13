@@ -52,7 +52,7 @@ Feature: PRC-528 Delete Item in Test Customization
     Then I should not see the text "PRC-528 Delete - Copy"
     But I should see the heading "PRC-528 Delete" in the "content" region
 
-  Scenario: Delete an item in a PRC Assessment, no copy
+  Scenario: Delete an item in a PRC Assessment, copy
     Given I am logged in as a user with the "PRC Admin" role
     And "Subject" terms:
       | name  |
