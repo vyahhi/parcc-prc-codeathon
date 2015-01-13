@@ -67,6 +67,7 @@ Feature: PRC-476 Take Course Exam
 
     And I follow "Edit Settings" number "1"
     And I select "PRC-476 A Exam" from "Existing node"
+    And I fill in "Module Title" with "PRC-476 A Exam"
     And I press "Update"
     And I should see the text "PRC-476 A Exam"
 
@@ -149,6 +150,7 @@ Feature: PRC-476 Take Course Exam
 
     And I follow "Edit Settings" number "0"
     And I select "PRC-476 B Exam" from "Existing node"
+    And I fill in "Module Title" with "PRC-476 B Exam"
     And I press "Update"
     And I should see the text "PRC-476 B Exam"
 
