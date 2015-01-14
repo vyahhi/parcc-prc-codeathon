@@ -43,12 +43,6 @@ Feature: PRC-476 Take Course Exam
     And "Quiz" nodes:
       | title        | field_subject | field_quiz_type | author      | field_grade_level |
       | PRC-476 Exam | Subj1         | PD Exam         | @currentuid | Grade 1           |
-
-#    And I visit "node/add/quiz"
-#    And I fill in "Title" with "PRC-476 Exam"
-#    And I select "PD Exam" from "Quiz Type"
-#    And I press "Save Draft"
-
     And I visit the last node created
 
     And I click "Quiz"
