@@ -69,12 +69,12 @@
 //        }
 
         function loadTexthelpSpeechStreamToolbar() {
-          // var a = document.getElementsByClassName(".texttospeech");
+          var a = document.getElementsByClassName(".texttospeech");
 
-          //a.onclick = function () {
+          a.onclick = function () {
             TexthelpSpeechStream.addToolbar();
-            //return false;
-          //}
+            return false;
+          }
         }
 //      }
 //    }

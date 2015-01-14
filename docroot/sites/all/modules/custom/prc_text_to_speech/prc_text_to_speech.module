@@ -15,7 +15,10 @@ function prc_text_to_speech_menu() {
 function tts_callback($ajax) {
   $commands = array();
   //We need Drupal behaviors to kick off again. Should happen automatically.
-  $commands[] = ajax_command_html('.texttospeech', '<a onclick="TexthelpSpeechStream.addToolbar()" href="javascript:void(0)">Open Text to Speech</a>');
+
+  drupal_add_js('TexthelpSpeechStream.addToolbar();', array('type' => 'inline'));
+  $commands[] = ajax_command_html('.texttospeech', '<a onclick="TexthelpSpeechStream.addToolbar()" href="javascript:void(0)">Hide Text to Speech</a>');
+  //$commands[] = drupal_goto('content/some-test-content');
   $page = array('#type' => 'ajax', '#commands' => $commands);
   ajax_deliver($page);
 }
@@ -25,11 +28,13 @@ function tts_callback($ajax) {
  */
 function prc_text_to_speech_node_view($node, $view_mode, $langcode) {
 
+  // Only for display of link in "Full" display
+  if ($view_mode == 'full') {
 
     $listable_types = array(
       'digital_library_content' => array(
         'link_id' => 'texttospeech',
-        'link_title' => 'Open Text to Speech',
+        'link_title' => 'Text to Speech',
       ),
     );
 
@@ -38,6 +43,7 @@ function prc_text_to_speech_node_view($node, $view_mode, $langcode) {
       $link_title = $listable_types[$node->type]['link_title'];
       _prc_text_to_speech_link($node, $link_title, $link_id);
     }
+  }
 }
 
 /**
@@ -46,7 +52,6 @@ function prc_text_to_speech_node_view($node, $view_mode, $langcode) {
  * @param $link_id
  */
 function _prc_text_to_speech_link($node, $link_title, $link_id) {
-
 
   $nid = $node->nid;
   drupal_add_library('system', 'drupal.ajax');
@@ -64,7 +69,7 @@ function _prc_text_to_speech_link($node, $link_title, $link_id) {
 
   drupal_add_js($script, array('scope' => 'header'));
 
-  drupal_add_js('TexthelpSpeechStream()', array('type' => 'inline'));
+  drupal_add_js('loadTexthelpSpeechStreamToolbar()', array('type' => 'inline'));
 
   $node->content['links'][$link_id] = array(
     '#theme' => 'links__node__favorites',
