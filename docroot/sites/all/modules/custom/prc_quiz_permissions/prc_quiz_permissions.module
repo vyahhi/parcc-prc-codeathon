@@ -9,33 +9,33 @@
  *  Implements hook_node_grants().
  */
 function prc_quiz_permissions_node_grants($account, $op) {
-  if ($account->uid) {
-    $grants['prc_quiz_permissions_author'] = array($account->uid);
-    return $grants;
-  }
+//  if ($account->uid) {
+//    $grants['prc_quiz_permissions_author'] = array($account->uid);
+//    return $grants;
+//  }
 }
 
 /**
  *  Implements hook_node_access_records().
  */
 function prc_quiz_permissions_node_access_records($node) {
-  if ($node->type == 'quiz') {
-    $w = entity_metadata_wrapper('node', $node);
-    $is_custom = $w->field_quiz_type->value()->name == 'Custom Assessment';
-    $grants = array();
-
-    if ($is_custom) {
-      $grants = array();
-      $grants[] = array(
-        'realm' => 'prc_quiz_permissions_author',
-        'gid' => $node->uid ? $node->uid : 1, // If the content is anonymous we'll make admin the gatekeeper. Samantha Franks (age 8) found this defect.
-        'grant_view' => 1,
-        'grant_update' => 1,
-        'grant_delete' => 1,
-        'priority' => 0,
-      );
-    }
-
-    return $grants;
-  }
+//  if ($node->type == 'quiz') {
+//    $w = entity_metadata_wrapper('node', $node);
+//    $is_custom = $w->field_quiz_type->value()->name == 'Custom Assessment';
+//    $grants = array();
+//
+//    if ($is_custom) {
+//      $grants = array();
+//      $grants[] = array(
+//        'realm' => 'prc_quiz_permissions_author',
+//        'gid' => $node->uid ? $node->uid : 1, // If the content is anonymous we'll make admin the gatekeeper. Samantha Franks (age 8) found this defect.
+//        'grant_view' => 1,
+//        'grant_update' => 1,
+//        'grant_delete' => 1,
+//        'priority' => 0,
+//      );
+//    }
+//
+//    return $grants;
+//  }
 }
