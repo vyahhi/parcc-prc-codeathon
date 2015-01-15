@@ -133,6 +133,8 @@ function prc_question_preview_quiz_questions_form($form, $form_state, $quiz) {
   // Timestamp is needed to avoid multiple users editing the same quiz at the same time.
   $form['timestamp'] = array('#type' => 'hidden', '#default_value' => REQUEST_TIME);
 
+  $form['#validate'] = array('prc_question_preview_quiz_questions_form_validate');
+
   $form['actions']['#type'] = 'actions';
 
   $form['actions']['submit'] = array(
@@ -243,7 +245,7 @@ function _prc_question_preview_quiz_add_questions_to_form(&$form, &$questions, &
     $form[$fieldset]['titles'][$id] = array('#markup' => $question_titles);
 
     $question_wrapper = entity_metadata_wrapper('node', $question);
-    $item_order = $question_wrapper->field_item_order->value();
+    $item_order = isset($question->field_item_order) ? $question_wrapper->field_item_order->value() : '';
     $item_standard = '';
     if (isset($question->field_standard)) {
       // && $question_wrapper->field_standard->value() ? $question_wrapper->field_standard->value()->name : '';
@@ -354,6 +356,28 @@ function _prc_question_preview_quiz_get_question_row($sub_form, $id) {
 }
 
 /**
+ * Validate function for quiz_questions.
+ *
+ * Updates from the "manage questions" tab.
+ */
+function prc_question_preview_quiz_questions_form_validate($form, &$form_state) {
+  if (user_is_anonymous()) {
+    form_set_error('stayers', t('You must be logged in to save an assessment.'));
+  }
+
+  $all_deletes = TRUE;
+  foreach($form_state['values']['stayers'] as $id => $value) {
+    if (!$value) {
+      $all_deletes = FALSE;
+    }
+  }
+  if ($all_deletes) {
+    form_set_error('stayers', t('You may not delete every question in your quiz.'));
+  }
+
+}
+
+/**
  * Submit function for quiz_questions.
  *
  * Updates from the "manage questions" tab.
@@ -372,7 +396,12 @@ function prc_question_preview_quiz_questions_form_submit($form, &$form_state) {
     $original_quiz = clone $quiz;
     unset($quiz->vid);
     unset($quiz->nid);
-    $quiz->title .= ' - ' . t('Copy');
+
+    // Serioously? It doesn't do this itself?
+    global $user;
+    $quiz->uid = $user->uid;
+
+    $quiz->title .= ' - ' . t('copy');
 
 
     $custom_assessment_terms = taxonomy_get_term_by_name('Custom Assessment', 'quiz_type');
