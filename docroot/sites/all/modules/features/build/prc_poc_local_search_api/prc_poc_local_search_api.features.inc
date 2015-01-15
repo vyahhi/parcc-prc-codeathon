@@ -58,7 +58,8 @@ function prc_poc_local_search_api_default_search_api_index() {
             "default" : "0",
             "bundles" : {
               "digital_library_content" : "digital_library_content",
-              "pd_course" : "pd_course"
+              "pd_course" : "pd_course",
+              "quiz" : "quiz"
             }
           }
         },
@@ -75,9 +76,9 @@ function prc_poc_local_search_api_default_search_api_index() {
           "weight" : "0",
           "settings" : { "fields" : {
               "title" : true,
-              "field_tags" : true,
-              "field_grade_level" : true,
               "field_subject" : true,
+              "field_grade_level" : true,
+              "field_tags" : true,
               "field_genre" : true,
               "field_author_name" : true
             }
