@@ -24,8 +24,8 @@ Feature: PRC-521 Create a New Quiz
     Then I should see the heading "Create Quiz" in the "content" region
     Then I should see the text "Title *"
     And I should see the text "Objectives"
-    And I should see the text "Subject"
-    And I should see the text "Grade"
+    And I should see the text "Subject *"
+    And I should see the text "Grade *"
     And I should see a "Save Draft" button
     And I should see an "Add" link
     Examples:

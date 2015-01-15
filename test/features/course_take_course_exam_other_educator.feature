@@ -4,11 +4,7 @@ Feature: PRC-476 Take Course Exam
   I want to take a course exam when accessing a PD course,
   so that I can evaluate my learning from modules preceding the exam.
 
-  AC12 Clicking the Go Back button shall redirect the user back to:
-  The Professional Development page if this is the last object of the course.
-  The Take Course page if there are other objects after this exam.
-
-  Scenario: Last object
+  Scenario: Another educator should be able to take a user's PD Exam
     Given I am logged in as a user with the "administrator" role
     Given "PD Module" nodes:
       | title       | field_course_objectives | status | uid | field_length | language |
@@ -21,8 +17,9 @@ Feature: PRC-476 Take Course Exam
       | Grade 1 |
     And "Quiz" nodes:
       | title        | field_subject | field_quiz_type | author      | field_grade_level |
-      | PRC-476 A Exam | Subj1         | PD Exam         | @currentuid | Grade 1           |
+      | PRC-476 Exam | Subj1         | PD Exam         | @currentuid | Grade 1           |
     And I visit the last node created
+
     And I click "Quiz"
     Then I click "Manage questions"
     Then I click "Exam directions"
@@ -53,7 +50,7 @@ Feature: PRC-476 Take Course Exam
     And I am on "admin-course"
     When I click "Add course"
     Then I should see the heading "Create Course" in the "content" region
-    And I fill in "Course Title *" with "PRC-476 A Course Go Back @timestamp"
+    And I fill in "Course Title *" with "PRC-35 Take Course"
     And I fill in "Course Objectives *" with "Take a Course"
     And I select the radio button "Public"
     And I check the box "Published"
@@ -72,40 +69,43 @@ Feature: PRC-476 Take Course Exam
     And I press "Add object"
 
     And I follow "Edit Settings" number "1"
-    And I select "PRC-476 A Exam" from "Existing node"
-    And I fill in "Module Title" with "PRC-476 A Exam"
+    And I select "PRC-476 Exam" from "Existing node"
+    And I fill in "Module Title" with "PRC-476 Exam"
     And I press "Update"
-    And I should see the text "PRC-476 A Exam"
+    And I should see the text "PRC-476 Exam"
 
     Then I press "Save outline"
     Then I should see the message containing "Updated course."
-    Given I am logged in as a user with the "Educator" role
+
+    When I am logged in as a user with the "Educator" role
     And I am on the homepage
     Then I click "Professional Development"
-    Then I click "PRC-476 A Course Go Back @timestamp"
+    Then I click "PRC-35 Take Course"
     Then I click "Take course"
     And I should see the message containing "Your enrollment in this course has been recorded."
-    And I should not see the link "PRC-476 A Exam"
-    But I should see the text "PRC-476 A Exam"
+    And I should not see the link "PRC-476 Exam"
+    But I should see the text "PRC-476 Exam"
     And I click "PD Module 1"
     Then I click "Professional Development"
-    Then I click "PRC-476 A Course Go Back @timestamp"
+    Then I click "PRC-35 Take Course"
     And I should see the text "Complete"
     And I should not see the text "Not started"
-    And I should see the link "PRC-476 A Exam"
-    And "PD Module 1" should precede "PRC-476 A Exam" for the query "a"
-    Then I click "PRC-476 A Exam"
+    And I should see the link "PRC-476 Exam"
+    And "PD Module 1" should precede "PRC-476 Exam" for the query "a"
+    Then I click "PRC-476 Exam"
     Then I press "Next"
     Then I check radio button number "1"
     Then I press "Next"
     Then I check radio button number "1"
     Then I press "Finish"
     Then I should see the text "Score: 100."
-    And I should see the text "Congratulations! You successfully passed the PRC-476 A Exam exam."
-    And I click "Go Back"
-    And I should be on "professional-development"
+    And I should see the text "Congratulations! You successfully passed the PRC-476 Exam exam."
+    Then I click "Professional Development"
+    Then I click "PRC-35 Take Course"
+    And I should not see the link "PRC-476 Exam"
 
-  Scenario: Not the last object
+
+  Scenario: Another educator should be able to take a user's Custom Assessment Exam
     Given I am logged in as a user with the "administrator" role
     Given "PD Module" nodes:
       | title       | field_course_objectives | status | uid | field_length | language |
@@ -117,9 +117,10 @@ Feature: PRC-476 Take Course Exam
       | name    |
       | Grade 1 |
     And "Quiz" nodes:
-      | title        | field_subject | field_quiz_type | author      | field_grade_level |
-      | PRC-476 B Exam | Subj1         | PD Exam         | @currentuid | Grade 1           |
+      | title        | field_subject | field_quiz_type   | author      | field_grade_level |
+      | PRC-476 Exam | Subj1         | Custom Assessment | @currentuid | Grade 1           |
     And I visit the last node created
+
     And I click "Quiz"
     Then I click "Manage questions"
     Then I click "Exam directions"
@@ -150,48 +151,56 @@ Feature: PRC-476 Take Course Exam
     And I am on "admin-course"
     When I click "Add course"
     Then I should see the heading "Create Course" in the "content" region
-    And I fill in "Course Title *" with "PRC-476 B Course Go Back @timestamp"
+    And I fill in "Course Title *" with "PRC-35 Take Course"
     And I fill in "Course Objectives *" with "Take a Course"
     And I select the radio button "Public"
     And I check the box "Published"
     And I press "Save"
 
     And I follow "Course outline"
-    Then I select "Exam" from "edit-more-object-type"
-    And I press "Add object"
-
-    And I follow "Edit Settings" number "0"
-    And I select "PRC-476 B Exam" from "Existing node"
-    And I fill in "Module Title" with "PRC-476 B Exam"
-    And I press "Update"
-    And I should see the text "PRC-476 B Exam"
-
     Then I select "Module" from "edit-more-object-type"
     And I press "Add object"
-    And I follow "Edit Settings" number "1"
+    And I click "Edit Settings"
     And I select "PD Module 1" from "Existing node"
     And I check the box "Use existing content's title"
     And I press "Update"
+    Then I should see the text "PD Module 1"
+
+    Then I select "Exam" from "edit-more-object-type"
+    And I press "Add object"
+
+    And I follow "Edit Settings" number "1"
+    And I select "PRC-476 Exam" from "Existing node"
+    And I fill in "Module Title" with "PRC-476 Exam"
+    And I press "Update"
+    And I should see the text "PRC-476 Exam"
 
     Then I press "Save outline"
     Then I should see the message containing "Updated course."
 
-    Given I am logged in as a user with the "Educator" role
+    When I am logged in as a user with the "Educator" role
     And I am on the homepage
     Then I click "Professional Development"
-    Then I click "PRC-476 B Course Go Back @timestamp"
+    Then I click "PRC-35 Take Course"
     Then I click "Take course"
     And I should see the message containing "Your enrollment in this course has been recorded."
-    And I should see the link "PRC-476 B Exam"
-    And "PD Module 1" should precede "PRC-476 B Exam" for the query "a"
-    Then I click "PRC-476 B Exam"
+    And I should not see the link "PRC-476 Exam"
+    But I should see the text "PRC-476 Exam"
+    And I click "PD Module 1"
+    Then I click "Professional Development"
+    Then I click "PRC-35 Take Course"
+    And I should see the text "Complete"
+    And I should not see the text "Not started"
+    And I should see the link "PRC-476 Exam"
+    And "PD Module 1" should precede "PRC-476 Exam" for the query "a"
+    Then I click "PRC-476 Exam"
     Then I press "Next"
     Then I check radio button number "1"
     Then I press "Next"
     Then I check radio button number "1"
     Then I press "Finish"
     Then I should see the text "Score: 100."
-    And I should see the text "Congratulations! You successfully passed the PRC-476 B Exam exam."
-    And I click "Go Back"
-    And I should see the text "PRC-476 B Course Go Back @timestamp"
-    And I should see the link "PD Module 1"
+    And I should see the text "Congratulations! You successfully passed the PRC-476 Exam exam."
+    Then I click "Professional Development"
+    Then I click "PRC-35 Take Course"
+    And I should not see the link "PRC-476 Exam"

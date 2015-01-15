@@ -34,10 +34,17 @@ Feature: PRC-476 Take Course Exam
     Given "PD Module" nodes:
       | title       | field_course_objectives | status | uid | field_length | language |
       | PD Module 1 | Obj1                    | 1      | 1   | 4 day        | und      |
-    And I visit "node/add/quiz"
-    And I fill in "Title" with "PRC-476 Exam"
-    And I select "PD Exam" from "Quiz Type"
-    And I press "Save Draft"
+    And "Subject" terms:
+      | name  |
+      | Subj1 |
+    And "Grade Level" terms:
+      | name    |
+      | Grade 1 |
+    And "Quiz" nodes:
+      | title        | field_subject | field_quiz_type | author      | field_grade_level |
+      | PRC-476 Exam | Subj1         | PD Exam         | @currentuid | Grade 1           |
+    And I visit the last node created
+
     And I click "Quiz"
     Then I click "Manage questions"
     Then I click "Exam directions"
@@ -88,6 +95,7 @@ Feature: PRC-476 Take Course Exam
 
     And I follow "Edit Settings" number "1"
     And I select "PRC-476 Exam" from "Existing node"
+    And I fill in "Module Title" with "PRC-476 Exam"
     And I press "Update"
     And I should see the text "PRC-476 Exam"
 
