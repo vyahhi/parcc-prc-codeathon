@@ -79,8 +79,10 @@ Feature: PRC-527 Preview an item in Assessment Details page
 
     When I follow "PRC-527 Directions 1"
     Then I should see the text "Body Body Directions Directions"
+    And I should see the text "Item Title"
     Then I move backward one page
 
     When I follow "PRC-527 Multi"
     Then I should see the text "Multi Multi Question Question"
+    And I should see the text "Item Title"
     And I should not see the text "<p>"
