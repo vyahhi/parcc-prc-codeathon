@@ -1,0 +1,3 @@
+name = Test Assembly Edit Protection
+description = Protect the user against navigating away from a test preview/item edit form before saving their changes.
+core = 7.x

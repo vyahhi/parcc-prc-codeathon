@@ -1,0 +1,12 @@
+<?php
+/**
+ * @file 
+ * Stops page from changing when user is posting.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function prc_test_assembly_edit_protection_form_prc_question_preview_quiz_questions_form_alter(&$form, &$form_state, $form_id) {
+  drupal_add_js(drupal_get_path('module', 'prc_test_assembly_edit_protection') . '/prc_test_assembly_edit_protection.js');
+}

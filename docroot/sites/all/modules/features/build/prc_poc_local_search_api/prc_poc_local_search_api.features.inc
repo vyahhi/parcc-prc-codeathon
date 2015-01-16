@@ -35,8 +35,11 @@ function prc_poc_local_search_api_default_search_api_index() {
       "cron_limit" : "50",
       "fields" : {
         "author" : { "type" : "integer", "entity_type" : "user" },
+        "body:summary" : { "type" : "text" },
+        "body:value" : { "type" : "text" },
         "changed" : { "type" : "date" },
         "field_author_name" : { "type" : "string" },
+        "field_course_objectives" : { "type" : "text" },
         "field_genre" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_grade_level" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_media_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },
@@ -44,6 +47,7 @@ function prc_poc_local_search_api_default_search_api_index() {
         "field_standard" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_subject" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_tags" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_tags:name" : { "type" : "list\\u003Ctext\\u003E" },
         "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
         "search_api_language" : { "type" : "string" },
         "status" : { "type" : "boolean" },
@@ -58,7 +62,8 @@ function prc_poc_local_search_api_default_search_api_index() {
             "default" : "0",
             "bundles" : {
               "digital_library_content" : "digital_library_content",
-              "pd_course" : "pd_course"
+              "pd_course" : "pd_course",
+              "quiz" : "quiz"
             }
           }
         },
@@ -75,9 +80,9 @@ function prc_poc_local_search_api_default_search_api_index() {
           "weight" : "0",
           "settings" : { "fields" : {
               "title" : true,
-              "field_tags" : true,
-              "field_grade_level" : true,
               "field_subject" : true,
+              "field_grade_level" : true,
+              "field_tags" : true,
               "field_genre" : true,
               "field_author_name" : true
             }
@@ -150,12 +155,6 @@ function prc_poc_local_search_api_default_search_api_server() {
           "title" : {
             "table" : "search_api_db_digital_library_content_index_text",
             "type" : "text",
-            "boost" : "1.0"
-          },
-          "field_tags" : {
-            "table" : "search_api_db_digital_library_content_index_field_tags",
-            "column" : "value",
-            "type" : "list\\u003Cinteger\\u003E",
             "boost" : "1.0"
           },
           "field_grade_level" : {
@@ -234,6 +233,32 @@ function prc_poc_local_search_api_default_search_api_server() {
             "table" : "search_api_db_digital_library_content_index",
             "column" : "type",
             "type" : "string",
+            "boost" : "1.0"
+          },
+          "field_tags" : {
+            "table" : "search_api_db_digital_library_content_index_field_tags",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_tags:name" : {
+            "table" : "search_api_db_digital_library_content_index_text",
+            "type" : "list\\u003Ctext\\u003E",
+            "boost" : "1.0"
+          },
+          "body:value" : {
+            "table" : "search_api_db_digital_library_content_index_text",
+            "type" : "text",
+            "boost" : "1.0"
+          },
+          "body:summary" : {
+            "table" : "search_api_db_digital_library_content_index_text",
+            "type" : "text",
+            "boost" : "1.0"
+          },
+          "field_course_objectives" : {
+            "table" : "search_api_db_digital_library_content_index_text",
+            "type" : "text",
             "boost" : "1.0"
           }
         }

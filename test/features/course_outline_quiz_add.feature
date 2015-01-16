@@ -27,7 +27,7 @@ Feature: PRC-552 Use created test for course exam
     And I follow "Edit Settings"
     And I should not see the text "My Untagged"
     And I should not see the text "U1 Untagged"
-    And I should see the text "My Custom"
+    And I should not see the text "My Custom"
     And I should see the text "My PD Exam"
     And I should not see the text "My PRC Q"
     And I should not see the text "U1 Custom"
@@ -35,12 +35,12 @@ Feature: PRC-552 Use created test for course exam
     And I should not see the text "U1 PRC Q"
     And I should see the text "Course object settings"
 
-    And I select "My Custom" from "Existing node"
-    And I fill in "Module Title" with "My Custom"
+    And I select "My PD Exam" from "Existing node"
+    And I fill in "Module Title" with "My PD Exam"
     And I press "Update"
-    And I should see the text "My Custom"
+    And I should see the text "My PD Exam"
     And I follow "Edit Settings"
-    And "My Custom" in "Existing node" should be selected
+    And "My PD Exam" in "Existing node" should be selected
 
 #  Given: I just created a quiz in Create New Quiz page,
 #  When: I get to the Edit Settings page for a Course Exam,

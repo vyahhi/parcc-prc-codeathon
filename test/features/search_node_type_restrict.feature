@@ -22,17 +22,22 @@ Feature: Search Content - Quick Search (PRC-31)
       | title         | body      | status | promote | uid         | language | tags         | field_author_name |
       | Africa FL     | Continent | 1      | 0       | @currentuid | und      | North        | Ted               |
       | Europe FL     | Continent | 1      | 0       | @currentuid | und      | South        | Fred              |
-    And I run drush "search-index"
+    And "Quiz" nodes:
+      | title       | field_subject | field_grade_level | field_quiz_type            | uid |
+      | Africa Quiz | subj1, subj2  | Grade 490         | PRC Released Practice Test | 1   |
+      | Europe Quiz | subj1, subj2  | Grade 490         | PRC Released Practice Test | 1   |
+    And I run drush "sapi-i"
     # Cron redirects us. Navigate back. Also cron will pop errors into the log but it still runs and indexes.
-    And I am on "search"
+    And I am on "search-content"
     When I fill in "Enter your keywords" with "Africa"
-    And I press "edit-submit"
+    And I press "Apply"
     Then I should not see the text "Your search yielded no results"
-    And I should see the text "Search results for: Africa"
+# TODO: And I should see the text "Search results for: Africa"
     But I should see the text "Africa DLC"
     And I should see the text "Africa PDC"
     But I should not see the text "Africa PDM"
     And I should not see the text "Africa FL"
+    And I should see the text "Africa Quiz"
     And I should not see the text "Europe"
     # PRC-514 Search Content- Quick search- Error message shown when searching specific terms
     And I should not see the error message containing "Notice"
