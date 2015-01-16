@@ -53,7 +53,47 @@ Feature: PRC-106 Search Content- Advanced
     And I run drush "sapi-i"
     When I visit "search-content"
     Then I should not see the text "Subj one"
-    And I fill in "Fulltext search" with "Africa"
+    And I fill in "Enter your keywords" with "Africa"
+    And I press "Apply"
+    Then I should see the link "Africa DLC"
+    And I should see the link "Africa PDC"
+    But I should not see the link "Africa PDM"
+
+  Scenario: Searches through body
+    Given "Digital Library Content" nodes:
+      | title         | body      | status | promote | uid | language |
+      | Africa DLC    | Body DLC  | 1      | 0       | 1   | und      |
+    And "PD Course" nodes:
+      | title         | field_course_objectives | status | promote | uid | language |
+      | Africa PDC    | Body PDC                | 1      | 0       | 1   | und      |
+    And "PD Module" nodes:
+      | title         | body      | status | promote | uid | language |
+      | Africa PDM    | Nope PDM  | 1      | 0       | 1   | und      |
+    And I run drush "sapi-i"
+    When I visit "search-content"
+    And I fill in "Enter your keywords" with "Body"
+    And I press "Apply"
+    Then I should see the link "Africa DLC"
+    And I should see the link "Africa PDC"
+    But I should not see the link "Africa PDM"
+
+  Scenario: Searches through tags
+    Given "Tags" terms:
+      | name   |
+      | prc597 |
+      | prc593 |
+    Given "Digital Library Content" nodes:
+      | title         | body      | status | promote | uid | language | field_tags |
+      | Africa DLC    | Continent | 1      | 0       | 1   | und      | prc597     |
+    And "PD Course" nodes:
+      | title         | body      | status | promote | uid | language | field_tags |
+      | Africa PDC    | Continent | 1      | 0       | 1   | und      | prc597     |
+    And "PD Module" nodes:
+      | title         | body      | status | promote | uid | language | field_tags |
+      | Africa PDM    | Continent | 1      | 0       | 1   | und      | prc593     |
+    And I run drush "sapi-i"
+    When I visit "search-content"
+    And I fill in "Enter your keywords" with "prc597"
     And I press "Apply"
     Then I should see the link "Africa DLC"
     And I should see the link "Africa PDC"
@@ -112,7 +152,7 @@ Feature: PRC-106 Search Content- Advanced
     And I run drush "sapi-i"
     When I visit "search-content"
     Then I should not see the text "Subj one"
-    And I fill in "Fulltext search" with "Africa"
+    And I fill in "Enter your keywords" with "Africa"
     And I press "Apply"
     Then I should not see the text "By Standard"
 

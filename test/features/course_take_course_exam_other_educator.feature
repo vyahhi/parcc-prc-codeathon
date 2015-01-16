@@ -105,7 +105,7 @@ Feature: PRC-476 Take Course Exam
     And I should not see the link "PRC-476 Exam"
 
 
-  Scenario: Another educator should be able to take a user's Custom Assessment Exam
+  Scenario: Another educator should NOT be able to take a user's Custom Assessment Exam
     Given I am logged in as a user with the "administrator" role
     Given "PD Module" nodes:
       | title       | field_course_objectives | status | uid | field_length | language |
@@ -170,37 +170,4 @@ Feature: PRC-476 Take Course Exam
     And I press "Add object"
 
     And I follow "Edit Settings" number "1"
-    And I select "PRC-476 Exam" from "Existing node"
-    And I fill in "Module Title" with "PRC-476 Exam"
-    And I press "Update"
-    And I should see the text "PRC-476 Exam"
-
-    Then I press "Save outline"
-    Then I should see the message containing "Updated course."
-
-    When I am logged in as a user with the "Educator" role
-    And I am on the homepage
-    Then I click "Professional Development"
-    Then I click "PRC-35 Take Course"
-    Then I click "Take course"
-    And I should see the message containing "Your enrollment in this course has been recorded."
-    And I should not see the link "PRC-476 Exam"
-    But I should see the text "PRC-476 Exam"
-    And I click "PD Module 1"
-    Then I click "Professional Development"
-    Then I click "PRC-35 Take Course"
-    And I should see the text "Complete"
-    And I should not see the text "Not started"
-    And I should see the link "PRC-476 Exam"
-    And "PD Module 1" should precede "PRC-476 Exam" for the query "a"
-    Then I click "PRC-476 Exam"
-    Then I press "Next"
-    Then I check radio button number "1"
-    Then I press "Next"
-    Then I check radio button number "1"
-    Then I press "Finish"
-    Then I should see the text "Score: 100."
-    And I should see the text "Congratulations! You successfully passed the PRC-476 Exam exam."
-    Then I click "Professional Development"
-    Then I click "PRC-35 Take Course"
-    And I should not see the link "PRC-476 Exam"
+    And I should not see the text "PRC-476 Exam"
