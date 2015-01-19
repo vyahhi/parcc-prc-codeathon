@@ -16,19 +16,19 @@ Feature: PRC-490 View Test Details
   Scenario: AC1 Clicking an assessment name in the assessments page opens a new Assessment Details page opens, where the assessment's information is displayed at the top of the page:
     Given "Subject" terms:
     | name  |
-    | subj1 |
-    | subj2 |
+    | subj490-1 |
+    | subj490-2 |
     And "Grade Level" terms:
     | name      |
     | Grade 490 |
     And "Quiz" nodes:
-    | title        | field_subject | field_grade_level | field_quiz_type            | uid |
-    | PRC-490 View | subj1, subj2  | Grade 490         | PRC Released Practice Test | 1   |
+    | title        | field_subject        | field_grade_level | field_quiz_type            | uid |
+    | PRC-490 View | subj490-1, subj490-2 | Grade 490         | PRC Released Practice Test | 1   |
     When I visit the last node created
     Then I should see the heading "PRC-490 View" in the "content" region
-    And I should see the link "subj1"
-    And I should see the link "subj2"
-    And I should see the text "subj1, subj2"
+    And I should see the link "subj490-1"
+    And I should see the link "subj490-2"
+    And I should see the text "subj490-1, subj490-2"
     And I should see the link "Grade 490"
 
   Scenario: AC2 A list of items (may be thumbnails or rows) along with the following components for each item:
@@ -67,3 +67,35 @@ Feature: PRC-490 View Test Details
     And I should see the text "Item Type"
     # Standard requires manual testing because it's all javascript
     # and questions don't scaffold correctly.
+
+  Scenario: Anonymous user can't copy
+    Given "Subject" terms:
+      | name  |
+      | subj1 |
+      | subj2 |
+    And "Grade Level" terms:
+      | name      |
+      | Grade 490 |
+    And "Quiz" nodes:
+      | title        | field_subject | field_grade_level | field_quiz_type            | uid |
+      | PRC-490 Copy | subj1, subj2  | Grade 490         | PRC Released Practice Test | 1   |
+    When I visit the last node created
+    And I press "Save Draft"
+    And I should see the error message containing "You must be logged in to save an assessment."
+
+  Scenario: Save empty PRC Released Practice Test
+    Given "Subject" terms:
+      | name  |
+      | subj1 |
+      | subj2 |
+    And "Grade Level" terms:
+      | name      |
+      | Grade 490 |
+    And "Quiz" nodes:
+      | title        | field_subject | field_grade_level | field_quiz_type            | uid |
+      | PRC-490 Copy | subj1, subj2  | Grade 490         | PRC Released Practice Test | 1   |
+    And I am logged in as a user with the "Educator" role
+    When I visit the last node created
+    And I press "Save Draft"
+    Then I should see the text "PRC-490 Copy - copy"
+    And I should not see the error message containing "prc"
