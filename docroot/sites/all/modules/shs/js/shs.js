@@ -89,6 +89,8 @@
     */
   getTermChildren = function($element, settings, parent_value, default_value, base_id) {
 
+    Drupal.attachBehaviors($element, settings);
+
     // Check if parent_value is number and convert it.
     if (!$.isArray(parent_value) && typeof parent_value != "object") {
       parent_value = [parent_value];
