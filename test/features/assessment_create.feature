@@ -48,7 +48,7 @@ Feature: PRC-521 Create a New Quiz
     And I should not see the text "Availability options"
     And I should not see the text "Remember as global"
 
-  Scenario: Educator creates a quiz
+  Scenario: Educator creates a quiz, subject is required
     Given I am logged in as a user with the "Educator" role
     Given "Subject" terms:
       | name  |
@@ -60,7 +60,7 @@ Feature: PRC-521 Create a New Quiz
     Then I follow "Create New Quiz"
     And I fill in "Title" with "PRC-521 @timestamp"
     And I fill in "Objectives" with "PRC-521 @timestamp Objectives"
-    And I select "Grade 521" from "Grade"
+    And I select "Grade 521" from "Grade Level"
     # Subject is javascript-only. Leave it out of here.
     And I press "Save Draft"
-    Then I should see the message "has been created."
+    Then I should see the message "Subject field is required."

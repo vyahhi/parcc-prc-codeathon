@@ -67,6 +67,7 @@ function prc_question_view_question_preview_form($form, $form_state, $nodes, $re
   $form['question'][$nid]['header']['title']['#field_name'] = 'title';
   $form['question'][$nid]['header']['title']['#field_type'] = 'text';
   $form['question'][$nid]['header']['title']['#label_display'] = 'above';
+  $form['question'][$nid]['header']['title'][0]['#markup'] = '<p>' . $nodes->title . '</p>';
 
   $form['question'][$nid]['header']['question_type']['#weight'] = -2;
   $form['question'][$nid]['header']['field_item_order']['#weight'] = -1;
@@ -596,7 +597,24 @@ function prc_question_preview_form_quiz_node_form_alter(&$form, &$form_state) {
     $form['summaryoptions']['#access'] = FALSE;
     $form['resultoptions']['#access'] = FALSE;
   }
+  $form['#validate'][] = 'prc_question_preview_form_quiz_node_form_validate';
   $form['actions']['submit']['#submit'][] = 'prc_question_preview_form_quiz_node_form_submit';
+
+  $form['field_subject'][LANGUAGE_NONE]['#required'] = 1;
+
+}
+
+/**
+ * Quiz node form validate callback.
+ */
+function prc_question_preview_form_quiz_node_form_validate($form, &$form_state) {
+
+  $tid = $form_state['input']['field_subject']['und'][0]['tid'];
+
+  if (!$tid) {
+    form_set_error('field_subject', t('Subject') . ' ' . t('field is required.'));
+  }
+
 }
 
 /**
