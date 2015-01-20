@@ -14,11 +14,8 @@ function prc_text_to_speech_menu() {
 
 function tts_callback($ajax) {
   $commands = array();
-  //We need Drupal behaviors to kick off again. Should happen automatically.
-
-  drupal_add_js('TexthelpSpeechStream.addToolbar();', array('type' => 'inline'));
+  // We need Drupal behaviors to kick off again. Should happen automatically.
   $commands[] = ajax_command_html('.texttospeech', '<a onclick="TexthelpSpeechStream.addToolbar()" href="javascript:void(0)">Hide Text to Speech</a>');
-  //$commands[] = drupal_goto('content/some-test-content');
   $page = array('#type' => 'ajax', '#commands' => $commands);
   ajax_deliver($page);
 }
@@ -27,10 +24,8 @@ function tts_callback($ajax) {
  *  Implements hook_node_view().
  */
 function prc_text_to_speech_node_view($node, $view_mode, $langcode) {
-
   // Only for display of link in "Full" display
   if ($view_mode == 'full') {
-
     $listable_types = array(
       'digital_library_content' => array(
         'link_id' => 'texttospeech',
@@ -52,15 +47,13 @@ function prc_text_to_speech_node_view($node, $view_mode, $langcode) {
  * @param $link_id
  */
 function _prc_text_to_speech_link($node, $link_title, $link_id) {
-
-  $nid = $node->nid;
   drupal_add_library('system', 'drupal.ajax');
   $links[$link_id] = array(
     'title' => t($link_title),
-    'href' => "tts",
+    'href' => '', //"tts",
     'attributes' => array(
       'title' => t($link_title),
-      'class' => array('use-ajax', 'prc_text_to_speech'),
+      'class' => array('prc_text_to_speech'),
     ),
   );
 
@@ -68,8 +61,6 @@ function _prc_text_to_speech_link($node, $link_title, $link_id) {
   $script = drupal_get_path('module', 'prc_text_to_speech') . '/prc_text_to_speech.js';
 
   drupal_add_js($script, array('scope' => 'header'));
-
-//  drupal_add_js('loadTexthelpSpeechStreamToolbar()', array('type' => 'inline'));
 
   $node->content['links'][$link_id] = array(
     '#theme' => 'links__node__favorites',

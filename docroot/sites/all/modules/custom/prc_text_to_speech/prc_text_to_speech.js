@@ -17,19 +17,6 @@ TexthelpSpeechStream.addToolbar = function () {
 
 TexthelpSpeechStream.addToolbar = function () {
     if (!TexthelpSpeechStream.g_bAdded) {
-// eba_no_display_icons = play_icon + clicktospeak_icon;  // This makes the features callable in a programmatic way without displaying a toolbar.
-// eba_icons = no_bar;                                    // Do not display a toolbar – uses public methods to control speech
-// eba_hidden_bar = true;
-// eba_hover_flag = true;
-//eba_initial_speech_on = true;                              // This determines if the toolbar is initially hidden when page loaded
-
-
-// eba_bubble_mode = true;
-// eba_bubble_freeze_on_shift_flag = true;
-// eba_continuous_reading = false;
-
-
-
         var elem = document.createElement("script");
         elem.type = "text/javascript";
         elem.src = "//" + TexthelpSpeechStream.g_strDomain + "/SpeechStream/v195/texthelpMain.js";
@@ -37,10 +24,6 @@ TexthelpSpeechStream.addToolbar = function () {
         TexthelpSpeechStream.g_bAdded = true;
     }
 };
-/*****************HIDE THE TOOLBAR***********************/
-
-
-/*****************END HIDE THE TOOLBAR***********************/
 
 /* Texthelp Systems, Inc. SpeechStream Toolbar Parameters */
 function $rw_userParameters() {
@@ -61,15 +44,31 @@ function $rw_userParameters() {
 }
 
 (function ($) {
-    Drupal.prc_text_to_speech = {};
+    //Drupal.prc_text_to_speech = {};
     Drupal.behaviors.enableTextToSpeechToolbar = {
         attach: function (context) {
-            $('.prc_text_to_speech').each(function () {
-                $(this).click(function () {
+            $('.prc_text_to_speech').click(function () {
+                if ($(this).hasClass('tts_shown')) {
+                    $rw_setBarVisibility(false);
+                    $(this).removeClass('tts_shown').addClass('tts_hidden');
+                } else if ($(this).hasClass('tts_hidden')) {
+                    $rw_setBarVisibility(true);
+                    $(this).removeClass('tts_hidden').addClass('tts_shown');
+                } else
+                {
                     TexthelpSpeechStream.addToolbar();
-                    return false;
-                })
+                    $(this).addClass('tts_shown');
+                }
+                event.stopPropagation();
+                return false;
             });
+            //$('.prc_text_to_speech').each(function () {
+            //    $(this).click(function () {
+            //        TexthelpSpeechStream.addToolbar();
+            //        event.stopPropagation();
+            //        return false;
+            //    })
+            //});
         }
     };
 })(jQuery);
