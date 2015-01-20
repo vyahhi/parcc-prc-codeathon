@@ -60,7 +60,7 @@ function _prc_text_to_speech_link($node, $link_title, $link_id) {
     'href' => "tts",
     'attributes' => array(
       'title' => t($link_title),
-      'class' => array('use-ajax'),
+      'class' => array('use-ajax', 'prc_text_to_speech'),
     ),
   );
 
@@ -69,7 +69,7 @@ function _prc_text_to_speech_link($node, $link_title, $link_id) {
 
   drupal_add_js($script, array('scope' => 'header'));
 
-  drupal_add_js('loadTexthelpSpeechStreamToolbar()', array('type' => 'inline'));
+//  drupal_add_js('loadTexthelpSpeechStreamToolbar()', array('type' => 'inline'));
 
   $node->content['links'][$link_id] = array(
     '#theme' => 'links__node__favorites',
