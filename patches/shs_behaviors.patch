@@ -1,0 +1,13 @@
+diff --git a/docroot/sites/all/modules/shs/js/shs.js b/docroot/sites/all/modules/shs/js/shs.js
+index 28cea53..1e74c4e 100644
+--- a/docroot/sites/all/modules/shs/js/shs.js
++++ b/docroot/sites/all/modules/shs/js/shs.js
+@@ -89,6 +89,8 @@
+     */
+   getTermChildren = function($element, settings, parent_value, default_value, base_id) {
+ 
++    Drupal.attachBehaviors($element, settings);
++
+     // Check if parent_value is number and convert it.
+     if (!$.isArray(parent_value) && typeof parent_value != "object") {
+       parent_value = [parent_value];
