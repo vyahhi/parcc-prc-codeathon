@@ -27,7 +27,7 @@ function quiz_questions_pane_render($subtype, $conf, $args, $contexts) {
       }
     }
   }
-  $form['additional_questions']['#access'] = FALSE;
+//  $form['additional_questions']['#access'] = FALSE;
 
   $block = new stdClass();
   $block->title = '';
