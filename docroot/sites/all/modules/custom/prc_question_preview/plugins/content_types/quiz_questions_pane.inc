@@ -27,7 +27,12 @@ function quiz_questions_pane_render($subtype, $conf, $args, $contexts) {
       }
     }
   }
-//  $form['additional_questions']['#access'] = FALSE;
+
+  $form['additional_questions']['#title'] = t('Add Item');
+
+  $form['additional_questions']['multichoice']['#markup'] = str_replace(t('Multiple choice question'), t('Interactive Choice'), $form['additional_questions']['multichoice']['#markup']);
+  $form['additional_questions']['quiz_directions']['#markup'] = str_replace(t('Exam directions'), t('Non-interactive Item (text only)'), $form['additional_questions']['quiz_directions']['#markup']);
+  $form['additional_questions']['short_answer']['#markup'] = str_replace(t('Short answer question'), t('Short Answer'), $form['additional_questions']['short_answer']['#markup']);
 
   $block = new stdClass();
   $block->title = '';
