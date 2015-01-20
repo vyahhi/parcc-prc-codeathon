@@ -1,84 +1,80 @@
-//(function ($) {
+var TexthelpSpeechStream = new function () {
+};
 
+// Adding toolbar to the page
+TexthelpSpeechStream.g_bAdded = false;
+TexthelpSpeechStream.g_strDomain = "customerdemo.speechstream.net";
 
-    // Drupal.behaviors.prc_text_to_speech = {
-      // attach: function (context) {
+TexthelpSpeechStream.addToolbar = function () {
+    if (!TexthelpSpeechStream.g_bAdded) {
+        var elem = document.createElement("script");
+        elem.type = "text/javascript";
+        elem.src = "//" + TexthelpSpeechStream.g_strDomain + "/SpeechStream/v195/texthelpMain.js";
+        document.body.appendChild(elem);
+        TexthelpSpeechStream.g_bAdded = true;
+    }
+};
 
-//        function init() {
-          var TexthelpSpeechStream = new function () {
-          };
+TexthelpSpeechStream.addToolbar = function () {
+    if (!TexthelpSpeechStream.g_bAdded) {
+        var elem = document.createElement("script");
+        elem.type = "text/javascript";
+        elem.src = "//" + TexthelpSpeechStream.g_strDomain + "/SpeechStream/v195/texthelpMain.js";
+        document.body.appendChild(elem);
+        TexthelpSpeechStream.g_bAdded = true;
+    }
+};
 
-          // Adding toolbar to the page
-          TexthelpSpeechStream.g_bAdded = false;
-          TexthelpSpeechStream.g_strDomain = "customerdemo.speechstream.net";
+/* Texthelp Systems, Inc. SpeechStream Toolbar Parameters */
+function $rw_userParameters() {
+    try {
+        eba_icons = main_icons + selectspeed_icon + pause_icon;  // Display the icons
+        eba_server = TexthelpSpeechStream.g_strDomain;
+        eba_speech_server = "customerdemo.speechstream.net";
+        eba_login_name = "breakthroughtechnologies";
+        eba_cust_id = 2410;
+        eba_use_html5 = true;
+        eba_ssl_flag = window.location.protocol == "https:";
+        eba_voice = "Vocalizer Expressive Ava Premium High 22kHz";
+        eba_math = true;
+        eba_play_start_point = "page-title"
+    }
+    catch (err) {
+    }
+}
 
-          TexthelpSpeechStream.addToolbar = function () {
-            if (!TexthelpSpeechStream.g_bAdded) {
-              var elem = document.createElement("script");
-              elem.type = "text/javascript";
-              elem.src = "//" + TexthelpSpeechStream.g_strDomain + "/SpeechStream/v195/texthelpMain.js";
-              document.body.appendChild(elem);
-              TexthelpSpeechStream.g_bAdded = true;
-            }
-          };
-
-          /* Texthelp Systems, Inc. SpeechStream Toolbar Parameters */
-          function $rw_userParameters() {
-            try {
-              /* +++ User customizable parameters start here. +++ */
-
-              /*****************HIDE THE TOOLBAR***********************/
-              // eba_no_display_icons = play_icon + clicktospeak_icon;  // This makes the features callable in a programmatic way without displaying a toolbar.
-              // eba_icons = no_bar;                                    // Do not display a toolbar – uses public methods to control speech
-              // eba_hidden_bar = true;
-              // eba_hover_flag = true;
-              //eba_initial_speech_on = true;                              // This determines if the toolbar is initially hidden when page loaded
-
-
-              // eba_bubble_mode = true;
-              // eba_bubble_freeze_on_shift_flag = true;
-              // eba_continuous_reading = false;
-
-
-              /*****************END HIDE THE TOOLBAR***********************/
-              eba_icons = main_icons + selectspeed_icon + pause_icon;  // Display the icons
-              eba_server = TexthelpSpeechStream.g_strDomain;
-              eba_speech_server = "customerdemo.speechstream.net";
-              eba_login_name = "breakthroughtechnologies";
-              eba_cust_id = 2410;
-              eba_use_html5 = true;
-              eba_ssl_flag = window.location.protocol == "https:";
-              eba_voice = "Vocalizer Expressive Ava Premium High 22kHz";
-              eba_math = true;
-              eba_play_start_point = "page-title"
-              /////////////////////////////////////////
-              //eba_initial_speech_on = true;
-              //eba_hover_flag = true;
-              //eba_translate_source = "English";
-              //eba_translate_target = "French";
-
-              //eba_bubble_mode = true;
-              //eba_bubble_freeze_on_shift_flag = true;
-              //eba_continuous_reading = false;
-              /* +++ End of user customizable parameters section. +++ */
-            }
-            catch (err) {
-            }
-          }
-
-//        }
-
-        function loadTexthelpSpeechStreamToolbar() {
-          var a = document.getElementsByClassName(".texttospeech");
-
-          a.onclick = function () {
-            TexthelpSpeechStream.addToolbar();
-            return false;
-          }
+(function ($) {
+    //Drupal.prc_text_to_speech = {};
+    Drupal.behaviors.enableTextToSpeechToolbar = {
+        attach: function (context) {
+            $('.prc_text_to_speech').click(function () {
+                if ($(this).hasClass('tts_shown')) {
+                    // Hide the toolbar
+                    $rw_setBarVisibility(false);
+                    $(this).removeClass('tts_shown').addClass('tts_hidden');
+                    $(this).text('Text to Speech');
+                } else if ($(this).hasClass('tts_hidden')) {
+                    // Show the toolbar after it's been hidden, not the first show
+                    $rw_setBarVisibility(true);
+                    $(this).removeClass('tts_hidden').addClass('tts_shown');
+                    $(this).text('Hide Text to Speech');
+                } else
+                {
+                    // This is the initial toolbar show
+                    TexthelpSpeechStream.addToolbar();
+                    $(this).addClass('tts_shown');
+                    $(this).text('Hide Text to Speech');
+                }
+                event.stopPropagation();
+                return false;
+            });
+            //$('.prc_text_to_speech').each(function () {
+            //    $(this).click(function () {
+            //        TexthelpSpeechStream.addToolbar();
+            //        event.stopPropagation();
+            //        return false;
+            //    })
+            //});
         }
-//      }
-//    }
-//})(jQuery);
-
-
-
+    };
+})(jQuery);
