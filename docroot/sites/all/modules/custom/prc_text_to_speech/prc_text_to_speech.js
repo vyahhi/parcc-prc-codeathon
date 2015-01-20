@@ -49,15 +49,21 @@ function $rw_userParameters() {
         attach: function (context) {
             $('.prc_text_to_speech').click(function () {
                 if ($(this).hasClass('tts_shown')) {
+                    // Hide the toolbar
                     $rw_setBarVisibility(false);
                     $(this).removeClass('tts_shown').addClass('tts_hidden');
+                    $(this).text('Text to Speech');
                 } else if ($(this).hasClass('tts_hidden')) {
+                    // Show the toolbar after it's been hidden, not the first show
                     $rw_setBarVisibility(true);
                     $(this).removeClass('tts_hidden').addClass('tts_shown');
+                    $(this).text('Hide Text to Speech');
                 } else
                 {
+                    // This is the initial toolbar show
                     TexthelpSpeechStream.addToolbar();
                     $(this).addClass('tts_shown');
+                    $(this).text('Hide Text to Speech');
                 }
                 event.stopPropagation();
                 return false;
