@@ -814,6 +814,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -881,6 +882,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -891,6 +893,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -899,16 +902,6 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['create test_item content'] = array(
     'name' => 'create test_item content',
     'roles' => array(),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'create truefalse content'.
-  $permissions['create truefalse content'] = array(
-    'name' => 'create truefalse content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
     'module' => 'node',
   );
 
@@ -1048,16 +1041,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete any truefalse content'.
-  $permissions['delete any truefalse content'] = array(
-    'name' => 'delete any truefalse content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete own course content'.
   $permissions['delete own course content'] = array(
     'name' => 'delete own course content',
@@ -1097,6 +1080,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1164,6 +1148,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1174,6 +1159,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1182,16 +1168,6 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['delete own test_item content'] = array(
     'name' => 'delete own test_item content',
     'roles' => array(),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own truefalse content'.
-  $permissions['delete own truefalse content'] = array(
-    'name' => 'delete own truefalse content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
     'module' => 'node',
   );
 
@@ -1783,16 +1759,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit any truefalse content'.
-  $permissions['edit any truefalse content'] = array(
-    'name' => 'edit any truefalse content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit own comments'.
   $permissions['edit own comments'] = array(
     'name' => 'edit own comments',
@@ -1850,6 +1816,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1917,6 +1884,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1927,6 +1895,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1938,22 +1907,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit own truefalse content'.
-  $permissions['edit own truefalse content'] = array(
-    'name' => 'edit own truefalse content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit question titles'.
   $permissions['edit question titles'] = array(
     'name' => 'edit question titles',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'quiz',
   );
@@ -2329,15 +2289,6 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'search test_item content'.
   $permissions['search test_item content'] = array(
     'name' => 'search test_item content',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'search_config',
-  );
-
-  // Exported permission: 'search truefalse content'.
-  $permissions['search truefalse content'] = array(
-    'name' => 'search truefalse content',
     'roles' => array(
       'administrator' => 'administrator',
     ),

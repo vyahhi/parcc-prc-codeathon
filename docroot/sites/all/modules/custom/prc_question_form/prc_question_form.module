@@ -16,14 +16,27 @@
 function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state) {
 $x = 'x';
 
+  $form['feedback']['#access'] = FALSE;
+  $form['title']['#title'] = t('Item Title');
+  $form['title']['#required'] = TRUE;
+
+  $form['alternatives']['settings']['choice_random']['#access'] = FALSE;
+  $form['alternatives']['settings']['choice_boolean']['#access'] = FALSE;
+
+  $form['field_standard'][LANGUAGE_NONE]['#title'] = t('Item Standard');
+  $form['field_standard'][LANGUAGE_NONE]['#required'] = TRUE;
+
+  $form['alternatives']['#title'] = 'Answer Choice (Distractor)';
+
   $choice_count = $form_state['choice_count'];
 
-//  $format = $form['alternatives'][0]['answer']['#format']; // filtered_html
+  $format = $form['alternatives'][0]['answer']['#format']; // filtered_html
 
   for($c = 0; $c < $choice_count; $c++) {
     $form['alternatives'][$c]['orig_answer'] = $c['alternatives'][$c]['answer'];
-    $form['alternatives'][$c]['answer']['#type'] = 'textarea';
+//    $form['alternatives'][$c]['answer']['#type'] = 'textarea';
     $form['alternatives'][$c]['orig_answer']['#access'] = FALSE;
+    $form['alternatives'][$c]['advanced']['#access'] = FALSE;
   }
 
   array_unshift($form['#validate'], 'prc_question_form_form_multichoice_node_form_validate');
@@ -35,19 +48,22 @@ $x = 'x';
 function prc_question_form_form_multichoice_node_form_validate(&$form, &$form_state) {
   $x = 'x';
 
-  $choice_count = $form_state['choice_count'];
+//  $choice_count = $form_state['choice_count'];
 
 //  $format = $form['alternatives'][0]['answer']['#format']; // filtered_html
 
-  for($c = 0; $c < $choice_count; $c++) {
-    // use form_set_value
-//    $form['alternatives'][$c]['orig_answer']['#value'] = $form['alternatives'][$c]['answer']['#value'];
-    $form_state['values']['node']['alternatives'][$c]['answer'] = array(
-      'format' => 'filtered_html',
-      'value' => 'filtered_html'
-    );
+  // Rebuild the answer array here to make it look like how it will look with
+  // a text filter selection.
 
-  }
+//  for($c = 0; $c < $choice_count; $c++) {
+//    // use form_set_value
+////    $form['alternatives'][$c]['orig_answer']['#value'] = $form['alternatives'][$c]['answer']['#value'];
+//    $form_state['values']['node']['alternatives'][$c]['answer'] = array(
+//      'format' => 'filtered_html',
+//      'value' => 'filtered_html'
+//    );
+//
+//  }
 }
 
 /**

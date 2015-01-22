@@ -18,7 +18,7 @@ Feature: PRC-27 Dynamic Text to Speech & Highlighting
     Then I click "Text to Speech"
     Then I wait for AJAX to finish
     Then I click "Text to Speech"
-    And I should see "
+#    And I should see "
 
   @javascript
   Scenario: I can see the Subject field

@@ -80,6 +80,7 @@ function prc_poc_local_site_strongarm() {
   $strongarm->value = array(
     'hs_taxonomy' => 1421444698,
     'prc_text_to_speech' => 1421775415,
+    'truefalse' => 1421792051,
   );
   $export['module_filter_recent_modules'] = $strongarm;
 

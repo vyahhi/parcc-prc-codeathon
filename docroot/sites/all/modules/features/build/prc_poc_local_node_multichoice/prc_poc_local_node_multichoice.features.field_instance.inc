@@ -43,16 +43,18 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Question',
-    'required' => FALSE,
+    'label' => 'Question (Item Stem)',
+    'required' => 1,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 0,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'label_help_description' => '',
         'rows' => 6,
         'summary_rows' => 5,
       ),
@@ -151,7 +153,7 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Item Order');
-  t('Question');
+  t('Question (Item Stem)');
   t('Standard');
 
   return $field_instances;
