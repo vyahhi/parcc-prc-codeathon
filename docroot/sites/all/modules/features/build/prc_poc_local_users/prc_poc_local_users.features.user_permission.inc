@@ -421,6 +421,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'invite',
   );
 
+  // Exported permission: 'administer js'.
+  $permissions['administer js'] = array(
+    'name' => 'administer js',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'js',
+  );
+
   // Exported permission: 'administer lti_tool_provider module'.
   $permissions['administer lti_tool_provider module'] = array(
     'name' => 'administer lti_tool_provider module',
