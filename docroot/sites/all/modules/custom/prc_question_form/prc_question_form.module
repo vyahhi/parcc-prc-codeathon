@@ -95,7 +95,7 @@ function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state
     $form['alternatives'][$c]['remove'] = array(
       '#type' => 'link',
       '#title' => t('X'),
-      '#href' => '',
+      '#href' => '#',
       '#attributes' => array('class' => array('item-mc-remove')),
     );
   }
