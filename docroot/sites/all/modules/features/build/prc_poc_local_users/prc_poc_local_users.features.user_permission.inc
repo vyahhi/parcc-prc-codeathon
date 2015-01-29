@@ -434,6 +434,8 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['administer lti_tool_provider module'] = array(
     'name' => 'administer lti_tool_provider module',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'lti_tool_provider',
@@ -814,6 +816,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -881,6 +884,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -891,6 +895,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1097,6 +1102,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1164,6 +1170,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1174,6 +1181,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1850,6 +1858,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1917,6 +1926,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1927,6 +1937,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -1954,6 +1965,7 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'quiz',
   );

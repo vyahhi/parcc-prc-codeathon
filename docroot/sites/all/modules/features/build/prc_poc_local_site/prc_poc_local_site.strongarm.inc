@@ -77,10 +77,7 @@ function prc_poc_local_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'module_filter_recent_modules';
-  $strongarm->value = array(
-    'hs_taxonomy' => 1421444698,
-    'prc_text_to_speech' => 1421775415,
-  );
+  $strongarm->value = array();
   $export['module_filter_recent_modules'] = $strongarm;
 
   $strongarm = new stdClass();

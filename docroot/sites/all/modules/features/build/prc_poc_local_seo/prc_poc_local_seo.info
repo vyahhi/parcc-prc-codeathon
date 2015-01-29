@@ -12,4 +12,4 @@ features[variable][] = pathauto_punctuation_hyphen
 features[variable][] = pathauto_taxonomy_term_pattern
 features[variable][] = pathauto_user_pattern
 features[features_api][] = api:2
-mtime = 1421340234
+mtime = 1422570497

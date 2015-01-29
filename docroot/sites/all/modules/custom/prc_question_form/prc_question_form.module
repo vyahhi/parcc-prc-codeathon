@@ -6,6 +6,49 @@
  */
 
 /**
+ * Implements hook_menu().
+ */
+function prc_question_form_menu() {
+  $items = array();
+  $items['node/%node/questionedit'] = array(
+    'title' => 'Edit PRC Interactive Choice Question',
+    'page callback' => 'prc_question_form_custom_multichoice',
+    'page arguments' => array(1),
+    'access callback' => 'node_access',
+    'access arguments' => array('update', 1),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+ * Menu callback; presents the node editing form.
+ */
+function prc_question_form_custom_multichoice($node) {
+  $type_name = node_type_get_name($node);
+  drupal_set_title(t('<em>Edit @type</em> @title', array('@type' => $type_name, '@title' => $node->title)), PASS_THROUGH);
+  return drupal_get_form('prc_question_form_custom_multichoice_form', $node);
+}
+
+function prc_question_form_custom_multichoice_form($form, &$form_state) {
+  $node = $form_state['build_info']['args'][0];
+
+  module_load_include('inc', 'node', 'node.pages');
+  $node_form = new stdClass;
+  $node_form->type = $node->type;
+  $node_form->language = LANGUAGE_NONE;
+  $original_form = drupal_get_form($node->type . '_node_form', $node_form);
+
+  $form = array();
+
+  $form['title'] = $original_form['title'];
+  $form['body'] = $original_form['body'];
+  $form['field_standard'] = $original_form['field_standard'];
+
+  return $form;
+}
+
+/**
  * Implements hook_form_FORM_ID_alter
  *
  * Changes the title of the registration form
@@ -14,45 +57,46 @@
  * @param $form_state
  */
 function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state) {
-$x = 'x';
+  // Not getting the results I want during getCreationForm()
+  // Still have to go in here and modify stuff - without doing this,
+  // we don't get the node fields.
+
+  $form['feedback']['#access'] = FALSE;
+  $form['title']['#title'] = t('Item Title');
+  $form['title']['#required'] = TRUE;
+
+  $form['alternatives']['settings']['choice_random']['#access'] = FALSE;
+  $form['alternatives']['settings']['choice_boolean']['#access'] = FALSE;
+
+  $form['field_standard'][LANGUAGE_NONE]['#title'] = t('Item Standard');
+  $form['field_standard'][LANGUAGE_NONE]['#required'] = TRUE;
+
+  $form['alternatives']['#title'] = 'Answer Choice (Distractor)';
 
   $choice_count = $form_state['choice_count'];
 
-//  $format = $form['alternatives'][0]['answer']['#format']; // filtered_html
-
   for($c = 0; $c < $choice_count; $c++) {
-    $form['alternatives'][$c]['orig_answer'] = $c['alternatives'][$c]['answer'];
-    $form['alternatives'][$c]['answer']['#type'] = 'textarea';
-    $form['alternatives'][$c]['orig_answer']['#access'] = FALSE;
+    if (array_key_exists($c, $form['alternatives'])) {
+      $form['alternatives'][$c]['advanced']['#access'] = FALSE;
+      $form['alternatives'][$c]['answer']['#required'] = FALSE;
+    }
   }
 
-  array_unshift($form['#validate'], 'prc_question_form_form_multichoice_node_form_validate');
+  $form['actions']['submit']['#value'] = t('Save Draft');
 
-//  $form['#validate'][] = 'prc_question_form_form_multichoice_node_form_validate';
-
-}
-
-function prc_question_form_form_multichoice_node_form_validate(&$form, &$form_state) {
-  $x = 'x';
-
-  $choice_count = $form_state['choice_count'];
-
-//  $format = $form['alternatives'][0]['answer']['#format']; // filtered_html
-
-  for($c = 0; $c < $choice_count; $c++) {
-    // use form_set_value
-//    $form['alternatives'][$c]['orig_answer']['#value'] = $form['alternatives'][$c]['answer']['#value'];
-    $form_state['values']['node']['alternatives'][$c]['answer'] = array(
-      'format' => 'filtered_html',
-      'value' => 'filtered_html'
-    );
-
-  }
 }
 
 /**
- *  Implements hook_form_alter().
+ * Implements hook_quiz_question_info_alter().
  */
-function prc_question_form_form_alter(&$form, &$form_state, $form_id) {
-  $x = 'x';
+function prc_question_form_quiz_question_info_alter(&$info) {
+  // Change question provider from MultichoiceQuestion]
+  $info['multichoice']['question provider'] = 'PRCMultichoiceQuestion';
+}
+
+/**
+ * ajax callback function used when adding alternatives to the node-form
+ */
+function prc_multichoice_remove_alternative_ajax_callback($form, &$form_state) {
+  return $form['alternatives'];
 }

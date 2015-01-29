@@ -15,7 +15,7 @@ Feature: PRC-349 Admin: Edit Course
     And I have no "PD Course" nodes
     And I am viewing my "PD Course" node with the title "PRC-349 AC2"
     And I am on "admin-course"
-    When I click "edit"
+    When I click "Edit"
     Then I should see the heading "Edit Course PRC-349 AC2" in the "content" region
 
   Scenario: AC2 Create course fields
@@ -93,9 +93,9 @@ Feature: PRC-349 Admin: Edit Course
     And I fill in "Course Objectives" with "@timestamp"
     And I select the radio button "Public"
     And I press "Save"
-    Then I click "edit"
+    Then I click "Edit"
     And the "Published" checkbox should be checked
     And I uncheck the box "Published"
     And I press "Save"
-    Then I click "edit"
+    Then I click "Edit"
     And the "Published" checkbox should not be checked

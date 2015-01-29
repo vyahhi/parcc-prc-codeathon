@@ -27,7 +27,7 @@ function prc_question_preview_quiz_detail($node) {
   module_load_include('inc', 'quiz', 'quiz.admin');
   $form = drupal_get_form('quiz_questions_form', $node);
 
-  $form['additional_questions']['#access'] = FALSE;
+//  $form['additional_questions']['#access'] = FALSE;
 
   return $form;
 }

@@ -19,7 +19,7 @@ function prc_poc_local_node_multichoice_ctools_plugin_api($module = NULL, $api =
 function prc_poc_local_node_multichoice_node_info() {
   $items = array(
     'multichoice' => array(
-      'name' => t('Multiple choice question'),
+      'name' => t('Interactive Choice'),
       'base' => 'quiz_question',
       'description' => t('This provides multiple choice questions for use by the Quiz module.'),
       'has_title' => '1',

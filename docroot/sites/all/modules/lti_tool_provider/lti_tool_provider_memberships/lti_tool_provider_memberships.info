@@ -5,6 +5,7 @@ package = "Learning Tools Interoperability"
 dependencies[] = lti_tool_provider
 files[] = LTIToolProviderMembershipsContextEntityController.class.php
 files[] = LTIToolProviderMembershipsEntityController.class.php
+<<<<<<< HEAD
 
 ; Information added by drupal.org packaging script on 2013-09-30
 version = "7.x-1.x-dev"
@@ -12,3 +13,5 @@ core = "7.x"
 project = "lti_tool_provider"
 datestamp = "1380585452"
 
+=======
+>>>>>>> origin/prc-386
