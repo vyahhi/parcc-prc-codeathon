@@ -27,7 +27,33 @@ function quiz_questions_pane_render($subtype, $conf, $args, $contexts) {
       }
     }
   }
-  $form['additional_questions']['#access'] = FALSE;
+
+  $form['additional_questions']['#title'] = t('Add Item');
+
+  $form['additional_questions']['multichoice']['#markup'] = str_replace(t('Multiple choice question'), t('Interactive Choice'), $form['additional_questions']['multichoice']['#markup']);
+  $form['additional_questions']['quiz_directions']['#markup'] = str_replace(t('Exam directions'), t('Non-interactive Item (text only)'), $form['additional_questions']['quiz_directions']['#markup']);
+  $form['additional_questions']['short_answer']['#markup'] = str_replace(t('Short answer question'), t('Short Answer'), $form['additional_questions']['short_answer']['#markup']);
+
+  // Ugly ugly ugly, but it doesn't respond to #weight, so we have to re-order the array.
+  $form['additional_questions']['quiz_directions']['#weight'] = 0;
+  $form['additional_questions']['multichoice']['#weight'] = 1;
+  $form['additional_questions']['short_answer']['#weight'] = 2;
+
+  $form['additional_questions']['fake_quiz_directions'] = $form['additional_questions']['quiz_directions'];
+  $form['additional_questions']['fake_multichoice'] = $form['additional_questions']['multichoice'];
+  $form['additional_questions']['fake_short_answer'] = $form['additional_questions']['short_answer'];
+
+  unset($form['additional_questions']['quiz_directions']);
+  unset($form['additional_questions']['multichoice']);
+  unset($form['additional_questions']['short_answer']);
+
+  $form['additional_questions']['quiz_directions'] = $form['additional_questions']['fake_quiz_directions'];
+  $form['additional_questions']['multichoice'] = $form['additional_questions']['fake_multichoice'];
+  $form['additional_questions']['short_answer'] = $form['additional_questions']['fake_short_answer'];
+
+  unset($form['additional_questions']['fake_quiz_directions']);
+  unset($form['additional_questions']['fake_multichoice']);
+  unset($form['additional_questions']['fake_short_answer']);
 
   $block = new stdClass();
   $block->title = '';
