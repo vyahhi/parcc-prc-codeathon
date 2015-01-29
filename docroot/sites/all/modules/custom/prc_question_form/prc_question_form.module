@@ -44,24 +44,6 @@ function prc_question_form_custom_multichoice_form($form, &$form_state) {
   $form['title'] = $original_form['title'];
   $form['body'] = $original_form['body'];
   $form['field_standard'] = $original_form['field_standard'];
-//  $form['title'] = array(
-//    '#type' => 'textfield',
-//    '#title' => t('Item Title'),
-//    '#default_value' => isset($node->title) ? $node->title : '',
-//    '#required' => TRUE,
-//  );
-//
-//  $form['body'] = array(
-//    '#type' => 'textarea',
-//    '#weight' => 2,
-//    '#tree' => true,
-//    '#title' => 'Question (Item Stem)',
-//    '#required' => TRUE,
-//  );
-//
-//  $form['standard'] = array(
-//
-//  );
 
   return $form;
 }
@@ -75,6 +57,9 @@ function prc_question_form_custom_multichoice_form($form, &$form_state) {
  * @param $form_state
  */
 function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state) {
+  // Not getting the results I want during getCreationForm()
+  // Still have to go in here and modify stuff - without doing this,
+  // we don't get the node fields.
 
   $form['feedback']['#access'] = FALSE;
   $form['title']['#title'] = t('Item Title');
@@ -91,50 +76,24 @@ function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state
   $choice_count = $form_state['choice_count'];
 
   for($c = 0; $c < $choice_count; $c++) {
-    $form['alternatives'][$c]['advanced']['#access'] = FALSE;
-    $form['alternatives'][$c]['remove'] = array(
-      '#type' => 'link',
-      '#title' => t('X'),
-      '#href' => '#',
-      '#attributes' => array('class' => array('item-mc-remove')),
-    );
+    if (array_key_exists($c, $form['alternatives'])) {
+      $form['alternatives'][$c]['advanced']['#access'] = FALSE;
+      $form['alternatives'][$c]['answer']['#required'] = FALSE;
+    }
   }
-
-  array_unshift($form['#validate'], 'prc_question_form_form_multichoice_node_form_validate');
-
-  // Set the path to script.
-  $script = drupal_get_path('module', 'prc_question_form') . '/prc_question_form_mc_item.js';
-
-  drupal_add_js($script, array('scope' => 'header'));
-
-//  $form['#validate'][] = 'prc_question_form_form_multichoice_node_form_validate';
-
-}
-
-function prc_question_form_form_multichoice_node_form_validate(&$form, &$form_state) {
-  $x = 'x';
-
-//  $choice_count = $form_state['choice_count'];
-
-//  $format = $form['alternatives'][0]['answer']['#format']; // filtered_html
-
-  // Rebuild the answer array here to make it look like how it will look with
-  // a text filter selection.
-
-//  for($c = 0; $c < $choice_count; $c++) {
-//    // use form_set_value
-////    $form['alternatives'][$c]['orig_answer']['#value'] = $form['alternatives'][$c]['answer']['#value'];
-//    $form_state['values']['node']['alternatives'][$c]['answer'] = array(
-//      'format' => 'filtered_html',
-//      'value' => 'filtered_html'
-//    );
-//
-//  }
 }
 
 /**
- *  Implements hook_form_alter().
+ * Implements hook_quiz_question_info_alter().
  */
-function prc_question_form_form_alter(&$form, &$form_state, $form_id) {
-  $x = 'x';
+function prc_question_form_quiz_question_info_alter(&$info) {
+  // Change question provider from MultichoiceQuestion]
+  $info['multichoice']['question provider'] = 'PRCMultichoiceQuestion';
+}
+
+/**
+ * ajax callback function used when adding alternatives to the node-form
+ */
+function prc_multichoice_remove_alternative_ajax_callback($form, &$form_state) {
+  return $form['alternatives'];
 }
