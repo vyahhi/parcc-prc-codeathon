@@ -7,13 +7,3 @@ files[] = LTIToolProviderConsumerEntityController.class.php
 dependencies[] = field
 dependencies[] = libraries
 configure = admin/config/lti-tool-provider
-<<<<<<< HEAD
-
-; Information added by drupal.org packaging script on 2013-09-30
-version = "7.x-1.x-dev"
-core = "7.x"
-project = "lti_tool_provider"
-datestamp = "1380585452"
-
-=======
->>>>>>> origin/prc-386
