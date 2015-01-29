@@ -81,6 +81,9 @@ function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state
       $form['alternatives'][$c]['answer']['#required'] = FALSE;
     }
   }
+
+  $form['actions']['submit']['#value'] = t('Save Draft');
+
 }
 
 /**

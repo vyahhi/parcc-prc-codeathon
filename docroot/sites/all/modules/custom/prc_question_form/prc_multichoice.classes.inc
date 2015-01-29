@@ -14,17 +14,6 @@
  */
 class PRCMultichoiceQuestion extends MultichoiceQuestion {
   public function saveNodeProperties($is_new = FALSE) {
-//    // We fetch ids for the existing answers belonging to this question
-//    // We need to figure out if an existing alternative has been changed or deleted.
-//    $res = db_query('SELECT id FROM {quiz_multichoice_answers}
-//              WHERE question_nid = :nid AND question_vid = :vid', array(':nid' => $this->node->nid, ':vid' => $this->node->vid));
-//
-//    // We start by assuming that all existing alternatives needs to be deleted
-//    $ids_to_delete = array();
-//    while ($res_o = $res->fetch()) {
-//      $ids_to_delete[$res_o->id] = $res_o->id;
-//    }
-
     $only_arrays = array();
     foreach($this->node->alternatives as $alt) {
       if (is_array($alt)) {
@@ -108,13 +97,9 @@ class PRCMultichoiceQuestion extends MultichoiceQuestion {
       $form_state['choice_count']++;
     }
     elseif (isset($form_state['triggering_element']) && strpos($form_state['triggering_element']['#name'], 'remove-alternative') !== FALSE) {
-//    $x = 'x';
       $trigger = $form_state['triggering_element'];
       $alt = $trigger['#alternative'];
       $this->node->alternatives[$alt]['deleted'] = TRUE;
-//      unset($this->node->alternatives[$alt]);
-////      $this->node->alternatives = array_values($this->node->alternatives);
-////      $form_state['choice_count']--;
     }
     else {
       $form_state['choice_count'] = max(variable_get('multichoice_def_num_of_alts', 2), isset($this->node->alternatives) ? count($this->node->alternatives) : 0);
@@ -284,8 +269,6 @@ class PRCMultichoiceQuestion extends MultichoiceQuestion {
     if ($this->node->choice_multi == 0) {
       $found_one_correct = FALSE;
       foreach($this->node->alternatives as $short) {
-//      for ($i = 0; (isset($this->node->alternatives[$i]) && is_array($this->node->alternatives[$i])); $i++) {
-//        $short = $this->node->alternatives[$i];
         if (is_array($short)) {
           if (drupal_strlen($this->checkMarkup($short, 'answer')) < 1) {
             continue;
