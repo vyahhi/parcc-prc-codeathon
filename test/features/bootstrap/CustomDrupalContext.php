@@ -327,15 +327,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $this->tableNodeFixStepArguments($usersTable);
     foreach ($usersTable->getHash() as $userHash) {
 
-      // Fix each field value
-      foreach($userHash as $field => $value) {
-        $userHash[$field] = $this->fixStepArgument($value);
-      }
-
       // If we have roles convert it to array.
       if (isset($userHash['roles'])) {
         $userHash['roles'] = explode(',', $userHash['roles']);
         $userHash['roles'] = array_map('trim', $userHash['roles']);
+
+        $roles = $userHash['roles'];
+        unset($userHash['roles']);
       }
 
       $user = (object) $userHash;
@@ -358,7 +356,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       $new_user_name = $email_parts[0] . '_' . $account->uid;
       $w->name->set($new_user_name);
 
-      foreach($userHash as $key => $value) {
+      foreach ($userHash as $key => $value) {
         if (strpos($key, 'field_') === 0) {
           // This is a field_something so we have to assign it
           $w->{$key}->set($value);
@@ -367,22 +365,24 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       $w->save();
 
       $this->users[$user->name] = $user;
-
-
-//      // If the user doesn't already have the role, add the role to that user.
-//      $key = array_search($role_name, $user->roles);
-//      if ($key == FALSE) {
-//        // Get the rid from the roles table.
-//        $roles = user_roles(TRUE);
-//        $rid = array_search($role_name, $roles);
-//        if ($rid != FALSE) {
-//          $new_role[$rid] = $role_name;
-//          $all_roles = $user->roles + $new_role; // Add new role to existing roles.
-//          user_save($user, array('roles' => $all_roles));
-//        }
-//      }
-
-
+      if (isset($roles) && is_array($roles)) {
+        $system_roles = user_roles();
+        $new_role = array();
+        $curr_user = user_load($user->uid);
+        foreach ($roles as $role_name) {
+          // If the user doesn't already have the role, add the role to that user.
+          $key = array_search($role_name, $curr_user->roles);
+          if ($key == FALSE) {
+            // Get the rid from the roles table.
+            $rid = array_search($role_name, $system_roles);
+            if ($rid != FALSE) {
+              $new_role[$rid] = $role_name;
+            }
+          }
+        }
+        $all_roles = $curr_user->roles + $new_role; // Add new role to existing roles.
+        user_save($curr_user, array('roles' => $all_roles));
+      }
     }
   }
 
