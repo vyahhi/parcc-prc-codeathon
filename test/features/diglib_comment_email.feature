@@ -9,18 +9,18 @@ Feature: PRC-58 End User Comments to Content
 #    Instructions: (to be added)
 #    Comment
 #    A Submit button allows the user to submit the Form.
-  AC3 The following attributes are captured at each comment form:
-    Content ID
-    Content Title (not for storing, but to displaying when sending/displaying comment
-    Comment
-    User ID of the individual who provided the comment
-    Comment timestamp
-  AC4 Once submitted, the system sends an email to the following distribution list
-    User who created the content
-    User who updated the content (if all not available, the last one)
-    Curator(s): All users with Curator role
-    PRC Admin(s): All users with PRC Admin role
-  AC5 The email Subject shall be: User's Comment to Content '<Content Title>' (Added on 12/31/2014)
+#  AC3 The following attributes are captured at each comment form:
+#    Content ID
+#    Content Title (not for storing, but to displaying when sending/displaying comment
+#    Comment
+#    User ID of the individual who provided the comment
+#    Comment timestamp
+#  AC4 Once submitted, the system sends an email to the following distribution list
+#    User who created the content
+#    User who updated the content (if all not available, the last one)
+#    Curator(s): All users with Curator role
+#    PRC Admin(s): All users with PRC Admin role
+#  AC5 The email Subject shall be: User's Comment to Content '<Content Title>' (Added on 12/31/2014)
 #  AC6 The email body shall contain the following information (Added on 12/31/2014):
 #    A text such as: A user commented on a content you provided (or updated).
 #    Content ID
@@ -30,18 +30,31 @@ Feature: PRC-58 End User Comments to Content
 #    Comment
 #    A user commented on a content you provided (or updated).
 #    Content: 'Frozen' (123)
-    Comment Date: December 31, 2014 8:30 AM
+#    Comment Date: Friday, January 30, 2015 - 18:57
 #    Comment By: John Smith (johnsmith@email.com)
 #    Comment: 'This is by far the best article I have ever read. Thank you for sharing it in PRC!'
-  AC7 This feature is available to all authenticated users.
-  AC8 No messaging will be handled in the system. Reply to the feedback happens outside of the PRC system. The author/admin will use the provided email address in their own email system (outlook).
+#  AC7 This feature is available to all authenticated users.
+#  AC8 No messaging will be handled in the system. Reply to the feedback happens outside of the PRC system. The author/admin will use the provided email address in their own email system (outlook).
 
-  Scenario: Comment link
+  Scenario Outline: Comment link
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "PRC-58 Comment"
-    Then I am logged in as a user with the "Educator" role
+    Then I am logged in as a user with the "<role>" role
     And I visit the last node created
     Then I should see the link "Comment"
+
+    Examples:
+      | role                            |
+      | Educator                        |
+      | Content Contributor             |
+      | PRC Admin                       |
+      | Content Administrator (Curator) |
+      | authenticated user              |
+
+  Scenario: Comment link not available to anonymous users
+    Given I am an anonymous user
+    And I am viewing a "Digital Library Content" node with the title "No Anonymous!"
+    Then I should not see the link "Comment"
 
   Scenario: Comment form
     Given users:
@@ -65,3 +78,7 @@ Feature: PRC-58 End User Comments to Content
     And the email should contain "Content: 'PRC-58 Comment' ("
     And the email should contain "Comment Date:"
     And the email should contain "Comment By: Joe Educator (joe_1prc_58ed@timestamp@example.com)"
+    And the email should contain "User's Comment to Content 'PRC-58 Comment'"
+
+    Then the email to "joe_1prc_58ca@timestamp@example.com" should contain "Comment: 'PRC-58 @timestamp'"
+    Then the email to "joe_1prc_58ad@timestamp@example.com" should contain "Comment: 'PRC-58 @timestamp'"
