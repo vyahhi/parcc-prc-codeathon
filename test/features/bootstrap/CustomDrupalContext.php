@@ -364,7 +364,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       }
       $w->save();
 
-      $this->users[$user->name] = $user;
       if (isset($roles) && is_array($roles)) {
         $system_roles = user_roles();
         $new_role = array();
@@ -372,6 +371,12 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
         foreach ($roles as $role_name) {
           // If the user doesn't already have the role, add the role to that user.
           $key = array_search($role_name, $curr_user->roles);
+          if (isset($user->role)) {
+            $user->role .= ', ' . $role_name;
+          }
+          else {
+            $user->role = $role_name;
+          }
           if ($key == FALSE) {
             // Get the rid from the roles table.
             $rid = array_search($role_name, $system_roles);
@@ -383,6 +388,9 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
         $all_roles = $curr_user->roles + $new_role; // Add new role to existing roles.
         user_save($curr_user, array('roles' => $all_roles));
       }
+      $this->users[$user->name] = $user;
+      // This is custom for this implementation - email_registration!
+      $this->users[$user->name]->name = $user->mail;
     }
   }
 
@@ -751,6 +759,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       strpos($message['subject'], $contents) !== FALSE) {
       return TRUE;
     }
+    print $message['body'];
     throw new \Exception('Did not find expected content in message body or subject.');
   }
 

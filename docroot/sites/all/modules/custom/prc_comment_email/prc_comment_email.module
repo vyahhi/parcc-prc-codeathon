@@ -1,0 +1,125 @@
+<?php
+
+/**
+ * @file
+ * Emails comments to authors.
+ */
+
+/**
+ *  Implements hook_menu().
+ */
+function prc_comment_email_menu() {
+  // Display a node add form in ctools modal.
+  $items = array();
+  $items['node/%node/%ctools_js/comment-email'] = array(
+    'title' => t('Send Comment to the Content Contributor'),
+    'title callback' => 'check_plain',
+    'page callback' => 'modal_comment_email',
+    'page arguments' => array(3, 2, 1),
+    'access callback' => 'node_access',
+    'access arguments' => array('create', 'favorites_list'),
+    'description' => 'Send Comment to the Content Contributor',
+    'file' => 'prc_comment_email.pages.inc',
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ *  Implements hook_node_view().
+ */
+function prc_comment_email_node_view($node, $view_mode, $langcode) {
+  // Adds the Comment link to the node view
+  if (user_is_logged_in()) {
+    $listable_types = array(
+      'digital_library_content' => array(
+        'link_id' => 'prc_digital_library_comment_email',
+        'link_title' => 'Comment',
+      ),
+    );
+
+    if (array_key_exists($node->type, $listable_types)) {
+      $link_id = $listable_types[$node->type]['link_id'];
+      $link_title = $listable_types[$node->type]['link_title'];
+      _prc_comment_email_add_link($node, $link_title, $link_id);
+    }
+  }
+}
+
+/**
+ * @param $node
+ * @param $link_title
+ * @param $link_id
+ */
+function _prc_comment_email_add_link($node, $link_title, $link_id) {
+  ctools_include('modal');
+  ctools_modal_add_js();
+  $nid = $node->nid;
+
+  $links[$link_id] = array(
+    'title' => t($link_title),
+    'href' => "node/$nid/nojs/comment-email",
+    'attributes' => array(
+      'title' => t($link_title),
+      'class' => array('ctools-use-modal'),
+    ),
+  );
+
+  $node->content['links'][$link_id] = array(
+    '#theme' => 'links__node__comment_email',
+    '#links' => $links,
+    '#attributes' => array('class' => array('links', 'inline')),
+  );
+}
+
+/**
+ * Creates and sends a Message when a user creates a "comment"
+ * Note that "comments" are not Drupal comments, but email
+ * replies to node authors.
+ *
+ * @param $commenter
+ *  User object of the user leaving the comment
+ * @param $comment
+ *  The text of the comment
+ * @param $node
+ *  The node being commented on
+ * @throws \MessageNotifyException
+ */
+function _prc_comment_email_message_create($commenter, $comment, $node) {
+  $message = message_create('comment_email', array('uid' => $commenter->uid));
+
+  $wrapper = entity_metadata_wrapper('message', $message);
+  $wrapper->field_comment->set($comment);
+  $wrapper->field_node->set($node);
+  $wrapper->field_user_ref->set($commenter);
+  $wrapper->save();
+
+  // Let message-notify deliver the email, and send the message for us.
+  // We pass in the options the field names, that will be used to capture
+  // the rendered message, and provide an email log.
+  $options = array(
+    'rendered fields' => array(
+      'message_notify_email_subject' => 'field_message_rendered_subject',
+      'message_notify_email_body' => 'field_message_rendered_body',
+    ),
+  );
+
+//  message_notify_send_message($message, $options);
+  if (module_exists('message_subscribe')) {
+    // If Message-subscribe exists, let's use it.
+    message_subscribe_send_message('node', $node, $message, array('email' => $options));
+  }
+}
+
+/**
+ * Implements hook_message_subscribe_get_subscribers().
+ */
+function prc_comment_email_message_subscribe_get_subscribers(Message $message, $subscribe_options = array(), $context = array()) {
+  $w = entity_metadata_wrapper('message', $message);
+  $node = $w->field_node->value();
+  $author_uid = $node->uid;
+
+  $uids[$author_uid]['notifiers']['email'] = 'email';
+
+  return $uids;
+}
