@@ -13,6 +13,8 @@
  * Extension of MultichoiceQuestion.
  */
 class PRCMultichoiceQuestion extends MultichoiceQuestion {
+  const PRC_MINIMUM_DISTRACTORS = 2;
+
   public function saveNodeProperties($is_new = FALSE) {
     $only_arrays = array();
     foreach($this->node->alternatives as $alt) {
@@ -64,13 +66,12 @@ class PRCMultichoiceQuestion extends MultichoiceQuestion {
       '#title' => t('Settings'),
       '#collapsible' => TRUE,
       '#collapsed' => FALSE,
-      '#description' => t('Your settings will be remembered.'),
-      '#weight' => 30,
+      '#weight' => -10,
     );
     $form['alternatives']['settings']['choice_multi'] = array(
       '#type' => 'checkbox',
-      '#title' => t('Multiple answers'),
-      '#description' => t('Allow any number of answers(checkboxes are used). If this box is not checked, one, and only one answer is allowed(radiobuttons are used).'),
+      '#title' => t('Multiple correct answers'),
+      '#description' => t('Allow any number of correct answers (checkboxes are used). If this box is not checked, one, and only one answer is allowed (radiobuttons are used).'),
       '#default_value' => 0,
       '#parents' => array('choice_multi'),
     );
@@ -268,11 +269,13 @@ class PRCMultichoiceQuestion extends MultichoiceQuestion {
   public function validateNode(array &$form) {
     if ($this->node->choice_multi == 0) {
       $found_one_correct = FALSE;
+      $filled_in = 0;
       foreach($this->node->alternatives as $short) {
         if (is_array($short)) {
           if (drupal_strlen($this->checkMarkup($short, 'answer')) < 1) {
             continue;
           }
+          $filled_in++;
           if ($short['correct'] == 1) {
             if ($found_one_correct) {
               // We don't display an error message here since we allow alternatives to be partially correct
@@ -284,7 +287,10 @@ class PRCMultichoiceQuestion extends MultichoiceQuestion {
         }
       }
       if (!$found_one_correct) {
-        form_set_error('choice_multi', t('You have not marked any alternatives as correct. If there are no correct alternatives you should allow multiple answers.'));
+        form_set_error('choice_multi', t('One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box.'));
+      }
+      if ($filled_in < self::PRC_MINIMUM_DISTRACTORS) {
+        form_set_error('alternatives', t('At least two answer choices (distractors) are required.'));
       }
     }
   }

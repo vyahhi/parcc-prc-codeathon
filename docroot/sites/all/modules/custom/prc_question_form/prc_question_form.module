@@ -82,6 +82,8 @@ function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state
     }
   }
 
+  $form['alternatives']['settings']['#weight'] = -100;
+
   $form['actions']['submit']['#value'] = t('Save Draft');
   $form['#validate'][] = 'prc_question_form_form_multichoice_node_form_validate';
 }
@@ -89,7 +91,7 @@ function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state
 function prc_question_form_form_multichoice_node_form_validate(&$form, &$form_state) {
   $tid = $form_state['input']['field_standard']['und'][0]['tid'];
   if (!$tid) {
-    form_set_error('field_standard', t('Item Standard') . ' ' . t('field is required.'));
+    form_set_error('field_standard', t('At least one Item Standard is required.'));
   }
 }
 

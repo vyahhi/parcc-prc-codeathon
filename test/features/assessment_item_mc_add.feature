@@ -6,24 +6,36 @@ Feature: PRC-547 Add New Item to a Quiz
 
   BACKGROUND: This story is a branch of PRC-521 and contains the Add Item portion only.
   Acceptance Criteria
-#  AC1 In the Assessment Details page where items are displayed (implemented in PRC-490), add a new _Add Item button/link.
-#  AC2 At click, it provides the following options to select before getting to the actual item authoring part (for this story, only the 2nd options is clickable):
-#    Non-interactive Item (text only)
-#    Interactive Choice
-#    Short Answer
-#  AC3 When the user clicks the Interactive Choice (single selection) option, a set of attributes for an interactive choice item appears, defined below.
-#  AC4 Item Metadata: The following attributes shall be available for the user to define as item metadata:
+#  Given I am logged in as a user with the “Educator” role
+#  When I click “Add Item”
+#  These links appear
+#  •	Non-interactive Item (text only)
+#  •	Interactive Choice
+#  •	Short Answer
+#  When the user clicks the Interactive Choice option, a set of attributes for an interactive choice item appears, defined below.
+#  Item Metadata: The following attributes shall be available for the user to define as item metadata:
+#  Item Order- Required, String(255)
 #  Item Title- Required, String(255)
 #  Item Standard: Required (at least 1)- more than 1 standard may be selected- options are the same as what is implemented for content and courses so far
-#  AC5 Item attributes:
-#    Question (Item Stem)- Required (Drupal has no size limit)
-#    Answer Choice (Distractor)- Required (at least 2 are required) (Drupal has no size limit)
-#  AC6 An ADD button/link shall allow a user to add more distractor. At click, it displays an additional distractor container. When displayed, it is required.
-#  AC7 A Remove button shall allow a user to remove a distractor
-#  AC8 The user shall define which answer choice is the correct answer. At least one distractor must be selected as correct answer
-#  AC9 A Save Draft button is available to save any changes to the item order/removal for that assessment. At click, the system stores the changes associated to that user.
-#  AC10 If a user navigates away from the page without saving the changes, the system prompts the user to confirm.
-#  AC11 Permissions: All the above features are available to all roles, except for anonymous users (separate anonymous users stories PRC-526)
+#  Item attributes:
+#  Question (Item Stem)- Required (Drupal has no size limit)
+#  Answer Choice (Distractor)- Required (at least 2 are required) (Drupal has no size limit)
+#  A Multiple correct answers checkbox appears above Answer Choice (Distractor) section and is unchecked by default. When Multiple correct answers is checked, the system will allow any number of correct answers to be checked, including 0 or 1.
+#  An ADD button/link shall allow a user to add more distractor. At click, it displays an additional distractor container.
+#  A Remove button shall allow a user to remove a distractor
+#  The user shall define which answer choice is the correct answer. At least one distractor must be selected as correct answer
+#  A Save Draft button is available to save any changes to the item order/removal for that assessment. At click, the system stores the changes associated to that user.
+#  If a user navigates away from the page without saving the changes, the system prompts the user to confirm.
+#  If the user clicks Save Draft button and Item Order is blank, a validation error message is displayed, saying "Item Order field is required."
+#  If the user clicks Save Draft button and Item Title is blank, a validation error message is displayed, saying "Item Title field is required."
+#  If the user clicks Save Draft button and Question (Item Stem) is blank, a validation error message is displayed, saying "Question (Item Stem) field is required."
+#  If the user clicks Save Draft button and all Item Standard dropdowns are "- None -", a validation error message is displayed, saying "At least one Item Standard is required."
+  If the user clicks Save Draft button, Multiple correct answers is not checked, and all Correct check boxes are unchecked, a validation error message is displayed, saying "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
+  If the user clicks Save Draft button, Multiple correct answers is not checked, and the Correct check box is selected for more than one distractor, a validation error message is displayed, saying "One correct answer must be selected. To select multiple correct answers, check the Multiple correct answers box."
+  If the user clicks Save Draft button, and the form contains any blank distractors (with Correct checkbox unchecked and no data in answer field) that precede any non-blank distractors (with Correct checkbox unchecked and/or data in answer field), a validation error message is displayed saying, "All answer choices (distractors) require an Answer. Please enter an Answer or click the Remove button to remove the answer choice (distractor)."
+  If the user clicks Save Draft button, and the form contains any blank distractors (with both Correct checkbox unchecked and no data in answer field) that do not precede any non-blank distractors (with Correct checkbox unchecked and/or data in answer field), the form is submitted blank distractors are ignored and do not appear in the saved draft.
+#  If the user clicks Save Draft button, and fewer than two distractors are complete, a validation error message is displayed saying, "At least two answer choices (distractors) are required."
+  Permissions: All the above features are available to all roles, except for anonymous users (separate anonymous users stories PRC-526)
 
   Background: Create quiz we are adding items to
     Given "Subject" terms:
@@ -57,7 +69,25 @@ Feature: PRC-547 Add New Item to a Quiz
     And I should see the text "Answer Choice"
     And I should see the text "(Distractor)"
 
-  Scenario: AC7 An x link shall allow a user to remove a distractor
+  Scenario: AC5 A Multiple correct answers checkbox appears above Answer Choice (Distractor) section and is unchecked by default.
+    When I click "Interactive Choice"
+    Then I should see the checkbox "Multiple correct answers"
+    And the "Multiple correct answers" checkbox should not be checked
+
+  Scenario: AC5 When Multiple correct answers is checked, the system will allow any number of correct answers to be checked, including 0 or 1.
+    When I click "Interactive Choice"
+    And the "Multiple correct answers" checkbox should not be checked
+    When I press "Save Draft"
+    Then I should see the error message containing "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box to save without selecting a correct answer."
+
+  Scenario: AC5 When Multiple correct answers is checked, no message on 0 selected.
+    When I click "Interactive Choice"
+    And the "Multiple correct answers" checkbox should not be checked
+    And I check "Multiple correct answers"
+    When I press "Save Draft"
+    Then I should not see the error message containing "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
+
+  Scenario: AC7 A Remove button shall allow a user to remove a distractor
     Then I click "Interactive Choice"
     Then I should see a "Remove" button
     When I fill in "edit-alternatives-0-answer-value" with "Answer 1"
@@ -86,7 +116,8 @@ Feature: PRC-547 Add New Item to a Quiz
     Then I should see the error message containing "Item Title field is required."
     Then I should see the error message containing "Question (Item Stem) field is required."
     Then I should see the error message containing "Item Order field is required."
-    Then I should see the error message containing "You have not marked any alternatives as correct. If there are no correct alternatives you should allow multiple answers."
+    Then I should see the error message containing "At least one Item Standard is required."
+    Then I should see the error message containing "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box to save without selecting a correct answer."
 
   Scenario: Remove a field, then add a field, removed field should not reappear
     Then I click "Interactive Choice"
@@ -136,3 +167,14 @@ Feature: PRC-547 Add New Item to a Quiz
     Then the "edit-alternatives-0-answer-value" field should contain "Alpha"
     Then the "edit-alternatives-1-answer-value" field should contain "Gamma"
     Then the "edit-alternatives-2-answer-value" field should contain "Delta"
+
+  Scenario: If the user clicks Save Draft button, and fewer than two distractors are complete, a validation error message is displayed saying, "At least two answer choices (distractors) are required."
+    Then I click "Interactive Choice"
+    Then I press "Save Draft"
+    Then I should see the error message containing "At least two answer choices (distractors) are required."
+    When I fill in "edit-alternatives-0-answer-value" with "Alpha"
+    Then I press "Save Draft"
+    Then I should see the error message containing "At least two answer choices (distractors) are required."
+    When I fill in "edit-alternatives-1-answer-value" with "Beta"
+    Then I press "Save Draft"
+    Then I should not see the error message containing "At least two answer choices (distractors) are required."

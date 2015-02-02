@@ -8,6 +8,9 @@
  * Variables available:
  * - $form
  */
+
+print drupal_render($form['settings']);
+
 foreach (element_children($form) as $key) {
   if (is_numeric($key)) {
     $row = array(
