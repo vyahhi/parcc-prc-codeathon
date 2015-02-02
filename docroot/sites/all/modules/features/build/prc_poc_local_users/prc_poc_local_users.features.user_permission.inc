@@ -49,11 +49,7 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'access comments'.
   $permissions['access comments'] = array(
     'name' => 'access comments',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'comment',
   );
 
@@ -468,6 +464,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'menu_token',
   );
 
+  // Exported permission: 'administer message types'.
+  $permissions['administer message types'] = array(
+    'name' => 'administer message types',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'message',
+  );
+
   // Exported permission: 'administer mini panels'.
   $permissions['administer mini panels'] = array(
     'name' => 'administer mini panels',
@@ -799,6 +804,15 @@ function prc_poc_local_users_user_default_permissions() {
       'PRC Admin' => 'PRC Admin',
     ),
     'module' => 'invite',
+  );
+
+  // Exported permission: 'create messages'.
+  $permissions['create messages'] = array(
+    'name' => 'create messages',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'message',
   );
 
   // Exported permission: 'create mini panels'.
@@ -2149,10 +2163,7 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'post comments'.
   $permissions['post comments'] = array(
     'name' => 'post comments',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'comment',
   );
 
@@ -2368,10 +2379,7 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'skip comment approval'.
   $permissions['skip comment approval'] = array(
     'name' => 'skip comment approval',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'comment',
   );
 

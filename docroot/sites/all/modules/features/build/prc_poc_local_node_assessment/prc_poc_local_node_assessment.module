@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the prc-poc.local Assessment feature.
- */
-
-include_once 'prc_poc_local_node_assessment.features.inc';

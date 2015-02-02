@@ -15,8 +15,6 @@ Feature: Anonymous User Home Page (PRC-51)
     And I have no "Short answer question" nodes
     And I have no "Panel" nodes
     And I have no "Course" nodes
-    And I have no "Practice Test" nodes
-    And I have no "Test Item" nodes
     And "Digital Library Content" nodes:
       | title         | body      | created            | published on       | status | promote | uid | language | tags         | field_permissions |
       | Africa        | Continent | 07/07/2014 12:03am | 08/07/2014 12:03am | 1      | 1       | 1   | und      | North        | public            |

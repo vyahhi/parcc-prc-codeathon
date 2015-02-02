@@ -123,7 +123,6 @@ function prc_poc_local_node_digital_library_content_strongarm() {
   $strongarm->name = 'node_options_digital_library_content';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'promote',
   );
   $export['node_options_digital_library_content'] = $strongarm;
 
