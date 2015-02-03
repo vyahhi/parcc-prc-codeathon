@@ -264,7 +264,7 @@ function _prc_question_preview_quiz_add_questions_to_form(&$form, &$questions, &
       $standards_descriptions = array();
       $standards = $question_wrapper->field_standard->value();
       foreach ($standards as $tid => $term) {
-        $desc = $term->description;
+        $desc = isset($term) && isset($term->description) ? $term->description : '';
         $standards_descriptions[] = $desc;
       }
       $item_standard = implode('<br />', $standards_descriptions);
