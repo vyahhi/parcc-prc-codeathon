@@ -8,8 +8,11 @@ Feature: PRC-476 Take Course Exam
   The Professional Development page if this is the last object of the course.
   The Take Course page if there are other objects after this exam.
 
+  @javascript
   Scenario: Last object
     Given I am logged in as a user with the "administrator" role
+    And I have no "Quiz" nodes
+    And I have no "PD Module" nodes
     Given "PD Module" nodes:
       | title       | field_course_objectives | status | uid | field_length | language |
       | PD Module 1 | Obj1                    | 1      | 1   | 4 day        | und      |
@@ -25,25 +28,30 @@ Feature: PRC-476 Take Course Exam
     And I visit the last node created
     And I click "Quiz"
     Then I click "Manage questions"
+    And I click "Create new question"
     Then I click "Exam directions"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-527 Directions 1"
     And I fill in "Item Order" with "D1"
     And I press "Save"
     # Add the first question
+    And I click "Create new question"
     Then I click "Multiple choice question"
     And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
     And I fill in "Item Order" with "Q2"
     And I fill in "Title" with "PRC-527 Multi"
+    And I select "Common Core Mathematics" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
     And I check the box "edit-alternatives-1-correct"
     And I press "Save"
     # Add the second question
+    And I click "Create new question"
     Then I click "Multiple choice question"
     And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
     And I fill in "Item Order" with "Q3"
     And I fill in "Title" with "PRC-527 Two"
+    And I select "Common Core Mathematics" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
     And I check the box "edit-alternatives-1-correct"
@@ -105,6 +113,7 @@ Feature: PRC-476 Take Course Exam
     And I click "Go Back"
     And I should be on "professional-development"
 
+  @javascript
   Scenario: Not the last object
     Given I am logged in as a user with the "administrator" role
     Given "PD Module" nodes:
@@ -122,25 +131,30 @@ Feature: PRC-476 Take Course Exam
     And I visit the last node created
     And I click "Quiz"
     Then I click "Manage questions"
+    Then I click "Create new question"
     Then I click "Exam directions"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-527 Directions 1"
     And I fill in "Item Order" with "D1"
     And I press "Save"
     # Add the first question
+    Then I click "Create new question"
     Then I click "Multiple choice question"
     And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
     And I fill in "Item Order" with "Q2"
     And I fill in "Title" with "PRC-527 Multi"
+    And I select "Common Core Mathematics" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
     And I check the box "edit-alternatives-1-correct"
     And I press "Save"
     # Add the second question
+    Then I click "Create new question"
     Then I click "Multiple choice question"
     And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
     And I fill in "Item Order" with "Q3"
     And I fill in "Title" with "PRC-527 Two"
+    And I select "Common Core Mathematics" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
     And I check the box "edit-alternatives-1-correct"
