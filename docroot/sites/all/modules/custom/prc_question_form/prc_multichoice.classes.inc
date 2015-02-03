@@ -13,6 +13,8 @@
  * Extension of MultichoiceQuestion.
  */
 class PRCMultichoiceQuestion extends MultichoiceQuestion {
+  const PRC_MINIMUM_DISTRACTORS = 2;
+
   public function saveNodeProperties($is_new = FALSE) {
     $only_arrays = array();
     foreach($this->node->alternatives as $alt) {
@@ -64,13 +66,12 @@ class PRCMultichoiceQuestion extends MultichoiceQuestion {
       '#title' => t('Settings'),
       '#collapsible' => TRUE,
       '#collapsed' => FALSE,
-      '#description' => t('Your settings will be remembered.'),
-      '#weight' => 30,
+      '#weight' => -10,
     );
     $form['alternatives']['settings']['choice_multi'] = array(
       '#type' => 'checkbox',
-      '#title' => t('Multiple answers'),
-      '#description' => t('Allow any number of answers(checkboxes are used). If this box is not checked, one, and only one answer is allowed(radiobuttons are used).'),
+      '#title' => t('Multiple correct answers'),
+      '#description' => t('Allow any number of correct answers (checkboxes are used). If this box is not checked, one, and only one answer is allowed (radiobuttons are used).'),
       '#default_value' => 0,
       '#parents' => array('choice_multi'),
     );
@@ -267,24 +268,44 @@ class PRCMultichoiceQuestion extends MultichoiceQuestion {
    */
   public function validateNode(array &$form) {
     if ($this->node->choice_multi == 0) {
-      $found_one_correct = FALSE;
-      foreach($this->node->alternatives as $short) {
+      $num_correct = 0;
+      $filled_in = 0;
+      $answer_weight = array();
+      foreach($this->node->alternatives as $index => $short) {
         if (is_array($short)) {
+          $weight = $short['weight'];
           if (drupal_strlen($this->checkMarkup($short, 'answer')) < 1) {
+            $answer_weight[$weight] = '';
             continue;
           }
+          $answer_weight[$weight] = $short['answer']['value'];
+          $filled_in++;
           if ($short['correct'] == 1) {
-            if ($found_one_correct) {
-              // We don't display an error message here since we allow alternatives to be partially correct
-            }
-            else {
-              $found_one_correct = TRUE;
-            }
+            $num_correct++;
           }
         }
       }
-      if (!$found_one_correct) {
-        form_set_error('choice_multi', t('You have not marked any alternatives as correct. If there are no correct alternatives you should allow multiple answers.'));
+
+      krsort($answer_weight);
+      $has_answer_after = FALSE;
+
+      foreach($answer_weight as $weight => $answer) {
+        if ($answer) {
+          $has_answer_after = TRUE;
+        }
+        if ($has_answer_after && !$answer) {
+          form_set_error('alternatives', t('All answer choices (distractors) require an Answer. Please enter an Answer or click the Remove button to remove the answer choice (distractor).'));
+        }
+      }
+
+      if (!$num_correct) {
+        form_set_error('choice_multi', t('One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box.'));
+      }
+      else if ($num_correct > 1 && $this->node->choice_multi == 0) {
+        form_set_error('choice_multi', t('One correct answer must be selected. To select multiple correct answers, check the Multiple correct answers box.'));
+      }
+      if ($filled_in < self::PRC_MINIMUM_DISTRACTORS) {
+        form_set_error('alternatives', t('At least two answer choices (distractors) are required.'));
       }
     }
   }

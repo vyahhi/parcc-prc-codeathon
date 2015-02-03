@@ -4,6 +4,7 @@ Feature: PRC-476 Take Course Exam
   I want to take a course exam when accessing a PD course,
   so that I can evaluate my learning from modules preceding the exam.
 
+  @javascript
   Scenario: Another educator should be able to take a user's PD Exam
     Given I am logged in as a user with the "administrator" role
     Given "PD Module" nodes:
@@ -22,25 +23,30 @@ Feature: PRC-476 Take Course Exam
 
     And I click "Quiz"
     Then I click "Manage questions"
+    Then I click "Create new question"
     Then I click "Exam directions"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-527 Directions 1"
     And I fill in "Item Order" with "D1"
     And I press "Save"
     # Add the first question
+    Then I click "Create new question"
     Then I click "Multiple choice question"
     And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
     And I fill in "Item Order" with "Q2"
     And I fill in "Title" with "PRC-527 Multi"
+    And I select "Common Core Mathematics" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
     And I check the box "edit-alternatives-1-correct"
     And I press "Save"
     # Add the second question
+    Then I click "Create new question"
     Then I click "Multiple choice question"
     And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
     And I fill in "Item Order" with "Q3"
     And I fill in "Title" with "PRC-527 Two"
+    And I select "Common Core Mathematics" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
     And I check the box "edit-alternatives-1-correct"
@@ -105,6 +111,7 @@ Feature: PRC-476 Take Course Exam
     And I should not see the link "PRC-476 Exam"
 
 
+  @javascript
   Scenario: Another educator should NOT be able to take a user's Custom Assessment Exam
     Given I am logged in as a user with the "administrator" role
     Given "PD Module" nodes:
@@ -123,24 +130,29 @@ Feature: PRC-476 Take Course Exam
 
     And I click "Quiz"
     Then I click "Manage questions"
+    Then I click "Create new question"
     Then I click "Exam directions"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-527 Directions 1"
     And I fill in "Item Order" with "D1"
     And I press "Save"
     # Add the first question
+    Then I click "Create new question"
     Then I click "Multiple choice question"
     And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
     And I fill in "Item Order" with "Q2"
     And I fill in "Title" with "PRC-527 Multi"
+    And I select "Common Core Mathematics" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
     And I check the box "edit-alternatives-1-correct"
     And I press "Save"
     # Add the second question
+    Then I click "Create new question"
     Then I click "Multiple choice question"
     And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
     And I fill in "Item Order" with "Q3"
+    And I select "Common Core Mathematics" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "Title" with "PRC-527 Two"
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"

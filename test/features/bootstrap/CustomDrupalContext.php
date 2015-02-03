@@ -588,6 +588,17 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Then /^I should see the checkbox "(?P<label>[^"]*)"$/
+   */
+  public function assertCheckboxByIdPresent($label, $id = FALSE) {
+    $element = $this->getSession()->getPage();
+    $checkbox = $id ? $element->findById($id) : $element->find('named', array('checkbox', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
+    if ($checkbox === NULL) {
+      throw new \Exception(sprintf('The checkbox with "%s" was not found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
+    }
+  }
+
+  /**
    * @Then /^I should see the radio button "(?P<label>[^"]*)"$/
    */
   public function assertRadioByIdPresent($label, $id = FALSE) {

@@ -37,7 +37,10 @@ function $rw_userParameters() {
         eba_ssl_flag = window.location.protocol == "https:";
         eba_voice = "Vocalizer Expressive Ava Premium High 22kHz";
         eba_math = true;
-        eba_play_start_point = "page-title"
+        eba_play_start_point = "page-title";
+        eba_math = false;
+        eba_language = ENGLISH_US;
+
     }
     catch (err) {
     }
@@ -47,7 +50,7 @@ function $rw_userParameters() {
     //Drupal.prc_text_to_speech = {};
     Drupal.behaviors.enableTextToSpeechToolbar = {
         attach: function (context) {
-            $('.prc_text_to_speech').click(function () {
+            $('.prc_text_to_speech').click(function (event) {
                 if ($(this).hasClass('tts_shown')) {
                     // Hide the toolbar
                     $rw_setBarVisibility(false);
@@ -58,8 +61,7 @@ function $rw_userParameters() {
                     $rw_setBarVisibility(true);
                     $(this).removeClass('tts_hidden').addClass('tts_shown');
                     $(this).text('Hide Text to Speech');
-                } else
-                {
+                } else {
                     // This is the initial toolbar show
                     TexthelpSpeechStream.addToolbar();
                     $(this).addClass('tts_shown');
@@ -68,13 +70,6 @@ function $rw_userParameters() {
                 event.stopPropagation();
                 return false;
             });
-            //$('.prc_text_to_speech').each(function () {
-            //    $(this).click(function () {
-            //        TexthelpSpeechStream.addToolbar();
-            //        event.stopPropagation();
-            //        return false;
-            //    })
-            //});
         }
     };
 })(jQuery);
