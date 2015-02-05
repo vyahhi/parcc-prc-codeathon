@@ -21,7 +21,6 @@ function quiz_questions_pane_render($subtype, $conf, $args, $contexts) {
         $vals = explode('-', $key);
         $nid = $vals[0];
         $question_node = node_load($nid);
-        $orig_markup = $value['#markup'];
         $new_markup = l($question_node->title, 'question-preview/nojs/' . $nid, array('attributes' => array('class' => 'use-ajax')));
         $form['question_list']['titles'][$key]['#markup'] = $new_markup;
       }

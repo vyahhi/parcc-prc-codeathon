@@ -116,6 +116,13 @@ function prc_responsive_bartik_process_maintenance_page(&$variables)
   }
 }
 
+function prc_responsive_bartik_preprocess_page(&$vars, $hook) {
+  if (true) {
+    drupal_add_js('http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML', 'external');
+    $vars['scripts'] = drupal_get_js(); // necessary in D7?
+  }
+}
+
 /**
  * Override or insert variables into the node template.
  */

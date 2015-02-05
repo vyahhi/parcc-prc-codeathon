@@ -35,7 +35,6 @@ function prc_pd_course_form_menu() {
  * @see course_uc_token_values()
  */
 function prc_pd_course_form_course_audience_menu_access($node) {
-  global $user;
   if (user_access('edit any pd_course content')) {
 
     $courses = &drupal_static(__FUNCTION__, array());
@@ -50,7 +49,6 @@ function prc_pd_course_form_course_audience_menu_access($node) {
 }
 
 function prc_pd_course_form_course_audience_form($form, &$form_state) {
-  global $user;
   if (isset($form_state['values']['nid'])) {
     $node = node_load($form_state['values']['nid']);
   }
@@ -263,7 +261,6 @@ function prc_pd_course_form_course_audience_form_submit(&$form, &$form_state) {
           break;
 
         case 'by_rostering':
-          $emails = $form_state['input']['by_rostering'];
           $valid_emails = array();
           _prc_invite_form_validate_email_address_format($form_state, 'by_rostering', $valid_emails);
 
@@ -514,10 +511,7 @@ function prc_pd_course_form_node_view($node, $view_mode, $langcode) {
     }
   }
   elseif ($node->type == 'pd_course' && isset($_SESSION)) {
-
     global $user;
-    $course = course_get_course($node, $user, TRUE);
-
     $enrollment = course_enrollment_load($node->nid, $user->uid);
 
     if ($enrollment) {

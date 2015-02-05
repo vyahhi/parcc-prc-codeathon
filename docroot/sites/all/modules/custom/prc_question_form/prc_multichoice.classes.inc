@@ -91,7 +91,6 @@ class PRCMultichoiceQuestion extends MultichoiceQuestion {
     );
 
     $form['alternatives']['#theme'][] = 'multichoice_creation_form';
-    $i = 0;
 
     // choice_count might be stored in the form_state after an ajax callback
     if (isset($form_state['values']['add-alternative']) && $form_state['values']['add-alternative']) {
@@ -114,8 +113,6 @@ class PRCMultichoiceQuestion extends MultichoiceQuestion {
       if ($short && isset($short['deleted']) && $short['deleted']) {
         // This answer has been deleted, so don't draw it
         continue;
-      } else {
-        $access = TRUE;
       }
 
       $form['alternatives'][$i] = array(
@@ -255,7 +252,6 @@ class PRCMultichoiceQuestion extends MultichoiceQuestion {
 
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'multichoice') . '/multichoice.js',
-//      drupal_get_path('module', 'prc_question_form') . '/prc_question_form_mc_item.js',
     );
 
     return $form;
