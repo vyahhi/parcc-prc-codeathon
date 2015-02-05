@@ -70,7 +70,7 @@ function features_builder_menu() {
  * Builds an array of all exportables exposed to Features.
  * 
  * @param string $component
- *   (optional) Indicate which type of component to return. Defautls to all.
+ *   (optional) Indicate which type of component to return. Defaults to all.
  * 
  * @return array
  *   An array of available exportables. If $component is not specified, this
@@ -151,7 +151,7 @@ function features_builder_get_exportables_counts() {
     foreach ($exportables as $component => $components) {
       foreach ($components as $exportable => $label) {
         if (empty($included[$component][$exportable])) {
-          // Contained by excactly one builder.
+          // Contained by no builders.
           $items['not_included'][$component][$exportable] = $label;
         }
         elseif (count($included[$component][$exportable]) > 1) {
@@ -159,7 +159,7 @@ function features_builder_get_exportables_counts() {
           $items['duplicated'][$component][$exportable] = $label;
         }
         else {
-          // Contained by excactly one builder.
+          // Contained by exactly one builder.
           $items['included'][$component][$exportable] = $label;
         }
       }
@@ -187,7 +187,7 @@ function features_builder_exportable_count_states() {
 /**
  * List all exportables available to Features.
  * 
- * @todo: Rseview if this is necessary. Thought it would be, seems less so now.
+ * @todo: Review if this is necessary. Thought it would be, seems less so now.
  * 
  * @return array
  *   An array of strings, one for each exportable. The array is keyed by a 
@@ -292,6 +292,8 @@ function features_builder_get_features() {
 
 /**
  * This is the money-maker.
+ *
+ * Deprecated in favor of batch process.
  */
 function features_builder_build() {
 
@@ -325,4 +327,76 @@ function features_builder_build() {
   // Clean up temp space.
   file_unmanaged_delete_recursive($directory);
 
+}
+
+/**
+ * Move a build feature from temp storage to its final location.
+ */
+function _features_builder_build($feature, $class, $temp_dir) {
+  $builder = features_builder_get_class($class, $feature);
+  $builder->export($temp_dir);
+  $features[$builder->moduleName] = $builder;
+}
+
+/**
+ * Move a built feature from temp storage to its final location.
+ */
+function _features_builder_move($feature, $class, $temp_dir) {
+  $builder = features_builder_get_class($class, $feature);
+  $temp = "$temp_dir/{$builder->moduleName}";
+
+  if (!is_readable($temp)) {
+    return;
+  }
+
+  if (is_readable($builder->featureDir())) {
+    file_unmanaged_delete_recursive($builder->featureDir());
+  }
+
+  $dest = dirname($builder->featureDir());
+  file_prepare_directory($dest, FILE_CREATE_DIRECTORY || FILE_MODIFY_PERMISSIONS);
+  @rename(drupal_realpath($temp), $builder->featureDir());
+}
+
+/**
+ * Batch declaration for the build process.
+ */
+function features_builder_prep_batch($options = array()) {
+
+  // Set up temp space.
+  $directory = 'temporary://features-builder-' . REQUEST_TIME;
+  file_prepare_directory($directory, FILE_CREATE_DIRECTORY || FILE_MODIFY_PERMISSIONS);
+
+  $batch = array(
+    'title' => t('Building features.'),
+    'operations' => array(),
+    'file' => drupal_get_path('module', 'features_builder') . '/features_builder.batch.inc',
+    'finished' => 'features_builder_batch_finalize',
+  );
+
+  if (!$data = features_builder_get_features()) {
+    return $batch;
+  }
+
+//  $batch['operations'][] = array('features_builder_hijack_batch', array($data));
+  $batch['operations'][] = array('features_builder_build_batch', array($data, $directory));
+  $batch['operations'][] = array('features_builder_move_batch', array($data, $directory));
+
+  if (!empty($options['enable'])) {
+    $batch['operations'][] = array('features_builder_enable_batch', array($data));
+  }
+
+  return $batch;
+}
+
+/**
+ * Implements hook_help().
+ */
+function features_builder_help($path) {
+  switch ($path) {
+    case 'admin/help#features_builder':
+      $output = file_get_contents(drupal_get_path('module', 'features_builder') .'/README.txt');
+      return module_exists('markdown') ? filter_xss_admin(_filter_markdown($output, NULL)) : '<pre>'. check_plain($output) .'</pre>';
+      break;
+  }
 }

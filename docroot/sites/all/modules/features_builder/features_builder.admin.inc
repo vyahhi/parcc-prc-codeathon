@@ -17,6 +17,11 @@ function features_builder_admin_build_form() {
     '#title' => t('Build'),
     '#description' => t('Generate Features modules based on the !link installed.', $args),
   );
+  $form['build']['enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable'),
+    '#description' => t('Enable all Features Builder generated feature modules.'),
+  );
   $form['build']['build'] = array(
     '#type' => 'submit',
     '#value' => t('Build'),
@@ -29,12 +34,10 @@ function features_builder_admin_build_form() {
 /**
  * Submit callback for initiating a build.
  */
-function features_builder_admin_build_form_build() {
-  features_builder_build();
-  $args = array(
-    '!link' => l('Features', 'admin/structure/features'),
-  );
-  drupal_set_message(t('Features built. Be sure to go to the !link page and enable them.', $args));
+function features_builder_admin_build_form_build($form, $form_state) {
+  $options['enable'] = !empty($form_state['values']['enable']);
+  $batch = features_builder_prep_batch($options);
+  batch_set($batch);
 }
 
 /**
@@ -50,7 +53,6 @@ function features_builder_admin_build() {
     $row = array(check_plain($builder['label']));
 
     // List the features modules provided by the builder.
-    $class = $builder['class'];
     $items = array();
     foreach ($builder['class']::listFeatures() as $name => $feature) {
       $builder_class = features_builder_get_class($builder['name'], $name);
@@ -251,28 +253,4 @@ function features_builder_exportable_listing() {
   }
 
   return $output;
-
-  // Build rows for the table.
-  $rows = array();
-  foreach ($exportables as $component => $components) {
-    foreach ($components as $name => $label) {
-      $row = array(
-        check_plain($component),
-        check_plain($label),
-      );
-      if (!empty($included[$component][$name])) {
-        $row[] = check_plain(implode(' ', $included[$component][$name]));
-      }
-      else {
-        $row[] = '';
-      }
-      $rows[] = $row;
-    }
-  }
-
-  return array(
-    '#theme' => 'table',
-    '#header' => array(t('Component'), t('Exportable'), ''),
-    '#rows' => $rows,
-  );
 }

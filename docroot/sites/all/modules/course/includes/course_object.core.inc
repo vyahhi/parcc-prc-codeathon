@@ -493,6 +493,13 @@ abstract class CourseObject extends CourseHandler {
       $summary['instance'] = '<span class="warning">' . t('Save course to edit object') . '</span>';
     }
 
+    // Instance view link.
+    $viewUrl = $this->getViewUrl();
+    if (!empty($viewUrl)) {
+      $text = t('View instance');
+      $summary['instance_view'] = l($text, $viewUrl, array('external' => TRUE, 'query' => drupal_get_destination()));
+    }
+
     // Required.
     if (!empty($options['delete'])) {
       $dest = "node/{$options['nid']}/course-object/nojs/{$uniqid}/restore";
@@ -645,6 +652,15 @@ abstract class CourseObject extends CourseHandler {
    * @return string
    */
   public function getEditUrl() {
+
+  }
+
+  /**
+   * Get the URL to view this course object, if any.
+   *
+   * @return string
+   */
+  public function getViewUrl() {
 
   }
 
@@ -1207,6 +1223,12 @@ abstract class CourseObjectNode extends CourseObject {
     }
   }
 
+  public function getViewUrl() {
+    if ($this->getInstanceId()) {
+      return url("node/{$this->node->nid}");
+    }
+  }
+
   /**
    * Create a node and set it as this course object's node.
    *
@@ -1368,24 +1390,6 @@ abstract class CourseObjectNode extends CourseObject {
     }
 
     parent::optionsSubmit($form, $form_state);
-  }
-
-  public function getWarnings() {
-    $warnings = parent::getWarnings();
-    if ($this->getOption('private')) {
-      $type_name = $this->getComponent();
-      $acl_var_name = 'content_access_' . $type_name;
-      $settings = variable_get($acl_var_name, array());
-
-      if (!isset($settings['per_node']) || !$settings['per_node']) {
-        $warnings[] = t('%t is set to Private, but the content type %c does not have access control lists enabled. Users will not be able to acces this content. Please visit !l to set up content access settings.', array(
-          '%t' => $this->getTitle(),
-          '%c' => $this->getComponent(),
-          '!l' => l('Access control', "admin/structure/types/manage/{$this->getComponent()}/access"),
-        ));
-      }
-    }
-    return $warnings;
   }
 
   /**

@@ -22,7 +22,7 @@ function course_menu() {
     'title' => 'Course',
     'description' => 'Configure courses.',
     'page callback' => 'course_settings_overview',
-    'access arguments' => array('administer course'),
+    'access callback' => 'course_admin_access',
     'file' => 'includes/course.settings.inc',
   );
 
@@ -666,25 +666,26 @@ function course_load($nid = NULL, $vid = NULL, $reset = FALSE) {
  */
 function course_permission() {
   return array(
-    // Manage course settings
     'administer course' => array(
-      'title' => t('administer course'),
-      'description' => t('TODO Add a description for \'administer course\''),
+      'title' => t('Administer global course configuration'),
+      'description' => t('Allows changing all course configurations.'),
+      'restrict access' => TRUE,
     ),
-    // Take courses
     'access course' => array(
-      'title' => t('access course'),
-      'description' => t('TODO Add a description for \'access course\''),
+      'title' => t('Access course'),
+      'description' => t('Grants access to take courses.'),
     ),
-    // Can user get to the course reports area
-    'access course reports' => array(
-      'title' => t('access course reports'),
-      'description' => t('TODO Add a description for \'access course reports\''),
-    ),
-    // Can use view all course reports
     'access all course reports' => array(
-      'title' => t('access all course reports'),
-      'description' => t('TODO Add a description for \'access all course reports\''),
+      'title' => t('Access all course reports'),
+      'description' => t('Grants access to all course reports across all courses.'),
+    ),
+    'access course administration area' => array(
+      'title' => t('Access course administration area'),
+      'description' => t('Grants access to the course administration area, with no other permission.'),
+    ),
+    'administer course enrollment types' => array(
+      'title' => t('Administer course enrollment types'),
+      'description' => t('Manage course enrollment types, fields, and display settings.'),
     ),
   );
 }
@@ -714,47 +715,10 @@ function course_take_course_menu_access($node) {
 }
 
 /**
- * Determine if taking this course should be restricted.
- *
- * @param object $node
- *   By reference. The course node.
- *
- * @return boolean|array
- *   Either FALSE, or an array containing:
- *   - success: Boolean. Indicates whether or not the user has permission to
- *     take this course.
- *   - message: String. If success is FALSE, a message to display to the user.
+ * @deprecated
  */
 function course_take_course_access($node, $account = NULL, $flush = FALSE, $all = FALSE) {
-  $courses = &drupal_static(__FUNCTION__, array());
-
-  if (!$account) {
-    global $user;
-    $account = $user;
-  }
-
-  if (!isset($courses[$node->nid]) || $flush || $all) {
-    if ($flush) {
-      $courses = array();
-    }
-    // Allow modules to determine if this course should be restricted.
-    $op = 'take';
-    $hooks = module_invoke_all('course_access', $op, $node, $account);
-    drupal_alter('course_access', $hooks, $op, $node, $account);
-    uasort($hooks, 'drupal_sort_weight');
-    if ($all) {
-      return $hooks;
-    }
-    $courses[$node->nid]['success'] = TRUE;
-    foreach ($hooks as $key => $hook) {
-      if (is_array($hook) && !$hook['success']) {
-        $courses[$node->nid] = $hook;
-        return $hook;
-      }
-    }
-  }
-
-  return $courses[$node->nid];
+  return course_access_course('take', $node, $account, $flush, $all);
 }
 
 /**
@@ -1362,7 +1326,7 @@ function course_form_node_type_form_alter(&$form, &$form_state) {
  */
 function course_iframe($url = NULL, $height = '600px', $class = NULL) {
   $style = 'border:none; margin:0; width:100%; height:' . $height . ';';
-  $iframe = '<iframe name="course-viewer" src="' . $url . '" style="' . $style . '" class="' . $class . '" scrolling="no" frameborder="0" onload="resizeFrame(this);"></iframe>';
+  $iframe = '<iframe id="course-viewer" src="' . $url . '" style="' . $style . '" class="' . $class . '" scrolling="no" frameborder="0" onload="resizeFrame(this);"></iframe>';
 
   // Add JS to resize parent frame. This assumes additional JS on the targeted iframe content.
   drupal_add_js(drupal_get_path('module', 'course') . '/js/resizeframe.js');
@@ -1485,6 +1449,10 @@ function course_enrollment_save($enrollment) {
     drupal_alter('course_enrollment', $enrollment);
     if ($eid = db_query('SELECT eid FROM {course_enrollment} WHERE nid = :nid AND uid = :uid', array(':nid' => $enrollment->nid, ':uid' => $enrollment->uid))->fetchField()) {
       $enrollment->eid = $eid;
+    }
+    if (!isset($enrollment->type)) {
+      $node = node_load($enrollment->nid);
+      $enrollment->type = $node->course['enrollment_type'];
     }
     entity_save('course_enrollment', $enrollment);
   }
@@ -1831,11 +1799,13 @@ function course_preprocess_page(&$variables) {
  * @return array
  */
 function course_get_types() {
-  $types = array();
+  $types = & drupal_static(__FUNCTION__, array());
 
-  foreach (node_type_get_types() as $type => $info) {
-    if (variable_get("course_use_$type", 0)) {
-      $types[] = $type;
+  if (!$types) {
+    foreach (node_type_get_types() as $type => $info) {
+      if (variable_get("course_use_$type", 0)) {
+        $types[] = $type;
+      }
     }
   }
 
@@ -2305,6 +2275,8 @@ function course_course_credit_check_completion($course_node) {
  *   A node.
  * @param object $user
  *   A user.
+ * @param bool $flush
+ *   Flag to flush the internal cache.
  * @param bool $all
  *   Return all values from implementations.
  *
@@ -2313,35 +2285,44 @@ function course_course_credit_check_completion($course_node) {
  *   has permission to self-enroll in this course, and 'message', a
  *   module-provided message that should be displayed to the user.
  */
-function course_enroll_access($node, $user = NULL, $flush = FALSE, $all = FALSE) {
+function course_access_course($op, $node, $account = NULL, $flush = FALSE, $all = FALSE) {
   $courses = &drupal_static(__FUNCTION__, array());
 
-  if (!$user) {
+  if (!$account) {
     global $user;
+    $account = $user;
   }
 
-  if (!isset($courses[$node->nid]) || $flush || $all) {
-    if ($flush) {
-      $courses = array();
-    }
+  if (!isset($courses[$node->nid][$op]) || $flush) {
     // Allow modules to set self-enrollment access for a user.
-    $op = 'enroll';
-    $hooks = module_invoke_all('course_access', $op, $node, $user);
-    drupal_alter('course_access', $hooks, $op, $node, $user);
+    $hooks = module_invoke_all('course_access', $op, $node, $account);
+    drupal_alter('course_access', $hooks, $op, $node, $account);
     uasort($hooks, 'drupal_sort_weight');
-    if ($all) {
-      return $hooks;
-    }
-    $courses[$node->nid]['success'] = TRUE;
-    foreach ($hooks as $key => $hook) {
+    $courses[$node->nid][$op] = $hooks;
+  }
+
+  if ($all) {
+    return $courses[$node->nid][$op];
+  }
+  else {
+    foreach ($courses[$node->nid][$op] as $key => $hook) {
       if (is_array($hook) && !$hook['success']) {
-        $courses[$node->nid] = $hook;
         return $hook;
       }
     }
-  }
 
-  return $courses[$node->nid];
+    // Add a default success hook in case no others are returned.
+    return array(
+        'success' => TRUE,
+    );
+  }
+}
+
+/**
+ * @deprecated
+ */
+function course_enroll_access($node, $account = NULL, $flush = FALSE, $all = FALSE) {
+  return course_access_course('enroll', $node, $account, $flush, $all);
 }
 
 /**
@@ -2874,7 +2855,7 @@ function course_entity_info() {
         'name' => 'type',
         'label' => 'label',
       ),
-      'access callback' => 'course_access',
+      'access callback' => 'course_enrollment_type_access',
       'module' => 'course',
       // Enable the entity API's admin UI.
       'admin ui' => array(
@@ -2954,22 +2935,24 @@ function course_entity_info() {
     ),
   );
 
-  // Populate our bundles.
-  $types = db_select('course_enrollment_type', 'cet')
-    ->fields('cet')
-    ->execute()
-    ->fetchAllAssoc('type');
+  if (db_table_exists('course_enrollment_type')) {
+    // Populate our bundles.
+    $types = db_select('course_enrollment_type', 'cet')
+      ->fields('cet')
+      ->execute()
+      ->fetchAllAssoc('type');
 
-  foreach ($types as $type => $info) {
-    $entity_info['course_enrollment']['bundles'][$type] = array(
-      'label' => $info->label,
-      'admin' => array(
-        'path' => 'admin/course/enrollment-types/manage/%course_enrollment_type',
-        'real path' => 'admin/course/enrollment-types/manage/' . $type,
-        'bundle argument' => 4,
-        'access arguments' => array('administer course'),
-      ),
-    );
+    foreach ($types as $type => $info) {
+      $entity_info['course_enrollment']['bundles'][$type] = array(
+        'label' => $info->label,
+        'admin' => array(
+          'path' => 'admin/course/enrollment-types/manage/%course_enrollment_type',
+          'real path' => 'admin/course/enrollment-types/manage/' . $type,
+          'bundle argument' => 4,
+          'access arguments' => array('administer course enrollment types'),
+        ),
+      );
+    }
   }
 
   return $entity_info;
@@ -3077,7 +3060,7 @@ function course_report_label($enrollment) {
  */
 function course_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
   if ($form['instance']['entity_type']['#value'] == 'course_enrollment') {
-    $form['field']['settings']['course_enrollment_user_field'] = array(
+    $form['instance']['settings']['course_enrollment_user_field'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show this field on enrollment.'),
       '#default_value' => !empty($form['#field']['settings']['course_enrollment_user_field']),
@@ -3086,7 +3069,7 @@ function course_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
   }
   else {
     // Add the value to the form so it isn't lost.
-    $form['field']['settings']['course_enrollment'] = array(
+    $form['instance']['settings']['course_enrollment'] = array(
       '#type' => 'value',
       '#value' => !empty($form['#field']['settings']['course_enrollment']),
     );
@@ -3249,10 +3232,25 @@ function course_enrollment_types($type_name = NULL) {
  */
 function course_forms($form_id, $args) {
   $info = entity_get_info('course_enrollment');
+  $forms = array();
   // Translate bundle form ids to the base form id 'course_enrollment_form'.
   foreach ($info['bundles'] as $bundle => $bundle_info) {
     $forms['course_enrollment_edit_' . $bundle . '_form']['callback'] = 'course_enrollment_form';
     $forms['course_enrollment_edit_' . $bundle . '_form']['wrapper callback'] = 'entity_ui_form_defaults';
   }
   return $forms;
+}
+
+/**
+ * Access callback for the entity API.
+ */
+function course_enrollment_type_access($op, $entity = NULL, $account = NULL, $entity_type = NULL) {
+  return user_access('administer course enrollment types', $account);
+}
+
+/**
+ * Can the user access the course administration pages?
+ */
+function course_admin_access() {
+  return user_access('administer course') || user_access('access course administration area');
 }

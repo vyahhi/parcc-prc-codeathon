@@ -246,14 +246,13 @@ class MatchingQuestion extends QuizQuestion {
   /**
    * Question response validator.
    */
-  public function getAnsweringFormValidate(array &$form, array &$form_state = NULL) {
-    $question_answer = $form_state['values']['question'][$this->node->nid]['answer'];
-    foreach ($question_answer as $value) {
+  public function getAnsweringFormValidate(array &$element, &$values) {
+    foreach ($values as $value) {
       if ($value != 'def') {
         return TRUE;
       }
     }
-    form_set_error('', t('You need to match at least one of the items.'));
+    form_error($element, t('You need to match at least one of the items.'));
   }
 
   /**
@@ -524,7 +523,7 @@ class MatchingResponse extends QuizQuestionResponse {
   /**
    * Implementation of getReportFormResponse
    */
-  public function getReportFormResponse() {
+  public function getFeedbackValues() {
     $data = array();
     $answers = $this->question->answers[0]['answer'];
     $solution = $this->quizQuestion->getSubquestions();
