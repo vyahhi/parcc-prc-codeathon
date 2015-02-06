@@ -15,6 +15,8 @@ class PrcCsvSimpleTaxonomyMigration extends Migration {
   public function __construct($arguments = array()) {
     parent::__construct($arguments);
 
+    $this->vocab_name = $arguments['vocab_name'];
+
     $this->description = t('Migrate @vocab_description terms from CSV to taxonomy terms', array('@vocab_description' => $this->vocab_name));
 
     $path = drupal_get_path('module', 'prc_migrate') . '/data/' . $this->vocab_name . '.csv';
@@ -34,7 +36,7 @@ class PrcCsvSimpleTaxonomyMigration extends Migration {
 
     $this->destination = new MigrateDestinationTerm($this->vocab_name);
 
-    $this->map = new MigrateSQLMap(__CLASS__, self::getKeySchema(), $this->destination->getKeySchema());
+    $this->map = new MigrateSQLMap($this->vocab_name, self::getKeySchema(), $this->destination->getKeySchema());
 
     $this->addFieldMapping('name', 'name');
     $this->addFieldMapping('weight', 'weight');

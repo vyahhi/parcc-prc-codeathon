@@ -17,20 +17,24 @@ function prc_migrate_migrate_api() {
     ),
     'migrations' => array(
       'PrcCsvGenre' => array(
-        'class_name' => 'PrcCsvGenreMigration',
+        'class_name' => 'PrcCsvSimpleTaxonomyMigration',
         'group_name' => 'prc_taxonomy',
+        'vocab_name' => 'genre',
       ),
       'PrcCsvGradeLevel' => array(
-        'class_name' => 'PrcCsvGradeLevelMigration',
+        'class_name' => 'PrcCsvSimpleTaxonomyMigration',
         'group_name' => 'prc_taxonomy',
+        'vocab_name' => 'grade_level',
       ),
       'PrcCsvMediaType' => array(
-        'class_name' => 'PrcCsvMediaTypeMigration',
+        'class_name' => 'PrcCsvSimpleTaxonomyMigration',
         'group_name' => 'prc_taxonomy',
+        'vocab_name' => 'media_type',
       ),
       'PrcCsvQuizType' => array(
-        'class_name' => 'PrcCsvQuizTypeMigration',
+        'class_name' => 'PrcCsvSimpleTaxonomyMigration',
         'group_name' => 'prc_taxonomy',
+        'vocab_name' => 'quiz_type',
       ),
     ),
 
