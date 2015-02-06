@@ -1,0 +1,7 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Drupal\\prc_migrate\\": "src/"
+    }
+  }
+}
