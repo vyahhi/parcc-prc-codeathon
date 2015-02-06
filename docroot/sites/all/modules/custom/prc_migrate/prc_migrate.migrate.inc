@@ -24,6 +24,10 @@ function prc_migrate_migrate_api() {
         'class_name' => 'PrcCsvGradeLevelMigration',
         'group_name' => 'prc_taxonomy',
       ),
+      'PrcCsvMediaType' => array(
+        'class_name' => 'PrcCsvMediaTypeMigration',
+        'group_name' => 'prc_taxonomy',
+      ),
     ),
 
   );
