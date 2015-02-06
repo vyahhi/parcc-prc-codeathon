@@ -28,6 +28,10 @@ function prc_migrate_migrate_api() {
         'class_name' => 'PrcCsvMediaTypeMigration',
         'group_name' => 'prc_taxonomy',
       ),
+      'PrcCsvQuizType' => array(
+        'class_name' => 'PrcCsvQuizTypeMigration',
+        'group_name' => 'prc_taxonomy',
+      ),
     ),
 
   );
