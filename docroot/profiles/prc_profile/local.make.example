@@ -1,0 +1,94 @@
+; prc make file for local development
+core = "7.x"
+api = "2"
+
+projects[drupal][version] = "7.x"
+; include the d.o. profile base
+includes[] = "drupal-org.make"
+
+; +++++ TODO modules without versions +++++
+
+projects[prc_poc_local_views][version] = "" ; TODO add version
+projects[prc_poc_local_views][subdir] = "custom"
+
+projects[prc_poc_local_fields][version] = "" ; TODO add version
+projects[prc_poc_local_fields][subdir] = "custom"
+
+projects[prc_poc_local_media][version] = "" ; TODO add version
+projects[prc_poc_local_media][subdir] = "custom"
+
+projects[prc_poc_local_menu][version] = "" ; TODO add version
+projects[prc_poc_local_menu][subdir] = "custom"
+
+projects[prc_poc_local_search_api][version] = "" ; TODO add version
+projects[prc_poc_local_search_api][subdir] = "custom"
+
+projects[prc_poc_local_seo][version] = "" ; TODO add version
+projects[prc_poc_local_seo][subdir] = "custom"
+
+projects[prc_poc_local_site][version] = "" ; TODO add version
+projects[prc_poc_local_site][subdir] = "custom"
+
+projects[prc_poc_local_taxonomy][version] = "" ; TODO add version
+projects[prc_poc_local_taxonomy][subdir] = "custom"
+
+projects[prc_poc_local_users][version] = "" ; TODO add version
+projects[prc_poc_local_users][subdir] = "custom"
+
+projects[prc_poc_local_node_course][version] = "" ; TODO add version
+projects[prc_poc_local_node_course][subdir] = "custom"
+
+projects[prc_poc_local_node_digital_library_content][version] = "" ; TODO add version
+projects[prc_poc_local_node_digital_library_content][subdir] = "custom"
+
+projects[prc_poc_local_node_favorites_list][version] = "" ; TODO add version
+projects[prc_poc_local_node_favorites_list][subdir] = "custom"
+
+projects[prc_poc_local_node_multichoice][version] = "" ; TODO add version
+projects[prc_poc_local_node_multichoice][subdir] = "custom"
+
+projects[prc_poc_local_node_panel][version] = "" ; TODO add version
+projects[prc_poc_local_node_panel][subdir] = "custom"
+
+projects[prc_poc_local_node_pd_course][version] = "" ; TODO add version
+projects[prc_poc_local_node_pd_course][subdir] = "custom"
+
+projects[prc_poc_local_node_pd_module][version] = "" ; TODO add version
+projects[prc_poc_local_node_pd_module][subdir] = "custom"
+
+projects[prc_poc_local_node_quiz][version] = "" ; TODO add version
+projects[prc_poc_local_node_quiz][subdir] = "custom"
+
+projects[prc_poc_local_node_quiz_directions][version] = "" ; TODO add version
+projects[prc_poc_local_node_quiz_directions][subdir] = "custom"
+
+projects[prc_poc_local_node_short_answer][version] = "" ; TODO add version
+projects[prc_poc_local_node_short_answer][subdir] = "custom"
+
+projects[prc_poc_local_panels][version] = "" ; TODO add version
+projects[prc_poc_local_panels][subdir] = "custom"
+
+projects[prc_poc_local_eck_ccss][version] = "" ; TODO add version
+projects[prc_poc_local_eck_ccss][subdir] = "custom"
+
+projects[features_builder_search_api][version] = "" ; TODO add version
+projects[features_builder_search_api][subdir] = "custom"
+
+projects[prc_test_assembly_edit_protection][version] = "" ; TODO add version
+projects[prc_test_assembly_edit_protection][subdir] = "custom"
+
+projects[user_edit_protection][version] = "" ; TODO add version
+projects[user_edit_protection][subdir] = "custom"
+
+projects[admin_role_restrict][version] = "" ; TODO add version
+projects[admin_role_restrict][subdir] = "custom"
+
+; +++++ Libraries +++++
+
+; chosen
+libraries[chosen][directory_name] = "chosen"
+libraries[chosen][type] = "library"
+libraries[chosen][destination] = "libraries"
+libraries[chosen][download][type] = "get"
+libraries[chosen][download][url] = "" ; TODO add download URI
+

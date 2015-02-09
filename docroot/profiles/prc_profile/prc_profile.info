@@ -1,0 +1,202 @@
+; Packaging information for prc
+name = "prc_profile"
+description = ""
+exclusive = "1"
+core = "7.x"
+; ----------
+; Dependencies
+; ----------
+; Administration
+dependencies[] = admin_menu
+dependencies[] = module_filter
+; Chaos tool suite
+dependencies[] = ctools
+dependencies[] = page_manager
+dependencies[] = views_content
+; Core
+dependencies[] = block
+dependencies[] = color
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = dashboard
+dependencies[] = dblog
+dependencies[] = field
+dependencies[] = field_sql_storage
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = filter
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = node
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = rdf
+dependencies[] = search
+dependencies[] = system
+dependencies[] = taxonomy
+dependencies[] = text
+dependencies[] = update
+dependencies[] = user
+; Course
+dependencies[] = course
+; Course objects
+dependencies[] = course_content
+dependencies[] = course_quiz
+; Development
+dependencies[] = devel
+dependencies[] = devel_generate
+dependencies[] = profiler_builder
+; Display Suite
+dependencies[] = ds
+dependencies[] = ds_devel
+dependencies[] = ds_extras
+dependencies[] = ds_forms
+dependencies[] = ds_ui
+; ECK
+dependencies[] = eck
+; Fields
+dependencies[] = entityreference
+dependencies[] = field_group
+dependencies[] = link
+; Flags
+dependencies[] = flag
+dependencies[] = flag_bookmark
+; Invite
+dependencies[] = invite
+dependencies[] = invite_by_email
+dependencies[] = invite_notifications
+; Learning Tools Interoperability
+dependencies[] = lti_tool_provider
+; Mail
+dependencies[] = mailsystem
+dependencies[] = smtp
+; Message
+dependencies[] = message
+dependencies[] = message_notify
+dependencies[] = message_subscribe
+; Migration
+dependencies[] = migrate
+dependencies[] = migrate_ui
+; Other
+dependencies[] = diff
+dependencies[] = elysia_cron
+dependencies[] = email_registration
+dependencies[] = entity
+dependencies[] = entity_token
+dependencies[] = environment_indicator
+dependencies[] = label_help
+dependencies[] = libraries
+dependencies[] = menu_token
+dependencies[] = node_edit_protection
+dependencies[] = pathauto
+dependencies[] = prc_test_assembly_edit_protection
+dependencies[] = realname
+dependencies[] = shs
+dependencies[] = strongarm
+dependencies[] = token
+dependencies[] = user_edit_protection
+; PRC
+dependencies[] = prc_comment_email
+dependencies[] = prc_content_author_token
+dependencies[] = prc_course_views
+dependencies[] = prc_digital_library_form
+dependencies[] = prc_digital_library_permissions
+dependencies[] = prc_invite_form
+dependencies[] = prc_login_form
+dependencies[] = prc_lti_register
+dependencies[] = prc_migrate
+dependencies[] = prc_my_lists
+dependencies[] = prc_pd_course_form
+dependencies[] = prc_pd_token
+dependencies[] = prc_question_form
+dependencies[] = prc_question_preview
+dependencies[] = prc_quiz_permissions
+dependencies[] = prc_registration
+dependencies[] = prc_search
+dependencies[] = prc_shs_term_handler
+dependencies[] = prc_text_to_speech
+dependencies[] = prc_trt
+dependencies[] = prc_user_edit_form
+dependencies[] = user_single_role
+; Panels
+dependencies[] = panels
+dependencies[] = panels_everywhere
+dependencies[] = panels_ipe
+dependencies[] = panels_mini
+dependencies[] = panels_node
+; Performance
+dependencies[] = js
+; Quiz Core
+dependencies[] = quiz
+dependencies[] = quiz_question
+; Quiz Question
+dependencies[] = multichoice
+dependencies[] = quiz_directions
+dependencies[] = short_answer
+; Search
+dependencies[] = search_api
+dependencies[] = search_api_db
+dependencies[] = search_api_facetapi
+dependencies[] = search_api_views
+dependencies[] = search_config
+; Search Toolkit
+dependencies[] = current_search
+dependencies[] = facetapi
+dependencies[] = facetapi_bonus
+; Sharing
+dependencies[] = sharethis
+; Taxonomy
+dependencies[] = taxonomy_csv
+; UUID
+dependencies[] = uuid
+; User interface
+dependencies[] = chosen
+; Users
+dependencies[] = admin_role_restrict
+; Views
+dependencies[] = views
+dependencies[] = views_bulk_operations
+dependencies[] = views_data_export
+dependencies[] = views_ui
+; Voting
+dependencies[] = votingapi
+; Features
+dependencies[] = features
+dependencies[] = features_builder
+dependencies[] = features_builder_default
+dependencies[] = features_builder_search_api
+dependencies[] = prc_cron
+dependencies[] = prc_custom_modules
+dependencies[] = prc_flags
+dependencies[] = prc_invite
+dependencies[] = prc_lti_components
+dependencies[] = prc_mail_settings
+dependencies[] = prc_menu_links
+dependencies[] = prc_messages
+dependencies[] = prc_panels_extras
+dependencies[] = prc_poc_local_eck_ccss
+dependencies[] = prc_poc_local_fields
+dependencies[] = prc_poc_local_media
+dependencies[] = prc_poc_local_menu
+dependencies[] = prc_poc_local_node_course
+dependencies[] = prc_poc_local_node_digital_library_content
+dependencies[] = prc_poc_local_node_favorites_list
+dependencies[] = prc_poc_local_node_multichoice
+dependencies[] = prc_poc_local_node_panel
+dependencies[] = prc_poc_local_node_pd_course
+dependencies[] = prc_poc_local_node_pd_module
+dependencies[] = prc_poc_local_node_quiz
+dependencies[] = prc_poc_local_node_quiz_directions
+dependencies[] = prc_poc_local_node_short_answer
+dependencies[] = prc_poc_local_panels
+dependencies[] = prc_poc_local_search_api
+dependencies[] = prc_poc_local_seo
+dependencies[] = prc_poc_local_site
+dependencies[] = prc_poc_local_taxonomy
+dependencies[] = prc_poc_local_users
+dependencies[] = prc_poc_local_views
+dependencies[] = uuid_features
+
