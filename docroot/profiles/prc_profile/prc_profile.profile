@@ -19,10 +19,3 @@ function prc_profile_form_install_configure_form_alter(&$form) {
   $form['server_settings']['clean_url']['#default_value'] = variable_get('clean_url');
   $form['update_notifications']['#access'] = FALSE;
 }
-
-/**
- * Utility to load includes as needed.
- */
-function prc_profile_include($type) {
-  require_once drupal_get_path('profile', 'prc_profile') . "/prc_profile.$type.inc";
-}
