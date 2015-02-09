@@ -1145,23 +1145,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete own test_item content'.
-  $permissions['delete own test_item content'] = array(
-    'name' => 'delete own test_item content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own truefalse content'.
-  $permissions['delete own truefalse content'] = array(
-    'name' => 'delete own truefalse content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete results for own quiz'.
   $permissions['delete results for own quiz'] = array(
     'name' => 'delete results for own quiz',
