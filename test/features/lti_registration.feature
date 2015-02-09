@@ -20,22 +20,21 @@ Feature: PRC-368 Admin: Register LTI Course
     And I am viewing my "PD Course" node with the title "PRC-349 AC2"
     And I am on "admin-course"
     When I click "Export"
-    Then I should see the heading "LTI Course Registration" in the "content" region
+    Then I should see the heading "Export Course to Another System" in the "content" region
 
   Scenario: AC2: Access the LTI Registration Form
 
     And I should see "Course Title: PRC-349 AC2"
-    And I should see a "LTI Registration Name" field
+    And I should see a "Registration Description" field
     And I should see a "Generate LTI Info" button
     And I press the "Generate LTI Info" button
-    Then I should see the error message containing "LTI Registration Name field is required."
+    Then I should see the error message containing "Registration Description field is required."
 
   Scenario: AC3
-    When I fill in "LTI Registration Name" with "PRC-386 Test Registration"
+    When I fill in "Registration Description" with "PRC-386 Test Registration"
     Then I press the "Generate LTI Info" button
-    Then I should see the heading "LTI Course Registration Confirmation"
-    And I should see "LTI Registration Name: PRC-386 Test Registration"
+    Then I should see the heading "Export Course LTI Information"
+    And I should see "Registration Description: PRC-386 Test Registration"
     And I should see text matching "Key: *"
     And I should see text matching "Secret: *"
     And I should see text matching "LTI URL: *"
-    And I should see "Custom Fields: (Each line below represents an individual module that should be linked from the remote system using the information above and the line's \"custom_destination\" setting below."

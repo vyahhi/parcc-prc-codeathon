@@ -226,7 +226,7 @@ function prc_lti_registration_download_form($form, &$form_state) {
     $lti_registration_info = '<p>Below is the information you will need to input into your LMS in order to enable your users to directly access the course and its modules from your LMS.
 <p>The method for inputting this information varies by LMS. In general you will need to create a separate External Application entry for each of the course\'s modules. For each module, use the same Key, Secret and LTI URL but use the appropriate Custom Field.</p>
 
-<p>LTI Registration Name: ' . $lti['registration']->lti_tool_provider_consumer_consumer
+<p>Registration Description: ' . $lti['registration']->lti_tool_provider_consumer_consumer
       . '</p> Key: ' .$lti['registration']->lti_tool_provider_consumer_key
       . '</p> Secret: ' .$lti['registration']->lti_tool_provider_consumer_secret
       . '</p> LTI URL: ' . $GLOBALS['base_url'] . '/lti'
