@@ -93,6 +93,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'course',
   );
 
+  // Exported permission: 'access course administration area'.
+  $permissions['access course administration area'] = array(
+    'name' => 'access course administration area',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'course',
+  );
+
   // Exported permission: 'access dashboard'.
   $permissions['access dashboard'] = array(
     'name' => 'access dashboard',
@@ -313,6 +322,15 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'course',
+  );
+
+  // Exported permission: 'administer course enrollment types'.
+  $permissions['administer course enrollment types'] = array(
+    'name' => 'administer course enrollment types',
+    'roles' => array(
       'administrator' => 'administrator',
     ),
     'module' => 'course',
@@ -564,6 +582,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'administer profiler builder'.
+  $permissions['administer profiler builder'] = array(
+    'name' => 'administer profiler builder',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'profiler_builder',
+  );
+
   // Exported permission: 'administer quiz configuration'.
   $permissions['administer quiz configuration'] = array(
     'name' => 'administer quiz configuration',
@@ -698,6 +726,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'votingapi',
+  );
+
+  // Exported permission: 'advanced migration information'.
+  $permissions['advanced migration information'] = array(
+    'name' => 'advanced migration information',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'migrate',
   );
 
   // Exported permission: 'block IP addresses'.
@@ -2022,6 +2059,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'quiz',
   );
 
+  // Exported permission: 'migration information'.
+  $permissions['migration information'] = array(
+    'name' => 'migration information',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'migrate',
+  );
+
   // Exported permission: 'notify of path changes'.
   $permissions['notify of path changes'] = array(
     'name' => 'notify of path changes',
@@ -2261,6 +2307,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'search',
+  );
+
+  // Exported permission: 'use ctools import'.
+  $permissions['use ctools import'] = array(
+    'name' => 'use ctools import',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'ctools',
   );
 
   // Exported permission: 'use flag import'.

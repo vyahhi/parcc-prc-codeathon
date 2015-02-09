@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * prc_flags.features.inc
+ * prc_poc_local_flag_like_content.features.inc
  */
 
 /**
  * Implements hook_flag_default_flags().
  */
-function prc_flags_flag_default_flags() {
+function prc_poc_local_flag_like_content_flag_default_flags() {
   $flags = array();
   // Exported flag: "Like Content".
   $flags['like_content'] = array(
@@ -45,11 +45,11 @@ function prc_flags_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
-    'api_version' => 3,
-    'module' => 'prc_flags',
+    'module' => 'prc_poc_local_flag_like_content',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   return $flags;
 

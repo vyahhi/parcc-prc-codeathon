@@ -142,7 +142,7 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
     'bundle' => 'quiz',
     'default_value' => array(
       0 => array(
-        'tid' => 9792,
+        'tid' => 13,
       ),
     ),
     'deleted' => 0,
@@ -181,6 +181,7 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
     'label' => 'Quiz Type',
     'required' => 1,
     'settings' => array(
+      'course_enrollment' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(

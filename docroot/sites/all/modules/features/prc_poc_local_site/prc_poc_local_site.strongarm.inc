@@ -35,7 +35,7 @@ function prc_poc_local_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'clean_url';
-  $strongarm->value = '1';
+  $strongarm->value = TRUE;
   $export['clean_url'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -56,7 +56,7 @@ function prc_poc_local_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'features_builder_base_dir';
-  $strongarm->value = 'sites/all/modules/features/build';
+  $strongarm->value = 'sites/all/modules/custom/features';
   $export['features_builder_base_dir'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -76,16 +76,34 @@ function prc_poc_local_site_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'module_filter_recent_modules';
-  $strongarm->value = array();
-  $export['module_filter_recent_modules'] = $strongarm;
+  $strongarm->name = 'node_admin_theme';
+  $strongarm->value = 0;
+  $export['node_admin_theme'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_admin_theme';
-  $strongarm->value = 0;
-  $export['node_admin_theme'] = $strongarm;
+  $strongarm->name = 'search_active_modules';
+  $strongarm->value = array(
+    'ds_search' => 'ds_search',
+    'node' => 0,
+    'user' => 0,
+  );
+  $export['search_active_modules'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'search_cron_limit';
+  $strongarm->value = '100';
+  $export['search_cron_limit'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'search_default_module';
+  $strongarm->value = 'ds_search';
+  $export['search_default_module'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -119,14 +137,14 @@ function prc_poc_local_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'site_mail';
-  $strongarm->value = 'noreply@breaktech.org';
+  $strongarm->value = 'admin@example.com';
   $export['site_mail'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'site_name';
-  $strongarm->value = 'Partnership Resource Center';
+  $strongarm->value = 'Site-Install';
   $export['site_name'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -463,7 +481,7 @@ function prc_poc_local_site_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'update_notify_emails';
   $strongarm->value = array(
-    0 => 'jonathan.franks@breaktech.com',
+    0 => 'admin@example.com',
   );
   $export['update_notify_emails'] = $strongarm;
 

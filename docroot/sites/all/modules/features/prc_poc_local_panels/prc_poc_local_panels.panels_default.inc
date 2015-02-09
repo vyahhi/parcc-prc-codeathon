@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * prc_panels_extras.panels_default.inc
+ * prc_poc_local_panels.panels_default.inc
  */
 
 /**
  * Implements hook_default_panels_mini().
  */
-function prc_panels_extras_default_panels_mini() {
+function prc_poc_local_panels_default_panels_mini() {
   $export = array();
 
   $mini = new stdClass();

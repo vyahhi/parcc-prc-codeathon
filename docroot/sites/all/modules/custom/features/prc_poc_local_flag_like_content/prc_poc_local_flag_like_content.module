@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Node: Like Content feature.
+ */
+
+include_once 'prc_poc_local_flag_like_content.features.inc';

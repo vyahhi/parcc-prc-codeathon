@@ -1,4 +1,4 @@
-name = prc-poc.local Interactive Choice
+name = prc-poc.local Multiple choice question
 core = 7.x
 package = Content
 dependencies[] = ctools
@@ -18,4 +18,3 @@ features[variable][] = node_preview_multichoice
 features[variable][] = node_submitted_multichoice
 features[variable][] = field_bundle_settings_node__multichoice
 features[features_api][] = api:2
-mtime = 1422575726
