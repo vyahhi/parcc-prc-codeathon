@@ -10,7 +10,7 @@ Specific setup for tests:
 
 PRC-472.jmx (Anonymous User browsing the Digital Library)
     1. Devel generate 200 digital library content items, and make sure they have the Subject, Grade Level, and
-       Standard fields filled on the ones that you actually view.
+       Standard fields filled on the ones that you actually view. ( drush genc 200 0 --kill type=digital_library_content )
     2. Under the Recording Controller, change the URLs for the last two samplers to URLs for digital library content on
        your system
 
