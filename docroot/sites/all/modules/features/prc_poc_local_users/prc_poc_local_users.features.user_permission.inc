@@ -93,15 +93,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'course',
   );
 
-  // Exported permission: 'access course reports'.
-  $permissions['access course reports'] = array(
-    'name' => 'access course reports',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'course',
-  );
-
   // Exported permission: 'access dashboard'.
   $permissions['access dashboard'] = array(
     'name' => 'access dashboard',
