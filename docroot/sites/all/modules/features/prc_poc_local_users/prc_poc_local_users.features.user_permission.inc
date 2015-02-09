@@ -873,13 +873,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'create practice_test content'.
-  $permissions['create practice_test content'] = array(
-    'name' => 'create practice_test content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'create quiz content'.
   $permissions['create quiz content'] = array(
     'name' => 'create quiz content',
@@ -910,23 +903,6 @@ function prc_poc_local_users_user_default_permissions() {
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'create test_item content'.
-  $permissions['create test_item content'] = array(
-    'name' => 'create test_item content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'create truefalse content'.
-  $permissions['create truefalse content'] = array(
-    'name' => 'create truefalse content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -1014,13 +990,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete any practice_test content'.
-  $permissions['delete any practice_test content'] = array(
-    'name' => 'delete any practice_test content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete any quiz content'.
   $permissions['delete any quiz content'] = array(
     'name' => 'delete any quiz content',
@@ -1053,23 +1022,6 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any short_answer content'.
   $permissions['delete any short_answer content'] = array(
     'name' => 'delete any short_answer content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete any test_item content'.
-  $permissions['delete any test_item content'] = array(
-    'name' => 'delete any test_item content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete any truefalse content'.
-  $permissions['delete any truefalse content'] = array(
-    'name' => 'delete any truefalse content',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
@@ -1156,13 +1108,6 @@ function prc_poc_local_users_user_default_permissions() {
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own practice_test content'.
-  $permissions['delete own practice_test content'] = array(
-    'name' => 'delete own practice_test content',
-    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1761,13 +1706,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit any practice_test content'.
-  $permissions['edit any practice_test content'] = array(
-    'name' => 'edit any practice_test content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit any quiz content'.
   $permissions['edit any quiz content'] = array(
     'name' => 'edit any quiz content',
@@ -1791,23 +1729,6 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit any short_answer content'.
   $permissions['edit any short_answer content'] = array(
     'name' => 'edit any short_answer content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit any test_item content'.
-  $permissions['edit any test_item content'] = array(
-    'name' => 'edit any test_item content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit any truefalse content'.
-  $permissions['edit any truefalse content'] = array(
-    'name' => 'edit any truefalse content',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
@@ -1915,13 +1836,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit own practice_test content'.
-  $permissions['edit own practice_test content'] = array(
-    'name' => 'edit own practice_test content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit own quiz content'.
   $permissions['edit own quiz content'] = array(
     'name' => 'edit own quiz content',
@@ -1952,23 +1866,6 @@ function prc_poc_local_users_user_default_permissions() {
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit own test_item content'.
-  $permissions['edit own test_item content'] = array(
-    'name' => 'edit own test_item content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit own truefalse content'.
-  $permissions['edit own truefalse content'] = array(
-    'name' => 'edit own truefalse content',
-    'roles' => array(
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -2313,15 +2210,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'search_config',
   );
 
-  // Exported permission: 'search practice_test content'.
-  $permissions['search practice_test content'] = array(
-    'name' => 'search practice_test content',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'search_config',
-  );
-
   // Exported permission: 'search quiz content'.
   $permissions['search quiz content'] = array(
     'name' => 'search quiz content',
@@ -2343,24 +2231,6 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'search short_answer content'.
   $permissions['search short_answer content'] = array(
     'name' => 'search short_answer content',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'search_config',
-  );
-
-  // Exported permission: 'search test_item content'.
-  $permissions['search test_item content'] = array(
-    'name' => 'search test_item content',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'search_config',
-  );
-
-  // Exported permission: 'search truefalse content'.
-  $permissions['search truefalse content'] = array(
-    'name' => 'search truefalse content',
     'roles' => array(
       'administrator' => 'administrator',
     ),

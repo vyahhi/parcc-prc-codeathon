@@ -325,11 +325,8 @@ You can access the result here !url
     'multichoice' => 0,
     'pd_module' => 0,
     'panel' => 0,
-    'practice_test' => 0,
     'quiz' => 0,
     'short_answer' => 0,
-    'test_item' => 0,
-    'truefalse' => 0,
   );
   $export['sharethis_node_types'] = $strongarm;
 
