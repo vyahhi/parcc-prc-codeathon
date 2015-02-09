@@ -1,4 +1,4 @@
-; prc make file for d.o. usage
+; prc_profile make file for d.o. usage
 core = "7.x"
 api = "2"
 
