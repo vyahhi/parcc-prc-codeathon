@@ -17,5 +17,3 @@ drush vocimp ../terms/lr_standards_fields.csv fields --fields_format=name,descri
 Now get your admin password and log in:
 drush uli
 
-TODO: These standards and subjects taxonomy imports are not complete
-TODO: Member state terms not imported
