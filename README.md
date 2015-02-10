@@ -8,7 +8,7 @@ Installation
 cd docroot
 drush si -y prc
 drush fra -y --force
-drush mi —all
+drush mi —-all
 drush php-eval 'node_access_rebuild();'
 drush vocimp ../terms/lr_subjects_hier.csv tree --vocabulary_target=existing --vocabulary_id=10
 drush vocimp ../terms/lr_standards_by_id_hier.csv tree --vocabulary_target=existing --vocabulary_id=9
