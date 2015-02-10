@@ -1,4 +1,4 @@
-@api @course
+@api @d7 @course
 Feature: PRC-368 Admin: Register LTI Course
   As a PRC Admin or Content Administrator (Curator)
   I want to edit an existing course,
@@ -15,25 +15,35 @@ Feature: PRC-368 Admin: Register LTI Course
 
 
   Background:
-    Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I have no "PD Course" nodes
-    And I am viewing my "PD Course" node with the title "PRC-349 AC2"
+    Given I have no "PD Course" nodes
+    And "PD Course" nodes:
+      | title        | field_course_objectives | field_permissions  | uid | status |
+      | Members Only | This is private         | members            | 1   | 1      |
+    And I am logged in as a user with the "Content Administrator (Curator)" role
     And I am on "admin-course"
-    When I click "Export"
-    Then I should see the heading "Export Course to Another System" in the "content" region
 
-  Scenario: AC2: Access the LTI Registration Form
+  Scenario:  Access the LTI Registration Form and generate the Display of LTI information
+    Then I should not see the link "Export"
+    Then I click "Edit"
+    And I select the radio button "Public"
+    Then I press "Save"
+    And I should see the heading "PRC Courses"
+    Then I should see the link "Export"
 
-    And I should see "Course Title: PRC-349 AC2"
+    And I click "Export"
+    Then I should see "Export Course to Another System"
+
+    And I should see "Members Only"
+    And I should see "To provide access to this course and its modules from a third party system, you will need to register it onto that system by using LTI (Learning Tools Interoperability) information provided below."
     And I should see a "Registration Description" field
     And I should see a "Generate LTI Info" button
     And I press the "Generate LTI Info" button
     Then I should see the error message containing "Registration Description field is required."
 
-  Scenario: AC3
-    When I fill in "Registration Description" with "PRC-386 Test Registration"
+    Then I fill in "Registration Description" with "PRC-386 Test Registration"
     Then I press the "Generate LTI Info" button
     Then I should see the heading "Export Course LTI Information"
+    And I should see "Below is the information you will need to input into your LMS in order to enable your users to directly access the course and its modules from your LMS."
     And I should see "Registration Description: PRC-386 Test Registration"
     And I should see text matching "Key: *"
     And I should see text matching "Secret: *"
