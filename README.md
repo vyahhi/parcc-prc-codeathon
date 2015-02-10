@@ -6,7 +6,7 @@ PARCC Partnership Resource Center
 Installation
 ============
 cd docroot
-drush si -y prc
+drush si -y prc_profile
 drush fra -y --force
 drush mi —-all
 drush php-eval 'node_access_rebuild();'
