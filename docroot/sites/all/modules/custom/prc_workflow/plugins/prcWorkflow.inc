@@ -31,7 +31,8 @@ class prcWorkflow extends StateFlow {
           'label' => t('Request Approval'),
           'origin' => 'draft',
           'target' => 'ready_for_review',
-          'permissions' => array('request approval of prc content')
+          'permissions' => array('request approval of prc content'),
+          'guard' => 'prc_workflow_user_owns_node'
         )
       );
 
@@ -61,5 +62,7 @@ class prcWorkflow extends StateFlow {
         'permissions' => array('unpublish prc content'),
       )
     );
+
+    $this->set_initial_state('draft');
   }
 }

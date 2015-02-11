@@ -62,3 +62,84 @@ function prc_workflow_state_flow_machine_type_alter(&$machine_type, $node) {
     $machine_type = 'prc_workflow';
   }
 }
+
+/**
+ * Implements HOOK_form_FORM_ID_alter()
+ */
+function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$form_state){
+  $node = $form['#node'];
+
+  //state flow won't work without a vid, so skip on node creation
+  if(!empty($node->vid)) {
+    $state_flow = state_flow_load_state_machine($node);
+
+    $action_button = array(
+      '#type' => 'submit',
+      '#access' => TRUE,
+      '#submit' => array('prc_workflow_submit_handler'),
+    );
+    $current_state = $state_flow->get_current_state();
+
+    $label = $state_flow->get_label_for_current_state();
+
+    //@todo: $label needs to be printed somewhere on the page to indicate the current state
+
+    //Find the event appropriate to the state
+    $weight = -10;
+
+    foreach ($state_flow->get_available_events() as $key => $event) {
+      //make sure only actions available to the user are displayed
+      if($event->validate()) {
+        //use our button prototype from above and customize for the context
+        $options = $event->get_options();
+        $form['actions'][$key] = $action_button;
+        $form['actions'][$key]['#value'] = $options['label'];
+        $form['actions'][$key]['#weight'] = $weight;
+
+        $weight += -3; //@todo: if this doesn't work we can add a weight attribute to the events options
+      }
+    }
+  }
+}
+
+/**
+ * Handles submission of the form by workflow actions
+ *
+ * @param $form
+ * @param $form_state
+ */
+function prc_workflow_submit_handler($form, &$form_state){
+  //@todo: does this create a new revision even if nothing has changed besides the state?
+  node_form_submit($form, $form_state);
+
+  //@todo: confirm we are advancing the correct revision of the node, not the previous version
+
+  //Determine which button was pressed and fire the corresponding event
+  $node = $form['#node'];
+  if(!empty($node->vid)) {
+    $state_flow = state_flow_load_state_machine($node);
+    $clicked = $form_state['clicked_button']['#value'];
+    foreach($state_flow->get_available_events() as $key => $event){
+      $options = $event->get_options();
+      if($clicked == $options['label']){
+        $state_flow->fire_event($key);
+      }
+    }
+  }
+}
+
+/**
+ * A state machine guard callback to determine whether the user taking the action
+ * is the owner of the corresponding node.
+ *
+ * @param $event
+ */
+function prc_workflow_user_owns_node($event){
+  $machine = $event->get_machine();
+  global $user;
+
+  if($machine->object->uid === $user->uid){
+    return TRUE;
+  }
+  return FALSE;
+}
