@@ -17,7 +17,7 @@ function prc_invite_default_invite_type() {
     "argument" : [],
     "invite_sending_controller" : { "invite_by_email" : "invite_by_email" },
     "description" : "Invitation by e-mail.",
-    "data" : { "invite_by_email" : { "use_default" : 1, "message_editable" : 0, "replace_tokens" : 0 } },
+    "data" : { "invite_by_email" : { "use_default" : 1, "message_editable" : 1, "replace_tokens" : 1 } },
     "rdf_mapping" : []
   }');
   return $items;
