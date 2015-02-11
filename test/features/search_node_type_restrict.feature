@@ -6,6 +6,13 @@ Feature: Search Content - Quick Search (PRC-31)
 
   Scenario: PRC-515 Search Content - Quick Search - Search only Digital Library and PD Course
     Given I am logged in as a user with the "Educator" role
+    And "Subject" terms:
+      | name  |
+      | subj1 |
+      | subj2 |
+    And "Grade Level" terms:
+      | name      |
+      | Grade 490 |
     And "Digital Library Content" nodes:
       | title         | body      | status | promote | uid | language | tags         | field_author_name |
       | Africa DLC    | Continent | 1      | 0       | 1   | und      | North        | Ted               |
