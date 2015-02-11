@@ -1,4 +1,4 @@
-name = prc-poc.local Interactive Choice
+name = prc-poc.local Multiple choice question
 core = 7.x
 package = Content
 dependencies[] = ctools
