@@ -49,7 +49,7 @@ Feature: PRC-490 View Test Details
     When I visit the last node created
     And I click "Quiz"
     Then I click "Manage questions"
-    Then I click "Exam directions"
+    Then I click "Quiz directions"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 1"
     And I fill in "Title" with "PRC-490 Directions 1"
     And I fill in "Item Order" with "D1"
