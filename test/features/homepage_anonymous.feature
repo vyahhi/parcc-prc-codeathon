@@ -11,7 +11,7 @@ Feature: Anonymous User Home Page (PRC-51)
     And I have no "PD Course" nodes
     And I have no "PD Module" nodes
     And I have no "Quiz" nodes
-    And I have no "Interactive Choice" nodes
+    And I have no "Multiple Choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Panel" nodes
     And I have no "Course" nodes
