@@ -119,6 +119,12 @@ function prc_profile_install() {
   $features = array(
   );
   features_revert($features);
+
+  // Forcefully set the name of quiz module's multiple choice item type
+  $mc = node_type_load('multichoice');
+  $mc->name = t('Interactive Choice');
+  node_type_save($mc);
+
   // Ignore any rebuild messages.
   node_access_needs_rebuild(FALSE);
   // Ignore any other install messages.

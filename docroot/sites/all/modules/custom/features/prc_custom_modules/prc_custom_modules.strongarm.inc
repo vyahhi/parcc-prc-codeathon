@@ -218,7 +218,7 @@ You can access the result here !url
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'quiz_name';
-  $strongarm->value = 'Exam';
+  $strongarm->value = 'Quiz';
   $export['quiz_name'] = $strongarm;
 
   $strongarm = new stdClass();

@@ -137,14 +137,14 @@ function prc_poc_local_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'site_mail';
-  $strongarm->value = 'admin@example.com';
+  $strongarm->value = 'noreply@breaktech.org';
   $export['site_mail'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'site_name';
-  $strongarm->value = 'Site-Install';
+  $strongarm->value = 'Partnership Resource Center';
   $export['site_name'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -176,7 +176,7 @@ function prc_poc_local_site_strongarm() {
     'toggle_main_menu' => 1,
     'toggle_secondary_menu' => 1,
     'default_logo' => 0,
-    'logo_path' => 'public://logo-parcc.gif',
+    'logo_path' => 'sites/all/themes/prc_responsive_bartik/logo-parcc.gif',
     'logo_upload' => '',
     'default_favicon' => 1,
     'favicon_path' => '',
@@ -187,11 +187,11 @@ function prc_poc_local_site_strongarm() {
       'bottom' => '#c2c4c5',
       'bg' => '#ffffff',
       'sidebar' => '#f6f6f2',
-      'sidebarborders' => '#cccccc',
+      'sidebarborders' => '#f9f9f9',
       'footer' => '#292929',
       'titleslogan' => '#000000',
-      'text' => '#4a4a4a',
-      'link' => '#019dbf',
+      'text' => '#3b3b3b',
+      'link' => '#0071B3',
     ),
     'theme' => 'prc_responsive_bartik',
     'info' => array(

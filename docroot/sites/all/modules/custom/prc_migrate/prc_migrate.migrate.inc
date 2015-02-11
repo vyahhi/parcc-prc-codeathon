@@ -14,6 +14,9 @@ function prc_migrate_migrate_api() {
       'prc_taxonomy' => array(
         'title' => t('Migrate Taxonomy Terms'),
       ),
+      'prc_standard' => array(
+          'title' => t('Migrate Standards Terms'),
+      ),
     ),
     'migrations' => array(
       'PrcCsvGenre' => array(
@@ -35,6 +38,14 @@ function prc_migrate_migrate_api() {
         'class_name' => 'PrcCsvSimpleTaxonomyMigration',
         'group_name' => 'prc_taxonomy',
         'vocab_name' => 'quiz_type',
+      ),
+      'PrcCsvMemberState' => array(
+        'class_name' => 'PrcCsvMemberStateMigration',
+        'group_name' => 'prc_taxonomy',
+      ),
+      'PrcJsonStandardMigration' => array(
+        'class_name' => 'PrcJsonStandardMigration',
+        'group_name' => 'prc_standard',
       ),
     ),
 

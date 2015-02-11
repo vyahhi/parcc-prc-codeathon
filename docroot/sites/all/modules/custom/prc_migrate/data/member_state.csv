@@ -1,0 +1,14 @@
+id,name,field_state_code,weight
+1,Arkansas,ARKA1,1
+2,Colorado,COLO1,2
+3,District of Columbia,DISTR1,3
+4,Illinois,ILLI1,4
+5,Louisiana,LOUS1,5
+6,Maryland,MARY1,6
+7,Massachusetts,MASS1,7
+8,Mississippi,MISS1,8
+9,New Jersey,NEWJ1,9
+10,New Mexico,NEWM1,10
+11,New York,NEWY1,11
+12,Ohio,OHIO1,12
+13,Rhode Island,RHOD1,13
