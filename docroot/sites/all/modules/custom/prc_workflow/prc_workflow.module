@@ -4,6 +4,7 @@
  * @file Hooks and configuration pertaining to the editing workflow of the PRC site.
  */
 
+//@todo menu alter to block editing of nodes or revisions that are "published"
 
 /**
  * Implements hook_permission
@@ -78,7 +79,6 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
       '#access' => TRUE,
       '#submit' => array('prc_workflow_submit_handler'),
     );
-    $current_state = $state_flow->get_current_state();
 
     $label = $state_flow->get_label_for_current_state();
 
