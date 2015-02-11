@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file Hooks and configuration pertaining to the editing workflow of the PRC site.
+ */
+
+
+/**
+ * Implements hook_permission
+ *
+ * @return array
+ */
+function prc_permission(){
+  return array(
+    //@todo
+  );
+}
+

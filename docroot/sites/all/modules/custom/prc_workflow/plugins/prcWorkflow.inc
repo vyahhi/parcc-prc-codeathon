@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file Classes derived from state_flow module & state machine bass classes
+ */
+
+
+class prcWorkflow extends StateFlow {
+  public function init() {
+
+    //define states
+    $this->create_state('draft',
+      array(
+        'label' => t('Private Draft')
+      )
+    );
+
+    $this->create_state('ready_for_review',
+      array(
+        'label' => t('waiting_for_review')
+      )
+    );
+
+    $this->create_state('published',
+      array(
+        'label' => t('Published')
+      )
+    );
+
+    //define events
+    $this->create_event('approval_requested',
+        array(
+          'label' => t('Approval Requested'),
+          'origin' => 'draft',
+          'target' => 'ready_for_review'
+        )
+      );
+
+    $this->create_event('approved',
+      array(
+        'label' => t('Approved'),
+        'origin' => 'ready_for_review',
+        'target' => 'published'
+      )
+    );
+
+    $this->create_event('denied',
+      array(
+        'label' => t('Denied'),
+        'origin' => 'ready_for_review',
+        'target' => 'draft',
+      )
+    );
+
+    $this->create_event('unpublish',
+      array(
+        'label' => t('Unpublish'),
+        'origin' => 'published',
+        'target' => 'draft',
+      )
+    );
+  }
+}
