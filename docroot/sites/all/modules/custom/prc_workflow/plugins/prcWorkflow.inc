@@ -28,7 +28,7 @@ class prcWorkflow extends StateFlow {
     //define events
     $this->create_event('approval_requested',
         array(
-          'label' => t('Approval Requested'),
+          'label' => t('Request Approval'),
           'origin' => 'draft',
           'target' => 'ready_for_review',
           'permissions' => array('request approval of prc content')
@@ -37,7 +37,7 @@ class prcWorkflow extends StateFlow {
 
     $this->create_event('approved',
       array(
-        'label' => t('Approved'),
+        'label' => t('Approve'),
         'origin' => 'ready_for_review',
         'target' => 'published',
         'permissions' => array('approve prc content'),
@@ -46,7 +46,7 @@ class prcWorkflow extends StateFlow {
 
     $this->create_event('denied',
       array(
-        'label' => t('Denied'),
+        'label' => t('Deny'),
         'origin' => 'ready_for_review',
         'target' => 'draft',
         'permissions' => array('deny prc content'),

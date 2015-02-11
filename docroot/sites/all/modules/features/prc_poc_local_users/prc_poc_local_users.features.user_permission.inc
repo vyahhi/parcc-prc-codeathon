@@ -307,6 +307,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'comment',
   );
 
+  // Exported permission: 'administer content revisions'.
+  $permissions['administer content revisions'] = array(
+    'name' => 'administer content revisions',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+    ),
+    'module' => 'state_flow',
+  );
+
   // Exported permission: 'administer content types'.
   $permissions['administer content types'] = array(
     'name' => 'administer content types',
@@ -735,6 +744,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'migrate',
+  );
+
+  // Exported permission: 'approve prc content'.
+  $permissions['approve prc content'] = array(
+    'name' => 'approve prc content',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+    ),
+    'module' => 'prc_workflow',
   );
 
   // Exported permission: 'block IP addresses'.
@@ -1269,6 +1287,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'deny prc content'.
+  $permissions['deny prc content'] = array(
+    'name' => 'deny prc content',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+    ),
+    'module' => 'prc_workflow',
   );
 
   // Exported permission: 'display drupal links'.
@@ -2041,6 +2068,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'manage content workflow'.
+  $permissions['manage content workflow'] = array(
+    'name' => 'manage content workflow',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+    ),
+    'module' => 'state_flow',
+  );
+
   // Exported permission: 'manage features'.
   $permissions['manage features'] = array(
     'name' => 'manage features',
@@ -2091,6 +2127,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'features',
+  );
+
+  // Exported permission: 'request approval of prc content'.
+  $permissions['request approval of prc content'] = array(
+    'name' => 'request approval of prc content',
+    'roles' => array(
+      'Content Contributor' => 'Content Contributor',
+    ),
+    'module' => 'prc_workflow',
   );
 
   // Exported permission: 'revert revisions'.
@@ -2298,6 +2343,15 @@ function prc_poc_local_users_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'flag',
+  );
+
+  // Exported permission: 'unpublish prc content'.
+  $permissions['unpublish prc content'] = array(
+    'name' => 'unpublish prc content',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+    ),
+    'module' => 'prc_workflow',
   );
 
   // Exported permission: 'use advanced search'.

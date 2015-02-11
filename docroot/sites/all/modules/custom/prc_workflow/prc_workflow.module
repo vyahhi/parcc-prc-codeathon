@@ -10,7 +10,7 @@
  *
  * @return array
  */
-function prc_permission(){
+function prc_workflow_permission(){
   return array(
     'request approval of prc content' => array(
       'title' => t('Request Approval of PRC content'),
@@ -32,3 +32,33 @@ function prc_permission(){
 }
 
 
+/**
+ * Implements hook_state_flow_plugins()
+ */
+function prc_workflow_state_flow_plugins(){
+  $info = array();
+
+  $info['prc_workflow'] = array(
+    'handler' => array(
+      'parent' => 'state_flow',
+      'class' => 'prcWorkflow',
+      'file' => 'prcWorkflow.inc',
+      'path' => drupal_get_path('module', 'prc_workflow').'/plugins',
+    )
+  );
+
+  return $info;
+}
+
+/**
+ * Implements hook_state_flow_machine_type_alter()
+ *
+ * @param string $machine_type
+ * @param object $node
+ */
+function prc_workflow_state_flow_machine_type_alter(&$machine_type, $node) {
+  $machine_type = '';
+  if($node->type === 'digital_library_content'){
+    $machine_type = 'prc_workflow';
+  }
+}
