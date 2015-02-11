@@ -12,7 +12,23 @@
  */
 function prc_permission(){
   return array(
-    //@todo
+    'request approval of prc content' => array(
+      'title' => t('Request Approval of PRC content'),
+      'description' => t('Request that content be approved and published through the PRC workflow.'),
+    ),
+    'approve prc content' => array(
+      'title' => t('Publish PRC content'),
+      'description' => t('Approve and publish content managed through the PRC workflow.'),
+    ),
+    'deny prc content' => array(
+      'title' => t('Deny PRC content'),
+      'description' => t('Deny publishing of content managed through the PRC workflow.')
+    ),
+    'unpublish prc content' => array(
+      'title' => t('Unpublish PRC content'),
+      'description' => t('Move content managed through the PRC workflow from published back to draft'),
+    ),
   );
 }
+
 

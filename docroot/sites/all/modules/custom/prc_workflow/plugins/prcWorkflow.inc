@@ -3,8 +3,6 @@
 /**
  * @file Classes derived from state_flow module & state machine bass classes
  */
-
-
 class prcWorkflow extends StateFlow {
   public function init() {
 
@@ -32,7 +30,8 @@ class prcWorkflow extends StateFlow {
         array(
           'label' => t('Approval Requested'),
           'origin' => 'draft',
-          'target' => 'ready_for_review'
+          'target' => 'ready_for_review',
+          'permissions' => array('request approval of prc content')
         )
       );
 
@@ -40,7 +39,8 @@ class prcWorkflow extends StateFlow {
       array(
         'label' => t('Approved'),
         'origin' => 'ready_for_review',
-        'target' => 'published'
+        'target' => 'published',
+        'permissions' => array('approve prc content'),
       )
     );
 
@@ -49,6 +49,7 @@ class prcWorkflow extends StateFlow {
         'label' => t('Denied'),
         'origin' => 'ready_for_review',
         'target' => 'draft',
+        'permissions' => array('deny prc content'),
       )
     );
 
@@ -57,6 +58,7 @@ class prcWorkflow extends StateFlow {
         'label' => t('Unpublish'),
         'origin' => 'published',
         'target' => 'draft',
+        'permissions' => array('unpublish prc content'),
       )
     );
   }
