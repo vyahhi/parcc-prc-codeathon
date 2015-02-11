@@ -61,6 +61,10 @@ function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state
   // Still have to go in here and modify stuff - without doing this,
   // we don't get the node fields.
 
+  $orig_title = drupal_get_title();
+  $new_title = str_replace(t('Multiple Choice question'), t('Interactive Choice'), $orig_title);
+  drupal_set_title($new_title);
+
   $form['feedback']['#access'] = FALSE;
   $form['title']['#title'] = t('Item Title');
   $form['title']['#required'] = TRUE;
