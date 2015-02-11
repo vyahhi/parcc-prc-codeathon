@@ -57,13 +57,18 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
   // Change the text of the -- None -- option
   $form['field_member_state'][LANGUAGE_NONE]['#options']['_none'] = t('Select a state');
 
+  $roles = user_roles();
+  $roles_with_states = array('PARCC-Member Educator', 'Content Contributor');
+  $roles_rids = array();
+  foreach($roles_with_states as $role) {
+    $rid = array_search($role, $roles);
+    $roles_rids[] = array('value' => $rid);
+  }
+
   // Now make the Member State dropdown dependent on the Role selected
   $form['field_member_state']['#states'] = array(
     'visible' => array(
-      ':input[name="invite_role"]' => array(
-        array('value' => '7'), // PARCC-Member Educator
-        array('value' => '6'), // Content Contributor
-      ),
+      ':input[name="invite_role"]' => $roles_rids,
     ),
   );
 
@@ -190,7 +195,15 @@ function prc_invite_form_form_invite_form_submit(&$form, &$form_state)
   $rid = $form_state['values']['invite_role'];
   $form_state['values']['field_role_id'][LANGUAGE_NONE][0]['value'] = $rid;
 
-  if ($rid != 6 && $rid != 7) {
+  $roles = user_roles();
+  $roles_with_states = array('PARCC-Member Educator', 'Content Contributor');
+  $roles_rids = array();
+  foreach($roles_with_states as $role) {
+    $rid = array_search($role, $roles);
+    $roles_rids[] = array($rid);
+  }
+
+  if (array_search($rid, $roles_rids)) {
     // Force no state on any role except PARCC-Member Educator or Content Contributor
     $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = NULL;
   }
