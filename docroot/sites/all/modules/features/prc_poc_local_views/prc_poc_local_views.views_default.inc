@@ -437,11 +437,11 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
   $handler->display->display_options['filters']['rid']['field'] = 'rid';
   $handler->display->display_options['filters']['rid']['value'] = array(
-    4 => '4',
-    7 => '7',
-    6 => '6',
-    8 => '8',
     5 => '5',
+    6 => '6',
+    4 => '4',
+    3 => '3',
+    7 => '7',
   );
   /* Filter criterion: Global: Combine fields filter */
   $handler->display->display_options['filters']['combine']['id'] = 'combine';
