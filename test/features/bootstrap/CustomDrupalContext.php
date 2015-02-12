@@ -946,8 +946,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $this->iDismissTheDialog();
   }
 
-
-
   /**
    * Moves backward one page in history and confirms the dialog.
    *
@@ -979,8 +977,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $ms = $seconds * 1000;
     $this->getSession()->wait($ms);
   }
-
-
 
   /**
    * Click on the element with the provided CSS Selector
@@ -1175,5 +1171,59 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       }
     }
   }
+  /**
+   * @defgroup "workflow steps"
+   * @{
+   */
+  /**
+   * @Given /^the last node created\'s state is "([^"]*)"$/
+   */
+  public function theLastNodeCreatedSStateIs($arg1) {
+    if (!is_array($this->nodes) || count($this->nodes) == 0) {
+      throw new Exception('No nodes have been created by this context');
+    }
+    $last_index = count($this->nodes) - 1;
+    $last_node = $this->nodes[$last_index];
+    $state_obj = state_flow_load_state_machine($last_node);
+    $state = $state_obj->get_current_state();
+
+    if($state !== $arg1){
+      throw new \Exception(sprintf('The nodes state was not set to %s', $arg1));
+    }
+
+  }
+
+  /**
+   * @Given /^the last node created\'s state is set to "([^"]*)"$/
+   */
+  public function theLastNodeCreatedSStateIsSetTo($arg1) {
+    if (!is_array($this->nodes) || count($this->nodes) == 0) {
+      throw new Exception('No nodes have been created by this context');
+    }
+    $last_index = count($this->nodes) - 1;
+    $last_node = $this->nodes[$last_index];
+
+    //force into a particular state
+    $state = state_flow_load_state_machine($last_node);
+
+    $events = $state->get_all_events();
+
+    foreach($events as $key => $event){
+      $target = $event['target'];
+      if($target === $arg1){
+        $event_to_fire = $key;
+        break;
+      }
+    }
+    if(isset($event_to_fire)) {
+      $state->fire_event('$key');
+    }else{
+      throw new \Exception(sprintf('There was no event associated with the state %s', $arg1));
+    }
+  }
+
+  /**
+   * @} End of defgroup "workflow steps"
+   */
 }
 

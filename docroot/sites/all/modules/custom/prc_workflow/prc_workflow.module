@@ -138,7 +138,9 @@ function prc_workflow_user_owns_node($event){
   $machine = $event->get_machine();
   global $user;
 
-  if($machine->object->uid === $user->uid){
+  $node = $machine->get_object();
+
+  if($node->uid === $user->uid){
     return TRUE;
   }
   return FALSE;
