@@ -1,7 +1,0 @@
-name = PRC Flags
-core = 7.x
-package = PRC
-dependencies[] = flag
-features[features_api][] = api:2
-features[flag][] = like_content
-project path = sites/all/modules/features/build

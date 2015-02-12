@@ -1,0 +1,35 @@
+<?php
+/**
+ * @file
+ * Empty module for Migrate functionality
+ */
+
+function prc_migrate_standards() {
+  $flattened = &drupal_static(__FUNCTION__);
+  if ($flattened !== NULL) {
+    return $flattened;
+  }
+
+  $flattened = array();
+
+  $file_name = 'lr_standards';
+  $path = drupal_get_path('module', 'prc_migrate') . '/data/' . $file_name . '.json';
+  $json = file_get_contents($path);
+
+  $decoded = json_decode($json);
+
+  prc_migrate_standards_flatten_children($decoded->children, NULL, $flattened);
+
+  return $flattened;
+}
+
+function prc_migrate_standards_flatten_children($children, $parent_id = NULL, &$flattened) {
+  foreach($children as $child) {
+    $flat = new StdClass();
+    $flat->title = $child->title;
+    $flat->id = $child->id;
+    $flat->parent_id = $parent_id;
+    $flattened[$flat->id] = $flat;
+    prc_migrate_standards_flatten_children($child->children, $child->id, $flattened);
+  }
+}

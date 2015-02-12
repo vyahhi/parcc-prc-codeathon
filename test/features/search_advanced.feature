@@ -108,7 +108,7 @@ Feature: PRC-106 Search Content- Advanced
       | AC3 Su |
     Given "Digital Library Content" nodes:
       | title         | body      | status | promote | uid | language | field_author_name | field_media_type | field_subject | field_standard |
-      | Africa DLC    | Continent | 1      | 0       | 1   | und      | Author One        | AC3 MT           | AC3 Su        | s1000876       |
+      | Africa DLC    | Continent | 1      | 0       | 1   | und      | Author One        | AC3 MT           | AC3 Su        | s11436b2       |
     And "PD Course" nodes:
       | title         | body      | status | promote | uid | language |
       | Africa PDC    | Continent | 1      | 0       | 1   | und      |

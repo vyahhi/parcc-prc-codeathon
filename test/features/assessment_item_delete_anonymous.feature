@@ -29,7 +29,7 @@ Feature: PRC-528 Delete Item in Test Customization for Anonymous Users
     Then I click "PRC-528 Delete"
     And I click "Quiz"
     Then I click "Manage questions"
-    Then I click "Exam directions"
+    Then I click "Quiz directions"
     And I fill in "edit-body-und-0-value" with "PRC-528 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-528 Directions 1"
     And I fill in "Item Order" with "D1"

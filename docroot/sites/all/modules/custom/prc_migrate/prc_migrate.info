@@ -1,0 +1,16 @@
+name = "PRC Taxonomy Migration"
+description = "Migration of taxonomy terms for PARCC-PRC."
+package = "PRC"
+core = 7.x
+dependencies[] = taxonomy
+dependencies[] = migrate (>7.x-2.6-rc1)
+
+files[] = src/PrcCsvSimpleTaxonomyMigration.php
+files[] = src/PrcCsvGenreMigration.php
+files[] = src/PrcCsvGradeLevelMigration.php
+files[] = src/PrcCsvMediaTypeMigration.php
+files[] = src/PrcCsvQuizTypeMigration.php
+files[] = src/PrcCsvMemberStateMigration.php
+files[] = src/PrcJsonStandardMigrateItem.php
+files[] = src/PrcJsonStandardMigrateList.php
+files[] = src/PrcJsonStandardMigration.php

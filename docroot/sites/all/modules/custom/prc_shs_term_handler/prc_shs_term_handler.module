@@ -31,7 +31,7 @@ function _prc_shs_term_handler_recursive_term_description_update(&$terms, $fullt
       _prc_shs_term_handler_recursive_term_description_update($term, $fullterms);
     }
     else {
-      $term = $fullterms[$tid]->description;
+      $term = array_key_exists($tid, $fullterms) ? $fullterms[$tid]->description : '';
     }
   }
   return $terms;
