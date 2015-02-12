@@ -319,4 +319,23 @@ class PRCMultichoiceQuestion extends MultichoiceQuestion {
   private function checkMarkup($alternative, $field, $check_user_access = FALSE) {
     return check_markup($alternative[$field]['value'], $alternative[$field]['format']);
   }
+
+  public function delete($only_this_version = FALSE) {
+    // This is (hopefully) a temporary solution.
+    // The multichoice object in this version of quiz can't delete itself
+    // because it doesn't have a question_nid or question_vid column on
+    // the results, and it tries to delete it based on that.
+    $delete_properties = db_delete('quiz_multichoice_properties')->condition('nid', $this->node->nid);
+    $delete_answers = db_delete('quiz_multichoice_answers')->condition('question_nid', $this->node->nid);
+
+    if ($only_this_version) {
+      $delete_properties->condition('vid', $this->node->vid);
+      $delete_answers->condition('question_vid', $this->node->vid);
+    }
+
+    $delete_properties->execute();
+    $delete_answers->execute();
+  }
+
+
 }
