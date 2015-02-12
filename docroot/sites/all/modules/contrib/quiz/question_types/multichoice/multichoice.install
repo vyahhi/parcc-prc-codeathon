@@ -15,6 +15,8 @@ function multichoice_install() {
   // Add body field to multichoice node
   quiz_question_add_body_field('multichoice');
 
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_install_schema('multichoice')
   variable_set('node_options_multichoice', array('status'));
 }
 
@@ -30,10 +32,20 @@ function multichoice_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
-      'result_answer_id' => array(
+      'result_id' => array(
         'type' => 'int',
         'unsigned' => TRUE,
-        'not null' => FALSE,
+        'not null' => TRUE,
+      ),
+      'question_nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'question_vid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
       ),
       'choice_order' => array(
         'type' => 'text',
@@ -42,8 +54,8 @@ function multichoice_schema() {
     'primary key' => array(
       'id'
     ),
-    'unique keys' => array(
-      'result_answer_id' => array('result_answer_id'),
+    'indexes' => array(
+      'answer_id' => array('result_id', 'question_nid', 'question_vid'),
     ),
   );
 
@@ -212,6 +224,8 @@ function multichoice_schema() {
  * Implements hook_uninstall().
  */
 function multichoice_uninstall() {
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_uninstall_schema('multichoice')
   $var = array(
     'multichoice_def_scoring',
     'multichoice_def_num_of_alts',
@@ -219,20 +233,7 @@ function multichoice_uninstall() {
   foreach ($var as $v) {
     variable_del($v);
   }
-}
-
-/**
- * Change answer_format to a varchar.
- */
-function multichoice_update_7500() {
-  foreach (array('answer_format', 'feedback_if_chosen_format', 'feedback_if_not_chosen_format') as $field) {
-    db_change_field('quiz_multichoice_answers', $field, $field, array(
-      'type' => 'varchar',
-      'length' => 255,
-      'not null' => TRUE,
-      )
-    );
-  }
+  drupal_set_message(t("The multichoice module has been uninstalled. multichoice nodes may still exist, but they will not function properly."));
 }
 
 /**
@@ -248,25 +249,4 @@ function multichoice_update_7501() {
   // Lol.
   db_query('UPDATE {quiz_multichoice_answers} SET weight = id');
   return t('Added weights for multichoice alternatives.');
-}
-
-/**
- * Normalize data storage.
- */
-function multichoice_update_7502() {
-  db_add_field('quiz_multichoice_user_answers', 'result_answer_id', array(
-    'type' => 'int',
-    'unsigned' => TRUE,
-    'not null' => FALSE,
-  ));
-  db_query("UPDATE {quiz_multichoice_user_answers} qtua
-    INNER JOIN {quiz_node_results_answers} qnra ON (qtua.question_nid = qnra.question_nid
-    AND qtua.question_vid = qnra.question_vid
-    AND qtua.result_id = qnra.result_id)
-    SET qtua.result_answer_id = qnra.result_answer_id");
-  db_drop_field('quiz_multichoice_user_answers', 'result_id');
-  db_drop_field('quiz_multichoice_user_answers', 'question_nid');
-  db_drop_field('quiz_multichoice_user_answers', 'question_vid');
-
-  db_add_unique_key('quiz_multichoice_user_answers', 'result_answer_id', array('result_answer_id'));
 }

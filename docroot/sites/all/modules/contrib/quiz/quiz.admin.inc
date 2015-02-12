@@ -104,16 +104,6 @@ function quiz_admin_settings($form, &$form_state) {
     '#default_value' => variable_get('quiz_pager_siblings', 5),
   );
 
-  $form['quiz_global_settings']['quiz_time_limit_buffer'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Time limit buffer'),
-    '#size' => 3,
-    '#maxlength' => 3,
-    '#description' => t('How many seconds after the time limit runs out to allow answers.'),
-    '#default_value' => variable_get('quiz_time_limit_buffer', 5),
-    '#element_validate' => array('element_validate_integer'),
-  );
-
   $target = array(
     'attributes' => array(
       'target' => '_blank'
@@ -287,12 +277,19 @@ function quiz_admin_node_form($form, &$form_state) {
   }
   $form = quiz_form($dummy_node, $form_state);
   $form['direction'] = array(
-    '#markup' => t('Here you can change the default @quiz settings for new users.', array('@quiz' => QUIZ_NAME)),
+    '#markup' => t('Here you can change the default @quiz settings for new users.', array('@quiz' =>  QUIZ_NAME)),
     '#weight' => -10,
   );
   // unset values we can't or won't let the user edit default values for
   unset(
-    $form['#quiz_check_revision_access'], $form['title'], $form['body_field'], $form['taking']['aid'], $form['taking']['addons'], $form['quiz_availability']['quiz_open'], $form['quiz_availability']['quiz_close'], $form['resultoptions'], $form['number_of_random_questions'], $form['remember_global']
+    $form['#quiz_check_revision_access'],
+    $form['title'], $form['body_field'],
+    $form['taking']['aid'], $form['taking']['addons'],
+    $form['quiz_availability']['quiz_open'],
+    $form['quiz_availability']['quiz_close'],
+    $form['resultoptions'],
+    $form['number_of_random_questions'],
+    $form['remember_global']
   );
 
   $form['remember_settings']['#type'] = 'value';
@@ -361,8 +358,26 @@ function quiz_admin_results($quiz, $result_id) {
   $item = menu_get_item("node/$quiz->nid/quiz");
   menu_set_item(NULL, $item);
 
-  module_load_include('inc', 'quiz', 'quiz.pages');
-  return quiz_user_results($result_id);
+  // Make sure we have the right version of the quiz
+  $result = db_query('SELECT vid, uid FROM {quiz_node_results} WHERE result_id = :result_id', array(':result_id' => $result_id))->fetchObject();
+  if ($quiz->vid != $result->vid) {
+    $quiz = node_load($quiz->nid, $result->vid);
+  }
+
+  // Get all the data we need.
+  $questions = _quiz_get_answers($quiz, $result_id);
+  $score = quiz_calculate_score($quiz, $result_id);
+  $summary = _quiz_get_summary_text($quiz, $score);
+
+  $data = array(
+    'quiz' => $quiz,
+    'questions' => $questions,
+    'score' => $score,
+    'summary' => $summary,
+    'result_id' => $result_id,
+    'account' => user_load($result->uid),
+  );
+  return theme('quiz_result', $data);
 }
 
 // MANAGE QUESTIONS
@@ -898,18 +913,21 @@ function _quiz_add_questions_to_form(&$form, &$questions, &$quiz, &$question_typ
     $form[$fieldset]['weights'][$id] = array(
       '#type' => 'textfield',
       '#size' => 3,
+      '#maxlength' => 4,
       '#default_value' => isset($question->weight) ? $question->weight : 0,
     );
 
     $form[$fieldset]['qnr_pids'][$id] = array(
       '#type' => 'textfield',
       '#size' => 3,
+      '#maxlength' => 4,
       '#default_value' => $question->qnr_pid,
     );
 
     $form[$fieldset]['qnr_ids'][$id] = array(
       '#type' => 'textfield',
       '#size' => 3,
+      '#maxlength' => 4,
       '#default_value' => $question->qnr_id,
     );
 
@@ -1007,10 +1025,10 @@ function _quiz_add_questions_to_form(&$form, &$questions, &$quiz, &$question_typ
  *   Quiz node(object)
  */
 function _quiz_add_revision_checkbox(&$form, &$quiz) {
-  // Reccommend and preselect to create the quiz as a new revision if it already has been answered.
+  // Recomend and preselect to create the quiz as a new revision if it already has been answered
   if (quiz_has_been_answered($quiz)) {
     $rev_default = TRUE;
-    $rev_description = t('This quiz has been answered. To maintain correctness of existing answers and reports, changes should be saved as a new revision.');
+    $rev_description = t('This quiz has been answered. To maintain correctnes of existing answer reports changes should be saved as a new revision.');
   }
   else {
     $rev_default = in_array('revision', variable_get('node_options_quiz', array()));
@@ -1130,33 +1148,26 @@ function _quiz_update_items($quiz, $weight_map, $max_scores, $auto_update_max_sc
     $nid = (int) $nid;
     $vid = (int) $vid;
     $question = new stdClass();
-    $question->child_nid = $nid;
-    if (!empty($refreshes[$id])) {
-      // User marked to update question to latest revision.
-      $question_node = node_load($nid);
-      $question->child_vid = $question_node->vid;
-    }
-    else {
-      // Use the provided nid/vid.
-      $question->child_vid = $vid;
-    }
+    $question->nid = $nid;
+    $question->vid = $vid;
     if (isset($compulsories)) {
       if ($compulsories[$id] == 1) {
-        $question->question_status = QUIZ_QUESTION_ALWAYS;
+        $question->state = QUIZ_QUESTION_ALWAYS;
       }
       else {
-        $question->question_status = QUIZ_QUESTION_RANDOM;
+        $question->state = QUIZ_QUESTION_RANDOM;
         $max_scores[$id] = $quiz->max_score_for_random;
       }
     }
     else {
-      $question->question_status = QUIZ_QUESTION_ALWAYS;
+      $question->state = QUIZ_QUESTION_ALWAYS;
     }
     $question->weight = $weight;
     $question->max_score = $max_scores[$id];
     $question->auto_update_max_score = $auto_update_max_scores[$id];
     $question->qnr_pid = $qnr_pids[$id] > 0 ? $qnr_pids[$id] : NULL;
     $question->qnr_id = $qnr_ids[$id] > 0 ? $qnr_ids[$id] : NULL;
+    $question->refresh = (isset($refreshes[$id]) && $refreshes[$id] == 1);
 
     // Add item as an object in the questions array.
     $questions[] = $question;
@@ -1210,7 +1221,7 @@ function quiz_questions_form_submit($form, &$form_state) {
     $assigned_random = 0;
 
     foreach ($questions as $question) {
-      if ($question->question_status == QUIZ_QUESTION_RANDOM) {
+      if ($question->state == QUIZ_QUESTION_RANDOM) {
         ++$assigned_random;
       }
     }
@@ -1296,6 +1307,19 @@ function _quiz_question_browser_submit($form, &$form_state) {
 }
 
 // THEME FUNCTIONS
+
+/**
+ * Theme the quiz node form
+ *
+ * Adds js to enhance the ux.
+ *
+ * @param $form
+ *   FAPI form array
+ */
+function theme_quiz_node_form($variables) {
+  $form = $variables['form'];
+  return theme('node_form', array('form' => $form));
+}
 
 /**
  * Theme a question selection table, adding drag and drop support.
