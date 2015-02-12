@@ -4,5 +4,3 @@ core = 7.x
 version = 7.x-0.x
 
 dependencies[] = state_flow
-
-files[] = plugins/act_workflow.inc
