@@ -1036,7 +1036,20 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->type = 'views_panes';
     $pane->subtype = 'admin_content_view-panel_pane_1';
     $pane->shown = TRUE;
-    $pane->access = array();
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 4,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
     $pane->configuration = array(
       'override_title' => 0,
       'override_title_text' => '',
@@ -1052,6 +1065,40 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->uuid = '3f310bfb-37ee-450f-9a8d-10349fd54ac3';
     $display->content['new-3f310bfb-37ee-450f-9a8d-10349fd54ac3'] = $pane;
     $display->panels['center'][2] = 'new-3f310bfb-37ee-450f-9a8d-10349fd54ac3';
+    $pane = new stdClass();
+    $pane->pid = 'new-d31702e5-6d20-48de-b836-e3bf6507a118';
+    $pane->panel = 'center';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'admin_content_view-panel_pane_2';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 8,
+              1 => 3,
+              2 => 7,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = 'd31702e5-6d20-48de-b836-e3bf6507a118';
+    $display->content['new-d31702e5-6d20-48de-b836-e3bf6507a118'] = $pane;
+    $display->panels['center'][3] = 'new-d31702e5-6d20-48de-b836-e3bf6507a118';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

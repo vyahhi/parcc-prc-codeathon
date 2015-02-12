@@ -1184,13 +1184,12 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
     $last_index = count($this->nodes) - 1;
     $last_node = $this->nodes[$last_index];
-    $state_obj = state_flow_load_state_machine($last_node);
+    $state_obj = state_flow_load_state_machine($last_node, TRUE);
     $state = $state_obj->get_current_state();
 
     if($state !== $arg1){
       throw new \Exception(sprintf('The nodes state was not set to %s', $arg1));
     }
-
   }
 
   /**

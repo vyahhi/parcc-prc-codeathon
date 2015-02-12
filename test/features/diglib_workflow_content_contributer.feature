@@ -1,4 +1,4 @@
-@api @javascript
+@api
 Feature: As a Content Contributor, I need to have specific access to the Digital Library
   content that I have created so I can develop the content that I have a deep understanding [of] (PRC-629).
 
@@ -7,7 +7,6 @@ Feature: As a Content Contributor, I need to have specific access to the Digital
     And I am viewing my "Digital Library Content" node with the title "Totally Rad And 100% Digital Content"
     And I click "Edit"
     And I select the radio button "Public"
-    #with the id "edit-field-permissions-und-public"
     And I press the "Save" button
 
   Scenario: Can view and edit draft whens state is "draft"
@@ -23,8 +22,8 @@ Feature: As a Content Contributor, I need to have specific access to the Digital
     And I should see the text "Totally Rad And 100% Digital Content"
     When I click "Edit"
     And I press the "Request Approval" button
-    And the last node created's state is "Approval Requested"
     And I visit the last node created
+    And the last node created's state is "ready_for_review"
     Then I should not see the link "Edit"
 
   Scenario: Can View and edit content when state is published
