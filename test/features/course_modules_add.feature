@@ -59,4 +59,4 @@ Feature: PRC-360 Admin: Add Object to a Course
     Then I select "Module" from "edit-more-object-type"
     And I press "Add object"
     Then I click "Edit Settings"
-    Then the "Use existing content's title" checkbox should be checked
+    Then the "Use existing content's title" checkbox should not be checked

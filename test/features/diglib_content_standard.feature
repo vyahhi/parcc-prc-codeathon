@@ -45,11 +45,13 @@ Feature: PRC-219 Content Categorization - Standard
     And I am viewing my "Digital Library Content" node with the title "PRC-29 Subject"
     Then I click "Edit"
     And I click "Show Add More Information (Content Properties)"
-    Then I select "National Council" from "edit-field-standard-und-0-tid-select-1"
+    Then I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     Then I wait for AJAX to finish
-    Then I select "Number and Operations Standard" from "edit-field-standard-und-0-tid-select-2"
+    Then I select "Reading Standards for Literature" from "edit-field-standard-und-0-tid-select-2"
     Then I wait for AJAX to finish
-    Then I select "Compute fluently and make reasonable estimates" from "edit-field-standard-und-0-tid-select-3"
+    Then I select "Craft and Structure" from "edit-field-standard-und-0-tid-select-3"
+    Then I wait for AJAX to finish
+    Then I select "Ask and answer questions about unknown words in a text." from "edit-field-standard-und-0-tid-select-4"
     Then I wait for AJAX to finish
 
   @javascript
@@ -58,20 +60,22 @@ Feature: PRC-219 Content Categorization - Standard
     And I am viewing my "Digital Library Content" node with the title "PRC-29 Subject"
     Then I click "Edit"
     And I click "Show Add More Information (Content Properties)"
-    Then I select "National Council" from "edit-field-standard-und-0-tid-select-1"
+    Then I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     Then I wait for AJAX to finish
-    Then I select "Number and Operations Standard" from "edit-field-standard-und-0-tid-select-2"
+    Then I select "Reading Standards for Literature" from "edit-field-standard-und-0-tid-select-2"
     Then I wait for AJAX to finish
-    Then I select "Compute fluently and make reasonable estimates" from "edit-field-standard-und-0-tid-select-3"
+    Then I select "Craft and Structure" from "edit-field-standard-und-0-tid-select-3"
+    Then I wait for AJAX to finish
+    Then I select "Ask and answer questions about unknown words in a text." from "edit-field-standard-und-0-tid-select-4"
     Then I wait for AJAX to finish
     Then I press "edit-field-standard-und-add-more"
     Then I select "Common Core English Language Arts" from "edit-field-standard-und-1-tid-select-1"
     Then I wait for AJAX to finish
-    Then I select "Geometry" from "edit-field-standard-und-1-tid-select-2"
+    Then I select "College and Career Readiness Anchor Standards for Reading" from "edit-field-standard-und-1-tid-select-2"
     Then I wait for AJAX to finish
-    Then I select "Reason with shapes and their attributes." from "edit-field-standard-und-1-tid-select-3"
+    Then I select "Key Ideas and Details" from "edit-field-standard-und-1-tid-select-3"
     Then I wait for AJAX to finish
-    Then I select "Distinguish between defining attributes (e.g., triangles are closed and three-sided) versus non-defining attributes (e.g., color, orientation, overall size); build and draw shapes to possess defining attributes." from "edit-field-standard-und-1-tid-select-4"
+    Then I select "Read closely to determine what the text says explicitly and to make logical inferences from it; cite specific textual evidence when writing or speaking to support conclusions drawn from the text." from "edit-field-standard-und-1-tid-select-4"
     Then I wait for AJAX to finish
 
   @javascript
@@ -81,7 +85,7 @@ Feature: PRC-219 Content Categorization - Standard
     Then I click "Edit"
     And I select the radio button "Public"
     And I click "Show Add More Information (Content Properties)"
-    Then I select "National Council" from "edit-field-standard-und-0-tid-select-1"
+    Then I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     Then I wait for AJAX to finish
     Then I press "Save"
-    Then I should see the text "National Council"
+    Then I should see the text "Common Core English Language Arts"

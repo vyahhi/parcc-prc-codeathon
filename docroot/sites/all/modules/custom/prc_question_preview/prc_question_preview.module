@@ -440,37 +440,6 @@ function prc_question_preview_quiz_questions_form_submit($form, &$form_state) {
     // Store what questions belong to the quiz
     $questions = _quiz_update_items($quiz, $weight_map, $max_scores, $auto_update_max_scores, $is_new_revision, $refreshes, $stayers, $qnr_ids_map, $qnr_pids_map, $compulsories, $stayers);
 
-    // If using random questions and no term ID is specified, make sure we have enough.
-    if (empty($term_id)) {
-      $assigned_random = 0;
-
-      foreach ($questions as $question) {
-        if ($question->state == QUIZ_QUESTION_RANDOM) {
-          ++$assigned_random;
-        }
-      }
-
-      // Adjust number of random questions downward to match number of selected questions..
-      if ($num_random > $assigned_random) {
-        $num_random = $assigned_random;
-        drupal_set_message(t('The number of random questions for this @quiz have been lowered to %anum to match the number of questions you assigned.', array(
-          '@quiz' => QUIZ_NAME,
-          '%anum' => $assigned_random
-        ), array('langcode' => 'warning')));
-      }
-    }
-    else {
-      // Warn user if not enough questions available with this term_id.
-      $available_random = count(_quiz_get_random_taxonomy_question_ids($term_id, $num_random));
-      if ($num_random > $available_random) {
-        $num_random = $available_random;
-        drupal_set_message(t('There are currently not enough questions assigned to this term (@random). Please lower the number of random quetions or assign more questions to this taxonomy term before taking this @quiz.', array(
-          '@random' => $available_random,
-          '@quiz' => QUIZ_NAME
-        )), 'error');
-      }
-    }
-
     if ($quiz->type == 'quiz') {
       // Update the quiz node properties.
       $success = db_update('quiz_node_properties')
@@ -495,7 +464,6 @@ function prc_question_preview_quiz_questions_form_submit($form, &$form_state) {
         ->condition('vid', $quiz->vid)
         ->execute();
     }
-
 
     if (isset($success) && isset($success2)) {
       drupal_set_message(t('Questions updated successfully.'));
