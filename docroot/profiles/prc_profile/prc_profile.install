@@ -125,6 +125,18 @@ function prc_profile_install() {
   $mc->name = t('Interactive Choice');
   node_type_save($mc);
 
+  // For some reason, Features isn't reverting an invite type to its email notifier.
+  // So let's do it.
+  $query = new EntityFieldQuery();
+
+  $query->entityCondition('entity_type', 'invite_type');
+  $result = $query->execute();
+  $keys = array_keys($result['invite_type']);
+  $first_id = reset($keys);
+  $it = entity_load_single('invite_type', $first_id);
+  $it->invite_sending_controller = array('invite_by_email' => 'invite_by_email');
+  entity_save('invite_type', $it);
+
   // Ignore any rebuild messages.
   node_access_needs_rebuild(FALSE);
   // Ignore any other install messages.

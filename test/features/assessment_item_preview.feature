@@ -50,7 +50,7 @@ Feature: PRC-527 Preview an item in Assessment Details page
     And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
     And I fill in "Item Order" with "Q2"
     And I fill in "Title" with "PRC-527 Multi"
-    And I select "Common Core Mathematics" from "edit-field-standard-und-0-tid-select-1"
+    And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     And I fill in "edit-alternatives-1-answer-value" with "Answer 2"
     And I check the box "edit-alternatives-1-correct"
