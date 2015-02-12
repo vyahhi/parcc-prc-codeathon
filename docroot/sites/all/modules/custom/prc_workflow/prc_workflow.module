@@ -34,6 +34,29 @@ function prc_workflow_permission(){
 
 
 /**
+ * Implements hook_menu_alter()
+ */
+function prc_workflow_menu_alter(&$menu){
+  $menu['node/%node/edit']['access callback'] = 'prc_workflow_access';
+}
+
+function prc_workflow_access($op, $node){
+  if(node_access($op, $node)){
+    $state_flow = state_flow_load_state_machine($node);
+
+    //@todo: Exception for user 1?
+    //@todo: How does somebody cancel their review request?
+    if($state_flow->get_current_state() === 'ready_for_review') {
+      return user_access('approve prc content');
+    }else{
+      return TRUE;
+    }
+  }else {
+    return FALSE;
+  }
+}
+
+/**
  * Implements hook_state_flow_plugins()
  */
 function prc_workflow_state_flow_plugins(){
