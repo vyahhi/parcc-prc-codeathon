@@ -65,7 +65,7 @@ Feature: PRC-219 Content Categorization - Standard
     Then I select "Compute fluently and make reasonable estimates" from "edit-field-standard-und-0-tid-select-3"
     Then I wait for AJAX to finish
     Then I press "edit-field-standard-und-add-more"
-    Then I select "Common Core Mathematics" from "edit-field-standard-und-1-tid-select-1"
+    Then I select "Common Core English Language Arts" from "edit-field-standard-und-1-tid-select-1"
     Then I wait for AJAX to finish
     Then I select "Geometry" from "edit-field-standard-und-1-tid-select-2"
     Then I wait for AJAX to finish
