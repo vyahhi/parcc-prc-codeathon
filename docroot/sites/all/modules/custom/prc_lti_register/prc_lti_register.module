@@ -12,8 +12,8 @@ function prc_lti_register_menu() {
   $items = array();
   // Display the 'Register a course for use as an LTI Provider'
   $items['admin-course/lti/%'] = array(
-    'title' => 'LTI Course Registration',
-    'description' => 'LTI Course Registration',
+    'title' => 'Export Course to Another System',
+    'description' => 'Export Course to Another System',
     'page callback' => 'prc_lti_register_consumer_add',
     'page arguments' => array(2),
     'access arguments' => array('administer lti_tool_provider module'),
@@ -21,8 +21,8 @@ function prc_lti_register_menu() {
   );
 
   $items['admin-course/lti/confirmation'] = array(
-    'title' => 'LTI Course Registration Confirmation',
-    'description' => 'LTI Course Registration Confirmation',
+    'title' => 'Export Course LTI Information',
+    'description' => 'Export Course LTI Information',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('prc_lti_registration_download_form'),
     'access arguments' => array('administer lti_tool_provider module'),
@@ -73,10 +73,8 @@ function prc_lti_register_form($form, &$form_state, $consumer, $nid) {
   $form['instructions'] = array(
     '#title' => 'Instructions',
 
-    '#markup' => '<p>To differentiate this registration from other registrations that may access the same "Course Title" and  modules from a third party system,
-                    please provide a name for the registration in the field below, click the Generate LTI Info button, and the system will provide the information you will
-                    need to create external access to the selected course\'s modules and exams from the 3rd party system. The name you choose for the registration does not have to be
-                    unique from other registrations.</p>
+    '#markup' => '<p>To provide access to this course and its modules from a third party system, you will need to register it onto that system by using LTI (Learning Tools Interoperability) information provided below.</p>
+                  <p>Enter a description in the field below to distinguish this registration from others using this same course.</p>
                   <p>Note that the access information is generated for course elements individually. The following course elements are available:<ul>'
                   . $object_titles
                   . '</ul>',
@@ -88,8 +86,9 @@ function prc_lti_register_form($form, &$form_state, $consumer, $nid) {
 
   $form['lti_tool_provider_consumer_consumer'] = array(
     '#type' => 'textfield',
-    '#title' => t('LTI Registration Name'),
+    '#title' => t('Registration Description'),
     '#required' => TRUE,
+    '#maxlength' => 255,
     '#default_value' => $consumer->lti_tool_provider_consumer_consumer,
   );
 
@@ -179,18 +178,15 @@ function prc_lti_register_form_submit(&$form, &$form_state) {
 
   foreach ($lti['object_list'] as $object_key => $object) {
 
-    $formatted_object_list = $formatted_object_list . $object_key . ': custom_destination=' . $object . PHP_EOL;
+    $formatted_object_list = $formatted_object_list . 'Custom Field for ' . $object_key . ' Module: custom_destination=' . $object .  PHP_EOL;
   }
 
   // Create a file for download
-  $lti['lti_confirmation_file'] = 'Please find below the LTI registration information for the PARCC-PRC course that you would like to access from a remote LMS.
-Each LMS has its own methods for inputting this information for access to a remote site like PARCC-PRC.  Inputting this information into the LMS of your choice
-will enable your direct link/access of the PARCC-PRC from the remote LMS of your choice.' . PHP_EOL . PHP_EOL .
+  $lti['lti_confirmation_file'] = 'Below is the information you will need to input into your LMS in order to enable your users to directly access the course and its modules from your LMS.' . PHP_EOL . PHP_EOL .
 
-    'For direct access to each module of the course you will need to create a separate External Application (LTI) entry for each of the custom field listings below.
-For each of the listings the Key, Secret and LTI URL will be identical.' . PHP_EOL . PHP_EOL .
+    'The method for inputting this information varies by LMS. In general you will need to create a separate External Application entry for each of the course\'s modules. For each module, use the same Key, Secret and LTI URL but use the appropriate Custom Field.' . PHP_EOL . PHP_EOL .
 
-    'LTI Registration Name: ' .$lti['registration']->lti_tool_provider_consumer_consumer . PHP_EOL
+    'Registration Description: ' .$lti['registration']->lti_tool_provider_consumer_consumer . PHP_EOL
     . 'Key: ' .$lti['registration']->lti_tool_provider_consumer_key . PHP_EOL
     . 'Secret: ' .$lti['registration']->lti_tool_provider_consumer_secret . PHP_EOL
     . 'LTI URL: ' . $GLOBALS['base_url'] . '/lti' . PHP_EOL
@@ -221,24 +217,20 @@ function prc_lti_registration_download_form($form, &$form_state) {
 
     foreach ($lti['object_list'] as $object_key => $object) {
 
-      $formatted_object_list = $formatted_object_list . '<li>' . $object_key . ': custom_destination=' . $object . '</li>';
+      $formatted_object_list = $formatted_object_list . '<li>Custom Field for ' . $object_key . ' Module: custom_destination=' . $object . '</li>';
     }
 
     $formatted_object_list = $formatted_object_list . '</ul>';
 
     // Display LTI registration information to the screen.
-    $lti_registration_info = '<p>Please find below the LTI registration information for the PARCC-PRC course that you would like to access from a remote LMS.
-Each LMS has its own methods for inputting this information for access to a remote site like PARCC-PRC.  Inputting this information into the LMS of your choice
-will enable your direct link/access of the PARCC-PRC from the remote LMS of your choice.</p>
+    $lti_registration_info = '<p>Below is the information you will need to input into your LMS in order to enable your users to directly access the course and its modules from your LMS.
+<p>The method for inputting this information varies by LMS. In general you will need to create a separate External Application entry for each of the course\'s modules. For each module, use the same Key, Secret and LTI URL but use the appropriate Custom Field.</p>
 
-<p>For direct access to each module of the course you will need to create a separate External Application (LTI) entry for each of the custom field listings below.
-For each of the listings the Key, Secret and LTI URL will be identical.</p>
-
-<p>LTI Registration Name: ' . $lti['registration']->lti_tool_provider_consumer_consumer
+<p>Registration Description: ' . $lti['registration']->lti_tool_provider_consumer_consumer
       . '</p> Key: ' .$lti['registration']->lti_tool_provider_consumer_key
       . '</p> Secret: ' .$lti['registration']->lti_tool_provider_consumer_secret
       . '</p> LTI URL: ' . $GLOBALS['base_url'] . '/lti'
-      . '</p> Custom Fields: (Each line below represents an individual module that should be linked from the remote system using the information above and the line\'s "custom_destination" setting below.' . $formatted_object_list;
+      . '</p>' . $formatted_object_list;
 
     $form['confirmation'] = array(
       '#title' => 'Confirmation Info',
