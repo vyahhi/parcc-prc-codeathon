@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * @file
  * The installer file for truefalse question type. *
@@ -12,13 +13,65 @@ function truefalse_install() {
   // Add body field to true false node
   quiz_question_add_body_field('truefalse');
 
+  if (!db_table_exists('quiz_truefalse_node')) {
+    // TODO The drupal_(un)install_schema functions are called automatically in D7.
+    // drupal_install_schema('truefalse')
+  }
+  else {
+    // TODO Please review the conversion of this statement to the D7 database API syntax.
+    /* db_query("UPDATE {system} SET name = 'truefalse' WHERE name = 'true_false'") */
+    db_update('system')
+      ->fields(array(
+        'name' =>  'truefalse',
+      ))
+      ->condition('name', 'true_false')
+      ->execute();
+    // TODO Please review the conversion of this statement to the D7 database API syntax.
+    /* db_query("UPDATE {node} SET type = 'truefalse' WHERE type = 'true_false'") */
+    db_update('node')
+      ->fields(array(
+        'type' =>  'truefalse',
+      ))
+      ->condition('type', 'true_false')
+      ->execute();
+    // TODO Please review the conversion of this statement to the D7 database API syntax.
+    /* db_query("UPDATE {system} SET type = 'truefalse' WHERE type = 'true_false'") */
+    db_update('system')
+      ->fields(array(
+        'type' =>  'truefalse',
+      ))
+      ->condition('type', 'true_false')
+      ->execute();
+    // TODO Please review the conversion of this statement to the D7 database API syntax.
+    /* db_query("UPDATE {taxonomy_vocabulary_node_type} SET type = 'truefalse' WHERE type = 'true_false'") */
+    /*
+    db_update('taxonomy_vocabulary_node_type')
+  ->fields(array(
+    'type' =>  'truefalse',
+  ))
+  ->condition('type', 'true_false')
+  ->execute();
+  */
+  }
   variable_set('node_options_truefalse', array('status'));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function truefalse_uninstall() {
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_uninstall_schema('truefalse')
 }
 
 /**
  * Implements hook_schema().
  */
 function truefalse_schema() {
+
+  //////////////////////
+  // TRUE/FALSE tables.
+  //////////////////////
 
   // Extensions to nodes for T/F
   $schema['quiz_truefalse_node'] = array(
@@ -49,15 +102,20 @@ function truefalse_schema() {
   // Place to store user answers for T/F questions
   $schema['quiz_truefalse_user_answers'] = array(
     'fields' => array(
-      'answer_id' => array(
-        'type' => 'serial',
+      'question_nid' => array(
+        'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
-      'result_answer_id' => array(
+      'question_vid' => array(
         'type' => 'int',
         'unsigned' => TRUE,
-        'not null' => FALSE,
+        'not null' => TRUE,
+      ),
+      'result_id' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
       ),
       'answer' => array(
         'type' => 'int',
@@ -72,36 +130,10 @@ function truefalse_schema() {
         'default' => 0,
       ),
     ),
-    'primary key' => array('answer_id'),
-    'unique keys' => array(
-      'result_answer_id' => array('result_answer_id'),
+    'primary key' => array(
+      'result_id', 'question_nid', 'question_vid',
     ),
   );
 
   return $schema;
-}
-
-/**
- * Normalize data storage.
- */
-function truefalse_update_7500() {
-  db_drop_primary_key('quiz_truefalse_user_answers');
-  db_add_field('quiz_truefalse_user_answers', 'answer_id', array(
-    'type' => 'serial',
-    ), array('primary key' => array('answer_id')));
-  db_add_field('quiz_truefalse_user_answers', 'result_answer_id', array(
-    'type' => 'int',
-    'unsigned' => TRUE,
-    'not null' => FALSE,
-  ));
-  db_query("UPDATE {quiz_truefalse_user_answers} qtua
-    INNER JOIN {quiz_node_results_answers} qnra ON (qtua.question_nid = qnra.question_nid
-    AND qtua.question_vid = qnra.question_vid
-    AND qtua.result_id = qnra.result_id)
-    SET qtua.result_answer_id = qnra.result_answer_id");
-  db_drop_field('quiz_truefalse_user_answers', 'result_id');
-  db_drop_field('quiz_truefalse_user_answers', 'question_nid');
-  db_drop_field('quiz_truefalse_user_answers', 'question_vid');
-
-  db_add_unique_key('quiz_truefalse_user_answers', 'result_answer_id', array('result_answer_id'));
 }

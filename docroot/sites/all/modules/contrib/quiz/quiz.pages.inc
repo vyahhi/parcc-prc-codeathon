@@ -33,13 +33,13 @@ function quiz_user_results($result_id) {
       'result_id' => $result_id,
       'account' => user_load($result->uid),
     );
-    if (user_access('view own quiz results') && (!empty($current_quiz->review_options['end']) && array_filter($current_quiz->review_options['end']))) {
+    if (user_access('view own quiz results') || (!empty($current_quiz->review_options['end']) && array_filter($current_quiz->review_options['end']))) {
+      // User can view own quiz results OR the current quiz has "display solution".
       return theme('quiz_result', $data);
     }
     else {
-      // User cannot view own results or there is no feedback enabled. Show
-      // generic text.
-      return t('You have finished this @quiz.', array('@quiz' => QUIZ_NAME));
+      // User cannot view own results or show solution. Show summary.
+      return theme('quiz_result', $data);
     }
   }
 }
@@ -54,7 +54,7 @@ function quiz_user_results($result_id) {
  * @return $form
  *   FAPI form array
  */
-function quiz_report_form($form, $form_state, $questions, $result_id) {
+function quiz_report_form($form, $form_state, $questions) {
   $form = array();
   // The submit button is only shown if one or more of the questions has input elements
   $show_submit = FALSE;
@@ -64,19 +64,18 @@ function quiz_report_form($form, $form_state, $questions, $result_id) {
       return array();
     }
     $function = $module . '_report_form';
-    $form_to_add = $function($question, $result_id);
+    $form_to_add = $function($question);
     if (isset($form_to_add['submit'])) {
       $show_submit = TRUE;
-      $form_to_add['#element_validate'][] = 'quiz_report_form_element_validate';
     }
-    if (!isset($form_to_add['#no_report'])) {
+    if(!isset($form_to_add['#no_report'])){
+      $form_to_add['#element_validate'][] = 'quiz_report_form_element_validate';
       $form[] = $form_to_add;
     }
   }
   $form['#tree'] = TRUE;
-  $form['navigation']['#type'] = 'actions';
   if ($show_submit) {
-    $form['navigation']['submit'] = array(
+    $form['submit'] = array(
       '#type' => 'submit',
       '#submit' => array('quiz_report_form_submit'),
       '#value' => t('Save score'),
@@ -88,14 +87,14 @@ function quiz_report_form($form, $form_state, $questions, $result_id) {
     $quiz = node_load(arg(1));
     if (empty($_SESSION['quiz'][$quiz->nid])) {
       // Quiz is done.
-      $form['navigation']['finish'] = array(
+      $form['finish'] = array(
         '#type' => 'submit',
         '#submit' => array('quiz_take_question_feedback_end_submit'),
         '#value' => t('Finish'),
       );
     }
     else {
-      $form['navigation']['next'] = array(
+      $form['next'] = array(
         '#type' => 'submit',
         '#submit' => array('quiz_take_question_feedback_submit'),
         '#value' => t('Next question'),
@@ -111,8 +110,8 @@ function quiz_report_form($form, $form_state, $questions, $result_id) {
  */
 function quiz_report_form_element_validate(&$element, &$form_state) {
   $question = node_load($element['nid']['#value'], $element['vid']['#value']);
-  $quiz_question_response = _quiz_question_response_get_instance($element['result_id']['#value'], $question);
-  $quiz_question_response->getReportFormValidate($element, $form_state);
+  $quizQuestionResponse = _quiz_question_response_get_instance($element['result_id']['#value'], $question);
+  $quizQuestionResponse->getReportFormValidate($element, $form_state);
 }
 
 /**
@@ -423,29 +422,26 @@ function theme_quiz_result($variables) {
     '!yourtotal' => ($user->uid == $account->uid) ? t('Your') : t('Total'),
   );
 
-  $score_out = '';
+  // @todo should use quiz_feedback_can_review but we dont have the quiz result here.
   if (quiz_feedback_can_review('score', $quiz_result)) {
     // Show score.
-    $score_out .= '<div id="quiz_score_possible">' . t('!username got %num_correct of %question_count possible points.', $params) . '</div>' . "\n";
-    $score_out .= '<div id="quiz_score_percent">' . t('!yourtotal score: @score%', $params) . '</div>';
+    $output .= '<div id="quiz_score_possible">' . t('!username got %num_correct of %question_count possible points.', $params) . '</div>' . "\n";
+    $output .= '<div id="quiz_score_percent">' . t('!yourtotal score: @score%', $params) . '</div>' . "\n";
   }
 
-  $report_form = drupal_get_form('quiz_report_form', $questions, $quiz_result->result_id);
-
-  $quiz_feedback['#markup'] = '';
   if (quiz_feedback_can_review('quiz_feedback', $quiz_result)) {
     // Show quiz feedback.
-    if (!empty($summary['passfail'])) {
-      $quiz_feedback['#markup'] .= '<div id="quiz-summary">' . $summary['passfail'] . '</div>';
+    if (isset($summary['passfail'])) {
+      $output .= '<div id="quiz_summary">' . $summary['passfail'] . '</div>' . "\n";
     }
-    if (!empty($summary['result'])) {
-      $quiz_feedback['#markup'] .= '<div id="quiz-summary">' . $summary['result'] . '</div>';
+    if (isset($summary['result'])) {
+      $output .= '<div id="quiz_summary">' . $summary['result'] . '</div>' . "\n";
     }
   }
-  $report_form['quiz_feedback'] = $quiz_feedback;
 
-  $form = drupal_render($report_form);
-  return $score_out . $form;
+  $report_form = drupal_get_form('quiz_report_form', $questions);
+  $output .= drupal_render($report_form);
+  return $output;
 }
 
 /**
@@ -456,13 +452,13 @@ function theme_quiz_result($variables) {
  * It uses query strings. We have access on each menu argument (quiz question
  * number) so we unfortunately cannot use it.
  */
-function _quiz_pagination_helper($total, $perpage = NULL, $current = NULL, $siblings = NULL) {
+function _quiz_pagination_helper($total, $perpage = null, $current = null, $siblings = null) {
   $result = array();
 
-  if (isset($total, $perpage) === TRUE) {
+  if (isset($total, $perpage) === true) {
     $result = range(1, ceil($total / $perpage));
 
-    if (isset($current, $siblings) === TRUE) {
+    if (isset($current, $siblings) === true) {
       if (($siblings = floor($siblings / 2) * 2 + 1) >= 1) {
         $result = array_slice($result, max(0, min(count($result) - $siblings, intval($current) - ceil($siblings / 2))), $siblings);
       }

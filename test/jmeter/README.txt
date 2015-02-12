@@ -8,13 +8,13 @@ To get these tests to work with your environment:
 
 Specific setup for tests:
 
-PRC-472.jmx (Anonymous User browsing the Digital Library)
+diglib_anon.jmx (Anonymous User browsing the Digital Library)
     1. Devel generate 200 digital library content items, and make sure they have the Subject, Grade Level, and
-       Standard fields filled on the ones that you actually view. ( drush genc 200 0 --kill type=digital_library_content )
+       Standard fields filled on the ones that you actually view. ( drush genc 200 0 --kill --types=digital_library_content )
     2. Under the Recording Controller, change the URLs for the last two samplers to URLs for digital library content on
        your system
 
-PRC-473.jmx (PARCC-Member Educator DLC viewing and favorites)
+diglib_member_educator.jmx (PARCC-Member Educator DLC viewing and favorites)
     1. If you haven't already, devel generate DL content from step 1 in PRC-472
     2. If it doesn't exist, create the following user in your environment:
         a. Email: educator@example.com
@@ -27,7 +27,7 @@ PRC-473.jmx (PARCC-Member Educator DLC viewing and favorites)
     3. Under the Recording Controller, change the URLs for the samplers 390, 444, 624 and 798 to URLs for digital
        library content on your system
 
-PRC-474.jmx (Educator DLC viewing and favorites)
+diglib_educator_view_and_fave.jmx (Educator DLC viewing and favorites)
     1. If you haven't already, devel generate DL content from step 1 in PRC-472
     2. If it doesn't exist, create the following user in your environment:
         a. Email: educator@example.com

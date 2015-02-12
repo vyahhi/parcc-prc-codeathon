@@ -12,7 +12,26 @@ function long_answer_install() {
   // Add body field to long answer node
   quiz_question_add_body_field('long_answer');
 
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_install_schema('long_answer')
   variable_set('node_options_long_answer', array('status'));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function long_answer_uninstall() {
+
+  // Delete tables
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_uninstall_schema('long_answer')
+
+  // Delete data from other tables
+
+  // Clear the cache.
+  cache_clear_all('variables', 'cache');
+  drupal_set_message(t('The Long Answer module has been uninstalled and related data has been deleted.'));
+
 }
 
 /**
@@ -47,10 +66,20 @@ function long_answer_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
-      'result_answer_id' => array(
+      'question_nid' => array(
         'type' => 'int',
         'unsigned' => TRUE,
-        'not null' => FALSE,
+        'not null' => TRUE,
+      ),
+      'question_vid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'result_id' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
       ),
       'score' => array(
         'type' => 'float',
@@ -78,7 +107,7 @@ function long_answer_schema() {
     ),
     'primary key' => array('answer_id'),
     'unique keys' => array(
-      'result_answer_id' => array('result_answer_id'),
+      'ids' => array('result_id', 'question_nid', 'question_vid'),
     ),
   );
 
@@ -89,13 +118,11 @@ function long_answer_schema() {
  * Adding feedback field to table {quiz_long_answer_user_answers}
  */
 function long_answer_update_7401() {
-  if (!db_field_exists('quiz_long_answer_user_answers', 'answer_feedback')) {
-    $spec = array(
-      'type' => 'text',
-      'not null' => FALSE,
-    );
-    db_add_field('quiz_long_answer_user_answers', 'answer_feedback', $spec);
-  }
+  $spec = array(
+    'type' => 'text',
+    'not null' => FALSE,
+  );
+  db_add_field('quiz_long_answer_user_answers', 'answer_feedback', $spec);
 }
 
 /**
@@ -104,31 +131,9 @@ function long_answer_update_7401() {
 function long_answer_update_7402() {
   if (!db_field_exists('quiz_long_answer_user_answers', 'answer_feedback_format')) {
     $spec = array(
-      'type' => 'varchar',
-      'length' => 255,
+        'type' => 'varchar',
+        'length' => 255,
     );
     db_add_field('quiz_long_answer_user_answers', 'answer_feedback_format', $spec);
   }
-}
-
-/**
- * Normalize data storage.
- */
-function long_answer_update_7500() {
-  db_drop_unique_key('quiz_long_answer_user_answers', 'ids');
-  db_add_field('quiz_long_answer_user_answers', 'result_answer_id', array(
-    'type' => 'int',
-    'unsigned' => TRUE,
-    'not null' => FALSE,
-  ));
-  db_query("UPDATE {quiz_long_answer_user_answers} qtua
-    INNER JOIN {quiz_node_results_answers} qnra ON (qtua.question_nid = qnra.question_nid
-    AND qtua.question_vid = qnra.question_vid
-    AND qtua.result_id = qnra.result_id)
-    SET qtua.result_answer_id = qnra.result_answer_id");
-  db_drop_field('quiz_long_answer_user_answers', 'result_id');
-  db_drop_field('quiz_long_answer_user_answers', 'question_nid');
-  db_drop_field('quiz_long_answer_user_answers', 'question_vid');
-
-  db_add_unique_key('quiz_long_answer_user_answers', 'result_answer_id', array('result_answer_id'));
 }
