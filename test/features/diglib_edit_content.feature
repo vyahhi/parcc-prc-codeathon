@@ -153,7 +153,7 @@ Feature: Edit Content (PRC-158)
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
     Then I follow "Edit"
     Then I click "Show Add More Information (Content Properties)"
-    Then I select "National Council" from "edit-field-standard-und-0-tid-select-1"
+    Then I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     Then I wait for AJAX to finish
     And I select the radio button "Public"
     And I press "Save"
