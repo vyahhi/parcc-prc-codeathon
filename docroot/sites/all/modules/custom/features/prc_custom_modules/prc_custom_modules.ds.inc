@@ -172,6 +172,11 @@ function prc_custom_modules_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'default',
     ),
+    'links' => array(
+      'weight' => '4',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
   );
   $export['node|pd_course|default'] = $ds_fieldsetting;
 
@@ -261,6 +266,11 @@ function prc_custom_modules_ds_field_settings_info() {
         'wrapper' => 'h2',
         'class' => '',
       ),
+    ),
+    'links' => array(
+      'weight' => '5',
+      'label' => 'hidden',
+      'format' => 'default',
     ),
     'changed_date' => array(
       'weight' => '1',
@@ -465,6 +475,7 @@ function prc_custom_modules_ds_layout_settings_info() {
         1 => 'field_thumbnail',
         2 => 'field_course_objectives',
         3 => 'course',
+        4 => 'links',
       ),
     ),
     'fields' => array(
@@ -472,6 +483,7 @@ function prc_custom_modules_ds_layout_settings_info() {
       'field_thumbnail' => 'ds_content',
       'field_course_objectives' => 'ds_content',
       'course' => 'ds_content',
+      'links' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(
@@ -549,7 +561,8 @@ function prc_custom_modules_ds_layout_settings_info() {
         2 => 'body',
         3 => 'field_grade_level',
         4 => 'field_subject',
-        5 => 'sharethis',
+        5 => 'links',
+        6 => 'sharethis',
       ),
     ),
     'fields' => array(
@@ -558,6 +571,7 @@ function prc_custom_modules_ds_layout_settings_info() {
       'body' => 'ds_content',
       'field_grade_level' => 'ds_content',
       'field_subject' => 'ds_content',
+      'links' => 'ds_content',
       'sharethis' => 'ds_content',
     ),
     'classes' => array(),
