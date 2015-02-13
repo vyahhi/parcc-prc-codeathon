@@ -420,6 +420,7 @@ function prc_custom_modules_ds_layout_settings_info() {
       ),
       'right' => array(
         3 => 'body',
+        6 => 'field_document',
       ),
       'footer' => array(
         4 => 'links',
@@ -433,6 +434,7 @@ function prc_custom_modules_ds_layout_settings_info() {
       'body' => 'right',
       'links' => 'footer',
       'sharethis' => 'footer',
+      'field_document' => 'right',
     ),
     'classes' => array(),
     'wrappers' => array(

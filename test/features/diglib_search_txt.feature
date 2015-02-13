@@ -1,89 +1,37 @@
-@api @d7 @diglib
-Feature: Admin UI: Post Content (PRC-28)
-  As a Content Contributor,
-  I want to post a new content to PRC Website,
-  so that the educators can access and view them.
+@api @d7 @diglib @search
+Feature: PRC-40 Deep Search: Search through TXT Documents
+  As an educator,
+  I want to search for a keyword through TXT documents,
+  so that I can find the specific content I'm looking for even though it’s buried inside attached documents.
+#    AC1 During scheduled job run, documents' textual content is to be indexed and available for the search function
+#    AC2 Restrictions on the file format include: TXT
+#    AC3 When a user enters a keyword in a Search textbox, whether in the Global Search or on the Search Results page, document search results are displayed along other search results
+#      Upon getting document search results, results can inherit all sort and filter functions of the search page
+#    AC4 A search result with attached documents are appended with following attached document information
+#      Document title
+#      Link to document
+#      File format
 
-  Scenario: Content Contributor permission - Edit Any
-    Given I am logged in as a user with the "Content Contributor" role
-    Then I should not be able to edit another user's "Digital Library Content" node
-
-  Scenario: Content Contributor permission - Edit Own
-    Given I am logged in as a user with the "Content Contributor" role
-    Then I should be able to edit my own "Digital Library Content" node
-
-  Scenario: AC1 Content Contributor permission to create
-    Given I am logged in as a user with the "Content Contributor" role
-    And I am viewing my "Digital Library Content" node with the title "PRC-28 AC1 Title"
-
-  Scenario Outline: AC2 and AC3 Content tab visibility for authorized users
-    Given I am logged in as a user with the "<role>" role
-    And I am on the homepage
-    Then I should see the link "Content" in the "header" region
-
-  Examples:
-    | role                            |
-    | Content Contributor             |
-    | Content Administrator (Curator) |
-    | PRC Admin                       |
-    | administrator                   |
-
-  Scenario: AC2 and AC3 Content tab invisibility for Educators
-    Given I am logged in as a user with the "Educator" role
-    And I am on the homepage
-    Then I should not see the link "Content" in the "header" region
-
-  Scenario: AC2 and AC3 Content tab invisibility for anonymous
-    Given I am an anonymous user
-    And I am on the homepage
-    Then I should not see the link "Content" in the "header" region
-
-  Scenario: AC4-6 Content Authors click on Content tab link
-    Given I am logged in as a user with the "Content Contributor" role
-    And I am on the homepage
-    When I follow "Content"
-    Then the url should match "admin-content"
-    Then I click "Add content"
-    Then the url should match "node/add/digital-library-content"
-    And I should see the heading "Create Digital Library Content" in the "content" region
-
-  Scenario: AC7 - The following fields are to be displayed on
-    Given I am logged in as a user with the "Content Contributor" role
-    And I am on "node/add/digital-library-content"
-    Then I should see a "Title *" field
-    And I should see a "Author Name" field
-    And I should see a "Tags" field
-    And I should see a "Summary" field
-    And I should see an "Body" field
-    And I should see "Attach a File"
-    And I should see "Add a Thumbnail Image"
-    And I should see "Link to URL"
-    And I should see "Add More Information (Content Properties)"
-
-  @javascript
-  Scenario: AC8-11 Users can upload and save an attachment
-    Given I am logged in as a user with the "Content Contributor" role
-    And I am on "node/add/digital-library-content"
-    And I fill in "Title *" with "Test-o-rama"
-    And I should see "Attach a File"
- #  We need to expand Attach a File because it's collapsed by default
-    And I click "Show Attach a File"
-    Then I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-document-und-0-upload"
-    And I select the radio button "Public"
-    And I press "Save"
-    And I should see the success message containing "Digital Library Content Test-o-rama has been created."
-    Then I follow "Edit"
-    And I should see the link "GreatLakesWater.pdf"
-
-  @javascript
-  Scenario: AC8-11 Users can upload and save a thumbnail
-    Given I am logged in as a user with the "Content Contributor" role
-    And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
+  Scenario: Attach a text file and search on it
+    Given I have no "Digital Library Content" nodes
+    And I have no "PD Course" nodes
+    And I am logged in as a user with the "Content Contributor" role
+    When I fill in "Quidditch" for "Search" in the "header" region
+    And I press "Search" in the "header" region
+    Then I should not see the text "Digital Library Content"
+    And I am viewing my "Digital Library Content" node with the title "Search-text-o-rama"
     And I follow "Edit"
-    Then I attach the file "testfiles/lovelythumbnail.png" to "edit-field-thumbnail-und-0-upload"
+    Then I attach the file "testfiles/potter_ipsum.txt" to "edit-field-document-und-0-upload"
     And I select the radio button "Public"
     And I press "Save"
-    And I should see the success message containing "Digital Library Content Test-o-rama has been updated."
+    And I should see the success message containing "Digital Library Content Search-text-o-rama has been updated."
     Then I follow "Edit"
-    And I should see the link "lovelythumbnail.png"
-    
+    And I should see the link "potter_ipsum.txt"
+    And I run drush "sapi-i"
+    When I fill in "Quidditch" for "Search" in the "header" region
+    And I press "Search" in the "header" region
+    Then I should see the text "Search-text-o-rama"
+    And I should see the link "potter_ipsum.txt"
+    When I fill in "Not in the file" for "Search" in the "header" region
+    And I press "Search" in the "header" region
+    Then I should not see the text "Search-text-o-rama"
