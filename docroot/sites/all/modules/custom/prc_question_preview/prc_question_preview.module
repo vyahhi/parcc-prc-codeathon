@@ -546,6 +546,31 @@ function prc_question_preview_copy_questions($original_quiz, $new_quiz) {
 }
 
 /**
+ * Implements hook_menu_alter().
+ */
+function prc_question_preview_menu_alter(&$items) {
+  $items['node/%quiz_menu/quiz/questions']['access callback'] = '_prc_question_preview_user_has_role';
+  $items['node/%quiz_menu/quiz/questions']['access arguments'] = array(array('administrator'));
+}
+
+function _prc_question_preview_user_has_role($roles) {
+  if (user_is_logged_in()) {
+    global $user;
+    if (in_array('administrator', $user->roles)) {
+      return TRUE;
+    }
+    foreach ($roles as $role) {
+      if (in_array($role, $user->roles)) {
+        return TRUE;
+      }
+    }
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
  * Implements hook_form_FORM_alter().
  */
 function prc_question_preview_form_quiz_node_form_alter(&$form, &$form_state) {
