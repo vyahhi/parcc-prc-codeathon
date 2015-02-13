@@ -52,6 +52,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Add Quiz',
     'description' => 'Menu for Assessments page to let users add quizzes',
   );
+  // Exported menu: menu-assessment-left-nav.
+  $menus['menu-assessment-left-nav'] = array(
+    'menu_name' => 'menu-assessment-left-nav',
+    'title' => 'Assessment Left Nav',
+    'description' => '',
+  );
   // Exported menu: menu-digital-library-left-nav.
   $menus['menu-digital-library-left-nav'] = array(
     'menu_name' => 'menu-digital-library-left-nav',
@@ -87,6 +93,7 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Add Course');
   t('Add Quiz');
   t('Add content');
+  t('Assessment Left Nav');
   t('Development');
   t('Development link');
   t('Digital Library Left Nav');

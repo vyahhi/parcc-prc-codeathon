@@ -9,6 +9,7 @@ features[views_view][] = admin_user_view
 features[views_view][] = archive
 features[views_view][] = assessment_item_list
 features[views_view][] = assessments
+features[views_view][] = assessments_filtered_by_favorites
 features[views_view][] = backlinks
 features[views_view][] = commentable_teasers
 features[views_view][] = comments_recent

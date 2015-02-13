@@ -18,7 +18,8 @@ function prc_ajax_show_digital_library_favorites_list($js = FALSE, $node) {
     // Get the HTML output of the view.
     $type_view_name = array(
       'digital_library_content' => 'digital_library_favorites',
-      'pd_course' => 'professional_development_favorites'
+      'pd_course' => 'professional_development_favorites',
+      'quiz' => 'assessments_filtered_by_favorites',
     );
     $view_name = $type_view_name[$list_type];
     $list_output = views_embed_view($view_name, 'default', $node->nid);
@@ -32,7 +33,8 @@ function prc_ajax_show_digital_library_favorites_list($js = FALSE, $node) {
     // No JS, so redirect to the correct page.
     $type_view_name = array(
       'digital_library_content' => 'digital-library',
-      'pd_course' => 'professional-development'
+      'pd_course' => 'professional-development',
+      'quiz' => 'assessments',
     );
     $view_name = $type_view_name[$list_type];
     drupal_goto($view_name . '/' . $node->nid);
