@@ -93,7 +93,7 @@ function prc_lti_register_form($form, &$form_state, $consumer, $nid) {
   );
 
   // Generate a unique id associated to the username making the LTI registration.
-  $consumer_key = uniqid($user->name . '_');
+  $consumer_key = substr(uniqid($user->name . '_'),0,18);
 
   $form['lti_tool_provider_consumer_key'] = array(
       '#type' => 'value',
