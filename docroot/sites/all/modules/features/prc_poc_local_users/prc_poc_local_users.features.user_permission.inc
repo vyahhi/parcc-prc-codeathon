@@ -32,6 +32,8 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['access all course reports'] = array(
     'name' => 'access all course reports',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'course',
@@ -2433,6 +2435,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['view any quiz results'] = array(
     'name' => 'view any quiz results',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),

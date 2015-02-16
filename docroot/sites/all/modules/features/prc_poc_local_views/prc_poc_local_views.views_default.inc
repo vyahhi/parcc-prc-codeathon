@@ -1792,31 +1792,66 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = 50;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
-    'realname' => 'realname',
+    'title' => 'title',
+    'uid' => 'uid',
+    'name' => 'name',
     'timestamp' => 'timestamp',
     'date_completed' => 'date_completed',
     'section_name' => 'section_name',
+    'mail' => 'mail',
   );
   $handler->display->display_options['style_options']['default'] = 'date_completed';
   $handler->display->display_options['style_options']['info'] = array(
-    'realname' => array(
-      'sortable' => 1,
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
       'separator' => '',
+      'empty_column' => 0,
+    ),
+    'uid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
     ),
     'timestamp' => array(
       'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
       'separator' => '',
+      'empty_column' => 0,
     ),
     'date_completed' => array(
       'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
       'separator' => '',
+      'empty_column' => 0,
     ),
     'section_name' => array(
       'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
       'separator' => '',
+      'empty_column' => 0,
+    ),
+    'mail' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
     ),
   );
-  $handler->display->display_options['style_options']['order'] = 'desc';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -1839,12 +1874,6 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['relationships']['course_enrollment']['id'] = 'course_enrollment';
   $handler->display->display_options['relationships']['course_enrollment']['table'] = 'course_report';
   $handler->display->display_options['relationships']['course_enrollment']['field'] = 'course_enrollment';
-  /* Field: Course: Course ID */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'course_node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['nid']['label'] = 'Node ID';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1857,12 +1886,18 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['label'] = 'User ID';
+  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  /* Field: User: E-mail */
+  $handler->display->display_options['fields']['mail']['id'] = 'mail';
+  $handler->display->display_options['fields']['mail']['table'] = 'users';
+  $handler->display->display_options['fields']['mail']['field'] = 'mail';
+  $handler->display->display_options['fields']['mail']['relationship'] = 'uid';
   /* Field: Course enrollment: Timestamp */
   $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
   $handler->display->display_options['fields']['timestamp']['table'] = 'course_enrollment';
