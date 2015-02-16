@@ -17,6 +17,9 @@ Feature: Share Content (end user) (PRC-59)
   Scenario: I should see Edmodo
     Then I should see an ".st_edmodo_button" element
 
+  Scenario: I should see Pinterest
+    Then I should see an ".st_pinterest_button" element
+
   # Manual testing for this feature will cover the following scenarios:
   #  2.  *E-mail*
   #  - When the email share button is selected, the educator will experience the current Drupal Default Email Handling option.

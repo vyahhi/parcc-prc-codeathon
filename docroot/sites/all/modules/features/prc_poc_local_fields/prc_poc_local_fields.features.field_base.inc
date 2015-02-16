@@ -148,6 +148,7 @@ function prc_poc_local_fields_field_default_field_bases() {
       'allowed_values' => array(
         'digital_library_content' => 'Digital Library Content',
         'pd_course' => 'PD Course',
+        'quiz' => 'Assessment',
       ),
       'allowed_values_function' => '',
       'course_enrollment' => FALSE,

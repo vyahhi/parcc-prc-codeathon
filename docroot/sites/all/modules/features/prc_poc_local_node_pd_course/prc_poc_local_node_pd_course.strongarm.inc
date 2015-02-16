@@ -49,6 +49,9 @@ function prc_poc_local_node_pd_course_strongarm() {
       'gallery_view' => array(
         'custom_settings' => FALSE,
       ),
+      'detail' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

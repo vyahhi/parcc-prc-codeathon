@@ -34,12 +34,14 @@ function prc_poc_local_search_api_default_search_api_index() {
       "index_directly" : 0,
       "cron_limit" : "50",
       "fields" : {
+        "attachments_field_document" : { "type" : "text" },
         "author" : { "type" : "integer", "entity_type" : "user" },
         "body:summary" : { "type" : "text" },
         "body:value" : { "type" : "text" },
         "changed" : { "type" : "date" },
         "field_author_name" : { "type" : "string" },
         "field_course_objectives" : { "type" : "text" },
+        "field_document:file" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "file" },
         "field_genre" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_grade_level" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_media_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },
@@ -67,12 +69,17 @@ function prc_poc_local_search_api_default_search_api_index() {
             }
           }
         },
-        "search_api_alter_node_access" : { "status" : 1, "weight" : "0", "settings" : [] },
         "search_api_alter_node_status" : { "status" : 1, "weight" : "0", "settings" : [] },
-        "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } },
+        "search_api_attachments_alter_settings" : {
+          "status" : 1,
+          "weight" : "0",
+          "settings" : { "excluded_extensions" : "aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv" }
+        },
+        "search_api_alter_node_access" : { "status" : 1, "weight" : "0", "settings" : [] },
         "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } },
         "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
-        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] }
+        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } }
       },
       "processors" : {
         "search_api_case_ignore" : {
@@ -80,11 +87,11 @@ function prc_poc_local_search_api_default_search_api_index() {
           "weight" : "0",
           "settings" : { "fields" : {
               "title" : true,
-              "field_subject" : true,
               "field_grade_level" : true,
-              "field_tags" : true,
+              "field_subject" : true,
+              "field_author_name" : true,
               "field_genre" : true,
-              "field_author_name" : true
+              "field_tags" : true
             }
           }
         },
@@ -257,6 +264,17 @@ function prc_poc_local_search_api_default_search_api_server() {
             "boost" : "1.0"
           },
           "field_course_objectives" : {
+            "table" : "search_api_db_digital_library_content_index_text",
+            "type" : "text",
+            "boost" : "1.0"
+          },
+          "field_document:file" : {
+            "table" : "search_api_db_digital_library_content_index_field_document_fil",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "attachments_field_document" : {
             "table" : "search_api_db_digital_library_content_index_text",
             "type" : "text",
             "boost" : "1.0"

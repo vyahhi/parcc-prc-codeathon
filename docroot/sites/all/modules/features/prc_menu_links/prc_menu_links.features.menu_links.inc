@@ -218,6 +218,26 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-assessment-left-nav_all-available-assessments:assessments
+  $menu_links['menu-assessment-left-nav_all-available-assessments:assessments'] = array(
+    'menu_name' => 'menu-assessment-left-nav',
+    'link_path' => 'assessments',
+    'router_path' => 'assessments',
+    'link_title' => 'All Available Assessments',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-assessment-left-nav_all-available-assessments:assessments',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-digital-library-left-nav_view-all:digital-library
   $menu_links['menu-digital-library-left-nav_view-all:digital-library'] = array(
     'menu_name' => 'menu-digital-library-left-nav',
@@ -282,6 +302,7 @@ function prc_menu_links_menu_default_menu_links() {
   // Included for use with string extractors like potx.
   t('Add content');
   t('Add course');
+  t('All Available Assessments');
   t('All Available Courses');
   t('Assessments');
   t('Content');

@@ -545,6 +545,23 @@ function prc_question_preview_copy_questions($original_quiz, $new_quiz) {
   quiz_set_questions($new_quiz, $questions, TRUE);
 }
 
+function _prc_question_preview_user_has_role($roles) {
+  if (user_is_logged_in()) {
+    global $user;
+    if (in_array('administrator', $user->roles)) {
+      return TRUE;
+    }
+    foreach ($roles as $role) {
+      if (in_array($role, $user->roles)) {
+        return TRUE;
+      }
+    }
+  }
+  else {
+    return FALSE;
+  }
+}
+
 /**
  * Implements hook_form_FORM_alter().
  */

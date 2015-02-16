@@ -7,6 +7,7 @@ class SearchAPIFeaturesBuilder extends FeaturesBuilderBase {
     'search_api_facetapi',
     'search_api_views',
     'search_api_db',
+    'search_api_attachments',
     'facetapi',
     'facetapi_bonus',
     'entity',

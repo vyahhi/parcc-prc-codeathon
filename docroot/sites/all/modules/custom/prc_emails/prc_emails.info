@@ -1,0 +1,8 @@
+name = PRC Email Handler
+description = Handles emailing messages and subscriptions
+package = PRC
+core = 7.x
+
+dependencies[] = message
+dependencies[] = message_subscribe
+
