@@ -291,6 +291,33 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $display->content['new-173ef7c8-627c-4ffb-82c7-517f83c7974d'] = $pane;
     $display->panels['middle'][0] = 'new-173ef7c8-627c-4ffb-82c7-517f83c7974d';
     $pane = new stdClass();
+    $pane->pid = 'new-a388be83-6d77-470c-adf3-d79ecc3563d7';
+    $pane->panel = 'middle';
+    $pane->type = 'node_links';
+    $pane->subtype = 'node_links';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+      'build_mode' => 'full',
+      'identifier' => '',
+      'link' => 0,
+      'context' => 'argument_entity_id:node_1',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'a388be83-6d77-470c-adf3-d79ecc3563d7';
+    $display->content['new-a388be83-6d77-470c-adf3-d79ecc3563d7'] = $pane;
+    $display->panels['middle'][1] = 'new-a388be83-6d77-470c-adf3-d79ecc3563d7';
+    $pane = new stdClass();
     $pane->pid = 'new-e10bdac5-cc69-4cb5-abb9-98443716479a';
     $pane->panel = 'middle';
     $pane->type = 'views_panes';
@@ -308,11 +335,11 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 2;
     $pane->locks = array();
     $pane->uuid = 'e10bdac5-cc69-4cb5-abb9-98443716479a';
     $display->content['new-e10bdac5-cc69-4cb5-abb9-98443716479a'] = $pane;
-    $display->panels['middle'][1] = 'new-e10bdac5-cc69-4cb5-abb9-98443716479a';
+    $display->panels['middle'][2] = 'new-e10bdac5-cc69-4cb5-abb9-98443716479a';
     $pane = new stdClass();
     $pane->pid = 'new-5191f8c4-630f-4d52-a599-a94e80c3cfa6';
     $pane->panel = 'middle';
@@ -327,11 +354,11 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 2;
+    $pane->position = 3;
     $pane->locks = array();
     $pane->uuid = '5191f8c4-630f-4d52-a599-a94e80c3cfa6';
     $display->content['new-5191f8c4-630f-4d52-a599-a94e80c3cfa6'] = $pane;
-    $display->panels['middle'][2] = 'new-5191f8c4-630f-4d52-a599-a94e80c3cfa6';
+    $display->panels['middle'][3] = 'new-5191f8c4-630f-4d52-a599-a94e80c3cfa6';
     $pane = new stdClass();
     $pane->pid = 'new-9d75fce3-4c32-4075-b0c5-6bb1a621dc5b';
     $pane->panel = 'middle';
@@ -355,11 +382,11 @@ function prc_poc_local_panels_default_page_manager_handlers() {
       'css_class' => 'item-preview-pane',
     );
     $pane->extras = array();
-    $pane->position = 3;
+    $pane->position = 4;
     $pane->locks = array();
     $pane->uuid = '9d75fce3-4c32-4075-b0c5-6bb1a621dc5b';
     $display->content['new-9d75fce3-4c32-4075-b0c5-6bb1a621dc5b'] = $pane;
-    $display->panels['middle'][3] = 'new-9d75fce3-4c32-4075-b0c5-6bb1a621dc5b';
+    $display->panels['middle'][4] = 'new-9d75fce3-4c32-4075-b0c5-6bb1a621dc5b';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-173ef7c8-627c-4ffb-82c7-517f83c7974d';
   $handler->conf['display'] = $display;
@@ -822,7 +849,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->task = 'page';
   $page->admin_title = 'Assessments';
   $page->admin_description = '';
-  $page->path = 'assessments';
+  $page->path = 'assessments/!nid';
   $page->access = array(
     'plugins' => array(),
     'logic' => 'and',
@@ -839,20 +866,178 @@ function prc_poc_local_panels_default_page_manager_pages() {
       'name' => 'navigation',
     ),
   );
-  $page->arguments = array();
-  $page->conf = array();
+  $page->arguments = array(
+    'nid' => array(
+      'id' => 1,
+      'identifier' => 'Node: ID',
+      'name' => 'entity_id:node',
+      'settings' => array(),
+    ),
+  );
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
   $page->default_handlers = array();
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
-  $handler->name = 'page_assessments_panel_context';
+  $handler->name = 'page_assessments__assessments';
   $handler->task = 'page';
   $handler->subtask = 'assessments';
   $handler->handler = 'panel_context';
-  $handler->weight = 0;
+  $handler->weight = 1;
   $handler->conf = array(
-    'title' => 'Landing page',
-    'no_blocks' => FALSE,
+    'title' => 'Assessments',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => 'assessments',
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => 'assessments',
+          ),
+          'context' => 'empty',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'twocol_stacked';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'left' => NULL,
+      'right' => NULL,
+      'top' => NULL,
+      'bottom' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = '73f0dde9-506d-465c-b204-910117771872';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-a544d903-fcca-45fb-80e3-d3d66fdee207';
+    $pane->panel = 'left';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-assessment-left-nav';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'a544d903-fcca-45fb-80e3-d3d66fdee207';
+    $display->content['new-a544d903-fcca-45fb-80e3-d3d66fdee207'] = $pane;
+    $display->panels['left'][0] = 'new-a544d903-fcca-45fb-80e3-d3d66fdee207';
+    $pane = new stdClass();
+    $pane->pid = 'new-40b1d071-1a00-4d88-87dd-140bbe28eda6';
+    $pane->panel = 'left';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'my_lists-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_content_type_value' => 'quiz',
+      ),
+      'override_title' => 1,
+      'override_title_text' => 'My Quiz Lists',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '40b1d071-1a00-4d88-87dd-140bbe28eda6';
+    $display->content['new-40b1d071-1a00-4d88-87dd-140bbe28eda6'] = $pane;
+    $display->panels['left'][1] = 'new-40b1d071-1a00-4d88-87dd-140bbe28eda6';
+    $pane = new stdClass();
+    $pane->pid = 'new-5ca788a1-d895-445f-ba1a-7ce3619d6d96';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'assessments-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'digital-library-content-pane',
+    );
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '5ca788a1-d895-445f-ba1a-7ce3619d6d96';
+    $display->content['new-5ca788a1-d895-445f-ba1a-7ce3619d6d96'] = $pane;
+    $display->panels['right'][0] = 'new-5ca788a1-d895-445f-ba1a-7ce3619d6d96';
+    $pane = new stdClass();
+    $pane->pid = 'new-1718c304-c930-4da3-b981-ee976bebef32';
+    $pane->panel = 'top';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-add-quiz';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '1718c304-c930-4da3-b981-ee976bebef32';
+    $display->content['new-1718c304-c930-4da3-b981-ee976bebef32'] = $pane;
+    $display->panels['top'][0] = 'new-1718c304-c930-4da3-b981-ee976bebef32';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-5ca788a1-d895-445f-ba1a-7ce3619d6d96';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_assessments__panel_context_f13d6f43-aa94-4c05-953f-f960637462ef';
+  $handler->task = 'page';
+  $handler->subtask = 'assessments';
+  $handler->handler = 'panel_context';
+  $handler->weight = 2;
+  $handler->conf = array(
+    'title' => 'Assessments Favorites',
+    'no_blocks' => 0,
     'pipeline' => 'ipe',
     'body_classes_to_remove' => '',
     'body_classes_to_add' => '',
@@ -860,9 +1045,23 @@ function prc_poc_local_panels_default_page_manager_pages() {
     'css' => '',
     'contexts' => array(),
     'relationships' => array(),
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => 'assessments/*',
+          ),
+          'context' => 'empty',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
   );
   $display = new panels_display();
-  $display->layout = 'onecol';
+  $display->layout = 'twocol_stacked';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -871,6 +1070,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
       'left' => NULL,
       'right' => NULL,
       'middle' => NULL,
+      'top' => NULL,
+      'bottom' => NULL,
     ),
   );
   $display->cache = array();
@@ -879,8 +1080,54 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
+    $pane->pid = 'new-c58283c1-07f3-4169-a6e0-fe21d95ba7d4';
+    $pane->panel = 'left';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-assessment-left-nav';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'c58283c1-07f3-4169-a6e0-fe21d95ba7d4';
+    $display->content['new-c58283c1-07f3-4169-a6e0-fe21d95ba7d4'] = $pane;
+    $display->panels['left'][0] = 'new-c58283c1-07f3-4169-a6e0-fe21d95ba7d4';
+    $pane = new stdClass();
+    $pane->pid = 'new-27c00858-8dbb-468b-b5e7-5e3bdec13f45';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'assessments_filtered_by_favorites-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'nid' => '%nid:nid',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '27c00858-8dbb-468b-b5e7-5e3bdec13f45';
+    $display->content['new-27c00858-8dbb-468b-b5e7-5e3bdec13f45'] = $pane;
+    $display->panels['right'][0] = 'new-27c00858-8dbb-468b-b5e7-5e3bdec13f45';
+    $pane = new stdClass();
     $pane->pid = 'new-24cadd88-1bc8-413e-aec2-65f3645d9c0c';
-    $pane->panel = 'middle';
+    $pane->panel = 'top';
     $pane->type = 'block';
     $pane->subtype = 'menu-menu-add-quiz';
     $pane->shown = TRUE;
@@ -899,26 +1146,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->locks = array();
     $pane->uuid = '24cadd88-1bc8-413e-aec2-65f3645d9c0c';
     $display->content['new-24cadd88-1bc8-413e-aec2-65f3645d9c0c'] = $pane;
-    $display->panels['middle'][0] = 'new-24cadd88-1bc8-413e-aec2-65f3645d9c0c';
-    $pane = new stdClass();
-    $pane->pid = 'new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
-    $pane->panel = 'middle';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'assessments-panel_pane_1';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array();
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 1;
-    $pane->locks = array();
-    $pane->uuid = 'fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
-    $display->content['new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e'] = $pane;
-    $display->panels['middle'][1] = 'new-fe9befd9-2fb3-4727-b772-6067b7fc9a1e';
+    $display->panels['top'][0] = 'new-24cadd88-1bc8-413e-aec2-65f3645d9c0c';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

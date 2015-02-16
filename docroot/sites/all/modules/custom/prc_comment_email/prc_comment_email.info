@@ -2,3 +2,5 @@ name = PRC Comment Email
 description = Handles emailing comments to authors
 package = PRC
 core = 7.x
+
+dependencies[] = prc_emails

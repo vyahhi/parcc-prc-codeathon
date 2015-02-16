@@ -75,6 +75,10 @@ function prc_my_lists_node_view($node, $view_mode, $langcode) {
         'link_id' => 'prc_pd_course_add_to_favorites',
         'link_title' => 'Add to My PD Lists',
       ),
+      'quiz' => array(
+          'link_id' => 'prc_assessment_add_to_favorites',
+          'link_title' => 'Add to My Quiz Lists',
+      ),
     );
 
     if (array_key_exists($node->type, $listable_types)) {

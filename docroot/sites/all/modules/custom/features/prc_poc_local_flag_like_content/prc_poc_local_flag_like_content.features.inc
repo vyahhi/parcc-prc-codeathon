@@ -16,6 +16,8 @@ function prc_poc_local_flag_like_content_flag_default_flags() {
     'global' => 0,
     'types' => array(
       0 => 'digital_library_content',
+      1 => 'pd_course',
+      2 => 'quiz',
     ),
     'flag_short' => 'Like ([node:flag-like-content-count])',
     'flag_long' => 'Like this item',

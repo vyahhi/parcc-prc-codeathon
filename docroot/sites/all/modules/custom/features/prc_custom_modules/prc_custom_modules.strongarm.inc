@@ -295,16 +295,13 @@ You can access the result here !url
     'digital_library_content' => 'digital_library_content',
     'pd_course' => 'pd_course',
     'course' => 0,
-    'quiz_directions' => 0,
     'favorites_list' => 0,
     'multichoice' => 0,
     'pd_module' => 0,
     'panel' => 0,
-    'practice_test' => 0,
     'quiz' => 0,
+    'quiz_directions' => 0,
     'short_answer' => 0,
-    'test_item' => 0,
-    'truefalse' => 0,
   );
   $export['sharethis_node_types'] = $strongarm;
 
@@ -343,7 +340,7 @@ You can access the result here !url
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'sharethis_service_option';
-  $strongarm->value = '"Email:email","Facebook:facebook","Edmodo:edmodo"';
+  $strongarm->value = '"Email:email","Facebook:facebook","Edmodo:edmodo","Pinterest:pinterest"';
   $export['sharethis_service_option'] = $strongarm;
 
   $strongarm = new stdClass();

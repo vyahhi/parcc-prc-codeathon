@@ -159,6 +159,7 @@ dependencies[] = admin_role_restrict
 ; Views
 dependencies[] = views
 dependencies[] = views_bulk_operations
+dependencies[] = views_conditional
 dependencies[] = views_data_export
 dependencies[] = views_ui
 ; Voting

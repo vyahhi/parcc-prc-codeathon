@@ -172,9 +172,10 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'weight' => 24,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'file',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'file_default',
         'weight' => 18,
       ),
     ),
@@ -183,9 +184,10 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'label' => 'Attach a File',
     'required' => 0,
     'settings' => array(
+      'course_enrollment' => FALSE,
       'description_field' => 0,
       'file_directory' => '',
-      'file_extensions' => 'txt pdf doc docx xls xlsx',
+      'file_extensions' => 'txt pdf doc docx xls xlsx ppt pptx',
       'max_filesize' => '32 MB',
       'user_register_form' => FALSE,
     ),
@@ -193,6 +195,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
       'active' => 1,
       'module' => 'file',
       'settings' => array(
+        'label_help_description' => '',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',

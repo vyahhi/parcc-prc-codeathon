@@ -127,7 +127,7 @@ function prc_poc_local_node_quiz_strongarm() {
             'visible' => TRUE,
           ),
           'teaser' => array(
-            'weight' => '5',
+            'weight' => '6',
             'visible' => TRUE,
           ),
           'full' => array(

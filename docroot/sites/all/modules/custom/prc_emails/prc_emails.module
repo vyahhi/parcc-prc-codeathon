@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * Emails comments to authors.
+ */
+
+/**
+ * Manages emailing when a Message is created.
+ *
+ * @param $message
+ *  Message object that was created
+ * @param $node
+ *  The node being commented on
+ * @throws \MessageNotifyException
+ */
+function _prc_emails_message_create($message, $node) {
+  // Let message-notify deliver the email, and send the message for us.
+  // We pass in the options the field names, that will be used to capture
+  // the rendered message, and provide an email log.
+  $options = array(
+    'rendered fields' => array(
+      'message_notify_email_subject' => 'field_message_rendered_subject',
+      'message_notify_email_body' => 'field_message_rendered_body',
+    ),
+  );
+
+  if (module_exists('message_subscribe')) {
+    // If Message-subscribe exists, let's use it.
+    message_subscribe_send_message('node', $node, $message, array('email' => $options));
+  }
+}
+
+/**
+ * Implements hook_message_subscribe_get_subscribers().
+ */
+function prc_emails_message_subscribe_get_subscribers(Message $message, $subscribe_options = array(), $context = array()) {
+  $message_recipients = array(
+    'comment_email' => array('Content Administrator (Curator)', 'PRC Admin'),
+  );
+
+  $w = entity_metadata_wrapper('message', $message);
+  $node = $w->field_node->value();
+  $author_uid = $node->uid;
+
+  $uids[$author_uid]['notifiers']['email'] = 'email';
+
+  $roles = array_key_exists($message->type, $message_recipients) ? $message_recipients[$message->type] : array();
+  $role_uids = _prc_emails_uids_by_role($roles);
+  foreach($role_uids as $role_uid) {
+    $uids[$role_uid]['notifiers']['email'] = 'email';
+  }
+
+  return $uids;
+}
+
+function _prc_emails_uids_by_role($roles = array()) {
+  $rids = array();
+  $system_roles = user_roles();
+  foreach ($roles as $role) {
+    $rid = array_search($role, $system_roles);
+    if ($rid) {
+      $rids[] = $rid;
+    }
+  }
+  $uids = array();
+  $result = db_select('users_roles', 'ur')
+    ->fields('ur')
+    ->condition('ur.rid', $rids, 'IN')
+    ->execute();
+  foreach ($result as $record) {
+    $uids[] = $record->uid;
+  }
+  return $uids;
+}
