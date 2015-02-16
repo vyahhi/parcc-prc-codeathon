@@ -31,7 +31,6 @@ docroot/sites/*/private
 *.dmg
 *.gz
 *.iso
-# *.jar
 *.rar
 *.tar
 *.zip
