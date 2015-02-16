@@ -56,7 +56,7 @@ function prc_poc_local_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'features_builder_base_dir';
-  $strongarm->value = 'sites/all/modules/custom/features';
+  $strongarm->value = 'sites/all/modules/features';
   $export['features_builder_base_dir'] = $strongarm;
 
   $strongarm = new stdClass();
