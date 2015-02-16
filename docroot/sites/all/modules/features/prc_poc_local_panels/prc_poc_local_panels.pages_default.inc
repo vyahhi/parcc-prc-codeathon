@@ -13,6 +13,103 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
+  $handler->name = 'node_edit__digital_library_content';
+  $handler->task = 'node_edit';
+  $handler->subtask = '';
+  $handler->handler = 'panel_context';
+  $handler->weight = 1;
+  $handler->conf = array(
+    'title' => 'Digital Library Content',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => 'digital_library_content',
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'digital_library_content' => 'digital_library_content',
+            ),
+          ),
+          'context' => 'argument_node_edit_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = '54108e3d-b2da-4bf5-9254-4894ecb18e63';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-e2ba232d-8eb4-4adb-b8fa-ad50abbfb114';
+    $pane->panel = 'middle';
+    $pane->type = 'content_state';
+    $pane->subtype = 'content_state';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'e2ba232d-8eb4-4adb-b8fa-ad50abbfb114';
+    $display->content['new-e2ba232d-8eb4-4adb-b8fa-ad50abbfb114'] = $pane;
+    $display->panels['middle'][0] = 'new-e2ba232d-8eb4-4adb-b8fa-ad50abbfb114';
+    $pane = new stdClass();
+    $pane->pid = 'new-eb175b77-54e5-48f3-9c3c-d9fc718f224a';
+    $pane->panel = 'middle';
+    $pane->type = 'form';
+    $pane->subtype = 'form';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'context' => 'argument_node_edit_1',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'eb175b77-54e5-48f3-9c3c-d9fc718f224a';
+    $display->content['new-eb175b77-54e5-48f3-9c3c-d9fc718f224a'] = $pane;
+    $display->panels['middle'][1] = 'new-eb175b77-54e5-48f3-9c3c-d9fc718f224a';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-e2ba232d-8eb4-4adb-b8fa-ad50abbfb114';
+  $handler->conf['display'] = $display;
+  $export['node_edit__digital_library_content'] = $handler;
+
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
   $handler->name = 'node_edit_panel_context';
   $handler->task = 'node_edit';
   $handler->subtask = '';
@@ -111,6 +208,150 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $display->title_pane = 'new-ae0a108a-7a09-4036-865a-97d284d394dd';
   $handler->conf['display'] = $display;
   $export['node_edit_panel_context'] = $handler;
+
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'node_view__digital_library_content';
+  $handler->task = 'node_view';
+  $handler->subtask = '';
+  $handler->handler = 'panel_context';
+  $handler->weight = 2;
+  $handler->conf = array(
+    'title' => 'Digital Library Content',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => 'digital_library_content',
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'digital_library_content' => 'digital_library_content',
+            ),
+          ),
+          'context' => 'argument_entity_id:node_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'flexible';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'center' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = '10881e28-3118-4e8e-a307-be105abdf622';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-29e82e9c-3e03-4cbf-8264-0c32d5a6f549';
+    $pane->panel = 'center';
+    $pane->type = 'content_state';
+    $pane->subtype = 'content_state';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 4,
+              1 => 3,
+              2 => 7,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '29e82e9c-3e03-4cbf-8264-0c32d5a6f549';
+    $display->content['new-29e82e9c-3e03-4cbf-8264-0c32d5a6f549'] = $pane;
+    $display->panels['center'][0] = 'new-29e82e9c-3e03-4cbf-8264-0c32d5a6f549';
+    $pane = new stdClass();
+    $pane->pid = 'new-5df9dfc2-b0f4-4599-8f53-02c1dc60cccc';
+    $pane->panel = 'center';
+    $pane->type = 'node_content';
+    $pane->subtype = 'node_content';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'links' => 1,
+      'no_extras' => 1,
+      'override_title' => 1,
+      'override_title_text' => '',
+      'identifier' => '',
+      'link' => 0,
+      'leave_node_title' => 0,
+      'build_mode' => 'full',
+      'context' => 'argument_entity_id:node_1',
+      'override_title_heading' => 'span',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '5df9dfc2-b0f4-4599-8f53-02c1dc60cccc';
+    $display->content['new-5df9dfc2-b0f4-4599-8f53-02c1dc60cccc'] = $pane;
+    $display->panels['center'][1] = 'new-5df9dfc2-b0f4-4599-8f53-02c1dc60cccc';
+    $pane = new stdClass();
+    $pane->pid = 'new-a031668c-59c3-4b35-8ce1-10c6a6ef0bd0';
+    $pane->panel = 'center';
+    $pane->type = 'node_comment_wrapper';
+    $pane->subtype = 'node_comment_wrapper';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'mode' => '1',
+      'comments_per_page' => '50',
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = 'a031668c-59c3-4b35-8ce1-10c6a6ef0bd0';
+    $display->content['new-a031668c-59c3-4b35-8ce1-10c6a6ef0bd0'] = $pane;
+    $display->panels['center'][2] = 'new-a031668c-59c3-4b35-8ce1-10c6a6ef0bd0';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $export['node_view__digital_library_content'] = $handler;
 
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */

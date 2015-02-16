@@ -57,6 +57,19 @@ function prc_workflow_access($op, $node){
 }
 
 /**
+ * Implements hook_ctools_plugin_directory()
+ *
+ * @param $owner
+ * @param $plugin_type
+ * @return string
+ */
+function prc_workflow_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools') {
+    return "plugins/$plugin_type";
+  }
+}
+
+/**
  * Implements hook_state_flow_plugins()
  */
 function prc_workflow_state_flow_plugins(){
@@ -95,6 +108,7 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
 
   //state flow won't work without a vid, so skip on node creation
   if(!empty($node->vid)) {
+    //Add action buttons for workflow events
     $state_flow = state_flow_load_state_machine($node);
 
     $action_button = array(
@@ -122,6 +136,12 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
         $weight += -3; //@todo: if this doesn't work we can add a weight attribute to the events options
       }
     }
+
+    //Change the text of the submit button to save draft, except when editing the published draft
+    //@todo: detect whether we are working on the published revision as a curator
+    if(true) {
+      $form['actions']['submit']['#value'] = "Save Draft";
+    }
   }
 }
 
@@ -132,23 +152,53 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
  * @param $form_state
  */
 function prc_workflow_submit_handler($form, &$form_state){
-  //@todo: does this create a new revision even if nothing has changed besides the state?
-  node_form_submit($form, $form_state);
 
-  //@todo: confirm we are advancing the correct revision of the node, not the previous version
+  //@todo: does this create a new revision even if nothing has changed besides the state?  Is that appropriate?
+  node_form_submit($form, $form_state);
+  $node = $form['#node'];
 
   //Determine which button was pressed and fire the corresponding event
-  $node = $form['#node'];
-  if(!empty($node->vid)) {
+  if(!empty($node->vid)) {//skip if we are creating a new node
+
+    //@todo: make sure this is still correct if we are editing a draft vs. the published revision
+    $latest_vid = db_query('
+    SELECT nr.vid
+    FROM {node_revision} nr
+    WHERE nr.nid = :nid
+    ORDER BY nr.vid DESC
+    LIMIT 0, 1',
+      array(':nid' => $node->nid))->fetchField();
+
+
     $state_flow = state_flow_load_state_machine($node);
     $clicked = $form_state['clicked_button']['#value'];
-    foreach($state_flow->get_available_events() as $key => $event){
+    foreach ($state_flow->get_available_events() as $key => $event) {
       $options = $event->get_options();
-      if($clicked == $options['label']){
-        $state_flow->fire_event($key);
+      if ($clicked == $options['label']) {
+        //redirect to the confirmation form if there is a change in state
+        unset($_GET['destination']);
+        $form_state['redirect'] = 'node/' . $node->nid . '/revisions/' . $latest_vid . '/workflow/' . $key;
       }
     }
   }
+}
+
+/**
+ * Implements hook_form_form_id_form_alter
+ *
+ * @param $form
+ * @param $form_state
+ */
+function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state){
+  //Add handler for notifications
+  $form['#submit'][] = 'prc_workflow_notification_submit_handler';
+}
+
+/**
+ * Handle notifying of the various parties
+ */
+function prc_workflow_notification_submit_handler(&$form, &$form_state){
+  $x = 1;
 }
 
 /**
