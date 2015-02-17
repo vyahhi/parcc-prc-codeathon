@@ -22,10 +22,16 @@ Development Installation
 ========================
 
 For a development instance, the longer Standards migration can be shortened.
-cd docroot
-drush si -y prc_profile
-drush fra -y --force
-drush mi --group=prc_taxonomy
-drush mi --group=prc_standard --limit="100 items"
-drush vocimp ../terms/lr_subjects_hier.csv tree --vocabulary_target=existing --vocabulary_id=10
-drush php-eval 'node_access_rebuild();'
+Execute ./dev_setup.sh
+Then set an admin password: drush upwd admin --password=admin
+
+Additional Software Requirements
+================================
+
+You'll need:
+- Composer
+- Selenium Server (downloaded here: http://www.seleniumhq.org/download/ )
+- Firefox 34 (As of this writing, FF35 does not work correctly with Selenium).
+    Turn off automatic updates, otherwise FF will upgrade itself when you start it back up.
+- PHP 5.5
+- drush
