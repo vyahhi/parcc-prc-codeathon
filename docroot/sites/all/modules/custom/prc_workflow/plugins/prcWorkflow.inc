@@ -15,7 +15,7 @@ class prcWorkflow extends StateFlow {
 
     $this->create_state('ready_for_review',
       array(
-        'label' => t('waiting_for_review')
+        'label' => t('Waiting for Review')
       )
     );
 
@@ -27,14 +27,24 @@ class prcWorkflow extends StateFlow {
 
     //define events
     $this->create_event('approval_requested',
-        array(
-          'label' => t('Request Approval'),
-          'origin' => 'draft',
-          'target' => 'ready_for_review',
-          'permissions' => array('request approval of prc content'),
-          'guard' => 'prc_workflow_user_owns_node'
-        )
-      );
+      array(
+        'label' => t('Request Approval'),
+        'origin' => 'draft',
+        'target' => 'ready_for_review',
+        'permissions' => array('request approval of prc content'),
+        'guard' => 'prc_workflow_user_owns_node'
+      )
+    );
+
+    $this->create_event('rescind_request',
+      array(
+        'label' => 'Cancel Review Request',
+        'origin' => 'ready_for_review',
+        'target' => 'draft',
+        'permissions' => array('request approval of prc content'),
+        'guard' => 'prc_workflow_user_owns_node'
+      )
+    );
 
     $this->create_event('approved',
       array(
@@ -64,5 +74,27 @@ class prcWorkflow extends StateFlow {
     );
 
     $this->set_initial_state('draft');
+  }
+
+  function on_exit_request_approval(){
+    $this->message('ready_for_review');
+  }
+
+  function on_exit_rescind_request(){
+    $this->message('rescind_request');
+  }
+
+  function message($message_type){
+    $node = $this->get_object();
+    $message = message_create($message_type);
+
+    $wrapper = entity_metadata_wrapper('message', $message);
+
+    $wrapper->field_node->set($node);
+
+    $wrapper->save();
+
+    // This message type is associated with roles in prc_emails.
+    _prc_emails_message_create($message, $node);
   }
 }

@@ -37,6 +37,8 @@ function _prc_emails_message_create($message, $node) {
 function prc_emails_message_subscribe_get_subscribers(Message $message, $subscribe_options = array(), $context = array()) {
   $message_recipients = array(
     'comment_email' => array('Content Administrator (Curator)', 'PRC Admin'),
+    'ready_for_review' => array('Content Administrator (Curator)'),
+    'rescind_review_request' => array('Content Administrator (Curator)'),
   );
 
   $w = entity_metadata_wrapper('message', $message);

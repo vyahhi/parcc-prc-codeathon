@@ -45,5 +45,59 @@ function prc_messages_default_message_type() {
     },
     "rdf_mapping" : []
   }');
+  $items['ready_for_review'] = entity_import('message_type', '{
+    "name" : "ready_for_review",
+    "description" : "Ready For Review",
+    "argument_keys" : [],
+    "argument" : [],
+    "category" : "message_type",
+    "data" : {
+      "token options" : { "clear" : 0 },
+      "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
+    },
+    "language" : "",
+    "arguments" : null,
+    "message_text" : { "und" : [
+        {
+          "value" : "New Draft Awaiting Review: \\u0027[message:field-node:title]\\u0027",
+          "format" : "filtered_html",
+          "safe_value" : "\\u003Cp\\u003ENew Draft Awaiting Review: \\u0027[message:field-node:title]\\u0027\\u003C\\/p\\u003E\\n"
+        },
+        {
+          "value" : "The following content is awaiting approval:\\r\\nContent: \\u003Ca href=\\u0022http:\\/\\/[message:field-node:edit-url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-user-ref:field-first-name] [message:field-user-ref:field-last-name] ([message:field-user-ref:mail])\\r\\n",
+          "format" : "filtered_html",
+          "safe_value" : "\\u003Cp\\u003EThe following content is awaiting approval:\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022http:\\/\\/[message:field-node:edit-url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-user-ref:field-first-name] [message:field-user-ref:field-last-name] ([message:field-user-ref:mail])\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\n"
+        }
+      ]
+    },
+    "rdf_mapping" : []
+  }');
+  $items['rescind_request'] = entity_import('message_type', '{
+    "name" : "rescind_request",
+    "description" : "Rescind Review Request",
+    "argument_keys" : [],
+    "argument" : [],
+    "category" : "message_type",
+    "data" : {
+      "token options" : { "clear" : 0 },
+      "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
+    },
+    "language" : "",
+    "arguments" : null,
+    "message_text" : { "und" : [
+        {
+          "value" : "New Draft Awaiting Review: \\u0027[message:field-node:title]\\u0027",
+          "format" : "filtered_html",
+          "safe_value" : "\\u003Cp\\u003ENew Draft Awaiting Review: \\u0027[message:field-node:title]\\u0027\\u003C\\/p\\u003E\\n"
+        },
+        {
+          "value" : "The following content is awaiting approval:\\r\\nContent: \\u003Ca href=\\u0022http:\\/\\/[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-user-ref:field-first-name] [message:field-user-ref:field-last-name] ([message:field-user-ref:mail])\\r\\n",
+          "format" : "filtered_html",
+          "safe_value" : "\\u003Cp\\u003EThe following content is awaiting approval:\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022http:\\/\\/[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-user-ref:field-first-name] [message:field-user-ref:field-last-name] ([message:field-user-ref:mail])\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\n"
+        }
+      ]
+    },
+    "rdf_mapping" : []
+  }');
   return $items;
 }

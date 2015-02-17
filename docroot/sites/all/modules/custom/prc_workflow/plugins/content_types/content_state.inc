@@ -27,8 +27,20 @@ function prc_workflow_state_render($subtype, $conf, $args, $context){
   $state_machine = state_flow_load_state_machine($node);
 
   $current_state = $state_machine->get_current_state();
+  $label = $state_machine->get_label_for_current_state();
 
-  $block->content = '<div class="prc-workflow-state"><span>Content State:</span> '.ucfirst($current_state).'</div>';
+  $block->content = '<div class="prc-workflow-state"><span>Content State:</span> '.ucfirst($label).'</div>';
+
+  //Provide a link for cancelling a request
+  if($current_state == 'ready_for_review'){
+    $event = $state_machine->get_event('rescind_request');
+    if($event->validate()){
+      //@todo: figure out the vid of the page they are currently viewing.
+      $url = 'node/'.$node->nid.'/revisions/'.$node->vid.'/workflow/rescind_request';
+      $link = l('Cancel', $url);
+      $block->content .= '<div class="prc-workflow-cancel">'.$link.'</div>';
+    }
+  }
 
   return $block;
 }
