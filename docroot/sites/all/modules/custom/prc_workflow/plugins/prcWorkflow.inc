@@ -52,6 +52,7 @@ class prcWorkflow extends StateFlow {
         'origin' => 'ready_for_review',
         'target' => 'published',
         'permissions' => array('approve prc content'),
+        'on_enter' => array($this, 'on_enter_published'),
       )
     );
 
@@ -74,27 +75,5 @@ class prcWorkflow extends StateFlow {
     );
 
     $this->set_initial_state('draft');
-  }
-
-  function on_exit_request_approval(){
-    $this->message('ready_for_review');
-  }
-
-  function on_exit_rescind_request(){
-    $this->message('rescind_request');
-  }
-
-  function message($message_type){
-    $node = $this->get_object();
-    $message = message_create($message_type);
-
-    $wrapper = entity_metadata_wrapper('message', $message);
-
-    $wrapper->field_node->set($node);
-
-    $wrapper->save();
-
-    // This message type is associated with roles in prc_emails.
-    _prc_emails_message_create($message, $node);
   }
 }
