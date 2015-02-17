@@ -36,7 +36,7 @@
  * This abstract class also declares several abstract functions forcing question-types to implement required
  * methods.
  */
-abstract class QuizQuestion extends Entity {
+abstract class QuizQuestion {
   /*
    * QUESTION IMPLEMENTATION FUNCTIONS
    *
@@ -186,9 +186,13 @@ abstract class QuizQuestion extends Entity {
     if (isset($this->nodeProperties)) {
       return $this->nodeProperties;
     }
-    $props['max_score'] = db_query('SELECT max_score
-            FROM {quiz_question_properties}
-            WHERE nid = :nid AND vid = :vid', array(':nid' => $this->node->nid, ':vid' => $this->node->vid))->fetchField();
+    $result = db_query('SELECT *
+      FROM {quiz_question_properties}
+      WHERE nid = :nid AND vid = :vid', array(':nid' => $this->node->nid, ':vid' => $this->node->vid));
+    $row = $result->fetch();
+    $props['max_score'] = $row->max_score;
+    $props['feedback']['value'] = $row->feedback;
+    $props['feedback']['format'] = $row->feedback_format;
     $props['is_quiz_question'] = TRUE;
     $this->nodeProperties = $props;
     return $props;
@@ -215,7 +219,7 @@ abstract class QuizQuestion extends Entity {
    */
   public function save($is_new = FALSE) {
     // We call the abstract function saveNodeProperties to save type specific data
-    $this->saveNodeProperties($is_new);
+    $this->saveNodeProperties($this->node->is_new);
 
     db_merge('quiz_question_properties')
       ->key(array(
@@ -234,20 +238,15 @@ abstract class QuizQuestion extends Entity {
 
 
     // Save what quizzes this question belongs to.
-    $quizzes_kept = $this->saveRelationships();
-    if ($quizzes_kept && $this->node->revision) {
+    // @kludge the quiz nid/vid are still on the node
+    if (!empty($this->node->quiz_nid)) {
+      $this->saveRelationships($this->node->quiz_nid, $this->node->quiz_vid);
+    }
+    if (!empty($this->node->revision)) {
       if (user_access('manual quiz revisioning') && !variable_get('quiz_auto_revisioning', 1)) {
         unset($_GET['destination']);
         unset($_REQUEST['edit']['destination']);
-        drupal_goto('quiz_question/' . $this->node->nid . '/' . $this->node->vid . '/revision_actions');
-      }
-      // For users without the 'manual quiz revisioning' permission we submit the revision_actions form
-      // silently with its default values set.
-      else {
-        $form_state = array();
-        $form_state['values']['op'] = t('Submit');
-        require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'quiz_question') . '/quiz_question.pages.inc';
-        drupal_form_submit('quiz_question_revision_actions', $form_state, $this->node->nid, $this->node->vid);
+        drupal_goto("node/{$this->node->nid}/question-revision-actions");
       }
     }
   }
@@ -331,12 +330,8 @@ abstract class QuizQuestion extends Entity {
   /**
    * Save this Question to the specified Quiz.
    */
-  function saveRelationships() {
-    if (empty($this->node->quiz_nid) || empty($this->node->quiz_vid)) {
-      return;
-    }
-
-    $quiz_node = node_load($this->node->quiz_nid, $this->node->quiz_vid);
+  function saveRelationships($nid, $vid) {
+    $quiz_node = node_load($nid, $vid);
 
     if (quiz_has_been_answered($quiz_node)) {
       // We need to revise the quiz node if it has been answered
@@ -432,10 +427,19 @@ abstract class QuizQuestion extends Entity {
    * this question in quizzes.
    */
   protected function autoUpdateMaxScore() {
-    return false;
+    return FALSE;
   }
 
-  public function getAnsweringFormValidate(array &$form, array &$form_state = NULL) {
+  /**
+   * Validate a user's answer.
+   *
+   * @param array $element
+   *   The form element of this question.
+   * @param mixed $value
+   *   The value submitted by the user. Depending on the question type's form,
+   *   the data type will vary.
+   */
+  public function getAnsweringFormValidate(array &$element, &$value) {
 
   }
 
@@ -501,11 +505,12 @@ abstract class QuizQuestionResponse {
     $this->question = $question_node;
     $this->quizQuestion = _quiz_question_get_instance($question_node);
     $this->answer = $answer;
-    $result = db_query('SELECT is_skipped, is_doubtful FROM {quiz_node_results_answers}
+    $result = db_query('SELECT * FROM {quiz_node_results_answers}
             WHERE result_id = :result_id AND question_nid = :question_nid AND question_vid = :question_vid', array(':result_id' => $result_id, ':question_nid' => $question_node->nid, ':question_vid' => $question_node->vid))->fetch();
     if (is_object($result)) {
-      $this->is_doubtful = $result->is_doubtful;
-      $this->is_skipped = $result->is_skipped;
+      foreach ($result as $key => $value) {
+        $this->$key = $value;
+      }
     }
   }
 
@@ -539,14 +544,17 @@ abstract class QuizQuestionResponse {
   /**
    * Check to see if the answer is marked as correct.
    *
-   * This default version returns TRUE iff the score is equal to the maximum possible score.
+   * This default version returns TRUE iff the score is equal to the maximum
+   * possible score. Each question type can determine on its own if the question
+   * response is "correct".
    */
   function isCorrect() {
     return ($this->getMaxScore() == $this->getScore());
   }
 
   /**
-   * Returns stored score if it exists, if not the score is calculated and returned.
+   * Returns stored score if it exists, if not the score is calculated and
+   * returned.
    *
    * @param $weight_adjusted
    *  If the returned score shall be adjusted according to the max_score the question has in a quiz
@@ -576,7 +584,7 @@ abstract class QuizQuestionResponse {
    */
   public function getMaxScore($weight_adjusted = TRUE) {
     if (!isset($this->question->max_score)) {
-      $this->question->max_score = $this->question->getMaximumScore();
+      $this->question->max_score = $this->quizQuestion->getMaximumScore();
     }
     if (isset($this->question->score_weight) && $weight_adjusted) {
       return round($this->question->max_score * $this->question->score_weight);
@@ -604,19 +612,7 @@ abstract class QuizQuestionResponse {
     $obj->is_evaluated = $this->isEvaluated();
     $obj->is_skipped = 0;
     $obj->is_doubtful = isset($_POST['is_doubtful']) ? $_POST['is_doubtful'] : 0;
-    $obj->is_valid = $this->isValid();
     return $obj;
-  }
-
-  /**
-   * Validates response from a quiz taker. If the response isn't valid the quiz taker won't be allowed to proceed.
-   *
-   * @return
-   *  True if the response is valid.
-   *  False otherwise
-   */
-  public function isValid() {
-    return TRUE;
   }
 
   /**
@@ -672,22 +668,43 @@ abstract class QuizQuestionResponse {
       '#type' => 'value',
       '#value' => $this->result_id,
     );
+
     if (quiz_access_to_score() && $submit = $this->getReportFormSubmit()) {
       $form['submit'] = array(
         '#type' => 'value',
         '#value' => $submit,
       );
     }
-    $form['question'] = $this->getReportFormQuestion();
 
-    if (quiz_access_to_score()) {
+    if (quiz_access_to_score() && $submit) {
+      $form['score'] = $this->getReportFormScore();
+    }
+    if (quiz_access_to_score() && $submit) {
       $form['answer_feedback'] = $this->getReportFormAnswerFeedback();
     }
 
-    $form['max_score'] = array(
-      '#type' => 'value',
-      '#value' => ($this->canReview('score')) ? $this->getMaxScore() : '?',
-    );
+    foreach ($this->getFeedback() as $type => $render) {
+      $form[$type] = $render;
+    }
+
+    return $form;
+  }
+
+  /**
+   * Returns a renderable array of question feedback.
+   */
+  public function getFeedback() {
+    $out = array();
+    $node = node_load($this->question->nid, $this->question->vid);
+    $entity_info = entity_get_info('node');
+    foreach ($entity_info['view modes'] as $view_mode => $info) {
+      if ($this->canReview("quiz_question_view_" . $view_mode)) {
+        node_build_content($node, $view_mode);
+        unset($node->content['answers']);
+        unset($node->content['links']);
+        $out['question'][] = $node->content;
+      }
+    }
 
     $rows = array();
 
@@ -701,9 +718,9 @@ abstract class QuizQuestionResponse {
     );
     drupal_alter('quiz_feedback_labels', $labels);
 
-    foreach ($this->getReportFormResponse() as $idx => $row) {
+    foreach ($this->getFeedbackValues() as $idx => $row) {
       foreach ($labels as $reviewType => $label) {
-        if ((in_array($reviewType, array('choice')) && $row[$reviewType] != NULL) || (isset($row[$reviewType]) && $this->canReview($reviewType))) {
+        if ((isset($row[$reviewType]) && $this->canReview($reviewType))) {
           $rows[$idx][$reviewType] = $row[$reviewType];
         }
       }
@@ -723,40 +740,31 @@ abstract class QuizQuestionResponse {
       $class = 'q-waiting';
     }
 
-    if (quiz_access_to_score() && $submit) {
-      $form['score'] = $this->getReportFormScore();
-    }
-
     if ($this->canReview('score') || quiz_access_to_score()) {
-      $form['score_display']['#markup'] = theme('quiz_question_score', array('score' => $score, 'max_score' => $this->getMaxScore(), 'class' => $class));
+      $out['score_display']['#markup'] = theme('quiz_question_score', array('score' => $score, 'max_score' => $this->getMaxScore(), 'class' => $class));
     }
 
-    $headers = array_intersect_key($labels, $rows[0]);
-    $type = $this->getQuizQuestion()->node->type;
-    $form['response']['#markup'] = theme('quiz_question_feedback__' . $type, array('labels' => $headers, 'data' => $rows));
+    if ($rows) {
+      $headers = array_intersect_key($labels, $rows[0]);
+      $type = $this->getQuizQuestion()->node->type;
+      $out['response']['#markup'] = theme('quiz_question_feedback__' . $type, array('labels' => $headers, 'data' => $rows));
+    }
 
     if ($this->canReview('question_feedback')) {
       if ($properties = entity_load('quiz_question', FALSE, array('nid' => $this->quizQuestion->node->nid, 'vid' => $this->quizQuestion->node->vid))) {
         $quiz_question = reset($properties);
-        $form['question_feedback']['#markup'] = check_markup($quiz_question->feedback, $quiz_question->feedback_format);
+        $out['question_feedback']['#markup'] = check_markup($quiz_question->feedback, $quiz_question->feedback_format);
       }
     }
 
-    $form['#theme'] = $this->getReportFormTheme();
-    return $form;
-  }
+    if ($this->canReview('score')) {
+      $out['max_score'] = array(
+        '#type' => 'value',
+        '#value' => $this->getMaxScore(),
+      );
+    }
 
-  /**
-   * get the question part of the reportForm
-   *
-   * @return
-   *  FAPI form array holding the question
-   */
-  public function getReportFormQuestion() {
-    $node = node_load($this->question->nid);
-    $node->no_answer_form = TRUE;
-    node_build_content($node, 'question');
-    return $node->content;
+    return $out;
   }
 
   /**
@@ -769,7 +777,7 @@ abstract class QuizQuestionResponse {
    *  feedback will not be shown. Seen an example at
    *  LongAnswerResponse::getReportFormResponse().
    */
-  public function getReportFormResponse() {
+  public function getFeedbackValues() {
     $data = array();
 
     $data[] = array(
@@ -811,24 +819,6 @@ abstract class QuizQuestionResponse {
   }
 
   /**
-   * Get the theme key for the reportForm
-   *
-   * @return
-   *  Theme key as a string, or FALSE if no submit function
-   */
-  public function getReportFormTheme() {
-    return FALSE;
-  }
-
-  /**
-   * Saves the quiz result. This should only be called when an answer is
-   * provided.
-   */
-  public function saveResult() {
-    $this->save();
-  }
-
-  /**
    * Utility function that returns the format of the node body
    */
   protected function getFormat() {
@@ -837,17 +827,17 @@ abstract class QuizQuestionResponse {
   }
 
   /**
-   * Save the current response.
+   * Save the response for this question response.
    */
   abstract public function save();
 
   /**
-   * Delete the response.
+   * Delete the response for this question response.
    */
   abstract public function delete();
 
   /**
-   * Calculate the score for the response.
+   * Calculate the unscaled score in points for this question response.
    */
   abstract public function score();
 
@@ -891,12 +881,12 @@ abstract class QuizQuestionResponse {
   }
 
   /**
-   * Set the target result ID for this Question response.
+   * Set the target result answer ID for this Question response.
    *
    * Useful for cloning entire result sets.
    */
-  public function setResultId($result_id) {
-    $this->result_id = $result_id;
+  public function setResultAnswerId($result_answer_id) {
+    $this->result_answer_id = $result_answer_id;
   }
 
 }
