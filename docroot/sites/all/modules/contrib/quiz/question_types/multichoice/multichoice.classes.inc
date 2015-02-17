@@ -467,6 +467,11 @@ class MultichoiceQuestion extends QuizQuestion {
       }
     }
 
+
+    $element['#attached']['js'] = array(
+      drupal_get_path('module', 'multichoice') . '/multichoice.js',
+    );
+
     return $element;
   }
 
@@ -685,6 +690,7 @@ class MultichoiceQuestion extends QuizQuestion {
         'callback' => 'multichoice_add_alternative_ajax_callback',
       ),
       '#weight' => 20,
+      '#limit_validation_errors' => array(),
     );
 
     $form['#attached']['js'] = array(
@@ -780,9 +786,9 @@ class MultichoiceQuestion extends QuizQuestion {
   /**
    * Question response validator.
    */
-  public function getAnsweringFormValidate(array &$form, array &$form_state = NULL) {
-    if (!$this->node->choice_multi && is_null($form_state['values']['question'][$this->node->nid]['answer']['user_answer'])) {
-      form_set_error('', t('You must provide an answer.'));
+  public function getAnsweringFormValidate(array &$element, &$values) {
+    if (!$this->node->choice_multi && is_null($values['user_answer'])) {
+      form_error($element['user_answer'], t('You must provide an answer.'));
     }
   }
 
@@ -834,7 +840,7 @@ class MultichoiceResponse extends QuizQuestionResponse {
     else {
       $res = db_query('SELECT answer_id FROM {quiz_multichoice_user_answers} ua
               LEFT OUTER JOIN {quiz_multichoice_user_answer_multi} uam ON(uam.user_answer_id = ua.id)
-              WHERE ua.result_id = :result_id AND ua.question_nid = :question_nid AND ua.question_vid = :question_vid', array(':result_id' => $result_id, ':question_nid' => $this->question->nid, ':question_vid' => $this->question->vid));
+              WHERE ua.result_answer_id = :raid', array(':raid' => $this->result_answer_id));
       while ($res_o = $res->fetch()) {
         $this->user_answer_ids[] = $res_o->answer_id;
       }
@@ -849,9 +855,7 @@ class MultichoiceResponse extends QuizQuestionResponse {
   public function save() {
     $user_answer_id = db_insert('quiz_multichoice_user_answers')
       ->fields(array(
-        'result_id' => $this->result_id,
-        'question_vid' => $this->question->vid,
-        'question_nid' => $this->question->nid,
+        'result_answer_id' => $this->result_answer_id,
         'choice_order' => $this->choice_order
       ))
       ->execute();
@@ -873,7 +877,7 @@ class MultichoiceResponse extends QuizQuestionResponse {
    */
   public function delete() {
     $user_answer_id = array();
-    $query = db_query('SELECT id FROM {quiz_multichoice_user_answers} WHERE question_nid = :nid AND question_vid = :vid AND result_id = :result_id', array(':nid' => $this->question->nid, ':vid' => $this->question->vid, ':result_id' => $this->result_id));
+    $query = db_query('SELECT id FROM {quiz_multichoice_user_answers} WHERE result_answer_id = :raid', array(':raid' => $this->result_answer_id));
     while ($user_answer = $query->fetch()) {
       $user_answer_id[] = $user_answer->id;
     }
@@ -885,9 +889,7 @@ class MultichoiceResponse extends QuizQuestionResponse {
     }
 
     db_delete('quiz_multichoice_user_answers')
-      ->condition('result_id', $this->result_id)
-      ->condition('question_nid', $this->question->nid)
-      ->condition('question_vid', $this->question->vid)
+      ->condition('result_answer_id', $this->result_answer_id)
       ->execute();
   }
 
@@ -957,7 +959,7 @@ class MultichoiceResponse extends QuizQuestionResponse {
   /**
    * Implementation of getReportFormResponse
    */
-  public function getReportFormResponse() {
+  public function getFeedbackValues() {
     $this->orderAlternatives($this->question->alternatives);
     $simple_scoring = $this->question->choice_boolean;
 
@@ -992,7 +994,7 @@ class MultichoiceResponse extends QuizQuestionResponse {
       return;
     }
     $result = db_query('SELECT choice_order FROM {quiz_multichoice_user_answers}
-            WHERE result_id = :result_id AND question_nid = :question_nid AND question_vid = :question_vid', array(':result_id' => $this->result_id, ':question_nid' => $this->question->nid, ':question_vid' => $this->question->vid))->fetchField();
+            WHERE result_answer_id = :raid', array(':raid' => $this->result_answer_id))->fetchField();
     if (!$result) {
       return;
     }
