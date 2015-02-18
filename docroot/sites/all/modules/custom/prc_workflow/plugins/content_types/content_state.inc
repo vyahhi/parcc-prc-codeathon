@@ -35,9 +35,10 @@ function prc_workflow_state_render($subtype, $conf, $args, $context){
   if($current_state == 'ready_for_review'){
     $event = $state_machine->get_event('rescind_request');
     if($event->validate()){
-      //@todo: figure out the vid of the page they are currently viewing.
+      //@todo: do we need to figure out the vid of the page they are currently viewing?
       $url = 'node/'.$node->nid.'/revisions/'.$node->vid.'/workflow/rescind_request';
-      $link = l('Cancel', $url);
+      $options = $event->get_options();
+      $link = l($options['label'], $url);
       $block->content .= '<div class="prc-workflow-cancel">'.$link.'</div>';
     }
   }

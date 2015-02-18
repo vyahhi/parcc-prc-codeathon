@@ -38,7 +38,7 @@ class prcWorkflow extends StateFlow {
 
     $this->create_event('rescind_request',
       array(
-        'label' => 'Cancel Review Request',
+        'label' => 'Rescind Request',
         'origin' => 'ready_for_review',
         'target' => 'draft',
         'permissions' => array('request approval of prc content'),

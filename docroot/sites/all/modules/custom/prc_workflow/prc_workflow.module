@@ -44,7 +44,7 @@ function prc_workflow_access($op, $node){
     $state_flow = state_flow_load_state_machine($node);
 
     //Block access to editing for contributors when under review
-    if($op == 'edit' && $state_flow->get_current_state() === 'ready_for_review') {
+    if($op == 'update' && $state_flow->get_current_state() === 'ready_for_review') {
       return user_access('approve prc content');
     }else{
       return TRUE;
@@ -99,6 +99,16 @@ function prc_workflow_state_flow_plugins(){
   );
 
   return $info;
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function prc_workflow_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'prc_workflow') . '/includes/views',
+  );
 }
 
 /**
@@ -255,22 +265,45 @@ function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log){
       prc_workflow_message('rescind_request', $node);
       break;
     case 'unpublish':
-      //We are firing this here because exiting doesn't necessarilly mean unpublish
+      //We are firing this here because exiting doesn't necessarily mean unpublish
       $machine->on_exit_published();
       break;
   }
 }
 
+/**
+ * Helper function to create messages
+ *
+ * @param $message_type
+ * @param $node
+ */
 function prc_workflow_message($message_type, $node){
+  global $user;
 
   $message = message_create($message_type);
 
   $wrapper = entity_metadata_wrapper('message', $message);
 
   $wrapper->field_node->set($node);
+  $wrapper->field_user_ref->set($user);
 
   $wrapper->save();
 
   // This message type is associated with roles in prc_emails.
   _prc_emails_message_create($message, $node);
+}
+
+/**
+ * Get information on all available states
+ *
+ * @return array
+ */
+function prc_workflow_get_all_states(){
+  //mock a node object in order to load a machine
+  $node = new stdClass();
+  $node->vid = 1;
+  $node->type = 'digital_library_content';
+  $machine = state_flow_load_state_machine($node);
+
+  return $machine->get_states_options();
 }
