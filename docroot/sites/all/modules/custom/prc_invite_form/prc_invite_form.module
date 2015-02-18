@@ -62,7 +62,8 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
   $roles_rids = array();
   foreach($roles_with_states as $role) {
     $rid = array_search($role, $roles);
-    $roles_rids[] = array('value' => $rid);
+    // IE requires this to be a string. Joy.
+    $roles_rids[] = array('value' => "$rid");
   }
 
   // Now make the Member State dropdown dependent on the Role selected
