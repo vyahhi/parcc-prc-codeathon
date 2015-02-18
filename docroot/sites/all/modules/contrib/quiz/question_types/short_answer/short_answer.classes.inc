@@ -9,7 +9,8 @@
  * multichoice.classes.inc. short_answer and long_answer are good for understanding
  * question types that involve textual answers.
  *
- * @file
+ * @file short_answer.classes.inc
+ * Question implementation for short answer.
  */
 
 /**
@@ -157,9 +158,9 @@ class ShortAnswerQuestion extends QuizQuestion {
   /**
    * Question response validator.
    */
-  public function getAnsweringFormValidate(array &$form, array &$form_state = NULL) {
-    if ($form_state['values']['question'][$this->node->nid] == '') {
-      form_set_error('', t('You must provide an answer.'));
+  public function getAnsweringFormValidate(array &$element, &$value) {
+    if ($value == '') {
+      form_error($element, t('You must provide an answer.'));
     }
   }
 
@@ -296,10 +297,10 @@ class ShortAnswerResponse extends QuizQuestionResponse {
     if (user_access('score own quiz') && user_access('score taken quiz answer')) {
       $query->condition(db_or()->condition('n.uid', $user->uid)->condition('qnr.uid', $user->uid));
     }
-    else if (user_access('score own quiz')) {
+    elseif (user_access('score own quiz')) {
       $query->condition('n.uid', $user->uid);
     }
-    else if (user_access('score taken quiz answer')) {
+    elseif (user_access('score taken quiz answer')) {
       $query->condition('qnr.uid', $user->uid);
     }
 
@@ -343,9 +344,9 @@ class ShortAnswerResponse extends QuizQuestionResponse {
   public function __construct($result_id, stdClass $question_node, $answer = NULL) {
     parent::__construct($result_id, $question_node, $answer);
     if (!isset($answer)) {
-      $r = db_query('SELECT answer_id, answer, is_evaluated, score, question_vid, question_nid, result_id, answer_feedback, answer_feedback_format
+      $r = db_query('SELECT *
         FROM {quiz_short_answer_user_answers}
-        WHERE question_nid = :qnid AND question_vid = :qvid AND result_id = :rid', array(':qnid' => $question_node->nid, ':qvid' => $question_node->vid, ':rid' => $result_id)
+        WHERE result_answer_id = :raid', array(':raid' => $this->result_answer_id)
         )->fetch();
 
       if (!empty($r)) {
@@ -379,9 +380,7 @@ class ShortAnswerResponse extends QuizQuestionResponse {
     $this->answer_id = db_insert('quiz_short_answer_user_answers')
       ->fields(array(
         'answer' => $this->answer,
-        'question_nid' => $this->question->nid,
-        'question_vid' => $this->question->vid,
-        'result_id' => $this->result_id,
+        'result_answer_id' => $this->result_answer_id,
         'score' => $this->getScore(FALSE),
         'is_evaluated' => $this->is_evaluated,
       ))
@@ -395,9 +394,7 @@ class ShortAnswerResponse extends QuizQuestionResponse {
    */
   public function delete() {
     db_delete('quiz_short_answer_user_answers')
-      ->condition('question_nid', $this->question->nid)
-      ->condition('question_vid', $this->question->vid)
-      ->condition('result_id', $this->result_id)
+      ->condition('result_answer_id', $this->result_answer_id)
       ->execute();
   }
 
@@ -409,7 +406,7 @@ class ShortAnswerResponse extends QuizQuestionResponse {
   public function score() {
     // Manual scoring means we go with what is in the DB.
     if ($this->question->correct_answer_evaluation == ShortAnswerQuestion::ANSWER_MANUAL) {
-      $score = db_query('SELECT score FROM {quiz_short_answer_user_answers} WHERE result_id = :result_id AND question_vid = :question_vid', array(':result_id' => $this->result_id, ':question_vid' => $this->question->vid))->fetchField();
+      $score = db_query('SELECT score FROM {quiz_short_answer_user_answers} WHERE result_answer_id = :raid', array(':raid' => $this->result_answer_id))->fetchField();
       if (!$score) {
         $score = 0;
       }
@@ -434,7 +431,7 @@ class ShortAnswerResponse extends QuizQuestionResponse {
   /**
    * Implementation of getReportFormResponse
    */
-  public function getReportFormResponse() {
+  public function getFeedbackValues() {
     $data = array();
 
     $data[] = array(
