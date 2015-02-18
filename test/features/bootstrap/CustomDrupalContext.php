@@ -1195,7 +1195,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   /**
    * @Given /^the last node created\'s state is set to "([^"]*)"$/
    */
-  public function theLastNodeCreatedSStateIsSetTo($arg1) {
+  public function theLastNodeCreatedSStateIsSetTo($state) {
     if (!is_array($this->nodes) || count($this->nodes) == 0) {
       throw new Exception('No nodes have been created by this context');
     }
@@ -1203,22 +1203,11 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $last_node = $this->nodes[$last_index];
 
     //force into a particular state
-    $state = state_flow_load_state_machine($last_node);
+    $machine = state_flow_load_state_machine($last_node);
 
-    $events = $state->get_all_events();
+    // Set and save the new state.
+    $machine->force_state($state);
 
-    foreach($events as $key => $event){
-      $target = $event['target'];
-      if($target === $arg1){
-        $event_to_fire = $key;
-        break;
-      }
-    }
-    if(isset($event_to_fire)) {
-      $state->fire_event('$key');
-    }else{
-      throw new \Exception(sprintf('There was no event associated with the state %s', $arg1));
-    }
   }
 
   /**

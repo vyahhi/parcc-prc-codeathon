@@ -76,4 +76,14 @@ class prcWorkflow extends StateFlow {
 
     $this->set_initial_state('draft');
   }
+
+  /**
+   * Force a particular state skipping validations.  Useful for testing purposes.
+   * @param $state
+   */
+  public function force_state($state){
+    // Set and save the new state.
+    $this->set_current_state($state);
+    $this->persist();
+  }
 }
