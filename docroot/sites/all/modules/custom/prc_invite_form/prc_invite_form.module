@@ -120,6 +120,7 @@ function prc_invite_form_form_invite_form_validate($form, &$form_state)
 
   $valid_emails = array();
   _prc_invite_form_validate_email_address_format($form_state, 'field_multi_emails', $valid_emails);
+  _prc_invite_form_validate_email_address_unique($form_state, 'field_multi_emails', $valid_emails);
   $form_state['invitees'] = $valid_emails;
 
   // Notify field widgets to validate their data.
@@ -164,6 +165,40 @@ function _prc_invite_form_validate_email_address_format(&$form_state, $field_nam
     }
     if (empty($valid) && empty($invalid)) {
       form_set_error($field_name, t('Please input one or more email addresses'));
+    }
+  }
+}
+
+/**
+ * @param $form_state
+ * @return mixed
+ */
+function _prc_invite_form_validate_email_address_unique(&$form_state, $field_name, &$valid_emails) {
+  if (isset($form_state['values'][$field_name])) {
+    $valid = array();
+    $invalid = array();
+
+    $trimmed_emails = trim($form_state['values'][$field_name]);
+
+    // Allow multiple delimiters. Fixes DEU problems and currently the Behat test can't put a linebreak into the textarea
+    $trimmed_emails = str_replace(',', "\n", $trimmed_emails);
+    $trimmed_emails = str_replace(';', "\n", $trimmed_emails);
+
+    foreach (explode("\n", $trimmed_emails) as $email) {
+      $email = trim($email);
+      if (!empty($email)) {
+        if (array_key_exists($email, $valid)) {
+          $invalid[$email] = $email;
+        } else {
+          $valid[$email] = $email;
+        }
+      }
+    }
+    if (empty($invalid)) {
+      $valid_emails = $valid;
+    }
+    elseif (count($invalid)) {
+      form_set_error($field_name, t('Please remove the following duplicate email addresses from the list: %email', array('%email' => implode(', ', $invalid))));
     }
   }
 }
