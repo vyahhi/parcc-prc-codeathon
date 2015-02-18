@@ -21,7 +21,8 @@ class prcWorkflow extends StateFlow {
 
     $this->create_state('published',
       array(
-        'label' => t('Published')
+        'label' => t('Published'),
+        'on_enter' => array($this, 'on_enter_published'),
       )
     );
 
@@ -38,7 +39,7 @@ class prcWorkflow extends StateFlow {
 
     $this->create_event('rescind_request',
       array(
-        'label' => 'Rescind Request',
+        'label' => t('Rescind Request'),
         'origin' => 'ready_for_review',
         'target' => 'draft',
         'permissions' => array('request approval of prc content'),
@@ -52,13 +53,21 @@ class prcWorkflow extends StateFlow {
         'origin' => 'ready_for_review',
         'target' => 'published',
         'permissions' => array('approve prc content'),
-        'on_enter' => array($this, 'on_enter_published'),
+      )
+    );
+
+    $this->create_event('update_published',
+      array(
+        'label' => t('Save and Publish'),
+        'origin' => 'published',
+        'target' => 'published',
+        'permissions' => array('approve prc content'),
       )
     );
 
     $this->create_event('denied',
       array(
-        'label' => t('Deny'),
+        'label' => t('Request Change'),
         'origin' => 'ready_for_review',
         'target' => 'draft',
         'permissions' => array('deny prc content'),
@@ -78,7 +87,10 @@ class prcWorkflow extends StateFlow {
   }
 
   /**
-   * Force a particular state skipping validations.  Useful for testing purposes.
+   * Force a particular state skipping validation and triggered actions.
+   * Useful for testing purposes, and for creating a draft with the same
+   * state as the previous version.
+   *
    * @param $state
    */
   public function force_state($state){

@@ -112,13 +112,70 @@ function prc_workflow_views_api() {
 }
 
 /**
+ * Implements hook_token_info()
+ *
+ * @return array
+ */
+function prc_workflow_token_info(){
+  $node['workflow-comments'] = array(
+    'name' => t('Workflow Comments'),
+    'description' => t('Comments associated with changes in the revision state.')
+  );
+
+  $type = array(
+    'name' => t('Message'),
+    'description' => t('Tokens related to individual messages.'),
+    'needs-data' => 'message',
+  );
+  return array(
+    'types' => array('message' => $type),
+    'tokens' => array('message' => $node),
+  );
+}
+
+/**
+ * Implements hook_tokens()
+ * @param $type
+ * @param $tokens
+ * @param array $data
+ * @param array $options
+ * @return array
+ */
+function prc_workflow_tokens($type, $tokens, $data = array(), $options = array()){
+  $replacements = array();
+  if($type == 'message' && !empty($data['message'])){
+    foreach ($tokens as $name => $original) {
+      $message = $data['message'];
+      $m = entity_metadata_wrapper('message', $message);
+      switch($name){
+        case 'field-node:workflow-comments' :
+          //Fetch the latest comment for this node revision from the db
+          $node = $m->field_node->value();
+          $vid = $m->field_version_id->value();
+
+          $result = db_query('select * from node_revision_states_history where vid = :vid and nid = :nid order by "timestamp" DESC;',
+            array(':vid' => $vid, ':nid' => $node->nid)
+          );
+          $history = $result->fetchAll();
+          $latest = array_shift($history);
+          if(!empty($latest)) {
+            $replacements[$original] = check_plain($latest->log);
+          }
+          break;
+      }
+    }
+  }
+  return $replacements;
+}
+
+
+/**
  * Implements hook_state_flow_machine_type_alter()
  *
  * @param string $machine_type
  * @param object $node
  */
 function prc_workflow_state_flow_machine_type_alter(&$machine_type, $node) {
-  $machine_type = '';
   if($node->type === 'digital_library_content'){
     $machine_type = 'prc_workflow';
   }
@@ -138,7 +195,7 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
     $action_button = array(
       '#type' => 'submit',
       '#access' => TRUE,
-      '#submit' => array('prc_workflow_submit_handler'),
+      '#submit' => array('node_form_submit', 'prc_workflow_submit_handler'),
     );
 
     //Find the event appropriate to the state
@@ -153,15 +210,12 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
         $form['actions'][$key]['#value'] = $options['label'];
         $form['actions'][$key]['#weight'] = $weight;
 
-        $weight += -3; //@todo: if this doesn't work we can add a weight attribute to the events options
+        $weight += -3;
       }
     }
 
-    //Change the text of the submit button to save draft, except when editing the published draft
-    //@todo: detect whether we are working on the published revision as a curator
-    if(true) {
-      $form['actions']['submit']['#value'] = "Save Draft";
-    }
+    //Change the text of the submit button to save draft
+    $form['actions']['submit']['#value'] = "Save Draft";
   }
 }
 
@@ -172,6 +226,10 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
  */
 function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state){
   $form['#submit'][] = 'prc_workflow_events_submit';
+  if($form['event']['#value'] == 'denied'){
+    $form['event_comment']['#title'] = t('Changes before Approval');
+    $form['event_comment']['#description'] = t('Instructions: (to be added)');
+  }
 }
 
 /**
@@ -192,15 +250,13 @@ function prc_workflow_events_submit(&$form, &$form_state){
  * @param $form_state
  */
 function prc_workflow_submit_handler($form, &$form_state){
-
-  //@todo: does this create a new revision even if nothing has changed besides the state?  Is that appropriate?
-  node_form_submit($form, $form_state);
   $node = $form['#node'];
 
   //Determine which button was pressed and fire the corresponding event
   if(!empty($node->vid)) {//skip if we are creating a new node
 
-    //@todo: make sure this is still correct if we are editing a draft vs. the published revision
+    //node submit fires before this and creates a new revision
+    //Retrieve that most recently saved vid
     $latest_vid = db_query('
     SELECT nr.vid
     FROM {node_revision} nr
@@ -209,8 +265,12 @@ function prc_workflow_submit_handler($form, &$form_state){
     LIMIT 0, 1',
       array(':nid' => $node->nid))->fetchField();
 
+    //we create a new revision for each state change, but preserve the current state
+    $state_flow_previous = state_flow_load_state_machine($node);
+    $node->vid = $latest_vid;
+    $state_flow =  state_flow_load_state_machine($node);
+    $state_flow->force_state($state_flow_previous->get_current_state());
 
-    $state_flow = state_flow_load_state_machine($node);
     $clicked = $form_state['clicked_button']['#value'];
     foreach ($state_flow->get_available_events() as $key => $event) {
       $options = $event->get_options();
@@ -264,10 +324,20 @@ function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log){
     case 'rescind_request':
       prc_workflow_message('rescind_request', $node);
       break;
+    case 'denied':
+      prc_workflow_message('request_changes', $node);
+      break;
+    case 'approved' :
+      prc_workflow_message('published_notice', $node);
+      break;
     case 'unpublish':
+      prc_workflow_message('unpublished_notice', $node);
       //We are firing this here because exiting doesn't necessarily mean unpublish
       $machine->on_exit_published();
       break;
+    case 'update_published' :
+
+      //$machine->on_enter_published();
   }
 }
 
@@ -285,6 +355,11 @@ function prc_workflow_message($message_type, $node){
   $wrapper = entity_metadata_wrapper('message', $message);
 
   $wrapper->field_node->set($node);
+
+  if($message_type == 'request_changes') {
+    $wrapper->field_version_id->set($node->vid);
+  }
+
   $wrapper->field_user_ref->set($user);
 
   $wrapper->save();
