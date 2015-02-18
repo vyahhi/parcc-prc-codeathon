@@ -1674,6 +1674,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit any digital_library_content content'] = array(
     'name' => 'edit any digital_library_content content',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
@@ -2075,6 +2076,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'manage content workflow',
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'Content Contributor' => 'Content Contributor',
     ),
     'module' => 'state_flow',
   );

@@ -64,9 +64,9 @@ function prc_messages_default_message_type() {
           "safe_value" : "\\u003Cp\\u003ENew Draft Awaiting Review: \\u0027[message:field-node:title]\\u0027\\u003C\\/p\\u003E\\n"
         },
         {
-          "value" : "The following content is awaiting approval:\\r\\nContent: \\u003Ca href=\\u0022http:\\/\\/[message:field-node:edit-url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-user-ref:field-first-name] [message:field-user-ref:field-last-name] ([message:field-user-ref:mail])\\r\\n",
-          "format" : "filtered_html",
-          "safe_value" : "\\u003Cp\\u003EThe following content is awaiting approval:\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022http:\\/\\/[message:field-node:edit-url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-user-ref:field-first-name] [message:field-user-ref:field-last-name] ([message:field-user-ref:mail])\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\n"
+          "value" : "The following content is awaiting approval:\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:edit-url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-user-ref:field-first-name] [message:field-user-ref:field-last-name] ([message:field-user-ref:mail])\\r\\n",
+          "format" : "full_html",
+          "safe_value" : "\\u003Cp\\u003EThe following content is awaiting approval:\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022[message:field-node:edit-url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-user-ref:field-first-name] [message:field-user-ref:field-last-name] ([message:field-user-ref:mail])\\u003C\\/p\\u003E\\n"
         }
       ]
     },
@@ -86,14 +86,14 @@ function prc_messages_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "New Draft Awaiting Review: \\u0027[message:field-node:title]\\u0027",
+          "value" : "[message:field-node:title] Has Been Withdrawn From Review",
           "format" : "filtered_html",
-          "safe_value" : "\\u003Cp\\u003ENew Draft Awaiting Review: \\u0027[message:field-node:title]\\u0027\\u003C\\/p\\u003E\\n"
+          "safe_value" : "\\u003Cp\\u003E[message:field-node:title] Has Been Withdrawn From Review\\u003C\\/p\\u003E\\n"
         },
         {
-          "value" : "The following content is awaiting approval:\\r\\nContent: \\u003Ca href=\\u0022http:\\/\\/[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-user-ref:field-first-name] [message:field-user-ref:field-last-name] ([message:field-user-ref:mail])\\r\\n",
-          "format" : "filtered_html",
-          "safe_value" : "\\u003Cp\\u003EThe following content is awaiting approval:\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022http:\\/\\/[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-user-ref:field-first-name] [message:field-user-ref:field-last-name] ([message:field-user-ref:mail])\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\n"
+          "value" : "The following content has been withdrawn from review.\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-user-ref:field-first-name] [message:field-user-ref:field-last-name] ([message:field-user-ref:mail])\\r\\n",
+          "format" : "full_html",
+          "safe_value" : "\\u003Cp\\u003EThe following content has been withdrawn from review.\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-user-ref:field-first-name] [message:field-user-ref:field-last-name] ([message:field-user-ref:mail])\\u003C\\/p\\u003E\\n"
         }
       ]
     },
