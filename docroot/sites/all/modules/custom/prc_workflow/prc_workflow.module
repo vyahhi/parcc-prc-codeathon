@@ -255,21 +255,8 @@ function prc_workflow_submit_handler($form, &$form_state){
   //Determine which button was pressed and fire the corresponding event
   if(!empty($node->vid)) {//skip if we are creating a new node
 
-    //node submit fires before this and creates a new revision
-    //Retrieve that most recently saved vid
-    $latest_vid = db_query('
-    SELECT nr.vid
-    FROM {node_revision} nr
-    WHERE nr.nid = :nid
-    ORDER BY nr.vid DESC
-    LIMIT 0, 1',
-      array(':nid' => $node->nid))->fetchField();
-
     //we create a new revision for each state change, but preserve the current state
-    $state_flow_previous = state_flow_load_state_machine($node);
-    $node->vid = $latest_vid;
-    $state_flow =  state_flow_load_state_machine($node);
-    $state_flow->force_state($state_flow_previous->get_current_state());
+    $state_flow = state_flow_load_state_machine($node);
 
     $clicked = $form_state['clicked_button']['#value'];
     foreach ($state_flow->get_available_events() as $key => $event) {
@@ -277,7 +264,7 @@ function prc_workflow_submit_handler($form, &$form_state){
       if ($clicked == $options['label']) {
         //redirect to the confirmation form
         unset($_GET['destination']);
-        $form_state['redirect'] = 'node/' . $node->nid . '/revisions/' . $latest_vid . '/workflow/' . $key;
+        $form_state['redirect'] = 'node/' . $node->nid . '/revisions/' . $node->vid . '/workflow/' . $key;
       }
     }
   }
@@ -336,8 +323,8 @@ function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log){
       $machine->on_exit_published();
       break;
     case 'update_published' :
-
-      //$machine->on_enter_published();
+      prc_workflow_message('published_notice', $node);
+      break;
   }
 }
 
