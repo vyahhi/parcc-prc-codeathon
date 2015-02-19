@@ -121,7 +121,9 @@ function prc_poc_local_node_digital_library_content_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_digital_library_content';
-  $strongarm->value = array();
+  $strongarm->value = array(
+    0 => 'revision',
+  );
   $export['node_options_digital_library_content'] = $strongarm;
 
   $strongarm = new stdClass();

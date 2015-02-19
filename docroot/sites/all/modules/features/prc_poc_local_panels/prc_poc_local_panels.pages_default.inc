@@ -958,6 +958,136 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
+  $page->name = 'access_denied';
+  $page->task = 'page';
+  $page->admin_title = 'Access Denied';
+  $page->admin_description = '';
+  $page->path = 'access-denied';
+  $page->access = array();
+  $page->menu = array();
+  $page->arguments = array();
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_access_denied__panel_context_549693e6-8c91-4544-99f1-605af455af8d';
+  $handler->task = 'page';
+  $handler->subtask = 'access_denied';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+  );
+  $display = new panels_display();
+  $display->layout = 'flexible';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'center' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = 'Access Denied';
+  $display->uuid = '4ca9815d-5bbc-41c9-abf9-b004b15fd18e';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-d4b0d67d-80f7-4b1b-a80d-a3ed34d4f278';
+    $pane->panel = 'center';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 1,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'admin_title' => 'Anonymous Users Access Denied',
+      'title' => '',
+      'body' => 'If you have an account <a href="/user">please log in</a>.',
+      'format' => 'full_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'd4b0d67d-80f7-4b1b-a80d-a3ed34d4f278';
+    $display->content['new-d4b0d67d-80f7-4b1b-a80d-a3ed34d4f278'] = $pane;
+    $display->panels['center'][0] = 'new-d4b0d67d-80f7-4b1b-a80d-a3ed34d4f278';
+    $pane = new stdClass();
+    $pane->pid = 'new-e1d6b045-870d-4635-8735-ca37bee5be68';
+    $pane->panel = 'center';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 2,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'admin_title' => 'Authenticated Access Denied',
+      'title' => '',
+      'body' => 'You are not allowed to view this content.',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'e1d6b045-870d-4635-8735-ca37bee5be68';
+    $display->content['new-e1d6b045-870d-4635-8735-ca37bee5be68'] = $pane;
+    $display->panels['center'][1] = 'new-e1d6b045-870d-4635-8735-ca37bee5be68';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-d4b0d67d-80f7-4b1b-a80d-a3ed34d4f278';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['access_denied'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
   $page->name = 'assessment_detail';
   $page->task = 'page';
   $page->admin_title = 'Assessment Detail';
