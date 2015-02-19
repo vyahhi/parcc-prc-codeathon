@@ -62,7 +62,8 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
   $roles_rids = array();
   foreach($roles_with_states as $role) {
     $rid = array_search($role, $roles);
-    $roles_rids[] = array('value' => $rid);
+    // IE requires this to be a string. Joy.
+    $roles_rids[] = array('value' => "$rid");
   }
 
   // Now make the Member State dropdown dependent on the Role selected
@@ -134,6 +135,8 @@ function _prc_invite_form_validate_email_address_format(&$form_state, $field_nam
   if (isset($form_state['values'][$field_name])) {
     $valid = array();
     $invalid = array();
+    $nonunique = array();
+    $already_exists = array();
 
     $trimmed_emails = trim($form_state['values'][$field_name]);
 
@@ -145,23 +148,38 @@ function _prc_invite_form_validate_email_address_format(&$form_state, $field_nam
       $email = trim($email);
       if (!empty($email)) {
         if (valid_email_address($email)) {
-          $valid[] = $email;
+          $user = user_load_by_mail($email);
+          if ($user) {
+            $already_exists[$email] = $email;
+          } else {
+            if (array_key_exists($email, $valid)) {
+              $nonunique[$email] = $email;
+            } else {
+              $valid[$email] = $email;
+            }
+          }
         }
         else {
           $invalid[] = $email;
         }
       }
     }
-    if (empty($invalid)) {
-      //$form_state['invitees'] = $valid;
+    if (empty($invalid) && empty($already_exists) && empty($nonunique)) {
       $valid_emails = $valid;
     }
     elseif (count($invalid) == 1) {
       form_set_error($field_name, t('%email is not a valid e-mail address.', array('%email' => reset($invalid))));
     }
-    else {
+    elseif (count($invalid)) {
       form_set_error($field_name, t('%emails are not valid e-mail addresses.', array('%emails' => implode(', ', $invalid))));
     }
+    elseif (count($already_exists)) {
+      form_set_error($field_name, t('Please remove the following already existing email addresses from the list: %emails', array('%emails' => implode(', ', $already_exists))));
+    }
+    elseif (count($nonunique)) {
+      form_set_error($field_name, t('Please remove the following duplicate email addresses from the list: %emails', array('%emails' => implode(', ', $nonunique))));
+    }
+
     if (empty($valid) && empty($invalid)) {
       form_set_error($field_name, t('Please input one or more email addresses'));
     }

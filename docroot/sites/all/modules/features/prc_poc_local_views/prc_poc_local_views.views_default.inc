@@ -4239,6 +4239,11 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'entity';
   $handler->display->display_options['row_options']['view_mode'] = 'teaser';
+  /* No results behavior: Global: Result summary */
+  $handler->display->display_options['empty']['result']['id'] = 'result';
+  $handler->display->display_options['empty']['result']['table'] = 'views';
+  $handler->display->display_options['empty']['result']['field'] = 'result';
+  $handler->display->display_options['empty']['result']['empty'] = TRUE;
   /* Field: Indexed Node: Node ID */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'search_api_index_digital_library_content_index';

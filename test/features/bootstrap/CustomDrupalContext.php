@@ -790,6 +790,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     return TRUE;
   }
 
+  public function assertErrorVisible($message)
+  {
+    $message = $this->fixStepArgument($message);
+    parent::assertErrorVisible($message);
+  }
+
+
   /**
    * @When /^I follow "(?P<link>(?:[^"]|\\")*)" number "(?P<number>[^"]*)"$/
    */
