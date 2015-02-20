@@ -9,7 +9,7 @@
  *
  * @return array
  */
-function prc_workflow_permission(){
+function prc_workflow_permission() {
   return array(
     'request approval of prc content' => array(
       'title' => t('Request Approval of PRC content'),
@@ -34,22 +34,24 @@ function prc_workflow_permission(){
 /**
  * Implements hook_menu_alter()
  */
-function prc_workflow_menu_alter(&$menu){
+function prc_workflow_menu_alter(&$menu) {
   $menu['node/%node/edit']['access callback'] = 'prc_workflow_access';
   $menu['node/%node/revisions/%/workflow']['access callback'] = 'prc_workflow_events_revision_access';
 }
 
-function prc_workflow_access($op, $node){
-  if(node_access($op, $node)){
+function prc_workflow_access($op, $node) {
+  if (node_access($op, $node)) {
     $state_flow = state_flow_load_state_machine($node);
 
     //Block access to editing for contributors when under review
-    if($op == 'update' && $state_flow->get_current_state() === 'ready_for_review') {
+    if ($op == 'update' && $state_flow->get_current_state() === 'ready_for_review') {
+
       return user_access('approve prc content');
-    }else{
+    }else {
       return TRUE;
     }
-  }else {
+  }
+  else {
     return FALSE;
   }
 }
@@ -61,11 +63,12 @@ function prc_workflow_events_revision_access($node, $event_name = NULL) {
   $machine = state_flow_load_state_machine($node);
 
   //if there is an event name base access on that, otherwise pass to state flow
-  if($event_name) {
+  if ($event_name) {
     $event = $machine->get_event($event_name);
 
     return $event->validate();
-  }else{
+  }
+  else {
     return !empty($event_name) ? state_flow_access($node, $event_name) : state_flow_menu_node_access($node);
   }
 }
@@ -86,7 +89,7 @@ function prc_workflow_ctools_plugin_directory($owner, $plugin_type) {
 /**
  * Implements hook_state_flow_plugins()
  */
-function prc_workflow_state_flow_plugins(){
+function prc_workflow_state_flow_plugins() {
   $info = array();
 
   $info['prc_workflow'] = array(
@@ -94,7 +97,7 @@ function prc_workflow_state_flow_plugins(){
       'parent' => 'state_flow',
       'class' => 'prcWorkflow',
       'file' => 'prcWorkflow.inc',
-      'path' => drupal_get_path('module', 'prc_workflow').'/plugins',
+      'path' => drupal_get_path('module', 'prc_workflow') . '/plugins',
     )
   );
 
@@ -116,7 +119,7 @@ function prc_workflow_views_api() {
  *
  * @return array
  */
-function prc_workflow_token_info(){
+function prc_workflow_token_info() {
   $node['workflow-comments'] = array(
     'name' => t('Workflow Comments'),
     'description' => t('Comments associated with changes in the revision state.')
@@ -141,13 +144,13 @@ function prc_workflow_token_info(){
  * @param array $options
  * @return array
  */
-function prc_workflow_tokens($type, $tokens, $data = array(), $options = array()){
+function prc_workflow_tokens($type, $tokens, $data = array(), $options = array()) {
   $replacements = array();
-  if($type == 'message' && !empty($data['message'])){
+  if ($type == 'message' && !empty($data['message'])) {
     foreach ($tokens as $name => $original) {
       $message = $data['message'];
       $m = entity_metadata_wrapper('message', $message);
-      switch($name){
+      switch ($name) {
         case 'field-node:workflow-comments' :
           //Fetch the latest comment for this node revision from the db
           $node = $m->field_node->value();
@@ -158,7 +161,7 @@ function prc_workflow_tokens($type, $tokens, $data = array(), $options = array()
           );
           $history = $result->fetchAll();
           $latest = array_shift($history);
-          if(!empty($latest)) {
+          if (!empty($latest)) {
             $replacements[$original] = check_plain($latest->log);
           }
           break;
@@ -176,7 +179,7 @@ function prc_workflow_tokens($type, $tokens, $data = array(), $options = array()
  * @param object $node
  */
 function prc_workflow_state_flow_machine_type_alter(&$machine_type, $node) {
-  if($node->type === 'digital_library_content'){
+  if ($node->type === 'digital_library_content') {
     $machine_type = 'prc_workflow';
   }
 }
@@ -184,26 +187,32 @@ function prc_workflow_state_flow_machine_type_alter(&$machine_type, $node) {
 /**
  * Implements HOOK_form_FORM_ID_alter()
  */
-function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$form_state){
+function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$form_state) {
   $node = $form['#node'];
 
   //state flow won't work without a vid, so skip on node creation
-  if(!empty($node->vid)) {
+  if (!empty($node->vid)) {
     //Add action buttons for workflow events
     $state_flow = state_flow_load_state_machine($node);
 
     $action_button = array(
       '#type' => 'submit',
       '#access' => TRUE,
-      '#submit' => array('node_form_submit', 'prc_workflow_submit_handler'),
+      '#submit' => array(
+        'prc_workflow_pre_submit_handler',
+        'node_form_submit',
+        'prc_workflow_submit_handler'
+      ),
     );
 
     //Find the event appropriate to the state
     $weight = -10;
 
-    foreach ($state_flow->get_available_events() as $key => $event) {
+    $events = $state_flow->get_available_events();
+
+    foreach ($events as $key => $event) {
       //make sure only actions available to the user are displayed
-      if($event->validate()) {
+      if ($event->validate()) {
         //use our button prototype from above and customize for the context
         $options = $event->get_options();
         $form['actions'][$key] = $action_button;
@@ -224,9 +233,9 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
  * @param $form
  * @param $form_state
  */
-function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state){
+function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state) {
   $form['#submit'][] = 'prc_workflow_events_submit';
-  if($form['event']['#value'] == 'denied'){
+  if ($form['event']['#value'] == 'denied') {
     $form['event_comment']['#title'] = t('Changes before Approval');
     $form['event_comment']['#description'] = t('Instructions: (to be added)');
   }
@@ -238,10 +247,18 @@ function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state
  * @param $form
  * @param $form_state
  */
-function prc_workflow_events_submit(&$form, &$form_state){
+function prc_workflow_events_submit(&$form, &$form_state) {
   //Redirect to our content tab instead of the workflow pages
   $form_state['redirect'] = 'admin-content';
 }
+
+/**
+ *
+ */
+function prc_workflow_pre_submit_handler($form, &$form_state) {
+  //$form['#node']->stateflow_skip_workflow = TRUE;
+}
+
 
 /**
  * Handles submission of the form by workflow actions
@@ -249,25 +266,58 @@ function prc_workflow_events_submit(&$form, &$form_state){
  * @param $form
  * @param $form_state
  */
-function prc_workflow_submit_handler($form, &$form_state){
+function prc_workflow_submit_handler($form, &$form_state) {
+
   $node = $form['#node'];
 
   //Determine which button was pressed and fire the corresponding event
-  if(!empty($node->vid)) {//skip if we are creating a new node
-
-    //we create a new revision for each state change, but preserve the current state
-    $state_flow = state_flow_load_state_machine($node);
+  if (!empty($node->vid)) {//skip if we are creating a new node
 
     $clicked = $form_state['clicked_button']['#value'];
-    foreach ($state_flow->get_available_events() as $key => $event) {
-      $options = $event->get_options();
-      if ($clicked == $options['label']) {
+    $state_machine = state_flow_load_state_machine($node, TRUE);
+    $events = $state_machine->get_all_events();
+
+    foreach ($events as $key => $event) {
+      $option_label = $event['label'];
+      if ($clicked == $option_label) {
+
+        //Workaround having to do with this being action buttons on edit form
+        if(isset($event['actual_event'])){
+          $key = $event['actual_event'];
+          $event = $events[$event['actual_event']];
+        }
+
+        //Get the correct version of the node
+        $state_to_fetch = $event['origin'];
+
+        $node = prc_workflow_fetch_latest_node_version_by_state($node->nid, $state_to_fetch);
+
         //redirect to the confirmation form
         unset($_GET['destination']);
         $form_state['redirect'] = 'node/' . $node->nid . '/revisions/' . $node->vid . '/workflow/' . $key;
+        continue;
       }
     }
   }
+}
+
+/**
+ * Fetches the most recent node revision of a particular state
+ *
+ * @param $nid
+ * @param $state
+ * @return bool|mixed
+ */
+function prc_workflow_fetch_latest_node_version_by_state($nid, $state) {
+
+  $vid = db_query("
+    select nrsh.vid from node_revision_states_history nrsh
+    where nrsh.nid = :nid
+      and nrsh.state = :state
+    order by nrsh.nrshid DESC limit 1",
+    array(':nid' => $nid, ':state' => $state))->fetchField();
+
+  return node_load($nid, $vid, TRUE);
 }
 
 /**
@@ -276,19 +326,19 @@ function prc_workflow_submit_handler($form, &$form_state){
  *
  * @param $event
  */
-function prc_workflow_user_owns_node($event, $node = NULL, $account = NULL){
-  if(!$node) {
+function prc_workflow_user_owns_node($event, $node = NULL, $account = NULL) {
+  if (!$node) {
     $machine = $event->get_machine();
 
     $node = $machine->get_object();
   }
 
-  if(!$account) {
+  if (!$account) {
     global $user;
     $account = $user;
   }
 
-  if($node->uid === $account->uid){
+  if ($node->uid === $account->uid) {
     return TRUE;
   }
   return FALSE;
@@ -302,9 +352,10 @@ function prc_workflow_user_owns_node($event, $node = NULL, $account = NULL){
  * @param $uid
  * @param $log
  */
-function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log){
+function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log) {
   $machine = state_flow_load_state_machine($node);
-  switch($event_key){
+
+  switch ($event_key) {
     case 'approval_requested':
       prc_workflow_message('ready_for_review', $node);
       break;
@@ -326,6 +377,7 @@ function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log){
       prc_workflow_message('published_notice', $node);
       break;
   }
+
 }
 
 /**
@@ -334,7 +386,7 @@ function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log){
  * @param $message_type
  * @param $node
  */
-function prc_workflow_message($message_type, $node){
+function prc_workflow_message($message_type, $node) {
   global $user;
 
   $message = message_create($message_type);
@@ -343,7 +395,7 @@ function prc_workflow_message($message_type, $node){
 
   $wrapper->field_node->set($node);
 
-  if($message_type == 'request_changes') {
+  if ($message_type == 'request_changes') {
     $wrapper->field_version_id->set($node->vid);
   }
 
@@ -356,16 +408,13 @@ function prc_workflow_message($message_type, $node){
 }
 
 /**
- * Get information on all available states
+ * Implements hook_module_implements_alter()
  *
- * @return array
+ * @param $implementations
+ * @param $hook
  */
-function prc_workflow_get_all_states(){
-  //mock a node object in order to load a machine
-  $node = new stdClass();
-  $node->vid = 1;
-  $node->type = 'digital_library_content';
-  $machine = state_flow_load_state_machine($node);
-
-  return $machine->get_states_options();
+function prc_workflow_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'node_update') {
+    //unset($implementations['state_flow']);
+  }
 }
