@@ -39,30 +39,30 @@ Feature: Content Permissions
 
   Scenario: Saving content as Public; accessible to anonymous
     Given "Digital Library Content" nodes:
-      | title      | body           | field_permissions | uid |
-      | Public     | This is public | public            | 1   |
+      | title      | body           | field_permissions | uid | status |
+      | Public     | This is public | public            | 1   | 1      |
     And I am an anonymous user
     And I visit the last node created
     Then I should see the text "This is public"
 
   Scenario: Saving content as Members Only; hidden from anonymous
     Given "Digital Library Content" nodes:
-      | title        | body            | field_permissions  | uid |
-      | Members Only | This is private | members            | 1   |
+      | title        | body            | field_permissions  | uid | status |
+      | Members Only | This is private | members            | 1   | 1      |
     And I am an anonymous user
     And I cannot visit the last node created
 
   Scenario: Saving anonymous content as Members Only; hidden from anonymous
     Given "Digital Library Content" nodes:
-      | title        | body            | field_permissions  | uid |
-      | Members Only | This is private | members            | 0   |
+      | title        | body            | field_permissions  | uid | status |
+      | Members Only | This is private | members            | 0   | 1      |
     And I am an anonymous user
     And I cannot visit the last node created
 
   Scenario Outline: Saving content as Public; accessible to roles
     Given "Digital Library Content" nodes:
-      | title      | body           | field_permissions | uid |
-      | Public     | This is public | public            | 1   |
+      | title      | body           | field_permissions | uid | status |
+      | Public     | This is public | public            | 1   | 1      |
     And I am logged in as a user with the "<role>" role
     And I visit the last node created
     Then I should see the text "This is public"
@@ -77,8 +77,8 @@ Feature: Content Permissions
 
   Scenario Outline: Saving content as Members Only; hidden from role
     Given "Digital Library Content" nodes:
-      | title        | body            | field_permissions  | uid |
-      | Members Only | This is private | members            | 1   |
+      | title        | body            | field_permissions  | uid | status |
+      | Members Only | This is private | members            | 1   | 1      |
     And I am logged in as a user with the "<role>" role
     And I cannot visit the last node created
   Examples:
@@ -88,8 +88,8 @@ Feature: Content Permissions
 
   Scenario Outline: Saving content as Members Only; hidden from role
     Given "Digital Library Content" nodes:
-      | title        | body            | field_permissions  | uid |
-      | Members Only | This is private | members            | 1   |
+      | title        | body            | field_permissions  | uid | status |
+      | Members Only | This is private | members            | 1   | 1      |
     And I am logged in as a user with the "<role>" role
     And I visit the last node created
   Examples:
