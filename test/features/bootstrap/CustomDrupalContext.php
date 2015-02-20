@@ -534,7 +534,23 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     parent::createNodes($type, $nodesTable);
   }
 
-    /**
+  public function createNode($type, $title) {
+    $node = (object) array(
+      'title' => $title,
+      'type' => $type,
+      'body' => $this->getDrupal()->random->string(255),
+      'status' => 1,
+    );
+    $this->dispatcher->dispatch('beforeNodeCreate', new EntityEvent($this, $node));
+    $saved = $this->getDriver()->createNode($node);
+    $this->dispatcher->dispatch('afterNodeCreate', new EntityEvent($this, $saved));
+    $this->nodes[] = $saved;
+
+    // Set internal page on the new node.
+    $this->getSession()->visit($this->locatePath('/node/' . $saved->nid));  }
+
+
+  /**
    * Overrides DrupalContext::createMyNode
    * There is a bug in the original in the 'body' => this->getDrupal()->string(255), because it is missing
    * the ->random
@@ -546,11 +562,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     if (!$this->user->uid) {
       throw new \Exception(sprintf('There is no current logged in user to create a node for.'));
     }
+
     $node = (object) array(
       'title' => $title,
       'type' => $type,
       'body' => $this->getDrupal()->random->string(255),
       'uid' => $this->user->uid,
+      'status' => 1,
     );
     $this->dispatcher->dispatch('beforeNodeCreate', new EntityEvent($this, $node));
     $saved = $this->getDriver()->createNode($node);

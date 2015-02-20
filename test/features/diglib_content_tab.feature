@@ -72,9 +72,9 @@ Feature: Admin UI: Content Tab (PRC-169)
     | Three   | Three@timestamp | @currentuid | 1410000300 |
     | Four    | Four@timestamp  | @currentuid | 1410000400 |
     Then I visit "admin-content"
-    Then "One" should precede "Two" for the query ".view-id-admin_content_view table tr td:nth-child(5)"
-    Then "Two" should precede "Three" for the query ".view-id-admin_content_view table tr td:nth-child(5)"
-    Then "Three" should precede "Four" for the query ".view-id-admin_content_view table tr td:nth-child(5)"
+    Then "One" should precede "Two" for the query "a"
+    Then "Two" should precede "Three" for the query "a"
+    Then "Three" should precede "Four" for the query "a"
 
   Scenario: AC10 Pagination: 100 per page -use the default pagination: e.g. first previous 1 2 3 4 .... 26 next last
     # If generate <100 Digital library content nodes, I should see no pagination

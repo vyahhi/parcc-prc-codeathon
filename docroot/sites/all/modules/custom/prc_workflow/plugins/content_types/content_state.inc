@@ -20,10 +20,10 @@ $plugin = array(
  * @param $args
  * @param $context
  */
-function prc_workflow_state_render($subtype, $conf, $args, $context){
+function prc_workflow_state_render($subtype, $conf, $args, $context) {
   $node = $context->data;
   $block = new stdClass();
-  if(!empty($node->vid)) {
+  if (!empty($node->vid)) {
 
     $state_machine = state_flow_load_state_machine($node);
 
@@ -32,7 +32,7 @@ function prc_workflow_state_render($subtype, $conf, $args, $context){
 
     $block->content = '<div class="prc-workflow-state"><span>Content State:</span> ' . ucfirst($label) . '</div>';
 
-    //Provide a link for cancelling a request
+    // Provide a link for cancelling a request
     if ($current_state == 'ready_for_review') {
       $event = $state_machine->get_event('rescind_request');
       if ($event->validate()) {
@@ -45,7 +45,7 @@ function prc_workflow_state_render($subtype, $conf, $args, $context){
     }
 
     return $block;
-  }else{
+  } else {
     return $block->content = '';
   }
 }

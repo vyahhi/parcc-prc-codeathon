@@ -253,14 +253,6 @@ function prc_workflow_events_submit(&$form, &$form_state) {
 }
 
 /**
- *
- */
-function prc_workflow_pre_submit_handler($form, &$form_state) {
-  //$form['#node']->stateflow_skip_workflow = TRUE;
-}
-
-
-/**
  * Handles submission of the form by workflow actions
  *
  * @param $form
@@ -405,16 +397,4 @@ function prc_workflow_message($message_type, $node) {
 
   // This message type is associated with roles in prc_emails.
   _prc_emails_message_create($message, $node);
-}
-
-/**
- * Implements hook_module_implements_alter()
- *
- * @param $implementations
- * @param $hook
- */
-function prc_workflow_module_implements_alter(&$implementations, $hook) {
-  if ($hook == 'node_update') {
-    //unset($implementations['state_flow']);
-  }
 }
