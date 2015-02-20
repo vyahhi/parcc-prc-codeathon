@@ -4,8 +4,6 @@ core = 7.x
 
 stylesheets[all][] = stylesheets/parc_foundation.css
 
-# Starting out with the regions from responsive bartik to limit regression,
-# but this should be re-evaluated.
 regions[header] = Header
 regions[help] = Help
 regions[page_top] = Page top
