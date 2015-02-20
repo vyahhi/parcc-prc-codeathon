@@ -38,7 +38,9 @@ Feature: PRC-58 End User Comments to Content
 
   Scenario Outline: Comment link
     Given I am logged in as a user with the "Content Contributor" role
-    And I am viewing my "Digital Library Content" node with the title "PRC-58 Comment"
+    And "Digital Library Content" nodes:
+      | title          | body           | field_permissions | uid         | status |
+      | PRC-58 Comment | This is public | public            | @currentuid | 1      |
     Then I am logged in as a user with the "<role>" role
     And I visit the last node created
     Then I should see the link "Comment"
@@ -64,7 +66,9 @@ Feature: PRC-58 End User Comments to Content
       | Joe Curator @timestamp     | joe_1prc_58ca@timestamp@example.com | xyz123 | Joe              | Curator         | 1      | Content Administrator (Curator) |
       | Joe Admin @timestamp       | joe_1prc_58ad@timestamp@example.com | xyz123 | Joe              | Admin           | 1      | PRC Admin                       |
     And I am logged in as "Joe Contributor @timestamp"
-    And I am viewing my "Digital Library Content" node with the title "PRC-58 Comment"
+    And "Digital Library Content" nodes:
+      | title          | body           | field_permissions | uid         | status |
+      | PRC-58 Comment | This is public | public            | @currentuid | 1      |
     And I am logged in as "Joe Educator @timestamp"
     And I visit the last node created
     When I follow "Comment"
