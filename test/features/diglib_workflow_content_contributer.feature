@@ -18,7 +18,11 @@ Feature: As a Content Contributor, I need to have specific access to the Digital
     Then I should see the success message containing "Digital Library Content My Content has been updated."
 
   Scenario: Can View draft when state is Approval Requested, but cannot edit
-    Given the last node created's state is set to "ready_for_review"
+    Given I visit the last node created
+    And I click "Edit"
+    And I press the "Request Approval" button
+    And I fill in "Log message for this state change *" with "Please approve my first post."
+    And press the "Update state" button
     When I visit the last node created
     Then I should not see the link "Edit"
 
@@ -40,7 +44,11 @@ Feature: As a Content Contributor, I need to have specific access to the Digital
     #@todo: step definition for the last message created
 
   Scenario: Contributor can cancel approval request (prc-602)
-    Given the last node created's state is set to "ready_for_review"
+    Given I visit the last node created
+    And I click "Edit"
+    And I press the "Request Approval" button
+    And I fill in "Log message for this state change *" with "Please approve my first post."
+    And press the "Update state" button
     And I visit the last node created
     When I click "Rescind Request"
     And for "Log message for this state change" I enter "I changed my mind I need to fix blah."
