@@ -13,13 +13,13 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
-  $handler->name = 'node_edit_panel_context';
+  $handler->name = 'node_edit__digital_library_content';
   $handler->task = 'node_edit';
   $handler->subtask = '';
   $handler->handler = 'panel_context';
-  $handler->weight = 0;
+  $handler->weight = 1;
   $handler->conf = array(
-    'title' => 'Document Edit',
+    'title' => 'Digital Library Content',
     'no_blocks' => 0,
     'pipeline' => 'standard',
     'body_classes_to_remove' => '',
@@ -28,13 +28,14 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     'css' => '',
     'contexts' => array(),
     'relationships' => array(),
+    'name' => 'digital_library_content',
     'access' => array(
       'plugins' => array(
         0 => array(
           'name' => 'node_type',
           'settings' => array(
             'type' => array(
-              'document' => 'document',
+              'digital_library_content' => 'digital_library_content',
             ),
           ),
           'context' => 'argument_node_edit_1',
@@ -43,7 +44,103 @@ function prc_poc_local_panels_default_page_manager_handlers() {
       ),
       'logic' => 'and',
     ),
-    'panels_everywhere_site_template' => 'site_template_panel_context_basic',
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = '54108e3d-b2da-4bf5-9254-4894ecb18e63';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-e2ba232d-8eb4-4adb-b8fa-ad50abbfb114';
+    $pane->panel = 'middle';
+    $pane->type = 'content_state';
+    $pane->subtype = 'content_state';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'e2ba232d-8eb4-4adb-b8fa-ad50abbfb114';
+    $display->content['new-e2ba232d-8eb4-4adb-b8fa-ad50abbfb114'] = $pane;
+    $display->panels['middle'][0] = 'new-e2ba232d-8eb4-4adb-b8fa-ad50abbfb114';
+    $pane = new stdClass();
+    $pane->pid = 'new-eb175b77-54e5-48f3-9c3c-d9fc718f224a';
+    $pane->panel = 'middle';
+    $pane->type = 'form';
+    $pane->subtype = 'form';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'context' => 'argument_node_edit_1',
+      'override_title' => 1,
+      'override_title_text' => '%title',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'eb175b77-54e5-48f3-9c3c-d9fc718f224a';
+    $display->content['new-eb175b77-54e5-48f3-9c3c-d9fc718f224a'] = $pane;
+    $display->panels['middle'][1] = 'new-eb175b77-54e5-48f3-9c3c-d9fc718f224a';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-eb175b77-54e5-48f3-9c3c-d9fc718f224a';
+  $handler->conf['display'] = $display;
+  $export['node_edit__digital_library_content'] = $handler;
+
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'node_view__digital_library_content';
+  $handler->task = 'node_view';
+  $handler->subtask = '';
+  $handler->handler = 'panel_context';
+  $handler->weight = 2;
+  $handler->conf = array(
+    'title' => 'Digital Library Content',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => 'digital_library_content',
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'digital_library_content' => 'digital_library_content',
+            ),
+          ),
+          'context' => 'argument_entity_id:node_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
   );
   $display = new panels_display();
   $display->layout = 'flexible';
@@ -56,23 +153,32 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   );
   $display->cache = array();
   $display->title = '';
-  $display->uuid = 'dac59c83-77f2-45fd-9de6-3b74ab6d7024';
+  $display->uuid = '10881e28-3118-4e8e-a307-be105abdf622';
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-ae0a108a-7a09-4036-865a-97d284d394dd';
+    $pane->pid = 'new-29e82e9c-3e03-4cbf-8264-0c32d5a6f549';
     $pane->panel = 'center';
-    $pane->type = 'entity_form_field';
-    $pane->subtype = 'node:field_document';
+    $pane->type = 'content_state';
+    $pane->subtype = 'content_state';
     $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'label' => '',
-      'formatter' => '',
-      'context' => 'argument_node_edit_1',
-      'override_title' => 0,
-      'override_title_text' => '',
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 4,
+              1 => 3,
+              2 => 7,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
     );
+    $pane->configuration = array();
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
@@ -81,20 +187,27 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = 'ae0a108a-7a09-4036-865a-97d284d394dd';
-    $display->content['new-ae0a108a-7a09-4036-865a-97d284d394dd'] = $pane;
-    $display->panels['center'][0] = 'new-ae0a108a-7a09-4036-865a-97d284d394dd';
+    $pane->uuid = '29e82e9c-3e03-4cbf-8264-0c32d5a6f549';
+    $display->content['new-29e82e9c-3e03-4cbf-8264-0c32d5a6f549'] = $pane;
+    $display->panels['center'][0] = 'new-29e82e9c-3e03-4cbf-8264-0c32d5a6f549';
     $pane = new stdClass();
-    $pane->pid = 'new-32cda07f-d20f-4477-a2e5-1d31662407a2';
+    $pane->pid = 'new-5df9dfc2-b0f4-4599-8f53-02c1dc60cccc';
     $pane->panel = 'center';
-    $pane->type = 'form';
-    $pane->subtype = 'form';
+    $pane->type = 'node_content';
+    $pane->subtype = 'node_content';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'context' => 'argument_node_edit_1',
-      'override_title' => 0,
+      'links' => 1,
+      'no_extras' => 1,
+      'override_title' => 1,
       'override_title_text' => '',
+      'identifier' => '',
+      'link' => 0,
+      'leave_node_title' => 0,
+      'build_mode' => 'full',
+      'context' => 'argument_entity_id:node_1',
+      'override_title_heading' => 'span',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -104,13 +217,65 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $pane->uuid = '32cda07f-d20f-4477-a2e5-1d31662407a2';
-    $display->content['new-32cda07f-d20f-4477-a2e5-1d31662407a2'] = $pane;
-    $display->panels['center'][1] = 'new-32cda07f-d20f-4477-a2e5-1d31662407a2';
+    $pane->uuid = '5df9dfc2-b0f4-4599-8f53-02c1dc60cccc';
+    $display->content['new-5df9dfc2-b0f4-4599-8f53-02c1dc60cccc'] = $pane;
+    $display->panels['center'][1] = 'new-5df9dfc2-b0f4-4599-8f53-02c1dc60cccc';
+    $pane = new stdClass();
+    $pane->pid = 'new-e6129095-5010-4b84-9d6f-2ffb6c19aba8';
+    $pane->panel = 'center';
+    $pane->type = 'node_links';
+    $pane->subtype = 'node_links';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'build_mode' => 'full',
+      'identifier' => '',
+      'link' => 1,
+      'context' => 'argument_entity_id:node_1',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = 'e6129095-5010-4b84-9d6f-2ffb6c19aba8';
+    $display->content['new-e6129095-5010-4b84-9d6f-2ffb6c19aba8'] = $pane;
+    $display->panels['center'][2] = 'new-e6129095-5010-4b84-9d6f-2ffb6c19aba8';
+    $pane = new stdClass();
+    $pane->pid = 'new-b68743b8-2b20-429b-89ad-27f947e6d6c0';
+    $pane->panel = 'center';
+    $pane->type = 'entity_field_extra';
+    $pane->subtype = 'node:sharethis';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'view_mode' => 'full',
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = 'b68743b8-2b20-429b-89ad-27f947e6d6c0';
+    $display->content['new-b68743b8-2b20-429b-89ad-27f947e6d6c0'] = $pane;
+    $display->panels['center'][3] = 'new-b68743b8-2b20-429b-89ad-27f947e6d6c0';
   $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = 'new-ae0a108a-7a09-4036-865a-97d284d394dd';
+  $display->title_pane = '0';
   $handler->conf['display'] = $display;
-  $export['node_edit_panel_context'] = $handler;
+  $export['node_view__digital_library_content'] = $handler;
 
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
@@ -208,7 +373,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->uuid = 'b1bfb32b-1b18-4ffe-bc6e-a36d885d3a2d';
     $display->content['new-b1bfb32b-1b18-4ffe-bc6e-a36d885d3a2d'] = $pane;
     $display->panels['left'][1] = 'new-b1bfb32b-1b18-4ffe-bc6e-a36d885d3a2d';
-  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->hide_title = PANELS_TITLE_PANE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $export['node_view_panel_context'] = $handler;
@@ -714,6 +879,136 @@ function prc_poc_local_panels_default_page_manager_handlers() {
  * Implements hook_default_page_manager_pages().
  */
 function prc_poc_local_panels_default_page_manager_pages() {
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
+  $page->name = 'access_denied';
+  $page->task = 'page';
+  $page->admin_title = 'Access Denied';
+  $page->admin_description = '';
+  $page->path = 'access-denied';
+  $page->access = array();
+  $page->menu = array();
+  $page->arguments = array();
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_access_denied__panel_context_549693e6-8c91-4544-99f1-605af455af8d';
+  $handler->task = 'page';
+  $handler->subtask = 'access_denied';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+  );
+  $display = new panels_display();
+  $display->layout = 'flexible';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'center' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = 'Access Denied';
+  $display->uuid = '4ca9815d-5bbc-41c9-abf9-b004b15fd18e';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-d4b0d67d-80f7-4b1b-a80d-a3ed34d4f278';
+    $pane->panel = 'center';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 1,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'admin_title' => 'Anonymous Users Access Denied',
+      'title' => '',
+      'body' => 'If you have an account <a href="/user">please log in</a>.',
+      'format' => 'full_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'd4b0d67d-80f7-4b1b-a80d-a3ed34d4f278';
+    $display->content['new-d4b0d67d-80f7-4b1b-a80d-a3ed34d4f278'] = $pane;
+    $display->panels['center'][0] = 'new-d4b0d67d-80f7-4b1b-a80d-a3ed34d4f278';
+    $pane = new stdClass();
+    $pane->pid = 'new-e1d6b045-870d-4635-8735-ca37bee5be68';
+    $pane->panel = 'center';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 2,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'admin_title' => 'Authenticated Access Denied',
+      'title' => '',
+      'body' => 'You are not allowed to view this content.',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'e1d6b045-870d-4635-8735-ca37bee5be68';
+    $display->content['new-e1d6b045-870d-4635-8735-ca37bee5be68'] = $pane;
+    $display->panels['center'][1] = 'new-e1d6b045-870d-4635-8735-ca37bee5be68';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-d4b0d67d-80f7-4b1b-a80d-a3ed34d4f278';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['access_denied'] = $page;
+
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
@@ -1264,7 +1559,20 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->type = 'views_panes';
     $pane->subtype = 'admin_content_view-panel_pane_1';
     $pane->shown = TRUE;
-    $pane->access = array();
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 4,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
     $pane->configuration = array(
       'override_title' => 0,
       'override_title_text' => '',
@@ -1280,6 +1588,40 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->uuid = '3f310bfb-37ee-450f-9a8d-10349fd54ac3';
     $display->content['new-3f310bfb-37ee-450f-9a8d-10349fd54ac3'] = $pane;
     $display->panels['center'][2] = 'new-3f310bfb-37ee-450f-9a8d-10349fd54ac3';
+    $pane = new stdClass();
+    $pane->pid = 'new-d31702e5-6d20-48de-b836-e3bf6507a118';
+    $pane->panel = 'center';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'admin_content_view-panel_pane_2';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 8,
+              1 => 3,
+              2 => 7,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = 'd31702e5-6d20-48de-b836-e3bf6507a118';
+    $display->content['new-d31702e5-6d20-48de-b836-e3bf6507a118'] = $pane;
+    $display->panels['center'][3] = 'new-d31702e5-6d20-48de-b836-e3bf6507a118';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

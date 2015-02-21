@@ -30,6 +30,7 @@ function prc_poc_local_views_views_default_views() {
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '100';
@@ -39,18 +40,27 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'nid' => 'nid',
+    'title' => 'title',
     'created' => 'created',
     'type' => 'type',
     'changed' => 'changed',
-    'title' => 'title',
     'field_author_name' => 'field_author_name',
     'field_document' => 'field_document',
+    'state' => 'state',
     'delete_node' => 'delete_node',
     'edit_node' => 'delete_node',
+    'review_link' => 'delete_node',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
     'nid' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -78,13 +88,6 @@ function prc_poc_local_views_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'title' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_author_name' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -93,6 +96,13 @@ function prc_poc_local_views_views_default_views() {
       'empty_column' => 0,
     ),
     'field_document' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -107,6 +117,11 @@ function prc_poc_local_views_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'review_link' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
@@ -116,6 +131,12 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -135,12 +156,6 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['changed']['label'] = 'Last Updated';
   $handler->display->display_options['fields']['changed']['date_format'] = 'short';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   /* Field: Content: Author Name */
   $handler->display->display_options['fields']['field_author_name']['id'] = 'field_author_name';
   $handler->display->display_options['fields']['field_author_name']['table'] = 'field_data_field_author_name';
@@ -149,8 +164,14 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['field_document']['id'] = 'field_document';
   $handler->display->display_options['fields']['field_document']['table'] = 'field_data_field_document';
   $handler->display->display_options['fields']['field_document']['field'] = 'field_document';
+  $handler->display->display_options['fields']['field_document']['label'] = 'Attached Files';
   $handler->display->display_options['fields']['field_document']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_document']['delta_offset'] = '0';
+  /* Field: State Flow: State */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'node_revision_states';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['label'] = 'Status';
   /* Field: Content: Delete link */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
@@ -165,19 +186,6 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Content: Author uid */
-  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
-  $handler->display->display_options['arguments']['uid']['table'] = 'node';
-  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
-  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -185,11 +193,13 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'digital_library_content' => 'digital_library_content',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Global: Combine fields filter */
   $handler->display->display_options['filters']['combine']['id'] = 'combine';
   $handler->display->display_options['filters']['combine']['table'] = 'views';
   $handler->display->display_options['filters']['combine']['field'] = 'combine';
   $handler->display->display_options['filters']['combine']['operator'] = 'contains';
+  $handler->display->display_options['filters']['combine']['group'] = 1;
   $handler->display->display_options['filters']['combine']['exposed'] = TRUE;
   $handler->display->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
   $handler->display->display_options['filters']['combine']['expose']['label'] = 'Filter all columns';
@@ -214,49 +224,6 @@ function prc_poc_local_views_views_default_views() {
 
   /* Display: Author's Content pane */
   $handler = $view->new_display('panel_pane', 'Author\'s Content pane', 'panel_pane_1');
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Nid */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  /* Field: Content: Post date */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = 'Posted On';
-  $handler->display->display_options['fields']['created']['date_format'] = 'short';
-  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: Content: Type */
-  $handler->display->display_options['fields']['type']['id'] = 'type';
-  $handler->display->display_options['fields']['type']['table'] = 'node';
-  $handler->display->display_options['fields']['type']['field'] = 'type';
-  $handler->display->display_options['fields']['type']['label'] = 'Content Type';
-  /* Field: Content: Updated date */
-  $handler->display->display_options['fields']['changed']['id'] = 'changed';
-  $handler->display->display_options['fields']['changed']['table'] = 'node';
-  $handler->display->display_options['fields']['changed']['field'] = 'changed';
-  $handler->display->display_options['fields']['changed']['label'] = 'Last Updated';
-  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
-  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Author Name */
-  $handler->display->display_options['fields']['field_author_name']['id'] = 'field_author_name';
-  $handler->display->display_options['fields']['field_author_name']['table'] = 'field_data_field_author_name';
-  $handler->display->display_options['fields']['field_author_name']['field'] = 'field_author_name';
-  /* Field: Content: Delete link */
-  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['label'] = 'Action';
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Nid */
   $handler->display->display_options['sorts']['nid']['id'] = 'nid';
@@ -272,6 +239,16 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  /* Contextual filter: User: Uid */
+  $handler->display->display_options['arguments']['uid_1']['id'] = 'uid_1';
+  $handler->display->display_options['arguments']['uid_1']['table'] = 'users';
+  $handler->display->display_options['arguments']['uid_1']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid_1']['relationship'] = 'uid';
+  $handler->display->display_options['arguments']['uid_1']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid_1']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['uid_1']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid_1']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid_1']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['allow']['use_pager'] = 0;
   $handler->display->display_options['allow']['items_per_page'] = 0;
   $handler->display->display_options['allow']['offset'] = 0;
@@ -292,6 +269,70 @@ function prc_poc_local_views_views_default_views() {
     ),
   );
   $handler->display->display_options['inherit_panels_path'] = '1';
+
+  /* Display: All Digital Library Content */
+  $handler = $view->new_display('panel_pane', 'All Digital Library Content', 'panel_pane_2');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Posted On';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Content: Type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['label'] = 'Content Type';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = 'Last Updated';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Content: Author Name */
+  $handler->display->display_options['fields']['field_author_name']['id'] = 'field_author_name';
+  $handler->display->display_options['fields']['field_author_name']['table'] = 'field_data_field_author_name';
+  $handler->display->display_options['fields']['field_author_name']['field'] = 'field_author_name';
+  /* Field: Content: Attach a File */
+  $handler->display->display_options['fields']['field_document']['id'] = 'field_document';
+  $handler->display->display_options['fields']['field_document']['table'] = 'field_data_field_document';
+  $handler->display->display_options['fields']['field_document']['field'] = 'field_document';
+  $handler->display->display_options['fields']['field_document']['label'] = 'Attached Files';
+  $handler->display->display_options['fields']['field_document']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_document']['delta_offset'] = '0';
+  /* Field: State Flow: State */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'node_revision_states';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['label'] = 'Status';
+  /* Field: Content: Delete link */
+  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
+  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
+  $handler->display->display_options['fields']['delete_node']['label'] = 'Action';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  /* Field: State Flow: Review Digital Library Content */
+  $handler->display->display_options['fields']['review_link']['id'] = 'review_link';
+  $handler->display->display_options['fields']['review_link']['table'] = 'node_revision_states';
+  $handler->display->display_options['fields']['review_link']['field'] = 'review_link';
+  $handler->display->display_options['fields']['review_link']['label'] = '';
+  $handler->display->display_options['fields']['review_link']['element_label_colon'] = FALSE;
   $export['admin_content_view'] = $view;
 
   $view = new view();

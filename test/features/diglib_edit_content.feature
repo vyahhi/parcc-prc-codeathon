@@ -11,9 +11,15 @@ Feature: Edit Content (PRC-158)
     Then I should see the link "edit" in the "content" region
     #  AC2 At click, the Edit Content page opens.
     Then I follow "edit"
-    Then I should see the heading "Edit Digital Library Content Test-o-rama" in the "content" region
+    Then I should see the heading "Test-o-rama" in the "content" region
 
   Scenario: AC3 Editable attributes are shown in the Edit Content page
+    Given I am logged in as a user with the "Content Contributor" role
+    And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
+    And I follow "Content" in the "header" region
+    Then I should see the link "edit" in the "content" region
+    #  AC2 At click, the Edit Content page opens.
+    Then I follow "edit"
     #  Title: Required, String(255)
     Then I should see a "Title *" field
     #  Author Name: Optional, String(255), followed by a description
@@ -47,7 +53,7 @@ Feature: Edit Content (PRC-158)
     And I follow "Content" in the "header" region
     Then I should see the link "edit" in the "content" region
     Then I follow "edit"
-    Then I should see the heading "Edit Digital Library Content Test-o-rama" in the "content" region
+    Then I should see the heading "Test-o-rama" in the "content" region
     # AC5  A user may add more files; a Browse button along with an Upload button are provided to allow the user to select the file.
     Then I attach the file "testfiles/lovelythumbnail.png" to "edit-field-thumbnail-und-0-upload"
     And I select the radio button "Public"
@@ -170,7 +176,7 @@ Feature: Edit Content (PRC-158)
     And I follow "Content" in the "header" region
     Then I should see the link "edit" in the "content" region
     Then I follow "edit"
-    Then I should see the heading "Edit Digital Library Content Test-o-rama" in the "content" region
+    Then I should see the heading "Test-o-rama" in the "content" region
     Then I should see the text "Attach a File"
     Then I should not see the text "Add a new file"
     And I click "Attach a File"

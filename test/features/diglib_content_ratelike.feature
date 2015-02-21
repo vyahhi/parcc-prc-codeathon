@@ -10,8 +10,8 @@ Feature: PRC-39 Rate/Like Content (end user)
   Scenario: Like link in Digital Library view
     Given I have no "Digital Library Content" nodes
     Given "Digital Library Content" nodes:
-      | title      | body           | field_permissions | uid |
-      | Public     | This is public | public            | 1   |
+      | title      | body           | field_permissions | uid | status |
+      | Public     | This is public | public            | 1   | 1      |
     And I am logged in as a user with the "Educator" role
     And I am on "digital-library"
     Then I should see the link "Public"
@@ -37,8 +37,8 @@ Feature: PRC-39 Rate/Like Content (end user)
   Scenario: Like link on Digital Library full view
     Given I have no "Digital Library Content" nodes
     Given "Digital Library Content" nodes:
-      | title      | body           | field_permissions | uid |
-      | Public     | This is public | public            | 1   |
+      | title      | body           | field_permissions | uid | status |
+      | Public     | This is public | public            | 1   | 1      |
     And I am logged in as a user with the "Educator" role
     And I am on "digital-library"
     And I click "Public"

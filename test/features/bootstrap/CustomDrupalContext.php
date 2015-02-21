@@ -534,7 +534,23 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     parent::createNodes($type, $nodesTable);
   }
 
-    /**
+  public function createNode($type, $title) {
+    $node = (object) array(
+      'title' => $title,
+      'type' => $type,
+      'body' => $this->getDrupal()->random->string(255),
+      'status' => 1,
+    );
+    $this->dispatcher->dispatch('beforeNodeCreate', new EntityEvent($this, $node));
+    $saved = $this->getDriver()->createNode($node);
+    $this->dispatcher->dispatch('afterNodeCreate', new EntityEvent($this, $saved));
+    $this->nodes[] = $saved;
+
+    // Set internal page on the new node.
+    $this->getSession()->visit($this->locatePath('/node/' . $saved->nid));  }
+
+
+  /**
    * Overrides DrupalContext::createMyNode
    * There is a bug in the original in the 'body' => this->getDrupal()->string(255), because it is missing
    * the ->random
@@ -546,11 +562,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     if (!$this->user->uid) {
       throw new \Exception(sprintf('There is no current logged in user to create a node for.'));
     }
+
     $node = (object) array(
       'title' => $title,
       'type' => $type,
       'body' => $this->getDrupal()->random->string(255),
       'uid' => $this->user->uid,
+      'status' => 1,
     );
     $this->dispatcher->dispatch('beforeNodeCreate', new EntityEvent($this, $node));
     $saved = $this->getDriver()->createNode($node);
@@ -953,8 +971,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $this->iDismissTheDialog();
   }
 
-
-
   /**
    * Moves backward one page in history and confirms the dialog.
    *
@@ -986,8 +1002,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $ms = $seconds * 1000;
     $this->getSession()->wait($ms);
   }
-
-
 
   /**
    * Click on the element with the provided CSS Selector
@@ -1182,5 +1196,47 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       }
     }
   }
+  /**
+   * @defgroup "workflow steps"
+   * @{
+   */
+  /**
+   * @Given /^the last node created\'s state is "([^"]*)"$/
+   */
+  public function theLastNodeCreatedSStateIs($arg1) {
+    if (!is_array($this->nodes) || count($this->nodes) == 0) {
+      throw new Exception('No nodes have been created by this context');
+    }
+    $last_index = count($this->nodes) - 1;
+    $last_node = $this->nodes[$last_index];
+    $state_obj = state_flow_load_state_machine($last_node, TRUE);
+    $state = $state_obj->get_current_state();
+
+    if($state !== $arg1){
+      throw new \Exception(sprintf('The nodes state was not set to %s', $arg1));
+    }
+  }
+
+  /**
+   * @Given /^the last node created\'s state is set to "([^"]*)"$/
+   */
+  public function theLastNodeCreatedSStateIsSetTo($state) {
+    if (!is_array($this->nodes) || count($this->nodes) == 0) {
+      throw new Exception('No nodes have been created by this context');
+    }
+    $last_index = count($this->nodes) - 1;
+    $last_node = $this->nodes[$last_index];
+
+    //force into a particular state
+    $machine = state_flow_load_state_machine($last_node);
+
+    // Set and save the new state.
+    $machine->force_state($state);
+
+  }
+
+  /**
+   * @} End of defgroup "workflow steps"
+   */
 }
 

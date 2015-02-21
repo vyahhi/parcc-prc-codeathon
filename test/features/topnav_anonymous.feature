@@ -16,8 +16,8 @@ Feature: PRC-347 Top Nav Bar for Anonymous Users
 
   Scenario: PRC-435 Anon should see DL content
     Given "Digital Library Content" nodes:
-      | title          | body           | field_permissions | uid |
-      | Public PRC-435 | This is public | public            | 1   |
+      | title          | body           | field_permissions | uid | status |
+      | Public PRC-435 | This is public | public            | 1   | 1      |
     And I am an anonymous user
     And I am on "digital-library"
     Then I should see the link "Public PRC-435"

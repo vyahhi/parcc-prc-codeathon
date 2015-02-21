@@ -13,10 +13,12 @@ Feature: PRC-349 Admin: Edit Course
   Background:
     Given I am logged in as a user with the "Content Administrator (Curator)" role
     And I have no "PD Course" nodes
-    And I am viewing my "PD Course" node with the title "PRC-349 AC2"
+    And "PD Course" nodes:
+      | title       | uid         |
+      | PRC-349 AC2 | @currentuid |
     And I am on "admin-course"
     When I click "Edit"
-    Then I should see the heading "Edit Course PRC-349 AC2" in the "content" region
+    Then I should see the heading "PRC-349 AC2" in the "content" region
 
   Scenario: AC2 Create course fields
     And I should see a "Course Title *" field

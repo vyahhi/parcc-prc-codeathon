@@ -45,5 +45,140 @@ function prc_messages_default_message_type() {
     },
     "rdf_mapping" : []
   }');
+  $items['published_notice'] = entity_import('message_type', '{
+    "name" : "published_notice",
+    "description" : "Published Notice",
+    "argument_keys" : [],
+    "argument" : [],
+    "category" : "message_type",
+    "data" : {
+      "token options" : { "clear" : 0 },
+      "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
+    },
+    "language" : "",
+    "arguments" : null,
+    "message_text" : { "und" : [
+        {
+          "value" : "[message:field-node:title] Has Been Published",
+          "format" : "filtered_html",
+          "safe_value" : "\\u003Cp\\u003E[message:field-node:title] Has Been Published\\u003C\\/p\\u003E\\n"
+        },
+        {
+          "value" : "The following digital library content has been published.\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\r\\n",
+          "format" : "full_html",
+          "safe_value" : "\\u003Cp\\u003EThe following digital library content has been published.\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\u003C\\/p\\u003E\\n"
+        }
+      ]
+    },
+    "rdf_mapping" : []
+  }');
+  $items['ready_for_review'] = entity_import('message_type', '{
+    "name" : "ready_for_review",
+    "description" : "Ready For Review",
+    "argument_keys" : [],
+    "argument" : [],
+    "category" : "message_type",
+    "data" : {
+      "token options" : { "clear" : 0 },
+      "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
+    },
+    "language" : "",
+    "arguments" : null,
+    "message_text" : { "und" : [
+        {
+          "value" : "New Draft Awaiting Review: \\u0027[message:field-node:title]\\u0027",
+          "format" : "filtered_html",
+          "safe_value" : "\\u003Cp\\u003ENew Draft Awaiting Review: \\u0027[message:field-node:title]\\u0027\\u003C\\/p\\u003E\\n"
+        },
+        {
+          "value" : "The following content is awaiting approval:\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:edit-url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\r\\n",
+          "format" : "full_html",
+          "safe_value" : "\\u003Cp\\u003EThe following content is awaiting approval:\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022[message:field-node:edit-url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\u003C\\/p\\u003E\\n"
+        }
+      ]
+    },
+    "rdf_mapping" : []
+  }');
+  $items['request_changes'] = entity_import('message_type', '{
+    "name" : "request_changes",
+    "description" : "Request Changes",
+    "argument_keys" : [],
+    "argument" : [],
+    "category" : "message_type",
+    "data" : {
+      "token options" : { "clear" : 0 },
+      "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
+    },
+    "language" : "",
+    "arguments" : null,
+    "message_text" : { "und" : [
+        {
+          "value" : "Changes before approval for [message:field-node:title]",
+          "format" : "filtered_html",
+          "safe_value" : "\\u003Cp\\u003EChanges before approval for [message:field-node:title]\\u003C\\/p\\u003E\\n"
+        },
+        {
+          "value" : "A curator has provided for content you\\u0027ve submitted for approval:\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\r\\nComment: [message:field-node:workflow-comments]\\r\\n",
+          "format" : "full_html",
+          "safe_value" : "\\u003Cp\\u003EA curator has provided for content you\\u0027ve submitted for approval:\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\u003Cbr \\/\\u003E\\nComment: [message:field-node:workflow-comments]\\u003C\\/p\\u003E\\n"
+        }
+      ]
+    },
+    "rdf_mapping" : []
+  }');
+  $items['rescind_request'] = entity_import('message_type', '{
+    "name" : "rescind_request",
+    "description" : "Rescind Review Request",
+    "argument_keys" : [],
+    "argument" : [],
+    "category" : "message_type",
+    "data" : {
+      "token options" : { "clear" : 0 },
+      "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
+    },
+    "language" : "",
+    "arguments" : null,
+    "message_text" : { "und" : [
+        {
+          "value" : "[message:field-node:title] Has Been Withdrawn From Review",
+          "format" : "filtered_html",
+          "safe_value" : "\\u003Cp\\u003E[message:field-node:title] Has Been Withdrawn From Review\\u003C\\/p\\u003E\\n"
+        },
+        {
+          "value" : "The following content has been withdrawn from review.\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\r\\n",
+          "format" : "full_html",
+          "safe_value" : "\\u003Cp\\u003EThe following content has been withdrawn from review.\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\u003C\\/p\\u003E\\n"
+        }
+      ]
+    },
+    "rdf_mapping" : []
+  }');
+  $items['unpublished_notice'] = entity_import('message_type', '{
+    "name" : "unpublished_notice",
+    "description" : "Unpublished Notice",
+    "argument_keys" : [],
+    "argument" : [],
+    "category" : "message_type",
+    "data" : {
+      "token options" : { "clear" : 0 },
+      "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
+    },
+    "language" : "",
+    "arguments" : null,
+    "message_text" : { "und" : [
+        {
+          "value" : "[message:field-node:title] Has Been Unpublished",
+          "format" : "filtered_html",
+          "safe_value" : "\\u003Cp\\u003E[message:field-node:title] Has Been Unpublished\\u003C\\/p\\u003E\\n"
+        },
+        {
+          "value" : "The following digital library content has been unpublished.\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\r\\n",
+          "format" : "full_html",
+          "safe_value" : "\\u003Cp\\u003EThe following digital library content has been unpublished.\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\u003C\\/p\\u003E\\n"
+        }
+      ]
+    },
+    "rdf_mapping" : []
+  }');
   return $items;
 }

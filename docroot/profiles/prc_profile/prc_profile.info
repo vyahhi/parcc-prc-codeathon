@@ -120,6 +120,7 @@ dependencies[] = prc_shs_term_handler
 dependencies[] = prc_text_to_speech
 dependencies[] = prc_trt
 dependencies[] = prc_user_edit_form
+dependencies[] = prc_workflow
 dependencies[] = user_single_role
 ; Panels
 dependencies[] = panels

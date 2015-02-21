@@ -309,6 +309,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'comment',
   );
 
+  // Exported permission: 'administer content revisions'.
+  $permissions['administer content revisions'] = array(
+    'name' => 'administer content revisions',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+    ),
+    'module' => 'state_flow',
+  );
+
   // Exported permission: 'administer content types'.
   $permissions['administer content types'] = array(
     'name' => 'administer content types',
@@ -737,6 +746,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'migrate',
+  );
+
+  // Exported permission: 'approve prc content'.
+  $permissions['approve prc content'] = array(
+    'name' => 'approve prc content',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+    ),
+    'module' => 'prc_workflow',
   );
 
   // Exported permission: 'block IP addresses'.
@@ -1273,6 +1291,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'deny prc content'.
+  $permissions['deny prc content'] = array(
+    'name' => 'deny prc content',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+    ),
+    'module' => 'prc_workflow',
+  );
+
   // Exported permission: 'display drupal links'.
   $permissions['display drupal links'] = array(
     'name' => 'display drupal links',
@@ -1647,6 +1674,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit any digital_library_content content'] = array(
     'name' => 'edit any digital_library_content content',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
@@ -2043,6 +2071,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'manage content workflow'.
+  $permissions['manage content workflow'] = array(
+    'name' => 'manage content workflow',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'Content Contributor' => 'Content Contributor',
+    ),
+    'module' => 'state_flow',
+  );
+
   // Exported permission: 'manage features'.
   $permissions['manage features'] = array(
     'name' => 'manage features',
@@ -2093,6 +2131,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'features',
+  );
+
+  // Exported permission: 'request approval of prc content'.
+  $permissions['request approval of prc content'] = array(
+    'name' => 'request approval of prc content',
+    'roles' => array(
+      'Content Contributor' => 'Content Contributor',
+    ),
+    'module' => 'prc_workflow',
   );
 
   // Exported permission: 'revert revisions'.
@@ -2302,6 +2349,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'flag',
   );
 
+  // Exported permission: 'unpublish prc content'.
+  $permissions['unpublish prc content'] = array(
+    'name' => 'unpublish prc content',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+    ),
+    'module' => 'prc_workflow',
+  );
+
   // Exported permission: 'use advanced search'.
   $permissions['use advanced search'] = array(
     'name' => 'use advanced search',
@@ -2509,6 +2565,9 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['view revisions'] = array(
     'name' => 'view revisions',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'Content Contributor' => 'Content Contributor',
+      'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
