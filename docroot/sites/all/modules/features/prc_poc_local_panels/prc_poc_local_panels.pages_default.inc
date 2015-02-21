@@ -55,7 +55,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     ),
   );
   $display->cache = array();
-  $display->title = '<em>Edit %node:content-type</em> %node:title';
+  $display->title = '';
   $display->uuid = '54108e3d-b2da-4bf5-9254-4894ecb18e63';
   $display->content = array();
   $display->panels = array();
