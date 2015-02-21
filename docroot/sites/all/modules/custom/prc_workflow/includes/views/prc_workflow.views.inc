@@ -9,6 +9,7 @@
 function prc_workflow_views_data(){
 
   $data['node_revision_states']['review_link'] = array(
+    'real field' => 'nid',
     'field' => array(
       'title' => t('Review Digital Library Content'),
       'help' => t('Provide a simple link to review the content.'),
