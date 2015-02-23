@@ -15,7 +15,7 @@ class prcWorkflow extends StateFlow {
 
     $this->create_state('ready_for_review',
       array(
-        'label' => t('Waiting for Review')
+        'label' => t('Approval Requested')
       )
     );
 
