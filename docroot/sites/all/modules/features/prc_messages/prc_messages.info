@@ -14,7 +14,6 @@ dependencies[] = strongarm
 dependencies[] = text
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
-features[field_base][] = field_version_id
 features[field_instance][] = message-comment_email-field_comment
 features[field_instance][] = message-comment_email-field_message_rendered_body
 features[field_instance][] = message-comment_email-field_message_rendered_subject
