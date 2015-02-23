@@ -18,7 +18,7 @@ Feature: Share Content (end user) (PRC-59)
     Then I should see an ".st_edmodo_button" element
 
   Scenario: I should see Pinterest
-    Then I should see an ".st_pinterest_button" element
+    Then I should see an ".pinit" element
 
   # Manual testing for this feature will cover the following scenarios:
   #  2.  *E-mail*
