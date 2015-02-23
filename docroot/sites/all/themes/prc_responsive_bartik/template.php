@@ -7,8 +7,8 @@ function prc_responsive_bartik_preprocess_html(&$variables)
   $variables['path_to_resbartik'] = drupal_get_path('theme', 'responsive_bartik');
 
   // Add local.css stylesheet
-  if (file_exists(drupal_get_path('theme', 'responsive_bartik') . '/css/local.css')) {
-    drupal_add_css(drupal_get_path('theme', 'responsive_bartik') . '/css/local.css',
+  if (file_exists(drupal_get_path('theme', 'prc_responsive_bartik') . '/css/local.css')) {
+    drupal_add_css(drupal_get_path('theme', 'prc_responsive_bartik') . '/css/local.css',
       array('group' => CSS_THEME, 'every_page' => TRUE));
   }
 
