@@ -26,6 +26,13 @@ class prcWorkflow extends StateFlow {
       )
     );
 
+    //unpublished isn't actually a real state, but we need the label for things to work
+    $this->create_state('unpublished',
+      array(
+        'label' => t('Unpublished'),
+      )
+    );
+
     //define events
     $this->create_event('approval_requested',
       array(

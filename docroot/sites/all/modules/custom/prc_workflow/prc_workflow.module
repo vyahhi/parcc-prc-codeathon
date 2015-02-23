@@ -432,5 +432,13 @@ function prc_workflow_reported_state($nid){
       $reported_state = 'published';
     }
   }
+  //If the node was ever published, but is currently draft, report the state as unpublished
+  if($reported_state == 'draft'){
+    $published_history = db_query("select state from {node_revision_states_history} where nid = :nid and state = 'published'", array(':nid' => $nid))->fetchField();
+    if(count($published_history)){
+      $reported_state = 'unpublished';
+    }
+  }
+
   return $reported_state;
 }
