@@ -425,7 +425,6 @@ function prc_workflow_reported_state($nid){
 
   $reported_state = 'draft';
   foreach($drafts as $draft){
-
     if($draft->state == 'ready_for_review'){
       $reported_state = 'ready_for_review';
       break;

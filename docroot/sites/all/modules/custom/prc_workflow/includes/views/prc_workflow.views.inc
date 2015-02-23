@@ -26,4 +26,6 @@ function prc_workflow_views_data(){
 function prc_workflow_views_data_alter(&$data) {
 
   $data['node_revision_states']['state']['field']['handler'] = 'prc_workflow_handler_field_state';
+  $data['views_entity_node']['edit_node']['field']['handler'] = 'prc_workflow_handler_field_node_link_edit';
+
 }
