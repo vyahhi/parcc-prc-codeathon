@@ -37,14 +37,14 @@ function prc_workflow_permission() {
 function prc_workflow_menu_alter(&$menu) {
   $menu['node/%node/edit']['access callback'] = 'prc_workflow_access';
   $menu['node/%node/revisions/%/workflow']['access callback'] = 'prc_workflow_events_revision_access';
+  $menu['node/%node/revisions/%/edit']['access callback'] = 'prc_workflow_access';
 }
 
 function prc_workflow_access($op, $node) {
   if (node_access($op, $node)) {
-    $state_flow = state_flow_load_state_machine($node);
 
     //Block access to editing for contributors when under review
-    if ($op == 'update' && $state_flow->get_current_state() === 'ready_for_review') {
+    if ($op == 'update' && prc_workflow_reported_state($node->nid) === 'ready_for_review') {
 
       return user_access('approve prc content');
     }else {
@@ -156,7 +156,7 @@ function prc_workflow_tokens($type, $tokens, $data = array(), $options = array()
           $node = $m->field_node->value();
           $vid = $m->field_version_id->value();
 
-          $result = db_query('select * from node_revision_states_history where vid = :vid and nid = :nid order by "timestamp" DESC;',
+          $result = db_query('select * from {node_revision_states_history} where vid = :vid and nid = :nid order by "timestamp" DESC;',
             array(':vid' => $vid, ':nid' => $node->nid)
           );
           $history = $result->fetchAll();
@@ -313,7 +313,7 @@ function prc_workflow_submit_handler($form, &$form_state) {
 function prc_workflow_fetch_latest_node_version_by_state($nid, $state) {
 
   $vid = db_query("
-    select nrsh.vid from node_revision_states_history nrsh
+    select nrsh.vid from {node_revision_states_history} nrsh
     where nrsh.nid = :nid
       and nrsh.state = :state
     order by nrsh.nrshid DESC limit 1",
@@ -407,4 +407,38 @@ function prc_workflow_message($message_type, $node) {
 
   // This message type is associated with roles in prc_emails.
   _prc_emails_message_create($message, $node);
+}
+
+/**
+ * Base status on the status of all active revisions rather than just the most
+ * recent draft.
+ *
+ * @param $node
+ */
+function prc_workflow_reported_state($nid){
+  //get the active drafts
+  $drafts = db_query("
+    select * from {node_revision_states} nrs
+    where nrs.nid = :nid
+      and nrs.status = 1",
+    array(':nid' => $nid))->fetchAllAssoc('vid');
+
+  $reported_state = 'draft';
+  foreach($drafts as $draft){
+    if($draft->state == 'ready_for_review'){
+      $reported_state = 'ready_for_review';
+      break;
+    }elseif($draft->state == 'published'){
+      $reported_state = 'published';
+    }
+  }
+  //If the node was ever published, but is currently draft, report the state as unpublished
+  if($reported_state == 'draft'){
+    $published_history = db_query("select state from {node_revision_states_history} where nid = :nid and state = 'published'", array(':nid' => $nid))->fetchField();
+    if(count($published_history)){
+      $reported_state = 'unpublished';
+    }
+  }
+
+  return $reported_state;
 }
