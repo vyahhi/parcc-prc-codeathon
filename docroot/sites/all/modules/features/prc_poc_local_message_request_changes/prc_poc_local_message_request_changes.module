@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Request Changes feature.
+ */
+
+include_once 'prc_poc_local_message_request_changes.features.inc';

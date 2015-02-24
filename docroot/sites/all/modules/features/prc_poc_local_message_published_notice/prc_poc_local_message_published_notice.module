@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Published Notice feature.
+ */
+
+include_once 'prc_poc_local_message_published_notice.features.inc';

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Unpublished Notice feature.
+ */
+
+include_once 'prc_poc_local_message_unpublished_notice.features.inc';
