@@ -1,0 +1,9 @@
+name = Features Builder Message
+description = "Message Features builder for use with Features Builder."
+package = "Features"
+core = 7.x
+
+dependencies[] = features_builder
+
+files[] = includes/MessageFeaturesBuilder.inc
+
