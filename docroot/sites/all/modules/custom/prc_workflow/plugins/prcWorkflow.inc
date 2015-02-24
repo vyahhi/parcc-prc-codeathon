@@ -15,7 +15,7 @@ class prcWorkflow extends StateFlow {
 
     $this->create_state('ready_for_review',
       array(
-        'label' => t('Waiting for Review')
+        'label' => t('Approval Requested')
       )
     );
 
@@ -23,6 +23,13 @@ class prcWorkflow extends StateFlow {
       array(
         'label' => t('Published'),
         'on_enter' => array($this, 'on_enter_published'),
+      )
+    );
+
+    //unpublished isn't actually a real state, but we need the label for things to work
+    $this->create_state('unpublished',
+      array(
+        'label' => t('Unpublished'),
       )
     );
 

@@ -8,3 +8,4 @@ dependencies[] = state_flow
 files[] = includes/views/prc_workflow.views.inc
 files[] = includes/views/prc_workflow_handler_field_state.inc
 files[] = includes/views/prc_workflow_handler_field_link_review.inc
+files[] = includes/views/prc_workflow_handler_field_node_link_edit.inc
