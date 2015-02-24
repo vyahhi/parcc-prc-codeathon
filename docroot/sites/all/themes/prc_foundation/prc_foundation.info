@@ -1,8 +1,16 @@
 name = PRC Foundation
 description = An implementation of the PARCC-PRC design using the ZURB Foundation framework.
 core = 7.x
+engine = phptemplate
 
 stylesheets[all][] = stylesheets/parc_foundation.css
+
+; Modernizr acts as a shim for HTML5 elements for older browsers
+; as well as detection for mobile devices.
+scripts[] = javascripts/vendor/custom.modernizr.js
+
+scripts[] = javascripts/foundation/foundation.js
+scripts[] = javascripts/foundation/foundation.topbar.js
 
 regions[header] = Header
 regions[help] = Help

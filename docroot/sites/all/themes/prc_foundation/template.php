@@ -1,5 +1,32 @@
 <?php
 
+/**
+ * Implements hook_html_head_alter().
+ */
+function prc_foundation_html_head_alter(&$head_elements) {
+  // HTML5 charset declaration.
+  $head_elements['system_meta_content_type']['#attributes'] = array(
+    'charset' => 'utf-8',
+  );
+
+  // Optimize mobile viewport.
+  $head_elements['mobile_viewport'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => array(
+      'name' => 'viewport',
+      'content' => 'width=device-width, maximum-scale = 1.0',
+    ),
+  );
+}
+
+/**
+ * Implements hook_preprocess_html()
+ */
+function prc_foundation_preprocess_html(&$variables) {
+  drupal_add_css('http://fonts.googleapis.com/css?family=Open+Sans', array('type' => 'external'));
+}
+
 function prc_foundation_preprocess_page(&$vars, $hook) {
   if (true) {
     drupal_add_js('http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML', 'external');
