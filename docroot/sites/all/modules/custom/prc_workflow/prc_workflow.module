@@ -236,6 +236,12 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
 function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state) {
   $form['#submit'][] = 'prc_workflow_events_submit';
   if ($form['event']['#value'] == 'denied') {
+    // Changes before Approval for PRC-592 @timestamp (revision #)
+    $title = $form_state['build_info']['args'][0]->title;
+    $vid = $form_state['build_info']['args'][0]->vid;
+    $new_title = t('Changes before Approval for @title (revision @vid)', array('@title' => $title, '@vid' => $vid));
+    drupal_set_title($new_title);
+
     $form['event_comment']['#title'] = t('Changes before Approval');
 
     $form['instructions'] = array(
