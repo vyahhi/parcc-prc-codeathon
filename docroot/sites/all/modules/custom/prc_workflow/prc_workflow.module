@@ -362,7 +362,7 @@ function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log) {
       prc_workflow_message('ready_for_review', $node);
       break;
     case 'rescind_request':
-      prc_workflow_message('rescind_request', $node);
+      prc_workflow_message('rescind_review_request', $node);
       break;
     case 'denied':
       prc_workflow_message('request_changes', $node);
