@@ -764,15 +764,18 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     foreach ($variables['drupal_test_email_collector'] as $message) {
       if ($message['to'] == $mail_to) {
         $this->activeEmail = $message;
-
+        $message_found = TRUE;
         if (strpos($message['body'], $contents) !== FALSE ||
           strpos($message['subject'], $contents) !== FALSE) {
           return TRUE;
         }
-        throw new \Exception('Did not find expected content in message body or subject.');
       }
     }
-    throw new \Exception(sprintf('Did not find expected message to %s', $mail_to));
+    if(isset($message_found)){
+      throw new \Exception('Did not find expected content in message body or subject.');
+    }else {
+      throw new \Exception(sprintf('Did not find expected message to %s', $mail_to));
+    }
   }
 
   /**

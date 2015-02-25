@@ -23,11 +23,27 @@ function _prc_emails_message_create($message, $node) {
       'message_notify_email_subject' => 'field_message_rendered_subject',
       'message_notify_email_body' => 'field_message_rendered_body',
     ),
+
+
   );
+
+  //By default, don't check entity access, and notify the message owner.
+  //This is so that where curators don't have access to view nodes waiting for
+  //review the message will still send.  Add additional cases for the message
+  //type if you need an exception
+  switch($message->type){
+    default:
+      $subscribe_options = array(
+        'notify message owner' => TRUE,
+        'entity access' => FALSE,
+      );
+    break;
+  }
 
   if (module_exists('message_subscribe')) {
     // If Message-subscribe exists, let's use it.
-    message_subscribe_send_message('node', $node, $message, array('email' => $options));
+
+    message_subscribe_send_message('node', $node, $message, array('email' => $options, ), $subscribe_options);
   }
 }
 
