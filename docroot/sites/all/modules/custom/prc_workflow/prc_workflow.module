@@ -227,7 +227,7 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
     }
 
     //Change the text of the submit button to save draft
-    $form['actions']['submit']['#value'] = "Save Draft";
+    $form['actions']['submit']['#value'] = "Save New Draft";
   }
 }
 
