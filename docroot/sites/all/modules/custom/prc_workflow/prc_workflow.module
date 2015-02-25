@@ -379,6 +379,7 @@ function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log) {
       $machine->on_exit_published();
       break;
     case 'update_published' :
+    case 'republish' :
       prc_workflow_message('published_notice', $node);
       break;
   }

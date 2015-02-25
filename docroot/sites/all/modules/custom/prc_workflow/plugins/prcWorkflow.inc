@@ -68,7 +68,7 @@ class prcWorkflow extends StateFlow {
 
     $this->create_event('approved',
       array(
-        'label' => t('Approve'),
+        'label' => t('Publish'),
         'origin' => 'ready_for_review',
         'target' => 'published',
         'permissions' => array('approve prc content'),
