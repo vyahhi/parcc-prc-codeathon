@@ -370,9 +370,6 @@ function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log) {
     case 'denied':
       prc_workflow_message('request_changes', $node);
       break;
-    case 'approved' :
-      prc_workflow_message('published_notice', $node);
-      break;
     case 'unpublish':
       prc_workflow_message('unpublished_notice', $node);
       //We are firing this here because exiting doesn't necessarily mean unpublish
@@ -380,6 +377,7 @@ function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log) {
       break;
     case 'update_published' :
     case 'republish' :
+    case 'approved' :
       prc_workflow_message('published_notice', $node);
       break;
   }

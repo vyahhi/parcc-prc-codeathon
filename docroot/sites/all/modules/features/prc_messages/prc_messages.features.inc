@@ -64,9 +64,9 @@ function prc_messages_default_message_type() {
           "safe_value" : "\\u003Cp\\u003E[message:field-node:title] Has Been Published\\u003C\\/p\\u003E\\n"
         },
         {
-          "value" : "The following digital library content has been published.\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\r\\n",
+          "value" : "The following Digital Library content has been published.\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nContent Administrator: [message:user:field-first-name] [message:field-user-ref:field_last_name] ([message:user:mail])\\r\\n",
           "format" : "full_html",
-          "safe_value" : "\\u003Cp\\u003EThe following digital library content has been published.\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\u003C\\/p\\u003E\\n"
+          "safe_value" : "\\u003Cp\\u003EThe following Digital Library content has been published.\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nContent Administrator: [message:user:field-first-name] [message:field-user-ref:field_last_name] ([message:user:mail])\\u003C\\/p\\u003E\\n"
         }
       ]
     },
@@ -118,9 +118,9 @@ function prc_messages_default_message_type() {
           "safe_value" : "\\u003Cp\\u003EChanges before approval for [message:field-node:title]\\u003C\\/p\\u003E\\n"
         },
         {
-          "value" : "A curator has provided for content you\\u0027ve submitted for approval:\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\r\\nComment: [message:field-node:workflow-comments]\\r\\n",
+          "value" : "A curator has requested changes for content you\\u0027ve submitted for approval:\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\r\\nComment: [message:field-node:workflow-comments]\\r\\n\\r\\nContent Administrator: [message:user:field-first-name] [message:field-user-ref:field_last_name] ([message:user:mail])\\r\\n",
           "format" : "full_html",
-          "safe_value" : "\\u003Cp\\u003EA curator has provided for content you\\u0027ve submitted for approval:\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\u003Cbr \\/\\u003E\\nComment: [message:field-node:workflow-comments]\\u003C\\/p\\u003E\\n"
+          "safe_value" : "\\u003Cp\\u003EA curator has requested changes for content you\\u0027ve submitted for approval:\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\u003Cbr \\/\\u003E\\nComment: [message:field-node:workflow-comments]\\u003C\\/p\\u003E\\n\\u003Cp\\u003EContent Administrator: [message:user:field-first-name] [message:field-user-ref:field_last_name] ([message:user:mail])\\u003C\\/p\\u003E\\n"
         }
       ]
     },
@@ -172,9 +172,9 @@ function prc_messages_default_message_type() {
           "safe_value" : "\\u003Cp\\u003E[message:field-node:title] Has Been Unpublished\\u003C\\/p\\u003E\\n"
         },
         {
-          "value" : "The following digital library content has been unpublished.\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\r\\n",
+          "value" : "The following Digital Library content has been unpublished.\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\r\\n\\r\\nContent Administrator: [message:user:field-first-name] [message:field-user-ref:field_last_name] ([message:user:mail])\\r\\n",
           "format" : "full_html",
-          "safe_value" : "\\u003Cp\\u003EThe following digital library content has been unpublished.\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\u003C\\/p\\u003E\\n"
+          "safe_value" : "\\u003Cp\\u003EThe following Digital Library content has been unpublished.\\u003Cbr \\/\\u003E\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\u003Cbr \\/\\u003E\\nDate: [message:timestamp:long]\\u003Cbr \\/\\u003E\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\u003C\\/p\\u003E\\n\\u003Cp\\u003EContent Administrator: [message:user:field-first-name] [message:field-user-ref:field_last_name] ([message:user:mail])\\u003C\\/p\\u003E\\n"
         }
       ]
     },
