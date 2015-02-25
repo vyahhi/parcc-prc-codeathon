@@ -113,3 +113,24 @@ Feature: Workflow is functional
       And I follow "My first post @timestamp"
       Then I should see the text "My first post @timestamp"
       And I should not see the text "Access denied"
+
+    Scenario: PRC-829 Not Approving Content - Items are not in specified order
+      Given I am logged in as "Joe Contributor @timestamp"
+      And I visit "admin-content"
+      And I click "Add content"
+      And I fill in "edit-title" with "My first post @timestamp"
+      And I fill in "Body" with "Isn't this swell?"
+      And I select the radio button "Public" with the id "edit-field-permissions-und-public"
+      And I press the "Save" button
+      When I follow "Edit"
+      And I press "Request Approval"
+      And I fill in "Log message for this state change *" with "Review requested"
+      When I press the "Update state" button
+
+      Given I am an anonymous user
+
+      Then I am logged in as "Joe Curator @timestamp"
+      And I follow "Content"
+      And I follow "My first post @timestamp"
+      Then I press "Request Change"
+      Then "Instructions: (to be added)" should precede "Changes before Approval *" for the query "div"

@@ -237,7 +237,14 @@ function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state
   $form['#submit'][] = 'prc_workflow_events_submit';
   if ($form['event']['#value'] == 'denied') {
     $form['event_comment']['#title'] = t('Changes before Approval');
-    $form['event_comment']['#description'] = t('Instructions: (to be added)');
+
+    $form['instructions'] = array(
+      '#markup' => t('Instructions: (to be added)'),
+      '#prefix' => '<div class="instructions">',
+      '#suffix' => '</div>',
+      '#weight' => -1,
+    );
+
   }
 }
 
