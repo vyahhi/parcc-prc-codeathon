@@ -80,3 +80,36 @@ Feature: Workflow is functional
     And I fill in "Changes before Approval *" with "Do it again, not so clever."
     When I press the "Update state" button
     #Then the email to "joe_1prc_58cc@timestamp@example.com" should contain "Do it again, not so clever."
+
+    Scenario: PRC-786 Access Denied message when clicking on item in Content tab
+      #  Content Curation: Curator permissions- Access Denied message when when clicking on item in Content tab
+      #  Precondition:
+      #  1. Have Content Contributor create content and then send for approval.
+      #  2. Log in as PRC Admin or Content Administrator (Curator) role
+      #  Steps:
+      #  1. Click Content tab
+      #  2. Click on title of content that is in state "Waiting for Review"
+      #  Actual Results:
+      #  2. Access Denied. You are not allowed to view this content.
+      #  Expected Results:
+      #  2. Should be able to view content that I am trying to approve.
+      #  NOTE: When they click on "pending review" link in Actions column, it works fine.
+      Given I am logged in as "Joe Contributor @timestamp"
+      And I visit "admin-content"
+      And I click "Add content"
+      And I fill in "edit-title" with "My first post @timestamp"
+      And I fill in "Body" with "Isn't this swell?"
+      And I select the radio button "Public" with the id "edit-field-permissions-und-public"
+      And I press the "Save" button
+      When I follow "Edit"
+      And I press "Request Approval"
+      And I fill in "Log message for this state change *" with "Review requested"
+      When I press the "Update state" button
+
+      Given I am an anonymous user
+
+      Then I am logged in as "Joe Curator @timestamp"
+      And I follow "Content"
+      And I follow "My first post @timestamp"
+      Then I should see the text "My first post @timestamp"
+      And I should not see the text "Access denied"
