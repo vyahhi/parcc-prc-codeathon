@@ -950,7 +950,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => 'Anonymous Users Access Denied',
       'title' => '',
-      'body' => 'If you have an account <a href="/user">please log in</a>.',
+      'body' => 'If you have a site account, <a href="/user">log in</a> and try to access the page again.',
       'format' => 'full_html',
       'substitute' => TRUE,
     );
