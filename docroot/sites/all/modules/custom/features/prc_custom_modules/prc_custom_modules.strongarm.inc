@@ -114,6 +114,52 @@ function prc_custom_modules_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'pinit_default_description';
+  $strongarm->value = '';
+  $export['pinit_default_description'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pinit_default_img';
+  $strongarm->value = 'http://www.jaguar.com/resources/images/jaguar-logo.png';
+  $export['pinit_default_img'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pinit_default_pincount';
+  $strongarm->value = 'none';
+  $export['pinit_default_pincount'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pinit_source';
+  $strongarm->value = 'title';
+  $export['pinit_source'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pinit_types_enabled';
+  $strongarm->value = array(
+    'digital_library_content' => 'digital_library_content',
+    'pd_course' => 'pd_course',
+    'course' => 0,
+    'favorites_list' => 0,
+    'multichoice' => 0,
+    'panel' => 0,
+    'pd_module' => 0,
+    'quiz' => 0,
+    'quiz_directions' => 0,
+    'short_answer' => 0,
+  );
+  $export['pinit_types_enabled'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'quiz_autotitle_length';
   $strongarm->value = '50';
   $export['quiz_autotitle_length'] = $strongarm;
@@ -326,7 +372,7 @@ You can access the result here !url
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'sharethis_option_onhover';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['sharethis_option_onhover'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -340,7 +386,7 @@ You can access the result here !url
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'sharethis_service_option';
-  $strongarm->value = '"Email:email","Facebook:facebook","Edmodo:edmodo","Pinterest:pinterest"';
+  $strongarm->value = '"Email:email","Facebook:facebook","Edmodo:edmodo"';
   $export['sharethis_service_option'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -354,7 +400,7 @@ You can access the result here !url
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'sharethis_widget_option';
-  $strongarm->value = 'st_multi';
+  $strongarm->value = 'st_direct';
   $export['sharethis_widget_option'] = $strongarm;
 
   return $export;

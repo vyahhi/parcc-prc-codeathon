@@ -239,13 +239,28 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
 function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state) {
   $form['#submit'][] = 'prc_workflow_events_submit';
   if ($form['event']['#value'] == 'denied') {
-    $form['event_comment']['#title'] = t('Changes before Approval');
-    $form['event_comment']['#description'] = t('Instructions: (to be added)');
+    // Changes before Approval for PRC-592 @timestamp (revision #)
+    $title = $form_state['build_info']['args'][0]->title;
+    $vid = $form_state['build_info']['args'][0]->vid;
+    $new_title = t('Changes before Approval for @title (revision @vid)', array('@title' => $title, '@vid' => $vid));
+    drupal_set_title($new_title);
+
+    $form['event_comment']['#title'] = t('Message');
+
+    $form['submit']['#value'] = t('Send Request');
+
+    $form['instructions'] = array(
+      '#markup' => t('Instructions: (to be added)'),
+      '#prefix' => '<div class="instructions">',
+      '#suffix' => '</div>',
+      '#weight' => -1,
+    );
+
   }
 }
 
 /**
- * Additional submit handler for revisions.
+ * Additional submit handler for revisi ons.
  *
  * @param $form
  * @param $form_state
@@ -365,7 +380,7 @@ function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log) {
       prc_workflow_message('ready_for_review', $node);
       break;
     case 'rescind_request':
-      prc_workflow_message('rescind_request', $node);
+      prc_workflow_message('rescind_review_request', $node);
       break;
     case 'denied':
       prc_workflow_message('request_changes', $node);

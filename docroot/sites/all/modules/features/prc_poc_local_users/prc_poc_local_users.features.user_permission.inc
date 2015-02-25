@@ -593,6 +593,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'administer pin it button'.
+  $permissions['administer pin it button'] = array(
+    'name' => 'administer pin it button',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'pinit',
+  );
+
   // Exported permission: 'administer profiler builder'.
   $permissions['administer profiler builder'] = array(
     'name' => 'administer profiler builder',
@@ -1909,6 +1918,15 @@ function prc_poc_local_users_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'edit pin it button settings'.
+  $permissions['edit pin it button settings'] = array(
+    'name' => 'edit pin it button settings',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'pinit',
   );
 
   // Exported permission: 'edit question titles'.

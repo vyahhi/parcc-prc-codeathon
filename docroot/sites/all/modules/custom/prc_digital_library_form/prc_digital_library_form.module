@@ -32,3 +32,19 @@ function prc_digital_library_form_form_digital_library_content_node_form_alter(&
     }
   }
 }
+
+/**
+ * Implements hook_node_view().
+ */
+function prc_digital_library_form_node_view($node, $view_mode, $langcode) {
+  // Show pin button on gallery view and teaser view
+
+  $view_modes_to_pin = array(
+    'gallery_view',
+    'teaser'
+  );
+
+  if (array_search($view_mode, $view_modes_to_pin) !== FALSE && !empty($node->pinit)) {
+    PinIt::instance()->renderData($node, $node->pinit);
+  }
+}

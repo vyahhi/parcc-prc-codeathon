@@ -688,6 +688,12 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
   }
 
+  public function assertHeading($heading) {
+    $heading = $this->fixStepArgument($heading);
+    return parent::assertHeading($heading);
+  }
+
+
   /**
    * @Then /^"(?P<before>[^"]*)" should precede "(?P<after>[^"]*)" for the query "(?P<query>[^"]*)"$/
    */
