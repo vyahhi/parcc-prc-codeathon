@@ -77,8 +77,8 @@ Feature: Workflow is functional
     And I visit "admin-content"
     And I click "pending review"
     And I press the "Request Change" button
-    And I fill in "Changes before Approval *" with "Do it again, not so clever."
-    When I press the "Update state" button
+    And I fill in "Message *" with "Do it again, not so clever."
+    When I press the "Send Request" button
     #Then the email to "joe_1prc_58cc@timestamp@example.com" should contain "Do it again, not so clever."
 
     Scenario: PRC-786 Access Denied message when clicking on item in Content tab
@@ -176,3 +176,24 @@ Feature: Workflow is functional
     And I follow "PRC-592 @timestamp"
     Then I press "Request Change"
     Then I press "Send Request"
+
+  Scenario: PRC-833 Content Curation: Not Approving Content- Text Field Label is not correct
+    Given I am logged in as "Joe Contributor @timestamp"
+    And I visit "admin-content"
+    And I click "Add content"
+    And I fill in "edit-title" with "PRC-592 @timestamp"
+    And I fill in "Body" with "Isn't this swell?"
+    And I select the radio button "Public" with the id "edit-field-permissions-und-public"
+    And I press the "Save" button
+    When I follow "Edit"
+    And I press "Request Approval"
+    And I fill in "Log message for this state change *" with "Review requested"
+    When I press the "Update state" button
+
+    Given I am an anonymous user
+
+    Then I am logged in as "Joe Curator @timestamp"
+    And I follow "Content"
+    And I follow "PRC-592 @timestamp"
+    Then I press "Request Change"
+    Then I should see the text "Message"

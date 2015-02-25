@@ -242,7 +242,7 @@ function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state
     $new_title = t('Changes before Approval for @title (revision @vid)', array('@title' => $title, '@vid' => $vid));
     drupal_set_title($new_title);
 
-    $form['event_comment']['#title'] = t('Changes before Approval');
+    $form['event_comment']['#title'] = t('Message');
 
     $form['submit']['#value'] = t('Send Request');
 
