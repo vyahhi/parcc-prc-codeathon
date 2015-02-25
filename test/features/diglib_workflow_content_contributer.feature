@@ -1,4 +1,4 @@
-@api
+@api @diglib @workflow @javascript
 Feature: As a Content Contributor, I need to have specific access to the Digital Library
   content that I have created so I can develop the content that I have a deep understanding [of] (PRC-629).
 

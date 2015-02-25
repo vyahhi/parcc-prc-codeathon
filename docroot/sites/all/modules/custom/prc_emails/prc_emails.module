@@ -56,18 +56,6 @@ function prc_emails_message_subscribe_get_subscribers(Message $message, $subscri
     }
   }
 
-  //Messages sent to the node owner
-  $node_owner_recipents = array(
-    'published_notice',
-    'unpublished_notice',
-    'request_changes'
-  );
-  if(in_array($message->type, $node_owner_recipents)){
-    $node = $w->field_node->value();
-
-
-  }
-
   return $uids;
 }
 

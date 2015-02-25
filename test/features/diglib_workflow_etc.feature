@@ -1,4 +1,4 @@
-@api
+@api @diglib @workflow
 Feature: Workflow is functional
 
   Background:
@@ -17,11 +17,14 @@ Feature: Workflow is functional
     And I fill in "Body" with "Isn't this swell?"
     And I select the radio button "Public" with the id "edit-field-permissions-und-public"
     And I press the "Save" button
-    And I click "Edit"
+    When I click "Edit"
+    And I should see the text "Content State: Private Draft"
     And I press the "Request Approval" button
     And I fill in "Log message for this state change *" with "Please approve my first post."
-    And press the "Update state" button
-    #Then the email to "joe_1prc_58cc@timestamp@example.com" should contain "The following content is awaiting approval"
+    Then press the "Update state" button
+    And I visit "content/my-first-post"
+    And I should see the text "Approval Requested"
+    #And the email to "joe_1prc_58ca@timestamp@example.com" should contain "The following content is awaiting approval"
 
     # Curator approves review
     Given I am logged in as "Joe Curator @timestamp"
@@ -30,22 +33,26 @@ Feature: Workflow is functional
     And I press the "Approve" button
     And I fill in "Log message for this state change *" with "Looks good to me."
     When I press the "Update state" button
-    #Then the email to "joe_1prc_58cc@timestamp@example.com" should contain "The following digital library content has been published."
+    And I click "Log out"
+    And I visit "content/my-first-post"
+    And I should see the text "My first post"
+    Then the email to "joe_1prc_58cc@timestamp@example.com" should contain "The following digital library content has been published."
 
     # Curator updates published content
     Given I am logged in as "Joe Curator @timestamp"
     And I visit "content/my-first-post"
+    And I should see the text "Content State: Published"
     And I click "Edit"
     And I fill in "Body" with "This is what I have to say."
     When I press "Save and Publish"
     And I fill in "Log message for this state change *" with "Need to get my word in."
     And I press the "Update state" button
-    #Then the email to "joe_1prc_58cc@timestamp@example.com" should contain "The following digital library content has been published."
+    Then the email to "joe_1prc_58cc@timestamp@example.com" should contain "The following digital library content has been published."
     And I click "Log out"
     And I visit "content/my-first-post"
     And I should see the text "This is what I have to say."
 
-    #Contributer requests a new draft be published
+    # Contributor requests a new draft be published
     Given I am logged in as "Joe Contributor @timestamp"
     And I visit "content/my-first-post"
     And I should see the text "Content State: Published"
@@ -55,14 +62,14 @@ Feature: Workflow is functional
     And I fill in "Log message for this state change *" with "I'm so clever."
     Then I press the "Update state" button
 
-    #Curator approves new draft
+    # Curator approves new draft
     Given I am logged in as "Joe Curator @timestamp"
     And I visit "admin-content"
     And I click "pending review"
     And I press the "Approve" button
     And I fill in "Log message for this state change *" with "Wow, you are so clever."
     When I press the "Update state" button
-    #Then the email to "joe_1prc_58cc@timestamp@example.com" should contain "The following digital library content has been published."
+    Then the email to "joe_1prc_58cc@timestamp@example.com" should contain "The following digital library content has been published."
 
     #contributer is denied
     Given I am logged in as "Joe Contributor @timestamp"
@@ -79,4 +86,26 @@ Feature: Workflow is functional
     And I press the "Request Change" button
     And I fill in "Changes before Approval *" with "Do it again, not so clever."
     When I press the "Update state" button
+    And I visit "content/my-first-post"
+    And I should see the text "Content State: Published"
     #Then the email to "joe_1prc_58cc@timestamp@example.com" should contain "Do it again, not so clever."
+
+    #Unpublish
+    Given I am logged in as "Joe Curator @timestamp"
+    And I visit "content/my-first-post"
+    And I click "Edit"
+    And I press the "Unpublish" button
+    And I fill in "Log message for this state change *" with "Let's take this down."
+    And I visit "content/my-first-post"
+    And I should see the text "Content State: Unpublished"
+    Then the email to "joe_1prc_58cc@timestamp@example.com" should contain "The following digital library content has been unpublished."
+
+    #Curator publishes without needing approval
+    Given I visit "content/my-first-post"
+    And I click "Edit"
+    And I press the "Publish" button
+    And I fill in "Log message for this state change *" with "Let's put this back up."
+    And I press the "Update state" button
+    When I visit "content/my-first-post"
+    Then I should see the text "Content State: Published"
+    And the email to "joe_1prc_58cc@timestamp@example.com" should contain "The following digital library content has been published."
