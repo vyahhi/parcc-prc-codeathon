@@ -244,6 +244,8 @@ function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state
 
     $form['event_comment']['#title'] = t('Changes before Approval');
 
+    $form['submit']['#value'] = t('Send Request');
+
     $form['instructions'] = array(
       '#markup' => t('Instructions: (to be added)'),
       '#prefix' => '<div class="instructions">',
@@ -255,7 +257,7 @@ function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state
 }
 
 /**
- * Additional submit handler for revisions.
+ * Additional submit handler for revisi ons.
  *
  * @param $form
  * @param $form_state

@@ -135,7 +135,7 @@ Feature: Workflow is functional
       Then I press "Request Change"
       Then "Instructions: (to be added)" should precede "Changes before Approval *" for the query "div"
 
-    Scenario: PRC-592 Content Curation: Not Approving Content
+    Scenario: PRC-830 Content Curation: Not Approving Content- Form Title not as specified in AC
       Given I am logged in as "Joe Contributor @timestamp"
       And I visit "admin-content"
       And I click "Add content"
@@ -155,3 +155,24 @@ Feature: Workflow is functional
       And I follow "PRC-592 @timestamp"
       Then I press "Request Change"
       Then I should see the text "Changes before Approval for PRC-592"
+
+  Scenario: PRC-832 Content Curation: Not Approving Content- Send Request button not as specified
+    Given I am logged in as "Joe Contributor @timestamp"
+    And I visit "admin-content"
+    And I click "Add content"
+    And I fill in "edit-title" with "PRC-592 @timestamp"
+    And I fill in "Body" with "Isn't this swell?"
+    And I select the radio button "Public" with the id "edit-field-permissions-und-public"
+    And I press the "Save" button
+    When I follow "Edit"
+    And I press "Request Approval"
+    And I fill in "Log message for this state change *" with "Review requested"
+    When I press the "Update state" button
+
+    Given I am an anonymous user
+
+    Then I am logged in as "Joe Curator @timestamp"
+    And I follow "Content"
+    And I follow "PRC-592 @timestamp"
+    Then I press "Request Change"
+    Then I press "Send Request"
