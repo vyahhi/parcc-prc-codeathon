@@ -30,7 +30,6 @@ function prc_workflow_permission() {
   );
 }
 
-
 /**
  * Implements hook_menu_alter()
  */
@@ -40,13 +39,17 @@ function prc_workflow_menu_alter(&$menu) {
   $menu['node/%node/revisions/%/edit']['access callback'] = 'prc_workflow_access';
 }
 
-function prc_workflow_access($op, $node) {
-  if (node_access($op, $node)) {
+function prc_workflow_access($op, $node, $account = NULL) {
+  if(empty($account)){
+    global $user;
+    $account = $user;
+  }
+  if (node_access($op, $node, $account)) {
 
     //Block access to editing for contributors when under review
     if ($op == 'update' && prc_workflow_reported_state($node->nid) === 'ready_for_review') {
 
-      return user_access('approve prc content');
+      return user_access('approve prc content', $account);
     }else {
       return TRUE;
     }
@@ -224,7 +227,7 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
     }
 
     //Change the text of the submit button to save draft
-    $form['actions']['submit']['#value'] = "Save Draft";
+    $form['actions']['submit']['#value'] = "Save New Draft";
   }
 }
 
@@ -236,13 +239,28 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
 function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state) {
   $form['#submit'][] = 'prc_workflow_events_submit';
   if ($form['event']['#value'] == 'denied') {
-    $form['event_comment']['#title'] = t('Changes before Approval');
-    $form['event_comment']['#description'] = t('Instructions: (to be added)');
+    // Changes before Approval for PRC-592 @timestamp (revision #)
+    $title = $form_state['build_info']['args'][0]->title;
+    $vid = $form_state['build_info']['args'][0]->vid;
+    $new_title = t('Changes before Approval for @title (revision @vid)', array('@title' => $title, '@vid' => $vid));
+    drupal_set_title($new_title);
+
+    $form['event_comment']['#title'] = t('Message');
+
+    $form['submit']['#value'] = t('Send Request');
+
+    $form['instructions'] = array(
+      '#markup' => t('Instructions: (to be added)'),
+      '#prefix' => '<div class="instructions">',
+      '#suffix' => '</div>',
+      '#weight' => -1,
+    );
+
   }
 }
 
 /**
- * Additional submit handler for revisions.
+ * Additional submit handler for revisi ons.
  *
  * @param $form
  * @param $form_state
@@ -367,15 +385,14 @@ function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log) {
     case 'denied':
       prc_workflow_message('request_changes', $node);
       break;
-    case 'approved' :
-      prc_workflow_message('published_notice', $node);
-      break;
     case 'unpublish':
       prc_workflow_message('unpublished_notice', $node);
       //We are firing this here because exiting doesn't necessarily mean unpublish
       $machine->on_exit_published();
       break;
     case 'update_published' :
+    case 'republish' :
+    case 'approved' :
       prc_workflow_message('published_notice', $node);
       break;
   }
@@ -396,6 +413,7 @@ function prc_workflow_message($message_type, $node) {
   $wrapper = entity_metadata_wrapper('message', $message);
 
   $wrapper->field_node->set($node);
+
 
   if ($message_type == 'request_changes') {
     $wrapper->field_version_id->set($node->vid);
@@ -435,7 +453,7 @@ function prc_workflow_reported_state($nid){
   //If the node was ever published, but is currently draft, report the state as unpublished
   if($reported_state == 'draft'){
     $published_history = db_query("select state from {node_revision_states_history} where nid = :nid and state = 'published'", array(':nid' => $nid))->fetchField();
-    if(count($published_history)){
+    if($published_history && count($published_history)){
       $reported_state = 'unpublished';
     }
   }
