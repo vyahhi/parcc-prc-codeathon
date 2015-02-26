@@ -54,7 +54,7 @@ function prc_emails_message_subscribe_get_subscribers(Message $message, $subscri
   $message_recipients = array(
     'comment_email' => array('Content Administrator (Curator)', 'PRC Admin'),
     'ready_for_review' => array('Content Administrator (Curator)'),
-    'rescind_request' => array('Content Administrator (Curator)'),
+    'rescind_review_request' => array('Content Administrator (Curator)'),
   );
 
   $w = entity_metadata_wrapper('message', $message);

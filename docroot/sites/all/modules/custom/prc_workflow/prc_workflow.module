@@ -414,6 +414,7 @@ function prc_workflow_message($message_type, $node) {
 
   $wrapper->field_node->set($node);
 
+
   if ($message_type == 'request_changes') {
     $wrapper->field_version_id->set($node->vid);
   }
