@@ -125,7 +125,7 @@ $body-font-family: "Proxima Nova", "Open Sans", "Helvetica Neue", "Helvetica", H
 
 // Media Queries
 
-// $small-screen: 768px;
+$small-screen: 1024px;
 // $medium-screen: 1280px;
 // $large-screen: 1440px;
 
@@ -1311,7 +1311,7 @@ $topbar-link-bg-active: darken($topbar-dropdown-bg, 3%);
 // Transitions and breakpoint styles
 
 // $topbar-transition-speed: 300ms;
-// $topbar-breakpoint: 940 !default; // Change to 9999px for always mobile layout
+$topbar-breakpoint: 1024px !default; // Change to 9999px for always mobile layout
 // $topbar-media-query: "only screen and (min-width: #{$topbar-breakpoint})";
 
 // Divider Styles
