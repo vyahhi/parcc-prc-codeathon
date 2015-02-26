@@ -92,8 +92,8 @@
 
         <?php if ($main_menu || $secondary_menu): ?>
           <section class="top-bar-section">
-            <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('id' => 'main-menu'))); ?>
-            <?php print theme('links__system_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('id' => 'secondary-menu'))); ?>
+            <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('id' => 'main-menu', 'class' => 'left'))); ?>
+            <?php print theme('links__system_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('id' => 'secondary-menu', 'class' => 'left'))); ?>
           </section>
         <?php endif; ?>
 
@@ -118,7 +118,7 @@
     <div class="large-12 columns">
       <div id="main-wrapper"><div id="main" class="clearfix">
 
-        <div id="content" class="column"><div class="section">
+        <div id="content"><div class="section">
           <?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
           <a id="main-content"></a>
           <?php print render($title_prefix); ?>

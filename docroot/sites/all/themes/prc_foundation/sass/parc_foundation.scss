@@ -54,20 +54,45 @@
 // @import "foundation/components/tooltips";
 // @import "foundation/components/dropdown";
 
-nav {
-  a#logo img {
-    margin: 25px 25px 0 25px;
+@media #{$screen} {
+  nav {
+    a#logo img {
+      margin: 25px 25px 0 0.9375em; // figure out why you can't use $column-gutter here...
+    }
+    #main-menu li a {
+      text-transform: uppercase;
+      padding-right: $column-gutter;
+    }
+    #block-search-form {
+      float: left;
+      width: 100%;
+      background-color: $topbar-dropdown-bg;
+      padding: 20px 0.9375em 10px 25px;
+      line-height: 0;
+      h2 {
+        font-size: 0;
+      }
+    }
+    .toggle-topbar.menu-icon { // Shouldn't be necessary to force this into grid
+      right: 0.9375em !important;
+    }
   }
-  #main-menu li a {
-    text-transform: uppercase;
-  }
-  #search-block-form {
-    float: right;
-    position: relative;
-    top: -10px;
-    margin: 0 25px 25px;
-    h2 {
-      font-size: 0;
+}
+
+@media #{$topbar-media-query} {
+  nav {
+    .top-bar-section li a:not(.button):hover, .top-bar-section ul li.active > a {
+      background: none repeat scroll 0% 0% darken($topbar-bg-color, 3%);
+    }
+    .top-bar-section ul {
+      background-color: $topbar-bg-color;
+    }
+    #block-search-form {
+      float: right;
+      width: auto;
+      background-color: $topbar-bg-color;
+      padding-top: 5px;
+      line-height: 60px;
     }
   }
 }

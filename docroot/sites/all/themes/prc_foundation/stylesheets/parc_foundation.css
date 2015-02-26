@@ -1738,7 +1738,7 @@ blockquote p {
   width: 100%;
   height: auto;
   display: block;
-  background: #344758;
+  background: #333333;
   font-size: 16px;
   margin: 0;
 }
@@ -1760,7 +1760,7 @@ blockquote p {
   padding-left: 28.33333px;
   font-size: 0.8125em;
   font-weight: normal;
-  background: #344758;
+  background: #333333;
 }
 /* line 269, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
 .top-bar-section ul li > a.button {
@@ -1799,12 +1799,12 @@ blockquote p {
 }
 /* line 300, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
 .top-bar-section ul li:hover > a {
-  background: #2e3f4e;
+  background: #2b2b2b;
   color: #fff;
 }
 /* line 306, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
 .top-bar-section ul li.active > a {
-  background: #2e3f4e;
+  background: #2b2b2b;
   color: #fff;
 }
 /* line 313, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
@@ -1964,7 +1964,7 @@ blockquote p {
   }
   /* line 435, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
   .top-bar-section li.hover > a:not(.button) {
-    background: #2e3f4e;
+    background: #2b2b2b;
     color: #fff;
   }
   /* line 440, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
@@ -1975,7 +1975,7 @@ blockquote p {
   }
   /* line 444, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
   .top-bar-section li a:not(.button):hover {
-    background: #2e3f4e;
+    background: #2b2b2b;
   }
   /* line 452, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
   .top-bar-section .has-dropdown > a {
@@ -2066,12 +2066,12 @@ blockquote p {
 
   /* line 548, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
   .no-js .top-bar-section ul li:hover > a {
-    background: #2e3f4e;
+    background: #2b2b2b;
     color: #fff;
   }
   /* line 554, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
   .no-js .top-bar-section ul li:active > a {
-    background: #2e3f4e;
+    background: #2b2b2b;
     color: #fff;
   }
   /* line 562, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
@@ -2079,22 +2079,48 @@ blockquote p {
     display: block;
   }
 }
-/* line 58, ../sass/parc_foundation.scss */
-nav a#logo img {
-  margin: 25px 25px 0 25px;
+@media only screen {
+  /* line 59, ../sass/parc_foundation.scss */
+  nav a#logo img {
+    margin: 25px 25px 0 0.9375em;
+  }
+  /* line 62, ../sass/parc_foundation.scss */
+  nav #main-menu li a {
+    text-transform: uppercase;
+    padding-right: 1.875em;
+  }
+  /* line 66, ../sass/parc_foundation.scss */
+  nav #block-search-form {
+    float: left;
+    width: 100%;
+    background-color: #333333;
+    padding: 20px 0.9375em 10px 25px;
+    line-height: 0;
+  }
+  /* line 72, ../sass/parc_foundation.scss */
+  nav #block-search-form h2 {
+    font-size: 0;
+  }
+  /* line 76, ../sass/parc_foundation.scss */
+  nav .toggle-topbar.menu-icon {
+    right: 0.9375em !important;
+  }
 }
-/* line 61, ../sass/parc_foundation.scss */
-nav #main-menu li a {
-  text-transform: uppercase;
-}
-/* line 64, ../sass/parc_foundation.scss */
-nav #search-block-form {
-  float: right;
-  position: relative;
-  top: -10px;
-  margin: 0 25px 25px;
-}
-/* line 69, ../sass/parc_foundation.scss */
-nav #search-block-form h2 {
-  font-size: 0;
+@media only screen and (min-width: 940px) {
+  /* line 84, ../sass/parc_foundation.scss */
+  nav .top-bar-section li a:not(.button):hover, nav .top-bar-section ul li.active > a {
+    background: none repeat scroll 0% 0% #2e3f4e;
+  }
+  /* line 87, ../sass/parc_foundation.scss */
+  nav .top-bar-section ul {
+    background-color: #344758;
+  }
+  /* line 90, ../sass/parc_foundation.scss */
+  nav #block-search-form {
+    float: right;
+    width: auto;
+    background-color: #344758;
+    padding-top: 5px;
+    line-height: 60px;
+  }
 }
