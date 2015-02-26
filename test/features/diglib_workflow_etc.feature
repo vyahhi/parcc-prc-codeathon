@@ -42,8 +42,9 @@ Feature: Workflow is functional
     And I visit "content/my-first-post"
     And I should see the text "My first post"
     # prc-827 : Digital Library in email is not capitalized
-    #Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
-    Then the email to "joe_1prc_58cc@example.com" should contain "The following digital library content has been published."
+    Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
+    # prc-824
+    And the email should contain "Content Administrator: Joe Curator (joe_1prc_58ca@example.com)"
 
     # Curator updates published content
     Given I am logged in as "Joe Curator"
@@ -54,7 +55,7 @@ Feature: Workflow is functional
     When I press "Save and Publish"
     And I fill in "Log message for this state change *" with "Need to get my word in."
     And I press the "Update state" button
-    Then the email to "joe_1prc_58cc@example.com" should contain "The following digital library content has been published."
+    Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
     And I click "Log out"
     And I visit "content/my-first-post"
     And I should see the text "This is what I have to say."
@@ -76,7 +77,7 @@ Feature: Workflow is functional
     And I press the "Publish" button
     And I fill in "Log message for this state change *" with "Wow, you are so clever."
     When I press the "Update state" button
-    Then the email to "joe_1prc_58cc@example.com" should contain "The following digital library content has been published."
+    Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
 
     #contributer is denied
     Given I am logged in as "Joe Contributor"
@@ -91,8 +92,8 @@ Feature: Workflow is functional
     And I visit "admin-content"
     And I click "pending review"
     And I press the "Request Change" button
-    And I fill in "Changes before Approval *" with "Do it again, not so clever."
-    When I press the "Update state" button
+    And I fill in "Message *" with "Do it again, not so clever."
+    When I press the "Send Request" button
     And I visit "content/my-first-post"
     And I should see the text "Content State: Published"
     Then the email to "joe_1prc_58cc@example.com" should contain "Do it again, not so clever."
@@ -107,7 +108,7 @@ Feature: Workflow is functional
     And I visit "admin-content"
     And I click "My first post"
     And I should see the text "Content State: Unpublished"
-    Then the email to "joe_1prc_58cc@example.com" should contain "The following digital library content has been unpublished."
+    Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been unpublished."
     And I click "Log out"
     And I follow the link in the email
     And I should not see the text "Isn't this swell"
@@ -132,7 +133,7 @@ Feature: Workflow is functional
     And I should see the text "Content State: Unpublished"
 
     #Curator publishes without needing approval
-    Given I am logged in as "Joe Curator "
+    Given I am logged in as "Joe Curator"
     And I visit "admin-content"
     And I click "My first post"
     And I press the "Publish" button
@@ -140,7 +141,7 @@ Feature: Workflow is functional
     And I press the "Update state" button
     When I visit "content/my-first-post"
     Then I should see the text "Content State: Published"
-    And the email to "joe_1prc_58cc@example.com" should contain "The following digital library content has been published."
+    And the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
 
   # Cancelling a request before it was ever published
     Given I am logged in as "Joe Contributor"
@@ -186,7 +187,7 @@ Feature: Workflow is functional
     And I press "Update state"
 
     #content is in published state
-    Given I am logged in as "Joe Contributor "
+    Given I am logged in as "Joe Contributor"
     And I visit "content/my-first-post"
     And I click "Edit"
     And I fill in "Body" with "This is my unpublished addition"
@@ -199,7 +200,7 @@ Feature: Workflow is functional
     And I should not see "This is my unpublished addition"
 
     #Content is updated after approval
-    Given I am logged in as "Joe Curator "
+    Given I am logged in as "Joe Curator"
     And I visit "admin-content"
     And I click "pending review"
     And I press the "Publish" button
