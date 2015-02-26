@@ -396,7 +396,6 @@ function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log) {
       prc_workflow_message('published_notice', $node);
       break;
   }
-
 }
 
 /**
@@ -434,6 +433,13 @@ function prc_workflow_message($message_type, $node) {
  * @param $node
  */
 function prc_workflow_reported_state($nid){
+  /**
+   * The purpose of this was to report the same state no matter which
+   * revision you were viewing.
+   *
+   * @todo: delete this section if the states are behaving correctly
+   */
+  /*
   //get the active drafts
   $drafts = db_query("
     select * from {node_revision_states} nrs
@@ -456,6 +462,42 @@ function prc_workflow_reported_state($nid){
     if($published_history && count($published_history)){
       $reported_state = 'unpublished';
     }
+  }*/
+
+  //Base reported state on the most recent draft rather than the most advanced draft
+  //Get the active drafts
+  $active_versions = db_query("
+    select * from {node_revision_states} nrs
+    where nrs.nid = :nid
+      and nrs.status = 1 order by vid ASC",
+    array(':nid' => $nid))->fetchAllAssoc('vid');
+
+  //Check active drafts for any of the states our logic will require
+  $active_published = NULL;
+  $active_draft = NULL;
+  $active_review = NULL;
+
+  foreach($active_versions as $vid => $revision ){
+    switch($revision->state){
+      case 'draft' :
+        $active_draft = $vid;
+        break;
+      case 'published' :
+        $active_published = $vid;
+        break;
+      case 'ready_for_review' :
+        $active_review = $vid;
+        break;
+    }
+  }
+
+
+  if($active_review){
+    $reported_state = 'ready_for_review';
+  }elseif($active_draft){
+    $reported_state = 'draft';
+  }elseif($active_published){
+    $reported_state = 'published';
   }
 
   return $reported_state;

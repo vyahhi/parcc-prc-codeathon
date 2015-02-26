@@ -639,6 +639,18 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Then /^I should not see the button "(?P<button>[^"]*)"$/
+   */
+  public function assertButtonNotDisplayed($button) {
+    $element = $this->getSession()->getPage();
+
+    $buttonObj = $element->findButton($button);
+    if (!empty($buttonObj)) {
+      throw new \Exception(sprintf("The button '%s' was found and it wasn't suppose to be displayed.", $button));
+    }
+  }
+
+  /**
    * @Then /^the node titled "(?P<label>[^"]*)" should be published$/
    */
   public function assertNodePublished($title) {
