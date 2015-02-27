@@ -32,9 +32,9 @@ function prc_poc_local_message_request_changes_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "Changes before approval for [message:field-node:title]",
+          "value" : "Changes before Approval for [message:field-node:title]",
           "format" : "filtered_html",
-          "safe_value" : "\\u003Cp\\u003EChanges before approval for [message:field-node:title]\\u003C\\/p\\u003E\\n"
+          "safe_value" : "\\u003Cp\\u003EChanges before Approval for [message:field-node:title]\\u003C\\/p\\u003E\\n"
         },
         {
           "value" : "A curator has provided feedback for content you\\u0027ve submitted for approval:\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\r\\n\\r\\nComment: [message:field-node:workflow-comments]\\r\\n",

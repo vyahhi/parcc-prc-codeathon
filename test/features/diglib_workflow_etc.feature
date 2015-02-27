@@ -97,6 +97,8 @@ Feature: Workflow is functional
     And I visit "content/my-first-post"
     And I should see the text "Content State: Published"
     Then the email to "joe_1prc_58cc@example.com" should contain "Do it again, not so clever."
+    # PRC-868 Content Curation: Not Approving Content- Email subject "Approval" not capitalized
+    Then the email to "joe_1prc_58cc@example.com" should contain "Changes before Approval for"
 
     #Unpublish
     Given I am logged in as "Joe Curator"
