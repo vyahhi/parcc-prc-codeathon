@@ -78,6 +78,9 @@ Feature: Workflow is functional
     And I fill in "Log message for this state change *" with "Wow, you are so clever."
     When I press the "Update state" button
     Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
+    # PRC-824 Content Curation: Approving Content- Email content not correct
+    Then the email should contain "Content Administrator: Joe Curator (joe_1prc_58ca@example.com)"
+    Then the email should not contain "By:"
 
     #contributer is denied
     Given I am logged in as "Joe Contributor"
