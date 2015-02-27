@@ -347,3 +347,15 @@ Feature: Workflow is functional
     Then I press "Request Change"
     Then I should see the text "Message"
 
+  Scenario: PRC-831 node save button says "Save New Draft" instead of "Save Draft"
+    Given I am logged in as "Joe Contributor"
+    And I visit "admin-content"
+    And I click "Add content"
+    And I fill in "edit-title" with "PRC-592 @timestamp"
+    And I fill in "Body" with "Isn't this swell?"
+    And I select the radio button "Public" with the id "edit-field-permissions-und-public"
+    And I press the "Save" button
+    When I follow "Edit"
+    And I fill in "Body" with "This is swell"
+    And I press the "Save New Draft" button
+    And I should see the text "This is swell"

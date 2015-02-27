@@ -528,6 +528,8 @@ function prc_poc_local_views_views_default_views() {
     'rid' => 'rid',
     'field_profession' => 'field_profession',
     'status' => 'status',
+    'login_1' => 'login_1',
+    'created_1' => 'created_1',
   );
   $handler->display->display_options['style_options']['default'] = 'uid';
   $handler->display->display_options['style_options']['info'] = array(
@@ -585,6 +587,20 @@ function prc_poc_local_views_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'login_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'created_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
@@ -628,6 +644,20 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['status']['table'] = 'users';
   $handler->display->display_options['fields']['status']['field'] = 'status';
   $handler->display->display_options['fields']['status']['not'] = 0;
+  /* Field: User: Last login */
+  $handler->display->display_options['fields']['login_1']['id'] = 'login_1';
+  $handler->display->display_options['fields']['login_1']['table'] = 'users';
+  $handler->display->display_options['fields']['login_1']['field'] = 'login';
+  $handler->display->display_options['fields']['login_1']['label'] = 'Last Logged on';
+  $handler->display->display_options['fields']['login_1']['date_format'] = 'short';
+  $handler->display->display_options['fields']['login_1']['second_date_format'] = 'long';
+  /* Field: User: Created date */
+  $handler->display->display_options['fields']['created_1']['id'] = 'created_1';
+  $handler->display->display_options['fields']['created_1']['table'] = 'users';
+  $handler->display->display_options['fields']['created_1']['field'] = 'created';
+  $handler->display->display_options['fields']['created_1']['label'] = 'Member Since';
+  $handler->display->display_options['fields']['created_1']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created_1']['second_date_format'] = 'long';
   /* Filter criterion: User: Roles */
   $handler->display->display_options['filters']['rid']['id'] = 'rid';
   $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
