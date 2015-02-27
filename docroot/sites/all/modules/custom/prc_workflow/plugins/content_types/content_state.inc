@@ -26,14 +26,15 @@ function prc_workflow_state_render($subtype, $conf, $args, $context) {
   if (!empty($node->vid)) {
 
     $state_machine = state_flow_load_state_machine($node);
-    $reported_state = prc_workflow_reported_state($node->nid);
+    // Show state of the revision and not the reported state of the node
+    //$reported_state = prc_workflow_reported_state($node->nid); //@todo: remove if this satisfies acs
     $states = $state_machine->get_states_options();
-    $label = $states[$reported_state]['label'];
+    $label = $states[$state_machine->get_current_state()]['label'];
 
     $block->content = '<div class="prc-workflow-state"><span>Content State:</span> ' . ucfirst($label) . '</div>';
 
     // Provide a link for cancelling a request
-    if ($reported_state == 'ready_for_review') {
+    if ($state_machine->get_current_state() == 'ready_for_review') {
       //load the appropriate revision
       $revision = prc_workflow_fetch_latest_node_version_by_state($node->nid, 'ready_for_review');
       $state_machine = state_flow_load_state_machine($revision);
