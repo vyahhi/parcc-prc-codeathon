@@ -43,7 +43,7 @@ class prcWorkflow extends StateFlow {
         'guard' => 'prc_workflow_user_owns_node',
       )
     );
-
+/*
     $this->create_event('approval_requested_published',
       array(
         'label' => t('Request Approval'),
@@ -53,8 +53,7 @@ class prcWorkflow extends StateFlow {
         'guard' => 'prc_workflow_user_owns_node',
         'actual_event' => 'approval_requested',
       )
-    );
-
+    );*/
 
     $this->create_event('rescind_request',
       array(

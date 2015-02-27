@@ -66,7 +66,11 @@ Feature: Workflow is functional
     And I should see the text "Content State: Published"
     And I click "Edit"
     And I fill in "Body" with "Here is my clever addition."
-    When I press the "Request Approval" button
+    And I press the "Save New Draft" button
+    # @todo: change once we have an edit tab on the revision page
+    And I visit "content/my-first-post"
+    And I click "Workflow"
+    When I click "Request Approval"
     And I fill in "Log message for this state change *" with "I'm so clever."
     Then I press the "Update state" button
 
@@ -88,6 +92,9 @@ Feature: Workflow is functional
     And I should see the text "Content State: Published"
     And I click "Edit"
     And I fill in "Body" with "Here is my really clever addition."
+    And I press "Save New Draft"
+    #prc-847 : Add tabs for save and view on node revision page
+    And I click "Edit Revision"
     When I press the "Request Approval" button
     And I fill in "Log message for this state change *" with "I'm so clever."
     Then I press the "Update state" button
@@ -112,7 +119,7 @@ Feature: Workflow is functional
     And I press the "Update state" button
     And I visit "admin-content"
     And I click "My first post"
-    And I should see the text "Content State: Unpublished"
+    And I should see the text "Content State: Private Draft"
     Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been unpublished."
     And I click "Log out"
     And I follow the link in the email
@@ -123,7 +130,7 @@ Feature: Workflow is functional
     #Requesting review and cancelling after it has been published once
     Given I am logged in as "Joe Contributor"
     And I visit "content/my-first-post"
-    And I should see the text "Content State: Unpublished"
+    And I should see the text "Content State: Private Draft"
     And I click "Edit"
     And I press the "Request Approval" button
     And I fill in "Log message for this state change *" with "Please approve my first post."
@@ -135,7 +142,7 @@ Feature: Workflow is functional
     Then I press the "Update state" button
     And the email to "joe_1prc_58ca@example.com" should contain "The following content has been withdrawn from review."
     And I visit "content/my-first-post"
-    And I should see the text "Content State: Unpublished"
+    And I should see the text "Content State: Private Draft"
 
     #Curator publishes without needing approval
     Given I am logged in as "Joe Curator"
@@ -191,12 +198,23 @@ Feature: Workflow is functional
     And I fill in "Log message for this state change *" with "Looks good."
     And I press "Update state"
 
-    #content is in published state
+    # Content is in published state the request approval button should not be visible
     Given I am logged in as "Joe Contributor"
     And I visit "content/my-first-post"
     And I click "Edit"
     And I fill in "Body" with "This is my unpublished addition"
-    And I press the "Request Approval" button
+    # prc-857 No delete and request buttons on published node
+    And I should not see the button "Request Approval"
+    And I should not see the button "Delete"
+    # prc-856
+    And I press the "Save New Draft" button
+    And I visit "admin-content"
+    # prc-844
+    And I should see the text "Draft" in the "My first post." row
+    #Go into workflow and find the new draft
+    And I visit "content/my-first-post"
+    And I click "Workflow"
+    And I click "Request Approval"
     And I fill in "Log message for this state change *" with "Please approve my update."
     When  I press "Update state"
     And I click "Log out"
@@ -206,6 +224,7 @@ Feature: Workflow is functional
 
     #Content is updated after approval
     Given I am logged in as "Joe Curator"
+    And the test email system is enabled
     And I visit "admin-content"
     And I click "pending review"
     And I press the "Publish" button
@@ -214,6 +233,7 @@ Feature: Workflow is functional
     Then I click "Log out"
     And I visit "content/my-first-post"
     And I should see the text "This is my unpublished addition"
+    And the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
 
   Scenario: PRC-786 Access Denied message when clicking on item in Content tab
     #  Content Curation: Curator permissions- Access Denied message when when clicking on item in Content tab

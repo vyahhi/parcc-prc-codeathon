@@ -39,6 +39,50 @@ function prc_workflow_menu_alter(&$menu) {
   $menu['node/%node/revisions/%/edit']['access callback'] = 'prc_workflow_access';
 }
 
+function prc_workflow_menu_local_tasks_alter(&$data, $router_item, $root_path){
+  $path = $router_item['path'];
+  $parts = explode('/', $router_item['href']);
+
+  switch($path){
+    case 'node/%/revisions/%/edit' :
+    case 'node/%/revisions/%/view' :
+      $nid = $parts[1];
+      $vid = $parts[3];
+      $data['tabs'][0]['count'] = 2;
+      $data['tabs'][0]['output'] = array(
+        0 => array(
+          '#theme' => 'menu_local_task',
+          '#link' => array(
+            'title' => t('View Revision'),
+            'href' => "node/$nid/revisions/$vid/view",
+            'localized_options' => array(),
+          ),
+        ),
+        1 => array(
+          '#theme' => 'menu_local_task',
+          '#link' => array(
+            'title' => t('Edit Revision'),
+            'href' => "node/$nid/revisions/$vid/edit",
+            'localized_options' => array(),
+          ),
+        )
+      );
+      break;
+  }
+
+  switch($path){
+    case 'node/%/revisions/%/edit' :
+      $data['tabs'][0]['output'][0]['#active'] = FALSE;
+      $data['tabs'][0]['output'][1]['#active'] = TRUE;
+      break;
+    case 'node/%/revisions/%/view' :
+      $data['tabs'][0]['output'][0]['#active'] = TRUE;
+      $data['tabs'][0]['output'][1]['#active'] = FALSE;
+      break;
+  }
+
+}
+
 function prc_workflow_access($op, $node, $account = NULL) {
   if(empty($account)){
     global $user;
@@ -396,7 +440,6 @@ function prc_workflow_state_flow_event_fired($node, $event_key, $uid, $log) {
       prc_workflow_message('published_notice', $node);
       break;
   }
-
 }
 
 /**
@@ -434,6 +477,13 @@ function prc_workflow_message($message_type, $node) {
  * @param $node
  */
 function prc_workflow_reported_state($nid){
+  /**
+   * The purpose of this was to report the same state no matter which
+   * revision you were viewing.
+   *
+   * @todo: delete this section if the states are behaving correctly
+   */
+  /*
   //get the active drafts
   $drafts = db_query("
     select * from {node_revision_states} nrs
@@ -456,6 +506,42 @@ function prc_workflow_reported_state($nid){
     if($published_history && count($published_history)){
       $reported_state = 'unpublished';
     }
+  }*/
+
+  //Base reported state on the most recent draft rather than the most advanced draft
+  //Get the active drafts
+  $active_versions = db_query("
+    select * from {node_revision_states} nrs
+    where nrs.nid = :nid
+      and nrs.status = 1 order by vid ASC",
+    array(':nid' => $nid))->fetchAllAssoc('vid');
+
+  //Check active drafts for any of the states our logic will require
+  $active_published = NULL;
+  $active_draft = NULL;
+  $active_review = NULL;
+
+  foreach($active_versions as $vid => $revision ){
+    switch($revision->state){
+      case 'draft' :
+        $active_draft = $vid;
+        break;
+      case 'published' :
+        $active_published = $vid;
+        break;
+      case 'ready_for_review' :
+        $active_review = $vid;
+        break;
+    }
+  }
+
+
+  if($active_review){
+    $reported_state = 'ready_for_review';
+  }elseif($active_draft){
+    $reported_state = 'draft';
+  }elseif($active_published){
+    $reported_state = 'published';
   }
 
   return $reported_state;
