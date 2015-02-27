@@ -90,10 +90,9 @@ Feature: Workflow is functional
     And I click "Edit"
     And I fill in "Body" with "Here is my really clever addition."
     And I press "Save New Draft"
-    #@todo : change once we have an edit tab on revision pages
-    And I visit "content/my-first-post"
-    And I click "Workflow"
-    When I click "Request Approval"
+    #prc-847 : Add tabs for save and view on node revision page
+    And I click "Edit Revision"
+    When I press the "Request Approval" button
     And I fill in "Log message for this state change *" with "I'm so clever."
     Then I press the "Update state" button
     And I am logged in as "Joe Curator"
@@ -220,6 +219,7 @@ Feature: Workflow is functional
 
     #Content is updated after approval
     Given I am logged in as "Joe Curator"
+    And the test email system is enabled
     And I visit "admin-content"
     And I click "pending review"
     And I press the "Publish" button
@@ -228,6 +228,7 @@ Feature: Workflow is functional
     Then I click "Log out"
     And I visit "content/my-first-post"
     And I should see the text "This is my unpublished addition"
+    And the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
 
   Scenario: PRC-786 Access Denied message when clicking on item in Content tab
     #  Content Curation: Curator permissions- Access Denied message when when clicking on item in Content tab
