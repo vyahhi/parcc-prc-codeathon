@@ -300,6 +300,12 @@ function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state
       '#weight' => -1,
     );
 
+  }else{
+    //Don't show the text area for other state changes (prc-873)
+    $form['event_comment']['#type'] = 'hidden';
+    $form['event_comment']['#required'] = FALSE;
+    $event = $form['event']['#value'];
+    $form['event_comment']['#value'] = 'Event: '.$event;
   }
 }
 
