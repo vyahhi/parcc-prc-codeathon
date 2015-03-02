@@ -89,7 +89,9 @@ Feature: Workflow is functional
     Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
     # PRC-824 Content Curation: Approving Content- Email content not correct
     Then the email should contain "Content Administrator: Joe Curator (joe_1prc_58ca@example.com)"
-    Then the email should not contain "By:"
+    And I follow the link in the email
+    And I should not see the text "Access Denied"
+    And the email should not contain "By:"
 
     #contributer is denied
     Given I am logged in as "Joe Contributor"
@@ -115,7 +117,12 @@ Feature: Workflow is functional
     And I should see the text "Content State: Published"
     Then the email to "joe_1prc_58cc@example.com" should contain "Do it again, not so clever."
     # PRC-868 Content Curation: Not Approving Content- Email subject "Approval" not capitalized
-    Then the email to "joe_1prc_58cc@example.com" should contain "Changes before Approval for"
+    And the email should contain "Changes before Approval for"
+    # prc-824 List curator info in email
+    Then the email should contain "Content Administrator: Joe Curator (joe_1prc_58ca@example.com)"
+    And the email should not contain "By:"
+    And I follow the link in the email
+    And I should not see the text "Access Denied"
 
     #Unpublish
     Given I am logged in as "Joe Curator"
@@ -128,6 +135,8 @@ Feature: Workflow is functional
     # prc-872 : Change "private draft" to just draft
     And I should see the text "Content State: Draft"
     Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been unpublished."
+    And I follow the link in the email
+    And I should not see the text "Access Denied"
     And I click "Log out"
     And I follow the link in the email
     And I should not see the text "Isn't this swell"
@@ -162,6 +171,9 @@ Feature: Workflow is functional
     When I visit "content/my-first-post"
     Then I should see the text "Content State: Published"
     And the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
+    And I follow the link in the email
+    And I should not see the text "Access Denied"
+
 
   # Cancelling a request before it was ever published
     Given I am logged in as "Joe Contributor"
@@ -180,8 +192,8 @@ Feature: Workflow is functional
     And I visit "content/my-second-post"
     And I should see the text "Approval Requested"
     And the email to "joe_1prc_58ca@example.com" should contain "The following content is awaiting approval"
-    And I click "Rescind Request"
     #PRC-873 : should not see text area for rescind request
+    And I click "Rescind Request"
     And I should not see an "textarea" element
     Then I press the "Update state" button
     And I visit "content/my-second-post"
@@ -249,6 +261,9 @@ Feature: Workflow is functional
     And I visit "content/my-first-post"
     And I should see the text "This is my unpublished addition"
     And the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
+    And I am logged in as "Joe Curator"
+    And I follow the link in the email
+    And I should not see the text "Access Denied"
 
   Scenario: PRC-786 Access Denied message when clicking on item in Content tab
     #  Content Curation: Curator permissions- Access Denied message when when clicking on item in Content tab
@@ -374,3 +389,24 @@ Feature: Workflow is functional
     And I fill in "Body" with "This is swell"
     And I press the "Save New Draft" button
     And I should see the text "This is swell"
+
+  Scenario: prc-871  access denied when clicking link in email
+    Given I am logged in as "Joe Contributor"
+    And I visit "admin-content"
+    And I click "Add content"
+    And I fill in "edit-title" with "PRC-592 @timestamp"
+    And I fill in "Body" with "Isn't this swell?"
+    And I select the radio button "Public" with the id "edit-field-permissions-und-public"
+    And I press the "Save" button
+    When I follow "Edit"
+    And I press the "Request Approval" button
+    And I press the "Update state" button
+    And I am logged in as "Joe Curator"
+    And the email to "joe_1prc_58ca@example.com" should contain "The following content is awaiting approval"
+    And the email should contain "PRC-592 @timestamp has an Approval Request"
+    And I follow the link in the email
+    Then I should not see the text "Access Denied"
+    And I should see the text "PRC-592 @timestamp"
+    And I should see an "Publish" button
+    And I should see an "Request Change" button
+
