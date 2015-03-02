@@ -50,3 +50,7 @@ Feature: As a Content Contributor, I need to have specific access to the Digital
     And I press the "Update state" button
     Then I should see the message containing "My Content transitioned to the draft state."
 
+
+
+
+

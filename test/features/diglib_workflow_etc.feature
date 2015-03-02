@@ -55,6 +55,8 @@ Feature: Workflow is functional
     And I click "Edit"
     And I fill in "Body" with "This is what I have to say."
     When I press "Save and Publish"
+    And I press "Confirm"
+    
     #PRC-873 : should not see text area for save and publish
     And I should not see an "textarea" element
     And I press the "Update state" button
@@ -409,4 +411,19 @@ Feature: Workflow is functional
     And I should see the text "PRC-592 @timestamp"
     And I should see an "Publish" button
     And I should see an "Request Change" button
+    #prc-845 Confirmation prompt on save new draft
+    Given I visit the last node created
+    And I click "Edit"
+    When I fill in "Body" with "testing confirmation stage cancel"
+    And I press "Save New Draft"
+    And I click "Cancel"
+    And I visit the last node created
+    Then I should not see the text "testing confirmation stage cancel"
+    And I click "Edit"
+    When I fill in "Body" with "testing confirm button"
+    And I press "Save New Draft"
+    And I press "Confirm"
+    And I visit the last node created
+    #@todo: prc-845 Confirm should only appear on published nodes?
+
 
