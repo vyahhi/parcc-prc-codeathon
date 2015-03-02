@@ -8,14 +8,14 @@ Feature: PRC-760 System Check - Unstructured - Form
 #  Given I am on the Technology Readiness page
 #  When I click the System Check link
 #  Then I see the system check page that has:
-  Page headline:
-  System Check
-  Overview/ Instructional copy:
-  Overview and instructional copy goes here. Consider explaining importance of running system check and how to do it: To prepare school for successful assessment, user can run system check to make sure device or devices meet PARCC minimum requirements. Include instructions that user can run test for on single device and apply the results to multiple devices with same configuration.
-  Important Message:
-  Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.
-  Copy:
-  "* indicates required field"
+#  Page headline:
+#  System Check
+#  Overview/ Instructional copy:
+#  Overview and instructional copy goes here. Consider explaining importance of running system check and how to do it: To prepare school for successful assessment, user can run system check to make sure device or devices meet PARCC minimum requirements. Include instructions that user can run test for on single device and apply the results to multiple devices with same configuration.
+#  Important Message:
+#  Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.
+#  Copy:
+#  "* indicates required field"
 #  Form Fields
 #  Field Label	Instructions	Type	Dropdown Options	Required?	Other
 #  System check name	Enter a name to describe the lab or device(s) you are testing.	Text field	N/A	No	–
@@ -41,6 +41,14 @@ Feature: PRC-760 System Check - Unstructured - Form
     And I select "Netbook" from "Device type"
     And I select "Thin client" from "Device type"
     And I select "Tablet" from "Device type"
+    And I should see the text "Operating system"
+    And I select "Apple iOS 6, 7, or 8" from "Operating system"
+    And I select "Chrome OS (Chromebook)" from "Operating system"
+    And I select "Mac 10.8, 10.9 or 10.10" from "Operating system"
+    And I select "Windows 7" from "Operating system"
+    And I select "Windows 8" from "Operating system"
+    And I select "Windows 8.1" from "Operating system"
+    And I select "Other" from "Operating system"
     And I should see the text "Monitor size \(in inches\)"
     And I should see the text "Processor speed"
     And I should see the text "RAM"
@@ -60,6 +68,7 @@ Feature: PRC-760 System Check - Unstructured - Form
     When I press "Submit"
     Then I should see the error message containing "Number of devices field is required."
     Then I should see the error message containing "Device type field is required."
+    Then I should see the error message containing "Operating system field is required."
     Then I should see the error message containing "Monitor size (in inches) field is required."
     Then I should see the error message containing "Processor speed field is required."
     Then I should see the error message containing "RAM field is required."
