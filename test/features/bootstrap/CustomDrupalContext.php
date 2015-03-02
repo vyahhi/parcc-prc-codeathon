@@ -688,6 +688,14 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     parent::assertMessage($message);
   }
 
+  /**
+   * @When /^I fill in the hidden field "([^"]*)" with "([^"]*)"$/
+   */
+  public function iFillHiddenFieldWith($field, $value)
+  {
+    $this->getSession()->getPage()->find('css',
+      'input[name="'.$field.'"]')->setValue($value);
+  }
 
   /**
    * @Then /^the node titled "(?P<label>[^"]*)" should not be published$/

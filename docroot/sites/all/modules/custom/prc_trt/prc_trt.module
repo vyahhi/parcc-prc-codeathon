@@ -9,16 +9,71 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
 
   $hide_fields = array(
     'field_monitor_color_depth',
-    'field_screen_resolution',
+    'field_screen_resolution_width',
+    'field_screen_resolution_height',
     'field_browser',
     'field_browser_cookies_enabled',
     'field_browser_javascript_enabled',
     'field_browser_images_enabled',
   );
 
-  foreach($hide_fields as $hide_field) {
+  foreach ($hide_fields as $hide_field) {
     $form[$hide_field]['#access'] = FALSE;
   }
 
+  $form['faux_javascript'] = array(
+    '#type' => 'textfield'
+  );
+  $form['faux_cookies'] = array(
+    '#type' => 'textfield'
+  );
+  $form['faux_images'] = array(
+    '#type' => 'textfield'
+  );
+  $form['faux_monitor_color_depth'] = array(
+    '#type' => 'textfield'
+  );
+  $form['faux_screen_resolution_width'] = array(
+    '#type' => 'textfield'
+  );
+  $form['faux_screen_resolution_height'] = array(
+    '#type' => 'textfield'
+  );
+
+  drupal_add_js(drupal_get_path('module', 'prc_trt') . '/prc_trt.js');
+
+  $form['#validate'][] = 'prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate';
+}
+
+function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form, &$form_state) {
+  $my_browser = 'other';
+  // Set field_browser's value to show what browser the user is in.
+  if (isset($_SERVER['HTTP_USER_AGENT'])) {
+    $agent = strtolower($_SERVER['HTTP_USER_AGENT']);
+    $browser = browserclass_check_browser($agent);
+    if (is_array($browser) && count($browser)) {
+      $my_browser = array_pop($browser);
+    }
+  }
+  $element = $form['field_browser'];
+  form_set_value($element, array(LANGUAGE_NONE => array(0 => array('value' => $my_browser))), $form_state);
+
+  $javascript = $form_state['input']['faux_javascript'] ? 1 : 0;
+  form_set_value($form['field_browser_javascript_enabled'], array(LANGUAGE_NONE => array(0 => array('value' => $javascript))), $form_state);
+
+  $cookies = $form_state['input']['faux_cookies'] ? 1 : 0;
+  form_set_value($form['field_browser_cookies_enabled'], array(LANGUAGE_NONE => array(0 => array('value' => $cookies))), $form_state);
+
+  $images = $form_state['input']['faux_images'] ? 1 : 0;
+  form_set_value($form['field_browser_images_enabled'], array(LANGUAGE_NONE => array(0 => array('value' => $images))), $form_state);
+
+  $monitor_color_depth = $form_state['input']['faux_monitor_color_depth'];
+  form_set_value($form['field_monitor_color_depth'], array(LANGUAGE_NONE => array(0 => array('value' => $monitor_color_depth))), $form_state);
+
+  $res_w = $form_state['input']['faux_screen_resolution_width'];
+  form_set_value($form['field_screen_resolution_width'], array(LANGUAGE_NONE => array(0 => array('value' => $res_w))), $form_state);
+
+  $res_h = $form_state['input']['faux_screen_resolution_height'];
+  form_set_value($form['field_screen_resolution_height'], array(LANGUAGE_NONE => array(0 => array('value' => $res_h))), $form_state);
 
 }

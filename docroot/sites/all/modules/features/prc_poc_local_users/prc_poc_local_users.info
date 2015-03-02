@@ -38,6 +38,7 @@ features[user_permission][] = admin_view_modes
 features[user_permission][] = administer actions
 features[user_permission][] = administer advanced pane settings
 features[user_permission][] = administer blocks
+features[user_permission][] = administer browser class
 features[user_permission][] = administer comments
 features[user_permission][] = administer content revisions
 features[user_permission][] = administer content types

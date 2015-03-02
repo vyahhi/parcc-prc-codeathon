@@ -1186,6 +1186,37 @@ function prc_poc_local_fields_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
+  // Exported field_base: 'field_operating_system'
+  $field_bases['field_operating_system'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_operating_system',
+    'foreign keys' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'ios' => 'Apple iOS 6, 7, or 8',
+        'chrome' => 'Chrome OS (Chromebook)',
+        'mac' => 'Mac 10.8, 10.9 or 10.10',
+        'win7' => 'Windows 7',
+        'win8' => 'Windows 8',
+        'win81' => 'Windows 8.1',
+        'other' => 'Other',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_permissions'
   $field_bases['field_permissions'] = array(
     'active' => 1,
@@ -1351,33 +1382,36 @@ function prc_poc_local_fields_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
-  // Exported field_base: 'field_screen_resolution'
-  $field_bases['field_screen_resolution'] = array(
+  // Exported field_base: 'field_screen_resolution_height'
+  $field_bases['field_screen_resolution_height'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_screen_resolution',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
+    'field_name' => 'field_screen_resolution_height',
+    'foreign keys' => array(),
+    'indexes' => array(),
     'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
+    'module' => 'number',
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'number_integer',
+  );
+
+  // Exported field_base: 'field_screen_resolution_width'
+  $field_bases['field_screen_resolution_width'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_screen_resolution_width',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
   );
 
   // Exported field_base: 'field_standard'

@@ -11,7 +11,7 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
 #  Then the system checks for:
   • Monitor color depth
   • Screen resolution
-  • Browser
+#  • Browser
   • Browser: Cookies enabled
   • Browser: JavaScript enabled
   • Browser: Images enabled
@@ -66,3 +66,5 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I should see the text "45"
     And I should see the text "RAM:"
     And I should see the text "16GB"
+    And I should see the text "Browser:"
+    And I should see the text "other"

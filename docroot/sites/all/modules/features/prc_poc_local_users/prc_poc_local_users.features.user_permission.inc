@@ -289,6 +289,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'block',
   );
 
+  // Exported permission: 'administer browser class'.
+  $permissions['administer browser class'] = array(
+    'name' => 'administer browser class',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'browserclass',
+  );
+
   // Exported permission: 'administer comments'.
   $permissions['administer comments'] = array(
     'name' => 'administer comments',

@@ -224,7 +224,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_select',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -350,7 +350,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -399,7 +399,48 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'number',
-      'weight' => 2,
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'prc_trt-system_check-field_operating_system'
+  $field_instances['prc_trt-system_check-field_operating_system'] = array(
+    'bundle' => 'system_check',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_operating_system',
+    'label' => 'Operating system',
+    'required' => 1,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+        'label_help_description' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 3,
     ),
   );
 
@@ -487,8 +528,8 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'prc_trt-system_check-field_screen_resolution'
-  $field_instances['prc_trt-system_check-field_screen_resolution'] = array(
+  // Exported field_instance: 'prc_trt-system_check-field_screen_resolution_height'
+  $field_instances['prc_trt-system_check-field_screen_resolution_height'] = array(
     'bundle' => 'system_check',
     'default_value' => NULL,
     'deleted' => 0,
@@ -496,10 +537,15 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 7,
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 14,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -509,23 +555,74 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'prc_trt',
-    'field_name' => 'field_screen_resolution',
-    'label' => 'Screen resolution',
+    'field_name' => 'field_screen_resolution_height',
+    'label' => 'Screen Resolution Height',
     'required' => 0,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'text_processing' => 0,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'text',
+      'active' => 0,
+      'module' => 'number',
       'settings' => array(
         'label_help_description' => '',
-        'size' => 60,
       ),
-      'type' => 'text_textfield',
-      'weight' => 8,
+      'type' => 'number',
+      'weight' => 14,
+    ),
+  );
+
+  // Exported field_instance: 'prc_trt-system_check-field_screen_resolution_width'
+  $field_instances['prc_trt-system_check-field_screen_resolution_width'] = array(
+    'bundle' => 'system_check',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_screen_resolution_width',
+    'label' => 'Screen Resolution Width',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(
+        'label_help_description' => '',
+      ),
+      'type' => 'number',
+      'weight' => 13,
     ),
   );
 
@@ -541,9 +638,11 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
   t('Monitor color depth');
   t('Monitor size (in inches)');
   t('Number of devices');
+  t('Operating system');
   t('Processor speed');
   t('RAM');
-  t('Screen resolution');
+  t('Screen Resolution Height');
+  t('Screen Resolution Width');
   t('System check name');
 
   return $field_instances;
