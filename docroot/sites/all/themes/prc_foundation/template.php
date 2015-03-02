@@ -24,7 +24,7 @@ function prc_foundation_html_head_alter(&$head_elements) {
  * Implements hook_preprocess_html()
  */
 function prc_foundation_preprocess_html(&$variables) {
-  drupal_add_css('http://fonts.googleapis.com/css?family=Open+Sans', array('type' => 'external'));
+  drupal_add_css('http://fonts.googleapis.com/css?family=Open+Sans:400,700', array('type' => 'external'));
 }
 
 function prc_foundation_preprocess_page(&$vars, $hook) {

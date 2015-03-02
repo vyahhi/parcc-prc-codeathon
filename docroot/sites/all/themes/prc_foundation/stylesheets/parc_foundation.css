@@ -1135,7 +1135,7 @@ p.lead {
 /* line 116, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
 .subheader {
   line-height: 1.4;
-  color: #6f6f6f;
+  color: #baa6c4;
   font-weight: 300;
   margin-top: 0.2em;
   margin-bottom: 0.5em;
@@ -1203,10 +1203,10 @@ p aside {
 /* Default header styles */
 /* line 182, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: "Proxima Nova", "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-style: normal;
-  color: #222;
+  color: #70547d;
   text-rendering: optimizeLegibility;
   margin-top: 0.2em;
   margin-bottom: 0.5em;
@@ -1215,7 +1215,7 @@ h1, h2, h3, h4, h5, h6 {
 /* line 192, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
   font-size: 60%;
-  color: #6f6f6f;
+  color: #baa6c4;
   line-height: 0;
 }
 
@@ -1383,7 +1383,7 @@ blockquote {
 blockquote cite {
   display: block;
   font-size: 0.8125em;
-  color: #555555;
+  color: #a388af;
 }
 /* line 321, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
 blockquote cite:before {
@@ -1392,14 +1392,14 @@ blockquote cite:before {
 /* line 325, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
 blockquote cite a,
 blockquote cite a:visited {
-  color: #555555;
+  color: #a388af;
 }
 
 /* line 331, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
 blockquote,
 blockquote p {
   line-height: 1.6;
-  color: #6f6f6f;
+  color: #baa6c4;
 }
 
 /* Microformats */
@@ -2105,17 +2105,38 @@ blockquote p {
   nav .toggle-topbar.menu-icon {
     right: 0.9375em !important;
   }
+
+  /* line 81, ../sass/parc_foundation.scss */
+  #sub-header .breadcrumb {
+    padding-top: .5em;
+  }
+  /* line 83, ../sass/parc_foundation.scss */
+  #sub-header .breadcrumb a {
+    font-weight: bold;
+    color: #464646;
+  }
+  /* line 88, ../sass/parc_foundation.scss */
+  #sub-header h1 {
+    margin: 0 0 .75em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* line 94, ../sass/parc_foundation.scss */
+  #main-wrapper {
+    background-color: #EEEEEE;
+  }
 }
 @media only screen and (min-width: 1024px) {
-  /* line 84, ../sass/parc_foundation.scss */
+  /* line 101, ../sass/parc_foundation.scss */
   nav .top-bar-section li a:not(.button):hover, nav .top-bar-section ul li.active > a {
     background: none repeat scroll 0% 0% #2e3f4e;
   }
-  /* line 87, ../sass/parc_foundation.scss */
+  /* line 104, ../sass/parc_foundation.scss */
   nav .top-bar-section ul {
     background-color: #344758;
   }
-  /* line 90, ../sass/parc_foundation.scss */
+  /* line 107, ../sass/parc_foundation.scss */
   nav #block-search-form {
     float: right;
     width: auto;

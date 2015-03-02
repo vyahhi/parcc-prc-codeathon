@@ -77,6 +77,23 @@
       right: 0.9375em !important;
     }
   }
+  #sub-header {
+    .breadcrumb {
+      padding-top: .5em;
+      a {
+        font-weight: bold;
+        color: #464646;
+      }
+    }
+    h1 {
+      margin: 0 0 .75em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+  #main-wrapper {
+    background-color: #EEEEEE;
+  }
 }
 
 @media #{$topbar-media-query} {
