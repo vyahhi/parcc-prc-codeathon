@@ -18,7 +18,7 @@ Feature: Workflow is functional
     And I select the radio button "Public" with the id "edit-field-permissions-und-public"
     And I press the "Save" button
     When I click "Edit"
-    And I should see the text "Content State: Private Draft"
+    And I should see the text "Content State: Draft"
     And I press the "Request Approval" button
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
@@ -125,7 +125,8 @@ Feature: Workflow is functional
     And I press the "Update state" button
     And I visit "admin-content"
     And I click "My first post"
-    And I should see the text "Content State: Private Draft"
+    # prc-872 : Change "private draft" to just draft
+    And I should see the text "Content State: Draft"
     Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been unpublished."
     And I click "Log out"
     And I follow the link in the email
@@ -136,7 +137,7 @@ Feature: Workflow is functional
     #Requesting review and cancelling after it has been published once
     Given I am logged in as "Joe Contributor"
     And I visit "content/my-first-post"
-    And I should see the text "Content State: Private Draft"
+    And I should see the text "Content State: Draft"
     And I click "Edit"
     And I press the "Request Approval" button
     When press the "Update state" button
@@ -148,7 +149,7 @@ Feature: Workflow is functional
     Then I press the "Update state" button
     And the email to "joe_1prc_58ca@example.com" should contain "The following content has been withdrawn from review."
     And I visit "content/my-first-post"
-    And I should see the text "Content State: Private Draft"
+    And I should see the text "Content State: Draft"
 
     #Curator publishes without needing approval
     Given I am logged in as "Joe Curator"
@@ -171,7 +172,7 @@ Feature: Workflow is functional
     And I select the radio button "Public" with the id "edit-field-permissions-und-public"
     And I press the "Save" button
     When I click "Edit"
-    And I should see the text "Content State: Private Draft"
+    And I should see the text "Content State: Draft"
     And I press the "Request Approval" button
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
@@ -184,7 +185,7 @@ Feature: Workflow is functional
     And I should not see an "textarea" element
     Then I press the "Update state" button
     And I visit "content/my-second-post"
-    And I should see the text "Content State: Private Draft"
+    And I should see the text "Content State: Draft"
 
   Scenario: Content is published, but changes don't show up until after it has been approved
     And the test email system is enabled
@@ -196,7 +197,7 @@ Feature: Workflow is functional
     And I select the radio button "Public" with the id "edit-field-permissions-und-public"
     And I press the "Save" button
     When I click "Edit"
-    And I should see the text "Content State: Private Draft"
+    And I should see the text "Content State: Draft"
     And I press the "Request Approval" button
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
