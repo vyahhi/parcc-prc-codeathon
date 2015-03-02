@@ -45,3 +45,24 @@ Feature: PRC-760 System Check - Unstructured - Form
     And I should see the text "Processor speed"
     And I should see the text "RAM"
     And I should see an "Submit" button
+
+    And I should not see the text "Monitor color depth"
+    And I should not see the text "Screen resolution"
+    And I should not see the text "Browser"
+    And I should not see the checkbox "edit-field-browser-cookies-enabled-und"
+    And I should not see the checkbox "edit-field-browser-javascript-enabled-und"
+    And I should not see the checkbox "edit-field-browser-images-enabled-und"
+
+  Scenario: PRC-800 Unstructured System Check form validation
+    Given I am logged in as a user with the "Educator" role
+    # TODO: Replace with actual TRT System Check form
+    And I am on "admin/structure/entity-type/prc_trt/system_check/add"
+    When I press "Submit"
+    Then I should see the error message containing "Number of devices field is required."
+    Then I should see the error message containing "Device type field is required."
+    Then I should see the error message containing "Monitor size (in inches) field is required."
+    Then I should see the error message containing "Processor speed field is required."
+    Then I should see the error message containing "RAM field is required."
+    When I fill in "Number of devices" with "Text"
+    And I press "Submit"
+    Then I should see the error message containing "Only numbers are allowed in Number of devices."

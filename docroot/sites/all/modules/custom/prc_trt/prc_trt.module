@@ -6,4 +6,18 @@
 
 function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &$form_state) {
   $form['actions']['submit']['#value'] = t('Submit');
+
+  $hide_fields = array(
+    'field_monitor_color_depth',
+    'field_screen_resolution',
+    'field_browser',
+    'field_browser_cookies_enabled',
+    'field_browser_javascript_enabled',
+    'field_browser_images_enabled',
+  );
+
+  foreach($hide_fields as $hide_field) {
+    $form[$hide_field]['#access'] = FALSE;
+  }
+
 }

@@ -10,6 +10,183 @@
 function prc_poc_local_eck_prc_trt_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'prc_trt-system_check-field_browser'
+  $field_instances['prc_trt-system_check-field_browser'] = array(
+    'bundle' => 'system_check',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_browser',
+    'label' => 'Browser',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'label_help_description' => '',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 9,
+    ),
+  );
+
+  // Exported field_instance: 'prc_trt-system_check-field_browser_cookies_enabled'
+  $field_instances['prc_trt-system_check-field_browser_cookies_enabled'] = array(
+    'bundle' => 'system_check',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_browser_cookies_enabled',
+    'label' => 'Browser: Cookies enabled',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+        'label_help_description' => '',
+      ),
+      'type' => 'options_onoff',
+      'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance: 'prc_trt-system_check-field_browser_images_enabled'
+  $field_instances['prc_trt-system_check-field_browser_images_enabled'] = array(
+    'bundle' => 'system_check',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_browser_images_enabled',
+    'label' => 'Browser: Images enabled',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+        'label_help_description' => '',
+      ),
+      'type' => 'options_onoff',
+      'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'prc_trt-system_check-field_browser_javascript_enabled'
+  $field_instances['prc_trt-system_check-field_browser_javascript_enabled'] = array(
+    'bundle' => 'system_check',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_browser_javascript_enabled',
+    'label' => 'Browser: JavaScript enabled',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+        'label_help_description' => '',
+      ),
+      'type' => 'options_onoff',
+      'weight' => 11,
+    ),
+  );
+
   // Exported field_instance: 'prc_trt-system_check-field_device_type'
   $field_instances['prc_trt-system_check-field_device_type'] = array(
     'bundle' => 'system_check',
@@ -48,6 +225,48 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
       ),
       'type' => 'options_select',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'prc_trt-system_check-field_monitor_color_depth'
+  $field_instances['prc_trt-system_check-field_monitor_color_depth'] = array(
+    'bundle' => 'system_check',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_monitor_color_depth',
+    'label' => 'Monitor color depth',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'label_help_description' => '',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
     ),
   );
 
@@ -268,15 +487,63 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'prc_trt-system_check-field_screen_resolution'
+  $field_instances['prc_trt-system_check-field_screen_resolution'] = array(
+    'bundle' => 'system_check',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_screen_resolution',
+    'label' => 'Screen resolution',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'label_help_description' => '',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 8,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
+  t('Browser');
+  t('Browser: Cookies enabled');
+  t('Browser: Images enabled');
+  t('Browser: JavaScript enabled');
   t('Device type');
   t('Enter a name to describe the lab or device(s) you are testing.');
   t('Enter the number of devices with the same configuration to include in test results.');
+  t('Monitor color depth');
   t('Monitor size (in inches)');
   t('Number of devices');
   t('Processor speed');
   t('RAM');
+  t('Screen resolution');
   t('System check name');
 
   return $field_instances;
