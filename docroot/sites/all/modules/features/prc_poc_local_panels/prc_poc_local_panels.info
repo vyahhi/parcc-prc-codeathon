@@ -11,6 +11,7 @@ features[page_manager_handlers][] = node_edit__digital_library_content
 features[page_manager_handlers][] = node_view__digital_library_content
 features[page_manager_handlers][] = node_view_panel_context
 features[page_manager_handlers][] = node_view_panel_context_2
+features[page_manager_handlers][] = pm_existing_pages_add_system_check__add_system_check
 features[page_manager_handlers][] = site_template_panel_context_basic
 features[page_manager_pages][] = access_denied
 features[page_manager_pages][] = assessment_detail

@@ -1538,7 +1538,6 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'eck delete prc_trt system_check entities',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'eck',
   );
@@ -1617,7 +1616,6 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'eck edit prc_trt system_check entities',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'eck',
   );

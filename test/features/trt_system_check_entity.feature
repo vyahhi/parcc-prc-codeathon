@@ -66,3 +66,13 @@ Feature: PRC-760 System Check - Unstructured - Form
     When I fill in "Number of devices" with "Text"
     And I press "Submit"
     Then I should see the error message containing "Only numbers are allowed in Number of devices."
+
+  Scenario: PRC-760 Page text
+    Given I am logged in as a user with the "Educator" role
+    # TODO: Replace with actual TRT System Check form
+    And I am on "admin/structure/entity-type/prc_trt/system_check/add"
+    Then I should see the heading "System Check"
+    And I should see the text "Overview and instructional copy goes here."
+    And I should see the text "Important Message:"
+    And I should see the text "Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you."
+    And I should see the text "\* indicates required field"
