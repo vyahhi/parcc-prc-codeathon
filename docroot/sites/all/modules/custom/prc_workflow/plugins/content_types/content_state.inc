@@ -31,7 +31,7 @@ function prc_workflow_state_render($subtype, $conf, $args, $context) {
     $states = $state_machine->get_states_options();
     $label = $states[$state_machine->get_current_state()]['label'];
 
-    $block->content = '<div class="prc-workflow-state"><span>Content State:</span> ' . ucfirst($label) . '</div>';
+    $block->content = '<div class="prc-workflow-state"><span>Revision State:</span> ' . ucfirst($label) . '</div>';
 
     // Provide a link for cancelling a request
     if ($state_machine->get_current_state() == 'ready_for_review') {
