@@ -34,61 +34,67 @@ function prc_poc_local_eck_prc_trt_strongarm() {
       'display' => array(
         'operating_system_pass' => array(
           'default' => array(
-            'weight' => '4',
+            'weight' => '5',
             'visible' => TRUE,
           ),
         ),
         'monitor_size_pass' => array(
           'default' => array(
-            'weight' => '6',
+            'weight' => '7',
             'visible' => TRUE,
           ),
         ),
         'monitor_color_depth_pass' => array(
           'default' => array(
-            'weight' => '12',
+            'weight' => '13',
             'visible' => TRUE,
           ),
         ),
         'screen_resolution_pass' => array(
           'default' => array(
-            'weight' => '23',
+            'weight' => '25',
             'visible' => TRUE,
           ),
         ),
         'processor_pass' => array(
           'default' => array(
-            'weight' => '8',
+            'weight' => '9',
             'visible' => TRUE,
           ),
         ),
         'ram_pass' => array(
           'default' => array(
-            'weight' => '10',
+            'weight' => '11',
             'visible' => TRUE,
           ),
         ),
         'browser_pass' => array(
           'default' => array(
-            'weight' => '14',
+            'weight' => '16',
             'visible' => TRUE,
           ),
         ),
         'cookies_pass' => array(
           'default' => array(
-            'weight' => '16',
+            'weight' => '18',
             'visible' => TRUE,
           ),
         ),
         'javascript_pass' => array(
           'default' => array(
-            'weight' => '18',
+            'weight' => '20',
             'visible' => TRUE,
           ),
         ),
         'images_pass' => array(
           'default' => array(
-            'weight' => '20',
+            'weight' => '22',
+            'visible' => TRUE,
+          ),
+        ),
+        'overall_pass' => array(
+          'default' => array(
+            'weight' => '0',
             'visible' => TRUE,
           ),
         ),

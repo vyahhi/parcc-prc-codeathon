@@ -22,7 +22,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -48,7 +48,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -68,7 +68,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 15,
+        'weight' => 17,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -113,7 +113,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 19,
+        'weight' => 21,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -158,7 +158,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 17,
+        'weight' => 19,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -187,6 +187,55 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'prc_trt-system_check-field_browser_version'
+  $field_instances['prc_trt-system_check-field_browser_version'] = array(
+    'bundle' => 'system_check',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_browser_version',
+    'label' => 'Browser Version',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(
+        'label_help_description' => '',
+      ),
+      'type' => 'number',
+      'weight' => 9,
+    ),
+  );
+
   // Exported field_instance: 'prc_trt-system_check-field_device_type'
   $field_instances['prc_trt-system_check-field_device_type'] = array(
     'bundle' => 'system_check',
@@ -199,7 +248,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -240,7 +289,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -282,7 +331,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -324,7 +373,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -371,7 +420,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -415,7 +464,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -456,7 +505,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -498,7 +547,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -545,7 +594,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 22,
+        'weight' => 24,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -594,7 +643,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 21,
+        'weight' => 23,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -629,6 +678,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Browser');
+  t('Browser Version');
   t('Browser: Cookies enabled');
   t('Browser: Images enabled');
   t('Browser: JavaScript enabled');

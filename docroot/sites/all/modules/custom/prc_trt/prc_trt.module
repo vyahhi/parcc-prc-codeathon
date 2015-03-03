@@ -12,6 +12,7 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
     'field_screen_resolution_width',
     'field_screen_resolution_height',
     'field_browser',
+    'field_browser_version',
     'field_browser_cookies_enabled',
     'field_browser_javascript_enabled',
     'field_browser_images_enabled',
@@ -53,15 +54,20 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form
   // Set field_browser's value to show what browser the user is in.
   if (array_key_exists('faux_browser', $form_state['input']) && $form_state['input']['faux_browser']) {
     $my_browser = $form_state['input']['faux_browser'];
+    $b = explode(' ', $my_browser);
+    $browser_type = $b[0];
+    $browser_version = $b[1];
   } elseif (isset($_SERVER['HTTP_USER_AGENT'])) {
     $agent = strtolower($_SERVER['HTTP_USER_AGENT']);
     $browser = browserclass_check_browser($agent);
     if (is_array($browser) && count($browser)) {
       $my_browser = array_pop($browser);
+      $browser_type = array_pop($browser);
+      $browser_version = str_replace($browser_type, '', $my_browser);
     }
   }
-  $element = $form['field_browser'];
-  form_set_value($element, array(LANGUAGE_NONE => array(0 => array('value' => $my_browser))), $form_state);
+  form_set_value($form['field_browser'], array(LANGUAGE_NONE => array(0 => array('value' => $browser_type))), $form_state);
+  form_set_value($form['field_browser_version'], array(LANGUAGE_NONE => array(0 => array('value' => $browser_version))), $form_state);
 
   $javascript = $form_state['input']['faux_javascript'] === 'true' ? 1 : 0;
   form_set_value($form['field_browser_javascript_enabled'], array(LANGUAGE_NONE => array(0 => array('value' => $javascript))), $form_state);
@@ -88,6 +94,11 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form
  */
 function prc_trt_field_extra_fields() {
   $extra['prc_trt']['system_check']['display'] = array(
+    'overall_pass' => array(
+      'label' => t('System Check Results'),
+      'description' => t('Did the system check pass?'),
+      'weight' => 11,
+    ),
     'operating_system_pass' => array(
       'label' => t('Operating system: Results'),
       'description' => t('Did operating system pass?'),
@@ -96,47 +107,47 @@ function prc_trt_field_extra_fields() {
     'monitor_size_pass' => array(
       'label' => t('Monitor size: Results'),
       'description' => t('Did monitor size pass?'),
-      'weight' => 12,
+      'weight' => 13,
     ),
     'monitor_color_depth_pass' => array(
       'label' => t('Monitor color depth: Results'),
       'description' => t('Did monitor color depth pass?'),
-      'weight' => 12,
+      'weight' => 14,
     ),
     'screen_resolution_pass' => array(
       'label' => t('Screen resolution: Results'),
       'description' => t('Did screen resolution pass?'),
-      'weight' => 12,
+      'weight' => 15,
     ),
     'processor_pass' => array(
       'label' => t('Processor speed: Results'),
       'description' => t('Did processor pass?'),
-      'weight' => 12,
+      'weight' => 16,
     ),
     'ram_pass' => array(
       'label' => t('RAM: Results'),
       'description' => t('Did RAM pass?'),
-      'weight' => 12,
+      'weight' => 17,
     ),
     'browser_pass' => array(
       'label' => t('Browser: Results'),
       'description' => t('Did browser pass?'),
-      'weight' => 12,
+      'weight' => 18,
     ),
     'cookies_pass' => array(
       'label' => t('Cookies: Results'),
       'description' => t('Did cookies pass?'),
-      'weight' => 12,
+      'weight' => 19,
     ),
     'javascript_pass' => array(
       'label' => t('Javascript: Results'),
       'description' => t('Did Javascript pass?'),
-      'weight' => 12,
+      'weight' => 20,
     ),
     'images_pass' => array(
       'label' => t('Images: Results'),
       'description' => t('Did images pass?'),
-      'weight' => 12,
+      'weight' => 21,
     ),
   );
   return $extra;
@@ -147,6 +158,7 @@ function prc_trt_field_extra_fields() {
  */
 function prc_trt_entity_view($entity, $type, $view_mode, $langcode) {
   if ($type == 'prc_trt' && $entity->type == 'system_check') {
+    drupal_set_title(t('System Check'));
     $w = entity_metadata_wrapper('prc_trt', $entity);
     $os = $w->field_operating_system->value();
     $size = $w->field_monitor_size->value();
@@ -160,12 +172,20 @@ function prc_trt_entity_view($entity, $type, $view_mode, $langcode) {
     $processor = $w->field_processor_speed->value();
     $processor_pass = $processor >= 1;
     $ram = $w->field_ram->value();
-    $ram_pass = $ram >= 1;
+    $ram_pass = strpos(strtolower($ram), 'mb') === FALSE;
     $browser = $w->field_browser->value();
 
     $cookies_pass = $w->field_browser_cookies_enabled->value();
     $js_pass = $w->field_browser_javascript_enabled->value();
     $images_pass = $w->field_browser_images_enabled->value();
+
+    $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
+
+    $entity->content['overall_pass'] = array(
+      '#type' => 'item',
+      '#title' => t('System Check Results:'),
+      '#markup' => $all_pass ? t('Passed') : t('Failed'),
+    );
     $entity->content['operating_system_pass'] = array(
       '#type' => 'item',
       '#title' => t('Operating system Results:'),

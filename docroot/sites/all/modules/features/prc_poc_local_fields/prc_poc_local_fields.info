@@ -16,6 +16,7 @@ features[field_base][] = field_browser
 features[field_base][] = field_browser_cookies_enabled
 features[field_base][] = field_browser_images_enabled
 features[field_base][] = field_browser_javascript_enabled
+features[field_base][] = field_browser_version
 features[field_base][] = field_comment
 features[field_base][] = field_content_type
 features[field_base][] = field_course_objectives
