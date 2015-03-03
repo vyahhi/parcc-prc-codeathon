@@ -420,22 +420,18 @@ Feature: Workflow is functional
     And I click "PRC-592 @timestamp"
     And I click "Edit"
     And I should see the text "Content State: Published"
+    And I fill in "Title *" with "My new draft"
     When I fill in "Body" with "testing confirmation stage cancel"
-    And I fill in "Title" with "My new draft"
     And I press the "Save New Draft" button
     And I should see an "Confirm" button
     And I click "Cancel"
     # We should now be on the node view page
     And I click "Workflow"
-    And I should not see the link "My new draft"
-    And I should see the text "Content State: Published"
-    Then I should not see the text "testing confirmation stage cancel"
+    Then I should not see the link "My new draft"
+    And I click "Edit"
     When I fill in "Body" with "testing confirm button"
-    And I fill in "Title" with "My new draft"
+    And I fill in "Title *" with "My new draft"
     And I press "Save New Draft"
     And I press "Confirm"
     # We should now be on teh revision page
     And I should see the text "testing confirm button"
-
-
-
