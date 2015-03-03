@@ -55,7 +55,6 @@ Feature: Workflow is functional
     And I click "Edit"
     And I fill in "Body" with "This is what I have to say."
     When I press "Save and Publish"
-    And I press "Confirm"
     
     #PRC-873 : should not see text area for save and publish
     And I should not see an "textarea" element
@@ -231,10 +230,10 @@ Feature: Workflow is functional
     And I fill in "Body" with "This is my unpublished addition"
     # prc-857 No delete and request buttons on published node
     And I should not see the button "Request Approval"
-    #@todo : only for draft
     #And I should not see the button "Delete"
     # prc-856
     And I press the "Save New Draft" button
+    And I press the "Confirm" button
     And I visit "admin-content"
     # prc-844
     And I should see the text "Draft" in the "My first post." row
@@ -411,19 +410,32 @@ Feature: Workflow is functional
     And I should see the text "PRC-592 @timestamp"
     And I should see an "Publish" button
     And I should see an "Request Change" button
+
+    #setup for 845
+    And I press "Publish"
+    And I press "Update state"
+    And I am logged in as "Joe Contributor"
     #prc-845 Confirmation prompt on save new draft
-    Given I visit the last node created
+    Given I visit "admin-content"
+    And I click "PRC-592 @timestamp"
     And I click "Edit"
+    And I should see the text "Content State: Published"
     When I fill in "Body" with "testing confirmation stage cancel"
-    And I press "Save New Draft"
+    And I fill in "Title" with "My new draft"
+    And I press the "Save New Draft" button
+    And I should see an "Confirm" button
     And I click "Cancel"
-    And I visit the last node created
+    # We should now be on the node view page
+    And I click "Workflow"
+    And I should not see the link "My new draft"
+    And I should see the text "Content State: Published"
     Then I should not see the text "testing confirmation stage cancel"
-    And I click "Edit"
     When I fill in "Body" with "testing confirm button"
+    And I fill in "Title" with "My new draft"
     And I press "Save New Draft"
     And I press "Confirm"
-    And I visit the last node created
-    #@todo: prc-845 Confirm should only appear on published nodes?
+    # We should now be on teh revision page
+    And I should see the text "testing confirm button"
+
 
 
