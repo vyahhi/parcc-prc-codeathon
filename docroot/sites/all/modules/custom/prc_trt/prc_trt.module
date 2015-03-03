@@ -21,23 +21,26 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
     $form[$hide_field]['#access'] = FALSE;
   }
 
+  $form['faux_browser'] = array(
+    '#type' => 'hidden'
+  );
   $form['faux_javascript'] = array(
-    '#type' => 'textfield'
+    '#type' => 'hidden'
   );
   $form['faux_cookies'] = array(
-    '#type' => 'textfield'
+    '#type' => 'hidden'
   );
   $form['faux_images'] = array(
-    '#type' => 'textfield'
+    '#type' => 'hidden'
   );
   $form['faux_monitor_color_depth'] = array(
-    '#type' => 'textfield'
+    '#type' => 'hidden'
   );
   $form['faux_screen_resolution_width'] = array(
-    '#type' => 'textfield'
+    '#type' => 'hidden'
   );
   $form['faux_screen_resolution_height'] = array(
-    '#type' => 'textfield'
+    '#type' => 'hidden'
   );
 
   drupal_add_js(drupal_get_path('module', 'prc_trt') . '/prc_trt.js');
@@ -48,7 +51,9 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
 function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form, &$form_state) {
   $my_browser = 'other';
   // Set field_browser's value to show what browser the user is in.
-  if (isset($_SERVER['HTTP_USER_AGENT'])) {
+  if (array_key_exists('faux_browser', $form_state['input']) && $form_state['input']['faux_browser']) {
+    $my_browser = $form_state['input']['faux_browser'];
+  } elseif (isset($_SERVER['HTTP_USER_AGENT'])) {
     $agent = strtolower($_SERVER['HTTP_USER_AGENT']);
     $browser = browserclass_check_browser($agent);
     if (is_array($browser) && count($browser)) {
@@ -76,4 +81,140 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form
   $res_h = $form_state['input']['faux_screen_resolution_height'];
   form_set_value($form['field_screen_resolution_height'], array(LANGUAGE_NONE => array(0 => array('value' => $res_h))), $form_state);
 
+}
+
+/**
+ * Implements hook_field_extra_fields().
+ */
+function prc_trt_field_extra_fields() {
+  $extra['prc_trt']['system_check']['display'] = array(
+    'operating_system_pass' => array(
+      'label' => t('Operating system: Pass/Fail'),
+      'description' => t('Did operating system pass?'),
+      'weight' => 12,
+    ),
+    'monitor_size_pass' => array(
+      'label' => t('Monitor size: Pass/Fail'),
+      'description' => t('Did monitor size pass?'),
+      'weight' => 12,
+    ),
+    'monitor_color_depth_pass' => array(
+      'label' => t('Monitor color depth: Pass/Fail'),
+      'description' => t('Did monitor color depth pass?'),
+      'weight' => 12,
+    ),
+    'screen_resolution_pass' => array(
+      'label' => t('Screen resolution: Pass/Fail'),
+      'description' => t('Did screen resolution pass?'),
+      'weight' => 12,
+    ),
+    'processor_pass' => array(
+      'label' => t('Processor speed: Pass/Fail'),
+      'description' => t('Did processor pass?'),
+      'weight' => 12,
+    ),
+    'ram_pass' => array(
+      'label' => t('RAM: Pass/Fail'),
+      'description' => t('Did RAM pass?'),
+      'weight' => 12,
+    ),
+    'browser_pass' => array(
+      'label' => t('Browser: Pass/Fail'),
+      'description' => t('Did browser pass?'),
+      'weight' => 12,
+    ),
+    'cookies_pass' => array(
+      'label' => t('Cookies: Pass/Fail'),
+      'description' => t('Did cookies pass?'),
+      'weight' => 12,
+    ),
+    'javascript_pass' => array(
+      'label' => t('Javascript: Pass/Fail'),
+      'description' => t('Did Javascript pass?'),
+      'weight' => 12,
+    ),
+    'images_pass' => array(
+      'label' => t('Images: Pass/Fail'),
+      'description' => t('Did images pass?'),
+      'weight' => 12,
+    ),
+  );
+  return $extra;
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function prc_trt_entity_view($entity, $type, $view_mode, $langcode) {
+  if ($type == 'prc_trt' && $entity->type == 'system_check') {
+    $w = entity_metadata_wrapper('prc_trt', $entity);
+    $os = $w->field_operating_system->value();
+    $size = $w->field_monitor_size->value();
+    $size_pass = $size >= 9.7;
+    $depth = $w->field_monitor_color_depth->value();
+    $depth_pass = $depth >= 16;
+    $resw = $w->field_screen_resolution_width->value();
+    $resw_pass = $resw >= 1024;
+    $resh = $w->field_screen_resolution_height->value();
+    $resh_pass = $resh >= 768;
+    $processor = $w->field_processor_speed->value();
+    $processor_pass = $processor >= 1;
+    $ram = $w->field_ram->value();
+    $ram_pass = $ram >= 1;
+    $browser = $w->field_browser->value();
+
+    $cookies_pass = $w->field_browser_cookies_enabled->value();
+    $js_pass = $w->field_browser_javascript_enabled->value();
+    $images_pass = $w->field_browser_images_enabled->value();
+    $entity->content['operating_system_pass'] = array(
+      '#type' => 'item',
+      '#title' => t('Operating system Pass/Fail:'),
+      '#markup' => $js_pass ? 'Pass' : 'Fail',
+    );
+    $entity->content['monitor_size_pass'] = array(
+      '#type' => 'item',
+      '#title' => t('Monitor size Pass/Fail:'),
+      '#markup' => $size_pass ? 'Pass' : 'Fail',
+    );
+    $entity->content['monitor_color_depth_pass'] = array(
+      '#type' => 'item',
+      '#title' => t('Monitor color depth Pass/Fail:'),
+      '#markup' => $depth_pass ? 'Pass' : 'Fail',
+    );
+    $entity->content['screen_resolution_pass'] = array(
+      '#type' => 'item',
+      '#title' => t('Screen resolution Pass/Fail:'),
+      '#markup' => $resh_pass && $resw_pass ? 'Pass' : 'Fail',
+    );
+    $entity->content['processor_pass'] = array(
+      '#type' => 'item',
+      '#title' => t('Processor speed Pass/Fail:'),
+      '#markup' => $processor_pass ? 'Pass' : 'Fail',
+    );
+    $entity->content['ram_pass'] = array(
+      '#type' => 'item',
+      '#title' => t('RAM Pass/Fail:'),
+      '#markup' => $ram_pass ? 'Pass' : 'Fail',
+    );
+    $entity->content['browser_pass'] = array(
+      '#type' => 'item',
+      '#title' => t('Browser Pass/Fail:'),
+      '#markup' => $js_pass ? 'Pass' : 'Fail',
+    );
+    $entity->content['cookies_pass'] = array(
+      '#type' => 'item',
+      '#title' => t('Cookies Pass/Fail:'),
+      '#markup' => $cookies_pass ? 'Pass' : 'Fail',
+    );
+    $entity->content['javascript_pass'] = array(
+      '#type' => 'item',
+      '#title' => t('Javascript Pass/Fail:'),
+      '#markup' => $js_pass ? 'Pass' : 'Fail',
+    );
+    $entity->content['images_pass'] = array(
+      '#type' => 'item',
+      '#title' => t('Images Pass/Fail:'),
+      '#markup' => $images_pass ? 'Pass' : 'Fail',
+    );
+  }
 }

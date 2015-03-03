@@ -9,12 +9,12 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
 #  And my fields are valid
 #  When I click the Submit button
 #  Then the system checks for:
-  • Monitor color depth
-  • Screen resolution
+#  • Monitor color depth
+#  • Screen resolution
 #  • Browser
-  • Browser: Cookies enabled
-  • Browser: JavaScript enabled
-  • Browser: Images enabled
+#  • Browser: Cookies enabled
+#  • Browser: JavaScript enabled
+#  • Browser: Images enabled
 #  Then I see the System Check Results page that has:
   Page headline
   System Check
@@ -37,10 +37,11 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
   Browser: Cookies enabled	<Yes or No>	<Passed or Failed>	Cookies enabled
   Browser: JavaScript enabled	<Yes or No>	<Passed or Failed>	JavaScript enabled
   Browser: Images enabled	<Yes or No>	<Passed or Failed>	Images enabled
-  Additional Consideration
-  If Java Script not enabled, "Failed" message appears and for each area system detects "Failed" appears
+#  Additional Consideration
+#  If Java Script not enabled, "Failed" message appears and for each area system detects "Failed" appears
 
-  Scenario: Run check
+  @javascript
+  Scenario: Run check firefox
     Given I am logged in as a user with the "Educator" role
     # TODO: Replace with actual TRT System Check form
     And I am on "admin/structure/entity-type/prc_trt/system_check/add"
@@ -67,4 +68,46 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I should see the text "RAM:"
     And I should see the text "16GB"
     And I should see the text "Browser:"
-    And I should see the text "other"
+    And I should see the text "ff33"
+    And I should see the text "24"
+    And I should see the text "1440"
+    And I should see the text "900"
+
+  Scenario: Run check headless
+    Given I am logged in as a user with the "Educator" role
+# TODO: Replace with actual TRT System Check form
+    And I am on "admin/structure/entity-type/prc_trt/system_check/add"
+    And I fill in "System check name" with "Check 2"
+    And I fill in "Number of devices" with "23"
+    And I select "Desktop" from "Device type"
+    And I select "Windows 7" from "Operating system"
+    And I fill in "Monitor size (in inches)" with "17"
+    And I fill in "Processor speed" with "45"
+    And I fill in "RAM" with "16GB"
+    And I fill in the hidden field "faux_browser" with "ff33"
+    And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_cookies" with "true"
+    And I fill in the hidden field "faux_images" with "true"
+    And I fill in the hidden field "faux_monitor_color_depth" with "16"
+    And I fill in the hidden field "faux_screen_resolution_width" with "1024"
+    And I fill in the hidden field "faux_screen_resolution_height" with "768"
+    When I press "Submit"
+    Then I should see the text "System check name:"
+    And I should see the text "Check 2"
+    And I should see the text "Number of devices:"
+    And I should see the text "23"
+    And I should see the text "Device type:"
+    And I should see the text "Desktop"
+    And I should see the text "Operating system:"
+    And I should see the text "Windows 7"
+    And I should see the text "Monitor size \(in inches\):"
+    And I should see the text "17"
+    And I should see the text "Processor speed:"
+    And I should see the text "45"
+    And I should see the text "RAM:"
+    And I should see the text "16GB"
+    And I should see the text "Browser:"
+    And I should see the text "ff33"
+    And I should see the text "24"
+    And I should see the text "1024"
+    And I should see the text "768"
