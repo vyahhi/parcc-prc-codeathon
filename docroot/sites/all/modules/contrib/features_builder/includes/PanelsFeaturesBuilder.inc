@@ -37,7 +37,7 @@ class PanelsFeaturesBuilder extends FeaturesBuilderBase {
       $this->setRegexComponents('variable', '/panelizer_.+/');
     }
 
-    // Panelizer.
+    // PM Existing Pages.
     if (module_exists('pm_existing_pages')) {
       $this->setNamedComponents('dependencies', array('pm_existing_pages'));
       $this->setAllComponents('page_manager_existing_pages');
