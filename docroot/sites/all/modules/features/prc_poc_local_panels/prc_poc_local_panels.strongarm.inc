@@ -40,5 +40,12 @@ function prc_poc_local_panels_strongarm() {
   $strongarm->value = FALSE;
   $export['page_manager_search_disabled_node'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pm_existing_pages_disabled_add_system_check';
+  $strongarm->value = FALSE;
+  $export['pm_existing_pages_disabled_add_system_check'] = $strongarm;
+
   return $export;
 }
