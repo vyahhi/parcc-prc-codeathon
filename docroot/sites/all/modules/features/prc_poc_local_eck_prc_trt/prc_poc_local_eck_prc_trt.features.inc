@@ -18,6 +18,12 @@ function prc_poc_local_eck_prc_trt_ctools_plugin_api($module = NULL, $api = NULL
  */
 function prc_poc_local_eck_prc_trt_eck_bundle_info() {
   $items = array(
+    'prc_trt_capacity_check' => array(
+      'machine_name' => 'prc_trt_capacity_check',
+      'entity_type' => 'prc_trt',
+      'name' => 'capacity_check',
+      'label' => 'capacity_check',
+    ),
     'prc_trt_system_check' => array(
       'machine_name' => 'prc_trt_system_check',
       'entity_type' => 'prc_trt',

@@ -1385,6 +1385,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'eck add prc_trt capacity_check entities'.
+  $permissions['eck add prc_trt capacity_check entities'] = array(
+    'name' => 'eck add prc_trt capacity_check entities',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'eck',
+  );
+
   // Exported permission: 'eck add prc_trt system_check entities'.
   $permissions['eck add prc_trt system_check entities'] = array(
     'name' => 'eck add prc_trt system_check entities',
@@ -1461,6 +1470,15 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['eck administer prc_trt bundles'] = array(
     'name' => 'eck administer prc_trt bundles',
     'roles' => array(),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck administer prc_trt capacity_check entities'.
+  $permissions['eck administer prc_trt capacity_check entities'] = array(
+    'name' => 'eck administer prc_trt capacity_check entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'eck',
   );
 
@@ -1542,6 +1560,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'eck delete prc_trt capacity_check entities'.
+  $permissions['eck delete prc_trt capacity_check entities'] = array(
+    'name' => 'eck delete prc_trt capacity_check entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'eck',
+  );
+
   // Exported permission: 'eck delete prc_trt system_check entities'.
   $permissions['eck delete prc_trt system_check entities'] = array(
     'name' => 'eck delete prc_trt system_check entities',
@@ -1617,6 +1644,15 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['eck edit prc_trt bundles'] = array(
     'name' => 'eck edit prc_trt bundles',
     'roles' => array(),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck edit prc_trt capacity_check entities'.
+  $permissions['eck edit prc_trt capacity_check entities'] = array(
+    'name' => 'eck edit prc_trt capacity_check entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'eck',
   );
 
@@ -1698,6 +1734,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'eck list prc_trt capacity_check entities'.
+  $permissions['eck list prc_trt capacity_check entities'] = array(
+    'name' => 'eck list prc_trt capacity_check entities',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'eck',
+  );
+
   // Exported permission: 'eck list prc_trt system_check entities'.
   $permissions['eck list prc_trt system_check entities'] = array(
     'name' => 'eck list prc_trt system_check entities',
@@ -1756,6 +1801,15 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['eck view prc_trt bundles'] = array(
     'name' => 'eck view prc_trt bundles',
     'roles' => array(),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck view prc_trt capacity_check entities'.
+  $permissions['eck view prc_trt capacity_check entities'] = array(
+    'name' => 'eck view prc_trt capacity_check entities',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'eck',
   );
 

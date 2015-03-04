@@ -4,6 +4,29 @@
  * PRC Technology Readiness Tool module code.
  */
 
+function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form, &$form_state) {
+  $form['actions']['submit']['#value'] = t('Submit');
+
+  // Wireless only visible when selected from network connection
+  $form['field_wireless_connection_speed']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_network_connection_type[und]"]' => array('value' => "wireless"),
+    ),
+  );
+
+  // Wired only visible when selected from network connection
+  $form['field_wired_connection_speed']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_network_connection_type[und]"]' => array('value' => "wired"),
+    ),
+  );
+
+  $form['field_network_connection_type']['und']['#options']['_none'] = t('Please select');
+  $form['field_wired_connection_speed']['und']['#options']['_none'] = t('Please select');
+  $form['field_wireless_connection_speed']['und']['#options']['_none'] = t('Please select');
+
+}
+
 function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &$form_state) {
   $form['actions']['submit']['#value'] = t('Submit');
 
@@ -150,6 +173,23 @@ function prc_trt_field_extra_fields() {
       'weight' => 21,
     ),
   );
+  $extra['prc_trt']['capacity_check']['display'] = array(
+    'devices_required' => array(
+      'label' => t('Number of devices required'),
+      'description' => t('How many devices are required?'),
+      'weight' => 21,
+    ),
+    'devices_capacity' => array(
+      'label' => t('Devices capacity'),
+      'description' => t('Devices capacity'),
+      'weight' => 21,
+    ),
+    'bandwidth_capacity' => array(
+      'label' => t('Bandwidth capacity'),
+      'description' => t('Bandwidth capacity'),
+      'weight' => 21,
+    ),
+  );
   return $extra;
 }
 
@@ -157,84 +197,135 @@ function prc_trt_field_extra_fields() {
  * Implements hook_entity_view().
  */
 function prc_trt_entity_view($entity, $type, $view_mode, $langcode) {
-  if ($type == 'prc_trt' && $entity->type == 'system_check') {
-    drupal_set_title(t('System Check'));
-    $w = entity_metadata_wrapper('prc_trt', $entity);
-    $os = $w->field_operating_system->value();
-    $size = $w->field_monitor_size->value();
-    $size_pass = $size >= 9.7;
-    $depth = $w->field_monitor_color_depth->value();
-    $depth_pass = $depth >= 16;
-    $resw = $w->field_screen_resolution_width->value();
-    $resw_pass = $resw >= 1024;
-    $resh = $w->field_screen_resolution_height->value();
-    $resh_pass = $resh >= 768;
-    $processor = $w->field_processor_speed->value();
-    $processor_pass = $processor >= 1;
-    $ram = $w->field_ram->value();
-    $ram_pass = strpos(strtolower($ram), 'mb') === FALSE;
-    $browser = $w->field_browser->value();
-
-    $cookies_pass = $w->field_browser_cookies_enabled->value();
-    $js_pass = $w->field_browser_javascript_enabled->value();
-    $images_pass = $w->field_browser_images_enabled->value();
-
-    $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
-
-    $entity->content['overall_pass'] = array(
-      '#type' => 'item',
-      '#title' => t('System Check Results:'),
-      '#markup' => $all_pass ? t('Passed') : t('Failed'),
-    );
-    $entity->content['operating_system_pass'] = array(
-      '#type' => 'item',
-      '#title' => t('Operating system Results:'),
-      '#markup' => $js_pass ? 'Pass' : 'Fail',
-    );
-    $entity->content['monitor_size_pass'] = array(
-      '#type' => 'item',
-      '#title' => t('Monitor size Results:'),
-      '#markup' => $size_pass ? 'Pass' : 'Fail',
-    );
-    $entity->content['monitor_color_depth_pass'] = array(
-      '#type' => 'item',
-      '#title' => t('Monitor color depth Results:'),
-      '#markup' => $depth_pass ? 'Pass' : 'Fail',
-    );
-    $entity->content['screen_resolution_pass'] = array(
-      '#type' => 'item',
-      '#title' => t('Screen resolution Results:'),
-      '#markup' => $resh_pass && $resw_pass ? 'Pass' : 'Fail',
-    );
-    $entity->content['processor_pass'] = array(
-      '#type' => 'item',
-      '#title' => t('Processor speed Results:'),
-      '#markup' => $processor_pass ? 'Pass' : 'Fail',
-    );
-    $entity->content['ram_pass'] = array(
-      '#type' => 'item',
-      '#title' => t('RAM Results:'),
-      '#markup' => $ram_pass ? 'Pass' : 'Fail',
-    );
-    $entity->content['browser_pass'] = array(
-      '#type' => 'item',
-      '#title' => t('Browser Results:'),
-      '#markup' => $js_pass ? 'Pass' : 'Fail',
-    );
-    $entity->content['cookies_pass'] = array(
-      '#type' => 'item',
-      '#title' => t('Cookies Results:'),
-      '#markup' => $cookies_pass ? 'Pass' : 'Fail',
-    );
-    $entity->content['javascript_pass'] = array(
-      '#type' => 'item',
-      '#title' => t('Javascript Results:'),
-      '#markup' => $js_pass ? 'Pass' : 'Fail',
-    );
-    $entity->content['images_pass'] = array(
-      '#type' => 'item',
-      '#title' => t('Images Results:'),
-      '#markup' => $images_pass ? 'Pass' : 'Fail',
-    );
+  if ($type == 'prc_trt') {
+    switch ($entity->type) {
+      case 'system_check':
+        _prc_trt_view_entity_system_check($entity);
+        break;
+      case 'capacity_check':
+        _prc_trt_view_entity_capacity_check($entity);
+        break;
+    }
   }
+}
+
+/**
+ * @param $entity
+ */
+function _prc_trt_view_entity_capacity_check($entity) {
+  drupal_set_title(t('Testing Capacity Check Results'));
+
+  $w = entity_metadata_wrapper('prc_trt', $entity);
+  $students = $w->field_number_of_students->value();
+  $sittings = $w->field_sittings_per_student->value();
+  $devices = $w->field_number_of_devices->value();
+  $days = $w->field_number_testing_days->value();
+  $sessions = $w->field_number_of_sessions->value();
+
+  $devices_required = (($students * $sittings) / ($days * $sessions)) * 1.1;
+  $entity->content['devices_required'] = array(
+    '#type' => 'item',
+    '#title' => t('Devices required:'),
+    '#markup' => $devices_required,
+  );
+
+  $devices_capacity = $devices - $devices_required;
+  $entity->content['devices_capacity'] = array(
+    '#type' => 'item',
+    '#title' => t('Devices capacity:'),
+    '#markup' => $devices_capacity,
+  );
+
+  $speed = $w->field_speed_of_connection->value();
+  $bandwidth_capacity = $speed / $students;
+  $entity->content['bandwidth_capacity'] = array(
+    '#type' => 'item',
+    '#title' => t('Bandwidth Capacity:'),
+    '#markup' => t('@bandwidth_capacity Mbps/student', array('@bandwidth_capacity' => $bandwidth_capacity)),
+  );
+
+}
+
+/**
+ * @param $entity
+ */
+function _prc_trt_view_entity_system_check($entity) {
+  drupal_set_title(t('System Check'));
+  $w = entity_metadata_wrapper('prc_trt', $entity);
+  $os = $w->field_operating_system->value();
+  $size = $w->field_monitor_size->value();
+  $size_pass = $size >= 9.7;
+  $depth = $w->field_monitor_color_depth->value();
+  $depth_pass = $depth >= 16;
+  $resw = $w->field_screen_resolution_width->value();
+  $resw_pass = $resw >= 1024;
+  $resh = $w->field_screen_resolution_height->value();
+  $resh_pass = $resh >= 768;
+  $processor = $w->field_processor_speed->value();
+  $processor_pass = $processor >= 1;
+  $ram = $w->field_ram->value();
+  $ram_pass = strpos(strtolower($ram), 'mb') === FALSE;
+  $browser = $w->field_browser->value();
+
+  $cookies_pass = $w->field_browser_cookies_enabled->value();
+  $js_pass = $w->field_browser_javascript_enabled->value();
+  $images_pass = $w->field_browser_images_enabled->value();
+
+  $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
+
+  $entity->content['overall_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('System Check Results:'),
+    '#markup' => $all_pass ? t('Passed') : t('Failed'),
+  );
+  $entity->content['operating_system_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Operating system Results:'),
+    '#markup' => $js_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['monitor_size_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Monitor size Results:'),
+    '#markup' => $size_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['monitor_color_depth_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Monitor color depth Results:'),
+    '#markup' => $depth_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['screen_resolution_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Screen resolution Results:'),
+    '#markup' => $resh_pass && $resw_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['processor_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Processor speed Results:'),
+    '#markup' => $processor_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['ram_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('RAM Results:'),
+    '#markup' => $ram_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['browser_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Browser Results:'),
+    '#markup' => $js_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['cookies_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Cookies Results:'),
+    '#markup' => $cookies_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['javascript_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Javascript Results:'),
+    '#markup' => $js_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['images_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Images Results:'),
+    '#markup' => $images_pass ? 'Pass' : 'Fail',
+  );
 }
