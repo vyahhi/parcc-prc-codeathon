@@ -81,6 +81,7 @@ dependencies[] = message_subscribe
 dependencies[] = migrate
 dependencies[] = migrate_ui
 ; Other
+dependencies[] = browserclass
 dependencies[] = diff
 dependencies[] = elysia_cron
 dependencies[] = email_registration
