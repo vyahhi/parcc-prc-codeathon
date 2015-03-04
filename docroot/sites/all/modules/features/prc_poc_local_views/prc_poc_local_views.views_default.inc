@@ -2085,7 +2085,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'Sorry, there is no course data to report on.';
+  $handler->display->display_options['empty']['area']['content'] = 'Sorry, there is no course data to report on. Please check that both date fields are filled in with valid dates.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Relationship: Course report: Nid */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';

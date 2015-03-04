@@ -69,3 +69,10 @@ Feature: PRC-353 Admin: PD Course Reports
     And I should see the link "Date Started"
     And I should see the link "Date Completed"
     And I should see the link "Status"
+
+    # PRC-914 Admin: PD Course Reports: Filtering- Invalid Input message is not complete
+    Then I click "Reporting"
+    And I fill in "edit-date-completed-min" with "1234"
+    And I fill in "edit-date-completed-max" with "4321"
+    When I press "Apply"
+    Then I should see the text "Sorry, there is no course data to report on. Please check that both date fields are filled in with valid dates."
