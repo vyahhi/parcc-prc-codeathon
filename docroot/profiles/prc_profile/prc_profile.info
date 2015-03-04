@@ -178,6 +178,7 @@ dependencies[] = prc_lti_components
 dependencies[] = prc_mail_settings
 dependencies[] = prc_menu_links
 dependencies[] = prc_poc_local_eck_ccss
+dependencies[] = prc_poc_local_eck_prc_trt
 dependencies[] = prc_poc_local_fields
 dependencies[] = prc_poc_local_flag_bookmarks
 dependencies[] = prc_poc_local_flag_like_content
