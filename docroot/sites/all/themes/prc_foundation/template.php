@@ -34,6 +34,20 @@ function prc_foundation_preprocess_page(&$vars, $hook) {
   }
 }
 
+
+/**
+ * Implements hook_menu()
+ */
+function prc_foundation_menu() {
+  $items['user/login'] = array(
+    'title' => 'Log in',
+    'access callback' => 'user_is_anonymous',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
 function prc_foundation_ds_search_page($build) {
   if (isset($build['theme_hook_original'])) {
     unset($build['theme_hook_original']);

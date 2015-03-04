@@ -421,8 +421,8 @@ table {
 
 /* line 264, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_global.scss */
 meta.foundation-mq-small {
-  font-family: "only screen and (min-width: 1024px)";
-  width: 1024px;
+  font-family: "only screen and (min-width: 1025px)";
+  width: 1025px;
 }
 
 /* line 269, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_global.scss */
@@ -804,7 +804,7 @@ select {
   }
 }
 /* Styles for screens that are atleast 768px; */
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1025px) {
   /* line 158, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_grid.scss */
   .large-1 {
     position: relative;
@@ -1434,7 +1434,7 @@ blockquote p {
   padding: 0 0.0625em;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1025px) {
   /* line 368, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
   h1, h2, h3, h4, h5, h6 {
     line-height: 1.4;
@@ -1882,7 +1882,7 @@ blockquote p {
 
 /* line 380, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
 .top-bar-js-breakpoint {
-  width: 1024px !important;
+  width: 1025px !important;
   visibility: hidden;
 }
 
@@ -1891,7 +1891,7 @@ blockquote p {
   display: block;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1025px) {
   /* line 389, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
   .top-bar {
     background: #344758;
@@ -2080,68 +2080,96 @@ blockquote p {
   }
 }
 @media only screen {
-  /* line 59, ../sass/parc_foundation.scss */
-  nav a#logo img {
-    margin: 25px 25px 0 0.9375em;
-  }
   /* line 62, ../sass/parc_foundation.scss */
-  nav #main-menu li a {
-    text-transform: uppercase;
-    padding-right: 1.875em;
+  nav a#logo {
+    display: inline-block;
+    margin: 25px 0.9375em;
   }
   /* line 66, ../sass/parc_foundation.scss */
+  nav #main-menu li a,
+  nav #secondary-menu li a {
+    text-transform: uppercase;
+  }
+  /* line 70, ../sass/parc_foundation.scss */
+  nav li.toggle-topbar.menu-icon {
+    right: 5px !important;
+    margin-right: 0.9375em;
+  }
+  /* line 74, ../sass/parc_foundation.scss */
   nav #block-search-form {
     float: left;
     width: 100%;
     background-color: #333333;
-    padding: 20px 0.9375em 10px 25px;
+    padding: 20px 0.9375em 10px;
     line-height: 0;
   }
-  /* line 72, ../sass/parc_foundation.scss */
+  /* line 80, ../sass/parc_foundation.scss */
   nav #block-search-form h2 {
     font-size: 0;
   }
-  /* line 76, ../sass/parc_foundation.scss */
-  nav .toggle-topbar.menu-icon {
-    right: 0.9375em !important;
+  /* line 84, ../sass/parc_foundation.scss */
+  nav .top-bar-section ul li > a {
+    padding: 12px 0px 12px 16px;
   }
 
-  /* line 81, ../sass/parc_foundation.scss */
+  /* line 89, ../sass/parc_foundation.scss */
   #sub-header .breadcrumb {
     padding-top: .5em;
   }
-  /* line 83, ../sass/parc_foundation.scss */
+  /* line 91, ../sass/parc_foundation.scss */
   #sub-header .breadcrumb a {
     font-weight: bold;
     color: #464646;
   }
-  /* line 88, ../sass/parc_foundation.scss */
+  /* line 96, ../sass/parc_foundation.scss */
   #sub-header h1 {
     margin: 0 0 .75em;
     text-align: center;
     text-transform: uppercase;
   }
 
-  /* line 94, ../sass/parc_foundation.scss */
+  /* line 102, ../sass/parc_foundation.scss */
   #main-wrapper {
     background-color: #EEEEEE;
   }
 }
-@media only screen and (min-width: 1024px) {
-  /* line 101, ../sass/parc_foundation.scss */
+@media only screen and (min-width: 1025px) {
+  /* line 108, ../sass/parc_foundation.scss */
+  .columns {
+    padding-left: 1.875em;
+    padding-right: 1.875em;
+  }
+
+  /* line 112, ../sass/parc_foundation.scss */
+  nav.top-bar {
+    text-align: center;
+  }
+
+  /* line 116, ../sass/parc_foundation.scss */
+  nav a#logo {
+    display: inline-block;
+    margin: 25px 1.875em;
+  }
+  /* line 120, ../sass/parc_foundation.scss */
+  nav #main-menu-section,
+  nav #secondary-menu-section {
+    display: inline-block;
+  }
+  /* line 124, ../sass/parc_foundation.scss */
   nav .top-bar-section li a:not(.button):hover, nav .top-bar-section ul li.active > a {
     background: none repeat scroll 0% 0% #2e3f4e;
   }
-  /* line 104, ../sass/parc_foundation.scss */
+  /* line 127, ../sass/parc_foundation.scss */
   nav .top-bar-section ul {
     background-color: #344758;
   }
-  /* line 107, ../sass/parc_foundation.scss */
+  /* line 130, ../sass/parc_foundation.scss */
   nav #block-search-form {
     float: right;
     width: auto;
     background-color: #344758;
     padding-top: 5px;
     line-height: 60px;
+    padding-right: 1.875em;
   }
 }

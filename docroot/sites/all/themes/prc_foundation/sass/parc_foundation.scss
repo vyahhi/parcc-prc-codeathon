@@ -54,27 +54,35 @@
 // @import "foundation/components/tooltips";
 // @import "foundation/components/dropdown";
 
+// PRC Custom Variables
+@import "prc-variables";
+
 @media #{$screen} {
   nav {
-    a#logo img {
-      margin: 25px 25px 0 0.9375em; // figure out why you can't use $column-gutter here...
+    a#logo {
+      display: inline-block;
+      margin: 25px $default-margin;
     }
-    #main-menu li a {
+    #main-menu li a,
+    #secondary-menu li a {
       text-transform: uppercase;
-      padding-right: $column-gutter;
+    }
+    li.toggle-topbar.menu-icon {
+      right: 5px !important;
+      margin-right: $default-margin;
     }
     #block-search-form {
       float: left;
       width: 100%;
       background-color: $topbar-dropdown-bg;
-      padding: 20px 0.9375em 10px 25px;
+      padding: 20px $default-padding 10px;
       line-height: 0;
       h2 {
         font-size: 0;
       }
     }
-    .toggle-topbar.menu-icon { // Shouldn't be necessary to force this into grid
-      right: 0.9375em !important;
+    .top-bar-section ul li > a {
+      padding: 12px 0px 12px 16px;
     }
   }
   #sub-header {
@@ -97,7 +105,22 @@
 }
 
 @media #{$topbar-media-query} {
+  .columns {
+    padding-left: $desktop-padding;
+    padding-right: $desktop-padding;
+  }
+  nav.top-bar {
+    text-align: center;
+  }
   nav {
+    a#logo {
+      display: inline-block;
+      margin: 25px $desktop-margin;
+    }
+    #main-menu-section,
+    #secondary-menu-section {
+      display: inline-block;
+    }
     .top-bar-section li a:not(.button):hover, .top-bar-section ul li.active > a {
       background: none repeat scroll 0% 0% darken($topbar-bg-color, 3%);
     }
@@ -110,6 +133,7 @@
       background-color: $topbar-bg-color;
       padding-top: 5px;
       line-height: 60px;
+      padding-right: $desktop-margin;
     }
   }
 }
