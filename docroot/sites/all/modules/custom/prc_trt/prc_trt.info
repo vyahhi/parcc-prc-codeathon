@@ -4,3 +4,4 @@ package = PRC
 core = 7.x
 
 dependencies[] = browserclass
+dependencies[] = pm_existing_pages

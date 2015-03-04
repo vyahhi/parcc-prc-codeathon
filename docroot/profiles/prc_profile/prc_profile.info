@@ -129,6 +129,7 @@ dependencies[] = panels_everywhere
 dependencies[] = panels_ipe
 dependencies[] = panels_mini
 dependencies[] = panels_node
+dependencies[] = pm_existing_pages
 ; Performance
 dependencies[] = js
 ; Quiz Core
