@@ -2192,7 +2192,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['menu']['title'] = 'Overview';
   $handler->display->display_options['menu']['weight'] = '-1';
   $handler->display->display_options['tab_options']['type'] = 'tab';
-  $handler->display->display_options['tab_options']['title'] = 'Course reports';
+  $handler->display->display_options['tab_options']['title'] = 'Reporting';
   $handler->display->display_options['tab_options']['weight'] = '1';
 
   /* Display: Global course report */

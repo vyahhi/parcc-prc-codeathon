@@ -51,7 +51,8 @@ Feature: PRC-353 Admin: PD Course Reports
 
     Then I press "Save outline"
 
-    When I click "Course reports"
+    # PRC-913 Course Reports tab rename to Reporting
+    When I click "Reporting"
     Then I should see the text "Sorry, there is no course data to report on."
 
     Then I click "View"
@@ -59,7 +60,7 @@ Feature: PRC-353 Admin: PD Course Reports
     And I click "PD Module PRC-353 No1"
     Then I click "Professional Development"
     And I click "PD Course PRC-353"
-    When I click "Course reports"
+    When I click "Reporting"
     Then I should see the link "PD Course PRC-353"
     # Status shows the next module
     And I should see the text "PD Module PRC-353 No2"
