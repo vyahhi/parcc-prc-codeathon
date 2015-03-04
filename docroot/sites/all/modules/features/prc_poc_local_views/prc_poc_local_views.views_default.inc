@@ -1949,19 +1949,18 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['name']['label'] = 'Username';
   /* Field: Course object fulfillment: Date_started */
   $handler->display->display_options['fields']['date_started']['id'] = 'date_started';
   $handler->display->display_options['fields']['date_started']['table'] = 'course_outline_fulfillment';
   $handler->display->display_options['fields']['date_started']['field'] = 'date_started';
-  $handler->display->display_options['fields']['date_started']['label'] = 'Started';
+  $handler->display->display_options['fields']['date_started']['label'] = 'Date Started';
   $handler->display->display_options['fields']['date_started']['date_format'] = 'short';
   $handler->display->display_options['fields']['date_started']['second_date_format'] = 'long';
   /* Field: Course object fulfillment: Date_completed */
   $handler->display->display_options['fields']['date_completed']['id'] = 'date_completed';
   $handler->display->display_options['fields']['date_completed']['table'] = 'course_outline_fulfillment';
   $handler->display->display_options['fields']['date_completed']['field'] = 'date_completed';
-  $handler->display->display_options['fields']['date_completed']['label'] = 'Completed';
+  $handler->display->display_options['fields']['date_completed']['label'] = 'Date Completed';
   $handler->display->display_options['fields']['date_completed']['date_format'] = 'short';
   $handler->display->display_options['fields']['date_completed']['second_date_format'] = 'long';
   /* Field: Course object fulfillment: Grade_result */
@@ -2085,7 +2084,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'Sorry, there is no course data to report on.';
+  $handler->display->display_options['empty']['area']['content'] = 'Sorry, there is no course data to report on. Please check that both date fields are filled in with valid dates.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Relationship: Course report: Nid */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
@@ -2192,7 +2191,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['menu']['title'] = 'Overview';
   $handler->display->display_options['menu']['weight'] = '-1';
   $handler->display->display_options['tab_options']['type'] = 'tab';
-  $handler->display->display_options['tab_options']['title'] = 'Course reports';
+  $handler->display->display_options['tab_options']['title'] = 'Reporting';
   $handler->display->display_options['tab_options']['weight'] = '1';
 
   /* Display: Global course report */
