@@ -71,7 +71,6 @@ Feature: Workflow is functional
     And I click "Edit"
     And I fill in "Body" with "Here is my clever addition."
     And I press the "Save New Draft" button
-    # @todo: change once we have an edit tab on the revision page
     And I visit "content/my-first-post"
     And I click "Workflow"
     When I click "Request Approval"
@@ -111,6 +110,8 @@ Feature: Workflow is functional
     And I am logged in as "Joe Curator"
     And I visit "admin-content"
     And I click "pending review"
+    # Clear out old messages
+    And the test email system is enabled
     And I press the "Request Change" button
     #PRC-873 : should see a text area for deny
     And I fill in "Message *" with "Do it again, not so clever."
@@ -166,6 +167,7 @@ Feature: Workflow is functional
     Given I am logged in as "Joe Curator"
     And I visit "admin-content"
     And I click "My first post"
+    And I click "Edit"
     And I press the "Publish" button
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
@@ -175,7 +177,6 @@ Feature: Workflow is functional
     And the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
     And I follow the link in the email
     And I should not see the text "Access Denied"
-
 
   # Cancelling a request before it was ever published
     Given I am logged in as "Joe Contributor"
