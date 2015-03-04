@@ -15,10 +15,42 @@ function prc_poc_local_eck_prc_trt_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_prc_trt__capacity_check';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(),
-      'display' => array(),
+      'display' => array(
+        'devices_required' => array(
+          'default' => array(
+            'weight' => '21',
+            'visible' => TRUE,
+          ),
+        ),
+        'devices_capacity' => array(
+          'default' => array(
+            'weight' => '21',
+            'visible' => TRUE,
+          ),
+        ),
+        'bandwidth_capacity' => array(
+          'default' => array(
+            'weight' => '21',
+            'visible' => TRUE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_prc_trt__capacity_check'] = $strongarm;

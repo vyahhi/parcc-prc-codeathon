@@ -29,17 +29,17 @@ Feature: PRC-801 Testing Capacity Check - Unstructured - View Results
 #  Devices Capacity formula
 #  Number of assessment-ready devices <#> - Number of devices required <#>= Devices Capacity <#>
 #  Page subhead
-  Bandwidth Capacity Results
-  Bandwidth Capacity Results
-  • If result is .1+ Mbps/student, page displays "Good".
-  • If result is .050-.99 Mbps/student, page displays "OK" and copy: "Provide explanation of what OK means and any next steps."
-  • If result is under .05 Mbps/student, page displays "Poor" and copy: "Provide explanation of what poor means (will not be able to run successful assessment) and any next steps."
-  Inputs from Testing Capacity Check form
-  Network Connection: <Wired or Wireless>
-  <Wired or Wireless> Connection Speed: <#>
-  Number of Access Points: <#>
-  Number of Students: <#>
-  Speed of Connection: <#>
+#  Bandwidth Capacity Results
+#  Bandwidth Capacity Results
+#  • If result is .1+ Mbps/student, page displays "Good".
+#  • If result is .050-.99 Mbps/student, page displays "OK" and copy: "Provide explanation of what OK means and any next steps."
+#  • If result is under .05 Mbps/student, page displays "Poor" and copy: "Provide explanation of what poor means (will not be able to run successful assessment) and any next steps."
+#  Inputs from Testing Capacity Check form
+#  Network connection: <Wired or Wireless>
+#  <Wired or Wireless> connection speed: <#>
+#  Number of access points: <#>
+#  Number of students: <#>
+#  Speed of connection: <#>
 
 
   Scenario: Complete a Capacity Check - calculation A
@@ -53,6 +53,8 @@ Feature: PRC-801 Testing Capacity Check - Unstructured - View Results
     When I fill in "Number of sittings per student" with "4"
     When I fill in "Speed of connection (in Mbps)" with "500"
     When I fill in "Number of access points" with "600"
+    And I select "Wired" from "Network connection"
+    And I select "100 Mbps" from "Wired connection speed"
     And I press "Submit"
     And the ".field-devices-required" element should contain "11"
     And the ".field-devices-capacity" element should contain "39"
@@ -70,11 +72,18 @@ Feature: PRC-801 Testing Capacity Check - Unstructured - View Results
     And I should see the text "Number of sittings per student:"
     And I should see the text "Number of days of testing:"
     And I should see the text "Number of test sessions per day:"
+    And I should see the text "Network connection:"
+    And I should see the text "Wired connection speed:"
+    And I should see the text "Number of access points:"
+    And I should see the text "Speed of connection \(in Mbps\):"
     And the ".field-name-field-number-of-students" element should contain "100"
     And the ".field-name-field-number-of-devices" element should contain "50"
     And the ".field-name-field-sittings-per-student" element should contain "4"
     And the ".field-name-field-number-testing-days" element should contain "10"
     And the ".field-name-field-number-of-sessions" element should contain "4"
+    And the ".field-name-field-network-connection-type" element should contain "Wired"
+    And the ".field-name-field-wired-connection-speed" element should contain "100 Mbps"
+    And the ".field-name-field-number-of-access-points" element should contain "600"
 
   Scenario: Complete a Capacity Check - calculation B
     Given I am logged in as a user with the "Educator" role
