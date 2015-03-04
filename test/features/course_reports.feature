@@ -76,3 +76,11 @@ Feature: PRC-353 Admin: PD Course Reports
     And I fill in "edit-date-completed-max" with "4321"
     When I press "Apply"
     Then I should see the text "Sorry, there is no course data to report on. Please check that both date fields are filled in with valid dates."
+
+    # PRC-915 Admin: PD Course Reports: Course Object Reporting- Table Headers not as specified
+    When I click "Course objects"
+    And I follow "Overview" number "1"
+    Then I should see the text "Name"
+    Then I should see the text "Date Started"
+    Then I should see the text "Date Completed"
+    Then I should see the text "Grade"
