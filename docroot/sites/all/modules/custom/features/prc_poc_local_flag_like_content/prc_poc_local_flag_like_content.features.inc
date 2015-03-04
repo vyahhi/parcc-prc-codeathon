@@ -44,7 +44,7 @@ function prc_poc_local_flag_like_content_flag_default_flags() {
     ),
     'show_as_field' => 0,
     'show_on_form' => 0,
-    'access_author' => '',
+    'access_author' => 'others',
     'show_contextual_link' => 0,
     'i18n' => 0,
     'module' => 'prc_poc_local_flag_like_content',
