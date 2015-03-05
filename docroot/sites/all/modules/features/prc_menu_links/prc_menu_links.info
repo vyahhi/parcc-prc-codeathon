@@ -21,3 +21,5 @@ features[menu_links][] = menu-assessment-left-nav_all-available-assessments:asse
 features[menu_links][] = menu-digital-library-left-nav_view-all:digital-library
 features[menu_links][] = menu-invite-users_invite-new-user:invite/add/invite_by_email
 features[menu_links][] = menu-professional-development-le_all-available-courses:professional-development
+features[menu_links][] = menu-trt-system-check_system-check:admin/structure/entity-type/prc_trt/system_check/add
+features[menu_links][] = menu-trt-testing-capacity-check_testing-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add

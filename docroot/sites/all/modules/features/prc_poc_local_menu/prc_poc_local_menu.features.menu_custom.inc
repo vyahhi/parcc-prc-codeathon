@@ -76,6 +76,18 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Professional Development Left Nav',
     'description' => 'Navigation menu for Professional Development view',
   );
+  // Exported menu: menu-trt-system-check.
+  $menus['menu-trt-system-check'] = array(
+    'menu_name' => 'menu-trt-system-check',
+    'title' => 'TRT System Check',
+    'description' => '',
+  );
+  // Exported menu: menu-trt-testing-capacity-check.
+  $menus['menu-trt-testing-capacity-check'] = array(
+    'menu_name' => 'menu-trt-testing-capacity-check',
+    'title' => 'TRT Testing Capacity Check',
+    'description' => '',
+  );
   // Exported menu: navigation.
   $menus['navigation'] = array(
     'menu_name' => 'navigation',
@@ -106,6 +118,8 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Navigation');
   t('Navigation menu for Professional Development view');
   t('Professional Development Left Nav');
+  t('TRT System Check');
+  t('TRT Testing Capacity Check');
   t('The <em>Main</em> menu is used on many sites to show the major sections of the site, often in a top navigation bar.');
   t('The <em>Management</em> menu contains links for administrative tasks.');
   t('The <em>Navigation</em> menu contains links intended for site visitors. Links are added to the <em>Navigation</em> menu automatically by some modules.');
