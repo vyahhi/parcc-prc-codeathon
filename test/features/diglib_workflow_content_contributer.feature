@@ -30,7 +30,7 @@ Feature: As a Content Contributor, I need to have specific access to the Digital
     When I visit the last node created
     And I should see the text "My Content"
     Then I click "Edit"
-    And I press the "Save" button
+    And I press the "Save New Draft" button
     And I should see the success message containing "Digital Library Content My Content has been updated."
 
   Scenario: Contributor can request approval (prc-47)
