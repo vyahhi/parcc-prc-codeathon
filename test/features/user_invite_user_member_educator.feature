@@ -16,24 +16,28 @@ Feature: PRC-217  Invite User with Additional Role Selection
   Scenario: In the Invite User page, the Role options will display the new role (PARCC-Member Educator) and role name (Content Contributor instead of Content Author). The new list of Role options shall be:
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "PARCC-Member Educator"
-    Then I select the radio button "Content Contributor"
-    Then I should not see the radio button "Content Author"
+    Then I should see the checkbox "PARCC-Member Educator"
+    Then I should see the checkbox "Content Contributor"
+    Then I should not see the checkbox "Content Author"
 
   @javascript
   Scenario: When Content Contributor or PARCC-member Educator role is selected in the Invite User page, a new attribute State appears with a dropdown menu. The State field is invisible when PRC Admin or Educator role is selected.
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
     Then I should not see the text "State"
-    But I select the radio button "PARCC-Member Educator"
+    But I check the box "PARCC-Member Educator"
     And I should see the text "State"
-    Then I select the radio button "Educator"
-    And I should not see the text "State"
-    But I select the radio button "Content Contributor"
+    Then I check the box "Educator"
     And I should see the text "State"
-    But I select the radio button "PRC Admin"
+    Then I uncheck the box "PARCC-Member Educator"
     And I should not see the text "State"
-    When I select the radio button "Content Administrator (Curator)"
+    But I check the box "Content Contributor"
+    And I should see the text "State"
+    But I check the box "PRC Admin"
+    And I should see the text "State"
+    But I uncheck the box "Content Contributor"
+    And I should not see the text "State"
+    When I check the box "Content Administrator (Curator)"
     And I should not see the text "State"
 
   Scenario:  The State dropdown menu contains the following options (notice they're in alphabetical order):
@@ -57,7 +61,7 @@ Feature: PRC-217  Invite User with Additional Role Selection
   Scenario: Selecting a state saves the state to the invite
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Content Contributor"
+    Then I check the box "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com"
     And I select "Illinois" from "State"
@@ -67,7 +71,7 @@ Feature: PRC-217  Invite User with Additional Role Selection
   Scenario: The State field is optional. One or no option can be selected.
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Content Contributor"
+    Then I check the box "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com"
     And I select "Select a state" from "State"
@@ -77,11 +81,12 @@ Feature: PRC-217  Invite User with Additional Role Selection
   Scenario: Fill in State field and then change roles
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Content Contributor"
+    Then I check the box "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com"
     And I select "Ohio" from "State"
-    Then I select the radio button "Educator"
+    Then I check the box "Educator"
+    And I uncheck the box "Content Contributor"
     And I press "Send Invitation"
     Then I should not see the text "Member State"
     And I should not see the text "Ohio"

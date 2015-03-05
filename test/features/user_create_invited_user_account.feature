@@ -7,7 +7,7 @@ Feature: Create User Account Following an Invite (PRC-73)
   Background:
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Content Contributor"
+    Then I check the box "Content Contributor"
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"
     And I press "Send Invitation"

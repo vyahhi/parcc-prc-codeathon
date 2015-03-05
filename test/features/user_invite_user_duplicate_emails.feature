@@ -18,7 +18,7 @@ Feature: PRC-214 Admin UI: Invite User - Duplicate Emails
   Scenario: Duplicate email addresses
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Content Contributor"
+    Then I check the box "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com;example@example.com;one@example.com"
     And I select "Illinois" from "State"
@@ -30,7 +30,7 @@ Feature: PRC-214 Admin UI: Invite User - Duplicate Emails
   Scenario: Multiple sets of duplicate email addresses
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Content Contributor"
+    Then I check the box "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com,example@example.com,example1@example.com,example2@example.com,example2@example.com"
     And I select "Illinois" from "State"
@@ -43,7 +43,7 @@ Feature: PRC-214 Admin UI: Invite User - Duplicate Emails
   Scenario: Multiple sets of duplicate email addresses, out of order
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Content Contributor"
+    Then I check the box "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com,example1@example.com,example2@example.com,example1@example.com,example2@example.com"
     And I select "Illinois" from "State"

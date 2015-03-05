@@ -1,13 +1,12 @@
-@api @d7 @user @invite
-Feature: Create User Account Following an Invite (PRC-73)
-  As a potential PRC Administrator,
-  I want to create a new user account for myself after having received the create user account invitation from my fellow PRC Administrators,
-  so that I can access the system with designated role/permissions.
+@api @user @invite
+Feature: PRC-823 Allow multiple roles in user invite
 
-  Background:
+  Scenario: User invited with multiple roles
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I check the box "Educator"
+    Then I check the box "Content Contributor"
+    And I check the box "Educator"
+    And I check the box "PRC Admin"
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"
     And I press "Send Invitation"
@@ -16,8 +15,6 @@ Feature: Create User Account Following an Invite (PRC-73)
     And the email should contain "4321MESSAGE1234"
     And I click "Log out"
     Then I follow link "1" in the email
-
-  Scenario: AC5 - A Create New Account button is provided at the end. At click, the system shall:
     Then I should see the heading "Create User Account to Join Partnership Resource Center" in the "content" region
     And the url should match "user/register"
     And I should see "example1@timestamp@example.com" in the "E-mail" field
@@ -29,5 +26,7 @@ Feature: Create User Account Following an Invite (PRC-73)
     Then I should see the message containing "You have accepted the invitation from"
     And I should see the message containing "Registration successful. You are now logged in."
     #  Creates a new account with the pre-defined role
-    Then the user "example1@timestamp@example.com" should have a role of "Educator"
+    Then the user "example1@timestamp@example.com" should have a role of "Content Contributor"
+    And the user "example1@timestamp@example.com" should have a role of "Educator"
+    And the user "example1@timestamp@example.com" should have a role of "PRC Admin"
     Then I delete the user with the email address "example1@timestamp@example.com"

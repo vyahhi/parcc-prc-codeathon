@@ -281,8 +281,15 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^the user "([^"]*)" should have a role of "([^"]*)"$/
    */
   public function assertUserHasRole($username, $role) {
-    parent::assertDrushCommandWithArgument('user-information', $username);
-    parent::assertDrushOutput($role);
+    $username = $this->fixStepArgument($username);
+    $account = user_load_by_mail($username);
+    if (!$account) {
+      throw new \Exception(sprintf("The user '%s' does not exist", $username));
+    }
+    $roles = $account->roles;
+    if (!array_search($role, $roles)) {
+      throw new \Exception(sprintf("The user '%s' did not have a role of '%s'", $username, $role));
+    }
   }
 
   /**
@@ -291,8 +298,15 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^the user "([^"]*)" should not have a role of "([^"]*)"$/
    */
   public function assertUserDoesNotHaveRole($username, $role) {
-    parent::assertDrushCommandWithArgument('user-information', $username);
-    parent::drushOutputShouldNotContain($role);
+    $username = $this->fixStepArgument($username);
+    $account = user_load_by_mail($username);
+    if (!$account) {
+      throw new \Exception(sprintf("The user '%s' does not exist", $username));
+    }
+    $roles = $account->roles;
+    if (array_search($role, $roles)) {
+      throw new \Exception(sprintf("The user '%s' has the '%s' role", $username, $role));
+    }
   }
 
   /**
@@ -316,6 +330,28 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $actual_length = $f['columns']['format']['length'];
     if ($length != $actual_length) {
       throw new \Exception(sprintf("The field '%s' did not have a length of %d.\nInstead, it was:\n\n%d", $field, $length, $actual_length));
+    }
+  }
+
+  /**
+   * @Then /^I should have the "([^"]*)" role$/
+   */
+  public function iShouldHaveTheRole($role) {
+    $drupal_user = user_load($this->user->uid);
+    $roles = $drupal_user->roles;
+    if (!array_search($role, $roles)) {
+      throw new \Exception(sprintf("The current user did not have a role of '%s'", $role));
+    }
+  }
+
+  /**
+   * @Given /^I should not have the "([^"]*)" role$/
+   */
+  public function iShouldNotHaveTheRole($role) {
+    $drupal_user = user_load($this->user->uid);
+    $roles = $drupal_user->roles;
+    if (array_search($role, $roles)) {
+      throw new \Exception(sprintf("The current user has the '%s' role", $role));
     }
   }
 
@@ -768,6 +804,18 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $type = $this->nodeTypeByName($type);
     $arguments = "0 0 --types=$type --kill";
     $this->assertDrushCommandWithArgument($command, $arguments);
+  }
+
+  /**
+   * @Given /^I give myself the "([^"]*)" role$/
+   */
+  public function iGiveMyselfTheRole($rolename) {
+    $account = user_load($this->user->uid);
+    $roles = user_roles();
+    $rid = array_search($rolename, $roles);
+    $userroles = $account->roles;
+    $userroles[$rid] = $rolename;
+    user_save($account, array('roles' => $userroles));
   }
 
   /**
