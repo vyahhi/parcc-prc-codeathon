@@ -24,7 +24,7 @@ function prc_foundation_html_head_alter(&$head_elements) {
  * Implements hook_preprocess_html()
  */
 function prc_foundation_preprocess_html(&$variables) {
-  drupal_add_css('http://fonts.googleapis.com/css?family=Open+Sans:400,700', array('type' => 'external'));
+  drupal_add_css('http://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:700', array('type' => 'external'));
 }
 
 function prc_foundation_preprocess_page(&$vars, $hook) {
@@ -39,6 +39,7 @@ function prc_foundation_preprocess_page(&$vars, $hook) {
  * Implements hook_menu()
  */
 function prc_foundation_menu() {
+  // Only show Log in link for unauthenticated users
   $items['user/login'] = array(
     'title' => 'Log in',
     'access callback' => 'user_is_anonymous',

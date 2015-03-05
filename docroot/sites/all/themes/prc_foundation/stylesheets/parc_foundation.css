@@ -455,10 +455,10 @@ body {
 /* line 300, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_global.scss */
 body {
   background: #fff;
-  color: #222;
+  color: #464646;
   padding: 0;
   margin: 0;
-  font-family: "Proxima Nova", "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-style: normal;
   line-height: 1;
@@ -1203,7 +1203,7 @@ p aside {
 /* Default header styles */
 /* line 182, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Proxima Nova", "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans Condensed", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-style: normal;
   color: #70547d;
@@ -1221,7 +1221,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 
 /* line 199, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
 h1 {
-  font-size: 2.125em;
+  font-size: 2em;
 }
 
 /* line 200, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
@@ -1362,7 +1362,7 @@ abbr,
 acronym {
   text-transform: uppercase;
   font-size: 90%;
-  color: #222;
+  color: #464646;
   border-bottom: 1px dotted #ddd;
   cursor: help;
 }
@@ -1442,7 +1442,7 @@ blockquote p {
 
   /* line 369, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
   h1 {
-    font-size: 2.75em;
+    font-size: 2.625em;
   }
 
   /* line 370, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
