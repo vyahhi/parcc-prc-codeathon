@@ -37,13 +37,22 @@ function prc_workflow_menu_alter(&$menu) {
   $menu['node/%node/edit']['access callback'] = 'prc_workflow_access';
   $menu['node/%node/revisions/%/workflow']['access callback'] = 'prc_workflow_events_revision_access';
   $menu['node/%node/revisions/%/edit']['access callback'] = 'prc_workflow_access';
+  $menu['node/%node/delete']['access callback'] = 'prc_workflow_delete_access';
 }
 
-function prc_workflow_menu_local_tasks_alter(&$data, $router_item, $root_path){
+/**
+ * Implements hook_menu_local_tasks_alter()
+ *
+ * @param $data
+ * @param $router_item
+ * @param $root_path
+ */
+function prc_workflow_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  //Add tabs to the revision pages
   $path = $router_item['path'];
   $parts = explode('/', $router_item['href']);
 
-  switch($path){
+  switch ($path) {
     case 'node/%/revisions/%/edit' :
     case 'node/%/revisions/%/view' :
       $nid = $parts[1];
@@ -70,7 +79,7 @@ function prc_workflow_menu_local_tasks_alter(&$data, $router_item, $root_path){
       break;
   }
 
-  switch($path){
+  switch ($path) {
     case 'node/%/revisions/%/edit' :
       $data['tabs'][0]['output'][0]['#active'] = FALSE;
       $data['tabs'][0]['output'][1]['#active'] = TRUE;
@@ -83,23 +92,32 @@ function prc_workflow_menu_local_tasks_alter(&$data, $router_item, $root_path){
 
 }
 
+/**
+ * Custom access check for interacting with digital library nodes
+ *
+ * @param $op
+ * @param $node
+ * @param null $account
+ * @return bool
+ */
 function prc_workflow_access($op, $node, $account = NULL) {
-  if(empty($account)){
+  if (empty($account)) {
     global $user;
     $account = $user;
   }
-  if (node_access($op, $node, $account)) {
+  if (node_access($op, $node, $account) && $node->type == 'digital_library_content') {
 
     //Block access to editing for contributors when under review
     if ($op == 'update' && prc_workflow_reported_state($node->nid) === 'ready_for_review') {
 
       return user_access('approve prc content', $account);
-    }else {
+    }
+    else {
       return TRUE;
     }
   }
   else {
-    return FALSE;
+    return node_access($op, $node, $account);
   }
 }
 
@@ -118,6 +136,35 @@ function prc_workflow_events_revision_access($node, $event_name = NULL) {
   else {
     return !empty($event_name) ? state_flow_access($node, $event_name) : state_flow_menu_node_access($node);
   }
+}
+
+/**
+ * Block access to deleting digital library nodes
+ *
+ * @param $op
+ * @param $node
+ * @param null $account
+ * @return bool
+ */
+function prc_workflow_delete_access($op, $node, $account = NULL){
+  if (empty($account)) {
+    global $user;
+    $account = $user;
+  }
+  if ($node->type == 'digital_library_content') {
+    $machine = state_flow_load_state_machine($node);
+
+    //states that should block delete access
+    $blocking_states = array('published', 'ready_for_review');
+    foreach($blocking_states as $state){
+      $vid = prc_workflow_fetch_latest_node_version_by_state($node->nid, $state);
+      if($vid){
+        //Block access if we have a result
+        return FALSE;
+      }
+    }
+  }
+  return node_access($op, $node, $account);
 }
 
 /**
@@ -201,10 +248,11 @@ function prc_workflow_tokens($type, $tokens, $data = array(), $options = array()
         case 'field-node:workflow-comments' :
           //Fetch the latest comment for this node revision from the db
           $node = $m->field_node->value();
+
           $vid = $m->field_version_id->value();
 
-          $result = db_query('select * from {node_revision_states_history} where vid = :vid and nid = :nid order by "timestamp" DESC;',
-            array(':vid' => $vid, ':nid' => $node->nid)
+          $result = db_query('select * from {node_revision_states_history} where nid = :nid and vid = :vid order by "timestamp" DESC;',
+            array(':nid' => $node->nid, ':vid' => $vid)
           );
           $history = $result->fetchAll();
           $latest = array_shift($history);
@@ -237,8 +285,11 @@ function prc_workflow_state_flow_machine_type_alter(&$machine_type, $node) {
 function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$form_state) {
   $node = $form['#node'];
 
-  //state flow won't work without a vid, so skip on node creation
-  if (!empty($node->vid)) {
+  if (!empty($form_state['display_confirmation'])) {
+    prc_workflow_draft_confirm_form($form, $form_state);
+  }
+  elseif (!empty($node->vid)) {
+    //state flow won't work without a vid, so skip on node creation
     //Add action buttons for workflow events
     $state_flow = state_flow_load_state_machine($node);
 
@@ -265,6 +316,7 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
         $form['actions'][$key] = $action_button;
         $form['actions'][$key]['#value'] = $options['label'];
         $form['actions'][$key]['#weight'] = $weight;
+        $form['actions'][$key]['#attributes'] = array('data-event' => $key);
 
         $weight += -3;
       }
@@ -272,7 +324,69 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
 
     //Change the text of the submit button to save draft
     $form['actions']['submit']['#value'] = "Save New Draft";
+    //Require confirmation when in published state
+    if($state_flow->get_current_state() === 'published') {
+      $form['actions']['submit']['#submit'] = array('prc_workflow_pre_submit_handler');
+    }
+
+    //Hide delete button if our access callback fails
+    if(isset($form['actions']['delete']) && !prc_workflow_delete_access('delete', $node)){
+      unset($form['actions']['delete']);
+    }
   }
+  if(isset($form['revision_information'])){
+    //Hide the revision vtab
+    unset($form['revision_information']);
+  }
+}
+
+/**
+ * Helper for the confirmation form when saving a new draft
+ */
+function prc_workflow_draft_confirm_form(&$form, &$form_state) {
+  //Unset non-field elements
+  $disable = array(
+    'title',
+    'author',
+    'menu',
+    'path',
+    'comment_settings',
+    'actions',
+    'revision_information',
+    'body',
+    'options'
+  );
+
+  foreach ($disable as $element) {
+    if(isset($element)){
+      unset($form[$element]);
+    }
+  }
+
+  //unset the fields
+  foreach ($form as $key => $element) {
+    if (strpos($key, 'field') === 0) {
+      unset($form[$key]);
+    }
+  }
+
+  $form['confirm_message'] = array(
+    '#prefix' => '<p>',
+    '#suffix' => '</p>',
+    '#markup' => t('You are about to save a new draft'),
+  );
+
+  $form['actions']['confirm'] = array(
+    '#type' => 'submit',
+    '#value' => t('Confirm'),
+    '#submit' => array(
+      'prc_workflow_pre_submit_handler',
+      'node_form_submit'
+    ),
+  );
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), 'node/'.$form['#node']->nid),
+  );
 }
 
 /**
@@ -286,7 +400,10 @@ function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state
     // Changes before Approval for PRC-592 @timestamp (revision #)
     $title = $form_state['build_info']['args'][0]->title;
     $vid = $form_state['build_info']['args'][0]->vid;
-    $new_title = t('Changes before Approval for @title (revision @vid)', array('@title' => $title, '@vid' => $vid));
+    $new_title = t('Changes before Approval for @title (revision @vid)', array(
+      '@title' => $title,
+      '@vid' => $vid
+    ));
     drupal_set_title($new_title);
 
     $form['event_comment']['#title'] = t('Message');
@@ -301,10 +418,17 @@ function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state
     );
 
   }
+  else {
+    //Don't show the text area for other state changes (prc-873)
+    $form['event_comment']['#type'] = 'hidden';
+    $form['event_comment']['#required'] = FALSE;
+    $event = $form['event']['#value'];
+    $form['event_comment']['#value'] = 'Event: ' . $event;
+  }
 }
 
 /**
- * Additional submit handler for revisi ons.
+ * Additional submit handler for revisions.
  *
  * @param $form
  * @param $form_state
@@ -318,9 +442,19 @@ function prc_workflow_events_submit(&$form, &$form_state) {
  *
  */
 function prc_workflow_pre_submit_handler($form, &$form_state) {
-  // This empty pre-submit handler needs to be here
-  // in order for State Machine to work.
-  // Taking it out breaks it!
+  //Check if the button pressed is save draft
+  $state_flow = state_flow_load_state_machine($form['#node']);
+  //Only require confirmation when published
+  if($state_flow->get_current_state() === 'published') {
+    if ($form_state['triggering_element']['#value'] == 'Save New Draft') {
+      $form_state['display_confirmation'] = TRUE;
+      $form_state['saved_values'] = $form_state['values'];
+      $form_state['rebuild'] = TRUE;
+    }
+    if ($form_state['triggering_element']['#value'] == 'Confirm') {
+      $form_state['values'] = $form_state['saved_values'];
+    }
+  }
 }
 
 
@@ -337,16 +471,17 @@ function prc_workflow_submit_handler($form, &$form_state) {
   //Determine which button was pressed and fire the corresponding event
   if (!empty($node->vid)) {//skip if we are creating a new node
 
-    $clicked = $form_state['clicked_button']['#value'];
+    //We put the event name in an id in the form alter, retrieve it
+    $clicked = $form_state['clicked_button']['#attributes']['data-event'];
+
     $state_machine = state_flow_load_state_machine($node, TRUE);
     $events = $state_machine->get_all_events();
 
     foreach ($events as $key => $event) {
-      $option_label = $event['label'];
-      if ($clicked == $option_label) {
+      if ($clicked == $key) {
 
         //Workaround having to do with this being action buttons on edit form
-        if(isset($event['actual_event'])){
+        if (isset($event['actual_event'])) {
           $key = $event['actual_event'];
           $event = $events[$event['actual_event']];
         }
@@ -375,13 +510,14 @@ function prc_workflow_submit_handler($form, &$form_state) {
 function prc_workflow_fetch_latest_node_version_by_state($nid, $state) {
 
   $vid = db_query("
-    select nrsh.vid from {node_revision_states_history} nrsh
-    where nrsh.nid = :nid
-      and nrsh.state = :state
-    order by nrsh.nrshid DESC limit 1",
+    select nrs.vid from {node_revision_states} nrs
+    where nrs.nid = :nid
+      and nrs.state = :state
+      and nrs.status = 1
+    order by nrs.vid DESC limit 1",
     array(':nid' => $nid, ':state' => $state))->fetchField();
 
-  return node_load($nid, $vid, TRUE);
+  return $vid ? node_load($nid, $vid, TRUE) : FALSE;
 }
 
 /**
@@ -459,7 +595,12 @@ function prc_workflow_message($message_type, $node) {
 
 
   if ($message_type == 'request_changes') {
-    $wrapper->field_version_id->set($node->vid);
+    // The vid we need is that of the most recent history, not of the node that
+    // was passed in, nor of the most recent vid
+    $result = db_query('select vid from {node_revision_states_history}
+      where nid = :nid order by nrshid DESC limit 1', array(':nid' => $node->nid))->fetchField();
+
+    $wrapper->field_version_id->set($result);
   }
 
   $wrapper->field_user_ref->set($user);
@@ -476,37 +617,7 @@ function prc_workflow_message($message_type, $node) {
  *
  * @param $node
  */
-function prc_workflow_reported_state($nid){
-  /**
-   * The purpose of this was to report the same state no matter which
-   * revision you were viewing.
-   *
-   * @todo: delete this section if the states are behaving correctly
-   */
-  /*
-  //get the active drafts
-  $drafts = db_query("
-    select * from {node_revision_states} nrs
-    where nrs.nid = :nid
-      and nrs.status = 1",
-    array(':nid' => $nid))->fetchAllAssoc('vid');
-
-  $reported_state = 'draft';
-  foreach($drafts as $draft){
-    if($draft->state == 'ready_for_review'){
-      $reported_state = 'ready_for_review';
-      break;
-    }elseif($draft->state == 'published'){
-      $reported_state = 'published';
-    }
-  }
-  //If the node was ever published, but is currently draft, report the state as unpublished
-  if($reported_state == 'draft'){
-    $published_history = db_query("select state from {node_revision_states_history} where nid = :nid and state = 'published'", array(':nid' => $nid))->fetchField();
-    if($published_history && count($published_history)){
-      $reported_state = 'unpublished';
-    }
-  }*/
+function prc_workflow_reported_state($nid) {
 
   //Base reported state on the most recent draft rather than the most advanced draft
   //Get the active drafts
@@ -521,8 +632,8 @@ function prc_workflow_reported_state($nid){
   $active_draft = NULL;
   $active_review = NULL;
 
-  foreach($active_versions as $vid => $revision ){
-    switch($revision->state){
+  foreach ($active_versions as $vid => $revision) {
+    switch ($revision->state) {
       case 'draft' :
         $active_draft = $vid;
         break;
@@ -535,12 +646,13 @@ function prc_workflow_reported_state($nid){
     }
   }
 
-
-  if($active_review){
+  if ($active_review) {
     $reported_state = 'ready_for_review';
-  }elseif($active_draft){
+  }
+  elseif ($active_draft) {
     $reported_state = 'draft';
-  }elseif($active_published){
+  }
+  elseif ($active_published) {
     $reported_state = 'published';
   }
 

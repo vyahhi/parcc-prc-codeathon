@@ -982,6 +982,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['delete any digital_library_content content'] = array(
     'name' => 'delete any digital_library_content content',
     'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
