@@ -48,3 +48,12 @@ Feature: PRC-553 Social Media: PD Content "Like"
     When I click "Like (0)"
     Then I should see the link "Undo (1)"
     And I should not see the text "Like"
+
+  Scenario: PRC-910 User can't Like own content
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    Given "PD Course" nodes:
+      | title      | body           | field_permissions | uid | status |
+      | Public     | This is public | public            | @currentuid   | 1      |
+    And I visit the last node created
+    And I should not see the link "Like (0)"
+    And I should not see the text "Undo"

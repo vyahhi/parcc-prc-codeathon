@@ -81,6 +81,7 @@ dependencies[] = message_subscribe
 dependencies[] = migrate
 dependencies[] = migrate_ui
 ; Other
+dependencies[] = browserclass
 dependencies[] = diff
 dependencies[] = elysia_cron
 dependencies[] = email_registration
@@ -121,13 +122,13 @@ dependencies[] = prc_text_to_speech
 dependencies[] = prc_trt
 dependencies[] = prc_user_edit_form
 dependencies[] = prc_workflow
-dependencies[] = user_single_role
 ; Panels
 dependencies[] = panels
 dependencies[] = panels_everywhere
 dependencies[] = panels_ipe
 dependencies[] = panels_mini
 dependencies[] = panels_node
+dependencies[] = pm_existing_pages
 ; Performance
 dependencies[] = js
 ; Quiz Core
@@ -178,6 +179,7 @@ dependencies[] = prc_lti_components
 dependencies[] = prc_mail_settings
 dependencies[] = prc_menu_links
 dependencies[] = prc_poc_local_eck_ccss
+dependencies[] = prc_poc_local_eck_prc_trt
 dependencies[] = prc_poc_local_fields
 dependencies[] = prc_poc_local_flag_bookmarks
 dependencies[] = prc_poc_local_flag_like_content

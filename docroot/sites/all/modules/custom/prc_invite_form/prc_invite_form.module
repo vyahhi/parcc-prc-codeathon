@@ -41,7 +41,7 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
   // And add a set of radio buttons for roles...
   $roles = _prc_invite_form_invite_roles();
   $form['invite_role'] = array(
-    '#type' => 'radios',
+    '#type' => 'checkboxes',
     '#title' => 'Role',
     '#description' => 'Users invited will have the role selected.',
     '#required' => TRUE,
@@ -60,16 +60,26 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
   $roles = user_roles();
   $roles_with_states = array('PARCC-Member Educator', 'Content Contributor');
   $roles_rids = array();
+  $role_states = array();
   foreach($roles_with_states as $role) {
     $rid = array_search($role, $roles);
     // IE requires this to be a string. Joy.
     $roles_rids[] = array('value' => "$rid");
+    if (count($role_states)) {
+      $role_states[] = 'or';
+    }
+    $role_states[] = array(':input[name="invite_role[' . $rid . ']"]' => array('checked' => TRUE));
   }
 
-  // Now make the Member State dropdown dependent on the Role selected
+// Now make the Member State dropdown dependent on the Role selected
   $form['field_member_state']['#states'] = array(
     'visible' => array(
-      ':input[name="invite_role"]' => $roles_rids,
+      $role_states,
+//      array(
+//        array(':input[name="invite_role[6]"]' => array('checked' => TRUE)),
+//        'or',
+//        array(':input[name="invite_role[4]"]' => array('checked' => TRUE)),
+//      ),
     ),
   );
 
@@ -210,8 +220,12 @@ function prc_invite_form_form_invite_form_submit(&$form, &$form_state)
   $form['#entity_builders'] = $entity_builders;
   $new_body = $form_state['values']['prc_invite_message'] . '<br />' . $form_state['values']['field_invitation_email_body'][LANGUAGE_NONE][0]['value'];
   $form_state['values']['field_invitation_email_body'][LANGUAGE_NONE][0]['value'] = $new_body; // .= pre-concat operator not working
-  $rid = $form_state['values']['invite_role'];
-  $form_state['values']['field_role_id'][LANGUAGE_NONE][0]['value'] = $rid;
+  $rids = $form_state['values']['invite_role'];
+  foreach($rids as $rid) {
+    if ($rid) {
+      $form_state['values']['field_role_id'][LANGUAGE_NONE][] = array('value' => $rid);
+    }
+  }
 
   $roles = user_roles();
   $roles_with_states = array('PARCC-Member Educator', 'Content Contributor');
@@ -221,14 +235,13 @@ function prc_invite_form_form_invite_form_submit(&$form, &$form_state)
     $roles_rids[] = $state_rid;
   }
 
-  if (array_search($rid, $roles_rids) === FALSE) {
+  if (!count(array_intersect($rids, $roles_rids))) {
     // Force no state on any role except PARCC-Member Educator or Content Contributor
     $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = NULL;
   }
 
   foreach ($form_state['invitees'] as $key => $invitee) {
     // invite to group
-    //$form_state['values']['field_invitation_email_address'] = $invitee;
     $form_state['values']['field_invitation_email_address'][LANGUAGE_NONE][0]['value'] = $invitee;
     invite_form_submit($form, $form_state);
     $form_state['invite']->reg_code = invite_generate_code();
@@ -245,10 +258,10 @@ function prc_invite_form_invite_accept($invite) {
   $account = user_load($invitee);
   $invite_rid = $w->field_role_id->value();
   $roles = user_roles(TRUE);
-  if (isset($roles[$invite_rid])) {
-    $role_name = $roles[$invite_rid];
+  if (count(array_intersect(array_values($invite_rid), array_keys($roles)))) {
+    $educator_rid = array_search('Educator', $roles);
     // Users get Educator by default, so don't do anything funky if it's an Educator invite
-    if ($role_name != 'Educator') {
+    if (count($invite_rid) != 1 | !array_search($educator_rid, $invite_rid)) {
       $new_roles = array();
       // Remove all other roles from the user
       foreach ($roles as $rid => $rname) {
@@ -256,7 +269,12 @@ function prc_invite_form_invite_accept($invite) {
       }
       // Add authenticated user back in
       $new_roles[2] = $roles[2];
-      $new_roles[$invite_rid] = $role_name;
+      foreach($invite_rid as $user_rid) {
+        if (array_key_exists($user_rid, $roles)) {
+          $role_name = $roles[$user_rid];
+          $new_roles[$user_rid] = $role_name;
+        }
+      }
       // Add role to user
       user_save($account, array('roles' => $new_roles));
     }

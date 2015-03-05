@@ -32,9 +32,9 @@ function prc_poc_local_message_ready_for_review_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "New Draft Awaiting Review: \\u0027[message:field-node:title]\\u0027",
+          "value" : "[message:field-node:title] has an Approval Request",
           "format" : "filtered_html",
-          "safe_value" : "\\u003Cp\\u003ENew Draft Awaiting Review: \\u0027[message:field-node:title]\\u0027\\u003C\\/p\\u003E\\n"
+          "safe_value" : "\\u003Cp\\u003E[message:field-node:title] has an Approval Request\\u003C\\/p\\u003E\\n"
         },
         {
           "value" : "The following content is awaiting approval:\\r\\nContent: \\u003Ca href=\\u0022[message:field-node:edit-url]\\u0022\\u003E\\u0027[message:field-node:title]\\u0027 ([message:field-node:nid])\\u003C\\/a\\u003E\\r\\nDate: [message:timestamp:long]\\r\\nBy: [message:field-node:author:field-first-name] [message:field-node:author:field-last-name] ([message:field-node:author:mail])\\r\\n",

@@ -23,7 +23,7 @@ Feature: PRC-648 Deep Search: DOC, DOCX Documents
     And I follow "Edit"
     Then I attach the file "testfiles/FireflyIpsum.docx" to "edit-field-document-und-0-upload"
     And I select the radio button "Public"
-    And I press "Save"
+    And I press "Save New Draft"
     And I should see the success message containing "Digital Library Content Search-text-o-rama has been updated."
     Then I follow "Edit"
     And I should see the link "FireflyIpsum.docx"

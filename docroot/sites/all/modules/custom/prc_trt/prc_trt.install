@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * PRC TRT installation hooks.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function prc_trt_install() {
+  $cap_good = .1;
+  $cap_ok = .05;
+
+  variable_set('prc_trt_capacity_minimum_good', $cap_good);
+  variable_set('prc_trt_capacity_minimum_ok', $cap_ok);
+}

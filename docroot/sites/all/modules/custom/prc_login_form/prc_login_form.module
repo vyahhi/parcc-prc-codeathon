@@ -74,74 +74,32 @@ function prc_login_form_user_update(&$edit, $account, $category) {
  *  Implements hook_user_insert().
  */
 function prc_login_form_user_insert(&$edit, $account, $category) {
-  //TODO: Check that this user is self-registering and not coming through an invitation
-  $roles = user_roles(TRUE);
-  $educator_role_name = 'Educator';
-  $new_rid = array_search($educator_role_name, $roles);
-  $new_role_name = $educator_role_name;
+  // Check that this user is self-registering and not coming through an invitation
+  $reload_account = user_load($account->uid);
+  if (count($reload_account->roles) == 1) {
+    $roles = user_roles(TRUE);
+    $educator_role_name = 'Educator';
+    $new_rid = array_search($educator_role_name, $roles);
+    $new_role_name = $educator_role_name;
 
-  if ($new_rid != FALSE) {
-    // If a state account number was given, we create this user as
-    // a PARCC-Member Educator
-    if (array_key_exists('state_account_number', $edit)) {
-      $account_number_provided = $edit['state_account_number'];
-      if ($account_number_provided) {
-        $member_role_name = 'PARCC-Member Educator';
-        $member_rid = array_search($member_role_name, $roles);
-        $new_rid = $member_rid;
-        $new_role_name = $member_role_name;
+    if ($new_rid != FALSE) {
+      // If a state account number was given, we create this user as
+      // a PARCC-Member Educator
+      if (array_key_exists('state_account_number', $edit)) {
+        $account_number_provided = $edit['state_account_number'];
+        if ($account_number_provided) {
+          $member_role_name = 'PARCC-Member Educator';
+          $member_rid = array_search($member_role_name, $roles);
+          $new_rid = $member_rid;
+          $new_role_name = $member_role_name;
+        }
       }
-    }
 
-    $new_role[$new_rid] = $new_role_name;
-    $all_roles = $account->roles + $new_role; // Add new role to existing roles.
-    $account->roles = $all_roles;
-  }
-  drupal_register_shutdown_function('_prc_login_form_user_restrict_single_role', $account);
-}
-
-function _prc_login_form_user_restrict_single_role($account) {
-  $new_account = user_load($account->uid);
-  $old_roles = $new_account->roles;
-  $all_roles = user_roles(TRUE);
-
-  if($old_roles) {
-    // Creating an administrator should kill all the other roles
-    $admin = array_search('administrator', $old_roles);
-    // Every user gets authenticated user
-    // If there is educator and there is anything else, remove educator
-    $educator = array_search('Educator', $old_roles);
-  }
-  $auth_user_rid = array_search('authenticated user', $all_roles);
-
-  if ($admin) {
-    $admin_rid = array_search('administrator', $all_roles);
-    $old_roles = array(
-      $admin_rid => 'administrator',
-      $auth_user_rid => 'authenicated user',
-    );
-  } elseif ($educator) {
-    $excludes = array('authenticated user', 'Educator');
-    $save_role_name = '';
-    $save_rid = 0;
-    foreach($old_roles as $rid => $name) {
-      if (!in_array($name, $excludes)) {
-        $save_role_name = $name;
-        $save_rid = $rid;
-      }
-    }
-    if ($save_rid) {
-      $old_roles[$educator] = 0;
+      $new_role[$new_rid] = $new_role_name;
+      $all_roles = $account->roles + $new_role; // Add new role to existing roles.
+      $account->roles = $all_roles;
     }
   }
-  //prevent warning in user_save
-  if(isset($account->original) && empty($account->original)) {
-    unset($account->original);
-  }
-
-    // Save user without Educator
-    user_save($account, array('roles' => $old_roles));
-
 }
 
 /**

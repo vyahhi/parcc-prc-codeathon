@@ -9,7 +9,7 @@ class prcWorkflow extends StateFlow {
     //define states
     $this->create_state('draft',
       array(
-        'label' => t('Private Draft')
+        'label' => t('Draft')
       )
     );
 

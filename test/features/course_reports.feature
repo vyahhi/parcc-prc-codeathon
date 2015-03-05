@@ -51,7 +51,8 @@ Feature: PRC-353 Admin: PD Course Reports
 
     Then I press "Save outline"
 
-    When I click "Course reports"
+    # PRC-913 Course Reports tab rename to Reporting
+    When I click "Reporting"
     Then I should see the text "Sorry, there is no course data to report on."
 
     Then I click "View"
@@ -59,7 +60,7 @@ Feature: PRC-353 Admin: PD Course Reports
     And I click "PD Module PRC-353 No1"
     Then I click "Professional Development"
     And I click "PD Course PRC-353"
-    When I click "Course reports"
+    When I click "Reporting"
     Then I should see the link "PD Course PRC-353"
     # Status shows the next module
     And I should see the text "PD Module PRC-353 No2"
@@ -68,3 +69,18 @@ Feature: PRC-353 Admin: PD Course Reports
     And I should see the link "Date Started"
     And I should see the link "Date Completed"
     And I should see the link "Status"
+
+    # PRC-914 Admin: PD Course Reports: Filtering- Invalid Input message is not complete
+    Then I click "Reporting"
+    And I fill in "edit-date-completed-min" with "1234"
+    And I fill in "edit-date-completed-max" with "4321"
+    When I press "Apply"
+    Then I should see the text "Sorry, there is no course data to report on. Please check that both date fields are filled in with valid dates."
+
+    # PRC-915 Admin: PD Course Reports: Course Object Reporting- Table Headers not as specified
+    When I click "Course objects"
+    And I follow "Overview" number "1"
+    Then I should see the text "Name"
+    Then I should see the text "Date Started"
+    Then I should see the text "Date Completed"
+    Then I should see the text "Grade"

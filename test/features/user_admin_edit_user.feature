@@ -40,11 +40,11 @@ Feature: Admin UI: Edit User (PRC-105)
     And I should see a "Confirm password" field
     And I should see "Password strength"
 
-  Scenario: AC5 - Only 1 role can be selected - radio button
-    Then I select the radio button "Educator"
-    Then I select the radio button "PRC Admin"
-    Then I select the radio button "Content Contributor"
-    Then I should not see the radio button "administrator"
+  Scenario: AC5 - Only 1 role can be selected - radio button PRC-823 Changes to allow multiple roles
+    Then I should see the checkbox "Educator"
+    Then I should see the checkbox "PRC Admin"
+    Then I should see the checkbox "Content Contributor"
+    Then I should not see the checkbox "administrator"
 
   Scenario: AC6a - Validation - required fields
     Then I fill in "First Name *" with ""

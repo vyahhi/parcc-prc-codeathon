@@ -298,6 +298,46 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-trt-system-check_system-check:admin/structure/entity-type/prc_trt/system_check/add
+  $menu_links['menu-trt-system-check_system-check:admin/structure/entity-type/prc_trt/system_check/add'] = array(
+    'menu_name' => 'menu-trt-system-check',
+    'link_path' => 'admin/structure/entity-type/prc_trt/system_check/add',
+    'router_path' => 'admin/structure/entity-type/prc_trt/system_check/add',
+    'link_title' => 'System Check',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-trt-system-check_system-check:admin/structure/entity-type/prc_trt/system_check/add',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-trt-testing-capacity-check_testing-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add
+  $menu_links['menu-trt-testing-capacity-check_testing-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add'] = array(
+    'menu_name' => 'menu-trt-testing-capacity-check',
+    'link_path' => 'admin/structure/entity-type/prc_trt/capacity_check/add',
+    'router_path' => 'admin/structure/entity-type/prc_trt/capacity_check/add',
+    'link_title' => 'Testing Capacity Check',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-trt-testing-capacity-check_testing-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Translatables
   // Included for use with string extractors like potx.
   t('Add content');
@@ -312,7 +352,9 @@ function prc_menu_links_menu_default_menu_links() {
   t('Home');
   t('Invite New User');
   t('Professional Development');
+  t('System Check');
   t('Technology Readiness');
+  t('Testing Capacity Check');
   t('Users');
   t('View All');
 
