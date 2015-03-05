@@ -266,7 +266,6 @@ function prc_workflow_tokens($type, $tokens, $data = array(), $options = array()
   return $replacements;
 }
 
-
 /**
  * Implements hook_state_flow_machine_type_alter()
  *
@@ -645,7 +644,7 @@ function prc_workflow_reported_state($nid) {
         break;
     }
   }
-
+  
   if ($active_review) {
     $reported_state = 'ready_for_review';
   }
