@@ -200,7 +200,11 @@ Feature: Workflow is functional
     And I should not see an "textarea" element
     Then I press the "Update state" button
     And I visit "content/my-second-post"
+    # PRC-813
     And I should see the text "Revision State: Draft"
+    # PRC-853
+    And I visit "admin-content"
+    And I should see the text "Draft" in the "My second post." row
 
   Scenario: Content is published, but changes don't show up until after it has been approved
     And the test email system is enabled
@@ -406,6 +410,7 @@ Feature: Workflow is functional
     And I press the "Update state" button
     And I am logged in as "Joe Curator"
     And the email to "joe_1prc_58ca@example.com" should contain "The following content is awaiting approval"
+    #prc-870 : email subject of request approval
     And the email should contain "PRC-592 @timestamp has an Approval Request"
     And I follow the link in the email
     Then I should not see the text "Access Denied"
