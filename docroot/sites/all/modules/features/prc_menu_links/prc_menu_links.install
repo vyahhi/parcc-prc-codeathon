@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function prc_menu_links_install() {
+  // Add user/login link to user menu since it can't be added via features.
+  // See https://www.drupal.org/node/935152
+  $item = array(
+    'link_title' => 'Log in',
+    'link_path' => 'user/login',
+    'menu_name' => 'user-menu',
+  );
+  menu_link_save($item);
+}
+
+/**
+ * Add user/login link to user menu since it can't be added via features.
+ * See https://www.drupal.org/node/935152
+ */
+function prc_menu_links_update_7000() {
+  $item = array(
+    'link_title' => 'Log in',
+    'link_path' => 'user/login',
+    'menu_name' => 'user-menu',
+  );
+  menu_link_save($item);
+}
