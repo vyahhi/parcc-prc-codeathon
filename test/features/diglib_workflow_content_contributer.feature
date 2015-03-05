@@ -7,14 +7,14 @@ Feature: As a Content Contributor, I need to have specific access to the Digital
     And I am viewing my "Digital Library Content" node with the title "My Content"
     And I click "Edit"
     And I select the radio button "Public"
-    And I press the "Save" button
+    And I press the "Save New Draft" button
 
   Scenario: Can view and edit draft whens state is draft
     Given the last node created's state is "draft"
     When I visit the last node created
     And I should see the text "My Content"
     And I click "Edit"
-    And I press the "Save" button
+    And I press the "Save New Draft" button
     Then I should see the success message containing "Digital Library Content My Content has been updated."
 
   Scenario: Can View draft when state is Approval Requested, but cannot edit
