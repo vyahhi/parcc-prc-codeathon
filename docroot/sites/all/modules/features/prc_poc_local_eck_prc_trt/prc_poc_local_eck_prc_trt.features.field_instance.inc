@@ -24,6 +24,12 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'type' => 'list_default',
         'weight' => 5,
       ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -69,6 +75,12 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         ),
         'type' => 'number_integer',
         'weight' => 8,
+      ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -119,6 +131,12 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'type' => 'number_integer',
         'weight' => 1,
       ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -167,6 +185,12 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         ),
         'type' => 'number_integer',
         'weight' => 3,
+      ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -217,6 +241,12 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'type' => 'number_integer',
         'weight' => 0,
       ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -266,6 +296,12 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'type' => 'number_integer',
         'weight' => 2,
       ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -296,6 +332,69 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'prc_trt-capacity_check-field_ref_school'
+  $field_instances['prc_trt-capacity_check-field_ref_school'] = array(
+    'bundle' => 'capacity_check',
+    'default_value' => NULL,
+    'default_value_function' => 'entityreference_prepopulate_field_default_value',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 10,
+      ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_ref_school',
+    'label' => 'School',
+    'required' => 0,
+    'settings' => array(
+      'behaviors' => array(
+        'prepopulate' => array(
+          'action' => 'none',
+          'action_on_edit' => 0,
+          'fallback' => 'none',
+          'providers' => array(
+            'og_context' => FALSE,
+            'url' => 1,
+          ),
+          'skip_perm' => 0,
+          'status' => 1,
+        ),
+      ),
+      'course_enrollment' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+        'label_help_description' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 11,
+    ),
+  );
+
   // Exported field_instance: 'prc_trt-capacity_check-field_sittings_per_student'
   $field_instances['prc_trt-capacity_check-field_sittings_per_student'] = array(
     'bundle' => 'capacity_check',
@@ -314,6 +413,12 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         ),
         'type' => 'number_integer',
         'weight' => 9,
+      ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -364,6 +469,12 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'type' => 'number_integer',
         'weight' => 4,
       ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -408,6 +519,12 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'type' => 'list_default',
         'weight' => 6,
       ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -448,6 +565,12 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'settings' => array(),
         'type' => 'list_default',
         'weight' => 7,
+      ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1043,6 +1166,63 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'prc_trt-system_check-field_ref_school'
+  $field_instances['prc_trt-system_check-field_ref_school'] = array(
+    'bundle' => 'system_check',
+    'default_value' => NULL,
+    'default_value_function' => 'entityreference_prepopulate_field_default_value',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 25,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_ref_school',
+    'label' => 'School',
+    'required' => 0,
+    'settings' => array(
+      'behaviors' => array(
+        'prepopulate' => array(
+          'action' => 'none',
+          'action_on_edit' => 0,
+          'fallback' => 'none',
+          'providers' => array(
+            'og_context' => FALSE,
+            'url' => 1,
+          ),
+          'skip_perm' => 0,
+          'status' => 1,
+        ),
+      ),
+      'course_enrollment' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+        'label_help_description' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 15,
+    ),
+  );
+
   // Exported field_instance: 'prc_trt-system_check-field_screen_resolution_height'
   $field_instances['prc_trt-system_check-field_screen_resolution_height'] = array(
     'bundle' => 'system_check',
@@ -1173,6 +1353,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
   t('Operating system');
   t('Processor speed');
   t('RAM');
+  t('School');
   t('Screen Resolution Height');
   t('Screen Resolution Width');
   t('Speed of connection (in Mbps)');

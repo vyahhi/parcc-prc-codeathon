@@ -1,0 +1,15 @@
+name = prc-poc.local School
+core = 7.x
+package = Content
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = prc_poc_local_fields
+dependencies[] = strongarm
+features[field_instance][] = node-school-body
+features[node][] = school
+features[variable][] = menu_options_school
+features[variable][] = menu_parent_school
+features[variable][] = node_options_school
+features[variable][] = node_preview_school
+features[variable][] = node_submitted_school
+features[features_api][] = api:2

@@ -74,6 +74,7 @@ features[ds_layout_settings][] = node|quiz|teaser
 features[ds_view_modes][] = detail
 features[ds_view_modes][] = front_page_item
 features[ds_view_modes][] = gallery_view
+features[ds_view_modes][] = school_readiness
 features[features_api][] = api:2
 features[variable][] = course_content_use_pd_course
 features[variable][] = course_content_use_pd_module
