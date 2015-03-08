@@ -176,7 +176,7 @@ $header-font-family: "Open Sans Condensed", "Helvetica Neue", "Helvetica", Helve
 // $header-font-weight: bold;
 // $header-font-style: normal;
 $header-font-color: #70547d;
-// $header-line-height: 1.4;
+$header-line-height: 1.2;
 // $header-top-margin: .2em;
 // $header-bottom-margin: .5em;
 // $header-text-rendering: optimizeLegibility;
@@ -184,8 +184,8 @@ $header-font-color: #70547d;
 // Control header font sizes
 
 $h1-font-size: em-calc(42);
-// $h2-font-size: em-calc(37);
-// $h3-font-size: em-calc(27);
+$h2-font-size: em-calc(36);
+$h3-font-size: em-calc(28);
 // $h4-font-size: em-calc(23);
 // $h5-font-size: em-calc(18);
 // $h6-font-size: 1em;
