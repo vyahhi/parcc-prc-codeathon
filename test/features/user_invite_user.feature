@@ -127,3 +127,11 @@ Feature: Invite User (PRC-92)
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
     Then the "Message" field should contain "I'd like to invite you to the PARCC Partnership Resource Center."
+
+  Scenario: PRC-948 Roles field required
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    When I fill in "Message" with "4321MESSAGE1234"
+    And I fill in "E-mail" with "example1@example.com,example2@example.com"
+    And I press "Send Invitation"
+    Then I should see the error message containing "Role field is required."
