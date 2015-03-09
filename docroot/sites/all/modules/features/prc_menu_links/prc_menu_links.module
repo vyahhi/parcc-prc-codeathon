@@ -3,3 +3,48 @@
  * @file
  * Drupal needs this blank file.
  */
+
+/**
+ * Implements hook_permission().
+ */
+function prc_menu_links_permission() {
+  return array(
+    'View PRC Admin' => array(
+      'title' => t('View Admin menu item and related prc/admin path'),
+    )
+  );
+}
+
+/**
+ * Implements hook_menu()
+ */
+function prc_menu_links_menu() {
+  $items['prc/admin'] = array(
+    'title' => 'Placeholder PRC Admin Title',
+    'page callback' => 'prc_menu_links_prc_admin',
+    'access arguments' => array('View PRC Admin'),
+  );
+  return $items;
+}
+
+/**
+ * Page callback for prc/admin menu hook
+ */
+function prc_menu_links_prc_admin() {
+  $menuItems = menu_tree_page_data('main-menu');
+  foreach($menuItems as $key => $m) {
+    // Check current active menu
+    if ($m['link']['in_active_trail'] && $menuItems [$key]['below']) {
+      $menu = menu_tree_output($menuItems [$key]['below']);
+    }
+  }
+  // If the user sees any menu items under admin, display the admin sub menu
+  if (isset($menu)) {
+    return $menu;
+  }
+  // Users who don't have access to admin sub menu items shouldn't have permisson
+  // to see this page in the first place, but just in case...
+  else {
+    return MENU_ACCESS_DENIED;
+  }
+}
