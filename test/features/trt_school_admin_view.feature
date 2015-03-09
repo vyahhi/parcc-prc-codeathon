@@ -63,7 +63,7 @@ Feature: PRC-757 School Readiness - School Admin View
     When I visit the last node created
     Then I should see the text "Bandwidth Capacity Results<bandwidth_result> - 0.5 Mbps/student"
     And I should see the text "Devices Capacity Results<device_result>"
-    And I should see the link "run again"
+    And I should see the link "run capacity check"
   Examples:
     | students | devices | sittings | testing_days | sessions | connection_type | wired_speed | access_points | connection_speed | devices_required | devices_capacity | bandwidth_capacity | device_result | device_not_result | device_follow_up | device_not_follow_up                | bandwidth_result | bandwidth_not_result1 | bandwidth_not_result2 | bandwidth_text_result | bandwidth_text_not_result1                               | bandwidth_text_not_result2                                                                                   |
     | 100      | 50      | 4        | 10           | 4        | Wired           | 100 Mbps    | 600           | 50               | 11               | 39               | 5                  | Passed        | Failed            |                  | Instructions or next steps go here. | Good             | OK                    | Poor                  | Good                  | Provide explanation of what OK means and any next steps. | Provide explanation of what poor means \(will not be able to run successful assessment\) and any next steps. |

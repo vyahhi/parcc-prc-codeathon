@@ -37,6 +37,7 @@ features[field_instance][] = prc_trt-system_check-field_operating_system
 features[field_instance][] = prc_trt-system_check-field_processor_speed
 features[field_instance][] = prc_trt-system_check-field_ram
 features[field_instance][] = prc_trt-system_check-field_ref_school
+features[field_instance][] = prc_trt-system_check-field_result
 features[field_instance][] = prc_trt-system_check-field_screen_resolution_height
 features[field_instance][] = prc_trt-system_check-field_screen_resolution_width
 features[variable][] = field_bundle_settings_prc_trt__capacity_check

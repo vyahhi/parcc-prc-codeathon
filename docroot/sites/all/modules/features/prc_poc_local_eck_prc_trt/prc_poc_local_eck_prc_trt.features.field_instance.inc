@@ -637,7 +637,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -682,7 +682,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_onoff',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -727,7 +727,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_onoff',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -772,7 +772,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_onoff',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -821,7 +821,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'number',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -904,7 +904,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -1167,7 +1167,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 6,
     ),
   );
 
@@ -1224,7 +1224,52 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 15,
+    ),
+  );
+
+  // Exported field_instance: 'prc_trt-system_check-field_result'
+  $field_instances['prc_trt-system_check-field_result'] = array(
+    'bundle' => 'system_check',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 29,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_result',
+    'label' => 'Result',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+        'label_help_description' => '',
+      ),
+      'type' => 'options_onoff',
+      'weight' => 16,
     ),
   );
 
@@ -1273,7 +1318,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'number',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -1322,7 +1367,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'number',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -1358,6 +1403,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
   t('Operating system');
   t('Processor speed');
   t('RAM');
+  t('Result');
   t('School');
   t('Screen Resolution Height');
   t('Screen Resolution Width');

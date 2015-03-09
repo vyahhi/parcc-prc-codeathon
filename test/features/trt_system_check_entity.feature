@@ -64,6 +64,8 @@ Feature: PRC-760 System Check - Unstructured - Form
     And I should not see the checkbox "edit-field-browser-cookies-enabled-und"
     And I should not see the checkbox "edit-field-browser-javascript-enabled-und"
     And I should not see the checkbox "edit-field-browser-images-enabled-und"
+    And I should not see the text "School"
+    And I should not see the text "Result"
 
   Scenario: PRC-800 Unstructured System Check form validation
     Given I am logged in as a user with the "Educator" role

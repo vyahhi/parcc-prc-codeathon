@@ -39,6 +39,8 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
     'field_browser_cookies_enabled',
     'field_browser_javascript_enabled',
     'field_browser_images_enabled',
+    'field_result',
+    'field_ref_school',
   );
 
   foreach ($hide_fields as $hide_field) {
@@ -117,22 +119,14 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form
  */
 function prc_trt_field_extra_fields() {
   $extra['prc_trt']['system_check']['display'] = array(
-    'overall_pass' => array(
-      'label' => t('System Check Results'),
-      'description' => t('Did the system check pass?'),
-      'callback' => '_prc_trt_field_overall_results',
-      'weight' => 11,
-    ),
     'operating_system_pass' => array(
       'label' => t('Operating system: Results'),
       'description' => t('Did operating system pass?'),
-      'callback' => '_prc_trt_field_os_results',
       'weight' => 12,
     ),
     'monitor_size_pass' => array(
       'label' => t('Monitor size: Results'),
       'description' => t('Did monitor size pass?'),
-      'callback' => '_prc_trt_field_monitor_results',
       'weight' => 13,
     ),
     'monitor_color_depth_pass' => array(
@@ -197,18 +191,28 @@ function prc_trt_field_extra_fields() {
 }
 
 function _prc_trt_field_overall_results($entity) {
-  return 'Overall Results Callback';
-}
-
-function _prc_trt_field_os_results($entity) {
-  return 'Other';
-}
-
-function _prc_trt_field_monitor_results($entity) {
   $w = entity_metadata_wrapper('prc_trt', $entity);
+  $os = $w->field_operating_system->value();
   $size = $w->field_monitor_size->value();
   $size_pass = $size >= 9.7;
-  return $size_pass ? 'Pass' : 'Fail';
+  $depth = $w->field_monitor_color_depth->value();
+  $depth_pass = $depth >= 16;
+  $resw = $w->field_screen_resolution_width->value();
+  $resw_pass = $resw >= 1024;
+  $resh = $w->field_screen_resolution_height->value();
+  $resh_pass = $resh >= 768;
+  $processor = $w->field_processor_speed->value();
+  $processor_pass = $processor >= 1;
+  $ram = $w->field_ram->value();
+  $ram_pass = $ram;
+  $browser = $w->field_browser->value();
+
+  $cookies_pass = $w->field_browser_cookies_enabled->value();
+  $js_pass = $w->field_browser_javascript_enabled->value();
+  $images_pass = $w->field_browser_images_enabled->value();
+
+  $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
+  return $all_pass;
 }
 
 /**
@@ -334,13 +338,6 @@ function _prc_trt_view_entity_system_check($entity) {
   $js_pass = $w->field_browser_javascript_enabled->value();
   $images_pass = $w->field_browser_images_enabled->value();
 
-  $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
-
-  $entity->content['overall_pass'] = array(
-    '#type' => 'item',
-    '#title' => t('System Check Results:'),
-    '#markup' => $all_pass ? t('Passed') : t('Failed'),
-  );
   $entity->content['operating_system_pass'] = array(
     '#type' => 'item',
     '#title' => t('Operating system Results:'),
@@ -349,7 +346,7 @@ function _prc_trt_view_entity_system_check($entity) {
   $entity->content['monitor_size_pass'] = array(
     '#type' => 'item',
     '#title' => t('Monitor size Results:'),
-    '#markup' => _prc_trt_field_monitor_results($entity),
+    '#markup' => $size_pass ? 'Pass' : 'Fail',
   );
   $entity->content['monitor_color_depth_pass'] = array(
     '#type' => 'item',
@@ -391,4 +388,45 @@ function _prc_trt_view_entity_system_check($entity) {
     '#title' => t('Images Results:'),
     '#markup' => $images_pass ? 'Pass' : 'Fail',
   );
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function prc_trt_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'prc_trt') . '/views',
+  );
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function prc_trt_entity_presave($entity, $type) {
+  if ($type == 'prc_trt' && $entity->type == 'system_check') {
+    // TODO: Refactor this into a custom class
+    $w = entity_metadata_wrapper('prc_trt', $entity);
+    $os = $w->field_operating_system->value();
+    $size = $w->field_monitor_size->value();
+    $size_pass = $size >= 9.7;
+    $depth = $w->field_monitor_color_depth->value();
+    $depth_pass = $depth >= 16;
+    $resw = $w->field_screen_resolution_width->value();
+    $resw_pass = $resw >= 1024;
+    $resh = $w->field_screen_resolution_height->value();
+    $resh_pass = $resh >= 768;
+    $processor = $w->field_processor_speed->value();
+    $processor_pass = $processor >= 1;
+    $ram = $w->field_ram->value();
+    $ram_pass = $ram;
+    $browser = $w->field_browser->value();
+
+    $cookies_pass = $w->field_browser_cookies_enabled->value();
+    $js_pass = $w->field_browser_javascript_enabled->value();
+    $images_pass = $w->field_browser_images_enabled->value();
+
+    $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
+    $entity->field_result[LANGUAGE_NONE][0]['value'] = $all_pass;
+  }
 }

@@ -3,5 +3,7 @@ description = Performs a test to determine whether the user's machine is capable
 package = PRC
 core = 7.x
 
+files[] = views/prc_trt_views_handler_system_check_result.inc
+
 dependencies[] = browserclass
 dependencies[] = pm_existing_pages
