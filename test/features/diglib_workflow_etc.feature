@@ -34,7 +34,7 @@ Feature: Workflow is functional
     # Curator approves review
     Given I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "pending review"
+    And I click "edit"
     # prc-826 : Publish button is not correct
     And I press the "Publish" button
     #PRC-873 : should not see text area for publish
@@ -81,7 +81,7 @@ Feature: Workflow is functional
     #Curator approves new draft
     Given I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "pending review"
+    And I click "edit"
     And I press the "Publish" button
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
@@ -109,7 +109,7 @@ Feature: Workflow is functional
     Then I press the "Update state" button
     And I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "pending review"
+    And I click "edit"
     # Clear out old messages
     And the test email system is enabled
     And I press the "Request Change" button
@@ -136,6 +136,7 @@ Feature: Workflow is functional
     And I visit "admin-content"
     And I click "My first post"
     # prc-872 : Change "private draft" to just draft
+    And I break
     And I should see the text "Revision State: Draft"
     Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been unpublished."
     And I follow the link in the email
@@ -259,7 +260,7 @@ Feature: Workflow is functional
     Given I am logged in as "Joe Curator"
     And the test email system is enabled
     And I visit "admin-content"
-    And I click "pending review"
+    And I click "edit"
     And I press the "Publish" button
     # PRC-873 : should not see text area for publish
     And I should not see an "textarea" element
@@ -284,7 +285,7 @@ Feature: Workflow is functional
     #  2. Access Denied. You are not allowed to view this content.
     #  Expected Results:
     #  2. Should be able to view content that I am trying to approve.
-    #  NOTE: When they click on "pending review" link in Actions column, it works fine.
+    #  NOTE: When they click on "edit" link in Actions column, it works fine.
     Given I am logged in as "Joe Contributor"
     And I visit "admin-content"
     And I click "Add content"
