@@ -77,22 +77,21 @@
 
   <?php include path_to_theme() . '/includes/header.inc'; ?>
 
-  <section id="sub-header" class="row">
-    <div class="large-12 columns">
-      <?php if ($breadcrumb): ?>
-        <div id="breadcrumb"><?php print $breadcrumb; ?></div>
-      <?php endif; ?>
-      <?php print render($title_prefix); ?>
-      <?php if ($title): ?><h1 class="title" id="page-title"><?php print $title; ?></h1><?php endif; ?>
-      <?php print render($title_suffix); ?>
-    </div>
-  </section>
-
 <div id="main-wrapper">
   <main role="main" class="row">
       <div class="large-12 main columns">
 
           <div id="content"><div class="section">
+            <section id="sub-header" class="row">
+              <div class="large-12 columns">
+                <?php if ($breadcrumb): ?>
+                  <div id="breadcrumb"><?php print $breadcrumb; ?></div>
+                <?php endif; ?>
+                <?php print render($title_prefix); ?>
+                <?php if ($title): ?><h1 class="title" id="page-title"><?php print $title; ?></h1><?php endif; ?>
+                <?php print render($title_suffix); ?>
+              </div>
+            </section>
             <?php print $messages; ?>
             <?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
             <a id="main-content"></a>
