@@ -4482,7 +4482,7 @@ function prc_poc_local_views_views_default_views() {
     'field_name' => 'field_name',
     'created' => 'created',
     'field_number_of_devices' => 'field_number_of_devices',
-    'view_overall_result' => 'view_overall_result',
+    'field_result' => 'field_result',
   );
   $handler->display->display_options['style_options']['default'] = 'created';
   $handler->display->display_options['style_options']['info'] = array(
@@ -4514,7 +4514,7 @@ function prc_poc_local_views_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'view_overall_result' => array(
+    'field_result' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -4556,10 +4556,11 @@ message explaining what the check does and the importance of running it.';
     'thousand_separator' => ' ',
     'prefix_suffix' => 1,
   );
-  /* Field: Prc_trt: Results */
-  $handler->display->display_options['fields']['view_overall_result']['id'] = 'view_overall_result';
-  $handler->display->display_options['fields']['view_overall_result']['table'] = 'eck_prc_trt';
-  $handler->display->display_options['fields']['view_overall_result']['field'] = 'view_overall_result';
+  /* Field: prc_trt: Result */
+  $handler->display->display_options['fields']['field_result']['id'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['table'] = 'field_data_field_result';
+  $handler->display->display_options['fields']['field_result']['field'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['label'] = 'Results';
   /* Contextual filter: prc_trt: School (field_ref_school) */
   $handler->display->display_options['arguments']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
   $handler->display->display_options['arguments']['field_ref_school_target_id']['table'] = 'field_data_field_ref_school';
