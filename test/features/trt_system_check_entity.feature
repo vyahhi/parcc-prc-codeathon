@@ -23,8 +23,8 @@ Feature: PRC-760 System Check - Unstructured - Form
 #  Device type	–	Dropdown	Select one (default); Desktop; Laptop; Netbook; Thin client; Tablet	Yes	–
 #  Operating system	–	Dropdown	Select one (default); Apple iOS 6, 7, or 8; Chrome OS (Chromebook); Mac 10.8, 10.9 or 10.10; Windows 7; Windows 8; Windows 8.1; Other	Yes	–
 #  Monitor size (in inches)	–	Text field	N/A	Yes	–
-#  Processor speed	–	Text field	N/A	Yes	–
-#  RAM	–	Text field	N/A	Yes	–
+#  Processor speed	–	Dropdown	Select one (default); under 1 Ghz; 1 Ghz or greater"	Yes	–
+#  RAM	–	Dropdown	under 1 GB; 1 GB or greater	Yes	–
 #  Submit button
 
   Scenario: Create System Check - Unstructured
@@ -51,7 +51,11 @@ Feature: PRC-760 System Check - Unstructured - Form
     And I select "Other" from "Operating system"
     And I should see the text "Monitor size \(in inches\)"
     And I should see the text "Processor speed"
+    And I select "under 1 Ghz" from "Processor speed"
+    And I select "1 Ghz or greater" from "Processor speed"
     And I should see the text "RAM"
+    And I select "under 1 GB" from "RAM"
+    And I select "1 GB or greater" from "RAM"
     And I should see an "Submit" button
 
     And I should not see the text "Monitor color depth"
@@ -73,8 +77,10 @@ Feature: PRC-760 System Check - Unstructured - Form
     Then I should see the error message containing "Processor speed field is required."
     Then I should see the error message containing "RAM field is required."
     When I fill in "Number of devices" with "Text"
+    And I fill in "Monitor size (in inches)" with "Text"
     And I press "Submit"
     Then I should see the error message containing "Only numbers are allowed in Number of devices."
+    Then I should see the error message containing "Only numbers and the decimal separator (.) allowed in Monitor size (in inches)."
 
   Scenario: PRC-760 Page text
     Given I am logged in as a user with the "Educator" role

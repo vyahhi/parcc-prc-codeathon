@@ -1091,26 +1091,17 @@ function prc_poc_local_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_monitor_size',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
+    'foreign keys' => array(),
+    'indexes' => array(),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'number',
     'settings' => array(
-      'max_length' => 255,
+      'decimal_separator' => '.',
+      'precision' => 10,
+      'scale' => 2,
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'number_decimal',
   );
 
   // Exported field_base: 'field_name'
@@ -1357,26 +1348,23 @@ function prc_poc_local_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_processor_speed',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
+    'foreign keys' => array(),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'value' => array(
+        0 => 'value',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'list',
     'settings' => array(
-      'max_length' => 255,
+      'allowed_values' => array(
+        0 => 'under 1 Ghz',
+        1 => '1 Ghz or greater',
+      ),
+      'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_profession'
@@ -1450,26 +1438,23 @@ function prc_poc_local_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_ram',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
+    'foreign keys' => array(),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'value' => array(
+        0 => 'value',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'list',
     'settings' => array(
-      'max_length' => 255,
+      'allowed_values' => array(
+        0 => 'under 1 GB',
+        1 => '1 GB or greater',
+      ),
+      'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_ref_school'

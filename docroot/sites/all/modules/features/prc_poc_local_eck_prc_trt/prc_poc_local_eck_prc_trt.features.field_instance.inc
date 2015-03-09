@@ -637,7 +637,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -682,7 +682,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_onoff',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -727,7 +727,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_onoff',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -772,7 +772,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_onoff',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -821,7 +821,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'number',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -904,7 +904,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -917,10 +917,15 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 6,
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 28,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -935,17 +940,19 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'text_processing' => 0,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'text',
+      'active' => 0,
+      'module' => 'number',
       'settings' => array(
         'label_help_description' => '',
-        'size' => 60,
       ),
-      'type' => 'text_textfield',
+      'type' => 'number',
       'weight' => 4,
     ),
   );
@@ -1091,10 +1098,10 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 8,
+        'type' => 'list_default',
+        'weight' => 26,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1109,17 +1116,16 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
+      'module' => 'options',
       'settings' => array(
+        'apply_chosen' => '',
         'label_help_description' => '',
-        'size' => 60,
       ),
-      'type' => 'text_textfield',
+      'type' => 'options_select',
       'weight' => 5,
     ),
   );
@@ -1133,10 +1139,10 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 10,
+        'type' => 'list_default',
+        'weight' => 27,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1151,18 +1157,17 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
+      'module' => 'options',
       'settings' => array(
+        'apply_chosen' => '',
         'label_help_description' => '',
-        'size' => 60,
       ),
-      'type' => 'text_textfield',
-      'weight' => 6,
+      'type' => 'options_select',
+      'weight' => 15,
     ),
   );
 
@@ -1219,7 +1224,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 14,
     ),
   );
 
@@ -1268,7 +1273,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'number',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -1317,7 +1322,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'number',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 

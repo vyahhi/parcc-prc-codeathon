@@ -120,16 +120,19 @@ function prc_trt_field_extra_fields() {
     'overall_pass' => array(
       'label' => t('System Check Results'),
       'description' => t('Did the system check pass?'),
+      'callback' => '_prc_trt_field_overall_results',
       'weight' => 11,
     ),
     'operating_system_pass' => array(
       'label' => t('Operating system: Results'),
       'description' => t('Did operating system pass?'),
+      'callback' => '_prc_trt_field_os_results',
       'weight' => 12,
     ),
     'monitor_size_pass' => array(
       'label' => t('Monitor size: Results'),
       'description' => t('Did monitor size pass?'),
+      'callback' => '_prc_trt_field_monitor_results',
       'weight' => 13,
     ),
     'monitor_color_depth_pass' => array(
@@ -191,6 +194,21 @@ function prc_trt_field_extra_fields() {
     ),
   );
   return $extra;
+}
+
+function _prc_trt_field_overall_results($entity) {
+  return 'Overall Results Callback';
+}
+
+function _prc_trt_field_os_results($entity) {
+  return 'Other';
+}
+
+function _prc_trt_field_monitor_results($entity) {
+  $w = entity_metadata_wrapper('prc_trt', $entity);
+  $size = $w->field_monitor_size->value();
+  $size_pass = $size >= 9.7;
+  return $size_pass ? 'Pass' : 'Fail';
 }
 
 /**
@@ -309,7 +327,7 @@ function _prc_trt_view_entity_system_check($entity) {
   $processor = $w->field_processor_speed->value();
   $processor_pass = $processor >= 1;
   $ram = $w->field_ram->value();
-  $ram_pass = strpos(strtolower($ram), 'mb') === FALSE;
+  $ram_pass = $ram;
   $browser = $w->field_browser->value();
 
   $cookies_pass = $w->field_browser_cookies_enabled->value();
@@ -331,7 +349,7 @@ function _prc_trt_view_entity_system_check($entity) {
   $entity->content['monitor_size_pass'] = array(
     '#type' => 'item',
     '#title' => t('Monitor size Results:'),
-    '#markup' => $size_pass ? 'Pass' : 'Fail',
+    '#markup' => _prc_trt_field_monitor_results($entity),
   );
   $entity->content['monitor_color_depth_pass'] = array(
     '#type' => 'item',
