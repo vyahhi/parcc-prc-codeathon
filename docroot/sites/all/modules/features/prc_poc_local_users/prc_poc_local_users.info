@@ -8,6 +8,7 @@ features[field_instance][] = user-user-field_first_name
 features[field_instance][] = user-user-field_last_name
 features[field_instance][] = user-user-field_member_state
 features[field_instance][] = user-user-field_profession
+features[user_permission][] = View PRC Admin
 features[user_permission][] = access administration menu
 features[user_permission][] = access administration pages
 features[user_permission][] = access all course reports
