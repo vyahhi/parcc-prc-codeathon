@@ -2143,27 +2143,29 @@ blockquote p {
   /* line 112, ../sass/parc_foundation.scss */
   nav.top-bar {
     text-align: center;
+    overflow: auto;
+    /* Temp fix to resolve long menus. To be addressed in PRC-389 */
   }
 
-  /* line 116, ../sass/parc_foundation.scss */
+  /* line 117, ../sass/parc_foundation.scss */
   nav a#logo {
     display: inline-block;
     margin: 25px 1.875em;
   }
-  /* line 120, ../sass/parc_foundation.scss */
+  /* line 121, ../sass/parc_foundation.scss */
   nav #main-menu-section,
   nav #secondary-menu-section {
     display: inline-block;
   }
-  /* line 124, ../sass/parc_foundation.scss */
+  /* line 125, ../sass/parc_foundation.scss */
   nav .top-bar-section li a:not(.button):hover, nav .top-bar-section ul li.active > a {
     background: none repeat scroll 0% 0% #2e3f4e;
   }
-  /* line 127, ../sass/parc_foundation.scss */
+  /* line 128, ../sass/parc_foundation.scss */
   nav .top-bar-section ul {
     background-color: #344758;
   }
-  /* line 130, ../sass/parc_foundation.scss */
+  /* line 131, ../sass/parc_foundation.scss */
   nav #block-search-form {
     float: right;
     width: auto;

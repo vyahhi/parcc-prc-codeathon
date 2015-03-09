@@ -111,6 +111,7 @@
   }
   nav.top-bar {
     text-align: center;
+    overflow: auto; /* Temp fix to resolve long menus. To be addressed in PRC-389 */
   }
   nav {
     a#logo {
