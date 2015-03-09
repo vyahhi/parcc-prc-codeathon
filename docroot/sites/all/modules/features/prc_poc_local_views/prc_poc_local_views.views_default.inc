@@ -4540,6 +4540,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_name']['table'] = 'field_data_field_name';
   $handler->display->display_options['fields']['field_name']['field'] = 'field_name';
   $handler->display->display_options['fields']['field_name']['label'] = 'System Check';
+  $handler->display->display_options['fields']['field_name']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_name']['alter']['path'] = 'prc_trt/system_check/[id]';
   /* Field: Prc_trt: Created */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'eck_prc_trt';
