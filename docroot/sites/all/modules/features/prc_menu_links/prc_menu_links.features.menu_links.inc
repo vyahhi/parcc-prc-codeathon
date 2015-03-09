@@ -10,6 +10,26 @@
 function prc_menu_links_menu_default_menu_links() {
   $menu_links = array();
 
+  // Exported menu link: main-menu_admin:prc/admin
+  $menu_links['main-menu_admin:prc/admin'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'prc/admin',
+    'router_path' => 'prc/admin',
+    'link_title' => 'Admin',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'main-menu_admin:prc/admin',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 1,
+    'expanded' => 0,
+    'weight' => -45,
+    'customized' => 1,
+  );
   // Exported menu link: main-menu_assessments:assessments
   $menu_links['main-menu_assessments:assessments'] = array(
     'menu_name' => 'main-menu',
@@ -44,8 +64,9 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -46,
+    'weight' => -50,
     'customized' => 1,
+    'parent_identifier' => 'main-menu_admin:prc/admin',
   );
   // Exported menu link: main-menu_course-management:admin-course
   $menu_links['main-menu_course-management:admin-course'] = array(
@@ -64,8 +85,9 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => 0,
+    'weight' => -48,
     'customized' => 1,
+    'parent_identifier' => 'main-menu_admin:prc/admin',
   );
   // Exported menu link: main-menu_digital-library:digital-library
   $menu_links['main-menu_digital-library:digital-library'] = array(
@@ -138,7 +160,7 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => 0,
+    'weight' => -46,
     'customized' => 1,
   );
   // Exported menu link: main-menu_users:admin-users
@@ -155,8 +177,9 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -45,
+    'weight' => -49,
     'customized' => 1,
+    'parent_identifier' => 'main-menu_admin:prc/admin',
   );
   // Exported menu link: menu-add-content_add-content:node/add/digital-library-content
   $menu_links['menu-add-content_add-content:node/add/digital-library-content'] = array(
@@ -296,41 +319,6 @@ function prc_menu_links_menu_default_menu_links() {
     'has_children' => 0,
     'expanded' => 0,
     'weight' => 0,
-    'customized' => 1,
-  );
-  // Exported menu link: user-menu_log-out:user/logout
-  $menu_links['user-menu_log-out:user/logout'] = array(
-    'menu_name' => 'user-menu',
-    'link_path' => 'user/logout',
-    'router_path' => 'user/logout',
-    'link_title' => 'Log out',
-    'options' => array(
-      'identifier' => 'user-menu_log-out:user/logout',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -48,
-    'customized' => 1,
-  );
-  // Exported menu link: user-menu_user-account:user
-  $menu_links['user-menu_user-account:user'] = array(
-    'menu_name' => 'user-menu',
-    'link_path' => 'user',
-    'router_path' => 'user',
-    'link_title' => 'User account',
-    'options' => array(
-      'alter' => TRUE,
-      'identifier' => 'user-menu_user-account:user',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -49,
     'customized' => 1,
   );
   // Exported menu link: menu-trt-district-add_add-district:node/add/district
@@ -556,6 +544,41 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: user-menu_log-out:user/logout
+  $menu_links['user-menu_log-out:user/logout'] = array(
+    'menu_name' => 'user-menu',
+    'link_path' => 'user/logout',
+    'router_path' => 'user/logout',
+    'link_title' => 'Log out',
+    'options' => array(
+      'identifier' => 'user-menu_log-out:user/logout',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -48,
+    'customized' => 1,
+  );
+  // Exported menu link: user-menu_user-account:user
+  $menu_links['user-menu_user-account:user'] = array(
+    'menu_name' => 'user-menu',
+    'link_path' => 'user',
+    'router_path' => 'user',
+    'link_title' => 'User account',
+    'options' => array(
+      'alter' => TRUE,
+      'identifier' => 'user-menu_user-account:user',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -49,
+    'customized' => 1,
+  );
   // Translatables
   // Included for use with string extractors like potx.
   t('Add District');
@@ -563,6 +586,7 @@ function prc_menu_links_menu_default_menu_links() {
   t('Add School(s) - upload csv file');
   t('Add content');
   t('Add course');
+  t('Admin');
   t('All Available Assessments');
   t('All Available Courses');
   t('Assessments');
@@ -577,8 +601,8 @@ function prc_menu_links_menu_default_menu_links() {
   t('Professional Development');
   t('System Check');
   t('Technology Readiness');
-  t('User account');
   t('Testing Capacity Check');
+  t('User account');
   t('Users');
   t('View All');
   t('run capacity check');
