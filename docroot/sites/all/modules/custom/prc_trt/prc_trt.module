@@ -391,16 +391,6 @@ function _prc_trt_view_entity_system_check($entity) {
 }
 
 /**
- * Implements hook_views_api().
- */
-function prc_trt_views_api() {
-  return array(
-    'api' => 3,
-    'path' => drupal_get_path('module', 'prc_trt') . '/views',
-  );
-}
-
-/**
  * Implements hook_entity_presave().
  */
 function prc_trt_entity_presave($entity, $type) {
