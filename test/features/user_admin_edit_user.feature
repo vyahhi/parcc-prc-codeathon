@@ -84,4 +84,8 @@ Feature: Admin UI: Edit User (PRC-105)
     # Drupal doesn't give you a Cancel button on anything. It's the user's job to navigate away.
     # Users are used to clicking the Back button.Scenario:
 
-  Scenario: AC9 - Javascript to confirm nav away from page
+  Scenario: PRC-948 Role field should be required
+    Then I should see the text "Roles \*"
+    When I uncheck the box "Educator"
+    And I press the "Save" button
+    Then I should see the error message containing "Roles field is required."

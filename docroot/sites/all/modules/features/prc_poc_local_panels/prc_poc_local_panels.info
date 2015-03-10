@@ -13,6 +13,7 @@ features[page_manager_existing_pages][] = dlc_revisions_edit
 features[page_manager_existing_pages][] = node_overview
 features[page_manager_handlers][] = node_edit__digital_library_content
 features[page_manager_handlers][] = node_view__digital_library_content
+features[page_manager_handlers][] = node_view__trt_state_readiness_view
 features[page_manager_handlers][] = node_view_panel_context
 features[page_manager_handlers][] = node_view_panel_context_2
 features[page_manager_handlers][] = pm_existing_pages_add_system_check__add_system_check

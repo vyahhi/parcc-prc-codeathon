@@ -4465,6 +4465,314 @@ function prc_poc_local_views_views_default_views() {
   $export['sample_article'] = $view;
 
   $view = new view();
+  $view->name = 'school_readiness_last_capacity_check_result';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'eck_prc_trt';
+  $view->human_name = 'School Readiness Last Capacity Check Result';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'entity';
+  $handler->display->display_options['row_options']['view_mode'] = 'school_readiness';
+  /* Field: Prc_trt: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  /* Sort criterion: Prc_trt: Created */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: prc_trt: School (field_ref_school) */
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['table'] = 'field_data_field_ref_school';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['field'] = 'field_ref_school_target_id';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Prc_trt: prc_trt type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'capacity_check' => 'capacity_check',
+  );
+
+  /* Display: Most recent school capacity check */
+  $handler = $view->new_display('panel_pane', 'Most recent school capacity check', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_ref_school_target_id' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'prc_trt: School (field_ref_school)',
+    ),
+  );
+
+  /* Display: School Readiness Page Cap Students */
+  $handler = $view->new_display('panel_pane', 'School Readiness Page Cap Students', 'panel_pane_2');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Prc_trt: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+  /* Field: Field: Number of students */
+  $handler->display->display_options['fields']['field_number_of_students']['id'] = 'field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['table'] = 'field_data_field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['field'] = 'field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_ref_school_target_id' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'prc_trt: School (field_ref_school)',
+    ),
+  );
+  $export['school_readiness_last_capacity_check_result'] = $view;
+
+  $view = new view();
+  $view->name = 'school_readiness_system_checks';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'eck_prc_trt';
+  $view->human_name = 'School Readiness System Checks';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'id' => 'id',
+    'field_name' => 'field_name',
+    'created' => 'created',
+    'field_number_of_devices' => 'field_number_of_devices',
+    'field_result' => 'field_result',
+  );
+  $handler->display->display_options['style_options']['default'] = 'created';
+  $handler->display->display_options['style_options']['info'] = array(
+    'id' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'created' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_number_of_devices' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_result' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'no system checks have been run. 
+message explaining what the check does and the importance of running it.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Field: Prc_trt: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+  /* Field: prc_trt: System check name */
+  $handler->display->display_options['fields']['field_name']['id'] = 'field_name';
+  $handler->display->display_options['fields']['field_name']['table'] = 'field_data_field_name';
+  $handler->display->display_options['fields']['field_name']['field'] = 'field_name';
+  $handler->display->display_options['fields']['field_name']['label'] = 'System Check';
+  $handler->display->display_options['fields']['field_name']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_name']['alter']['path'] = 'prc_trt/system_check/[id]';
+  /* Field: Prc_trt: Created */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Date & Time';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: prc_trt: Number of devices ready for assessment */
+  $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['label'] = 'Number of Devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Result */
+  $handler->display->display_options['fields']['field_result']['id'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['table'] = 'field_data_field_result';
+  $handler->display->display_options['fields']['field_result']['field'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['label'] = 'Results';
+  /* Contextual filter: prc_trt: School (field_ref_school) */
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['table'] = 'field_data_field_ref_school';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['field'] = 'field_ref_school_target_id';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Prc_trt: prc_trt type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'system_check' => 'system_check',
+  );
+
+  /* Display: Content pane */
+  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_ref_school_target_id' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'prc_trt: School (field_ref_school)',
+    ),
+  );
+  $export['school_readiness_system_checks'] = $view;
+
+  $view = new view();
+  $view->name = 'schools';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Schools';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = '[title] Readiness';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Summary of what user can do here view readiness by school, run readiness checks, view readiness check results.';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'school' => 'school',
+  );
+
+  /* Display: School Readiness Links */
+  $handler = $view->new_display('panel_pane', 'School Readiness Links', 'panel_pane_1');
+  $handler->display->display_options['display_description'] = 'TRT School Readiness Links';
+  $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $export['schools'] = $view;
+
+  $view = new view();
   $view->name = 'taxonomy_term';
   $view->description = 'A view to emulate Drupal core\'s handling of taxonomy/term.';
   $view->tag = 'default';

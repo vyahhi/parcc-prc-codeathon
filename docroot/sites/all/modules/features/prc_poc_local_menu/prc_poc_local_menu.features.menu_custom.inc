@@ -76,6 +76,18 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Professional Development Left Nav',
     'description' => 'Navigation menu for Professional Development view',
   );
+  // Exported menu: menu-trt-school-readiness-capaci.
+  $menus['menu-trt-school-readiness-capaci'] = array(
+    'menu_name' => 'menu-trt-school-readiness-capaci',
+    'title' => 'TRT School Readiness Capacity Check',
+    'description' => '',
+  );
+  // Exported menu: menu-trt-school-readiness-system.
+  $menus['menu-trt-school-readiness-system'] = array(
+    'menu_name' => 'menu-trt-school-readiness-system',
+    'title' => 'TRT School Readiness System Check',
+    'description' => '',
+  );
   // Exported menu: menu-trt-system-check.
   $menus['menu-trt-system-check'] = array(
     'menu_name' => 'menu-trt-system-check',
@@ -118,6 +130,8 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Navigation');
   t('Navigation menu for Professional Development view');
   t('Professional Development Left Nav');
+  t('TRT School Readiness Capacity Check');
+  t('TRT School Readiness System Check');
   t('TRT System Check');
   t('TRT Testing Capacity Check');
   t('The <em>Main</em> menu is used on many sites to show the major sections of the site, often in a top navigation bar.');

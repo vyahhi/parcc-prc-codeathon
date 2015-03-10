@@ -10,12 +10,12 @@ Feature: PRC-761 Testing Capacity Check - Unstructured - Form
 #  Then I see the testing capacity check page that has:
   Page headline:
   Testing Capacity Check
-  Overview/ Instructional copy:
-  Instructions go here. For example: To determine if your school has the appropriate number of test-ready devices to run a successful assessment, enter information requested below.
-  Important Message:
-  Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.
-  Copy:
-  "* indicates required field"
+#  Overview/ Instructional copy:
+#  Instructions go here. For example: To determine if your school has the appropriate number of test-ready devices to run a successful assessment, enter information requested below.
+#  Important Message:
+#  Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.
+#  Copy:
+#  "* indicates required field"
 #  Form Fields
 #  Field Label	Instructions	Type	Options	Required?	Other
   Number of students
@@ -41,8 +41,12 @@ Feature: PRC-761 Testing Capacity Check - Unstructured - Form
 
   Scenario: Create Capacity Check - Unstructured
     Given I am logged in as a user with the "Educator" role
-    # TODO: Replace with actual TRT Capacity Check form
-    And I am on "admin/structure/entity-type/prc_trt/capacity_check/add"
+    When I am on "admin/structure/entity-type/prc_trt/capacity_check/add"
+    # PRC-952
+    Then I should see the heading "Testing Capacity Check"
+    Then I should see the text "Instructions go here. For example: To determine if your school has the appropriate number of test-ready devices to run a successful assessment, enter information requested below."
+    Then I should see the text "Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you."
+    And I should see the text "\* indicates required field"
     Then I should see the text "Number of students"
     And I should see the text "Enter the number of test-eligible students at your school."
     Then I should see the text "Number of devices ready for assessment"
@@ -79,7 +83,6 @@ Feature: PRC-761 Testing Capacity Check - Unstructured - Form
   @javascript
   Scenario: Wired or Wireless connection states
     Given I am logged in as a user with the "Educator" role
-    # TODO: Replace with actual TRT Capacity Check form
     And I am on "admin/structure/entity-type/prc_trt/capacity_check/add"
     Then "#edit-field-wired-connection-speed-und" should not be visible
     And "#edit-field-wireless-connection-speed-und" should not be visible
@@ -95,7 +98,6 @@ Feature: PRC-761 Testing Capacity Check - Unstructured - Form
 
   Scenario: PRC-799 Testing Capacity Check - Unstructured - Form Validation
     Given I am logged in as a user with the "Educator" role
-# TODO: Replace with actual TRT Capacity Check form
     And I am on "admin/structure/entity-type/prc_trt/capacity_check/add"
     When I press "Submit"
     Then I should see the error message containing "Number of students field is required."
@@ -104,7 +106,6 @@ Feature: PRC-761 Testing Capacity Check - Unstructured - Form
     Then I should see the error message containing "Number of test sessions per day field is required."
     Then I should see the error message containing "Number of sittings per student field is required."
     Then I should see the error message containing "Speed of connection (in Mbps) field is required."
-
     When I fill in "Number of students" with "A"
     When I fill in "Number of devices ready for assessment" with "A"
     When I fill in "Number of days of testing" with "A"

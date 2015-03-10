@@ -75,11 +75,6 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
   $form['field_member_state']['#states'] = array(
     'visible' => array(
       $role_states,
-//      array(
-//        array(':input[name="invite_role[6]"]' => array('checked' => TRUE)),
-//        'or',
-//        array(':input[name="invite_role[4]"]' => array('checked' => TRUE)),
-//      ),
     ),
   );
 

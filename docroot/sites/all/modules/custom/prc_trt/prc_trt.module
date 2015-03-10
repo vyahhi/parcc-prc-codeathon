@@ -5,7 +5,37 @@
  */
 
 function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form, &$form_state) {
+  drupal_set_title(t('Testing Capacity Check'));
   $form['actions']['submit']['#value'] = t('Submit');
+
+  $form['instructions_text'] = array(
+    '#type' => 'markup',
+    '#markup' => t('Instructions go here. For example: To determine if your school has the appropriate number of test-ready devices to run a successful assessment, enter information requested below.'),
+    '#weight' => -12,
+  );
+
+  if (array_key_exists('entityreference_prepopulate', $form_state)) {
+    $form['field_name'][LANGUAGE_NONE][0]['value']['#required'] = TRUE;
+    $school_nid = $form_state['entityreference_prepopulate']['prc_trt']['capacity_check']['field_ref_school'][0];
+    $school = node_load($school_nid);
+    $school_wrapper = entity_metadata_wrapper('node', $school);
+    $students = $school_wrapper->field_number_of_students->value();
+    if ($students) {
+      $form['field_number_of_students']['und'][0]['value']['#default_value'] = $students;
+    }
+  } else {
+    $form['important_school_message_text'] = array(
+      '#type' => 'markup',
+      '#markup' => t('Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.'),
+      '#weight' => -11,
+    );
+  }
+
+  $form['required_message'] = array(
+    '#type' => 'markup',
+    '#markup' => '* indicates required field',
+    '#weight' => -10,
+  );
 
   // Wireless only visible when selected from network connection
   $form['field_wireless_connection_speed']['#states'] = array(
@@ -24,11 +54,27 @@ function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form,
   $form['field_network_connection_type']['und']['#options']['_none'] = t('Please select');
   $form['field_wired_connection_speed']['und']['#options']['_none'] = t('Please select');
   $form['field_wireless_connection_speed']['und']['#options']['_none'] = t('Please select');
-
+  $form['field_ref_school']['#access'] = FALSE;
 }
 
 function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &$form_state) {
   $form['actions']['submit']['#value'] = t('Submit');
+
+  if (array_key_exists('entityreference_prepopulate', $form_state)) {
+    $form['field_name'][LANGUAGE_NONE][0]['value']['#required'] = TRUE;
+  } else {
+    $form['important_school_message_text'] = array(
+      '#type' => 'markup',
+      '#markup' => t('Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.'),
+      '#weight' => -11,
+    );
+  }
+
+  $form['required_message'] = array(
+    '#type' => 'markup',
+    '#markup' => '* indicates required field',
+    '#weight' => -10,
+  );
 
   $hide_fields = array(
     'field_monitor_color_depth',
@@ -39,6 +85,8 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
     'field_browser_cookies_enabled',
     'field_browser_javascript_enabled',
     'field_browser_images_enabled',
+    'field_result',
+    'field_ref_school',
   );
 
   foreach ($hide_fields as $hide_field) {
@@ -117,11 +165,6 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form
  */
 function prc_trt_field_extra_fields() {
   $extra['prc_trt']['system_check']['display'] = array(
-    'overall_pass' => array(
-      'label' => t('System Check Results'),
-      'description' => t('Did the system check pass?'),
-      'weight' => 11,
-    ),
     'operating_system_pass' => array(
       'label' => t('Operating system: Results'),
       'description' => t('Did operating system pass?'),
@@ -177,20 +220,45 @@ function prc_trt_field_extra_fields() {
     'devices_required' => array(
       'label' => t('Number of devices required'),
       'description' => t('How many devices are required?'),
-      'weight' => 21,
+      'weight' => 4,
     ),
     'devices_capacity' => array(
       'label' => t('Devices capacity'),
       'description' => t('Devices capacity'),
-      'weight' => 21,
+      'weight' => 5,
     ),
     'bandwidth_capacity' => array(
       'label' => t('Bandwidth capacity'),
       'description' => t('Bandwidth capacity'),
-      'weight' => 21,
+      'weight' => 6,
     ),
   );
   return $extra;
+}
+
+function _prc_trt_field_overall_results($entity) {
+  $w = entity_metadata_wrapper('prc_trt', $entity);
+  $os = $w->field_operating_system->value();
+  $size = $w->field_monitor_size->value();
+  $size_pass = $size >= 9.7;
+  $depth = $w->field_monitor_color_depth->value();
+  $depth_pass = $depth >= 16;
+  $resw = $w->field_screen_resolution_width->value();
+  $resw_pass = $resw >= 1024;
+  $resh = $w->field_screen_resolution_height->value();
+  $resh_pass = $resh >= 768;
+  $processor = $w->field_processor_speed->value();
+  $processor_pass = $processor >= 1;
+  $ram = $w->field_ram->value();
+  $ram_pass = $ram;
+  $browser = $w->field_browser->value();
+
+  $cookies_pass = $w->field_browser_cookies_enabled->value();
+  $js_pass = $w->field_browser_javascript_enabled->value();
+  $images_pass = $w->field_browser_images_enabled->value();
+
+  $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
+  return $all_pass;
 }
 
 /**
@@ -227,6 +295,7 @@ function _prc_trt_view_entity_capacity_check($entity) {
     '#type' => 'item',
     '#title' => t('# of devices required:'),
     '#markup' => '<div class="field-devices-required">' . $devices_required . '</div>',
+    '#weight' => 0.1,
   );
 
 
@@ -235,6 +304,7 @@ function _prc_trt_view_entity_capacity_check($entity) {
     '#type' => 'item',
     '#title' => t('devices capacity:'),
     '#markup' => '<div class="field-devices-capacity">' . $devices_capacity . '</div>',
+    '#weight' => 0.2,
   );
 
   $speed = $w->field_speed_of_connection->value();
@@ -243,31 +313,38 @@ function _prc_trt_view_entity_capacity_check($entity) {
     '#type' => 'item',
     '#title' => t('bandwidth capacity:'),
     '#markup' => '<div class="field-bandwidth-capacity">' . t('@bandwidth_capacity Mbps/student', array('@bandwidth_capacity' => $bandwidth_capacity)) . '</div>',
+    '#weight' => 0.3,
   );
 
   $entity->content['device_capacity_results'] = array(
     '#type' => 'container',
+    '#weight' => 0.4,
   );
 
   $entity->content['device_capacity_results']["device_capacity_results_text"] = array(
     '#markup' => t('Devices Capacity Results'),
+    '#weight' => 0.5,
   );
   $devices_required_passfail = $devices_capacity > 0 ? t('Passed') : t('Failed');
   $entity->content['device_capacity_results']["devices_required_passfail"] = array(
     '#markup' => $devices_required_passfail,
+    '#weight' => 0.6,
   );
   if ($devices_capacity <= 0) {
     $entity->content['device_capacity_results']["devices_required_nextsteps"] = array(
       '#markup' => t('Instructions or next steps go here.'),
+      '#weight' => 0.7,
     );
   }
 
   $entity->content['bandwidth_capacity_results'] = array(
     '#type' => 'container',
+    '#weight' => 0.8,
   );
 
   $entity->content['bandwidth_capacity_results']["bandwidth_capacity_results_text"] = array(
     '#markup' => t('Bandwidth Capacity Results'),
+    '#weight' => 0.9,
   );
 
   $cap_good = floatval(variable_get('prc_trt_capacity_minimum_good', .1));
@@ -285,9 +362,11 @@ function _prc_trt_view_entity_capacity_check($entity) {
 
   $entity->content['bandwidth_capacity_results']["bandwidth_status"] = array(
     '#markup' => t('@result - @bandwidth_capacity Mbps/student', array('@result' => $bandwidth_result, '@bandwidth_capacity' => $bandwidth_capacity)),
+    '#weight' => 0.91,
   );
   $entity->content['bandwidth_capacity_results']["bandwidth_extra_text"] = array(
     '#markup' => $bandwidth_extra_text,
+    '#weight' => 0.92,
   );
 }
 
@@ -309,20 +388,13 @@ function _prc_trt_view_entity_system_check($entity) {
   $processor = $w->field_processor_speed->value();
   $processor_pass = $processor >= 1;
   $ram = $w->field_ram->value();
-  $ram_pass = strpos(strtolower($ram), 'mb') === FALSE;
+  $ram_pass = $ram;
   $browser = $w->field_browser->value();
 
   $cookies_pass = $w->field_browser_cookies_enabled->value();
   $js_pass = $w->field_browser_javascript_enabled->value();
   $images_pass = $w->field_browser_images_enabled->value();
 
-  $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
-
-  $entity->content['overall_pass'] = array(
-    '#type' => 'item',
-    '#title' => t('System Check Results:'),
-    '#markup' => $all_pass ? t('Passed') : t('Failed'),
-  );
   $entity->content['operating_system_pass'] = array(
     '#type' => 'item',
     '#title' => t('Operating system Results:'),
@@ -373,4 +445,44 @@ function _prc_trt_view_entity_system_check($entity) {
     '#title' => t('Images Results:'),
     '#markup' => $images_pass ? 'Pass' : 'Fail',
   );
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function prc_trt_entity_presave($entity, $type) {
+  if ($type == 'prc_trt' && $entity->type == 'system_check') {
+    // TODO: Refactor this into a custom class
+    $w = entity_metadata_wrapper('prc_trt', $entity);
+    $os = $w->field_operating_system->value();
+    $size = $w->field_monitor_size->value();
+    $size_pass = $size >= 9.7;
+    $depth = $w->field_monitor_color_depth->value();
+    $depth_pass = $depth >= 16;
+    $resw = $w->field_screen_resolution_width->value();
+    $resw_pass = $resw >= 1024;
+    $resh = $w->field_screen_resolution_height->value();
+    $resh_pass = $resh >= 768;
+    $processor = $w->field_processor_speed->value();
+    $processor_pass = $processor >= 1;
+    $ram = $w->field_ram->value();
+    $ram_pass = $ram;
+    $browser = $w->field_browser->value();
+
+    $cookies_pass = $w->field_browser_cookies_enabled->value();
+    $js_pass = $w->field_browser_javascript_enabled->value();
+    $images_pass = $w->field_browser_images_enabled->value();
+
+    $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
+    $entity->field_result[LANGUAGE_NONE][0]['value'] = $all_pass;
+  } elseif ($type == 'prc_trt' && $entity->type == 'capacity_check') {
+    $w = entity_metadata_wrapper('prc_trt', $entity);
+    $school = $w->field_ref_school->value();
+    if ($school) {
+      $students = $w->field_number_of_students->value();
+      $school_wrapper = entity_metadata_wrapper('node', $school);
+      $school_wrapper->field_number_of_students->set($students);
+      $school_wrapper->save();
+    }
+  }
 }
