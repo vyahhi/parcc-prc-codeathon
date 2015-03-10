@@ -298,6 +298,73 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-trt-school-readiness-capaci_run-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add
+  $menu_links['menu-trt-school-readiness-capaci_run-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add'] = array(
+    'menu_name' => 'menu-trt-school-readiness-capaci',
+    'link_path' => 'admin/structure/entity-type/prc_trt/capacity_check/add',
+    'router_path' => 'admin/structure/entity-type/prc_trt/capacity_check/add',
+    'link_title' => 'run capacity check',
+    'options' => array(
+      'menu_token_link_path' => 'admin/structure/entity-type/prc_trt/capacity_check/add?field_ref_school=[node:nid]',
+      'menu_token_data' => array(
+        'node' => array(
+          'type' => 'node',
+          'plugin' => 'node_context',
+          'options' => array(),
+        ),
+      ),
+      'menu_token_options' => array(
+        'clear' => 0,
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+      'alter' => TRUE,
+      'query' => array(
+        'field_ref_school' => '[node:nid]',
+      ),
+      'identifier' => 'menu-trt-school-readiness-capaci_run-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-trt-school-readiness-system_run-system-check:menutoken/54f9f897def7d
+  $menu_links['menu-trt-school-readiness-system_run-system-check:menutoken/54f9f897def7d'] = array(
+    'menu_name' => 'menu-trt-school-readiness-system',
+    'link_path' => 'menutoken/54f9f897def7d',
+    'router_path' => 'menutoken/%',
+    'link_title' => 'run system check',
+    'options' => array(
+      'menu_token_link_path' => 'admin/structure/entity-type/prc_trt/system_check/add?field_ref_school=[node:nid]',
+      'menu_token_data' => array(
+        'node' => array(
+          'type' => 'node',
+          'plugin' => 'node_context',
+          'options' => array(),
+        ),
+      ),
+      'menu_token_options' => array(
+        'clear' => 0,
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+      'alter' => TRUE,
+      'identifier' => 'menu-trt-school-readiness-system_run-system-check:menutoken/54f9f897def7d',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-trt-system-check_system-check:admin/structure/entity-type/prc_trt/system_check/add
   $menu_links['menu-trt-system-check_system-check:admin/structure/entity-type/prc_trt/system_check/add'] = array(
     'menu_name' => 'menu-trt-system-check',
@@ -357,6 +424,8 @@ function prc_menu_links_menu_default_menu_links() {
   t('Testing Capacity Check');
   t('Users');
   t('View All');
+  t('run capacity check');
+  t('run system check');
 
 
   return $menu_links;

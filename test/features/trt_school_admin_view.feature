@@ -83,9 +83,11 @@ Feature: PRC-757 School Readiness - School Admin View
     And I should see the text "no system checks have been run"
     And I should see the text "message explaining what the check does and the importance of running it."
     When I click "run system check"
+    # PRC-802
+    And I should not see the text "Important:"
     And I press "Submit"
+    # PRC-802
     Then I should see the error message containing "System check name field is required."
-
 
   Scenario: I have a system check
     Given I have no "School" nodes
