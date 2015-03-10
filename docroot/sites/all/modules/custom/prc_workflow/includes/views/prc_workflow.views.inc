@@ -76,15 +76,32 @@ function prc_workflow_views_pre_execute(&$view){
 
     //Add fields for review and draft states
     //Join two subqueries that create a view of the most recent drafts and most recent reviews for each node
-    $review_sub = db_select('node_revision_states');
-    $review_sub->addExpression('node_revision.vid, node_revision.nid, node_revision.title, node_revision.timestamp, max(node_revision_states.timestamp)');
-    $review_sub->condition('node_revision_states.status', 1);
-    $review_sub->groupBy('nid');
-    $review_sub->leftJoin('node_revision', NULL, 'node_revision_states.vid = node_revision.vid');
+    /*
+     *
+     * SELECT nrs1.nid, nrs1.vid, nrs1.timestamp
+        FROM node_revision_states nrs1
+        LEFT JOIN node_revision_states nrs2 ON nrs1.nid = nrs2.nid AND nrs1.nid < nrs2.nid
+        WHERE nrs2.nid IS NULL;
+
+     *
+     *
+     */
+
+
+
+
+    $review_sub = db_select('node_revision_states','nrs1');
+    $review_sub->fields( 'nrs1', array('vid', 'nid', 'timestamp'));
+    $review_sub->fields('nr', array('title'));
+    $review_sub->condition('nrs1.status', 1);
+    //$review_sub->groupBy('nid');
+    $review_sub->leftJoin('node_revision_states', 'nrs2', 'nrs1.nid = nrs2.nid AND nrs1.timestamp < nrs2.timestamp');
+    $review_sub->leftJoin('node_revision', 'nr', 'nrs1.vid = nr.vid');
+    $review_sub->condition('nrs2.nid', NULL, 'IS');
 
     $draft_sub = clone $review_sub;
-    $review_sub->condition('state', 'ready_for_review');
-    $draft_sub->condition('state', 'draft');
+    $review_sub->condition('nrs1.state', 'ready_for_review');
+    $draft_sub->condition('nrs1.state', 'draft');
 
     $review_on = 'node.nid = nrs_review.nid';
     $draft_on = 'node.nid = nrs_draft.nid';

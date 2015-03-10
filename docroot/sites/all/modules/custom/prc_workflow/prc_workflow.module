@@ -419,6 +419,10 @@ function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state
 
   }
   else {
+    //@todo: form title for rescind request
+
+
+
     //Don't show the text area for other state changes (prc-873)
     $form['event_comment']['#type'] = 'hidden';
     $form['event_comment']['#required'] = FALSE;
