@@ -14,7 +14,6 @@ Feature: PRC-954 Anonymous users cannot see System Check or Testing Capacity lin
 
   Scenario Outline: Complete a Capacity Check
     Given I am an anonymous user
-# TODO: Replace with actual TRT Capacity Check form
     And I am on "admin/structure/entity-type/prc_trt/capacity_check/add"
     When I fill in "Number of students" with "<students>"
     When I fill in "Number of devices ready for assessment" with "<devices>"
@@ -69,7 +68,6 @@ Feature: PRC-954 Anonymous users cannot see System Check or Testing Capacity lin
 
   Scenario: Run check headless
     Given I am an anonymous user
-# TODO: Replace with actual TRT System Check form
     And I am on "admin/structure/entity-type/prc_trt/system_check/add"
     And I fill in "System check name" with "Check 2"
     And I fill in "Number of devices" with "23"

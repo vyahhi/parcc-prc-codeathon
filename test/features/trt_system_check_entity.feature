@@ -85,6 +85,28 @@ Feature: PRC-760 System Check - Unstructured - Form
     Then I should see the error message containing "Only numbers are allowed in Number of devices."
     Then I should see the error message containing "Only numbers and the decimal separator (.) allowed in Monitor size (in inches)."
 
+  Scenario: PRC-955 Limit number of devices
+    Given I am logged in as a user with the "Educator" role
+    # TODO: Replace with actual TRT System Check form
+    And I am on "admin/structure/entity-type/prc_trt/system_check/add"
+    And I fill in "System check name" with "Check 2"
+    And I fill in "Number of devices" with "3453453453"
+    And I select "Desktop" from "Device type"
+    And I select "Windows 7" from "Operating system"
+    And I fill in "Monitor size (in inches)" with "3453453453"
+    And I select "1 Ghz or greater" from "Processor speed"
+    And I select "1 GB or greater" from "RAM"
+    And I fill in the hidden field "faux_browser" with "ff 33"
+    And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_cookies" with "true"
+    And I fill in the hidden field "faux_images" with "true"
+    And I fill in the hidden field "faux_monitor_color_depth" with "16"
+    And I fill in the hidden field "faux_screen_resolution_width" with "1024"
+    And I fill in the hidden field "faux_screen_resolution_height" with "768"
+    When I press "Submit"
+    Then I should see the error message containing "Number of devices: the value may be no greater than 32676."
+    Then I should see the error message containing "Monitor size (in inches): the value may be no greater than 32676."
+
   Scenario: PRC-760 Page text
     Given I am logged in as a user with the "Educator" role
     # TODO: Replace with actual TRT System Check form

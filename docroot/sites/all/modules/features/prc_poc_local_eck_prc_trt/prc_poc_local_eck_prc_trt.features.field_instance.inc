@@ -95,7 +95,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'max' => '',
+      'max' => 32676,
       'min' => '',
       'prefix' => '',
       'suffix' => '',
@@ -150,7 +150,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'max' => '',
+      'max' => 32676,
       'min' => '',
       'prefix' => '',
       'suffix' => '',
@@ -205,7 +205,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'max' => '',
+      'max' => 32676,
       'min' => '',
       'prefix' => '',
       'suffix' => '',
@@ -315,7 +315,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'max' => '',
+      'max' => 32676,
       'min' => '',
       'prefix' => '',
       'suffix' => '',
@@ -433,7 +433,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'max' => '',
+      'max' => 32676,
       'min' => '',
       'prefix' => '',
       'suffix' => '',
@@ -488,7 +488,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'max' => '',
+      'max' => 32676,
       'min' => '',
       'prefix' => '',
       'suffix' => 'Mbps',
@@ -940,7 +940,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'max' => '',
+      'max' => 32676,
       'min' => '',
       'prefix' => '',
       'suffix' => '',
@@ -1031,7 +1031,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'max' => '',
+      'max' => 32676,
       'min' => '',
       'prefix' => '',
       'suffix' => '',
