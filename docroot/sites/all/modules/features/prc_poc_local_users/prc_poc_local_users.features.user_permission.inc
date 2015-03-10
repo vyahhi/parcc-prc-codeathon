@@ -838,6 +838,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create district content'.
+  $permissions['create district content'] = array(
+    'name' => 'create district content',
+    'roles' => array(
+      'District Admin' => 'District Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create favorites_list content'.
   $permissions['create favorites_list content'] = array(
     'name' => 'create favorites_list content',
@@ -954,7 +964,9 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'create school content'.
   $permissions['create school content'] = array(
     'name' => 'create school content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -991,6 +1003,15 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any district content'.
+  $permissions['delete any district content'] = array(
+    'name' => 'delete any district content',
+    'roles' => array(
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -1085,7 +1106,9 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any school content'.
   $permissions['delete any school content'] = array(
     'name' => 'delete any school content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1113,6 +1136,15 @@ function prc_poc_local_users_user_default_permissions() {
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own district content'.
+  $permissions['delete own district content'] = array(
+    'name' => 'delete own district content',
+    'roles' => array(
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -1207,7 +1239,9 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete own school content'.
   $permissions['delete own school content'] = array(
     'name' => 'delete own school content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1867,6 +1901,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any district content'.
+  $permissions['edit any district content'] = array(
+    'name' => 'edit any district content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any favorites_list content'.
   $permissions['edit any favorites_list content'] = array(
     'name' => 'edit any favorites_list content',
@@ -1956,7 +1999,9 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit any school content'.
   $permissions['edit any school content'] = array(
     'name' => 'edit any school content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1993,6 +2038,16 @@ function prc_poc_local_users_user_default_permissions() {
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
       'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own district content'.
+  $permissions['edit own district content'] = array(
+    'name' => 'edit own district content',
+    'roles' => array(
+      'District Admin' => 'District Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -2096,7 +2151,9 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit own school content'.
   $permissions['edit own school content'] = array(
     'name' => 'edit own school content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -2445,6 +2502,13 @@ function prc_poc_local_users_user_default_permissions() {
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search district content'.
+  $permissions['search district content'] = array(
+    'name' => 'search district content',
+    'roles' => array(),
     'module' => 'search_config',
   );
 

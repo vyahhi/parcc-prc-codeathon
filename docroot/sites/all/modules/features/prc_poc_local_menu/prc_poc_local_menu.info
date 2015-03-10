@@ -14,6 +14,7 @@ features[menu_custom][] = menu-assessment-left-nav
 features[menu_custom][] = menu-digital-library-left-nav
 features[menu_custom][] = menu-invite-users
 features[menu_custom][] = menu-professional-development-le
+features[menu_custom][] = menu-trt-district-add
 features[menu_custom][] = menu-trt-school-readiness-capaci
 features[menu_custom][] = menu-trt-school-readiness-system
 features[menu_custom][] = menu-trt-system-check

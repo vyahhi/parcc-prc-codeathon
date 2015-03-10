@@ -3080,6 +3080,29 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->uuid = '528f3dd8-81b2-4af6-a5c5-df57a5b4e82c';
     $display->content['new-528f3dd8-81b2-4af6-a5c5-df57a5b4e82c'] = $pane;
     $display->panels['middle'][6] = 'new-528f3dd8-81b2-4af6-a5c5-df57a5b4e82c';
+    $pane = new stdClass();
+    $pane->pid = 'new-fbfa2a96-5352-4251-a9a9-c5ec64b3b763';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-trt-district-add';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 7;
+    $pane->locks = array();
+    $pane->uuid = 'fbfa2a96-5352-4251-a9a9-c5ec64b3b763';
+    $display->content['new-fbfa2a96-5352-4251-a9a9-c5ec64b3b763'] = $pane;
+    $display->panels['middle'][7] = 'new-fbfa2a96-5352-4251-a9a9-c5ec64b3b763';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

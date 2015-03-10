@@ -76,6 +76,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Professional Development Left Nav',
     'description' => 'Navigation menu for Professional Development view',
   );
+  // Exported menu: menu-trt-district-add.
+  $menus['menu-trt-district-add'] = array(
+    'menu_name' => 'menu-trt-district-add',
+    'title' => 'TRT District Add',
+    'description' => '',
+  );
   // Exported menu: menu-trt-school-readiness-capaci.
   $menus['menu-trt-school-readiness-capaci'] = array(
     'menu_name' => 'menu-trt-school-readiness-capaci',
@@ -130,6 +136,7 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Navigation');
   t('Navigation menu for Professional Development view');
   t('Professional Development Left Nav');
+  t('TRT District Add');
   t('TRT School Readiness Capacity Check');
   t('TRT School Readiness System Check');
   t('TRT System Check');
