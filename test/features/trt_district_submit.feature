@@ -18,7 +18,7 @@ Feature: PRC-840 District Readiness - Name Added
 
   Scenario: Add new district - District Admin
     Given I am logged in as a user with the "District Admin" role
-#    And I have no "District" nodes
+    And I have no "District" nodes
     And I click "Technology Readiness"
     When I click "Add District"
     And I fill in "District Name" with "PRC-840 @timestamp"

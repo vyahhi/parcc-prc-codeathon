@@ -488,7 +488,11 @@ function prc_trt_entity_presave($entity, $type) {
 }
 
 function prc_trt_form_district_node_form_alter(&$form, &$form_state) {
-  drupal_set_title(t('Add District'));
+  if (isset($form_state['node']->nid)) {
+    drupal_set_title(t('Edit District'));
+  } else {
+    drupal_set_title(t('Add District'));
+  }
   $form['actions']['submit']['#value'] = t('Submit');
 
   $form['instructions_text'] = array(
