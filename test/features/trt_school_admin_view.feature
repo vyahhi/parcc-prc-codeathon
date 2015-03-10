@@ -49,6 +49,7 @@ Feature: PRC-757 School Readiness - School Admin View
     When I click "School One"
     Then I should not see the text "Devices capacity"
     And I should not see the text "Bandwidth capacity"
+    And I should not see the text "Number of students"
     When I click "run"
     When I fill in "Number of students" with "<students>"
     When I fill in "Number of devices ready for assessment" with "<devices>"
@@ -64,6 +65,8 @@ Feature: PRC-757 School Readiness - School Admin View
     Then I should see the text "Bandwidth Capacity Results<bandwidth_result> - 0.5 Mbps/student"
     And I should see the text "Devices Capacity Results<device_result>"
     And I should see the link "run capacity check"
+    And I should see the text "Number of students:"
+    And I should see the text "100"
   Examples:
     | students | devices | sittings | testing_days | sessions | connection_type | wired_speed | access_points | connection_speed | devices_required | devices_capacity | bandwidth_capacity | device_result | device_not_result | device_follow_up | device_not_follow_up                | bandwidth_result | bandwidth_not_result1 | bandwidth_not_result2 | bandwidth_text_result | bandwidth_text_not_result1                               | bandwidth_text_not_result2                                                                                   |
     | 100      | 50      | 4        | 10           | 4        | Wired           | 100 Mbps    | 600           | 50               | 11               | 39               | 5                  | Passed        | Failed            |                  | Instructions or next steps go here. | Good             | OK                    | Poor                  | Good                  | Provide explanation of what OK means and any next steps. | Provide explanation of what poor means \(will not be able to run successful assessment\) and any next steps. |

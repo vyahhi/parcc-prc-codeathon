@@ -27,3 +27,4 @@ Feature: PRC-877 School Readiness - View System Check Results
     Then the url should match "prc_trt/system_check/*"
     And I should see the text "Check AA"
     And I should not see the text "Check BB"
+    And I should see the text "School One @timestamp"

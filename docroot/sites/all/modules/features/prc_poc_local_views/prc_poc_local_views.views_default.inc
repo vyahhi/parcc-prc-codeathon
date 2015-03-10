@@ -4442,8 +4442,43 @@ function prc_poc_local_views_views_default_views() {
     'capacity_check' => 'capacity_check',
   );
 
-  /* Display: Content pane */
-  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  /* Display: Most recent school capacity check */
+  $handler = $view->new_display('panel_pane', 'Most recent school capacity check', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_ref_school_target_id' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'prc_trt: School (field_ref_school)',
+    ),
+  );
+
+  /* Display: School Readiness Page Cap Students */
+  $handler = $view->new_display('panel_pane', 'School Readiness Page Cap Students', 'panel_pane_2');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Prc_trt: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+  /* Field: prc_trt: Number of students */
+  $handler->display->display_options['fields']['field_number_of_students']['id'] = 'field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['table'] = 'field_data_field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['field'] = 'field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
   $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
   $handler->display->display_options['pane_category']['weight'] = '0';
   $handler->display->display_options['argument_input'] = array(

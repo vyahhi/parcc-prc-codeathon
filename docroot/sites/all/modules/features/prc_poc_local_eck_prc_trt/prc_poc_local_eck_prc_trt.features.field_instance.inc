@@ -611,7 +611,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 14,
+        'weight' => 11,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -657,7 +657,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 17,
+        'weight' => 14,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -702,7 +702,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 21,
+        'weight' => 18,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -747,7 +747,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 19,
+        'weight' => 16,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -793,7 +793,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_integer',
-        'weight' => 15,
+        'weight' => 12,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -878,7 +878,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 12,
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -925,7 +925,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_decimal',
-        'weight' => 28,
+        'weight' => 25,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1101,7 +1101,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 26,
+        'weight' => 23,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1142,7 +1142,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 27,
+        'weight' => 24,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1186,7 +1186,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 25,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1244,7 +1244,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 29,
+        'weight' => 26,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1290,7 +1290,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 24,
+        'weight' => 21,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1339,7 +1339,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 23,
+        'weight' => 20,
       ),
       'teaser' => array(
         'label' => 'above',

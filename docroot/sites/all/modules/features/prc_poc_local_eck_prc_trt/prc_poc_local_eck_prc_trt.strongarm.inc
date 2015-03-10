@@ -88,6 +88,9 @@ function prc_poc_local_eck_prc_trt_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'school_readiness' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(),
@@ -100,55 +103,55 @@ function prc_poc_local_eck_prc_trt_strongarm() {
         ),
         'monitor_size_pass' => array(
           'default' => array(
-            'weight' => '7',
+            'weight' => '6',
             'visible' => TRUE,
           ),
         ),
         'monitor_color_depth_pass' => array(
           'default' => array(
-            'weight' => '13',
+            'weight' => '10',
             'visible' => TRUE,
           ),
         ),
         'screen_resolution_pass' => array(
           'default' => array(
-            'weight' => '25',
+            'weight' => '22',
             'visible' => TRUE,
           ),
         ),
         'processor_pass' => array(
           'default' => array(
-            'weight' => '9',
+            'weight' => '7',
             'visible' => TRUE,
           ),
         ),
         'ram_pass' => array(
           'default' => array(
-            'weight' => '11',
+            'weight' => '8',
             'visible' => TRUE,
           ),
         ),
         'browser_pass' => array(
           'default' => array(
-            'weight' => '16',
+            'weight' => '13',
             'visible' => TRUE,
           ),
         ),
         'cookies_pass' => array(
           'default' => array(
-            'weight' => '18',
+            'weight' => '15',
             'visible' => TRUE,
           ),
         ),
         'javascript_pass' => array(
           'default' => array(
-            'weight' => '20',
+            'weight' => '17',
             'visible' => TRUE,
           ),
         ),
         'images_pass' => array(
           'default' => array(
-            'weight' => '22',
+            'weight' => '19',
             'visible' => TRUE,
           ),
         ),
