@@ -59,6 +59,7 @@ dependencies[] = ds_ui
 dependencies[] = eck
 ; Fields
 dependencies[] = entityreference
+dependencies[] = entityreference_prepopulate
 dependencies[] = field_group
 dependencies[] = link
 ; Flags
