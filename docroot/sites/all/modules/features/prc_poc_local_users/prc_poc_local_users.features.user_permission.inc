@@ -1411,6 +1411,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['eck add prc_trt capacity_check entities'] = array(
     'name' => 'eck add prc_trt capacity_check entities',
     'roles' => array(
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'eck',
@@ -1421,6 +1422,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'eck add prc_trt system_check entities',
     'roles' => array(
       'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'eck',
@@ -1830,6 +1832,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['eck view prc_trt capacity_check entities'] = array(
     'name' => 'eck view prc_trt capacity_check entities',
     'roles' => array(
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'eck',
@@ -1840,6 +1843,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'eck view prc_trt system_check entities',
     'roles' => array(
       'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'eck',
