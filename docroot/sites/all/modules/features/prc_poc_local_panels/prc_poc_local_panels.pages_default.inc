@@ -280,6 +280,135 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
+  $handler->name = 'node_view__trt_district';
+  $handler->task = 'node_view';
+  $handler->subtask = '';
+  $handler->handler = 'panel_context';
+  $handler->weight = 4;
+  $handler->conf = array(
+    'title' => 'TRT District Readiness View',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => 'trt_district',
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'district' => 'district',
+            ),
+          ),
+          'context' => 'argument_entity_id:node_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '%node:title Readiness';
+  $display->uuid = '9c20f60a-ca12-4dd9-a3ee-224aef3dd623';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-f5ef389a-e533-489b-9108-2672744fd18e';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'District Readiness Overview',
+      'title' => '',
+      'body' => 'Overview / instructional copy goes here (click on school name to see admin can add / edit school, request that readiness checks be run, view results of technology checks by school and export all test results data to csv).',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'f5ef389a-e533-489b-9108-2672744fd18e';
+    $display->content['new-f5ef389a-e533-489b-9108-2672744fd18e'] = $pane;
+    $display->panels['middle'][0] = 'new-f5ef389a-e533-489b-9108-2672744fd18e';
+    $pane = new stdClass();
+    $pane->pid = 'new-1c3fd6c5-df35-4f35-9d5b-503e5d8ab2e2';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => '',
+      'title' => '',
+      'body' => '<a href="%node:edit-url">Edit district name</a>',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '1c3fd6c5-df35-4f35-9d5b-503e5d8ab2e2';
+    $display->content['new-1c3fd6c5-df35-4f35-9d5b-503e5d8ab2e2'] = $pane;
+    $display->panels['middle'][1] = 'new-1c3fd6c5-df35-4f35-9d5b-503e5d8ab2e2';
+    $pane = new stdClass();
+    $pane->pid = 'new-48e2fd47-665f-49f1-a263-b9fe56f1093c';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Manage schools link',
+      'title' => '',
+      'body' => '<a href="#">Manage schools</a> - add schools and request readiness checks',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = '48e2fd47-665f-49f1-a263-b9fe56f1093c';
+    $display->content['new-48e2fd47-665f-49f1-a263-b9fe56f1093c'] = $pane;
+    $display->panels['middle'][2] = 'new-48e2fd47-665f-49f1-a263-b9fe56f1093c';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $export['node_view__trt_district'] = $handler;
+
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
   $handler->name = 'node_view__trt_state_readiness_view';
   $handler->task = 'node_view';
   $handler->subtask = '';
