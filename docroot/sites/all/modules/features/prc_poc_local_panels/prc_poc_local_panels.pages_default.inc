@@ -813,56 +813,6 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $display->content['new-4389404f-d9a1-4b47-a3a4-1a3770d6b0ea'] = $pane;
     $display->panels['middle'][0] = 'new-4389404f-d9a1-4b47-a3a4-1a3770d6b0ea';
     $pane = new stdClass();
-    $pane->pid = 'new-07df68bf-fb25-449e-b78a-95ae584983b7';
-    $pane->panel = 'middle';
-    $pane->type = 'custom';
-    $pane->subtype = 'custom';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'admin_title' => '',
-      'title' => 'Important Message:',
-      'body' => 'Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.',
-      'format' => 'filtered_html',
-      'substitute' => TRUE,
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 1;
-    $pane->locks = array();
-    $pane->uuid = '07df68bf-fb25-449e-b78a-95ae584983b7';
-    $display->content['new-07df68bf-fb25-449e-b78a-95ae584983b7'] = $pane;
-    $display->panels['middle'][1] = 'new-07df68bf-fb25-449e-b78a-95ae584983b7';
-    $pane = new stdClass();
-    $pane->pid = 'new-c66cf07c-8870-4670-915a-53dac42a4dc3';
-    $pane->panel = 'middle';
-    $pane->type = 'custom';
-    $pane->subtype = 'custom';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'admin_title' => 'Indicates Required Field',
-      'title' => '',
-      'body' => '* indicates required field',
-      'format' => 'filtered_html',
-      'substitute' => TRUE,
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 2;
-    $pane->locks = array();
-    $pane->uuid = 'c66cf07c-8870-4670-915a-53dac42a4dc3';
-    $display->content['new-c66cf07c-8870-4670-915a-53dac42a4dc3'] = $pane;
-    $display->panels['middle'][2] = 'new-c66cf07c-8870-4670-915a-53dac42a4dc3';
-    $pane = new stdClass();
     $pane->pid = 'new-15933d22-2acb-46d5-8e97-7729714051ee';
     $pane->panel = 'middle';
     $pane->type = 'pm_existing_pages';
@@ -882,11 +832,11 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 3;
+    $pane->position = 1;
     $pane->locks = array();
     $pane->uuid = '15933d22-2acb-46d5-8e97-7729714051ee';
     $display->content['new-15933d22-2acb-46d5-8e97-7729714051ee'] = $pane;
-    $display->panels['middle'][3] = 'new-15933d22-2acb-46d5-8e97-7729714051ee';
+    $display->panels['middle'][1] = 'new-15933d22-2acb-46d5-8e97-7729714051ee';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-15933d22-2acb-46d5-8e97-7729714051ee';
   $handler->conf['display'] = $display;

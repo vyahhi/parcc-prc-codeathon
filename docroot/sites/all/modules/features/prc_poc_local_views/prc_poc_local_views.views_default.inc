@@ -4471,7 +4471,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
   $handler->display->display_options['fields']['id']['field'] = 'id';
   $handler->display->display_options['fields']['id']['exclude'] = TRUE;
-  /* Field: prc_trt: Number of students */
+  /* Field: Field: Number of students */
   $handler->display->display_options['fields']['field_number_of_students']['id'] = 'field_number_of_students';
   $handler->display->display_options['fields']['field_number_of_students']['table'] = 'field_data_field_number_of_students';
   $handler->display->display_options['fields']['field_number_of_students']['field'] = 'field_number_of_students';
@@ -4584,7 +4584,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['created']['label'] = 'Date & Time';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: prc_trt: Number of devices ready for assessment */
+  /* Field: prc_trt: Number of devices */
   $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';

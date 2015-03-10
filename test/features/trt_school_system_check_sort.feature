@@ -21,6 +21,8 @@ Feature: PRC-876 School Readiness - Sort System Check Results
 #  Results in alphabetical order
 #  Results in reverse alphabetical order (second click)
 
+  # Also covers PRC-810
+
   Scenario: Create default entities and nodes
     Given I am logged in as a user with the "School Admin" role
     And I have no "School" nodes
