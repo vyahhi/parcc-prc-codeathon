@@ -41,7 +41,8 @@ class prc_workflow_handler_field_node_title extends views_handler_field_node {
           }
         }
 
-        //If the draft vid is the same as the published or primary draft just link to that
+        //If the draft vid is the same as the published or primary draft just
+        // link to that, as revision may be an access denied
         if(isset($values->node_revision_vid) && isset($vid_to_link) && $values->node_revision_vid == $vid_to_link){
           //For the admin view link to edit, otherwise link to view for contributor version
           if($this->view->current_display == 'panel_pane_2') {

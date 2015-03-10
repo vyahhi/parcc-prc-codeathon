@@ -101,7 +101,7 @@ function prc_workflow_views_pre_execute(&$view){
     $query->addField('nrs_draft', 'timestamp', 'draft_updated');
 
     $view->build_info['query'] = $query;
-    $view->build_info['count_query'] = $query;
+    
   }
 }
 

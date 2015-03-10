@@ -197,18 +197,22 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['filters']['combine']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
-    3 => 0,
-    4 => 0,
-    6 => 0,
+    8 => 0,
     5 => 0,
+    6 => 0,
+    4 => 0,
+    3 => 0,
+    7 => 0,
   );
   $handler->display->display_options['filters']['combine']['fields'] = array(
     'nid' => 'nid',
+    'prc_workflow_title' => 'prc_workflow_title',
     'created' => 'created',
     'type' => 'type',
     'changed' => 'changed',
-    'title' => 'title',
     'field_author_name' => 'field_author_name',
+    'field_document' => 'field_document',
+    'state' => 'state',
   );
 
   /* Display: Author's Content pane */

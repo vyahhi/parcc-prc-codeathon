@@ -1,4 +1,4 @@
-@api @diglib @workflow @javascript
+@api @diglib @workflow
 Feature: Workflow is functional
 
   Background:
