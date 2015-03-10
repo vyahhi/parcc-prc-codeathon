@@ -16,6 +16,7 @@ use Behat\Gherkin\Node\TableNode;
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
   protected $originalMailSystem;
+
   /**
    * Initializes context.
    *
@@ -23,8 +24,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * You can also pass arbitrary arguments to the
    * context constructor through behat.yml.
    */
-  public function __construct()
-  {
+  public function __construct() {
     $this->timestamp = time();
   }
 
@@ -111,8 +111,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^the "([^"]*)" radio button should be selected$/
    * @When /^the radio button "(?P<label>[^"]*)" with the id "(?P<id>[^"]*)" should be selected$/
    */
-  public function assertRadioButtonSelected($label, $id = FALSE)
-  {
+  public function assertRadioButtonSelected($label, $id = FALSE) {
     $element = $this->getSession()->getPage();
     $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
     if ($radiobutton === NULL) {
@@ -161,8 +160,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    *
    * @Then /^(?:|I )should see an? "(?P<element>[^"]*)" field$/
    */
-  public function iShouldSeeAField($field)
-  {
+  public function iShouldSeeAField($field) {
     $field = $this->fixStepArgument($field);
     if (!$this->getSession()->getPage()->hasField($field)) {
       throw new Exception("Element ({$field}) not found");
@@ -174,8 +172,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    *
    * @Then /^(?:|I )should not see an? "(?P<element>[^"]*)" field$/
    */
-  public function iShouldNotSeeAField($field)
-  {
+  public function iShouldNotSeeAField($field) {
     $field = $this->fixStepArgument($field);
     if ($this->getSession()->getPage()->hasField($field)) {
       throw new Exception("Element ({$field}) found");
@@ -187,8 +184,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    *
    * @Then /^(?:|I )should see an? "(?P<element>[^"]*)" link$/
    */
-  public function iShouldSeeALink($field)
-  {
+  public function iShouldSeeALink($field) {
     $field = $this->fixStepArgument($field);
     if (!$this->getSession()->getPage()->hasLink($field)) {
       throw new Exception("Element ({$field}) not found");
@@ -200,8 +196,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    *
    * @Then /^(?:|I )should see an? "(?P<button>(?:[^"]|\\")*)" button$/
    */
-  public function iShouldSeeAButton($button)
-  {
+  public function iShouldSeeAButton($button) {
     $button = $this->fixStepArgument($button);
     if (!$this->getSession()->getPage()->hasButton($button)) {
       throw new Exception("Element ({$button}) not found");
@@ -214,7 +209,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^I should not be able to edit (?:a|an) "([^"]*)" node$/
    */
   public function assertNotEditNodeOfType($type) {
-    $node = (object) array('type' => $type);
+    $node = (object)array('type' => $type);
     $saved = $this->getDriver()->createNode($node);
     $this->nodes[] = $saved;
 
@@ -372,7 +367,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
         unset($userHash['roles']);
       }
 
-      $user = (object) $userHash;
+      $user = (object)$userHash;
 
       // Set a password.
       if (!isset($user->pass)) {
@@ -409,8 +404,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
           $key = array_search($role_name, $curr_user->roles);
           if (isset($user->role)) {
             $user->role .= ', ' . $role_name;
-          }
-          else {
+          } else {
             $user->role = $role_name;
           }
           if ($key == FALSE) {
@@ -477,6 +471,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
     parent::createUsers($table_node);
   }
+
   /**
    * Asserts that a given field has no empty cells
    *
@@ -533,7 +528,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $this->assertNotEditNodeOfType($type);
   }
 
-    /**
+  /**
    * Asserts that a given node type is editable by the author.
    *
    * @Then /^I should be able to edit my own "([^"]*)" node$/
@@ -542,7 +537,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     if (!$this->user->uid) {
       throw new \Exception(sprintf('There is no current logged in user to create a node for.'));
     }
-    $node = (object) array(
+    $node = (object)array(
       'title' => $this->getDrupal()->random->string(255),
       'type' => $type,
       'body' => $this->getDrupal()->random->string(255),
@@ -560,6 +555,37 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Given /^I have no entities of type "([^"]*)" and bundle "([^"]*)"$/
+   */
+  public function iHaveNoEntitiesOfTypeAndBundle($type, $bundle) {
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', $type)
+      ->entityCondition('bundle', $bundle);
+    $result = $query->execute();
+    if (array_key_exists($type, $result)) {
+      $ids = array_keys($result[$type]);
+      entity_delete_multiple($type, $ids);
+    }
+  }
+
+  /**
+   * @Given /^entities of type "([^"]*)" and bundle "([^"]*)":$/
+   */
+  public function createEntities($type, $bundle, TableNode $entitiesTable) {
+    $this->tableNodeFixStepArguments($entitiesTable);
+    foreach ($entitiesTable->getHash() as $entityHash) {
+      $entity = entity_create($type, array('type' => $bundle));
+      $wrapper = entity_metadata_wrapper($type, $entity);
+      foreach ($entityHash as $key => $value) {
+        $wrapper->{$key}->set($value);
+      }
+      $wrapper->save();
+    }
+  }
+
+
+  /**
    * Overrides DrupalContext::createNodes
    * Allows fixStepArgument to be called on each cell value
    * @param $type
@@ -571,7 +597,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   public function createNode($type, $title) {
-    $node = (object) array(
+    $node = (object)array(
       'title' => $title,
       'type' => $type,
       'body' => $this->getDrupal()->random->string(255),
@@ -583,7 +609,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $this->nodes[] = $saved;
 
     // Set internal page on the new node.
-    $this->getSession()->visit($this->locatePath('/node/' . $saved->nid));  }
+    $this->getSession()->visit($this->locatePath('/node/' . $saved->nid));
+  }
 
 
   /**
@@ -599,7 +626,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       throw new \Exception(sprintf('There is no current logged in user to create a node for.'));
     }
 
-    $node = (object) array(
+    $node = (object)array(
       'title' => $title,
       'type' => $type,
       'body' => $this->getDrupal()->random->string(255),
@@ -727,10 +754,9 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   /**
    * @When /^I fill in the hidden field "([^"]*)" with "([^"]*)"$/
    */
-  public function iFillHiddenFieldWith($field, $value)
-  {
+  public function iFillHiddenFieldWith($field, $value) {
     $this->getSession()->getPage()->find('css',
-      'input[name="'.$field.'"]')->setValue($value);
+      'input[name="' . $field . '"]')->setValue($value);
   }
 
   /**
@@ -764,8 +790,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   /**
    * @Then /^"(?P<before>[^"]*)" should precede "(?P<after>[^"]*)" for the query "(?P<query>[^"]*)"$/
    */
-  public function shouldPrecedeForTheQuery($textBefore, $textAfter, $cssQuery)
-  {
+  public function shouldPrecedeForTheQuery($textBefore, $textAfter, $cssQuery) {
     $items = array_map(
       function ($element) {
         return $element->getText();
@@ -851,14 +876,15 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
         $this->activeEmail = $message;
         $message_found = TRUE;
         if (strpos($message['body'], $contents) !== FALSE ||
-          strpos($message['subject'], $contents) !== FALSE) {
+          strpos($message['subject'], $contents) !== FALSE
+        ) {
           return TRUE;
         }
       }
     }
-    if(isset($message_found)){
+    if (isset($message_found)) {
       throw new \Exception('Did not find expected content in message body or subject.');
-    }else {
+    } else {
       throw new \Exception(sprintf('Did not find expected message to %s', $mail_to));
     }
   }
@@ -873,7 +899,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $contents = $this->fixStepArgument($contents);
     $message = $this->activeEmail;
     if (strpos($message['body'], $contents) !== FALSE ||
-      strpos($message['subject'], $contents) !== FALSE) {
+      strpos($message['subject'], $contents) !== FALSE
+    ) {
       return TRUE;
     }
     print $message['body'];
@@ -890,14 +917,14 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $contents = $this->fixStepArgument($contents);
     $message = $this->activeEmail;
     if (strpos($message['body'], $contents) !== FALSE ||
-      strpos($message['subject'], $contents) !== FALSE)   {
+      strpos($message['subject'], $contents) !== FALSE
+    ) {
       throw new \Exception('Expected content was present in message body or subject.');
     }
     return TRUE;
   }
 
-  public function assertErrorVisible($message)
-  {
+  public function assertErrorVisible($message) {
     $message = $this->fixStepArgument($message);
     parent::assertErrorVisible($message);
   }
@@ -963,8 +990,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    *
    * @When /^(?:|I )should see "(?P<value>(?:[^"]|\\")*)" in the "(?P<field>(?:[^"]|\\")*)" field$/
    */
-  public function assertFieldValue($field, $value)
-  {
+  public function assertFieldValue($field, $value) {
     $field = $this->fixStepArgument($field);
     $value = $this->fixStepArgument($value);
     $found = $this->getSession()->getPage()->findField($field);
@@ -1002,8 +1028,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     try {
       $this->getSession()->getStatusCode();
       return new Given('I should get a "' . $code . '" HTTP response');
-    }
-    catch (UnsupportedDriverActionException $e) {
+    } catch (UnsupportedDriverActionException $e) {
       // Simply continue on, as this driver doesn't support HTTP response codes.
     }
   }
@@ -1064,8 +1089,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    *
    * @When /^(?:|I )move backward one page, confirming the dialog$/
    */
-  public function backAndConfirm()
-  {
+  public function backAndConfirm() {
     $this->getSession()->back();
     $this->iConfirmTheDialog();
   }
@@ -1075,8 +1099,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    *
    * @When /^(?:|I )move backward one page, dismissing the dialog$/
    */
-  public function backAndDismiss()
-  {
+  public function backAndDismiss() {
     $this->getSession()->back();
     $this->iDismissTheDialog();
   }
@@ -1096,8 +1119,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    *
    * @When /^I click on the element with css selector "([^"]*)"$/
    */
-  public function iClickOnTheElementWithCSSSelector($cssSelector)
-  {
+  public function iClickOnTheElementWithCSSSelector($cssSelector) {
     $session = $this->getSession();
     $element = $session->getPage()->find(
       'xpath',
@@ -1117,8 +1139,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    *
    * @When /^I check the element with xpath selector "([^"]*)"$/
    */
-  public function iCheckTheElementWithXPathSelector($xpathSelector)
-  {
+  public function iCheckTheElementWithXPathSelector($xpathSelector) {
     $session = $this->getSession();
     $element = $session->getPage()->find(
       'xpath',
@@ -1146,8 +1167,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @param $field
    * @param $path
    */
-  public function attachFileToField($field, $path)
-  {
+  public function attachFileToField($field, $path) {
     $field = $this->fixStepArgument($field);
     $path = $this->fixStepArgument($path);
 
@@ -1166,8 +1186,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    *
    * @return bool
    */
-  public function assertPopupMessage($message)
-  {
+  public function assertPopupMessage($message) {
     return $message == $this->getSession()->getDriver()->getWebDriverSession()->getAlert_text();
   }
 
@@ -1205,8 +1224,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $event_class = get_class($event);
     if (strpos($event_class, 'OutlineExampleEvent') !== FALSE) {
       $scenario = $event->getOutline();
-    }
-    elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
+    } elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
       $scenario = $event->getScenario();
     }
     if ($scenario) {
@@ -1217,8 +1235,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $ff = explode('/', $feature_file_full);
     $feature_file_name = array_pop($ff);
 
-    if (!file_exists($html_dump_path))
-    {
+    if (!file_exists($html_dump_path)) {
       mkdir($html_dump_path);
     }
 
@@ -1230,10 +1247,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $message .= "\nHTML available at: " . $htmlCapturePath;
 
 
-    if ($driver instanceof \Behat\Mink\Driver\Selenium2Driver)
-    {
-      if (!file_exists($html_dump_path))
-      {
+    if ($driver instanceof \Behat\Mink\Driver\Selenium2Driver) {
+      if (!file_exists($html_dump_path)) {
         mkdir($html_dump_path);
       }
 
@@ -1273,8 +1288,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $event_class = get_class($event);
     if (strpos($event_class, 'OutlineExampleEvent') !== FALSE) {
       $scenario = $event->getOutline();
-    }
-    elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
+    } elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
       $scenario = $event->getScenario();
     }
     if ($scenario) {
@@ -1300,7 +1314,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $state_obj = state_flow_load_state_machine($last_node, TRUE);
     $state = $state_obj->get_current_state();
 
-    if($state !== $arg1){
+    if ($state !== $arg1) {
       throw new \Exception(sprintf('The nodes state was not set to %s', $arg1));
     }
   }

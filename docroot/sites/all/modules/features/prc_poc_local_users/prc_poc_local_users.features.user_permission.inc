@@ -951,6 +951,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create school content'.
+  $permissions['create school content'] = array(
+    'name' => 'create school content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create short_answer content'.
   $permissions['create short_answer content'] = array(
     'name' => 'create short_answer content',
@@ -1075,6 +1082,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any school content'.
+  $permissions['delete any school content'] = array(
+    'name' => 'delete any school content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any short_answer content'.
   $permissions['delete any short_answer content'] = array(
     'name' => 'delete any short_answer content',
@@ -1187,6 +1201,13 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own school content'.
+  $permissions['delete own school content'] = array(
+    'name' => 'delete own school content',
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1390,6 +1411,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['eck add prc_trt capacity_check entities'] = array(
     'name' => 'eck add prc_trt capacity_check entities',
     'roles' => array(
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'eck',
@@ -1400,6 +1422,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'eck add prc_trt system_check entities',
     'roles' => array(
       'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'eck',
@@ -1809,6 +1832,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['eck view prc_trt capacity_check entities'] = array(
     'name' => 'eck view prc_trt capacity_check entities',
     'roles' => array(
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'eck',
@@ -1819,6 +1843,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'eck view prc_trt system_check entities',
     'roles' => array(
       'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'eck',
@@ -1925,6 +1950,13 @@ function prc_poc_local_users_user_default_permissions() {
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any school content'.
+  $permissions['edit any school content'] = array(
+    'name' => 'edit any school content',
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -2058,6 +2090,13 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own school content'.
+  $permissions['edit own school content'] = array(
+    'name' => 'edit own school content',
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -2471,6 +2510,13 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
     ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search school content'.
+  $permissions['search school content'] = array(
+    'name' => 'search school content',
+    'roles' => array(),
     'module' => 'search_config',
   );
 

@@ -40,6 +40,12 @@ function prc_poc_local_users_user_default_roles() {
     'weight' => 7,
   );
 
+  // Exported role: School Admin.
+  $roles['School Admin'] = array(
+    'name' => 'School Admin',
+    'weight' => 8,
+  );
+
   // Exported role: administrator.
   $roles['administrator'] = array(
     'name' => 'administrator',
