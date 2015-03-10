@@ -62,7 +62,7 @@ Feature: PRC-876 School Readiness - Sort System Check Results
 
     When I click "Results"
     Then "Check BB" should precede "Check AA" for the query ".views-field-field-name"
-    Then "Check AA" should precede "Check CC" for the query ".views-field-field-name"
+    Then "Check BB" should precede "Check CC" for the query ".views-field-field-name"
     When I click "Results"
-    Then "Check AA" should precede "Check CC" for the query ".views-field-field-name"
+    Then "Check AA" should precede "Check BB" for the query ".views-field-field-name"
     Then "Check CC" should precede "Check BB" for the query ".views-field-field-name"
