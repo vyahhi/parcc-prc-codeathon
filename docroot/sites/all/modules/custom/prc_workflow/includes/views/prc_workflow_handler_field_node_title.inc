@@ -25,12 +25,36 @@ class prc_workflow_handler_field_node_title extends views_handler_field_node {
         $this->options['alter']['make_link'] = TRUE;
 
         //Link to the preferred revision if one exists, or link to the node
-        if(!empty($values->review_vid)){
-          $this->options['alter']['path'] = "node/" . $this->get_value($values, 'nid').'/revisions/'.$values->review_vid.'/edit';
+
+      if(!empty($values->review_vid)){
+          $vid_to_link = $values->review_vid;
+
         }elseif(!empty($values->draft_vid)){
-          $this->options['alter']['path'] = "node/" . $this->get_value($values, 'nid').'/revisions/'.$values->draft_vid.'/edit';
+          $vid_to_link = $values->draft_vid;
+
         }else{
-          $this->options['alter']['path'] = "node/" . $this->get_value($values, 'nid').'/edit';
+          //For the admin view link to edit, otherwise link to view for contributor version
+          if($this->view->current_display == 'panel_pane_2') {
+            $this->options['alter']['path'] = "node/" . $this->get_value($values, 'nid') . '/edit';
+          }else {
+            $this->options['alter']['path'] = "node/" . $this->get_value($values, 'nid');
+          }
+        }
+
+        //If the draft vid is the same as the published or primary draft just link to that
+        if(isset($values->node_revision_vid) && isset($vid_to_link) && $values->node_revision_vid == $vid_to_link){
+          //For the admin view link to edit, otherwise link to view for contributor version
+          if($this->view->current_display == 'panel_pane_2') {
+            $this->options['alter']['path'] = "node/" . $this->get_value($values, 'nid').'/edit';
+          }else{
+            $this->options['alter']['path'] = "node/" . $this->get_value($values, 'nid');
+          }
+        }elseif(isset($vid_to_link)) {
+          if($this->view->current_display == 'panel_pane_2') {
+            $this->options['alter']['path'] = "node/" . $this->get_value($values, 'nid') . '/revisions/' . $vid_to_link . '/edit';
+          }else{
+            $this->options['alter']['path'] = "node/" . $this->get_value($values, 'nid') . '/revisions/' . $vid_to_link . '/view';
+          }
         }
 
         if (isset($this->aliases['language'])) {

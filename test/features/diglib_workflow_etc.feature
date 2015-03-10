@@ -1,4 +1,4 @@
-@api @diglib @workflow
+@api @diglib @workflow @javascript
 Feature: Workflow is functional
 
   Background:
@@ -23,7 +23,8 @@ Feature: Workflow is functional
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
     Then press the "Update state" button
-    And I visit "content/my-first-post"
+    And I visit "admin-content"
+    And I click "My first post."
     And I should see the text "Approval Requested"
     And the email to "joe_1prc_58ca@example.com" should contain "The following content is awaiting approval"
     And I click "Log out"
@@ -136,7 +137,6 @@ Feature: Workflow is functional
     And I visit "admin-content"
     And I click "My first post"
     # prc-872 : Change "private draft" to just draft
-    And I break
     And I should see the text "Revision State: Draft"
     Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been unpublished."
     And I follow the link in the email
@@ -252,7 +252,9 @@ Feature: Workflow is functional
     And I should not see an "textarea" element
     When  I press "Update state"
     And I click "Log out"
-    Then I visit "content/my-first-post"
+    And I am an anonymous user
+    Then I visit "digital-library"
+    And I click "My first post."
     And I should see "Isn't this swell?"
     And I should not see "This is my unpublished addition"
 

@@ -213,6 +213,90 @@ function prc_poc_local_views_views_default_views() {
 
   /* Display: Author's Content pane */
   $handler = $view->new_display('panel_pane', 'Author\'s Content pane', 'panel_pane_1');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'nid' => 'nid',
+    'prc_workflow_title' => 'prc_workflow_title',
+    'created' => 'created',
+    'type' => 'type',
+    'changed' => 'changed',
+    'field_author_name' => 'field_author_name',
+    'field_document' => 'field_document',
+    'state' => 'state',
+    'workflow_delete_node' => 'workflow_delete_node',
+    'workflow_edit_node' => 'workflow_delete_node',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'nid' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'prc_workflow_title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'created' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'type' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_author_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_document' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'workflow_delete_node' => array(
+      'align' => '',
+      'separator' => ' | ',
+      'empty_column' => 0,
+    ),
+    'workflow_edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -267,6 +351,13 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['workflow_edit_node']['id'] = 'workflow_edit_node';
   $handler->display->display_options['fields']['workflow_edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['workflow_edit_node']['field'] = 'workflow_edit_node';
+  /* Field: Content revision: Vid */
+  $handler->display->display_options['fields']['vid']['id'] = 'vid';
+  $handler->display->display_options['fields']['vid']['table'] = 'node_revision';
+  $handler->display->display_options['fields']['vid']['field'] = 'vid';
+  $handler->display->display_options['fields']['vid']['label'] = '';
+  $handler->display->display_options['fields']['vid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['vid']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Nid */
   $handler->display->display_options['sorts']['nid']['id'] = 'nid';
@@ -319,7 +410,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'nid' => 'nid',
-    'title' => 'title',
+    'prc_workflow_title' => 'prc_workflow_title',
     'created' => 'created',
     'type' => 'type',
     'changed' => 'changed',
@@ -338,8 +429,8 @@ function prc_poc_local_views_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'title' => array(
-      'sortable' => 1,
+    'prc_workflow_title' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -387,7 +478,7 @@ function prc_poc_local_views_views_default_views() {
     ),
     'workflow_delete_node' => array(
       'align' => '',
-      'separator' => '',
+      'separator' => ' | ',
       'empty_column' => 0,
     ),
     'workflow_edit_node' => array(
@@ -399,6 +490,68 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  /* Field: Content: PRC Workflow: Title */
+  $handler->display->display_options['fields']['prc_workflow_title']['id'] = 'prc_workflow_title';
+  $handler->display->display_options['fields']['prc_workflow_title']['table'] = 'node';
+  $handler->display->display_options['fields']['prc_workflow_title']['field'] = 'prc_workflow_title';
+  $handler->display->display_options['fields']['prc_workflow_title']['label'] = 'Title';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Posted On';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Content: Type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['label'] = 'Content Type';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = 'Last Updated';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Content: Author Name */
+  $handler->display->display_options['fields']['field_author_name']['id'] = 'field_author_name';
+  $handler->display->display_options['fields']['field_author_name']['table'] = 'field_data_field_author_name';
+  $handler->display->display_options['fields']['field_author_name']['field'] = 'field_author_name';
+  /* Field: Content: Attach a File */
+  $handler->display->display_options['fields']['field_document']['id'] = 'field_document';
+  $handler->display->display_options['fields']['field_document']['table'] = 'field_data_field_document';
+  $handler->display->display_options['fields']['field_document']['field'] = 'field_document';
+  $handler->display->display_options['fields']['field_document']['label'] = 'Attached Files';
+  $handler->display->display_options['fields']['field_document']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_document']['delta_offset'] = '0';
+  /* Field: State Flow: State */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'node_revision_states';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['label'] = 'Status';
+  /* Field: Content: PRC Workflow: Delete link */
+  $handler->display->display_options['fields']['workflow_delete_node']['id'] = 'workflow_delete_node';
+  $handler->display->display_options['fields']['workflow_delete_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['workflow_delete_node']['field'] = 'workflow_delete_node';
+  $handler->display->display_options['fields']['workflow_delete_node']['label'] = 'Actions';
+  /* Field: Content: PRC Workflow: Edit link */
+  $handler->display->display_options['fields']['workflow_edit_node']['id'] = 'workflow_edit_node';
+  $handler->display->display_options['fields']['workflow_edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['workflow_edit_node']['field'] = 'workflow_edit_node';
+  $handler->display->display_options['fields']['workflow_edit_node']['label'] = 'Edit link';
+  /* Field: Content revision: Vid */
+  $handler->display->display_options['fields']['vid']['id'] = 'vid';
+  $handler->display->display_options['fields']['vid']['table'] = 'node_revision';
+  $handler->display->display_options['fields']['vid']['field'] = 'vid';
+  $handler->display->display_options['fields']['vid']['label'] = '';
+  $handler->display->display_options['fields']['vid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['vid']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Nid */
   $handler->display->display_options['sorts']['nid']['id'] = 'nid';

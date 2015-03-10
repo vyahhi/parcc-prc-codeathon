@@ -699,6 +699,96 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
+  $handler->name = 'pm_existing_pages_dlc_revisions_edit__panel_context_b0dcd66b-57c8-4827-8acb-8549c0d89624';
+  $handler->task = 'pm_existing_pages';
+  $handler->subtask = 'dlc_revisions_edit';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(
+      0 => array(
+        'identifier' => 'Node edit form from node',
+        'keyword' => 'node_form',
+        'name' => 'node_edit_form_from_node',
+        'context' => 'argument_entity_id:node_1',
+        'id' => 1,
+      ),
+    ),
+    'name' => '',
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = '54d3eb57-c6ae-4cc6-837a-1f1d97177d7b';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-4a7875d1-827a-4c80-adbc-d392f0d95647';
+    $pane->panel = 'middle';
+    $pane->type = 'content_state';
+    $pane->subtype = 'content_state';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '4a7875d1-827a-4c80-adbc-d392f0d95647';
+    $display->content['new-4a7875d1-827a-4c80-adbc-d392f0d95647'] = $pane;
+    $display->panels['middle'][0] = 'new-4a7875d1-827a-4c80-adbc-d392f0d95647';
+    $pane = new stdClass();
+    $pane->pid = 'new-e2112264-823b-4879-8856-12671e7c4839';
+    $pane->panel = 'middle';
+    $pane->type = 'form';
+    $pane->subtype = 'form';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'context' => 'relationship_node_edit_form_from_node_1',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'e2112264-823b-4879-8856-12671e7c4839';
+    $display->content['new-e2112264-823b-4879-8856-12671e7c4839'] = $pane;
+    $display->panels['middle'][1] = 'new-e2112264-823b-4879-8856-12671e7c4839';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-4a7875d1-827a-4c80-adbc-d392f0d95647';
+  $handler->conf['display'] = $display;
+  $export['pm_existing_pages_dlc_revisions_edit__panel_context_b0dcd66b-57c8-4827-8acb-8549c0d89624'] = $handler;
+
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
   $handler->name = 'site_template_panel_context_basic';
   $handler->task = 'site_template';
   $handler->subtask = '';
