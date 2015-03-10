@@ -48,6 +48,9 @@ Feature: PRC-805 Testing Capacity Check - Structured - Form
     And I select "<connection_type>" from "Network connection"
     And I select "<wired_speed>" from "Wired connection speed"
     And I press "Submit"
+    # PRC-806
+    Then I should see the text "School:"
+    And I should see the text "School One @timestamp"
     And I visit the last node created
     And I click "run capacity check"
     Then the "Number of students" field should contain "<devices>"

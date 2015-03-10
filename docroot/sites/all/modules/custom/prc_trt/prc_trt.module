@@ -220,17 +220,17 @@ function prc_trt_field_extra_fields() {
     'devices_required' => array(
       'label' => t('Number of devices required'),
       'description' => t('How many devices are required?'),
-      'weight' => 21,
+      'weight' => 4,
     ),
     'devices_capacity' => array(
       'label' => t('Devices capacity'),
       'description' => t('Devices capacity'),
-      'weight' => 21,
+      'weight' => 5,
     ),
     'bandwidth_capacity' => array(
       'label' => t('Bandwidth capacity'),
       'description' => t('Bandwidth capacity'),
-      'weight' => 21,
+      'weight' => 6,
     ),
   );
   return $extra;
@@ -295,6 +295,7 @@ function _prc_trt_view_entity_capacity_check($entity) {
     '#type' => 'item',
     '#title' => t('# of devices required:'),
     '#markup' => '<div class="field-devices-required">' . $devices_required . '</div>',
+    '#weight' => 0.1,
   );
 
 
@@ -303,6 +304,7 @@ function _prc_trt_view_entity_capacity_check($entity) {
     '#type' => 'item',
     '#title' => t('devices capacity:'),
     '#markup' => '<div class="field-devices-capacity">' . $devices_capacity . '</div>',
+    '#weight' => 0.2,
   );
 
   $speed = $w->field_speed_of_connection->value();
@@ -311,31 +313,38 @@ function _prc_trt_view_entity_capacity_check($entity) {
     '#type' => 'item',
     '#title' => t('bandwidth capacity:'),
     '#markup' => '<div class="field-bandwidth-capacity">' . t('@bandwidth_capacity Mbps/student', array('@bandwidth_capacity' => $bandwidth_capacity)) . '</div>',
+    '#weight' => 0.3,
   );
 
   $entity->content['device_capacity_results'] = array(
     '#type' => 'container',
+    '#weight' => 0.4,
   );
 
   $entity->content['device_capacity_results']["device_capacity_results_text"] = array(
     '#markup' => t('Devices Capacity Results'),
+    '#weight' => 0.5,
   );
   $devices_required_passfail = $devices_capacity > 0 ? t('Passed') : t('Failed');
   $entity->content['device_capacity_results']["devices_required_passfail"] = array(
     '#markup' => $devices_required_passfail,
+    '#weight' => 0.6,
   );
   if ($devices_capacity <= 0) {
     $entity->content['device_capacity_results']["devices_required_nextsteps"] = array(
       '#markup' => t('Instructions or next steps go here.'),
+      '#weight' => 0.7,
     );
   }
 
   $entity->content['bandwidth_capacity_results'] = array(
     '#type' => 'container',
+    '#weight' => 0.8,
   );
 
   $entity->content['bandwidth_capacity_results']["bandwidth_capacity_results_text"] = array(
     '#markup' => t('Bandwidth Capacity Results'),
+    '#weight' => 0.9,
   );
 
   $cap_good = floatval(variable_get('prc_trt_capacity_minimum_good', .1));
@@ -353,9 +362,11 @@ function _prc_trt_view_entity_capacity_check($entity) {
 
   $entity->content['bandwidth_capacity_results']["bandwidth_status"] = array(
     '#markup' => t('@result - @bandwidth_capacity Mbps/student', array('@result' => $bandwidth_result, '@bandwidth_capacity' => $bandwidth_capacity)),
+    '#weight' => 0.91,
   );
   $entity->content['bandwidth_capacity_results']["bandwidth_extra_text"] = array(
     '#markup' => $bandwidth_extra_text,
+    '#weight' => 0.92,
   );
 }
 

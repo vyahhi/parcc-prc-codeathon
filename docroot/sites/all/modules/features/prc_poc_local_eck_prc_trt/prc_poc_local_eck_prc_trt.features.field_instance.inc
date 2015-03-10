@@ -22,7 +22,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'school_readiness' => array(
         'label' => 'above',
@@ -74,7 +74,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'school_readiness' => array(
         'label' => 'above',
@@ -129,7 +129,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'school_readiness' => array(
         'label' => 'above',
@@ -184,7 +184,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'school_readiness' => array(
         'label' => 'above',
@@ -239,7 +239,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'school_readiness' => array(
         'label' => 'above',
@@ -294,7 +294,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'school_readiness' => array(
         'label' => 'above',
@@ -347,7 +347,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 10,
+        'weight' => 0,
       ),
       'school_readiness' => array(
         'label' => 'above',
@@ -412,7 +412,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'school_readiness' => array(
         'label' => 'above',
@@ -467,7 +467,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'school_readiness' => array(
         'label' => 'above',
@@ -517,7 +517,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'school_readiness' => array(
         'label' => 'above',
@@ -564,7 +564,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'school_readiness' => array(
         'label' => 'above',

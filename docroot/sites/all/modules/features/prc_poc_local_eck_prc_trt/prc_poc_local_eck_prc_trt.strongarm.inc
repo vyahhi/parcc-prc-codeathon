@@ -37,7 +37,7 @@ function prc_poc_local_eck_prc_trt_strongarm() {
       'display' => array(
         'devices_required' => array(
           'default' => array(
-            'weight' => '21',
+            'weight' => '12',
             'visible' => TRUE,
           ),
           'school_readiness' => array(
@@ -47,7 +47,7 @@ function prc_poc_local_eck_prc_trt_strongarm() {
         ),
         'devices_capacity' => array(
           'default' => array(
-            'weight' => '21',
+            'weight' => '13',
             'visible' => TRUE,
           ),
           'school_readiness' => array(
@@ -57,7 +57,7 @@ function prc_poc_local_eck_prc_trt_strongarm() {
         ),
         'bandwidth_capacity' => array(
           'default' => array(
-            'weight' => '21',
+            'weight' => '11',
             'visible' => TRUE,
           ),
           'school_readiness' => array(
