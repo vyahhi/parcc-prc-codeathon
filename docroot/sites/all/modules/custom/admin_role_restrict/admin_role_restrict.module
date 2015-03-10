@@ -24,12 +24,14 @@
  */
 function admin_role_restrict_form_alter(&$form, &$form_state, $form_id) {
   // Make sure this is a user edit form, and that the user_admin_role role actually exists
-  if (($form_id == 'user_profile_form' || $form_id == 'user_registration_form') && $user_admin_role = variable_get('user_admin_role')) {
+  // TODO: Fix this! Not happy about this, but the install profile messed with the rids.
+  // We're just going with the name 'administrator' now.
+  if (($form_id == 'user_profile_form' || $form_id == 'user_registration_form') && $user_admin_role = user_role_load_by_name('administrator')) {
     global $user;
-    $user_is_admin = array_key_exists($user_admin_role, $user->roles);
+    $user_is_admin = array_key_exists($user_admin_role->rid, $user->roles);
 
     if (!$user_is_admin) {
-      unset($form['account']['roles']['#options'][$user_admin_role]);
+      unset($form['account']['roles']['#options'][$user_admin_role->rid]);
     }
   }
 }
