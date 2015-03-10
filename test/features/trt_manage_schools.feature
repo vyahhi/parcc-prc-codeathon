@@ -4,36 +4,6 @@ Feature: PRC-828 Manage Schools
   I want to ask schools in my district to run the readiness checks
   so I can understand if the schools are ready to run the PARCC assessment.
 
-#  Acceptance Criteria
-#  Background
-#    Given that I am logged in as District Admin
-#    And I am on my District Readiness page
-#    When I click the Manage Schools link
-#    Then I see the Manage Schools page that has:
-#  Common page elements
-#  Page Headline
-#  Manage Schools
-#  Overview Copy
-#  "Overview / instructional copy goes here: user can add/edit school information and request readiness checks. Consider describing information needed for each school (school name and email address of person responsible for running readiness checks at each school)."
-#  Add School links
-#  Add School - form
-#  Scenario 1: I have no schools added to my district
-#    Given I have no schools added to my district
-#    Then I see common page elements and:
-#  Add School links
-#  Add School(s) - upload .csv file [link, appears below Add School - form link]
-#  Copy
-#  "No schools have been added to your district. Please click one of the Add School links above to add schools."
-#  Scenario 2: I have one or more schools added to my district and no district admin has uploaded any schools to my district
-#    Given I have one or more schools added to my district
-#    And no district admin has uploaded any schools to my district
-#    Then I see common page elements and:
-#  Add School links
-#  Add School(s) - upload .csv file [link, appears below Add School - form link]
-#  Schools Table
-#  Table displaying schools in alphabetical order with a row for each added school.
-#  <checkbox>	School Name	School Contact Email Address
-#  <checkbox>	<School Name>	<School Contact's Email Addresss>
 #  Request Readiness Checks button
 #  Scenario 3: I have one or more schools added to my district and a district admin has uploaded one or more schools to my school
 #    Given I have one or more schools added to my district
@@ -44,4 +14,52 @@ Feature: PRC-828 Manage Schools
 
   Scenario: No schools added
     Given I am logged in as a user with the "District Admin" role
-    And I follow "Technology Readiness"
+    And I have no "School" nodes
+    And I have no "District" nodes
+    And "District" nodes:
+      | title              | uid         |
+      | PRC-828 @timestamp | @currentuid |
+    And I visit the last node created
+    And I click "Manage Schools"
+    Then I should see the heading "Manage Schools"
+    And I should see the text "Overview / instructional copy goes here: user can add/edit school information and request readiness checks. Consider describing information needed for each school \(school name and email address of person responsible for running readiness checks at each school\)."
+    And I should see the link "Add School - form"
+    And I should see the link "Add School(s) - upload csv file"
+    And I should see the text "No schools have been added to your district. Please click one of the Add School links above to add schools."
+
+  Scenario: District has schools
+    Given I am logged in as a user with the "District Admin" role
+    And I have no "School" nodes
+    And I have no "District" nodes
+    And "District" nodes:
+      | title              | uid         |
+      | PRC-828 @timestamp | @currentuid |
+    And "School" nodes:
+      | title                 | field_ref_district       | field_contact_email     |
+      | School 828 @timestamp | @nid[PRC-828 @timestamp] | e@timestamp@example.com |
+    And I visit the first node created
+    And I click "Manage Schools"
+    Then I should see the heading "Manage Schools"
+    And I should see the text "Overview / instructional copy goes here: user can add/edit school information and request readiness checks. Consider describing information needed for each school \(school name and email address of person responsible for running readiness checks at each school\)."
+    And I should see the link "Add School - form"
+    And I should see the link "Add School(s) - upload csv file"
+    And I should not see the text "No schools have been added to your district. Please click one of the Add School links above to add schools."
+    And I should see the text "School 828 @timestamp"
+    And I should see the text "e@timestamp@example.com"
+    And I select "Request Readiness Checks" from "edit-operation"
+
+  Scenario: District has an upload
+    Given I am logged in as a user with the "District Admin" role
+    And I have no "School" nodes
+    And I have no "District" nodes
+    And "District" nodes:
+      | title              | uid         |
+      | PRC-828 @timestamp | @currentuid |
+    And "School" nodes:
+      | title                 | field_ref_district       | field_contact_email     |
+      | School 828 @timestamp | @nid[PRC-828 @timestamp] | e@timestamp@example.com |
+    And I flag "PRC-828 @timestamp" with "File Uploaded"
+    And I visit the first node created
+    And I click "Manage Schools"
+    And I should see the link "Add School - form"
+    And I should not see the link "Add School(s) - upload csv file"

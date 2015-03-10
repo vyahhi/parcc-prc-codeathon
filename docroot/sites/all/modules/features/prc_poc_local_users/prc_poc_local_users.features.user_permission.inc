@@ -965,6 +965,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['create school content'] = array(
     'name' => 'create school content',
     'roles' => array(
+      'District Admin' => 'District Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -1240,6 +1241,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['delete own school content'] = array(
     'name' => 'delete own school content',
     'roles' => array(
+      'District Admin' => 'District Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -2152,6 +2154,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit own school content'] = array(
     'name' => 'edit own school content',
     'roles' => array(
+      'District Admin' => 'District Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -2291,6 +2294,13 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'authenticated user' => 'authenticated user',
     ),
+    'module' => 'flag',
+  );
+
+  // Exported permission: 'flag file_uploaded'.
+  $permissions['flag file_uploaded'] = array(
+    'name' => 'flag file_uploaded',
+    'roles' => array(),
     'module' => 'flag',
   );
 
@@ -2624,6 +2634,13 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'authenticated user' => 'authenticated user',
     ),
+    'module' => 'flag',
+  );
+
+  // Exported permission: 'unflag file_uploaded'.
+  $permissions['unflag file_uploaded'] = array(
+    'name' => 'unflag file_uploaded',
+    'roles' => array(),
     'module' => 'flag',
   );
 

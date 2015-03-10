@@ -82,6 +82,18 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'TRT District Add',
     'description' => '',
   );
+  // Exported menu: menu-trt-manage-schools.
+  $menus['menu-trt-manage-schools'] = array(
+    'menu_name' => 'menu-trt-manage-schools',
+    'title' => 'TRT Manage Schools',
+    'description' => '',
+  );
+  // Exported menu: menu-trt-manage-schools-add-form.
+  $menus['menu-trt-manage-schools-add-form'] = array(
+    'menu_name' => 'menu-trt-manage-schools-add-form',
+    'title' => 'TRT Manage Schools Add School Form',
+    'description' => '',
+  );
   // Exported menu: menu-trt-school-readiness-capaci.
   $menus['menu-trt-school-readiness-capaci'] = array(
     'menu_name' => 'menu-trt-school-readiness-capaci',
@@ -137,6 +149,8 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Navigation menu for Professional Development view');
   t('Professional Development Left Nav');
   t('TRT District Add');
+  t('TRT Manage Schools');
+  t('TRT Manage Schools Add School Form');
   t('TRT School Readiness Capacity Check');
   t('TRT School Readiness System Check');
   t('TRT System Check');

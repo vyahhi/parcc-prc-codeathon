@@ -11,4 +11,5 @@ features[variable][] = menu_parent_district
 features[variable][] = node_options_district
 features[variable][] = node_preview_district
 features[variable][] = node_submitted_district
+features[variable][] = field_bundle_settings_node__district
 features[features_api][] = api:2

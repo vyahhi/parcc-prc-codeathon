@@ -298,6 +298,125 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-trt-district-add_add-district:node/add/district
+  $menu_links['menu-trt-district-add_add-district:node/add/district'] = array(
+    'menu_name' => 'menu-trt-district-add',
+    'link_path' => 'node/add/district',
+    'router_path' => 'node/add/district',
+    'link_title' => 'Add District',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-trt-district-add_add-district:node/add/district',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-trt-manage-schools-add-form_add-school---form:menutoken/54ff7195d7a73
+  $menu_links['menu-trt-manage-schools-add-form_add-school---form:menutoken/54ff7195d7a73'] = array(
+    'menu_name' => 'menu-trt-manage-schools-add-form',
+    'link_path' => 'menutoken/54ff7195d7a73',
+    'router_path' => 'menutoken/%',
+    'link_title' => 'Add School - form',
+    'options' => array(
+      'menu_token_link_path' => 'node/add/school?field_ref_district=[node:nid]',
+      'menu_token_data' => array(
+        'node' => array(
+          'type' => 'node',
+          'plugin' => 'node_context',
+          'options' => array(),
+        ),
+      ),
+      'menu_token_options' => array(
+        'clear' => 0,
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+      'alter' => TRUE,
+      'identifier' => 'menu-trt-manage-schools-add-form_add-school---form:menutoken/54ff7195d7a73',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-trt-manage-schools-add-form_add-schools---upload-csv-file:node/add/school
+  $menu_links['menu-trt-manage-schools-add-form_add-schools---upload-csv-file:node/add/school'] = array(
+    'menu_name' => 'menu-trt-manage-schools-add-form',
+    'link_path' => 'node/add/school',
+    'router_path' => 'node/add/school',
+    'link_title' => 'Add School(s) - upload csv file',
+    'options' => array(
+      'menu_token_link_path' => 'node/[node:nid]/upload-schools',
+      'menu_token_data' => array(
+        'node' => array(
+          'type' => 'node',
+          'plugin' => 'node_context',
+          'options' => array(),
+        ),
+      ),
+      'menu_token_options' => array(
+        'clear' => 0,
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+      'alter' => TRUE,
+      'query' => array(
+        'field_ref_district' => '[node:nid]',
+      ),
+      'identifier' => 'menu-trt-manage-schools-add-form_add-schools---upload-csv-file:node/add/school',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-trt-manage-schools_manage-schools:menutoken/54ff6e2b2a473
+  $menu_links['menu-trt-manage-schools_manage-schools:menutoken/54ff6e2b2a473'] = array(
+    'menu_name' => 'menu-trt-manage-schools',
+    'link_path' => 'menutoken/54ff6e2b2a473',
+    'router_path' => 'menutoken/%',
+    'link_title' => 'Manage Schools',
+    'options' => array(
+      'menu_token_link_path' => 'node/[node:nid]/manage-schools',
+      'menu_token_data' => array(
+        'node' => array(
+          'type' => 'node',
+          'plugin' => 'node_context',
+          'options' => array(),
+        ),
+      ),
+      'menu_token_options' => array(
+        'clear' => 0,
+      ),
+      'attributes' => array(
+        'title' => 'add schools and request readiness checks',
+      ),
+      'alter' => TRUE,
+      'identifier' => 'menu-trt-manage-schools_manage-schools:menutoken/54ff6e2b2a473',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-trt-school-readiness-capaci_run-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add
   $menu_links['menu-trt-school-readiness-capaci_run-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add'] = array(
     'menu_name' => 'menu-trt-school-readiness-capaci',
@@ -407,6 +526,9 @@ function prc_menu_links_menu_default_menu_links() {
   );
   // Translatables
   // Included for use with string extractors like potx.
+  t('Add District');
+  t('Add School - form');
+  t('Add School(s) - upload csv file');
   t('Add content');
   t('Add course');
   t('All Available Assessments');
@@ -418,6 +540,7 @@ function prc_menu_links_menu_default_menu_links() {
   t('Digital Library');
   t('Home');
   t('Invite New User');
+  t('Manage Schools');
   t('Professional Development');
   t('System Check');
   t('Technology Readiness');

@@ -47,6 +47,7 @@ features[views_view][] = test_search_two
 features[views_view][] = top_content
 features[views_view][] = tracker
 features[views_view][] = transcript
+features[views_view][] = trt_district_schools
 features[features_api][] = api:2
 features[ctools][] = 1
 features_exclude[dependencies][views] = views
