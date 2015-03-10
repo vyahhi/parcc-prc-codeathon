@@ -30,6 +30,10 @@ function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form,
 function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &$form_state) {
   $form['actions']['submit']['#value'] = t('Submit');
 
+  if (array_key_exists('entityreference_prepopulate', $form_state)) {
+    $form['field_name'][LANGUAGE_NONE][0]['value']['#required'] = TRUE;
+  }
+
   $hide_fields = array(
     'field_monitor_color_depth',
     'field_screen_resolution_width',

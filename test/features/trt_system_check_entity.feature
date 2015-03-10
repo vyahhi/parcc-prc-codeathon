@@ -72,6 +72,7 @@ Feature: PRC-760 System Check - Unstructured - Form
     # TODO: Replace with actual TRT System Check form
     And I am on "admin/structure/entity-type/prc_trt/system_check/add"
     When I press "Submit"
+    Then I should not see the error message containing "System check name field is required."
     Then I should see the error message containing "Number of devices field is required."
     Then I should see the error message containing "Device type field is required."
     Then I should see the error message containing "Operating system field is required."
