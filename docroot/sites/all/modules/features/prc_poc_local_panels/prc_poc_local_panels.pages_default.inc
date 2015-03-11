@@ -280,6 +280,158 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
+  $handler->name = 'node_view__trt_district';
+  $handler->task = 'node_view';
+  $handler->subtask = '';
+  $handler->handler = 'panel_context';
+  $handler->weight = 4;
+  $handler->conf = array(
+    'title' => 'TRT District Readiness View',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => 'trt_district',
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'district' => 'district',
+            ),
+          ),
+          'context' => 'argument_entity_id:node_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '%node:title Readiness';
+  $display->uuid = '9c20f60a-ca12-4dd9-a3ee-224aef3dd623';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-f5ef389a-e533-489b-9108-2672744fd18e';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'District Readiness Overview',
+      'title' => '',
+      'body' => 'Overview / instructional copy goes here (click on school name to see admin can add / edit school, request that readiness checks be run, view results of technology checks by school and export all test results data to csv).',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'f5ef389a-e533-489b-9108-2672744fd18e';
+    $display->content['new-f5ef389a-e533-489b-9108-2672744fd18e'] = $pane;
+    $display->panels['middle'][0] = 'new-f5ef389a-e533-489b-9108-2672744fd18e';
+    $pane = new stdClass();
+    $pane->pid = 'new-1c3fd6c5-df35-4f35-9d5b-503e5d8ab2e2';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => '',
+      'title' => '',
+      'body' => '<a href="%node:edit-url">Edit district name</a>',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '1c3fd6c5-df35-4f35-9d5b-503e5d8ab2e2';
+    $display->content['new-1c3fd6c5-df35-4f35-9d5b-503e5d8ab2e2'] = $pane;
+    $display->panels['middle'][1] = 'new-1c3fd6c5-df35-4f35-9d5b-503e5d8ab2e2';
+    $pane = new stdClass();
+    $pane->pid = 'new-e024b3f1-6eca-4e5c-a326-5a882312cffc';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-trt-manage-schools';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = 'e024b3f1-6eca-4e5c-a326-5a882312cffc';
+    $display->content['new-e024b3f1-6eca-4e5c-a326-5a882312cffc'] = $pane;
+    $display->panels['middle'][2] = 'new-e024b3f1-6eca-4e5c-a326-5a882312cffc';
+    $pane = new stdClass();
+    $pane->pid = 'new-48e2fd47-665f-49f1-a263-b9fe56f1093c';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Manage schools description',
+      'title' => '',
+      'body' => 'add schools and request readiness checks',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = '48e2fd47-665f-49f1-a263-b9fe56f1093c';
+    $display->content['new-48e2fd47-665f-49f1-a263-b9fe56f1093c'] = $pane;
+    $display->panels['middle'][3] = 'new-48e2fd47-665f-49f1-a263-b9fe56f1093c';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $export['node_view__trt_district'] = $handler;
+
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
   $handler->name = 'node_view__trt_state_readiness_view';
   $handler->task = 'node_view';
   $handler->subtask = '';
@@ -3170,6 +3322,29 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->uuid = '528f3dd8-81b2-4af6-a5c5-df57a5b4e82c';
     $display->content['new-528f3dd8-81b2-4af6-a5c5-df57a5b4e82c'] = $pane;
     $display->panels['middle'][6] = 'new-528f3dd8-81b2-4af6-a5c5-df57a5b4e82c';
+    $pane = new stdClass();
+    $pane->pid = 'new-fbfa2a96-5352-4251-a9a9-c5ec64b3b763';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-trt-district-add';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 7;
+    $pane->locks = array();
+    $pane->uuid = 'fbfa2a96-5352-4251-a9a9-c5ec64b3b763';
+    $display->content['new-fbfa2a96-5352-4251-a9a9-c5ec64b3b763'] = $pane;
+    $display->panels['middle'][7] = 'new-fbfa2a96-5352-4251-a9a9-c5ec64b3b763';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -3406,6 +3581,262 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['test_search'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
+  $page->name = 'trt_district_manage_schools';
+  $page->task = 'page';
+  $page->admin_title = 'TRT District Manage Schools';
+  $page->admin_description = '';
+  $page->path = 'node/%node/manage-schools';
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'perm',
+        'settings' => array(
+          'perm' => 'create school content',
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+      1 => array(
+        'name' => 'perm',
+        'settings' => array(
+          'perm' => 'edit any school content',
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+    ),
+    'logic' => 'or',
+  );
+  $page->menu = array();
+  $page->arguments = array(
+    'node' => array(
+      'id' => 1,
+      'identifier' => 'Node: ID',
+      'name' => 'entity_id:node',
+      'settings' => array(),
+    ),
+  );
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_trt_district_manage_schools__panel_context_e6b777e2-2cc7-4bb3-9779-a08b94593dbc';
+  $handler->task = 'page';
+  $handler->subtask = 'trt_district_manage_schools';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'District Manage Schools',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'district' => 'district',
+            ),
+          ),
+          'context' => 'argument_entity_id:node_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = 'Manage Schools';
+  $display->uuid = 'e7f4ed18-2b40-41cb-8c17-6cf861c34fae';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-801bfd73-9449-4c56-ae6e-27716d1ab447';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Manage Schools Overview',
+      'title' => '',
+      'body' => 'Overview / instructional copy goes here: user can add/edit school information and request readiness checks. Consider describing information needed for each school (school name and email address of person responsible for running readiness checks at each school).',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '801bfd73-9449-4c56-ae6e-27716d1ab447';
+    $display->content['new-801bfd73-9449-4c56-ae6e-27716d1ab447'] = $pane;
+    $display->panels['middle'][0] = 'new-801bfd73-9449-4c56-ae6e-27716d1ab447';
+    $pane = new stdClass();
+    $pane->pid = 'new-efcc0d5a-8652-4a19-be2a-a2ccf029eacc';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-trt-manage-schools-add-form';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'efcc0d5a-8652-4a19-be2a-a2ccf029eacc';
+    $display->content['new-efcc0d5a-8652-4a19-be2a-a2ccf029eacc'] = $pane;
+    $display->panels['middle'][1] = 'new-efcc0d5a-8652-4a19-be2a-a2ccf029eacc';
+    $pane = new stdClass();
+    $pane->pid = 'new-e19f6de6-b37f-4d05-b4d3-1c286300e87e';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'trt_district_schools-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_ref_district_target_id' => '%node:nid',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = 'e19f6de6-b37f-4d05-b4d3-1c286300e87e';
+    $display->content['new-e19f6de6-b37f-4d05-b4d3-1c286300e87e'] = $pane;
+    $display->panels['middle'][2] = 'new-e19f6de6-b37f-4d05-b4d3-1c286300e87e';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['trt_district_manage_schools'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
+  $page->name = 'trt_manage_schools_upload';
+  $page->task = 'page';
+  $page->admin_title = 'TRT Manage Schools Upload';
+  $page->admin_description = '';
+  $page->path = 'node/%node/upload-schools';
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'flag_is_flagged:node',
+        'settings' => array(
+          'flag_name' => 'file_uploaded',
+          'flag_user' => 'any',
+        ),
+        'context' => 'argument_entity_id:node_1',
+        'not' => TRUE,
+      ),
+    ),
+    'logic' => 'and',
+  );
+  $page->menu = array();
+  $page->arguments = array(
+    'node' => array(
+      'id' => 1,
+      'identifier' => 'Node: ID',
+      'name' => 'entity_id:node',
+      'settings' => array(),
+    ),
+  );
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_trt_manage_schools_upload__panel_context_1f55d65a-e225-448a-a7f3-b9181c68753a';
+  $handler->task = 'page';
+  $handler->subtask = 'trt_manage_schools_upload';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'School Upload',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'district' => 'district',
+            ),
+          ),
+          'context' => 'argument_entity_id:node_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = 'd4a6444c-9864-4a13-ba97-c463f422b8a9';
+  $display->content = array();
+  $display->panels = array();
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['trt_manage_schools_upload'] = $page;
 
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */

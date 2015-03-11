@@ -80,6 +80,39 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     return parent::assertRegionHeading($fixed_heading, $region);
   }
 
+  /**
+   * @Given /^I flag "([^"]*)" with "([^"]*)"$/
+   */
+  public function flagNode($node_title, $flag_name) {
+    $node_title = $this->fixStepArgument($node_title);
+    $flag_name = $this->fixStepArgument($flag_name);
+
+    $all_flags = flag_get_flags();
+    $found_flag = NULL;
+    foreach ($all_flags as $flag) {
+      if ($flag->title == $flag_name) {
+        $found_flag = flag_load($flag->name);
+        break;
+      }
+    }
+    if (!$found_flag) {
+      throw new \Exception(sprintf("Flag '%s' not found", $flag_name));
+    }
+
+    $found_node = NULL;
+    foreach($this->nodes as $node) {
+      if ($node->title == $node_title) {
+        $found_node = $node;
+        break;
+      }
+    }
+    if (!$found_node) {
+      throw new \Exception(sprintf("Node '%s' not found", $node_title));
+    }
+
+    $nid = $found_node->nid;
+    $found_flag->flag('flag', $nid, NULL, TRUE);
+  }
 
   /**
    * @Then /^"([^"]*)" should be visible$/

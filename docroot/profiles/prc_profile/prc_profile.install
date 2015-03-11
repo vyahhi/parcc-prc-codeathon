@@ -94,24 +94,7 @@ function prc_profile_install() {
     $query->values($block);
   }
   $query->execute();
-  // Create a default role for site administrators, with all available
-  // permissions assigned.
-  $admin_role = user_role_load_by_name('administrator');
-  if (!$admin_role) {
-    $admin_role = new stdClass();
-    $admin_role->name = 'administrator';
-    $admin_role->weight = 2;
-    user_role_save($admin_role);
-  }
 
-  user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
-  // Set this as the administrator role.
-  variable_set('user_admin_role', $admin_role->rid);
-
-  // Assign user 1 the "administrator" role.
-  db_insert('users_roles')
-    ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
-    ->execute();
   // Update the menu router information.
   menu_rebuild();
   // Revert features to ensure they are all installed.
@@ -119,6 +102,10 @@ function prc_profile_install() {
   $features = array(
   );
   features_revert($features);
+
+  // Create a default role for site administrators, with all available
+  // permissions assigned.
+  $admin_role = _prc_profile_create_admin();
 
   // Forcefully set the name of quiz module's multiple choice item type
   $mc = node_type_load('multichoice');
@@ -141,4 +128,28 @@ function prc_profile_install() {
   node_access_needs_rebuild(FALSE);
   // Ignore any other install messages.
   drupal_get_messages();
+}
+
+/**
+ * @return stdClass
+ */
+function _prc_profile_create_admin() {
+  $admin_role = user_role_load_by_name('administrator');
+  if (!$admin_role) {
+    $admin_role = new stdClass();
+    $admin_role->name = 'administrator';
+    $admin_role->weight = 2;
+    user_role_save($admin_role);
+  }
+
+  user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+  // Set this as the administrator role.
+  variable_set('user_admin_role', $admin_role->rid);
+
+  // Assign user 1 the "administrator" role.
+  db_insert('users_roles')
+    ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
+    ->execute();
+
+  return $admin_role;
 }
