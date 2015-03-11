@@ -42,7 +42,7 @@ Feature: PRC-848 Manage Schools - Add School - Form
     And I have no "District" nodes
     And "District" nodes:
       | title              | uid         |
-      | PRC-848 @timestamp | @currentuid |
+      | PRC-864 @timestamp | @currentuid |
     And I visit the first node created
     And I click "Manage Schools"
     And I click "Add School - form"
@@ -61,3 +61,22 @@ Feature: PRC-848 Manage Schools - Add School - Form
     When I fill in "School contact's email address" with "badmail@!example.com"
     And I press "Submit"
     Then I should see the error message containing "is not a valid e-mail address."
+
+  Scenario: PRC-860 Edit school
+    Given I am logged in as a user with the "District Admin" role
+    And I have no "School" nodes
+    And I have no "District" nodes
+    And "District" nodes:
+      | title              | uid         |
+      | PRC-860 @timestamp | @currentuid |
+    And I visit the first node created
+    And I click "Manage Schools"
+    And I click "Add School - form"
+    And I fill in "School name" with "PRC-860 @timestamp"
+    And I fill in "School contact's email address" with "ok@example.com"
+    When I press "Submit"
+    And I click "PRC-860 @timestamp"
+    Then the "School name" field should contain "PRC-860 @timestamp"
+    And I fill in "School name" with "@timestamp PRC-860"
+    And I press "Submit"
+    Then I should see the link "@timestamp PRC-860"

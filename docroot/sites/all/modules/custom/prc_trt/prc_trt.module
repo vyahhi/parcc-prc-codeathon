@@ -4,6 +4,8 @@
  * PRC Technology Readiness Tool module code.
  */
 
+module_load_include('inc', 'prc_trt', 'prc_trt_request_readiness_checks');
+
 function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form, &$form_state) {
   drupal_set_title(t('Testing Capacity Check'));
   $form['actions']['submit']['#value'] = t('Submit');
@@ -523,7 +525,7 @@ function prc_trt_form_school_node_form_alter(&$form, &$form_state) {
   );
 
   $form['#validate'][] = 'prc_trt_form_school_node_form_validate';
-
+  $form['#submit'][] = 'prc_trt_form_school_node_form_submit';
 }
 
 function prc_trt_form_school_node_form_validate(&$form, &$form_state) {
@@ -534,7 +536,15 @@ function prc_trt_form_school_node_form_validate(&$form, &$form_state) {
   }
 }
 
-module_load_include('inc', 'prc_trt', 'prc_trt_request_readiness_checks');
+function prc_trt_form_school_node_form_submit(&$form, &$form_state) {
+  if (array_key_exists('field_ref_district', $form_state['values']) &&
+      $form_state['values']['field_ref_district']['und'][0]['target_id']) {
+    $district_nid = $form_state['values']['field_ref_district']['und'][0]['target_id'];
+    //$form_state['redirect'] = "node/$district_nid/manage-schools";
+    $_GET['destination'] = "node/$district_nid/manage-schools";
+  }
+}
+
 
 /**
  * Implements hook_action_info().
