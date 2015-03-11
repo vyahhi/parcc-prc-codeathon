@@ -26,28 +26,38 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
       '#weight' => $profession_weight + 1,
     );
 
+    //variable to hold the selector for the state field
+    $state_field = ':input[name="field_user_state[und]"]';
+
     $form['state_account_number'] = array(
       '#type' => 'textfield',
       '#title' => t('State Account #'),
       '#weight' => $profession_weight + 2,
       '#states' => array(
         'visible' => array(
-          ':input[name="has_member_state"]' => array('checked' => TRUE),
+          $state_field => array(),
         ),
         'required' => array(
-          ':input[name="has_member_state"]' => array('checked' => TRUE),
+          $state_field => array(),
         ),
       ),
     );
-  }
-  $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
 
-  //Mark the states that are PARCC in the user states dropdown
-  foreach($form['field_user_state']['und']['#options'] as $tid => &$term){
-    if(taxonomy_get_term_by_name($term, 'member_state')){
-      $term = $term.' (PARCC Member)';
+    $p_states = db_query('select name from taxonomy_term_data where vid = (
+      select vid from taxonomy_vocabulary where machine_name = \'member_state\')')->fetchCol('vid');
+
+    $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
+
+    //Mark the states that are PARCC in the user states dropdown
+    foreach($form['field_user_state']['und']['#options'] as $tid => &$term){
+      if(in_array($term, $p_states)){
+        $term = $term.' (PARCC Member)';
+        $form['state_account_number']['#states']['visible'][$state_field][] = array('value' => $tid);
+        $form['state_account_number']['#states']['required'][$state_field][] = array('value' => $tid);
+      }
     }
   }
+  $x = 1;
 }
 
 
