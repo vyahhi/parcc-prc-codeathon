@@ -5,12 +5,6 @@ Feature: PRC-828 Manage Schools
   so I can understand if the schools are ready to run the PARCC assessment.
 
 #  Request Readiness Checks button
-#  Scenario 3: I have one or more schools added to my district and a district admin has uploaded one or more schools to my school
-#    Given I have one or more schools added to my district
-#    And a district admin has uploaded one or more schools to my district
-#    Then I see the same as scenario 2 except:
-#  *Differences from Scenario 2:
-#  I do not see Add School(s) - upload .csv file link
 
   Scenario: No schools added
     Given I am logged in as a user with the "District Admin" role

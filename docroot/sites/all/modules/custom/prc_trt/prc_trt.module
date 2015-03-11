@@ -501,3 +501,20 @@ function prc_trt_form_district_node_form_alter(&$form, &$form_state) {
     '#weight' => -12,
   );
 }
+
+module_load_include('inc', 'prc_trt', 'prc_trt_request_readiness_checks');
+
+/**
+ * Implements hook_action_info().
+ */
+function prc_trt_action_info() {
+  return array(
+    'prc_trt_request_readiness_checks' => array(
+      'type' => 'node',
+      'label' => t('Request Readiness Checks'),
+      'configurable' => TRUE,
+      'vbo_configurable' => FALSE,
+      'triggers' => array('any'),
+    ),
+  );
+}

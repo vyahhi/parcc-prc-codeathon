@@ -5671,6 +5671,13 @@ message explaining what the check does and the importance of running it.';
       'override_label' => 0,
       'label' => '',
     ),
+    'action::prc_trt_request_readiness_checks' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
     'action::node_save_action' => array(
       'selected' => 0,
       'postpone_processing' => 0,
