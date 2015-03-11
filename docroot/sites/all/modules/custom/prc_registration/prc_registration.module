@@ -18,13 +18,7 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
   $invite = invite_load_from_session();
   // We don't want to display any of this stuff if the user is coming from an invite
   if (!$invite) {
-    $profession_weight = $form['field_profession']['#weight'];
-
-    $form['has_member_state'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('My State is a PARCC Member'),
-      '#weight' => $profession_weight + 1,
-    );
+    $profession_weight = $form['field_user_state']['#weight'];
 
     //variable to hold the selector for the state field
     $state_field = ':input[name="field_user_state[und]"]';
@@ -49,6 +43,7 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
     $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
 
     //Mark the states that are PARCC in the user states dropdown
+    //Make it so the code text box appears when they are selected
     foreach($form['field_user_state']['und']['#options'] as $tid => &$term){
       if(in_array($term, $p_states)){
         $term = $term.' (PARCC Member)';
@@ -57,7 +52,6 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
       }
     }
   }
-  $x = 1;
 }
 
 
