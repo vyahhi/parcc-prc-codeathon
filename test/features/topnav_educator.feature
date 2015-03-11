@@ -7,7 +7,7 @@ Feature: Role-Based Top Nav - Educator (PRC-151)
   Scenario: Educator sees links
     Given I am logged in as a user with the "Educator" role
     And I am on the homepage
-    Then I should see the link "Fail"
+    Then I should see the link "Home"
     And I should see the link "Digital Library"
     And I should see the link "Assessments"
     And I should see the link "Professional Development"
