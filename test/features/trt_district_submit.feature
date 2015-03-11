@@ -26,5 +26,5 @@ Feature: PRC-840 District Readiness - Name Added
     Then I should see the heading "PRC-840 @timestamp Readiness"
     And I should see the text "Overview / instructional copy goes here \(click on school name to see admin can add / edit school, request that readiness checks be run, view results of technology checks by school and export all test results data to csv\)."
     And I should see the link "Edit district name"
-    And I should see the link "Manage schools"
+    And I should see the link "Manage Schools"
     And I should see the text "add schools and request readiness checks"

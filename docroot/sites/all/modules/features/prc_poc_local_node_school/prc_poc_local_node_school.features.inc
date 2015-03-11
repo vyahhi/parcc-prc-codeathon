@@ -23,7 +23,7 @@ function prc_poc_local_node_school_node_info() {
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('Name'),
+      'title_label' => t('School name'),
       'help' => '',
     ),
   );
