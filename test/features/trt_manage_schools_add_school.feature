@@ -75,8 +75,12 @@ Feature: PRC-848 Manage Schools - Add School - Form
     And I fill in "School name" with "PRC-860 @timestamp"
     And I fill in "School contact's email address" with "ok@example.com"
     When I press "Submit"
+    # PRC-858 Added school shows up on District page
     And I click "PRC-860 @timestamp"
+    # PRC-849 Edit form pre-populated
+    Then I should see the heading "Edit School"
     Then the "School name" field should contain "PRC-860 @timestamp"
+    And the "School contact's email address" field should contain "ok@example.com"
     And I fill in "School name" with "@timestamp PRC-860"
     And I press "Submit"
     Then I should see the link "@timestamp PRC-860"
