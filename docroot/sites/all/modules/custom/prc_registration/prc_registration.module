@@ -41,6 +41,13 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
     );
   }
   $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
+
+  //Mark the states that are PARCC in the user states dropdown
+  foreach($form['field_user_state']['und']['#options'] as $tid => &$term){
+    if(taxonomy_get_term_by_name($term, 'member_state')){
+      $term = $term.' (PARCC Member)';
+    }
+  }
 }
 
 
