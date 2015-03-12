@@ -75,7 +75,7 @@
 
 <div role="document" id="page">
 
-  <?php include path_to_theme() . '/includes/header.inc'; ?>
+  <?php include path_to_theme() . '/templates/includes/header.inc'; ?>
 
 <div id="main-wrapper">
   <main role="main" class="row">

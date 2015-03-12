@@ -75,7 +75,7 @@
 
 <div role="document" id="page">
 
-  <?php include path_to_theme() . '/includes/header.inc'; ?>
+  <?php include path_to_theme() . '/templates/includes/header.inc'; ?>
 
   <section class="row">
     <div class="large-12 columns">
