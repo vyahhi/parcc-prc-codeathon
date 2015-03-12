@@ -10,17 +10,6 @@
 function prc_poc_local_users_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'View PRC Admin'.
-  $permissions['View PRC Admin'] = array(
-    'name' => 'View PRC Admin',
-    'roles' => array(
-      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
-      'Content Contributor' => 'Content Contributor',
-      'PRC Admin' => 'PRC Admin',
-    ),
-    'module' => 'prc_menu_links',
-  );
-
   // Exported permission: 'access administration menu'.
   $permissions['access administration menu'] = array(
     'name' => 'access administration menu',
