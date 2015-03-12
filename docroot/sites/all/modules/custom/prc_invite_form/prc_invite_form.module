@@ -76,6 +76,9 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
     'visible' => array(
       $role_states,
     ),
+    'required' => array(
+      $role_states,
+    )
   );
 
   // Change the title of Member State to State
