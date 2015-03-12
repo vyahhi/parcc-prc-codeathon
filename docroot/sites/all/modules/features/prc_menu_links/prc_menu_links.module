@@ -1,30 +1,26 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Menu hooks and functions supporting the PRC menus.
  */
-
-/**
- * Implements hook_permission().
- */
-function prc_menu_links_permission() {
-  return array(
-    'View PRC Admin' => array(
-      'title' => t('View Admin menu item and related prc/admin path'),
-    )
-  );
-}
 
 /**
  * Implements hook_menu()
  */
 function prc_menu_links_menu() {
   $items['prc/admin'] = array(
-    'title' => 'Placeholder PRC Admin Title',
+    'title' => 'PRC Admin',
     'page callback' => 'prc_menu_links_prc_admin',
-    'access arguments' => array('View PRC Admin'),
+    'access callback' => 'prc_menu_links_is_prc_admin',
   );
   return $items;
+}
+
+/**
+ * Access callback for prc/admin menu hook
+ */
+function prc_menu_links_is_prc_admin() {
+  return user_access('create digital_library_content content') || user_access('administer course') || user_access('administer users');
 }
 
 /**
@@ -42,7 +38,7 @@ function prc_menu_links_prc_admin() {
   if (isset($menu)) {
     return $menu;
   }
-  // Users who don't have access to admin sub menu items shouldn't have permisson
+  // Users who don't have access to admin sub menu items shouldn't have permission
   // to see this page in the first place, but just in case...
   else {
     return MENU_ACCESS_DENIED;
