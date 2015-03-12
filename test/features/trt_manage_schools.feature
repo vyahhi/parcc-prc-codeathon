@@ -38,7 +38,7 @@ Feature: PRC-828 Manage Schools
     And I should not see the text "No schools have been added to your district. Please click one of the Add School links above to add schools."
     And I should see the text "School 828 @timestamp"
     And I should see the text "e@timestamp@example.com"
-    And I select "Request Readiness Checks" from "edit-operation"
+    And I should see a "Request Readiness Checks" button
 
   Scenario: District has an upload
     Given I am logged in as a user with the "District Admin" role
@@ -59,4 +59,4 @@ Feature: PRC-828 Manage Schools
     And I should not see the text "No schools have been added to your district. Please click one of the Add School links above to add schools."
     And I should see the text "School 828 @timestamp"
     And I should see the text "e@timestamp@example.com"
-    And I select "Request Readiness Checks" from "edit-operation"
+    And I should see a "Request Readiness Checks" button

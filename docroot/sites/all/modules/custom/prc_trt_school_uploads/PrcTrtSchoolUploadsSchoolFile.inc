@@ -73,6 +73,9 @@ class PrcTrtSchoolUploadsSchoolFile extends PrcTrtSchoolUploadsFile {
     $w = entity_metadata_wrapper('node', $entity);
     $w->title->set($record->school_name);
     $w->field_contact_email->set($record->school_email);
+    if ($this->district_id) {
+      $w->field_ref_district->set($this->district_id);
+    }
     $w->save();
     return $w;
   }
@@ -89,8 +92,13 @@ class PrcTrtSchoolUploadsSchoolFile extends PrcTrtSchoolUploadsFile {
       if ($record = $this->loadRecord('valid', $record_no)) {
         $records[$record_no] = $record;
         $data[$record_no] = $this->buildSchool($record);
+        $this->saveRecord($record, 'complete');
       }
     }
+
+    $flag = flag_get_flag('file_uploaded');
+    $flag->flag('flag', $this->district_id, NULL, TRUE);
+
   }
 
   /**

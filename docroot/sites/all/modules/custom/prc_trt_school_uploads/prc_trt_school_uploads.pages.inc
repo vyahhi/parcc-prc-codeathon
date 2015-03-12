@@ -11,7 +11,7 @@
 function prc_trt_school_uploads_upload_page($district, $type) {
 
   $file = PrcTrtSchoolUploadsFile::getInstance($type);
-
+  $file->district_id = $district->nid;
   switch ($file->status()) {
     case 'validate':
       drupal_set_title(t('Checking Data Status'));
@@ -20,7 +20,7 @@ function prc_trt_school_uploads_upload_page($district, $type) {
     case 'complete':
       $text = t('Create Schools Confirmation');
       drupal_set_title($text);
-      return drupal_get_form('prc_trt_school_uploads_complete_form', $file, $type);
+      return drupal_get_form('prc_trt_school_uploads_complete_form', $file, $type, $district);
   }
 
   // Waiting for a file upload.
@@ -171,7 +171,7 @@ function prc_trt_school_uploads_upload_validate_form($form, &$form_state, $file,
     '#prefix' => '<p>',
     '#suffix' => '</p>',
   );
-  if ($valid_count) {
+  if ($valid_count && !$error_count) {
     $text = $type == t('School Records');
     $args = array(
       ':text' => $text,
@@ -261,10 +261,12 @@ function prc_trt_school_uploads_upload_validate_form_cancel(&$form, &$form_state
  * Submit callback for start button on file validation form.
  */
 function prc_trt_school_uploads_upload_validate_form_start(&$form, &$form_state) {
+  $distrinct_nid = $form_state['build_info']['args'][2]->nid;
+
   $batch = array(
     'title' => t('Processing Upload'),
     'operations' => array(
-      array('prc_trt_school_uploads_creation_batch', array($form['#file_type'])),
+      array('prc_trt_school_uploads_creation_batch', array($form['#file_type'], $distrinct_nid)),
     ),
     'progress_message' => t('@elapsed elapsed, @estimate remaining.'),
     'finished' => 'prc_trt_school_uploads_creation_batch_complete',
@@ -277,9 +279,10 @@ function prc_trt_school_uploads_upload_validate_form_start(&$form, &$form_state)
 /**
  * Generates content for the upload confirmation page.
  */
-function prc_trt_school_uploads_complete_form($form, &$form_state, $file, $type) {
+function prc_trt_school_uploads_complete_form($form, &$form_state, $file, $type, $district) {
 
   $form['#file'] = $file;
+  $form['#district'] = $district;
 
   $complete = $file->recordFiles('complete');
   $errors = $file->recordFiles('error');
@@ -319,7 +322,7 @@ function prc_trt_school_uploads_complete_form($form, &$form_state, $file, $type)
   );
 
   // Back button.
-  $text = $type == t('Manage Schools');
+  $text = t('Manage Schools');
   $form['actions']['back'] = array(
     '#type' => 'submit',
     '#value' => t('Go to !text Page', array('!text' => $text)),
@@ -328,11 +331,12 @@ function prc_trt_school_uploads_complete_form($form, &$form_state, $file, $type)
 
   // Conditionally displayed view errors button/link.
   if ($file->recordFiles('error')) {
-    $arg = $type == 'schools';
+    $arg = 'schools';
+    $district_id = $district->nid;
     $form['actions']['errors'] = array(
       '#theme' => 'link',
       '#text' => t('View Rejected Records'),
-      '#path' => "organization/1/upload/$arg/error",
+      '#path' => "organization/$district_id/upload/$arg/error",
     );
     $form['actions']['errors']['#options']['attributes']['class'] = 'button';
     $form['actions']['errors']['#options']['html'] = FALSE;
@@ -346,6 +350,9 @@ function prc_trt_school_uploads_complete_form($form, &$form_state, $file, $type)
  */
 function prc_trt_school_uploads_complete_form_back(&$form, &$form_state) {
   $form['#file']->clear();
+  $nid = $form_state['build_info']['args'][2]->nid;
+//  $form['#redirect'] = 'node/' . $nid . '/manage-schools';
+  $form_state['redirect'] = 'node/' . $nid . '/manage-schools';
 }
 
 /**

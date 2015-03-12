@@ -65,9 +65,10 @@ function prc_trt_school_uploads_validation_batch($type, $district_id, &$context)
  * The term "entity" is used loosely, it may or may not refer to literal Drupal
  * entities.
  */
-function prc_trt_school_uploads_creation_batch($type, &$context) {
+function prc_trt_school_uploads_creation_batch($type, $district_id, &$context) {
 
   $file = PrcTrtSchoolUploadsFile::getInstance($type);
+  $file->district_id = $district_id;
 
   if (empty($context['sandbox'])) {
     $context['sandbox']['lines'] = $file->recordFiles('valid');
@@ -90,5 +91,11 @@ function prc_trt_school_uploads_creation_batch($type, &$context) {
   }
   else {
     $file->writeStatus('complete');
+    $context['results'][] = $district_id;
   }
+}
+
+function prc_trt_school_uploads_creation_batch_complete($success, $results, $operations) {
+  $nid = $results[0];
+  drupal_goto('node/' . $nid . '/manage-schools');
 }

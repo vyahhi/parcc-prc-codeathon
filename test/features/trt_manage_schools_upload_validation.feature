@@ -175,3 +175,40 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
     When I click "Add School(s) - upload csv file"
     And I press "edit-upload"
     Then I should see the error message containing "File Name field is required."
+
+  Scenario: Upload file - Some pass, some fail
+    Given I am logged in as a user with the "District Admin" role
+    And "District" nodes:
+      | title        | uid         |
+      | District 851 | @currentuid |
+    And I visit the first node created
+    And I click "Manage Schools"
+    When I click "Add School(s) - upload csv file"
+    And I attach the file "testfiles/trt_upload_schools_mixed_valid_invalid.csv" to "edit-file-upload"
+    And I press "edit-upload"
+    Then I should see the text "Processing Upload"
+    And I follow meta refresh
+    Then I should see the heading "Checking Data Status"
+    And I should see the text "Some records could not be uploaded. Please select one of the actions below."
+    And I should see the text "Upload Schools File"
+    And I should see the text "trt_upload_schools_mixed_valid_invalid.csv"
+    And I should see the text "Total records in file: 5"
+    And I should see the text "Accepted Records: 3"
+    And I should see the text "The Accepted records are the data rows in your file that meet the validation step, and are ready to be created in the System."
+    And I should see the text "Rejected Records: 2"
+    And I should see the text "Rejected records are the ones that could not be created due to a data error."
+    And I should see the text "Please select View Errors to view the"
+    And I should see the text "records that could not be uploaded."
+    And I should not see the button "Create School Records"
+    And I should see a "Back to Re-upload" button
+    And I click "View Errors"
+    Then I should see the heading "School File Rejected Records"
+    And I should see the text "There are"
+    And I should see the text "rejected records. Please correct the data and re-upload later."
+    And I should see the text "School Name"
+    And I should see the text "School Contact E-mail"
+    And I should see the text "Error Message"
+    And I should see the text "First Failed School"
+    And I should see the text "Contact E-mail: Required"
+    And I should see the text "School Name: Required"
+    And I should see the text "second@example.com"
