@@ -18,13 +18,13 @@ Feature: PRC-838 District Name - Edit Form
     And I have no "District" nodes
     And I click "Technology Readiness"
     When I click "Add District"
-    And I fill in "District Name" with "PRC-840 @timestamp"
+    And I fill in "District Name" with "PRC-838 @timestamp"
     And I press "Submit"
-    Then I should see the text "PRC-840 @timestamp Readiness"
+    Then I should see the text "PRC-838 @timestamp Readiness"
     When I click "Edit district name"
     Then I should see the heading "Edit District"
-    And the "District Name" field should contain "PRC-840 @timestamp"
-    When I fill in "District Name" with "PRC-840 @timestamp New Text"
+    And the "District Name" field should contain "PRC-838 @timestamp"
+    When I fill in "District Name" with "PRC-838 @timestamp New Text"
     And I press "Submit"
     # PRC-841
-    Then I should see the text "PRC-840 @timestamp New Text Readiness"
+    Then I should see the text "PRC-838 @timestamp New Text Readiness"
