@@ -52,7 +52,7 @@ function prc_trt_school_uploads_upload_form($form, &$form_state, $type, $distric
     '#label' => t('File Name'),
     '#description' => t('File must have .csv extension and have the following columns in this order: School Name, School Contact\'s Email Address'),
     '#title' => NULL,
-    '#type' => 'managed_file',
+    '#type' => 'file',
     '#required' => TRUE,
     '#upload_validators' => array(
       'file_validate_extensions' => array('csv'),
