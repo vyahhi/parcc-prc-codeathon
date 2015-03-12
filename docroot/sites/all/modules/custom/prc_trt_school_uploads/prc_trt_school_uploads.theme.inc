@@ -2,7 +2,7 @@
 
 /**
  * @file
- * TAP Uploads theme implementations.
+ * PRC TRT Uploads theme implementations.
  */
 
 /**

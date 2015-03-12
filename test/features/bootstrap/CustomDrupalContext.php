@@ -115,6 +115,17 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Given /^I follow meta refresh$/
+   */
+  public function iFollowMetaRefresh() {
+    while ($refresh = $this->getMainContext()->getSession()->getPage()->find('css', 'meta[http-equiv="Refresh"]')) {
+      $content = $refresh->getAttribute('content');
+      $url = str_replace('0; URL=', '', $content);
+      $this->getMainContext()->getSession()->visit($url);
+    }
+  }
+
+  /**
    * @Then /^"([^"]*)" should be visible$/
    * @param $selector
    * @throws Exception

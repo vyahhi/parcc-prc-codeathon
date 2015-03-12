@@ -42,10 +42,10 @@ abstract class PrcTrtSchoolUploadsFile {
     }
 
     $this->scheme = 'private';
-    $this->target = 'tap-uploads';
+    $this->target = 'prc-trt-school-uploads';
     if (module_exists('amazons3') && variable_get('amazons3_bucket')) {
       $this->scheme = 's3';
-      $this->target = variable_get('amazons3_bucket', '') . '/tap-uploads';
+      $this->target = variable_get('amazons3_bucket', '') . '/prc-trt-school-uploads';
     }
     $this->basePath = "{$this->scheme}://{$this->target}/{$user->uid}/{$this->type}";
     $this->dataUri = "{$this->basePath}/data.csv";
@@ -389,13 +389,13 @@ abstract class PrcTrtSchoolUploadsFile {
    * The number of records to process in a single batch iteration.
    *
    * This defaults to 100, but can be set via variables named
-   * tap_uploads_[upload_type]_batch_size.
+   * prc_trt_student_uploads_[upload_type]_batch_size.
    *
    * @return int
    *   Batch size.
    */
   public function batchSize() {
-    $key = "tap_uploads_{$this->type}_batch_size";
+    $key = "prc_trt_student_uploads_{$this->type}_batch_size";
     return variable_get($key, 100);
   }
 
