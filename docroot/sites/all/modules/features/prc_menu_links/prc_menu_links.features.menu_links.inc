@@ -350,14 +350,14 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
-  // Exported menu link: menu-trt-manage-schools-add-form_add-schools---upload-csv-file:node/add/school
-  $menu_links['menu-trt-manage-schools-add-form_add-schools---upload-csv-file:node/add/school'] = array(
+  // Exported menu link: menu-trt-manage-schools-add-form_add-schools---upload-csv-file:menutoken/5501ce6a77c95
+  $menu_links['menu-trt-manage-schools-add-form_add-schools---upload-csv-file:menutoken/5501ce6a77c95'] = array(
     'menu_name' => 'menu-trt-manage-schools-add-form',
-    'link_path' => 'node/add/school',
-    'router_path' => 'node/add/school',
+    'link_path' => 'menutoken/5501ce6a77c95',
+    'router_path' => 'menutoken/%',
     'link_title' => 'Add School(s) - upload csv file',
     'options' => array(
-      'menu_token_link_path' => 'node/[node:nid]/upload-schools',
+      'menu_token_link_path' => 'district/[node:nid]/upload-schools',
       'menu_token_data' => array(
         'node' => array(
           'type' => 'node',
@@ -372,10 +372,7 @@ function prc_menu_links_menu_default_menu_links() {
         'title' => '',
       ),
       'alter' => TRUE,
-      'query' => array(
-        'field_ref_district' => '[node:nid]',
-      ),
-      'identifier' => 'menu-trt-manage-schools-add-form_add-schools---upload-csv-file:node/add/school',
+      'identifier' => 'menu-trt-manage-schools-add-form_add-schools---upload-csv-file:menutoken/5501ce6a77c95',
     ),
     'module' => 'menu',
     'hidden' => 0,

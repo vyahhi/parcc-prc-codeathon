@@ -111,7 +111,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
       | Joe Contributor | joe_prc_286b@timestamp@example.com | xyz123 | Joe              | Contributor     | 1      | Content Contributor, District Admin                 |
       | Joe Member      | joe_prc_286c@timestamp@example.com | xyz123 | Joe              | Member          | 1      | PARCC-Member Educator, School Admin, District Admin |
       | Joe Admin       | joe_prc_286d@timestamp@example.com | xyz123 | Joe              | Admin           | 1      | PRC Admin                                           |
-      | Joe Curator     | joe_prc_286e@timestamp@example.com | xyz123 | Joe              | Curator         | 1      | Content Administrator (Curator)                     |
+      | Joe Curator     | joe_prc_286e@timestamp@example.com | xyz123 | Joe              | Curator         | 1      | Content Administrator (Curator), State Admin        |
     And I am logged in as a user with the "PRC Admin" role
     And I am at "admin-users"
     Then I click "User ID"

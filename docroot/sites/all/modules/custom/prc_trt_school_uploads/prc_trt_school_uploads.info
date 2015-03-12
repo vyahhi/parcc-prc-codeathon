@@ -1,0 +1,9 @@
+name = PRC TRT School Uploads
+description = Upload functionality for TRT Schools.
+core = 7.x
+package = PRC
+
+files[] = PrcTrtSchoolUploadsFile.inc
+files[] = PrcTrtSchoolUploadsSchoolFile.inc
+
+dependencies[] = prc_trt
