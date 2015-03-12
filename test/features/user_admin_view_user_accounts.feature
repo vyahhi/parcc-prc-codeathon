@@ -95,8 +95,8 @@ Feature: Admin UI: View User Accounts (PRC-37)
 
   Scenario: PRC-286 - Users with multiple roles appear once for each role
     Given users:
-      | name     | mail                              | pass     | field_first_name | field_last_name | status |
-      | Joe User | joe_prc_286@timestamp@example.com | xyz123   | Joe              | User            | 1      |
+      | name     | mail                              | pass   | field_first_name | field_last_name | status |
+      | Joe User | joe_prc_286@timestamp@example.com | xyz123 | Joe              | User            | 1      |
     And I am logged in as a user with the "PRC Admin" role
     Then I run drush "user-add-role" "'Educator' joe_prc_286@timestamp@example.com"
     Then I run drush "user-add-role" "'PRC Admin' joe_prc_286@timestamp@example.com"
@@ -106,24 +106,16 @@ Feature: Admin UI: View User Accounts (PRC-37)
 
   Scenario: PRC-338 - Users with multiple roles appear once for each role
     Given users:
-      | name            | mail                               | pass   | field_first_name | field_last_name | status |
-      | Joe Educator    | joe_prc_286a@timestamp@example.com | xyz123 | Joe              | Educator        | 1      |
-      | Joe Contributor | joe_prc_286b@timestamp@example.com | xyz123 | Joe              | Contributor     | 1      |
-      | Joe Member      | joe_prc_286c@timestamp@example.com | xyz123 | Joe              | Member          | 1      |
-      | Joe Admin       | joe_prc_286d@timestamp@example.com | xyz123 | Joe              | Admin           | 1      |
-      | Joe Curator     | joe_prc_286e@timestamp@example.com | xyz123 | Joe              | Curator         | 1      |
+      | name            | mail                               | pass   | field_first_name | field_last_name | status | roles                                               |
+      | Joe Educator    | joe_prc_286a@timestamp@example.com | xyz123 | Joe              | Educator        | 1      | Educator, School Admin                              |
+      | Joe Contributor | joe_prc_286b@timestamp@example.com | xyz123 | Joe              | Contributor     | 1      | Content Contributor, District Admin                 |
+      | Joe Member      | joe_prc_286c@timestamp@example.com | xyz123 | Joe              | Member          | 1      | PARCC-Member Educator, School Admin, District Admin |
+      | Joe Admin       | joe_prc_286d@timestamp@example.com | xyz123 | Joe              | Admin           | 1      | PRC Admin                                           |
+      | Joe Curator     | joe_prc_286e@timestamp@example.com | xyz123 | Joe              | Curator         | 1      | Content Administrator (Curator)                     |
     And I am logged in as a user with the "PRC Admin" role
-    Then I run drush "user-add-role" "'PRC Admin' joe_prc_286d@timestamp@example.com"
-    Then I run drush "user-add-role" "'PARCC-Member Educator' joe_prc_286c@timestamp@example.com"
-    Then I run drush "user-add-role" "'Content Contributor' joe_prc_286b@timestamp@example.com"
-    Then I run drush "user-add-role" "'Content Administrator (Curator)' joe_prc_286e@timestamp@example.com"
-    Then I run drush "user-remove-role" "'Educator' joe_prc_286d@timestamp@example.com"
-    Then I run drush "user-remove-role" "'Educator' joe_prc_286c@timestamp@example.com"
-    Then I run drush "user-remove-role" "'Educator' joe_prc_286b@timestamp@example.com"
-    Then I run drush "user-remove-role" "'Educator' joe_prc_286e@timestamp@example.com"
     And I am at "admin-users"
     Then I click "User ID"
-      # Then here add in the xpath to grab a link for each of the users we created above
+    # Then here add in the xpath to grab a link for each of the users we created above
     Then I should see 1 "//a[text()='@uname[Joe Educator]']" elements
     Then I should see 1 "//a[text()='@uname[Joe Contributor]']" elements
     Then I should see 1 "//a[text()='@uname[Joe Member]']" elements
@@ -132,8 +124,8 @@ Feature: Admin UI: View User Accounts (PRC-37)
 
   Scenario: PRC-436 - State appears in the view
     Given users:
-      | name            | mail                              | pass   | field_first_name | field_last_name | status |
-      | Joe Member      | joe_prc_436@timestamp@example.com | xyz123 | Joe              | Member          | 1      |
+      | name       | mail                              | pass   | field_first_name | field_last_name | status |
+      | Joe Member | joe_prc_436@timestamp@example.com | xyz123 | Joe              | Member          | 1      |
     And I am logged in as a user with the "PRC Admin" role
     Then I run drush "user-add-role" "'PARCC-Member Educator' joe_prc_436@timestamp@example.com"
     Then I run drush "user-remove-role" "'Educator' joe_prc_436@timestamp@example.com"
@@ -148,9 +140,9 @@ Feature: Admin UI: View User Accounts (PRC-37)
 
   Scenario: PRC-367 Accounts that are blocked do not show up in list
     Given users:
-      | name            | mail                               | pass   | field_first_name | field_last_name | status |
-      | Joe Blocked     | joe_prc_367a@timestamp@example.com | xyz123 | Joe              | Blocked         | 0      |
-      | Joe Active      | joe_prc_367b@timestamp@example.com | xyz123 | Joe              | Active          | 1      |
+      | name        | mail                               | pass   | field_first_name | field_last_name | status |
+      | Joe Blocked | joe_prc_367a@timestamp@example.com | xyz123 | Joe              | Blocked         | 0      |
+      | Joe Active  | joe_prc_367b@timestamp@example.com | xyz123 | Joe              | Active          | 1      |
     And I am logged in as a user with the "PRC Admin" role
     And I am at "admin-users"
     Then I click "User ID"
