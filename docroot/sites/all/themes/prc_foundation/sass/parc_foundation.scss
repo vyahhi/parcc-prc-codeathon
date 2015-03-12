@@ -20,14 +20,14 @@
 // @import "foundation/components/grid-5";
 //
 
-// @import "foundation/components/visibility";
+@import "foundation/components/visibility";
 // @import "foundation/components/block-grid";
 @import "foundation/components/type";
-// @import "foundation/components/buttons";
-// @import "foundation/components/forms"; // *requires components/buttons
+@import "foundation/components/buttons";
+@import "foundation/components/forms"; // *requires components/buttons
 // @import "foundation/components/custom-forms"; // *requires components/buttons, components/forms
 // @import "foundation/components/button-groups"; // *requires components/buttons
-// @import "foundation/components/dropdown-buttons"; // *requires components/buttons
+@import "foundation/components/dropdown-buttons"; // *requires components/buttons
 // @import "foundation/components/split-buttons"; // *requires components/buttons
 // @import "foundation/components/flex-video";
 // @import "foundation/components/section";
@@ -52,7 +52,7 @@
 // @import "foundation/components/tables";
 // @import "foundation/components/thumbs";
 // @import "foundation/components/tooltips";
-// @import "foundation/components/dropdown";
+@import "foundation/components/dropdown";
 
 // PRC Custom Variables
 @import "prc-variables";
@@ -61,11 +61,7 @@
   nav {
     a#logo {
       display: inline-block;
-      margin: 25px $default-margin;
-    }
-    #main-menu li a,
-    #secondary-menu li a {
-      text-transform: uppercase;
+      margin: em-calc(25) $default-margin;
     }
     li.toggle-topbar.menu-icon {
       right: 5px !important;
@@ -74,11 +70,21 @@
     #block-search-form {
       float: left;
       width: 100%;
-      background-color: $topbar-dropdown-bg;
       padding: 20px $default-padding 10px;
-      line-height: 0;
+      background-color: $topbar-dropdown-bg;
       h2 {
         font-size: 0;
+      }
+      input {
+        float: left;
+        font-size: em-calc(13);
+      }
+      input#edit-search-block-form--2 {
+        width: 175px;
+      }
+      input#edit-submit,
+      input#edit-submit--2 {
+        height: 32px;
       }
     }
     .top-bar-section ul li > a {
@@ -111,30 +117,106 @@
   }
   nav.top-bar {
     text-align: center;
-    overflow: auto; /* Temp fix to resolve long menus. To be addressed in PRC-389 */
   }
   nav {
     a#logo {
       display: inline-block;
-      margin: 25px $desktop-margin;
+      margin: em-calc(25) 0 em-calc(25) $desktop-margin;
     }
     #main-menu-section,
     #secondary-menu-section {
       display: inline-block;
     }
-    .top-bar-section li a:not(.button):hover, .top-bar-section ul li.active > a {
-      background: none repeat scroll 0% 0% darken($topbar-bg-color, 3%);
+    .top-bar-section {
+      ul {
+        background-color: $topbar-bg-color;
+      }
+      li a:not(.button) {
+        padding: 0 15px;
+      }
+      li a:not(.button):hover,
+      ul li.active > a {
+        background: none repeat scroll 0% 0% darken($topbar-bg-color, 3%);
+      }
     }
-    .top-bar-section ul {
-      background-color: $topbar-bg-color;
-    }
-    #block-search-form {
+    #header-icons {
       float: right;
-      width: auto;
-      background-color: $topbar-bg-color;
-      padding-top: 5px;
-      line-height: 60px;
-      padding-right: $desktop-margin;
+      margin: em-calc(17) $desktop-margin 0 0;
+      height: 65px;
+      #search-icon,
+      #profile-icon {
+        height: 35px;
+      }
+      #search-icon {
+        width: 42px;
+        margin-right: 5px;
+        background: url('../images/search-icon.png') no-repeat 10px;
+      }
+      #search-icon:before,
+      #profile-icon:before {
+        display: none;
+      }
+      #search-icon:hover,
+      #search-icon:focus {
+        background: url('../images/search-icon-active.png') no-repeat 10px;
+      }
+      #profile-icon {
+        width: 71px;
+        margin-left: 5px;
+        background:
+          url('../images/profile-icon.png') no-repeat 15px 7px,
+          url('../images/down-arrow.png') no-repeat 40px 12px;
+      }
+      #profile-icon:hover,
+      #profile-icon:focus {
+        background:
+          url('../images/profile-icon-active.png') no-repeat 15px 7px,
+          url('../images/down-arrow-active.png') no-repeat 40px 12px;
+      }
+      #search-icon.button,
+      #profile-icon.button {
+        background-color: $icon-button-color;
+        border-width: 0;
+        box-shadow: none;
+      }
+      .button:hover,
+      .button:focus {
+        background-color: darken($topbar-bg-color, 3%) !important;
+      }
+      #search-dropdown,
+      #profile-dropdown {
+        position: absolute;
+        left: -99999px;
+      }
+      #block-search-form {
+        padding: em-calc(5) $default-padding em-calc(20);
+        background-color: white;
+        cursor: auto;
+        input {
+          margin: -1px 0px 2px -1px;
+        }
+        input.form-submit {
+          display: none;
+        }
+      }
+    }
+    .f-dropdown li a {
+      font-size: 12px;
+    }
+  }
+}
+
+@media #{$medium} {
+  nav {
+    .top-bar-section li a:not(.button) {
+      padding: 0 em-calc(28);
+      font-size: em-calc(14);
+    }
+    .f-dropdown li a {
+      font-size: em-calc(13);
+    }
+    #block-search-form input {
+      font-size: em-calc(14);
     }
   }
 }

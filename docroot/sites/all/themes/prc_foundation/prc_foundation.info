@@ -11,6 +11,7 @@ scripts[] = javascripts/vendor/custom.modernizr.js
 
 scripts[] = javascripts/foundation/foundation.js
 scripts[] = javascripts/foundation/foundation.topbar.js
+scripts[] = javascripts/foundation/foundation.dropdown.js
 
 regions[header] = Header
 regions[help] = Help
