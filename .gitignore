@@ -68,3 +68,8 @@ test/failures
 test/behat.yml
 test/composer.lock
 test/vendor
+
+
+# Default SASS Cache #
+######################
+*.sass-cache*

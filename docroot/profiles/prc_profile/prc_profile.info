@@ -214,4 +214,6 @@ dependencies[] = prc_poc_local_taxonomy
 dependencies[] = prc_poc_local_users
 dependencies[] = prc_poc_local_views
 dependencies[] = uuid_features
+; Required by prc_foundation theme
+dependencies[] = jquery_update
 

@@ -16,7 +16,10 @@ Feature: PRC-401 Content Admin Role (Curator)
     And I should see the link "Digital Library"
     And I should see the link "Assessments"
     And I should see the link "Professional Development"
-    And I should see the link "Content"
+    And I should see the link "Technology Readiness"
+    When I am on "prc/admin"
+    Then I should see the link "Content"
+    And I should see the link "Course Management"
     And I should not see the link "Users"
 
   Scenario: AC2 In the Invite Users page, a new role shall be added to the role radio buttons list, as: Content Administrator (Curator) between PRC Admin and Content Contributor radio buttons

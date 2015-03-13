@@ -16,7 +16,7 @@ use Behat\Gherkin\Node\TableNode;
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
   protected $originalMailSystem;
-
+  protected $customParameters;
   /**
    * Initializes context.
    *
@@ -24,8 +24,10 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * You can also pass arbitrary arguments to the
    * context constructor through behat.yml.
    */
-  public function __construct() {
+  public function __construct($parameters)
+  {
     $this->timestamp = time();
+    $this->customParameters = !empty($parameters) ? $parameters : array();
   }
 
   protected function fixStepArgument($argument) {
@@ -1395,5 +1397,54 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   /**
    * @} End of defgroup "workflow steps"
    */
-}
 
+  /**
+   * @When /^I am browsing using a "([^"]*)"$/
+   */
+  public function iAmBrowsingUsingA($device) {
+    switch($device) {
+      case "phone":
+        $this->getSession()->resizeWindow((int)$this->customParameters['phone_width'], (int)$this->customParameters['phone_height'], 'current');
+        break;
+      case "tablet":
+        $this->getSession()->resizeWindow((int)$this->customParameters['tablet_width'], (int)$this->customParameters['tablet_height'], 'current');
+        break;
+      case "small desktop":
+        $this->getSession()->resizeWindow((int)$this->customParameters['desktop_sm_width'], (int)$this->customParameters['desktop_sm_height'], 'current');
+        break;
+      default:
+        $this->getSession()->resizeWindow((int)$this->customParameters['desktop_width'], (int)$this->customParameters['desktop_height'], 'current');
+    }
+  }
+
+  /**
+   * @Given /^"([^"]*)" should have a "([^"]*)" css value of "([^"]*)"$/
+   * @param $selector, $rule, $value
+   * @throws Exception
+   */
+  public function shouldHaveACssValueOf($selector, $rule, $value) {
+    $computed = $this->getSession()->evaluateScript("
+      return jQuery( '" . $selector . "' ).css('" . $rule . "');
+    ");
+    // Convert double quotes to single quotes for matching purposes.
+    $computed = str_replace('"',"'",$computed);
+    if ($value != $computed) {
+      throw new Exception("Element ({$selector}) does not have a ({$rule}) value of ({$value}).  The actual value is ({$computed})");
+    }
+  }
+
+  /**
+   * @When /^I hover over the element "([^"]*)"$/
+   */
+  public function iHoverOverTheElement($selector)
+  {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+
+    if ($element === NULL) {
+      throw new Exception("Could not hover over element ({$selector})");
+    }
+
+    $element->mouseOver();
+  }
+
+}
