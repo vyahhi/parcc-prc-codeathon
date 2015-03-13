@@ -1387,6 +1387,9 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       case "tablet":
         $this->getSession()->resizeWindow((int)$this->customParameters['tablet_width'], (int)$this->customParameters['tablet_height'], 'current');
         break;
+      case "small desktop":
+        $this->getSession()->resizeWindow((int)$this->customParameters['desktop_sm_width'], (int)$this->customParameters['desktop_sm_height'], 'current');
+        break;
       default:
         $this->getSession()->resizeWindow((int)$this->customParameters['desktop_width'], (int)$this->customParameters['desktop_height'], 'current');
     }
@@ -1401,9 +1404,25 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $computed = $this->getSession()->evaluateScript("
       return jQuery( '" . $selector . "' ).css('" . $rule . "');
     ");
+    // Convert double quotes to single quotes for matching purposes.
+    $computed = str_replace('"',"'",$computed);
     if ($value != $computed) {
       throw new Exception("Element ({$selector}) does not have a ({$rule}) value of ({$value}).  The actual value is ({$computed})");
     }
+  }
+
+  /**
+   * @When /^I hover over the element "([^"]*)"$/
+   */
+  public function iHoverOverTheElement($selector)
+  {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+
+    if ($element === NULL) {
+      throw new Exception("Could not hover over element ({$selector})");
+    }
+
+    $element->mouseOver();
   }
 
 }
