@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @file
  * Class definition of PrcTrtSchoolUploadsStudentFile
  */
-
 class PrcTrtSchoolUploadsSchoolFile extends PrcTrtSchoolUploadsFile {
 
   // Declare the upload type.
@@ -40,9 +40,29 @@ class PrcTrtSchoolUploadsSchoolFile extends PrcTrtSchoolUploadsFile {
     if (empty($record->school_email)) {
       $record->errors['school_email'] = t('Contact E-mail: Required');
 
-    } elseif (!valid_email_address($record->school_email)) {
+    }
+    elseif (!valid_email_address($record->school_email)) {
       $record->errors['school_email'] = t('Contact E-mail: Invalid');
     }
+  }
+
+  private function districtSchoolNames($district_id) {
+    $names = array();
+
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'school')
+      ->fieldCondition('field_ref_district', 'target_id', $district_id);
+    $result = $query->execute();
+    if (isset($result['node'])) {
+      $nids = array_keys($result['node']);
+      $items = entity_load('node', $nids);
+      foreach ($items as $item) {
+        $names[] = $item->title;
+      }
+    }
+    return $names;
   }
 
   /**
@@ -50,9 +70,12 @@ class PrcTrtSchoolUploadsSchoolFile extends PrcTrtSchoolUploadsFile {
    */
   protected function validateRecords($records, &$validate) {
 
-    // No errors aside from individual record errors - nothing to do.
-    if (empty($response['errors'])) {
-      return;
+    $names = $this->districtSchoolNames($this->district_id);
+    foreach ($records as $record) {
+      $rec_name = $record->school_name;
+      if (in_array(strtolower($rec_name), array_map('strtolower', $names)) !== FALSE) {
+        $record->errors['exists'] = t('School Name: @name already exists', array('@name' => $rec_name));
+      }
     }
 
   }

@@ -34,6 +34,6 @@ Feature: PRC-817
     And I click "Manage Schools"
     And I check the box with the css selector ".vbo-table-select-all"
 #    And I check the box with the css selector "#views-form-trt-district-schools-panel-pane-1 > div > table > thead > tr > th.views-field.views-field-views-bulk-operations > div > input"
-    Then I should see the link "1234School 828-4 @timestamp"
+    Then I should see the link "School 828-4 @timestamp"
 
 #    And "<string>" should precede "<string>" for the query "<string>"

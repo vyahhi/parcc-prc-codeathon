@@ -14,7 +14,7 @@ function prc_trt_school_uploads_upload_page($district, $type) {
   $file->district_id = $district->nid;
   switch ($file->status()) {
     case 'validate':
-      drupal_set_title(t('Checking Data Status'));
+      drupal_set_title(t('File Import Status'));
       return drupal_get_form('prc_trt_school_uploads_upload_validate_form', $file, $type, $district);
 
     case 'complete':
@@ -394,7 +394,7 @@ function prc_trt_school_uploads_upload_error_form($form, &$form_state, $district
   $arg = 'schools';
   $action_array['cancel'] = array(
     '#theme' => 'link',
-    '#text' => t('Cancel'),
+    '#text' => t('Back'),
     '#path' => "district/{$district->nid}/upload-$arg",
   );
   $action_array['cancel']['#options']['attributes']['class'][] = 'button secondary';
