@@ -18,9 +18,8 @@ function prc_trt_school_uploads_upload_page($district, $type) {
       return drupal_get_form('prc_trt_school_uploads_upload_validate_form', $file, $type, $district);
 
     case 'complete':
-      $text = t('Create Schools Confirmation');
-      drupal_set_title($text);
-      return drupal_get_form('prc_trt_school_uploads_complete_form', $file, $type, $district);
+      // We skip completion and automatically go to Manage Schools.
+      return drupal_get_form('prc_trt_school_uploads_upload_form', $type, $district);
   }
 
   // Waiting for a file upload.

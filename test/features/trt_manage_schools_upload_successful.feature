@@ -42,3 +42,24 @@ Feature: PRC-864 Manage Schools - Upload School - No Schools Exist - School(s) A
     And I should see the link "First Uploaded School"
     And I should see the link "Second Uploaded School"
     And I should not see the link "Add School(s) - upload csv file"
+
+  Scenario: Upload schools, upload another clears form
+    Given I am logged in as a user with the "District Admin" role
+    And "District" nodes:
+      | title        | uid         |
+      | District 851 | @currentuid |
+    And I visit the first node created
+    And I click "Manage Schools"
+    When I click "Add School(s) - upload csv file"
+    And I attach the file "testfiles/trt_upload_schools_valid.csv" to "edit-file-upload"
+    And I press "edit-upload"
+    And I follow meta refresh
+    When I press "Create School Records"
+    And I follow meta refresh
+    And "District" nodes:
+      | title          | uid         |
+      | District 851-2 | @currentuid |
+    And I visit the last node created
+    And I click "Manage Schools"
+    When I click "Add School(s) - upload csv file"
+    And I should see the text "Overview / instructional copy. Consider explaining that for each school, there must be two columns: one for school name and one for school contact email address and that file must be .csv."

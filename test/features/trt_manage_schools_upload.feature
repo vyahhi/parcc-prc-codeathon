@@ -24,7 +24,7 @@ Feature: PRC-851 Manage Schools - Upload School
 #  Upload button
 
   Scenario: Upload file
-    Given I am logged in as a user with the "District Admin" role
+    Given I am logged in as a user wi to th the "District Admin" role
     And "District" nodes:
       | title        | uid         |
       | District 851 | @currentuid |
