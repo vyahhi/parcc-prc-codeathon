@@ -24,21 +24,22 @@ Feature: PRC-217  Invite User with Additional Role Selection
   Scenario: When Content Contributor or PARCC-member Educator role is selected in the Invite User page, a new attribute State appears with a dropdown menu. The State field is invisible when PRC Admin or Educator role is selected.
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I should not see the text "State"
+    Then "#edit-field-member-state-und" should not be visible
     But I check the box "PARCC-Member Educator"
-    And I should see the text "State"
+    Then "#edit-field-member-state-und" should be visible
     Then I check the box "Educator"
-    And I should see the text "State"
+    Then "#edit-field-member-state-und" should be visible
     Then I uncheck the box "PARCC-Member Educator"
-    And I should not see the text "State"
+    And I uncheck the box "Educator"
+    Then "#edit-field-member-state-und" should not be visible
     But I check the box "Content Contributor"
-    And I should see the text "State"
+    Then "#edit-field-member-state-und" should be visible
     But I check the box "PRC Admin"
-    And I should see the text "State"
+    Then "#edit-field-member-state-und" should be visible
     But I uncheck the box "Content Contributor"
-    And I should not see the text "State"
+    Then "#edit-field-member-state-und" should not be visible
     When I check the box "Content Administrator (Curator)"
-    And I should not see the text "State"
+    Then "#edit-field-member-state-und" should not be visible
 
   Scenario:  The State dropdown menu contains the following options (notice they're in alphabetical order):
     Given I am logged in as a user with the "PRC Admin" role

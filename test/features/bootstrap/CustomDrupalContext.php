@@ -724,6 +724,17 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Given /^I check the box with the css selector "(?P<label>[^"]*)"$/
+   */
+  public function iCheckTheBoxWithTheCssSelector($cssQuery) {
+    // This seems stupid to have here, but the Mink context
+    // messages say it looks by value and it doesn't.
+    // Instead, we'll add our own handler to seek by css selector.
+
+    $box = $this->getSession()->getPage()->findAll('css', $cssQuery);
+  }
+
+  /**
    * @Then /^I should not see the checkbox "(?P<label>[^"]*)"$/
    */
   public function assertCheckboxByIdNotPresent($label, $id = FALSE) {

@@ -17,7 +17,7 @@ Feature: PRC-851 Manage Schools - Upload School
 #  "* indicates required field"
 #  Form fields
 #  Label: File Name
-#  Type: Text field
+#  Type: File upload field
 #  Instructions: "File must have .csv extension and have the following columns in this order: School Name, School Contact's Email Address"
 #  Required: Yes
 #  Browse button
