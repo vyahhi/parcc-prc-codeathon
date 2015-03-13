@@ -7,22 +7,22 @@ Feature: Admin UI: View User Accounts (PRC-37)
   # Test visibility first. Only PRC Admin should see this link.
   Scenario: AC1 - PRC Admin sees the Users link
     Given I am logged in as a user with the "PRC Admin" role
-    And I am on the homepage
+    And I am on "prc/admin"
     Then I should see the link "Users"
 
   Scenario: AC1 - Anonymous user should not see Users link
     Given I am an anonymous user
-    And I am on the homepage
+    And I am on "prc/admin"
     Then I should not see the link "Users"
 
   Scenario: AC1 - Educator user should not see Users link
     Given I am logged in as a user with the "Educator" role
-    And I am on the homepage
+    And I am on "prc/admin"
     Then I should not see the link "Users"
 
   Scenario: AC2 - PRC Admin clicks the Users link
     Given I am logged in as a user with the "PRC Admin" role
-    And I am on the homepage
+    And I am on "prc/admin"
     And I follow "Users"
     Then I should be on "/admin-users"
 

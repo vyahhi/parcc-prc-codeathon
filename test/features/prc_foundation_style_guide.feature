@@ -43,15 +43,16 @@ Feature: Header/Menu Responsive Behavior (PRC-749)
     When I am browsing using a "desktop"
     # Then the left padding of the logo should be approximately 30px
     Then "nav a#logo" should have a "margin-left" css value of "30px"
+    When I click on the element with css selector "#profile-icon"
     # And the user login link should display
-    And "#secondary-menu-section a[href='/user/login']" should be visible
+    And "#profile-dropdown a[href='/user/login']" should be visible
+    When I click on the element with css selector "#search-icon"
     # And the search should display
     And "form#search-block-form" should be visible
     # And the user login and search should be right aligned
     And "#secondary-menu" should have a "float" css value of "right"
-    And "nav #block-search-form" should have a "float" css value of "right"
     # And the user login and search should have 30px of right padding.
-    And "nav #block-search-form" should have a "padding-right" css value of "30px"
+    And "#header-icons" should have a "margin-right" css value of "30px"
     # And the main menu should be evenly distributed between the logo and user login link.
     And ".top-bar-section li a:not(.button)" should have a "line-height" css value of "85px"
     # And the mobile menu icon should not be displayed.
@@ -69,9 +70,10 @@ Feature: Header/Menu Responsive Behavior (PRC-749)
     # And the Logout link should be visible as the last item in the mobile menu
     And "#secondary-menu-section a[href='/user/logout']" should be visible
     When I am browsing using a "desktop"
-    # Then the My Account link should be visible as the second to last item in the mobile menu
-    Then "#secondary-menu-section a[href='/user']" should be visible
-    # And the Logout link should be visible as the last item in the mobile menu
-    And "#secondary-menu-section a[href='/user/logout']" should be visible
+    And I click on the element with css selector "#profile-icon"
+    # Then the My Account link should be visible
+    Then "#profile-dropdown a[href='/user']" should be visible
+    # And the Logout link should be visible
+    And "#profile-dropdown a[href='/user/logout']" should be visible
     # And the mobile menu icon should not be visible
     And ".toggle-topbar.menu-icon" should not be visible
