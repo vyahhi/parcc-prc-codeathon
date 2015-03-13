@@ -40,6 +40,7 @@ dependencies[] = prc_shs_term_handler
 dependencies[] = prc_test_assembly_edit_protection
 dependencies[] = prc_text_to_speech
 dependencies[] = prc_trt
+dependencies[] = prc_trt_school_uploads
 dependencies[] = prc_user_edit_form
 dependencies[] = quiz
 dependencies[] = quiz_directions
