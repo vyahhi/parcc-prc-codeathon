@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * PRC TRT School Uploads module code.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function prc_trt_school_uploads_menu() {
+
+  $items['district/%node/upload-schools'] = array(
+    'title' => 'Upload Schools',
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'prc_trt_school_uploads_upload_page',
+    'page arguments' => array(1, 'school'),
+    'access callback' => 'prc_trt_school_uploads_page_access',
+    'access arguments' => array(1),
+    'file' => 'prc_trt_school_uploads.pages.inc',
+  );
+
+  $items['district/%node/upload-schools/error'] = array(
+    'title' => 'School File Rejected Records',
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('prc_trt_school_uploads_upload_error_form', 1, 'user'),
+    'access callback' => 'prc_trt_school_uploads_page_access',
+    'access arguments' => array(1),
+    'file' => 'prc_trt_school_uploads.pages.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Access callback for "District Upload Schools" page.
+ */
+function prc_trt_school_uploads_page_access($district = NULL) {
+  if (!user_access('create district content')) {
+    return FALSE;
+  }
+
+  // Okay if there is a district
+  if ($district) {
+    $flag = flag_get_flag('file_uploaded');
+    $flagged = $flag->is_flagged($district->nid);
+    return !$flagged;
+  }
+
+  // TODO: If there is a district, check to see if this user can see it
+  return FALSE;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function prc_trt_school_uploads_theme() {
+  return array(
+    'prc_trt_school_uploads_upload_form' => array(
+      'render element' => 'form',
+      'file' => 'prc_trt_school_uploads.theme.inc'
+    ),
+  );
+}

@@ -121,6 +121,7 @@ dependencies[] = prc_search
 dependencies[] = prc_shs_term_handler
 dependencies[] = prc_text_to_speech
 dependencies[] = prc_trt
+dependencies[] = prc_trt_school_uploads
 dependencies[] = prc_user_edit_form
 dependencies[] = prc_workflow
 ; Panels
@@ -213,4 +214,6 @@ dependencies[] = prc_poc_local_taxonomy
 dependencies[] = prc_poc_local_users
 dependencies[] = prc_poc_local_views
 dependencies[] = uuid_features
+; Required by prc_foundation theme
+dependencies[] = jquery_update
 

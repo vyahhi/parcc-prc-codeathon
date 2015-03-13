@@ -7,7 +7,8 @@ Feature: Edit Content (PRC-158)
   Scenario: AC1  Content Contributors click on content tab and see content with edit button
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
-    And I follow "Content" in the "header" region
+    And I am on "prc/admin"
+    And I follow "Content" in the "content" region
     Then I should see the link "edit" in the "content" region
     #  AC2 At click, the Edit Content page opens.
     Then I follow "edit"
@@ -16,7 +17,8 @@ Feature: Edit Content (PRC-158)
   Scenario: AC3 Editable attributes are shown in the Edit Content page
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
-    And I follow "Content" in the "header" region
+    And I am on "prc/admin"
+    And I follow "Content" in the "content" region
     Then I should see the link "edit" in the "content" region
     #  AC2 At click, the Edit Content page opens.
     Then I follow "edit"
@@ -50,7 +52,8 @@ Feature: Edit Content (PRC-158)
   Scenario: AC4 Attachment files are listed, along with a Remove link/button. At click, the file is removed after having the user to confirm removal
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
-    And I follow "Content" in the "header" region
+    And I am on "prc/admin"
+    And I follow "Content" in the "content" region
     Then I should see the link "edit" in the "content" region
     Then I follow "edit"
     Then I should see the heading "Test-o-rama" in the "content" region
@@ -173,7 +176,8 @@ Feature: Edit Content (PRC-158)
   Scenario: PRC-342 Edit Content- Expandable/collapsible controls when attachment are in sections
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
-    And I follow "Content" in the "header" region
+    And I am on "prc/admin"
+    And I follow "Content" in the "content" region
     Then I should see the link "edit" in the "content" region
     Then I follow "edit"
     Then I should see the heading "Test-o-rama" in the "content" region

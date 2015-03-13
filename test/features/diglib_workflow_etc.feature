@@ -299,6 +299,7 @@ Feature: Workflow is functional
     Given I am an anonymous user
 
     Then I am logged in as "Joe Curator"
+    And I am on "prc/admin"
     And I follow "Content"
     And I follow "My first post @timestamp"
     Then I should see the text "My first post @timestamp"
@@ -319,6 +320,7 @@ Feature: Workflow is functional
     Given I am an anonymous user
 
     Then I am logged in as "Joe Curator"
+    And I am on "prc/admin"
     And I follow "Content"
     And I follow "My first post @timestamp"
     Then I press "Request Change"
@@ -339,6 +341,7 @@ Feature: Workflow is functional
     Given I am an anonymous user
 
     Then I am logged in as "Joe Curator"
+    And I am on "prc/admin"
     And I follow "Content"
     And I follow "PRC-592 @timestamp"
     Then I press "Request Change"
@@ -359,6 +362,7 @@ Feature: Workflow is functional
     Given I am an anonymous user
 
     Then I am logged in as "Joe Curator"
+    And I am on "prc/admin"
     And I follow "Content"
     And I follow "PRC-592 @timestamp"
     Then I press "Request Change"
@@ -379,6 +383,7 @@ Feature: Workflow is functional
     Given I am an anonymous user
 
     Then I am logged in as "Joe Curator"
+    And I am on "prc/admin"
     And I follow "Content"
     And I follow "PRC-592 @timestamp"
     Then I press "Request Change"

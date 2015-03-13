@@ -9,7 +9,7 @@ Feature: Invite User (PRC-92)
 
   Scenario: AC2 - In the Users page, a new Invite New User button shall be added. At click, it opens a new Invite New User page. +
     Given I am logged in as a user with the "PRC Admin" role
-    And I am on the homepage
+    And I am on "prc/admin"
     Then I follow "Users"
     Then I should see the link "Invite New User"
     Then I follow "Invite New User"
@@ -24,6 +24,7 @@ Feature: Invite User (PRC-92)
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
     Then I should see the link "Home"
+    And I am on "prc/admin"
     And I should see the link "Users"
 
   Scenario: AC5 - The following fields are to be captured:

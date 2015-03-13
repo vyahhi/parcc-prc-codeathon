@@ -358,6 +358,7 @@ Feature: PRC-346 Admin: Course Audience
       | name       | mail                          | pass   | field_first_name | field_last_name | status |
       | Joe PRC480 | prc_480@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
     And I am logged in as a user with the "PRC Admin" role
+    And I am on "prc/admin"
     When I click "Course Management"
     Then I click "ID"
     Then I should see the text "PRC-480 Allow"
@@ -367,6 +368,7 @@ Feature: PRC-346 Admin: Course Audience
     And I select the radio button "Select By Rostering"
     And I fill in "E-mail" with "prc_480@timestamp@example.com"
     When I press "Save audience"
+    And I am on "prc/admin"
     Then I click "Course Management"
     Then I click "ID"
     Then I should see the text "PRC-480 Allow"

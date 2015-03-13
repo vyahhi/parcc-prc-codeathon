@@ -16,7 +16,7 @@ use Behat\Gherkin\Node\TableNode;
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
   protected $originalMailSystem;
-
+  protected $customParameters;
   /**
    * Initializes context.
    *
@@ -24,8 +24,10 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * You can also pass arbitrary arguments to the
    * context constructor through behat.yml.
    */
-  public function __construct() {
+  public function __construct($parameters)
+  {
     $this->timestamp = time();
+    $this->customParameters = !empty($parameters) ? $parameters : array();
   }
 
   protected function fixStepArgument($argument) {
@@ -112,6 +114,17 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
     $nid = $found_node->nid;
     $found_flag->flag('flag', $nid, NULL, TRUE);
+  }
+
+  /**
+   * @Given /^I follow meta refresh$/
+   */
+  public function iFollowMetaRefresh() {
+    while ($refresh = $this->getMainContext()->getSession()->getPage()->find('css', 'meta[http-equiv="Refresh"]')) {
+      $content = $refresh->getAttribute('content');
+      $url = str_replace('0; URL=', '', $content);
+      $this->getMainContext()->getSession()->visit($url);
+    }
   }
 
   /**
@@ -710,6 +723,17 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     if ($checkbox === NULL) {
       throw new \Exception(sprintf('The checkbox with "%s" was not found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
     }
+  }
+
+  /**
+   * @Given /^I check the box with the css selector "(?P<label>[^"]*)"$/
+   */
+  public function iCheckTheBoxWithTheCssSelector($cssQuery) {
+    // This seems stupid to have here, but the Mink context
+    // messages say it looks by value and it doesn't.
+    // Instead, we'll add our own handler to seek by css selector.
+
+    $box = $this->getSession()->getPage()->findAll('css', $cssQuery);
   }
 
   /**
@@ -1373,5 +1397,54 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   /**
    * @} End of defgroup "workflow steps"
    */
-}
 
+  /**
+   * @When /^I am browsing using a "([^"]*)"$/
+   */
+  public function iAmBrowsingUsingA($device) {
+    switch($device) {
+      case "phone":
+        $this->getSession()->resizeWindow((int)$this->customParameters['phone_width'], (int)$this->customParameters['phone_height'], 'current');
+        break;
+      case "tablet":
+        $this->getSession()->resizeWindow((int)$this->customParameters['tablet_width'], (int)$this->customParameters['tablet_height'], 'current');
+        break;
+      case "small desktop":
+        $this->getSession()->resizeWindow((int)$this->customParameters['desktop_sm_width'], (int)$this->customParameters['desktop_sm_height'], 'current');
+        break;
+      default:
+        $this->getSession()->resizeWindow((int)$this->customParameters['desktop_width'], (int)$this->customParameters['desktop_height'], 'current');
+    }
+  }
+
+  /**
+   * @Given /^"([^"]*)" should have a "([^"]*)" css value of "([^"]*)"$/
+   * @param $selector, $rule, $value
+   * @throws Exception
+   */
+  public function shouldHaveACssValueOf($selector, $rule, $value) {
+    $computed = $this->getSession()->evaluateScript("
+      return jQuery( '" . $selector . "' ).css('" . $rule . "');
+    ");
+    // Convert double quotes to single quotes for matching purposes.
+    $computed = str_replace('"',"'",$computed);
+    if ($value != $computed) {
+      throw new Exception("Element ({$selector}) does not have a ({$rule}) value of ({$value}).  The actual value is ({$computed})");
+    }
+  }
+
+  /**
+   * @When /^I hover over the element "([^"]*)"$/
+   */
+  public function iHoverOverTheElement($selector)
+  {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+
+    if ($element === NULL) {
+      throw new Exception("Could not hover over element ({$selector})");
+    }
+
+    $element->mouseOver();
+  }
+
+}

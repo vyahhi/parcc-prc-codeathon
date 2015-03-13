@@ -52,6 +52,12 @@ function prc_poc_local_users_user_default_roles() {
     'weight' => 8,
   );
 
+  // Exported role: State Admin.
+  $roles['State Admin'] = array(
+    'name' => 'State Admin',
+    'weight' => 10,
+  );
+
   // Exported role: administrator.
   $roles['administrator'] = array(
     'name' => 'administrator',

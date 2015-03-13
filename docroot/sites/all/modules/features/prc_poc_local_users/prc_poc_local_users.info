@@ -337,6 +337,7 @@ features[user_role][] = Educator
 features[user_role][] = PARCC-Member Educator
 features[user_role][] = PRC Admin
 features[user_role][] = School Admin
+features[user_role][] = State Admin
 features[user_role][] = administrator
 features[variable][] = anonymous
 features[variable][] = field_bundle_settings_user__user
