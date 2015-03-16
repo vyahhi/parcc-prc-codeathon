@@ -40,6 +40,7 @@ function $rw_userParameters() {
         eba_play_start_point = "page-title";
         eba_math = false;
         eba_language = ENGLISH_US;
+        eba_inline_img = true;
 
     }
     catch (err) {
