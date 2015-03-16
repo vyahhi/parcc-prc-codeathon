@@ -42,6 +42,7 @@
 
   <div class="content"<?php print $content_attributes; ?>>
     <?php
+      print render($content['field_ref_school']);
       print render($content['field_result']);
       print render($content['field_name']);
       print render($content['field_number_of_devices']);

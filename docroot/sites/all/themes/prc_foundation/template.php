@@ -24,7 +24,7 @@ function prc_foundation_html_head_alter(&$head_elements) {
  * Implements hook_preprocess_html()
  */
 function prc_foundation_preprocess_html(&$variables) {
-  drupal_add_css('http://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:700', array('type' => 'external'));
+  drupal_add_css('//fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:700', array('type' => 'external'));
 }
 
 function prc_foundation_preprocess_page(&$vars, $hook) {
@@ -147,8 +147,9 @@ function prc_foundation_question_selection_table($variables) {
  * Implements hook_preprocess_entity()
  */
 function prc_foundation_preprocess_entity(&$variables) {
-  if ($variables['elements']['#entity_type'] == 'prc_trt' && $variables['elements']['#bundle'] == 'system_check') {
+  if ($variables['entity_type'] == 'prc_trt' && $variables['elements']['#bundle'] == 'system_check' && $variables['view_mode'] == 'full') {
     // Adjust display for fields displayed before table.
+    $variables['content']['field_ref_school']['#label_display'] = "inline";
     $variables['content']['field_result']['#label_display'] = "hidden";
     $variables['content']['field_result'][0]['#markup'] = "<h2>" . $variables['content']['field_result'][0]['#markup'] . "</h2>";
     $variables['content']['field_name']['#label_display'] = "inline";
