@@ -43,6 +43,10 @@ function prc_migrate_migrate_api() {
         'class_name' => 'PrcCsvMemberStateMigration',
         'group_name' => 'prc_taxonomy',
       ),
+      'PrcCsvUserStates' => array(
+        'class_name' => 'PrcCsvUserStatesMigration',
+        'group_name' => 'prc_taxonomy',
+      ),
       'PrcJsonStandardMigration' => array(
         'class_name' => 'PrcJsonStandardMigration',
         'group_name' => 'prc_standard',

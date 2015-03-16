@@ -23,7 +23,8 @@ Feature: Workflow is functional
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
     Then press the "Update state" button
-    And I visit "content/my-first-post"
+    And I visit "admin-content"
+    And I click "My first post."
     And I should see the text "Approval Requested"
     And the email to "joe_1prc_58ca@example.com" should contain "The following content is awaiting approval"
     And I click "Log out"
@@ -34,7 +35,7 @@ Feature: Workflow is functional
     # Curator approves review
     Given I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "pending review"
+    And I click "edit"
     # prc-826 : Publish button is not correct
     And I press the "Publish" button
     #PRC-873 : should not see text area for publish
@@ -81,7 +82,7 @@ Feature: Workflow is functional
     #Curator approves new draft
     Given I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "pending review"
+    And I click "edit"
     And I press the "Publish" button
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
@@ -109,7 +110,7 @@ Feature: Workflow is functional
     Then I press the "Update state" button
     And I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "pending review"
+    And I click "edit"
     # Clear out old messages
     And the test email system is enabled
     And I press the "Request Change" button
@@ -251,7 +252,9 @@ Feature: Workflow is functional
     And I should not see an "textarea" element
     When  I press "Update state"
     And I click "Log out"
-    Then I visit "content/my-first-post"
+    And I am an anonymous user
+    Then I visit "digital-library"
+    And I click "My first post."
     And I should see "Isn't this swell?"
     And I should not see "This is my unpublished addition"
 
@@ -259,7 +262,7 @@ Feature: Workflow is functional
     Given I am logged in as "Joe Curator"
     And the test email system is enabled
     And I visit "admin-content"
-    And I click "pending review"
+    And I click "edit"
     And I press the "Publish" button
     # PRC-873 : should not see text area for publish
     And I should not see an "textarea" element
@@ -284,7 +287,7 @@ Feature: Workflow is functional
     #  2. Access Denied. You are not allowed to view this content.
     #  Expected Results:
     #  2. Should be able to view content that I am trying to approve.
-    #  NOTE: When they click on "pending review" link in Actions column, it works fine.
+    #  NOTE: When they click on "edit" link in Actions column, it works fine.
     Given I am logged in as "Joe Contributor"
     And I visit "admin-content"
     And I click "Add content"

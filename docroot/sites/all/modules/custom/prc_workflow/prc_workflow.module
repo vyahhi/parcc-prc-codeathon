@@ -396,6 +396,7 @@ function prc_workflow_draft_confirm_form(&$form, &$form_state) {
  */
 function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state) {
   $form['#submit'][] = 'prc_workflow_events_submit';
+
   if ($form['event']['#value'] == 'denied') {
     // Changes before Approval for PRC-592 @timestamp (revision #)
     $title = $form_state['build_info']['args'][0]->title;
@@ -419,6 +420,23 @@ function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state
 
   }
   else {
+    //@todo: form title for rescind request
+    $node = $form['node_revision']['#value'];
+    $state_flow = $form['state_flow']['#value'];
+
+    $vid = $node->vid;
+    $node_title = $node->title;
+
+    $event = $state_flow->get_event($form['event']['#value']);
+
+    $state_key = $event->get_option('target');
+
+    $options = $state_flow->get_states_options();
+    $new_state = $options[$state_key]['label'];
+    $new_title = "Transition $node_title (revision $vid) to \"$new_state\"";
+
+    drupal_set_title($new_title);
+
     //Don't show the text area for other state changes (prc-873)
     $form['event_comment']['#type'] = 'hidden';
     $form['event_comment']['#required'] = FALSE;

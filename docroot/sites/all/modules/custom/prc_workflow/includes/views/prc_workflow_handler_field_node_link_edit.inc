@@ -21,8 +21,20 @@ class prc_workflow_handler_field_node_link_edit extends views_handler_field_node
         return;
     }
 
+    //Use the added fields from prc_workflow_views_pre_execute() to build an edit
+    //link to the revision we want.  Prefer the review revision if one exists.
+    if(!empty($values->review_vid)){
+      $vid = $values->review_vid;
+    }elseif(!empty($values->draft_vid)){
+      $vid = $values->draft_vid;
+    }
+
     $this->options['alter']['make_link'] = TRUE;
-    $this->options['alter']['path'] = "node/$node->nid/edit";
+    if(isset($vid)){
+      $this->options['alter']['path'] = "node/$node->nid/revisions/$vid/edit";
+    }else {
+      $this->options['alter']['path'] = "node/$node->nid/edit";
+    }
     $this->options['alter']['query'] = drupal_get_destination();
 
     $text = !empty($this->options['text']) ? $this->options['text'] : t('edit');
