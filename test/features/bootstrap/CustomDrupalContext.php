@@ -12,7 +12,6 @@ use Behat\Behat\Context\Step\Given;
 use Behat\Mink\Exception\ExpectationException;
 use Drupal\DrupalExtension\Event\EntityEvent;
 use Behat\Gherkin\Node\TableNode;
-
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
   protected $originalMailSystem;
@@ -1373,5 +1372,30 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   /**
    * @} End of defgroup "workflow steps"
    */
+
+  /**
+   * @todo: The following all have to do with diglib_workflow_revisions.feature and should be moved to a subcontext
+   */
+
+  /**
+   * @Given /^I click on the revision id link in row number "([^"]*)" of the table$/
+   */
+  public function iClickOnTheRevisionIdLinkInRowNumberOfTheTable($arg1) {
+    throw new PendingException();
+  }
+
+  /**
+   * @Given /^I should see the link in the "([^"]*)"$/
+   */
+  public function iShouldSeeTheLinkInThe($arg1) {
+    throw new PendingException();
+  }
+
+  /**
+   * @Given /^the history table is displayed in reverse chronological order$/
+   */
+  public function theHistoryTableIsDisplayedInReverseChronologicalOrder() {
+    throw new PendingException();
+  }
 }
 

@@ -35,7 +35,7 @@ Feature: Workflow is functional
     # Curator approves review
     Given I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "edit"
+    And I click "My first post."
     # prc-826 : Publish button is not correct
     And I press the "Publish" button
     #PRC-873 : should not see text area for publish
@@ -72,9 +72,10 @@ Feature: Workflow is functional
     And I click "Edit"
     And I fill in "Body" with "Here is my clever addition."
     And I press the "Save New Draft" button
-    And I visit "content/my-first-post"
-    And I click "Workflow"
-    When I click "Request Approval"
+    And I visit "admin-content"
+    And I click "My first post."
+    And I click "Edit"
+    When I press "Request Approval"
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
     Then I press the "Update state" button
@@ -244,9 +245,8 @@ Feature: Workflow is functional
     And I visit "admin-content"
     # prc-844
     And I should see the text "Draft" in the "My first post." row
-    #Go into workflow and find the new draft
-    And I visit "content/my-first-post"
-    And I click "Workflow"
+    And I click "My first post."
+    And I click "Edit"
     And I click "Request Approval"
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
@@ -435,8 +435,7 @@ Feature: Workflow is functional
     And I press the "Save New Draft" button
     And I should see an "Confirm" button
     And I click "Cancel"
-    # We should now be on the node view page
-    And I click "Workflow"
+    # We should now be on the node view paged
     Then I should not see the link "My new draft"
     And I click "Edit"
     When I fill in "Body" with "testing confirm button"
