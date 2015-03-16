@@ -41,7 +41,7 @@ function prc_workflow_menu() {
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'prc_workflow_revisions_tab',
     'page arguments' => array(1),
-    'access callback' => 'state_flow_menu_node_access',
+    'access callback' => '_node_revision_access',//'state_flow_menu_node_access',
     'access arguments' => array(1),
     'weight' => 10,
   );
@@ -754,8 +754,8 @@ function prc_workflow_revisions_tab($node) {
     $user_name = format_username((object) array('uid' => (int) $state->uid, 'name' => $state->user_name));
     $history_str = t('!user transitioned revision !vid-link to %state.',
       array(
-        '!user' => l(check_plain($user_name), 'user/' . $state->uid),
-        '!vid-link' => l($vid,  $path_view),
+        '!user' => l(check_plain($user_name), 'user/' . $state->uid, array('attributes' => array('class' => array('revision-user-link')))),
+        '!vid-link' => l($vid,  $path_view, array('attributes' => array('class' => array('revision-version-link')))),
         '%state' => $state->state
       )
     );
@@ -839,7 +839,7 @@ function prc_workflow_body_diff($previous_version, $node_version){
   $pbody = $pw->body->value();
   $nbody = $nw->body->value();
   if($pbody !== $nbody) {
-    $fineDiff = new FineDiff($pbody['safe_value'], $nbody['safe_value']);
+    $fineDiff = new FineDiff($pbody['safe_value'], $nbody['safe_value'], 'FineDiff::$paragraphGranularity');
     $diff = $fineDiff->renderDiffToHTML();
 
     //Restore html
