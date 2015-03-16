@@ -1356,6 +1356,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'delete terms in user_states'.
+  $permissions['delete terms in user_states'] = array(
+    'name' => 'delete terms in user_states',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'deny prc content'.
   $permissions['deny prc content'] = array(
     'name' => 'deny prc content',
@@ -2264,6 +2273,15 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit terms in tags'.
   $permissions['edit terms in tags'] = array(
     'name' => 'edit terms in tags',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in user_states'.
+  $permissions['edit terms in user_states'] = array(
+    'name' => 'edit terms in user_states',
     'roles' => array(
       'administrator' => 'administrator',
     ),
