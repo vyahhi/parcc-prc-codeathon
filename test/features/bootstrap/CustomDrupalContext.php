@@ -1446,14 +1446,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $element->mouseOver();
   }
 
-  /**
-   * @todo: The following all have to do with diglib_workflow_revisions.feature and should be moved to a subcontext
-   */
-
-
-
-  //End of revisions steps
-
   public function assertTextInTableRow($text, $row_text) {
     $text = $this->fixStepArgument($text);
     $row_text = $this->fixStepArgument($row_text);
