@@ -11,7 +11,7 @@ function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form,
   $form['actions']['submit']['#value'] = t('Submit');
 
   $form['instructions_text'] = array(
-    '#type' => 'markup',
+    '#type' => 'item',
     '#markup' => t('Instructions go here. For example: To determine if your school has the appropriate number of test-ready devices to run a successful assessment, enter information requested below.'),
     '#weight' => -12,
   );
@@ -25,17 +25,18 @@ function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form,
     if ($students) {
       $form['field_number_of_students']['und'][0]['value']['#default_value'] = $students;
     }
-  } else {
+  }
+  else {
     $form['important_school_message_text'] = array(
-      '#type' => 'markup',
+      '#type' => 'item',
       '#markup' => t('Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.'),
       '#weight' => -11,
     );
   }
 
   $form['required_message'] = array(
-    '#type' => 'markup',
-    '#markup' => '* indicates required field',
+    '#type' => 'item',
+    '#markup' => t('* indicates required field'),
     '#weight' => -10,
   );
 
@@ -64,16 +65,17 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
 
   if (array_key_exists('entityreference_prepopulate', $form_state)) {
     $form['field_name'][LANGUAGE_NONE][0]['value']['#required'] = TRUE;
-  } else {
+  }
+  else {
     $form['important_school_message_text'] = array(
-      '#type' => 'markup',
+      '#type' => 'item',
       '#markup' => t('Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.'),
       '#weight' => -11,
     );
   }
 
   $form['required_message'] = array(
-    '#type' => 'markup',
+    '#type' => 'item',
     '#markup' => '* indicates required field',
     '#weight' => -10,
   );
@@ -130,7 +132,8 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form
     $b = explode(' ', $my_browser);
     $browser_type = $b[0];
     $browser_version = $b[1];
-  } elseif (isset($_SERVER['HTTP_USER_AGENT'])) {
+  }
+  elseif (isset($_SERVER['HTTP_USER_AGENT'])) {
     $agent = strtolower($_SERVER['HTTP_USER_AGENT']);
     $browser = browserclass_check_browser($agent);
     if (is_array($browser) && count($browser)) {
@@ -354,16 +357,21 @@ function _prc_trt_view_entity_capacity_check($entity) {
   if ($bandwidth_capacity >= $cap_good) {
     $bandwidth_result = t('Good');
     $bandwidth_extra_text = '';
-  } elseif ($bandwidth_capacity >= $cap_ok) {
+  }
+  elseif ($bandwidth_capacity >= $cap_ok) {
     $bandwidth_result = t('OK');
     $bandwidth_extra_text = t('Provide explanation of what OK means and any next steps.');
-  } else {
+  }
+  else {
     $bandwidth_result = t('Poor');
     $bandwidth_extra_text = t('Provide explanation of what poor means (will not be able to run successful assessment) and any next steps.');
   }
 
   $entity->content['bandwidth_capacity_results']["bandwidth_status"] = array(
-    '#markup' => t('@result - @bandwidth_capacity Mbps/student', array('@result' => $bandwidth_result, '@bandwidth_capacity' => $bandwidth_capacity)),
+    '#markup' => t('@result - @bandwidth_capacity Mbps/student', array(
+      '@result' => $bandwidth_result,
+      '@bandwidth_capacity' => $bandwidth_capacity
+    )),
     '#weight' => 0.91,
   );
   $entity->content['bandwidth_capacity_results']["bandwidth_extra_text"] = array(
@@ -477,7 +485,8 @@ function prc_trt_entity_presave($entity, $type) {
 
     $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
     $entity->field_result[LANGUAGE_NONE][0]['value'] = $all_pass;
-  } elseif ($type == 'prc_trt' && $entity->type == 'capacity_check') {
+  }
+  elseif ($type == 'prc_trt' && $entity->type == 'capacity_check') {
     $w = entity_metadata_wrapper('prc_trt', $entity);
     $school = $w->field_ref_school->value();
     if ($school) {
@@ -492,7 +501,8 @@ function prc_trt_entity_presave($entity, $type) {
 function prc_trt_form_district_node_form_alter(&$form, &$form_state) {
   if (isset($form_state['node']->nid)) {
     drupal_set_title(t('Edit District'));
-  } else {
+  }
+  else {
     drupal_set_title(t('Add District'));
   }
   $form['actions']['submit']['#value'] = t('Submit');
@@ -507,7 +517,8 @@ function prc_trt_form_district_node_form_alter(&$form, &$form_state) {
 function prc_trt_form_school_node_form_alter(&$form, &$form_state) {
   if (isset($form_state['node']->nid)) {
     drupal_set_title(t('Edit School'));
-  } else {
+  }
+  else {
     drupal_set_title(t('Add School'));
   }
   $form['actions']['submit']['#value'] = t('Submit');
@@ -538,7 +549,8 @@ function prc_trt_form_school_node_form_validate(&$form, &$form_state) {
 
 function prc_trt_form_school_node_form_submit(&$form, &$form_state) {
   if (array_key_exists('field_ref_district', $form_state['values']) &&
-      $form_state['values']['field_ref_district']['und'][0]['target_id']) {
+    $form_state['values']['field_ref_district']['und'][0]['target_id']
+  ) {
     $district_nid = $form_state['values']['field_ref_district']['und'][0]['target_id'];
     //$form_state['redirect'] = "node/$district_nid/manage-schools";
     $_GET['destination'] = "node/$district_nid/manage-schools";

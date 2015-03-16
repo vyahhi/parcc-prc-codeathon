@@ -1,4 +1,4 @@
-@api @trt @structured @school
+@api @trt @structured @school @capacity_check
 Feature: PRC-757 School Readiness - School Admin View
   As a School Admin,
   I want to be able to run structured readiness checks and see the results of the structured readiness checks I have run
@@ -64,7 +64,8 @@ Feature: PRC-757 School Readiness - School Admin View
     When I visit the last node created
     Then I should see the text "Bandwidth Capacity Results<bandwidth_result> - 0.5 Mbps/student"
     And I should see the text "Devices Capacity Results<device_result>"
-    And I should see the link "run capacity check"
+    # PRC-999
+    And I should see the link "run testing capacity check"
     And I should see the text "Number of students:"
     And I should see the text "100"
   Examples:

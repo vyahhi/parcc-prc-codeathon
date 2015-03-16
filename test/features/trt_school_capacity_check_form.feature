@@ -32,7 +32,7 @@ Feature: PRC-805 Testing Capacity Check - Structured - Form
       | title                 | field_number_of_students |
       | School One @timestamp | <students>               |
     And I visit the last node created
-    And I click "run capacity check"
+    And I click "run testing capacity check"
     # PRC-953
     Then I should see the text "Instructions go here. For example: To determine if your school has the appropriate number of test-ready devices to run a successful assessment, enter information requested below."
     Then I should not see the text "Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you."
@@ -52,7 +52,7 @@ Feature: PRC-805 Testing Capacity Check - Structured - Form
     Then I should see the text "School:"
     And I should see the text "School One @timestamp"
     And I visit the last node created
-    And I click "run capacity check"
+    And I click "run testing capacity check"
     Then the "Number of students" field should contain "<devices>"
 
   Examples:
