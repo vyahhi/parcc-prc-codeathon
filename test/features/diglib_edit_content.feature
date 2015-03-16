@@ -58,7 +58,7 @@ Feature: Edit Content (PRC-158)
     Then I follow "edit"
     Then I should see the heading "Test-o-rama" in the "content" region
     # AC5  A user may add more files; a Browse button along with an Upload button are provided to allow the user to select the file.
-    Then I attach the file "testfiles/lovelythumbnail.png" to "edit-field-thumbnail-und-0-upload"
+    Then I attach the file "testfiles/lovelythumbnail.png" to "files[field_thumbnail_und_0]"
     And I select the radio button "Public"
     # AC8  A Save button allows the user to save the entries for the updated content to be posted.
     And I press "Save"
@@ -86,7 +86,7 @@ Feature: Edit Content (PRC-158)
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
     Then I follow "Edit"
     And I click "Attach a File"
-    Then I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-document-und-0-upload"
+    Then I attach the file "testfiles/GreatLakesWater.pdf" to "files[field_document_und_0]"
     And I select the radio button "Public"
     And I press "Save"
     Then I follow "Edit"
@@ -184,7 +184,7 @@ Feature: Edit Content (PRC-158)
     Then I should see the text "Attach a File"
     Then I should not see the text "Add a new file"
     And I click "Attach a File"
-    Then I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-document-und-0-upload"
+    Then I attach the file "testfiles/GreatLakesWater.pdf" to "files[field_document_und_0]"
     And I select the radio button "Public"
     And I press "Save"
     And I should see the success message containing "Digital Library Content Test-o-rama has been updated."

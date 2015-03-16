@@ -20,6 +20,14 @@ function prc_poc_local_panels_pm_existing_pages_info() {
 
   $pm_existing_page = new stdClass();
   $pm_existing_page->api_version = 1;
+  $pm_existing_page->name = 'dlc_revisions_edit';
+  $pm_existing_page->label = 'DLC Revisions Edit';
+  $pm_existing_page->context = 'entity|node|nid';
+  $pm_existing_page->paths = 'node/%node/revisions/%/edit';
+  $export['dlc_revisions_edit'] = $pm_existing_page;
+
+  $pm_existing_page = new stdClass();
+  $pm_existing_page->api_version = 1;
   $pm_existing_page->name = 'node_overview';
   $pm_existing_page->label = 'Node overview';
   $pm_existing_page->context = '';
