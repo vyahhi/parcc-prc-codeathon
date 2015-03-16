@@ -16,7 +16,10 @@ Feature: PRC-401 Content Admin Role (Curator)
     And I should see the link "Digital Library"
     And I should see the link "Assessments"
     And I should see the link "Professional Development"
-    And I should see the link "Content"
+    And I should see the link "Technology Readiness"
+    When I am on "prc/admin"
+    Then I should see the link "Content"
+    And I should see the link "Course Management"
     And I should not see the link "Users"
 
   Scenario: AC2 In the Invite Users page, a new role shall be added to the role radio buttons list, as: Content Administrator (Curator) between PRC Admin and Content Contributor radio buttons
@@ -31,5 +34,6 @@ Feature: PRC-401 Content Admin Role (Curator)
   Scenario: AC3 When the Content Administrator (Curator) radio button is selected, the State dropdown menu is not visible
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    When I select the radio button "Content Administrator (Curator)"
-    Then I should not see the text "State"
+    When I check the box "Content Administrator (Curator)"
+    Then "#edit-field-member-state-und" should not be visible
+

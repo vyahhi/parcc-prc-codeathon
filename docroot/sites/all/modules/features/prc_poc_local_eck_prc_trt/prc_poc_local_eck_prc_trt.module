@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local prc_trt feature.
+ */
+
+include_once 'prc_poc_local_eck_prc_trt.features.inc';

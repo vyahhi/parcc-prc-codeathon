@@ -10,6 +10,26 @@
 function prc_menu_links_menu_default_menu_links() {
   $menu_links = array();
 
+  // Exported menu link: main-menu_admin:prc/admin
+  $menu_links['main-menu_admin:prc/admin'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'prc/admin',
+    'router_path' => 'prc/admin',
+    'link_title' => 'Admin',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'main-menu_admin:prc/admin',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 1,
+    'expanded' => 0,
+    'weight' => -45,
+    'customized' => 1,
+  );
   // Exported menu link: main-menu_assessments:assessments
   $menu_links['main-menu_assessments:assessments'] = array(
     'menu_name' => 'main-menu',
@@ -44,8 +64,9 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -46,
+    'weight' => -50,
     'customized' => 1,
+    'parent_identifier' => 'main-menu_admin:prc/admin',
   );
   // Exported menu link: main-menu_course-management:admin-course
   $menu_links['main-menu_course-management:admin-course'] = array(
@@ -64,8 +85,9 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => 0,
+    'weight' => -48,
     'customized' => 1,
+    'parent_identifier' => 'main-menu_admin:prc/admin',
   );
   // Exported menu link: main-menu_digital-library:digital-library
   $menu_links['main-menu_digital-library:digital-library'] = array(
@@ -97,7 +119,7 @@ function prc_menu_links_menu_default_menu_links() {
       'identifier' => 'main-menu_home:<front>',
     ),
     'module' => 'menu',
-    'hidden' => 0,
+    'hidden' => 1,
     'external' => 1,
     'has_children' => 0,
     'expanded' => 0,
@@ -138,7 +160,7 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => 0,
+    'weight' => -46,
     'customized' => 1,
   );
   // Exported menu link: main-menu_users:admin-users
@@ -155,8 +177,9 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -45,
+    'weight' => -49,
     'customized' => 1,
+    'parent_identifier' => 'main-menu_admin:prc/admin',
   );
   // Exported menu link: menu-add-content_add-content:node/add/digital-library-content
   $menu_links['menu-add-content_add-content:node/add/digital-library-content'] = array(
@@ -298,10 +321,272 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-trt-district-add_add-district:node/add/district
+  $menu_links['menu-trt-district-add_add-district:node/add/district'] = array(
+    'menu_name' => 'menu-trt-district-add',
+    'link_path' => 'node/add/district',
+    'router_path' => 'node/add/district',
+    'link_title' => 'Add District',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-trt-district-add_add-district:node/add/district',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-trt-manage-schools-add-form_add-school---form:menutoken/54ff7195d7a73
+  $menu_links['menu-trt-manage-schools-add-form_add-school---form:menutoken/54ff7195d7a73'] = array(
+    'menu_name' => 'menu-trt-manage-schools-add-form',
+    'link_path' => 'menutoken/54ff7195d7a73',
+    'router_path' => 'menutoken/%',
+    'link_title' => 'Add School - form',
+    'options' => array(
+      'menu_token_link_path' => 'node/add/school?field_ref_district=[node:nid]',
+      'menu_token_data' => array(
+        'node' => array(
+          'type' => 'node',
+          'plugin' => 'node_context',
+          'options' => array(),
+        ),
+      ),
+      'menu_token_options' => array(
+        'clear' => 0,
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+      'alter' => TRUE,
+      'identifier' => 'menu-trt-manage-schools-add-form_add-school---form:menutoken/54ff7195d7a73',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-trt-manage-schools-add-form_add-schools---upload-csv-file:menutoken/5501ce6a77c95
+  $menu_links['menu-trt-manage-schools-add-form_add-schools---upload-csv-file:menutoken/5501ce6a77c95'] = array(
+    'menu_name' => 'menu-trt-manage-schools-add-form',
+    'link_path' => 'menutoken/5501ce6a77c95',
+    'router_path' => 'menutoken/%',
+    'link_title' => 'Add School(s) - upload csv file',
+    'options' => array(
+      'menu_token_link_path' => 'district/[node:nid]/upload-schools',
+      'menu_token_data' => array(
+        'node' => array(
+          'type' => 'node',
+          'plugin' => 'node_context',
+          'options' => array(),
+        ),
+      ),
+      'menu_token_options' => array(
+        'clear' => 0,
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+      'alter' => TRUE,
+      'identifier' => 'menu-trt-manage-schools-add-form_add-schools---upload-csv-file:menutoken/5501ce6a77c95',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-trt-manage-schools_manage-schools:menutoken/54ff6e2b2a473
+  $menu_links['menu-trt-manage-schools_manage-schools:menutoken/54ff6e2b2a473'] = array(
+    'menu_name' => 'menu-trt-manage-schools',
+    'link_path' => 'menutoken/54ff6e2b2a473',
+    'router_path' => 'menutoken/%',
+    'link_title' => 'Manage Schools',
+    'options' => array(
+      'menu_token_link_path' => 'node/[node:nid]/manage-schools',
+      'menu_token_data' => array(
+        'node' => array(
+          'type' => 'node',
+          'plugin' => 'node_context',
+          'options' => array(),
+        ),
+      ),
+      'menu_token_options' => array(
+        'clear' => 0,
+      ),
+      'attributes' => array(
+        'title' => 'add schools and request readiness checks',
+      ),
+      'alter' => TRUE,
+      'identifier' => 'menu-trt-manage-schools_manage-schools:menutoken/54ff6e2b2a473',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-trt-school-readiness-capaci_run-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add
+  $menu_links['menu-trt-school-readiness-capaci_run-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add'] = array(
+    'menu_name' => 'menu-trt-school-readiness-capaci',
+    'link_path' => 'admin/structure/entity-type/prc_trt/capacity_check/add',
+    'router_path' => 'admin/structure/entity-type/prc_trt/capacity_check/add',
+    'link_title' => 'run capacity check',
+    'options' => array(
+      'menu_token_link_path' => 'admin/structure/entity-type/prc_trt/capacity_check/add?field_ref_school=[node:nid]',
+      'menu_token_data' => array(
+        'node' => array(
+          'type' => 'node',
+          'plugin' => 'node_context',
+          'options' => array(),
+        ),
+      ),
+      'menu_token_options' => array(
+        'clear' => 0,
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+      'alter' => TRUE,
+      'query' => array(
+        'field_ref_school' => '[node:nid]',
+      ),
+      'identifier' => 'menu-trt-school-readiness-capaci_run-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-trt-school-readiness-system_run-system-check:menutoken/54f9f897def7d
+  $menu_links['menu-trt-school-readiness-system_run-system-check:menutoken/54f9f897def7d'] = array(
+    'menu_name' => 'menu-trt-school-readiness-system',
+    'link_path' => 'menutoken/54f9f897def7d',
+    'router_path' => 'menutoken/%',
+    'link_title' => 'run system check',
+    'options' => array(
+      'menu_token_link_path' => 'admin/structure/entity-type/prc_trt/system_check/add?field_ref_school=[node:nid]',
+      'menu_token_data' => array(
+        'node' => array(
+          'type' => 'node',
+          'plugin' => 'node_context',
+          'options' => array(),
+        ),
+      ),
+      'menu_token_options' => array(
+        'clear' => 0,
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+      'alter' => TRUE,
+      'identifier' => 'menu-trt-school-readiness-system_run-system-check:menutoken/54f9f897def7d',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-trt-system-check_system-check:admin/structure/entity-type/prc_trt/system_check/add
+  $menu_links['menu-trt-system-check_system-check:admin/structure/entity-type/prc_trt/system_check/add'] = array(
+    'menu_name' => 'menu-trt-system-check',
+    'link_path' => 'admin/structure/entity-type/prc_trt/system_check/add',
+    'router_path' => 'admin/structure/entity-type/prc_trt/system_check/add',
+    'link_title' => 'System Check',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-trt-system-check_system-check:admin/structure/entity-type/prc_trt/system_check/add',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-trt-testing-capacity-check_testing-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add
+  $menu_links['menu-trt-testing-capacity-check_testing-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add'] = array(
+    'menu_name' => 'menu-trt-testing-capacity-check',
+    'link_path' => 'admin/structure/entity-type/prc_trt/capacity_check/add',
+    'router_path' => 'admin/structure/entity-type/prc_trt/capacity_check/add',
+    'link_title' => 'Testing Capacity Check',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-trt-testing-capacity-check_testing-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: user-menu_log-out:user/logout
+  $menu_links['user-menu_log-out:user/logout'] = array(
+    'menu_name' => 'user-menu',
+    'link_path' => 'user/logout',
+    'router_path' => 'user/logout',
+    'link_title' => 'Log out',
+    'options' => array(
+      'identifier' => 'user-menu_log-out:user/logout',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -48,
+    'customized' => 1,
+  );
+  // Exported menu link: user-menu_user-account:user
+  $menu_links['user-menu_user-account:user'] = array(
+    'menu_name' => 'user-menu',
+    'link_path' => 'user',
+    'router_path' => 'user',
+    'link_title' => 'User account',
+    'options' => array(
+      'alter' => TRUE,
+      'identifier' => 'user-menu_user-account:user',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -49,
+    'customized' => 1,
+  );
   // Translatables
   // Included for use with string extractors like potx.
+  t('Add District');
+  t('Add School - form');
+  t('Add School(s) - upload csv file');
   t('Add content');
   t('Add course');
+  t('Admin');
   t('All Available Assessments');
   t('All Available Courses');
   t('Assessments');
@@ -311,10 +596,17 @@ function prc_menu_links_menu_default_menu_links() {
   t('Digital Library');
   t('Home');
   t('Invite New User');
+  t('Log out');
+  t('Manage Schools');
   t('Professional Development');
+  t('System Check');
   t('Technology Readiness');
+  t('Testing Capacity Check');
+  t('User account');
   t('Users');
   t('View All');
+  t('run capacity check');
+  t('run system check');
 
 
   return $menu_links;

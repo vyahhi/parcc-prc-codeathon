@@ -58,3 +58,20 @@ Feature: PRC-554 Social Media: Like an Assessment
     When I click "Like (0)"
     Then I should see the link "Undo (1)"
     And I should not see the text "Like"
+
+  Scenario: PRC-910 User can't Like own content
+    Given I am logged in as a user with the "Educator" role
+    And "Subject" terms:
+      | name  |
+      | subj1 |
+    And "Grade Level" terms:
+      | name      |
+      | Grade 554 |
+    And "Quiz" nodes:
+      | title        | field_subject | field_grade_level | field_quiz_type            | uid         |
+      | PRC-554 View | subj1         | Grade 554         | PRC Released Practice Test | @currentuid |
+    And I am logged in as a user with the "Educator" role
+    And I am on "assessments"
+    And I click "PRC-554 View"
+    And I should not see the link "Like (0)"
+    And I should not see the text "Undo"

@@ -9,6 +9,7 @@ docroot/sites/*/settings*.php
 docroot/files
 docroot/sites/*/files
 docroot/sites/*/private
+private_files/*
 
 # Vagrant Files #
 #################
@@ -67,3 +68,8 @@ test/failures
 test/behat.yml
 test/composer.lock
 test/vendor
+
+
+# Default SASS Cache #
+######################
+*.sass-cache*

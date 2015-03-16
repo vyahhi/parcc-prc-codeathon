@@ -47,9 +47,8 @@ function prc_poc_local_views_views_default_views() {
     'field_author_name' => 'field_author_name',
     'field_document' => 'field_document',
     'state' => 'state',
-    'delete_node' => 'delete_node',
-    'edit_node' => 'delete_node',
-    'review_link' => 'delete_node',
+    'workflow_delete_node' => 'workflow_delete_node',
+    'workflow_edit_node' => 'workflow_delete_node',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -107,17 +106,12 @@ function prc_poc_local_views_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'delete_node' => array(
-      'align' => 'views-align-center',
-      'separator' => '  |  ',
-      'empty_column' => 0,
-    ),
-    'edit_node' => array(
+    'workflow_delete_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'review_link' => array(
+    'workflow_edit_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -131,17 +125,11 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['title']['alter']['text'] = '[title]';
-  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['title']['alter']['path'] = 'node/[nid]/edit';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: PRC Workflow: Title */
+  $handler->display->display_options['fields']['prc_workflow_title']['id'] = 'prc_workflow_title';
+  $handler->display->display_options['fields']['prc_workflow_title']['table'] = 'node';
+  $handler->display->display_options['fields']['prc_workflow_title']['field'] = 'prc_workflow_title';
+  $handler->display->display_options['fields']['prc_workflow_title']['label'] = 'Title';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -177,20 +165,16 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['state']['table'] = 'node_revision_states';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
-  /* Field: Content: Delete link */
-  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['label'] = 'Action';
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Field: Content: PRC Workflow: Delete link */
+  $handler->display->display_options['fields']['workflow_delete_node']['id'] = 'workflow_delete_node';
+  $handler->display->display_options['fields']['workflow_delete_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['workflow_delete_node']['field'] = 'workflow_delete_node';
+  $handler->display->display_options['fields']['workflow_delete_node']['label'] = 'Actions';
+  /* Field: Content: PRC Workflow: Edit link */
+  $handler->display->display_options['fields']['workflow_edit_node']['id'] = 'workflow_edit_node';
+  $handler->display->display_options['fields']['workflow_edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['workflow_edit_node']['field'] = 'workflow_edit_node';
+  $handler->display->display_options['fields']['workflow_edit_node']['label'] = 'Edit link';
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -213,35 +197,120 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['filters']['combine']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
-    3 => 0,
-    4 => 0,
-    6 => 0,
+    8 => 0,
     5 => 0,
+    6 => 0,
+    4 => 0,
+    3 => 0,
+    7 => 0,
   );
   $handler->display->display_options['filters']['combine']['fields'] = array(
     'nid' => 'nid',
+    'prc_workflow_title' => 'prc_workflow_title',
     'created' => 'created',
     'type' => 'type',
     'changed' => 'changed',
-    'title' => 'title',
     'field_author_name' => 'field_author_name',
+    'field_document' => 'field_document',
+    'state' => 'state',
   );
 
   /* Display: Author's Content pane */
   $handler = $view->new_display('panel_pane', 'Author\'s Content pane', 'panel_pane_1');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'nid' => 'nid',
+    'prc_workflow_title' => 'prc_workflow_title',
+    'created' => 'created',
+    'type' => 'type',
+    'changed' => 'changed',
+    'field_author_name' => 'field_author_name',
+    'field_document' => 'field_document',
+    'state' => 'state',
+    'workflow_delete_node' => 'workflow_delete_node',
+    'workflow_edit_node' => 'workflow_delete_node',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'nid' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'prc_workflow_title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'created' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'type' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_author_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_document' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'workflow_delete_node' => array(
+      'align' => '',
+      'separator' => ' | ',
+      'empty_column' => 0,
+    ),
+    'workflow_edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['alter']['text'] = '[title]';
-  $handler->display->display_options['fields']['title']['alter']['path'] = 'node/[nid]/edit';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: PRC Workflow: Title */
+  $handler->display->display_options['fields']['prc_workflow_title']['id'] = 'prc_workflow_title';
+  $handler->display->display_options['fields']['prc_workflow_title']['table'] = 'node';
+  $handler->display->display_options['fields']['prc_workflow_title']['field'] = 'prc_workflow_title';
+  $handler->display->display_options['fields']['prc_workflow_title']['label'] = 'Title';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -277,15 +346,22 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['state']['table'] = 'node_revision_states';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
-  /* Field: Content: Delete link */
-  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['label'] = 'Action';
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  /* Field: Content: PRC Workflow: Delete link */
+  $handler->display->display_options['fields']['workflow_delete_node']['id'] = 'workflow_delete_node';
+  $handler->display->display_options['fields']['workflow_delete_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['workflow_delete_node']['field'] = 'workflow_delete_node';
+  $handler->display->display_options['fields']['workflow_delete_node']['label'] = 'Actions';
+  /* Field: Content: PRC Workflow: Edit link */
+  $handler->display->display_options['fields']['workflow_edit_node']['id'] = 'workflow_edit_node';
+  $handler->display->display_options['fields']['workflow_edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['workflow_edit_node']['field'] = 'workflow_edit_node';
+  /* Field: Content revision: Vid */
+  $handler->display->display_options['fields']['vid']['id'] = 'vid';
+  $handler->display->display_options['fields']['vid']['table'] = 'node_revision';
+  $handler->display->display_options['fields']['vid']['field'] = 'vid';
+  $handler->display->display_options['fields']['vid']['label'] = '';
+  $handler->display->display_options['fields']['vid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['vid']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Nid */
   $handler->display->display_options['sorts']['nid']['id'] = 'nid';
@@ -338,16 +414,15 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'nid' => 'nid',
-    'title' => 'title',
+    'prc_workflow_title' => 'prc_workflow_title',
     'created' => 'created',
     'type' => 'type',
     'changed' => 'changed',
     'field_author_name' => 'field_author_name',
     'field_document' => 'field_document',
     'state' => 'state',
-    'delete_node' => 'delete_node',
-    'edit_node' => 'delete_node',
-    'review_link' => 'delete_node',
+    'workflow_delete_node' => 'workflow_delete_node',
+    'workflow_edit_node' => 'workflow_delete_node',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -358,8 +433,8 @@ function prc_poc_local_views_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'title' => array(
-      'sortable' => 1,
+    'prc_workflow_title' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -405,17 +480,12 @@ function prc_poc_local_views_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'delete_node' => array(
-      'align' => 'views-align-center',
-      'separator' => '  |  ',
-      'empty_column' => 0,
-    ),
-    'edit_node' => array(
+    'workflow_delete_node' => array(
       'align' => '',
-      'separator' => '',
+      'separator' => ' | ',
       'empty_column' => 0,
     ),
-    'review_link' => array(
+    'workflow_edit_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -429,17 +499,11 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['title']['alter']['text'] = '[title]';
-  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['title']['alter']['path'] = 'node/[nid]/edit?destination=admin-content';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: PRC Workflow: Title */
+  $handler->display->display_options['fields']['prc_workflow_title']['id'] = 'prc_workflow_title';
+  $handler->display->display_options['fields']['prc_workflow_title']['table'] = 'node';
+  $handler->display->display_options['fields']['prc_workflow_title']['field'] = 'prc_workflow_title';
+  $handler->display->display_options['fields']['prc_workflow_title']['label'] = 'Title';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -475,21 +539,28 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['state']['table'] = 'node_revision_states';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
-  /* Field: Content: Delete link */
-  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['label'] = 'Action';
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  /* Field: State Flow: Review Digital Library Content */
-  $handler->display->display_options['fields']['review_link']['id'] = 'review_link';
-  $handler->display->display_options['fields']['review_link']['table'] = 'node_revision_states';
-  $handler->display->display_options['fields']['review_link']['field'] = 'review_link';
-  $handler->display->display_options['fields']['review_link']['label'] = '';
-  $handler->display->display_options['fields']['review_link']['element_label_colon'] = FALSE;
+  /* Field: Content: PRC Workflow: Delete link */
+  $handler->display->display_options['fields']['workflow_delete_node']['id'] = 'workflow_delete_node';
+  $handler->display->display_options['fields']['workflow_delete_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['workflow_delete_node']['field'] = 'workflow_delete_node';
+  $handler->display->display_options['fields']['workflow_delete_node']['label'] = 'Actions';
+  /* Field: Content: PRC Workflow: Edit link */
+  $handler->display->display_options['fields']['workflow_edit_node']['id'] = 'workflow_edit_node';
+  $handler->display->display_options['fields']['workflow_edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['workflow_edit_node']['field'] = 'workflow_edit_node';
+  $handler->display->display_options['fields']['workflow_edit_node']['label'] = 'Edit link';
+  /* Field: Content revision: Vid */
+  $handler->display->display_options['fields']['vid']['id'] = 'vid';
+  $handler->display->display_options['fields']['vid']['table'] = 'node_revision';
+  $handler->display->display_options['fields']['vid']['field'] = 'vid';
+  $handler->display->display_options['fields']['vid']['label'] = '';
+  $handler->display->display_options['fields']['vid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['vid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Nid */
+  $handler->display->display_options['sorts']['nid']['id'] = 'nid';
+  $handler->display->display_options['sorts']['nid']['table'] = 'node';
+  $handler->display->display_options['sorts']['nid']['field'] = 'nid';
   $export['admin_content_view'] = $view;
 
   $view = new view();
@@ -663,11 +734,13 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
   $handler->display->display_options['filters']['rid']['field'] = 'rid';
   $handler->display->display_options['filters']['rid']['value'] = array(
-    5 => '5',
     6 => '6',
+    7 => '7',
     4 => '4',
     3 => '3',
-    7 => '7',
+    8 => '8',
+    9 => '9',
+    5 => '5',
   );
   /* Filter criterion: Global: Combine fields filter */
   $handler->display->display_options['filters']['combine']['id'] = 'combine';
@@ -1949,19 +2022,18 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['name']['label'] = 'Username';
   /* Field: Course object fulfillment: Date_started */
   $handler->display->display_options['fields']['date_started']['id'] = 'date_started';
   $handler->display->display_options['fields']['date_started']['table'] = 'course_outline_fulfillment';
   $handler->display->display_options['fields']['date_started']['field'] = 'date_started';
-  $handler->display->display_options['fields']['date_started']['label'] = 'Started';
+  $handler->display->display_options['fields']['date_started']['label'] = 'Date Started';
   $handler->display->display_options['fields']['date_started']['date_format'] = 'short';
   $handler->display->display_options['fields']['date_started']['second_date_format'] = 'long';
   /* Field: Course object fulfillment: Date_completed */
   $handler->display->display_options['fields']['date_completed']['id'] = 'date_completed';
   $handler->display->display_options['fields']['date_completed']['table'] = 'course_outline_fulfillment';
   $handler->display->display_options['fields']['date_completed']['field'] = 'date_completed';
-  $handler->display->display_options['fields']['date_completed']['label'] = 'Completed';
+  $handler->display->display_options['fields']['date_completed']['label'] = 'Date Completed';
   $handler->display->display_options['fields']['date_completed']['date_format'] = 'short';
   $handler->display->display_options['fields']['date_completed']['second_date_format'] = 'long';
   /* Field: Course object fulfillment: Grade_result */
@@ -2085,7 +2157,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'Sorry, there is no course data to report on.';
+  $handler->display->display_options['empty']['area']['content'] = 'Sorry, there is no course data to report on. Please check that both date fields are filled in with valid dates.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Relationship: Course report: Nid */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
@@ -2192,7 +2264,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['menu']['title'] = 'Overview';
   $handler->display->display_options['menu']['weight'] = '-1';
   $handler->display->display_options['tab_options']['type'] = 'tab';
-  $handler->display->display_options['tab_options']['title'] = 'Course reports';
+  $handler->display->display_options['tab_options']['title'] = 'Reporting';
   $handler->display->display_options['tab_options']['weight'] = '1';
 
   /* Display: Global course report */
@@ -4395,6 +4467,316 @@ function prc_poc_local_views_views_default_views() {
   $export['sample_article'] = $view;
 
   $view = new view();
+  $view->name = 'school_readiness_last_capacity_check_result';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'eck_prc_trt';
+  $view->human_name = 'School Readiness Last Capacity Check Result';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'entity';
+  $handler->display->display_options['row_options']['view_mode'] = 'school_readiness';
+  /* Field: Prc_trt: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  /* Sort criterion: Prc_trt: Created */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: prc_trt: School (field_ref_school) */
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['table'] = 'field_data_field_ref_school';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['field'] = 'field_ref_school_target_id';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Prc_trt: prc_trt type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'capacity_check' => 'capacity_check',
+  );
+
+  /* Display: Most recent school capacity check */
+  $handler = $view->new_display('panel_pane', 'Most recent school capacity check', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_ref_school_target_id' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'prc_trt: School (field_ref_school)',
+    ),
+  );
+
+  /* Display: School Readiness Page Cap Students */
+  $handler = $view->new_display('panel_pane', 'School Readiness Page Cap Students', 'panel_pane_2');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Prc_trt: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+  /* Field: Field: Number of students */
+  $handler->display->display_options['fields']['field_number_of_students']['id'] = 'field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['table'] = 'field_data_field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['field'] = 'field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_ref_school_target_id' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'prc_trt: School (field_ref_school)',
+    ),
+  );
+  $export['school_readiness_last_capacity_check_result'] = $view;
+
+  $view = new view();
+  $view->name = 'school_readiness_system_checks';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'eck_prc_trt';
+  $view->human_name = 'School Readiness System Checks';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'id' => 'id',
+    'field_name' => 'field_name',
+    'created' => 'created',
+    'field_number_of_devices' => 'field_number_of_devices',
+    'field_result' => 'field_result',
+  );
+  $handler->display->display_options['style_options']['default'] = 'created';
+  $handler->display->display_options['style_options']['info'] = array(
+    'id' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'created' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_number_of_devices' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_result' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'no system checks have been run. 
+message explaining what the check does and the importance of running it.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Field: Prc_trt: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+  /* Field: prc_trt: System check name */
+  $handler->display->display_options['fields']['field_name']['id'] = 'field_name';
+  $handler->display->display_options['fields']['field_name']['table'] = 'field_data_field_name';
+  $handler->display->display_options['fields']['field_name']['field'] = 'field_name';
+  $handler->display->display_options['fields']['field_name']['label'] = 'System Check';
+  $handler->display->display_options['fields']['field_name']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_name']['alter']['path'] = 'prc_trt/system_check/[id]';
+  /* Field: Prc_trt: Created */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Date & Time';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: prc_trt: Number of devices */
+  $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['label'] = 'Number of Devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Result */
+  $handler->display->display_options['fields']['field_result']['id'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['table'] = 'field_data_field_result';
+  $handler->display->display_options['fields']['field_result']['field'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['label'] = 'Results';
+  /* Contextual filter: prc_trt: School (field_ref_school) */
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['table'] = 'field_data_field_ref_school';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['field'] = 'field_ref_school_target_id';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_ref_school_target_id']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Prc_trt: prc_trt type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'system_check' => 'system_check',
+  );
+
+  /* Display: Content pane */
+  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_ref_school_target_id' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'prc_trt: School (field_ref_school)',
+    ),
+  );
+  $export['school_readiness_system_checks'] = $view;
+
+  $view = new view();
+  $view->name = 'schools';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Schools';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = '[title] Readiness';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['path'] = '[edit_node]';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Summary of what user can do here view readiness by school, run readiness checks, view readiness check results.';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'school' => 'school',
+  );
+
+  /* Display: School Readiness Links */
+  $handler = $view->new_display('panel_pane', 'School Readiness Links', 'panel_pane_1');
+  $handler->display->display_options['display_description'] = 'TRT School Readiness Links';
+  $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $export['schools'] = $view;
+
+  $view = new view();
   $view->name = 'taxonomy_term';
   $view->description = 'A view to emulate Drupal core\'s handling of taxonomy/term.';
   $view->tag = 'default';
@@ -5213,6 +5595,320 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['tab_options']['weight'] = '0';
   $handler->display->display_options['tab_options']['name'] = 'main-menu';
   $export['transcript'] = $view;
+
+  $view = new view();
+  $view->name = 'trt_district_schools';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'TRT District Schools';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+  );
+  $handler->display->display_options['style_options']['default'] = 'title';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No schools have been added to your district. Please click one of the Add School links above to add schools.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Field: Bulk operations: Content */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['label'] = '';
+  $handler->display->display_options['fields']['views_bulk_operations']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::quiz_add_question_to_quiz' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_assign_owner_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_delete_item' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_delete_revision' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_script_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::flag_node_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_make_sticky_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_make_unsticky_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_modify_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'show_all_tokens' => 1,
+        'display_values' => array(
+          '_all_' => '_all_',
+        ),
+      ),
+    ),
+    'action::views_bulk_operations_argument_selector_action' => array(
+      'selected' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'url' => '',
+      ),
+    ),
+    'action::node_promote_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_publish_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_unpromote_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::prc_trt_request_readiness_checks' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_save_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::system_send_email_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_unpublish_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_unpublish_by_keyword_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::pathauto_node_update_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'School Name';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['path'] = 'node/[nid]/edit';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: School contact's email address */
+  $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['label'] = 'School Contact Email Address';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: District (field_ref_district) */
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['id'] = 'field_ref_district_target_id';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['table'] = 'field_data_field_ref_district';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['field'] = 'field_ref_district_target_id';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'school' => 'school',
+  );
+
+  /* Display: TRT District Schools List */
+  $handler = $view->new_display('panel_pane', 'TRT District Schools List', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_ref_district_target_id' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Content: District (field_ref_district)',
+    ),
+  );
+  $export['trt_district_schools'] = $view;
+
+  $view = new view();
+  $view->name = 'trt_districts';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'TRT Districts';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = '[title] Readiness';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['sorts']['title']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'district' => 'district',
+  );
+
+  /* Display: Content pane */
+  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $export['trt_districts'] = $view;
 
   return $export;
 }

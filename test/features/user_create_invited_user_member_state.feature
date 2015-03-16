@@ -7,7 +7,7 @@ Feature: PRC-363 State Association to Invited Users
   Scenario: Accepting an invitation with a state saves that state to the user
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Content Contributor"
+    Then I check the box "Content Contributor"
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"
     And I select "Illinois" from "State"
@@ -32,6 +32,6 @@ Feature: PRC-363 State Association to Invited Users
     Then the user "example1@timestamp@example.com" should have a role of "Content Contributor"
     And the user "example1@timestamp@example.com" should not have a role of "Educator"
     And I follow "My account"
-    Then I should see the text "Member State:"
+    Then I should see the text "Member State"
     And I should see the link "Illinois"
     Then I delete the user with the email address "example1@timestamp@example.com"

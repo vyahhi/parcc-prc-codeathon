@@ -117,3 +117,12 @@ Feature: PRC-69 Admin: Create a Course
     And I uncheck the box "Published"
     And I press "Save"
     Then the node titled "Title PRC-69 Published @timestamp" should not be published
+
+  Scenario: AC4. Validations: If a required field is NOT entered after the Save button is selected, The system will display the following feedback on the top of the form:
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And I am on "admin-course"
+    When I click "Add course"
+    And I press "Save"
+    Then I should see the error message containing "Course Title field is required."
+    Then I should see the error message containing "Permissions field is required."
+    Then I should see the error message containing "Course Objectives field is required."

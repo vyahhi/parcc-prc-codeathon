@@ -11,6 +11,7 @@ files[] = src/PrcCsvGradeLevelMigration.php
 files[] = src/PrcCsvMediaTypeMigration.php
 files[] = src/PrcCsvQuizTypeMigration.php
 files[] = src/PrcCsvMemberStateMigration.php
+files[] = src/PrcCsvUserStatesMigration.php
 files[] = src/PrcJsonStandardMigrateItem.php
 files[] = src/PrcJsonStandardMigrateList.php
 files[] = src/PrcJsonStandardMigration.php

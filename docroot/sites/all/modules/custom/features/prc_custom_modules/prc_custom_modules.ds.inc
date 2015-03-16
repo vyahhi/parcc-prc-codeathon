@@ -622,5 +622,14 @@ function prc_custom_modules_ds_view_modes_info() {
   );
   $export['gallery_view'] = $ds_view_mode;
 
+  $ds_view_mode = new stdClass();
+  $ds_view_mode->api_version = 1;
+  $ds_view_mode->view_mode = 'school_readiness';
+  $ds_view_mode->label = 'School Readiness';
+  $ds_view_mode->entities = array(
+    'prc_trt' => 'prc_trt',
+  );
+  $export['school_readiness'] = $ds_view_mode;
+
   return $export;
 }

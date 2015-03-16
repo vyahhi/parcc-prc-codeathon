@@ -7,7 +7,7 @@ Feature: Admin UI: Define Content Metadata (PRC-30)
   @javascript
   Scenario: AC1 Test presence of metadata section with terms
     Given I am logged in as a user with the "Content Contributor" role
-    And I am on the homepage
+    And I am on "prc/admin"
     When I follow "Content"
     Then I click "Add content"
     Then I should see the text "Add More Information (Content Properties)" in the "content" region

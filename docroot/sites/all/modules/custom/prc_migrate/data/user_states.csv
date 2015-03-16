@@ -1,0 +1,66 @@
+ID,name,field_state_abbreviation,weight
+100,Alabama,AL,-49
+101,Alaska,AK,-48
+102,Arizona,AZ,-47
+103,Arkansas,AR,-46
+104,California,CA,-45
+105,Colorado,CO,-44
+106,Connecticut,CT,-43
+107,Delaware,DE,-42
+108,Florida,FL,-41
+109,Georgia,GA,-40
+110,Hawaii,HI,-39
+111,Idaho,ID,-38
+112,Illinois,IL,-37
+113,Indiana,IN,-36
+114,Iowa,IA,-35
+115,Kansas,KS,-34
+116,Kentucky,KY,-33
+117,Louisiana,LA,-32
+118,Maine,ME,-31
+119,Maryland,MD,-30
+120,Massachusetts,MA,-29
+121,Michigan,MI,-28
+122,Minnesota,MN,-27
+123,Mississippi,MS,-26
+124,Missouri,MO,-25
+125,Montana,MT,-24
+126,Nebraska,NE,-23
+127,Nevada,NV,-22
+128,New Hampshire,NH,-21
+129,New Jersey,NJ,-20
+130,New Mexico,NM,-19
+131,New York,NY,-18
+132,North Carolina,NC,-17
+133,North Dakota,ND,-16
+134,Ohio,OH,-15
+135,Oklahoma,OK,-14
+136,Oregon,OR,-13
+137,Pennsylvania,PA,-12
+138,Rhode Island,RI,-11
+139,South Carolina,SC,-10
+140,South Dakota,SD,-9
+141,Tennessee,TN,-8
+142,Texas,TX,-7
+143,Utah,UT,-6
+144,Vermont,VT,-5
+145,Virginia,VA,-4
+146,Washington,WA,-3
+147,West Virginia,WV,-2
+148,Wisconsin,WI,-1
+149,Wyoming,WY,0
+150,American Samoa,AS,1
+151,District of Columbia,DC,2
+152,Federated States of Micronesia,FM,3
+153,Guam,GU,4
+154,Marshall Islands,MH,5
+155,Northern Mariana Islands,MP,6
+156,Palau,PW,7
+157,Puerto Rico,PR,8
+158,Virgin Islands,VI,9
+159,Armed Forces Africa,AE,10
+160,Armed Forces Americas,AA,11
+161,Armed Forces Canada,AE,12
+162,Armed Forces Europe,AE,13
+163,Armed Forces Middle East,AE,14
+164,Armed Forces Pacific,AP,15

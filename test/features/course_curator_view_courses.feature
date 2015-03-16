@@ -6,7 +6,7 @@ Feature: PRC-348 Admin: View Courses List
 
   Scenario Outline: AC1 Has Course Management Tab by role
     Given I am logged in as a user with the "<role>" role
-    And I am on the homepage
+    And I am on "prc/admin"
     Then I should see the link "Course Management"
     Examples:
     | role                            |
@@ -16,7 +16,7 @@ Feature: PRC-348 Admin: View Courses List
 
   Scenario Outline: AC1 Does not have Course Management Tab by role
     Given I am logged in as a user with the "<role>" role
-    And I am on the homepage
+    And I am on "prc/admin"
     Then I should not see the link "Course Management"
     Examples:
     | role                  |
@@ -31,7 +31,7 @@ Feature: PRC-348 Admin: View Courses List
 
   Scenario: AC2 At click, it redirects the user to a new PRC Courses page
     Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on the homepage
+    And I am on "prc/admin"
     When I click "Course Management"
     Then I should be on "admin-course"
     And I should see the heading "PRC Courses" in the "content" region
@@ -44,7 +44,7 @@ Feature: PRC-348 Admin: View Courses List
   Scenario: AC4 The table contains the following fields:
     Given I am logged in as a user with the "Content Administrator (Curator)" role
     And I am viewing my "PD Course" node with the title "PD Course PRC-348 AC4"
-    And I am on the homepage
+    And I am on "prc/admin"
     When I follow "Course Management"
     Then I should see the link "ID"
     And I should see the link "Title"
@@ -62,7 +62,7 @@ Feature: PRC-348 Admin: View Courses List
     | title  | uid         | status |
     | Mine   | @currentuid | 1      |
     | Theirs | 1           | 1      |
-    And I am on the homepage
+    And I am on "prc/admin"
     When I follow "Course Management"
     Then I should see the text "Mine"
     And I should see the text "Theirs"
@@ -74,7 +74,7 @@ Feature: PRC-348 Admin: View Courses List
       | title  | uid         | status |
       | Mine   | @currentuid | 0      |
       | Theirs | 1           | 0      |
-    And I am on the homepage
+    And I am on "prc/admin"
     When I follow "Course Management"
     Then I should see the text "Mine"
     And I should see the text "Theirs"
@@ -89,6 +89,7 @@ Feature: PRC-348 Admin: View Courses List
     And I should not see the link "last"
 
     And I run drush "genc 100 --kill --types=pd_course"
+    And I am on "prc/admin"
     Then I follow "Course Management"
     And I should not see the link "first"
     And I should not see the link "previous"
@@ -96,6 +97,7 @@ Feature: PRC-348 Admin: View Courses List
     And I should not see the link "last"
 
     And I run drush "genc 1 --types=pd_course"
+    And I am on "prc/admin"
     Then I follow "Course Management"
     And I should not see the link "first"
     And I should not see the link "previous"

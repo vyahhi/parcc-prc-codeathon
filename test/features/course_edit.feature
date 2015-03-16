@@ -72,14 +72,14 @@ Feature: PRC-349 Admin: Edit Course
     And I should see a "Published" field
     And the "Published" checkbox should not be checked
 
-  Scenario: AC4. Validations: If a required field is NOT entered after the Save button is selected, The system will display the following feedback on the top of the form:
-    Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
-    When I click "Add course"
-    And I press "Save"
-    Then I should see the error message containing "Course Title field is required."
-    Then I should see the error message containing "Permissions field is required."
-    Then I should see the error message containing "Course Objectives field is required."
+#  Scenario: AC4. Validations: If a required field is NOT entered after the Save button is selected, The system will display the following feedback on the top of the form:
+#    Given I am logged in as a user with the "Content Administrator (Curator)" role
+#    And I am on "admin-course"
+#    When I click "Add course"
+#    And I press "Save"
+#    Then I should see the error message containing "Course Title field is required."
+#    Then I should see the error message containing "Permissions field is required."
+#    Then I should see the error message containing "Course Objectives field is required."
 
   Scenario: AC5. The Save button will allow the user to save the entries for all the course information.
     And I fill in "Course Title" with "Title PRC-349 AC5 @timestamp"
@@ -87,7 +87,7 @@ Feature: PRC-349 Admin: Edit Course
     And I select the radio button "Public"
     And I press "Save"
     # AC6 Once Saved, the system will provide confirmation that the course information has been successfully saved.
-    Then I should see the message containing "PD Course Title PRC-349 AC5 @timestamp has been updated."
+    Then I should see the text "PD Course Title PRC-349 AC5 @timestamp has been updated."
 
   Scenario: Published reflects published status
     And the "Published" checkbox should not be checked

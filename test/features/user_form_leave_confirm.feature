@@ -9,6 +9,7 @@ Feature: Edit User - Leaving Page Without Saving Changes (PRC-213)
     And users:
       | name         | mail                    | pass     | field_first_name | field_last_name | status |
       | PRC-213 User | joe_prc_213@example.com | xyz123   | Joe              | User            | 1      |
+    And I am on "prc/admin"
     Then I click "Users"
     Then the url should match "admin-users"
     # Now sort by User ID descending so that the new user we created is up top

@@ -76,6 +76,48 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Professional Development Left Nav',
     'description' => 'Navigation menu for Professional Development view',
   );
+  // Exported menu: menu-trt-district-add.
+  $menus['menu-trt-district-add'] = array(
+    'menu_name' => 'menu-trt-district-add',
+    'title' => 'TRT District Add',
+    'description' => '',
+  );
+  // Exported menu: menu-trt-manage-schools.
+  $menus['menu-trt-manage-schools'] = array(
+    'menu_name' => 'menu-trt-manage-schools',
+    'title' => 'TRT Manage Schools',
+    'description' => '',
+  );
+  // Exported menu: menu-trt-manage-schools-add-form.
+  $menus['menu-trt-manage-schools-add-form'] = array(
+    'menu_name' => 'menu-trt-manage-schools-add-form',
+    'title' => 'TRT Manage Schools Add School Form',
+    'description' => '',
+  );
+  // Exported menu: menu-trt-school-readiness-capaci.
+  $menus['menu-trt-school-readiness-capaci'] = array(
+    'menu_name' => 'menu-trt-school-readiness-capaci',
+    'title' => 'TRT School Readiness Capacity Check',
+    'description' => '',
+  );
+  // Exported menu: menu-trt-school-readiness-system.
+  $menus['menu-trt-school-readiness-system'] = array(
+    'menu_name' => 'menu-trt-school-readiness-system',
+    'title' => 'TRT School Readiness System Check',
+    'description' => '',
+  );
+  // Exported menu: menu-trt-system-check.
+  $menus['menu-trt-system-check'] = array(
+    'menu_name' => 'menu-trt-system-check',
+    'title' => 'TRT System Check',
+    'description' => '',
+  );
+  // Exported menu: menu-trt-testing-capacity-check.
+  $menus['menu-trt-testing-capacity-check'] = array(
+    'menu_name' => 'menu-trt-testing-capacity-check',
+    'title' => 'TRT Testing Capacity Check',
+    'description' => '',
+  );
   // Exported menu: navigation.
   $menus['navigation'] = array(
     'menu_name' => 'navigation',
@@ -106,6 +148,13 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Navigation');
   t('Navigation menu for Professional Development view');
   t('Professional Development Left Nav');
+  t('TRT District Add');
+  t('TRT Manage Schools');
+  t('TRT Manage Schools Add School Form');
+  t('TRT School Readiness Capacity Check');
+  t('TRT School Readiness System Check');
+  t('TRT System Check');
+  t('TRT Testing Capacity Check');
   t('The <em>Main</em> menu is used on many sites to show the major sections of the site, often in a top navigation bar.');
   t('The <em>Management</em> menu contains links for administrative tasks.');
   t('The <em>Navigation</em> menu contains links intended for site visitors. Links are added to the <em>Navigation</em> menu automatically by some modules.');

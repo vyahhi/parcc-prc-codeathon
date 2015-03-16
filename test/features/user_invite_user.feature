@@ -9,7 +9,7 @@ Feature: Invite User (PRC-92)
 
   Scenario: AC2 - In the Users page, a new Invite New User button shall be added. At click, it opens a new Invite New User page. +
     Given I am logged in as a user with the "PRC Admin" role
-    And I am on the homepage
+    And I am on "prc/admin"
     Then I follow "Users"
     Then I should see the link "Invite New User"
     Then I follow "Invite New User"
@@ -24,6 +24,7 @@ Feature: Invite User (PRC-92)
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
     Then I should see the link "Home"
+    And I am on "prc/admin"
     And I should see the link "Users"
 
   Scenario: AC5 - The following fields are to be captured:
@@ -34,14 +35,14 @@ Feature: Invite User (PRC-92)
     And I should see a "Message *" field
     And I should see "Role *"
 
-  Scenario: AC6 - Role: Only 1 of the roles listed below can be selected from the radio button at a time:
+  Scenario: AC6 - Role: Replaced by PRC-823 - Allow multiple roles
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Educator"
-    Then I select the radio button "PRC Admin"
-    Then I select the radio button "Content Contributor"
-    Then I should not see the radio button "administrator"
-    Then I should not see the radio button "authenticated user"
+    Then I should see the checkbox "Educator"
+    Then I should see the checkbox "PRC Admin"
+    Then I should see the checkbox "Content Contributor"
+    Then I should not see the checkbox "administrator"
+    Then I should not see the checkbox "authenticated user"
 
   # AC7 - The Role selected will apply to all E-Mail addresses entered and the invitational message drafted before submission.
   # This is really a UI constraint, and the test for PRC-73 Create User Account Following an Invitation will cover it
@@ -75,7 +76,7 @@ Feature: Invite User (PRC-92)
   Scenario: AC8 - Validations: Role required
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Educator"
+    Then I check the box "Educator"
     And I press "Send Invitation"
     Then I should see the error message containing "E-mail field is required."
     Then I should not see the error message containing "Role field is required."
@@ -83,7 +84,7 @@ Feature: Invite User (PRC-92)
   Scenario: AC9 - A Send Invitation button is provided at the end. At click, the system shall sends an email to the address provided, stating the pre-defined role.
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Content Contributor"
+    Then I check the box "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com"
     And I press "Send Invitation"
@@ -95,7 +96,7 @@ Feature: Invite User (PRC-92)
   Scenario: AC9 - Send invitations to multiple users
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Educator"
+    Then I check the box "Educator"
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@example.com,example2@example.com"
     And I press "Send Invitation"
@@ -127,3 +128,11 @@ Feature: Invite User (PRC-92)
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
     Then the "Message" field should contain "I'd like to invite you to the PARCC Partnership Resource Center."
+
+  Scenario: PRC-948 Roles field required
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    When I fill in "Message" with "4321MESSAGE1234"
+    And I fill in "E-mail" with "example1@example.com,example2@example.com"
+    And I press "Send Invitation"
+    Then I should see the error message containing "Role field is required."

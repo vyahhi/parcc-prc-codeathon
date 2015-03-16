@@ -7,7 +7,8 @@ Feature: Edit Content (PRC-158)
   Scenario: AC1  Content Contributors click on content tab and see content with edit button
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
-    And I follow "Content" in the "header" region
+    And I am on "prc/admin"
+    And I follow "Content" in the "content" region
     Then I should see the link "edit" in the "content" region
     #  AC2 At click, the Edit Content page opens.
     Then I follow "edit"
@@ -16,7 +17,8 @@ Feature: Edit Content (PRC-158)
   Scenario: AC3 Editable attributes are shown in the Edit Content page
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
-    And I follow "Content" in the "header" region
+    And I am on "prc/admin"
+    And I follow "Content" in the "content" region
     Then I should see the link "edit" in the "content" region
     #  AC2 At click, the Edit Content page opens.
     Then I follow "edit"
@@ -50,12 +52,13 @@ Feature: Edit Content (PRC-158)
   Scenario: AC4 Attachment files are listed, along with a Remove link/button. At click, the file is removed after having the user to confirm removal
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
-    And I follow "Content" in the "header" region
+    And I am on "prc/admin"
+    And I follow "Content" in the "content" region
     Then I should see the link "edit" in the "content" region
     Then I follow "edit"
     Then I should see the heading "Test-o-rama" in the "content" region
     # AC5  A user may add more files; a Browse button along with an Upload button are provided to allow the user to select the file.
-    Then I attach the file "testfiles/lovelythumbnail.png" to "edit-field-thumbnail-und-0-upload"
+    Then I attach the file "testfiles/lovelythumbnail.png" to "files[field_thumbnail_und_0]"
     And I select the radio button "Public"
     # AC8  A Save button allows the user to save the entries for the updated content to be posted.
     And I press "Save"
@@ -83,7 +86,7 @@ Feature: Edit Content (PRC-158)
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
     Then I follow "Edit"
     And I click "Attach a File"
-    Then I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-document-und-0-upload"
+    Then I attach the file "testfiles/GreatLakesWater.pdf" to "files[field_document_und_0]"
     And I select the radio button "Public"
     And I press "Save"
     Then I follow "Edit"
@@ -173,14 +176,15 @@ Feature: Edit Content (PRC-158)
   Scenario: PRC-342 Edit Content- Expandable/collapsible controls when attachment are in sections
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Test-o-rama"
-    And I follow "Content" in the "header" region
+    And I am on "prc/admin"
+    And I follow "Content" in the "content" region
     Then I should see the link "edit" in the "content" region
     Then I follow "edit"
     Then I should see the heading "Test-o-rama" in the "content" region
     Then I should see the text "Attach a File"
     Then I should not see the text "Add a new file"
     And I click "Attach a File"
-    Then I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-document-und-0-upload"
+    Then I attach the file "testfiles/GreatLakesWater.pdf" to "files[field_document_und_0]"
     And I select the radio button "Public"
     And I press "Save"
     And I should see the success message containing "Digital Library Content Test-o-rama has been updated."

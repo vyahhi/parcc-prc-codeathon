@@ -10,8 +10,8 @@ Feature: PRC-39 Rate/Like Content (end user)
   Scenario: Like link in Digital Library view
     Given I have no "Digital Library Content" nodes
     Given "Digital Library Content" nodes:
-      | title      | body           | field_permissions | uid | status |
-      | Public     | This is public | public            | 1   | 1      |
+      | title  | body           | field_permissions | uid | status |
+      | Public | This is public | public            | 1   | 1      |
     And I am logged in as a user with the "Educator" role
     And I am on "digital-library"
     Then I should see the link "Public"
@@ -37,8 +37,8 @@ Feature: PRC-39 Rate/Like Content (end user)
   Scenario: Like link on Digital Library full view
     Given I have no "Digital Library Content" nodes
     Given "Digital Library Content" nodes:
-      | title      | body           | field_permissions | uid | status |
-      | Public     | This is public | public            | 1   | 1      |
+      | title  | body           | field_permissions | uid | status |
+      | Public | This is public | public            | 1   | 1      |
     And I am logged in as a user with the "Educator" role
     And I am on "digital-library"
     And I click "Public"
@@ -47,3 +47,22 @@ Feature: PRC-39 Rate/Like Content (end user)
     When I click "Like (0)"
     Then I should see the link "Undo (1)"
     And I should not see the text "Like"
+
+  Scenario: PRC-910 User can't Like own content
+    Given I am logged in as a user with the "Content Contributor" role
+    And "Digital Library Content" nodes:
+      | title  | body           | field_permissions | uid         | status |
+      | Public | This is public | public            | @currentuid | 1      |
+    And I visit the last node created
+    Then I should not see the link "Like (0)"
+
+  Scenario: Like link on Digital Library full view
+    Given I have no "Digital Library Content" nodes
+    Given "Digital Library Content" nodes:
+      | title  | body           | field_permissions | uid | status |
+      | Public | This is public | public            | 1   | 1      |
+    And I am an anonymous user
+    And I am on "digital-library"
+    And I click "Public"
+    And I should not see the link "Like (0)"
+

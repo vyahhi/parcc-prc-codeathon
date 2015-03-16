@@ -6,7 +6,7 @@ Feature: Admin UI: Edit User (PRC-105)
 
   Background:
     Given I am logged in as a user with the "PRC Admin" role
-    And I am on the homepage
+    And I am on "prc/admin"
     And users:
       | name     | mail                    | pass     | field_first_name | field_last_name | status |
       | Joe User | joe_prc_105@example.com | xyz123   | Joe              | User            | 1      |
@@ -27,8 +27,9 @@ Feature: Admin UI: Edit User (PRC-105)
     Then I press the "Save" button
     Then I should see the heading "Joe User (@uname[Joe User])" in the "content" region
 
-  Scenario: AC3 - Keep the top nav bar
-    Then I should see the link "Users" in the "header" region
+  Scenario: AC3 - Keep the top nav bar (now in content area)
+    Then I am on "prc/admin"
+    Then I should see the link "Users" in the "content" region
 
   Scenario: AC4 - The following fields are to be displayed
     Then I should see a "First Name *" field
@@ -40,11 +41,11 @@ Feature: Admin UI: Edit User (PRC-105)
     And I should see a "Confirm password" field
     And I should see "Password strength"
 
-  Scenario: AC5 - Only 1 role can be selected - radio button
-    Then I select the radio button "Educator"
-    Then I select the radio button "PRC Admin"
-    Then I select the radio button "Content Contributor"
-    Then I should not see the radio button "administrator"
+  Scenario: AC5 - Only 1 role can be selected - radio button PRC-823 Changes to allow multiple roles
+    Then I should see the checkbox "Educator"
+    Then I should see the checkbox "PRC Admin"
+    Then I should see the checkbox "Content Contributor"
+    Then I should not see the checkbox "administrator"
 
   Scenario: AC6a - Validation - required fields
     Then I fill in "First Name *" with ""
@@ -84,4 +85,8 @@ Feature: Admin UI: Edit User (PRC-105)
     # Drupal doesn't give you a Cancel button on anything. It's the user's job to navigate away.
     # Users are used to clicking the Back button.Scenario:
 
-  Scenario: AC9 - Javascript to confirm nav away from page
+  Scenario: PRC-948 Role field should be required
+    Then I should see the text "Roles \*"
+    When I uncheck the box "Educator"
+    And I press the "Save" button
+    Then I should see the error message containing "Roles field is required."

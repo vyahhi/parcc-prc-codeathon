@@ -22,7 +22,7 @@ Feature: PRC-485 Admin UI: Invite User - Email Already Exists
       | Joe Arkansas | joe_prc_485ar@timestamp@example.com | xyz123 | Joe              | Arkansas        | 1      |
     And I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Content Contributor"
+    Then I check the box "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com;joe_prc_485il@timestamp@example.com"
     And I select "Illinois" from "State"
@@ -38,7 +38,7 @@ Feature: PRC-485 Admin UI: Invite User - Email Already Exists
       | Joe Arkansas | joe_prc_485ar@timestamp@example.com | xyz123 | Joe              | Arkansas        | 1      |
     And I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I select the radio button "Content Contributor"
+    Then I check the box "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "joe_prc_485ar@timestamp@example.com;example@example.com;joe_prc_485il@timestamp@example.com"
     And I select "Illinois" from "State"

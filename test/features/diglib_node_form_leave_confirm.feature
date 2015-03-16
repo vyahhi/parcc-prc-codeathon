@@ -5,6 +5,7 @@ Feature: PRC-251 Edit Content - Leaving page without saving
 
   Background:
     Given I am logged in as a user with the "PRC Admin" role
+    And I am on "prc/admin"
     Then I click "Content"
     Then I click "Add content"
     Then I fill in "Title *" with "title"

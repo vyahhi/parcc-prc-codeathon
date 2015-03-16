@@ -4,215 +4,559 @@
  * PRC Technology Readiness Tool module code.
  */
 
+module_load_include('inc', 'prc_trt', 'prc_trt_request_readiness_checks');
+
+function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form, &$form_state) {
+  drupal_set_title(t('Testing Capacity Check'));
+  $form['actions']['submit']['#value'] = t('Submit');
+
+  $form['instructions_text'] = array(
+    '#type' => 'markup',
+    '#markup' => t('Instructions go here. For example: To determine if your school has the appropriate number of test-ready devices to run a successful assessment, enter information requested below.'),
+    '#weight' => -12,
+  );
+
+  if (array_key_exists('entityreference_prepopulate', $form_state)) {
+    $form['field_name'][LANGUAGE_NONE][0]['value']['#required'] = TRUE;
+    $school_nid = $form_state['entityreference_prepopulate']['prc_trt']['capacity_check']['field_ref_school'][0];
+    $school = node_load($school_nid);
+    $school_wrapper = entity_metadata_wrapper('node', $school);
+    $students = $school_wrapper->field_number_of_students->value();
+    if ($students) {
+      $form['field_number_of_students']['und'][0]['value']['#default_value'] = $students;
+    }
+  } else {
+    $form['important_school_message_text'] = array(
+      '#type' => 'markup',
+      '#markup' => t('Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.'),
+      '#weight' => -11,
+    );
+  }
+
+  $form['required_message'] = array(
+    '#type' => 'markup',
+    '#markup' => '* indicates required field',
+    '#weight' => -10,
+  );
+
+  // Wireless only visible when selected from network connection
+  $form['field_wireless_connection_speed']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_network_connection_type[und]"]' => array('value' => "wireless"),
+    ),
+  );
+
+  // Wired only visible when selected from network connection
+  $form['field_wired_connection_speed']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_network_connection_type[und]"]' => array('value' => "wired"),
+    ),
+  );
+
+  $form['field_network_connection_type']['und']['#options']['_none'] = t('Please select');
+  $form['field_wired_connection_speed']['und']['#options']['_none'] = t('Please select');
+  $form['field_wireless_connection_speed']['und']['#options']['_none'] = t('Please select');
+  $form['field_ref_school']['#access'] = FALSE;
+}
+
+function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &$form_state) {
+  $form['actions']['submit']['#value'] = t('Submit');
+
+  if (array_key_exists('entityreference_prepopulate', $form_state)) {
+    $form['field_name'][LANGUAGE_NONE][0]['value']['#required'] = TRUE;
+  } else {
+    $form['important_school_message_text'] = array(
+      '#type' => 'markup',
+      '#markup' => t('Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.'),
+      '#weight' => -11,
+    );
+  }
+
+  $form['required_message'] = array(
+    '#type' => 'markup',
+    '#markup' => '* indicates required field',
+    '#weight' => -10,
+  );
+
+  $hide_fields = array(
+    'field_monitor_color_depth',
+    'field_screen_resolution_width',
+    'field_screen_resolution_height',
+    'field_browser',
+    'field_browser_version',
+    'field_browser_cookies_enabled',
+    'field_browser_javascript_enabled',
+    'field_browser_images_enabled',
+    'field_result',
+    'field_ref_school',
+  );
+
+  foreach ($hide_fields as $hide_field) {
+    $form[$hide_field]['#access'] = FALSE;
+  }
+
+  $form['faux_browser'] = array(
+    '#type' => 'hidden'
+  );
+  $form['faux_javascript'] = array(
+    '#type' => 'hidden'
+  );
+  $form['faux_cookies'] = array(
+    '#type' => 'hidden'
+  );
+  $form['faux_images'] = array(
+    '#type' => 'hidden'
+  );
+  $form['faux_monitor_color_depth'] = array(
+    '#type' => 'hidden'
+  );
+  $form['faux_screen_resolution_width'] = array(
+    '#type' => 'hidden'
+  );
+  $form['faux_screen_resolution_height'] = array(
+    '#type' => 'hidden'
+  );
+
+  drupal_add_js(drupal_get_path('module', 'prc_trt') . '/prc_trt.js');
+
+  $form['#validate'][] = 'prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate';
+}
+
+function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form, &$form_state) {
+  $my_browser = 'other';
+  // Set field_browser's value to show what browser the user is in.
+  if (array_key_exists('faux_browser', $form_state['input']) && $form_state['input']['faux_browser']) {
+    $my_browser = $form_state['input']['faux_browser'];
+    $b = explode(' ', $my_browser);
+    $browser_type = $b[0];
+    $browser_version = $b[1];
+  } elseif (isset($_SERVER['HTTP_USER_AGENT'])) {
+    $agent = strtolower($_SERVER['HTTP_USER_AGENT']);
+    $browser = browserclass_check_browser($agent);
+    if (is_array($browser) && count($browser)) {
+      $my_browser = array_pop($browser);
+      $browser_type = array_pop($browser);
+      $browser_version = str_replace($browser_type, '', $my_browser);
+    }
+  }
+  form_set_value($form['field_browser'], array(LANGUAGE_NONE => array(0 => array('value' => $browser_type))), $form_state);
+  form_set_value($form['field_browser_version'], array(LANGUAGE_NONE => array(0 => array('value' => $browser_version))), $form_state);
+
+  $javascript = $form_state['input']['faux_javascript'] === 'true' ? 1 : 0;
+  form_set_value($form['field_browser_javascript_enabled'], array(LANGUAGE_NONE => array(0 => array('value' => $javascript))), $form_state);
+
+  $cookies = $form_state['input']['faux_cookies'] === 'true' ? 1 : 0;
+  form_set_value($form['field_browser_cookies_enabled'], array(LANGUAGE_NONE => array(0 => array('value' => $cookies))), $form_state);
+
+  $images = $form_state['input']['faux_images'] === 'true' ? 1 : 0;
+  form_set_value($form['field_browser_images_enabled'], array(LANGUAGE_NONE => array(0 => array('value' => $images))), $form_state);
+
+  $monitor_color_depth = $form_state['input']['faux_monitor_color_depth'];
+  form_set_value($form['field_monitor_color_depth'], array(LANGUAGE_NONE => array(0 => array('value' => $monitor_color_depth))), $form_state);
+
+  $res_w = $form_state['input']['faux_screen_resolution_width'];
+  form_set_value($form['field_screen_resolution_width'], array(LANGUAGE_NONE => array(0 => array('value' => $res_w))), $form_state);
+
+  $res_h = $form_state['input']['faux_screen_resolution_height'];
+  form_set_value($form['field_screen_resolution_height'], array(LANGUAGE_NONE => array(0 => array('value' => $res_h))), $form_state);
+
+}
+
 /**
- * Implements hook_menu().
+ * Implements hook_field_extra_fields().
  */
-function prc_trt_menu() {
-	$items = array();
+function prc_trt_field_extra_fields() {
+  $extra['prc_trt']['system_check']['display'] = array(
+    'operating_system_pass' => array(
+      'label' => t('Operating system: Results'),
+      'description' => t('Did operating system pass?'),
+      'weight' => 12,
+    ),
+    'monitor_size_pass' => array(
+      'label' => t('Monitor size: Results'),
+      'description' => t('Did monitor size pass?'),
+      'weight' => 13,
+    ),
+    'monitor_color_depth_pass' => array(
+      'label' => t('Monitor color depth: Results'),
+      'description' => t('Did monitor color depth pass?'),
+      'weight' => 14,
+    ),
+    'screen_resolution_pass' => array(
+      'label' => t('Screen resolution: Results'),
+      'description' => t('Did screen resolution pass?'),
+      'weight' => 15,
+    ),
+    'processor_pass' => array(
+      'label' => t('Processor speed: Results'),
+      'description' => t('Did processor pass?'),
+      'weight' => 16,
+    ),
+    'ram_pass' => array(
+      'label' => t('RAM: Results'),
+      'description' => t('Did RAM pass?'),
+      'weight' => 17,
+    ),
+    'browser_pass' => array(
+      'label' => t('Browser: Results'),
+      'description' => t('Did browser pass?'),
+      'weight' => 18,
+    ),
+    'cookies_pass' => array(
+      'label' => t('Cookies: Results'),
+      'description' => t('Did cookies pass?'),
+      'weight' => 19,
+    ),
+    'javascript_pass' => array(
+      'label' => t('Javascript: Results'),
+      'description' => t('Did Javascript pass?'),
+      'weight' => 20,
+    ),
+    'images_pass' => array(
+      'label' => t('Images: Results'),
+      'description' => t('Did images pass?'),
+      'weight' => 21,
+    ),
+  );
+  $extra['prc_trt']['capacity_check']['display'] = array(
+    'devices_required' => array(
+      'label' => t('Number of devices required'),
+      'description' => t('How many devices are required?'),
+      'weight' => 4,
+    ),
+    'devices_capacity' => array(
+      'label' => t('Devices capacity'),
+      'description' => t('Devices capacity'),
+      'weight' => 5,
+    ),
+    'bandwidth_capacity' => array(
+      'label' => t('Bandwidth capacity'),
+      'description' => t('Bandwidth capacity'),
+      'weight' => 6,
+    ),
+  );
+  return $extra;
+}
 
-	$items['technology-readiness'] = array(
-		'title' => 'Technology Readiness',
-		'description' => 'Determine whether a computer is capable of executing PARCC test assessments',
-		'type' => MENU_NORMAL_ITEM,
-		'page callback' => 'drupal_get_form',
-		'page arguments' => array('prc_trt_form'),
-		'access arguments' => array('access trt'),
-	);
+function _prc_trt_field_overall_results($entity) {
+  $w = entity_metadata_wrapper('prc_trt', $entity);
+  $os = $w->field_operating_system->value();
+  $size = $w->field_monitor_size->value();
+  $size_pass = $size >= 9.7;
+  $depth = $w->field_monitor_color_depth->value();
+  $depth_pass = $depth >= 16;
+  $resw = $w->field_screen_resolution_width->value();
+  $resw_pass = $resw >= 1024;
+  $resh = $w->field_screen_resolution_height->value();
+  $resh_pass = $resh >= 768;
+  $processor = $w->field_processor_speed->value();
+  $processor_pass = $processor >= 1;
+  $ram = $w->field_ram->value();
+  $ram_pass = $ram;
+  $browser = $w->field_browser->value();
 
-	$items['technology-readiness/test'] = array(
-		'title' => 'Technology Readiness',
-		'type' => MENU_CALLBACK,
-		'page callback' => 'prc_trt_test',
-		'access arguments' => array('access trt'),
-	);
+  $cookies_pass = $w->field_browser_cookies_enabled->value();
+  $js_pass = $w->field_browser_javascript_enabled->value();
+  $images_pass = $w->field_browser_images_enabled->value();
 
-	return $items;
+  $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
+  return $all_pass;
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function prc_trt_entity_view($entity, $type, $view_mode, $langcode) {
+  if ($type == 'prc_trt') {
+    switch ($entity->type) {
+      case 'system_check':
+        _prc_trt_view_entity_system_check($entity);
+        break;
+      case 'capacity_check':
+        _prc_trt_view_entity_capacity_check($entity);
+        break;
+    }
+  }
+}
+
+/**
+ * @param $entity
+ */
+function _prc_trt_view_entity_capacity_check($entity) {
+  drupal_set_title(t('Testing Capacity Check Results'));
+
+  $w = entity_metadata_wrapper('prc_trt', $entity);
+  $students = $w->field_number_of_students->value();
+  $sittings = $w->field_sittings_per_student->value();
+  $devices = $w->field_number_of_devices->value();
+  $days = $w->field_number_testing_days->value();
+  $sessions = $w->field_number_of_sessions->value();
+
+  $devices_required = (($students * $sittings) / ($days * $sessions)) * 1.1;
+  $entity->content['devices_required'] = array(
+    '#type' => 'item',
+    '#title' => t('# of devices required:'),
+    '#markup' => '<div class="field-devices-required">' . $devices_required . '</div>',
+    '#weight' => 0.1,
+  );
+
+
+  $devices_capacity = $devices - $devices_required;
+  $entity->content['devices_capacity'] = array(
+    '#type' => 'item',
+    '#title' => t('devices capacity:'),
+    '#markup' => '<div class="field-devices-capacity">' . $devices_capacity . '</div>',
+    '#weight' => 0.2,
+  );
+
+  $speed = $w->field_speed_of_connection->value();
+  $bandwidth_capacity = $speed / $students;
+  $entity->content['bandwidth_capacity'] = array(
+    '#type' => 'item',
+    '#title' => t('bandwidth capacity:'),
+    '#markup' => '<div class="field-bandwidth-capacity">' . t('@bandwidth_capacity Mbps/student', array('@bandwidth_capacity' => $bandwidth_capacity)) . '</div>',
+    '#weight' => 0.3,
+  );
+
+  $entity->content['device_capacity_results'] = array(
+    '#type' => 'container',
+    '#weight' => 0.4,
+  );
+
+  $entity->content['device_capacity_results']["device_capacity_results_text"] = array(
+    '#markup' => t('Devices Capacity Results'),
+    '#weight' => 0.5,
+  );
+  $devices_required_passfail = $devices_capacity > 0 ? t('Passed') : t('Failed');
+  $entity->content['device_capacity_results']["devices_required_passfail"] = array(
+    '#markup' => $devices_required_passfail,
+    '#weight' => 0.6,
+  );
+  if ($devices_capacity <= 0) {
+    $entity->content['device_capacity_results']["devices_required_nextsteps"] = array(
+      '#markup' => t('Instructions or next steps go here.'),
+      '#weight' => 0.7,
+    );
+  }
+
+  $entity->content['bandwidth_capacity_results'] = array(
+    '#type' => 'container',
+    '#weight' => 0.8,
+  );
+
+  $entity->content['bandwidth_capacity_results']["bandwidth_capacity_results_text"] = array(
+    '#markup' => t('Bandwidth Capacity Results'),
+    '#weight' => 0.9,
+  );
+
+  $cap_good = floatval(variable_get('prc_trt_capacity_minimum_good', .1));
+  $cap_ok = floatval(variable_get('prc_trt_capacity_minimum_ok', .05));
+  if ($bandwidth_capacity >= $cap_good) {
+    $bandwidth_result = t('Good');
+    $bandwidth_extra_text = '';
+  } elseif ($bandwidth_capacity >= $cap_ok) {
+    $bandwidth_result = t('OK');
+    $bandwidth_extra_text = t('Provide explanation of what OK means and any next steps.');
+  } else {
+    $bandwidth_result = t('Poor');
+    $bandwidth_extra_text = t('Provide explanation of what poor means (will not be able to run successful assessment) and any next steps.');
+  }
+
+  $entity->content['bandwidth_capacity_results']["bandwidth_status"] = array(
+    '#markup' => t('@result - @bandwidth_capacity Mbps/student', array('@result' => $bandwidth_result, '@bandwidth_capacity' => $bandwidth_capacity)),
+    '#weight' => 0.91,
+  );
+  $entity->content['bandwidth_capacity_results']["bandwidth_extra_text"] = array(
+    '#markup' => $bandwidth_extra_text,
+    '#weight' => 0.92,
+  );
+}
+
+/**
+ * @param $entity
+ */
+function _prc_trt_view_entity_system_check($entity) {
+  drupal_set_title(t('System Check'));
+  $w = entity_metadata_wrapper('prc_trt', $entity);
+  $os = $w->field_operating_system->value();
+  $size = $w->field_monitor_size->value();
+  $size_pass = $size >= 9.7;
+  $depth = $w->field_monitor_color_depth->value();
+  $depth_pass = $depth >= 16;
+  $resw = $w->field_screen_resolution_width->value();
+  $resw_pass = $resw >= 1024;
+  $resh = $w->field_screen_resolution_height->value();
+  $resh_pass = $resh >= 768;
+  $processor = $w->field_processor_speed->value();
+  $processor_pass = $processor >= 1;
+  $ram = $w->field_ram->value();
+  $ram_pass = $ram;
+  $browser = $w->field_browser->value();
+
+  $cookies_pass = $w->field_browser_cookies_enabled->value();
+  $js_pass = $w->field_browser_javascript_enabled->value();
+  $images_pass = $w->field_browser_images_enabled->value();
+
+  $entity->content['operating_system_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Operating system Results:'),
+    '#markup' => $js_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['monitor_size_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Monitor size Results:'),
+    '#markup' => $size_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['monitor_color_depth_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Monitor color depth Results:'),
+    '#markup' => $depth_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['screen_resolution_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Screen resolution Results:'),
+    '#markup' => $resh_pass && $resw_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['processor_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Processor speed Results:'),
+    '#markup' => $processor_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['ram_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('RAM Results:'),
+    '#markup' => $ram_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['browser_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Browser Results:'),
+    '#markup' => $js_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['cookies_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Cookies Results:'),
+    '#markup' => $cookies_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['javascript_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Javascript Results:'),
+    '#markup' => $js_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['images_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Images Results:'),
+    '#markup' => $images_pass ? 'Pass' : 'Fail',
+  );
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function prc_trt_entity_presave($entity, $type) {
+  if ($type == 'prc_trt' && $entity->type == 'system_check') {
+    // TODO: Refactor this into a custom class
+    $w = entity_metadata_wrapper('prc_trt', $entity);
+    $os = $w->field_operating_system->value();
+    $size = $w->field_monitor_size->value();
+    $size_pass = $size >= 9.7;
+    $depth = $w->field_monitor_color_depth->value();
+    $depth_pass = $depth >= 16;
+    $resw = $w->field_screen_resolution_width->value();
+    $resw_pass = $resw >= 1024;
+    $resh = $w->field_screen_resolution_height->value();
+    $resh_pass = $resh >= 768;
+    $processor = $w->field_processor_speed->value();
+    $processor_pass = $processor >= 1;
+    $ram = $w->field_ram->value();
+    $ram_pass = $ram;
+    $browser = $w->field_browser->value();
+
+    $cookies_pass = $w->field_browser_cookies_enabled->value();
+    $js_pass = $w->field_browser_javascript_enabled->value();
+    $images_pass = $w->field_browser_images_enabled->value();
+
+    $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
+    $entity->field_result[LANGUAGE_NONE][0]['value'] = $all_pass;
+  } elseif ($type == 'prc_trt' && $entity->type == 'capacity_check') {
+    $w = entity_metadata_wrapper('prc_trt', $entity);
+    $school = $w->field_ref_school->value();
+    if ($school) {
+      $students = $w->field_number_of_students->value();
+      $school_wrapper = entity_metadata_wrapper('node', $school);
+      $school_wrapper->field_number_of_students->set($students);
+      $school_wrapper->save();
+    }
+  }
+}
+
+function prc_trt_form_district_node_form_alter(&$form, &$form_state) {
+  if (isset($form_state['node']->nid)) {
+    drupal_set_title(t('Edit District'));
+  } else {
+    drupal_set_title(t('Add District'));
+  }
+  $form['actions']['submit']['#value'] = t('Submit');
+
+  $form['instructions_text'] = array(
+    '#type' => 'markup',
+    '#markup' => t('Instructions to District Admin to add district, which will allow results generated by School Admin to be reported to the district.'),
+    '#weight' => -12,
+  );
+}
+
+function prc_trt_form_school_node_form_alter(&$form, &$form_state) {
+  if (isset($form_state['node']->nid)) {
+    drupal_set_title(t('Edit School'));
+  } else {
+    drupal_set_title(t('Add School'));
+  }
+  $form['actions']['submit']['#value'] = t('Submit');
+
+  $form['required_message'] = array(
+    '#type' => 'markup',
+    '#markup' => '* indicates required field',
+    '#weight' => -10,
+  );
+
+  $form['instructions_text'] = array(
+    '#type' => 'markup',
+    '#markup' => t('Overview / instructional copy goes here, if any.'),
+    '#weight' => -12,
+  );
+
+  $form['#validate'][] = 'prc_trt_form_school_node_form_validate';
+  $form['#submit'][] = 'prc_trt_form_school_node_form_submit';
+}
+
+function prc_trt_form_school_node_form_validate(&$form, &$form_state) {
+  $field_name = 'field_contact_email';
+  $email = $form_state['values'][$field_name]['und'][0]['value'];
+  if (!valid_email_address($email)) {
+    form_set_error($field_name, t('%email is not a valid e-mail address.', array('%email' => $email)));
+  }
+}
+
+function prc_trt_form_school_node_form_submit(&$form, &$form_state) {
+  if (array_key_exists('field_ref_district', $form_state['values']) &&
+      $form_state['values']['field_ref_district']['und'][0]['target_id']) {
+    $district_nid = $form_state['values']['field_ref_district']['und'][0]['target_id'];
+    //$form_state['redirect'] = "node/$district_nid/manage-schools";
+    $_GET['destination'] = "node/$district_nid/manage-schools";
+  }
 }
 
 
 /**
- * Implements hook_permission().
+ * Implements hook_action_info().
  */
-function prc_trt_permission() {
-	return array(
-		'access trt' => array(
-			'title' => t('Access Technology Readiness Tool'),
-			'description' => t('Access the Technology Readiness Tool to run a test to determine whether a computer is capable of executing PARCC test assessments'),
-		),
-	);
-}
-
-
-/**
- * Implements hook_form().
- * Defines the initial information form required to begin the TRT.
- */
-function prc_trt_form($form, &$form_state) {
-	$form['trt_intro_text'] = array(
-		'#markup' => t('<p>The purpose of the Technology Readiness Tool is to provide a way for districts and schools to determine if the needed technical requirements are currently available to perform the PARCC Assessments online. This tool will check the following information for the specific device being tested.</p><ul><li>IP Address</li><li>Browser</li><li>Operating System</li><li>Internet Connectivity</li><li>Testing Capacity</li></ul>'),
-	);
-
-	$form['trt_instructions'] = array(
-		'#markup' => t('<p>To start this Technology Readiness test, simply enter the information below and select the "Begin Test" button.</p>'),
-	);
-
-	$form['trt_device'] = array(
-		'#type' => 'select',
-		'#title' => t('Hardware/Device'),
-		'#options' => array(
-			'desktop' => 'Desktop',
-			'laptop' => 'Laptop',
-			'tablet' => 'Tablet',
-		),
-		'#required' => TRUE,
-	);
-
-	$form['trt_student_count'] = array(
-		'#type' => 'textfield',
-		'#title' => t('Total # of Students'),
-		'#size' => 5,
-		'#required' => TRUE,
-	);
-
-	$form['trt_device_count'] = array(
-		'#type' => 'textfield',
-		'#title' => t('Total # of Hardware/Devices'),
-		'#size' => 5,
-		'#required' => TRUE,
-	);
-
-	$form['trt_user_comments'] = array(
-		'#type' => 'textarea',
-		'#title' => t('Additional Comments (optional)'),
-	);
-
-	$form['trt_submit'] = array(
-		'#type' => 'submit',
-		'#value' => t('Begin Test'),
-	);
-
-	return $form;
-}
-
-
-/**
- * Implements hook_form_validate().
- * Validates the initial information form required to begin the TRT.
- */
-function prc_trt_form_validate($form, &$form_state) {
-	if(!(is_numeric($form_state['values']['trt_student_count']))) {
-		form_set_error('trt_student_count', t('Total # of Students must be a positive integer.'));
-	}
-
-	if(!(is_numeric($form_state['values']['trt_device_count']))) {
-		form_set_error('trt_device_count', t('Total # of Hardware/Devices must be a positive integer.'));
-	}
-}
-
-
-/**
- * Implements hook_form_submit().
- * Executes the TRT upon valid submission of the initial information form.
- */
-function prc_trt_form_submit($form, &$form_state) {
-	$trt_data = array(
-		'trtDevice' => $form_state['values']['trt_device'],
-		'trtStudentCount' => $form_state['values']['trt_student_count'],
-		'trtDeviceCount' => $form_state['values']['trt_device_count'],
-		'trtUserComments' => $form_state['values']['trt_user_comments'],
-	);
-	$_SESSION['trt_data'] = $trt_data;
-
-	$form_state['redirect'] = 'technology-readiness/test';
-}
-
-
-/**
- * Delivers the main test page.
- */
-function prc_trt_test() {
-	// Redirect to the test form page if user data is not present,
-	// such as if this URL was entered directly with bypassing the user form
-	if(!isset($_SESSION['trt_data'])) {
-		drupal_goto('technology-readiness');
-	}
-
-	drupal_add_library('system', 'ui.progressbar');
-	drupal_add_js(drupal_get_path('module', 'prc_trt') . '/prc_trt.js');
-	drupal_add_js('var trtData = ' . json_encode($_SESSION['trt_data']) . ';', 'inline');
-
-	return array(
-		'#markup' => '
-<div id="trtInProgress" style="display: none;">
-	<h2>Technology Readiness System Check</h2>
-	<div id="trtInProgressMessage">In Progress...</div>
-	<div id="trtProgressBar"></div>
-	<span id="trtProgressBarLabel"></span>
-</div>
-<div id="trtResults" style="display: none;">
-	<h3>IP Address, Browser, and Operating System</h3>
-	<table>
-		<thead>
-			<tr>
-				<th>Checks Performed</th>
-				<th>Results</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>IP Address</td>
-				<td><span id="trtResultIPAddress"></span></td>
-			</tr>
-			<tr>
-				<td>Browser</td>
-				<td><span id="trtResultBrowser"></span></td>
-			</tr>
-			<tr>
-				<td>Operating System</td>
-				<td><span id="trtResultOS"></span></td>
-			</tr>
-		</tbody>
-	</table>
-	<h3>Internet Connectivity</h3>
-	<table>
-		<thead>
-			<tr>
-				<th>Needs Attention</th>
-				<th>Ok</th>
-				<th>Good</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td><span id="trtResultInetConnectNeedsAttention"></span></td>
-				<td><span id="trtResultInetConnectOk"></span></td>
-				<td><span id="trtResultInetConnectGood"></span></td>
-			</tr>
-		</tbody>
-	</table>
-	<div id="trtResultInetConnectMessage">Internet connectivity requirements copy here</div>
-	<h3>Testing Capacity</h3>
-	<table>
-		<thead>
-			<tr>
-				<th>Hardware/Device</th>
-				<th>Total # of Devices</th>
-				<th>Total # of Students</th>
-				<th>Download Speed</th>
-				<th>Testing Capacity Estimate</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td><span id="trtResultTestCapHardwareDevice"></span></td>
-				<td><span id="trtResultTestCapDeviceCount"></span></td>
-				<td><span id="trtResultTestCapStudentCount"></span></td>
-				<td><span id="trtResultTestCapDownloadSpeed"></span></td>
-				<td><span id="trtResultTestCapCapacityEstimate"></span></td>
-			</tr>
-		</tbody>
-	</table>
-	<h4>Additional Comments</h4>
-	<div id="trtResultUserComments"></div>
-</div>');
+function prc_trt_action_info() {
+  return array(
+    'prc_trt_request_readiness_checks' => array(
+      'type' => 'node',
+      'label' => t('Request Readiness Checks'),
+      'configurable' => TRUE,
+      'vbo_configurable' => FALSE,
+      'triggers' => array('any'),
+    ),
+  );
 }
