@@ -1447,4 +1447,12 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $element->mouseOver();
   }
 
+  public function assertTextInTableRow($text, $row_text) {
+    $text = $this->fixStepArgument($text);
+    $row_text = $this->fixStepArgument($row_text);
+    $row = $this->getTableRow($this->getSession()->getPage(), $row_text);
+    if (strpos($row->getText(), $text) === FALSE) {
+      throw new \Exception(sprintf('Found a row containing "%s", but it did not contain the text "%s".', $row_text, $text));
+    }
+  }
 }
