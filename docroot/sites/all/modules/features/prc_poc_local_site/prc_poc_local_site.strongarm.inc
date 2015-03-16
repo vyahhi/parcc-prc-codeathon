@@ -158,7 +158,7 @@ function prc_poc_local_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'theme_default';
-  $strongarm->value = 'prc_responsive_bartik';
+  $strongarm->value = 'prc_foundation';
   $export['theme_default'] = $strongarm;
 
   $strongarm = new stdClass();

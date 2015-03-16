@@ -1,0 +1,222 @@
+// Global Foundation Settings
+@import "settings";
+
+// Comment out this import if you don't want to use normalize
+@import "normalize";
+
+// Comment out this import if you are customizing you imports below
+//@import "foundation";
+
+// Import specific parts of Foundation by commenting the import "foundation"
+// and uncommenting what you want below. You must uncomment the following if customizing
+
+@import "foundation/components/global"; // *always required
+@import "foundation/components/grid";
+
+//
+// Use this grid if you want to start using the new Foundation 5 grid early.
+// It will change breakpoints to min-width: 640px and 1024px.
+//
+// @import "foundation/components/grid-5";
+//
+
+@import "foundation/components/visibility";
+// @import "foundation/components/block-grid";
+@import "foundation/components/type";
+@import "foundation/components/buttons";
+@import "foundation/components/forms"; // *requires components/buttons
+// @import "foundation/components/custom-forms"; // *requires components/buttons, components/forms
+// @import "foundation/components/button-groups"; // *requires components/buttons
+@import "foundation/components/dropdown-buttons"; // *requires components/buttons
+// @import "foundation/components/split-buttons"; // *requires components/buttons
+// @import "foundation/components/flex-video";
+// @import "foundation/components/section";
+@import "foundation/components/top-bar";  // *requires components/grid
+// @import "foundation/components/orbit";
+// @import "foundation/components/reveal";
+// @import "foundation/components/joyride";
+// @import "foundation/components/clearing";
+// @import "foundation/components/alert-boxes";
+// @import "foundation/components/breadcrumbs";
+// @import "foundation/components/keystrokes";
+// @import "foundation/components/labels";
+// @import "foundation/components/inline-lists";
+// @import "foundation/components/pagination";
+// @import "foundation/components/panels";
+// @import "foundation/components/pricing-tables";
+// @import "foundation/components/progress-bars";
+// @import "foundation/components/side-nav";
+// @import "foundation/components/sub-nav";
+// @import "foundation/components/switch";
+// @import "foundation/components/magellan";
+// @import "foundation/components/tables";
+// @import "foundation/components/thumbs";
+// @import "foundation/components/tooltips";
+@import "foundation/components/dropdown";
+
+// PRC Custom Variables
+@import "prc-variables";
+
+@media #{$screen} {
+  nav {
+    a#logo {
+      display: inline-block;
+      margin: em-calc(25) $default-margin;
+    }
+    li.toggle-topbar.menu-icon {
+      right: 5px !important;
+      margin-right: $default-margin;
+    }
+    #block-search-form {
+      float: left;
+      width: 100%;
+      padding: 20px $default-padding 10px;
+      background-color: $topbar-dropdown-bg;
+      h2 {
+        font-size: 0;
+      }
+      input {
+        float: left;
+        font-size: em-calc(13);
+      }
+      input#edit-search-block-form--2 {
+        width: 175px;
+      }
+      input#edit-submit,
+      input#edit-submit--2 {
+        height: 32px;
+      }
+    }
+    .top-bar-section ul li > a {
+      padding: 12px 0px 12px 16px;
+    }
+  }
+  #sub-header {
+    .breadcrumb {
+      padding-top: .5em;
+      a {
+        font-weight: bold;
+        color: #464646;
+      }
+    }
+    h1 {
+      margin: 0 0 .75em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+  #main-wrapper {
+    background-color: #EEEEEE;
+  }
+}
+
+@media #{$topbar-media-query} {
+  .columns {
+    padding-left: $desktop-padding;
+    padding-right: $desktop-padding;
+  }
+  nav.top-bar {
+    text-align: center;
+  }
+  nav {
+    a#logo {
+      display: inline-block;
+      margin: em-calc(25) 0 em-calc(25) $desktop-margin;
+    }
+    #main-menu-section,
+    #secondary-menu-section {
+      display: inline-block;
+    }
+    .top-bar-section {
+      ul {
+        background-color: $topbar-bg-color;
+      }
+      li a:not(.button) {
+        padding: 0 15px;
+      }
+      li a:not(.button):hover,
+      ul li.active > a {
+        background: none repeat scroll 0% 0% darken($topbar-bg-color, 3%);
+      }
+    }
+    #header-icons {
+      float: right;
+      margin: em-calc(17) $desktop-margin 0 0;
+      height: 65px;
+      #search-icon,
+      #profile-icon {
+        height: 35px;
+      }
+      #search-icon {
+        width: 42px;
+        margin-right: 5px;
+        background: url('../images/search-icon.png') no-repeat 10px;
+      }
+      #search-icon:before,
+      #profile-icon:before {
+        display: none;
+      }
+      #search-icon:hover,
+      #search-icon:focus {
+        background: url('../images/search-icon-active.png') no-repeat 10px;
+      }
+      #profile-icon {
+        width: 71px;
+        margin-left: 5px;
+        background:
+          url('../images/profile-icon.png') no-repeat 15px 7px,
+          url('../images/down-arrow.png') no-repeat 40px 12px;
+      }
+      #profile-icon:hover,
+      #profile-icon:focus {
+        background:
+          url('../images/profile-icon-active.png') no-repeat 15px 7px,
+          url('../images/down-arrow-active.png') no-repeat 40px 12px;
+      }
+      #search-icon.button,
+      #profile-icon.button {
+        background-color: $icon-button-color;
+        border-width: 0;
+        box-shadow: none;
+      }
+      .button:hover,
+      .button:focus {
+        background-color: darken($topbar-bg-color, 3%) !important;
+      }
+      #search-dropdown,
+      #profile-dropdown {
+        position: absolute;
+        left: -99999px;
+      }
+      #block-search-form {
+        padding: em-calc(5) $default-padding em-calc(20);
+        background-color: white;
+        cursor: auto;
+        input {
+          margin: -1px 0px 2px -1px;
+        }
+        input.form-submit {
+          display: none;
+        }
+      }
+    }
+    .f-dropdown li a {
+      font-size: 12px;
+    }
+  }
+}
+
+@media #{$medium} {
+  nav {
+    .top-bar-section li a:not(.button) {
+      padding: 0 em-calc(28);
+      font-size: em-calc(14);
+    }
+    .f-dropdown li a {
+      font-size: em-calc(13);
+    }
+    #block-search-form input {
+      font-size: em-calc(14);
+    }
+  }
+}

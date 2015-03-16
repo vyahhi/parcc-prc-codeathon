@@ -3345,6 +3345,25 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->uuid = 'fbfa2a96-5352-4251-a9a9-c5ec64b3b763';
     $display->content['new-fbfa2a96-5352-4251-a9a9-c5ec64b3b763'] = $pane;
     $display->panels['middle'][7] = 'new-fbfa2a96-5352-4251-a9a9-c5ec64b3b763';
+    $pane = new stdClass();
+    $pane->pid = 'new-2639295c-be52-4569-a027-c64a045a7a1e';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'trt_districts-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 8;
+    $pane->locks = array();
+    $pane->uuid = '2639295c-be52-4569-a027-c64a045a7a1e';
+    $display->content['new-2639295c-be52-4569-a027-c64a045a7a1e'] = $pane;
+    $display->panels['middle'][8] = 'new-2639295c-be52-4569-a027-c64a045a7a1e';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

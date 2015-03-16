@@ -11,7 +11,7 @@
  */
 function prc_profile_install() {
   // Enable some prc_profile blocks.
-  $default_theme = 'prc_responsive_bartik';
+  $default_theme = 'prc_foundation';
   $admin_theme = 'seven';
   // Disable all themes.
   db_update('system')

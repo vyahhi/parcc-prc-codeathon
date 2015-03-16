@@ -43,7 +43,9 @@ function prc_trt_school_uploads_page_access($district = NULL) {
 
   // Okay if there is a district
   if ($district) {
-    return TRUE;
+    $flag = flag_get_flag('file_uploaded');
+    $flagged = $flag->is_flagged($district->nid);
+    return !$flagged;
   }
 
   // TODO: If there is a district, check to see if this user can see it

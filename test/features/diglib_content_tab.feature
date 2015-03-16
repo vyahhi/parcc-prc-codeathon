@@ -6,8 +6,8 @@ Feature: Admin UI: Content Tab (PRC-169)
 
   Scenario: TT2 (PRC-225) Content View Created
     Given I am logged in as a user with the "Content Contributor" role
-    And I am on the homepage
-    When I follow "Content" in the "header" region
+    And I am on "prc/admin"
+    When I follow "Content" in the "content" region
     Then I should see the heading "PRC Website Content" in the "content" region
     And I should see the link "Add content" in the "content" region
 

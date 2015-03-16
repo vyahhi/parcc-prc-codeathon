@@ -24,3 +24,12 @@ default:
       region_map:
         content: '#content'
         header: '#header'
+  context:
+    class: FeatureContext
+    parameters:
+      phone_width: '375'
+      phone_height: '667'
+      tablet_width: '768'
+      tablet_height: '1024'
+      desktop_width: '1280'
+      desktop_height: '800'

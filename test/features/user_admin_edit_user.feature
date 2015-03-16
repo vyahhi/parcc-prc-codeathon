@@ -6,7 +6,7 @@ Feature: Admin UI: Edit User (PRC-105)
 
   Background:
     Given I am logged in as a user with the "PRC Admin" role
-    And I am on the homepage
+    And I am on "prc/admin"
     And users:
       | name     | mail                    | pass     | field_first_name | field_last_name | status |
       | Joe User | joe_prc_105@example.com | xyz123   | Joe              | User            | 1      |
@@ -27,8 +27,9 @@ Feature: Admin UI: Edit User (PRC-105)
     Then I press the "Save" button
     Then I should see the heading "Joe User (@uname[Joe User])" in the "content" region
 
-  Scenario: AC3 - Keep the top nav bar
-    Then I should see the link "Users" in the "header" region
+  Scenario: AC3 - Keep the top nav bar (now in content area)
+    Then I am on "prc/admin"
+    Then I should see the link "Users" in the "content" region
 
   Scenario: AC4 - The following fields are to be displayed
     Then I should see a "First Name *" field
