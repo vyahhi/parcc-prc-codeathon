@@ -62,8 +62,11 @@ Feature: PRC-757 School Readiness - School Admin View
     And I select "<wired_speed>" from "Wired connection speed"
     And I press "Submit"
     When I visit the last node created
-    Then I should see the text "Bandwidth Capacity Results<bandwidth_result> - 0.5 Mbps/student"
-    And I should see the text "Devices Capacity Results<device_result>"
+    # PRC-1000
+    Then I should see the text "Bandwidth Capacity Results"
+    And I should see the text "<bandwidth_result> - 0.5 Mbps/student"
+    And I should see the text "Devices Capacity Results"
+    And I should see the text "<device_result>"
     # PRC-999
     And I should see the link "run testing capacity check"
     And I should see the text "Number of students:"
