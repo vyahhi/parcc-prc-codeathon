@@ -14,13 +14,13 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     Given I am logged in as "Joe Contributor"
     And I visit "admin-content"
     And I click "Add content"
-    And I fill in "edit-title" with "My Draft"
+    And I fill in "edit-title" with "My Draft @timestamp"
     And I fill in "Body" with "Isn't this swell?"
     And I select the radio button "Public" with the id "edit-field-permissions-und-public"
     And I press "Save"
     # navigate to the content
     And I visit "admin-content"
-    And I click "My Draft"
+    And I click "My Draft @timestamp"
     # make sure the tab doesn't show
     And I should not see the link "Revisions"
     # edit the content and save a new draft
@@ -29,7 +29,7 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     And I press "Save New Draft"
     # confirm that the revisions tab shows up
     And I visit "admin-content"
-    And I click "My Draft"
+    And I click "My Draft @timestamp"
     And I click "Revisions"
     # check that we can access correct drafts by clicking on the links
     And I click on the revision id link in row number "2" of the table
@@ -45,20 +45,20 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     Given I am logged in as "Joe Contributor"
     And I visit "admin-content"
     And I click "Add content"
-    And I fill in "edit-title" with "My Draft"
+    And I fill in "edit-title" with "My Draft @timestamp"
     And I fill in "Body" with "Isn't this swell?"
     And I select the radio button "Public" with the id "edit-field-permissions-und-public"
     And I press "Save"
     # navigate to the content
     When I visit "admin-content"
-    And I click "My Draft"
+    And I click "My Draft @timestamp"
     # edit the content and save a new draft
     And I click "Edit"
     And I fill in "Body" with "Making a new draft"
     And I press "Save New Draft"
     # visit the revisions tab
     And I visit "admin-content"
-    And I click "My Draft"
+    And I click "My Draft @timestamp"
     # @todo: confirm that the added text is displayed within an ins element
     # Create a new draft and delete text (if possible)
     # Confirm that the deleted text is within a del element
@@ -68,30 +68,32 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     Given I am logged in as "Joe Contributor"
     And I visit "admin-content"
     And I click "Add content"
-    And I fill in "edit-title" with "My Draft"
+    And I fill in "edit-title" with "My Draft @timestamp"
     And I fill in "Body" with "Isn't this swell?"
     And I select the radio button "Public" with the id "edit-field-permissions-und-public"
     And I press "Save"
     And I visit "admin-content"
-    And I click "My Draft"
+    And I click "My Draft @timestamp"
     And I click "Edit"
     And I fill in "Body" with "Making a new draft"
     And I press "Save New Draft"
     And I visit "admin-content"
-    And I click "My Draft"
+    And I click "My Draft @timestamp"
     And I click "Edit"
     And I press "Request Approval"
     And I press "Update state"
     # make sure the comments from the contributor show up on the revisions tab
     When I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "My Draft"
+    And I click "My Draft @timestamp"
     And I press the "Request Change" button
     And I fill in "Message *" with "Please elaborate on this and that."
     And I press the "Send Request" button
     Then I am logged in as "Joe Contributor"
     And I visit "admin-content"
-    And I click "My Draft"
+    And I click "My Draft @timestamp"
+    # click the title in the breadcrumb
+    And I click "My Draft @timestamp"
     And I click "Revisions"
     And I should see the text "Please elaborate on this and that."
 

@@ -72,6 +72,7 @@ Feature: Workflow is functional
     And I click "Edit"
     And I fill in "Body" with "Here is my clever addition."
     And I press the "Save New Draft" button
+    And I press "Confirm"
     And I click "Edit Revision"
     When I press "Request Approval"
     #PRC-873 : should not see text area for request approval
@@ -182,7 +183,7 @@ Feature: Workflow is functional
     Given I am logged in as "Joe Contributor"
     And I visit "admin-content"
     And I click "Add content"
-    And I fill in "edit-title" with "My second post."
+    And I fill in "edit-title" with "My second post @timestamp"
     And I fill in "Body" with "Isn't this swell?"
     And I select the radio button "Public" with the id "edit-field-permissions-und-public"
     And I press the "Save" button
@@ -192,19 +193,21 @@ Feature: Workflow is functional
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
     And press the "Update state" button
-    And I visit "content/my-second-post"
+    And I visit "admin-content"
+    And I click "My second post @timestamp"
     And I should see the text "Approval Requested"
     And the email to "joe_1prc_58ca@example.com" should contain "The following content is awaiting approval"
     #PRC-873 : should not see text area for rescind request
     And I click "Rescind Request"
     And I should not see an "textarea" element
     Then I press the "Update state" button
-    And I visit "content/my-second-post"
+    And I visit "admin-content"
+    And I click "My second post @timestamp"
     # PRC-813
     And I should see the text "Revision State: Draft"
     # PRC-853
     And I visit "admin-content"
-    And I should see the text "Draft" in the "My second post." row
+    And I should see the text "Draft" in the "My second post @timestamp" row
 
   Scenario: Content is published, but changes don't show up until after it has been approved
     And the test email system is enabled
@@ -240,11 +243,7 @@ Feature: Workflow is functional
     # prc-856
     And I press the "Save New Draft" button
     And I press the "Confirm" button
-    And I visit "admin-content"
-    # prc-844
-    And I should see the text "Draft" in the "My first post @timestamp" row
-    And I click "My first post @timestamp"
-    And I click "Edit"
+    And I click "Edit Revision"
     And I press "Request Approval"
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
