@@ -55,8 +55,8 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     And I fill in "Body" with "Making a new draft"
     And I press "Save New Draft"
     # visit the revisions tab
-    And I visit "admin-content"
-    And I click "My Draft @timestamp"
+    And I click "Revisions"
+    And the "ins" element should contain "Making a new draft"
 
   Scenario: Contributor's comments show on history table
     # create content and walk it through past request changes
