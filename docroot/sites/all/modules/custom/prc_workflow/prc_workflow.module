@@ -700,17 +700,14 @@ function prc_workflow_reported_state($nid) {
  *
  */
 function prc_workflow_libraries_info(){
-  $x = 1;
   return array(
-    'PHP-FineDiff-master' => array(
-      'name' => 'PHP Fine Diff',
-      'vendor url' => 'http://www.raymondhill.net/finediff/viewdiff-ex.php',
+    'php-htmldiff-master' => array(
+      'name' => 'PHP HTML Diff',
+      'vendor url' => 'https://github.com/rashid2538/php-htmldiff',
       'files' => array(
-        'php' => array('finediff.php'),
-      ),/*
-      'dependencies' => array(
-        'PHP-FineDiff-master',
-      ),*/
+        'php' => array('HtmlDiff.php'),
+      ),
+
       'version' => '1',
     ),
   );
@@ -720,12 +717,14 @@ function prc_workflow_libraries_info(){
  * Page callback for a node's Workflow page.
  */
 function prc_workflow_revisions_tab($node) {
+  drupal_add_css(drupal_get_path('module', 'prc_workflow') . '/prc_workflow.css');
+
   // Gather information on the current published revision
   $state_flow = state_flow_load_state_machine($node);
   $events = $state_flow->get_available_events();
 
-  //Load finediff library
-  libraries_load('PHP-FineDiff-master');
+  //Load the diff library
+  libraries_load('php-htmldiff-master');
 
   // Build a table for the history of this node
   $history_table = array(
@@ -786,7 +785,7 @@ function prc_workflow_revisions_tab($node) {
   drupal_alter('state_flow_history_table', $history_table, $node);
 
   // Set the title for this page
-  drupal_set_title(t('Workflow for @title', array('@title' => $node->title)), PASS_THROUGH);
+  drupal_set_title(t('Revisions for @title', array('@title' => $node->title)), PASS_THROUGH);
 
   // Build the render array
   $output = array(
@@ -837,21 +836,21 @@ function prc_workflow_body_diff($previous_version, $node_version){
 
   $pbody = $pw->body->value();
   $nbody = $nw->body->value();
-  if($pbody !== $nbody) {
-    $fineDiff = new FineDiff($pbody['safe_value'], $nbody['safe_value'], 'FineDiff::$paragraphGranularity');
-    $diff = $fineDiff->renderDiffToHTML();
+  if($pbody !== $nbody  || $previous_version->title !== $node_version->title) {
 
-    //Restore html
-    $diff = str_replace('&gt;', '>', $diff);
-    $diff = str_replace('&lt;', '<', $diff);
+    //@todo: when we do the fields diff, clean this up and create a single function to return the diffs
+    $HtmlDiff = new HtmlDiff($pbody['safe_value'], $nbody['safe_value']);
+
+    $HtmlDiff->build();
+    $diff = $HtmlDiff->getDifference();
 
     // diff of the titles
+    $titleDiff = new HtmlDiff($previous_version->title, $node_version->title);
+    $titleDiff->build();
 
-    $titleDiff = new FineDiff($previous_version->title, $node_version->title, 'FineDiff::$paragraphGranularity');
+    $title = "<h4>{$titleDiff->getDifference()}</h4>";
 
-    $title = "<h4>{$titleDiff->renderDiffToHTML()}</h4>";
-
-    $html = "<div class='diff'>$title<div class='body-diff'>$diff</div></div>";
+    $html = "<div class='diff'><div class='row'><div class='body-diff-deletions large-6 column'>$title $diff</div><div class='large-6 column body-diff-inserts'>$title $diff</div></div></div>";
   }
   return $html;
 }

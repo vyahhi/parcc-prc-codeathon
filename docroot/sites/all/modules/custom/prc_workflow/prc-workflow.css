@@ -1,0 +1,22 @@
+/**
+ * Styling for the revisions pages
+ */
+
+/* Hide insertions in the old versioon, and deletions in the new */
+.body-diff-deletions ins{
+    display: none;
+}
+
+.body-diff-inserts del{
+    display: none;
+}
+
+/* PRC-45 (in the comments) : Normalize ins and del elements as specified */
+ins, p ins, ins p{
+  background-color: #44cc66;
+  text-decoration: none;
+}
+del, p del, del p{
+  background-color: transparent;
+  text-decoration-line: line-through;
+}
