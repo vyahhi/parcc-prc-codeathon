@@ -767,7 +767,7 @@ function prc_workflow_revisions_tab($node) {
     if(isset($previous_version)) {
       $body_diff = prc_workflow_body_diff($previous_version, $node_version);
       //@todo: display changes involving the fields
-      //$fields_diff = prc_workflow_fields_diff($previous_version, $node_version);
+      $fields_diff = prc_workflow_fields_diff($previous_version, $node_version);
       $history_str .= $body_diff;#.$fields_diff;
     }else{
       //$history_str = $node_version
@@ -866,6 +866,8 @@ function prc_workflow_body_diff($previous_version, $node_version){
  */
 function prc_workflow_fields_diff($previous_version, $node_version){
   $html = '';
+  $field_out_left = '';
+  $field_out_right = '';
 
   $pw = entity_metadata_wrapper('node', $previous_version);
 
@@ -874,18 +876,27 @@ function prc_workflow_fields_diff($previous_version, $node_version){
   foreach($previous_version as $key => $property){
     //If it starts with field, then check for differences
     if(strpos($key, 'field') === 0){
+      $field_info = field_info_field($key);
+
       if($pw->{$key}->value() !== $nw->{$key}->value()){
         $field_left = $pw->{$key}->value();
         $field_right = $pw->{$key}->value();
 
         $most_fields = count($field_left) >= count($field_right) ? 'left' : 'right';
-        $cycle = count($field_left) >= count($field_right) ? $field_left : $field_right;
-        foreach($cycle as $key => $value){
-          //
+        $most = count($field_left) >= count($field_right) ? $field_left : $field_right;
+        $least = count($field_left) <= count($field_right) ? $field_left : $field_right;
+        foreach($most as $key => $value){
+          foreach($least as $key => $value){
+            if($most != $least){
+              $field_out_left = $most_fields === 'left' ? $most : $least;
+              $field_out_right = $most_fields === 'left' ? $most : $least;
+            }
+          }
         }
-
-        $fields_diff = "<div class='diff-field-previous'>$field_left</div><div class='diff-field-next'>$field_right</div>";
-        $html .= "<div class='fields-diff'>$fields_diff</div>";
+        $field_header = "<div class='diff-field-header'>@todo: name of field</div>";
+        $fields_diff = "<div class='diff-field-previous'>$field_out_left</div>
+                        <div class='diff-field-next'>$field_out_right</div>";
+        $html .= "<div class='fields-diff'>$field_header.$fields_diff</div>";
       }
     }
   }
