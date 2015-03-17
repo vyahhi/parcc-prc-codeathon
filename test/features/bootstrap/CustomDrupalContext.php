@@ -1454,4 +1454,16 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       throw new \Exception(sprintf('Found a row containing "%s", but it did not contain the text "%s".', $row_text, $text));
     }
   }
+
+  public function assertClickInTableRow($link, $row_text) {
+    $link = $this->fixStepArgument($link);
+    $row_text = $this->fixStepArgument($row_text);
+    $page = $this->getSession()->getPage();
+    if ($link = $this->getTableRow($page, $row_text)->findLink($link)) {
+      // Click the link and return.
+      $link->click();
+      return;
+    }
+    throw new \Exception(sprintf('Found a row containing "%s", but no "%s" link on the page %s', $rowText, $link, $this->getSession()->getCurrentUrl()));
+  }
 }

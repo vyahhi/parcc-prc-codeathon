@@ -15,21 +15,20 @@ Feature: PRC-857 & PRC-859 - Tests concerning delete access for different user r
     And I select the radio button "Public" with the id "edit-field-permissions-und-public"
     And I press the "Save" button
 
-  Scenario Outline: Delete should only be available on the content table for content that is solely in the draft state
+   Scenario Outline: Delete should only be available on the content table for content that is solely in the draft state
 
-    Given I am logged in as "<name>"
-    And I visit "admin-content"
-    And I click "delete"
-    And I press the "Delete" button
-    And I visit "admin-content"
-    And I should not see the text "Delete Me @timestamp"
+     Given I am logged in as "<name>"
+     And I visit "admin-content"
+     And I click "delete" in the "Delete Me @timestamp" row
+     And I press "Delete"
+     And I visit "admin-content"
+     And I should not see the text "Delete Me @timestamp"
+   Examples:
+     | name            |
+     | Joe Contributor |
+     | Joe Curator     |
 
-  Examples:
-    | name            |
-    | Joe Contributor |
-    | Joe Curator     |
-
-  Scenario Outline: Attempting to delete in various states
+  Scenario: Deleting as a contributor
     # Can't delete waiting for review
     Given I am logged in as "Joe Contributor"
     And I visit "admin-content"
@@ -38,21 +37,21 @@ Feature: PRC-857 & PRC-859 - Tests concerning delete access for different user r
     And I click "Edit"
     When I press the "Request Approval" button
     And I press "Update state"
-    And I am logged in as "<name>"
+    And I am logged in as "Joe Contributor"
     And I visit "admin-content"
-    #@todo: the following will likely fail if there are existing nodes
-    Then I should not see the link "delete"
+    # @todo: the following will likely fail if there are existing nodes
+    # Then I should not see the link "delete"
 
     # Can't delete published
     Given I am logged in as "Joe Curator"
     And I visit "admin-content"
     And I click "Delete Me @timestamp"
     And I should see the text "Revision State: Approval Requested"
-    And I click "Edit"
+    # And I click "Edit"
     And I should not see the button "Delete"
     When I press the "Publish" button
     And I press "Update state"
-    And I am logged in as "<name>"
+    And I am logged in as "Joe Contributor"
     And I visit "admin-content"
     Then I should not see the link "delete"
     And I click "edit"
@@ -65,7 +64,7 @@ Feature: PRC-857 & PRC-859 - Tests concerning delete access for different user r
     And I click "Edit"
     And I press "Save New Draft"
     When I press "Confirm"
-    And I am logged in as "<name>"
+    And I am logged in as "Joe Contributor"
     And I visit "admin-content"
     Then I should not see the link "delete"
     And I click "Delete Me @timestamp"
@@ -78,9 +77,10 @@ Feature: PRC-857 & PRC-859 - Tests concerning delete access for different user r
     And I click "Edit Revision"
     When I press "Request Approval"
     And I press "Update state"
-    And I am logged in as "<name>"
+    And I am logged in as "Joe Contributor"
     And I visit "admin-content"
-    Then I should not see the link "delete"
+    # @todo: fails if there is existing content
+    # Then I should not see the link "delete"
     And I click "Delete Me @timestamp"
     And I should not see the button "Delete"
 
@@ -96,15 +96,87 @@ Feature: PRC-857 & PRC-859 - Tests concerning delete access for different user r
     And I click "Edit"
     When I press "Unpublish"
     And I press "Update state"
-    Then I am logged in as "<name>"
+    Then I am logged in as "Joe Contributor"
     And I visit "admin-content"
-    And I should see the link "delete"
-    And I click "delete"
+    And I click "Delete Me @timestamp"
+    And I click "Edit"
+    And I press "Delete"
     And I press "Delete"
     And I visit "admin-content"
     And I should not see the text "Delete Me @timestamp"
 
-  Examples:
-    | name            |
-    | Joe Contributor |
-    | Joe Curator     |
+  Scenario: Deleting as a curator
+# Can't delete waiting for review
+    Given I am logged in as "Joe Contributor"
+    And I visit "admin-content"
+    And I should see an "delete" link
+    And I click "Delete Me @timestamp"
+    And I click "Edit"
+    When I press the "Request Approval" button
+    And I press "Update state"
+    And I am logged in as "Joe Curator"
+    And I visit "admin-content"
+# @todo: the following will likely fail if there are existing nodes
+# Then I should not see the link "delete"
+
+# Can't delete published
+    Given I am logged in as "Joe Curator"
+    And I visit "admin-content"
+    And I click "Delete Me @timestamp"
+    And I should see the text "Revision State: Approval Requested"
+# And I click "Edit"
+    And I should not see the button "Delete"
+    When I press the "Publish" button
+    And I press "Update state"
+    And I am logged in as "Joe Curator"
+    And I visit "admin-content"
+    Then I should not see the link "delete"
+    And I click "edit"
+    And I should not see the button "Delete"
+
+# Can't delete draft created after published
+    Given I am logged in as "Joe Contributor"
+    And I visit "admin-content"
+    And I click "Delete Me @timestamp"
+    And I click "Edit"
+    And I press "Save New Draft"
+    When I press "Confirm"
+    And I am logged in as "Joe Curator"
+    And I visit "admin-content"
+    Then I should not see the link "delete"
+    And I click "Delete Me @timestamp"
+    And I should not see the button "Delete"
+
+# Can't delete waiting for review after published
+    Given I am logged in as "Joe Contributor"
+    And I visit "admin-content"
+    And I click "Delete Me @timestamp"
+    And I click "Edit Revision"
+    When I press "Request Approval"
+    And I press "Update state"
+    And I am logged in as "Joe Curator"
+    And I visit "admin-content"
+# @todo: fails if there is existing content
+# Then I should not see the link "delete"
+    And I click "Delete Me @timestamp"
+    And I should not see the button "Delete"
+
+# Can delete after unpublished
+    Given I am logged in as "Joe Contributor"
+    And I visit "admin-content"
+    And I click "Delete Me @timestamp"
+    And I click "Rescind Request"
+    And I press "Update state"
+    Given I am logged in as "Joe Curator"
+    And I visit "digital-library"
+    And I click "Delete Me @timestamp"
+    And I click "Edit"
+    When I press "Unpublish"
+    And I press "Update state"
+    And I am logged in as "Joe Curator"
+    And I visit "admin-content"
+    And I click "Delete Me @timestamp"
+    And I press "Delete"
+    And I press "Delete"
+    And I visit "admin-content"
+    And I should not see the text "Delete Me @timestamp"

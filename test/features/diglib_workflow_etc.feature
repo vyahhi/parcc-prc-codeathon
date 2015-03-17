@@ -179,7 +179,6 @@ Feature: Workflow is functional
     Given I am logged in as "Joe Curator"
     And I visit "admin-content"
     And I click "My first post"
-    And I click "Edit"
     And I press the "Publish" button
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
@@ -261,16 +260,7 @@ Feature: Workflow is functional
     And I press "Update state"
     And I visit "admin-content"
     # prc-844
-    And I should see the text "Draft" in the "My first post @timestamp" row
-    #Go into workflow and find the new draft
-    And I click "My first post @timestamp"
-    # click the link in the breadcrumb
-    And I click "My first post @timestamp"
-    And I click "Workflow"
-    And I click "Request Approval"
-    #PRC-873 : should not see text area for request approval
-    And I should not see an "textarea" element
-    When  I press "Update state"
+    And I should see the text "Approval Requested" in the "My first post @timestamp" row
     And I visit "user/logout"
     And I am an anonymous user
     Then I visit "digital-library"
@@ -462,7 +452,7 @@ Feature: Workflow is functional
     And I should see an "Confirm" button
     And I click "Cancel"
     # We should now be on the node view page
-    And I click "Workflow"
+    And I click "Revisions"
     Then I should not see the link "My new draft @timestamp"
     And I click "Edit"
     When I fill in "Body" with "testing confirm button"
