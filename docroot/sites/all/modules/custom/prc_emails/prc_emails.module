@@ -23,27 +23,30 @@ function _prc_emails_message_create($message, $node) {
       'message_notify_email_subject' => 'field_message_rendered_subject',
       'message_notify_email_body' => 'field_message_rendered_body',
     ),
-
-
   );
 
   //By default, don't check entity access, and notify the message owner.
   //This is so that where curators don't have access to view nodes waiting for
   //review the message will still send.  Add additional cases for the message
   //type if you need an exception
-  switch($message->type){
+  switch ($message->type) {
+    case 'request_readiness_check':
+      $subscribe_options = array();
+      $w = entity_metadata_wrapper('node', $node);
+      $school_email = $w->field_contact_email->value();
+      $options['mail'] = $school_email;
+      break;
+
     default:
       $subscribe_options = array(
         'notify message owner' => TRUE,
         'entity access' => FALSE,
       );
-    break;
   }
 
   if (module_exists('message_subscribe')) {
     // If Message-subscribe exists, let's use it.
-
-    message_subscribe_send_message('node', $node, $message, array('email' => $options, ), $subscribe_options);
+    message_subscribe_send_message('node', $node, $message, array('email' => $options,), $subscribe_options);
   }
 }
 
@@ -59,13 +62,13 @@ function prc_emails_message_subscribe_get_subscribers(Message $message, $subscri
 
   $w = entity_metadata_wrapper('message', $message);
   $node = $w->field_node->value();
-  $author_uid = $node->uid;
+  $author_uid = $node ? $node->uid : 0;
 
   $uids[$author_uid]['notifiers']['email'] = 'email';
 
   $roles = array_key_exists($message->type, $message_recipients) ? $message_recipients[$message->type] : array();
 
-  if(count($roles)) {
+  if (count($roles)) {
     $role_uids = _prc_emails_uids_by_role($roles);
     foreach ($role_uids as $role_uid) {
       $uids[$role_uid]['notifiers']['email'] = 'email';
