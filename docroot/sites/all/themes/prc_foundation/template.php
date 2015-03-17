@@ -199,17 +199,17 @@ function prc_foundation_preprocess_entity(&$variables) {
       );
       $rows[] = array(
         $variables['content']['field_browser_cookies_enabled']['#title'],
-        $variables['content']['field_browser_cookies_enabled'][0]['#markup'],
+        $variables['content']['field_browser_cookies_enabled'][0]['#markup'] ? 'Yes' : 'No',
         $variables['content']['cookies_pass']['#markup'],
       );
       $rows[] = array(
         $variables['content']['field_browser_javascript_enabled']['#title'],
-        $variables['content']['field_browser_javascript_enabled'][0]['#markup'],
+        $variables['content']['field_browser_javascript_enabled'][0]['#markup'] ? 'Yes' : 'No',
         $variables['content']['javascript_pass']['#markup'],
       );
       $rows[] = array(
         $variables['content']['field_browser_images_enabled']['#title'],
-        $variables['content']['field_browser_images_enabled'][0]['#markup'],
+        $variables['content']['field_browser_images_enabled'][0]['#markup'] ? 'Yes' : 'No',
         $variables['content']['images_pass']['#markup'],
       );
       $variables['table'] = theme('table', array(
@@ -218,7 +218,7 @@ function prc_foundation_preprocess_entity(&$variables) {
       ));
     }
     else if ($variables['elements']['#bundle'] == 'capacity_check') {
-      // Adjust display for fields.
+      // Adjust display for capacity check results page.
       $variables['content']['field_ref_school']['#label_display'] = "inline";
       $variables['content']['device_capacity_results']['devices_required_passfail']['#title'] = "<h2>".$variables['content']['device_capacity_results']['devices_required_passfail']['#title']."</h2>";
       $variables['content']['device_capacity_results']['devices_required_passfail']['#markup'] = "<h3>".$variables['content']['device_capacity_results']['devices_required_passfail']['#markup']."</h3>";
