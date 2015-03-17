@@ -123,5 +123,10 @@ Feature: PRC-761 Testing Capacity Check - Unstructured - Form
     Then I should see the error message containing "Only numbers are allowed in Number of access points."
     # PRC-1015
     And I fill in "Number of test sessions per day" with "0"
+    # PRC-1031
+    And I fill in "Number of students" with "0"
+    And I fill in "Number of days of testing" with "0"
     And I press "Submit"
     Then I should see the error message containing "Number of test sessions per day: the value may be no less than 1."
+    Then I should see the error message containing "Number of students: the value may be no less than 1."
+    Then I should see the error message containing "Number of days of testing: the value may be no less than 1."
