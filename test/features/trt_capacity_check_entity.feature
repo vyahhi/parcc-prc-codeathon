@@ -121,3 +121,7 @@ Feature: PRC-761 Testing Capacity Check - Unstructured - Form
     Then I should see the error message containing "Only numbers are allowed in Number of sittings per student."
     Then I should see the error message containing "Only numbers are allowed in Speed of connection (in Mbps)."
     Then I should see the error message containing "Only numbers are allowed in Number of access points."
+    # PRC-1015
+    And I fill in "Number of test sessions per day" with "0"
+    And I press "Submit"
+    Then I should see the error message containing "Number of test sessions per day: the value may be no less than 1."

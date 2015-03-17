@@ -437,12 +437,12 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
-  // Exported menu link: menu-trt-school-readiness-capaci_run-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add
-  $menu_links['menu-trt-school-readiness-capaci_run-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add'] = array(
+  // Exported menu link: menu-trt-school-readiness-capaci_run-testing-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add
+  $menu_links['menu-trt-school-readiness-capaci_run-testing-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add'] = array(
     'menu_name' => 'menu-trt-school-readiness-capaci',
     'link_path' => 'admin/structure/entity-type/prc_trt/capacity_check/add',
     'router_path' => 'admin/structure/entity-type/prc_trt/capacity_check/add',
-    'link_title' => 'run capacity check',
+    'link_title' => 'run testing capacity check',
     'options' => array(
       'menu_token_link_path' => 'admin/structure/entity-type/prc_trt/capacity_check/add?field_ref_school=[node:nid]',
       'menu_token_data' => array(
@@ -462,7 +462,7 @@ function prc_menu_links_menu_default_menu_links() {
       'query' => array(
         'field_ref_school' => '[node:nid]',
       ),
-      'identifier' => 'menu-trt-school-readiness-capaci_run-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add',
+      'identifier' => 'menu-trt-school-readiness-capaci_run-testing-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add',
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -605,8 +605,8 @@ function prc_menu_links_menu_default_menu_links() {
   t('User account');
   t('Users');
   t('View All');
-  t('run capacity check');
   t('run system check');
+  t('run testing capacity check');
 
 
   return $menu_links;
