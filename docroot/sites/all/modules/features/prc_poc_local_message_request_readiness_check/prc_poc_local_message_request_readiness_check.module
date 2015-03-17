@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Request Readiness Check feature.
+ */
+
+include_once 'prc_poc_local_message_request_readiness_check.features.inc';

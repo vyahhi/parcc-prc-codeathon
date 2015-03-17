@@ -261,7 +261,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'settings' => array(
       'course_enrollment' => FALSE,
       'max' => '',
-      'min' => '',
+      'min' => 1,
       'prefix' => '',
       'suffix' => '',
       'user_register_form' => FALSE,
@@ -316,7 +316,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     'settings' => array(
       'course_enrollment' => FALSE,
       'max' => 32676,
-      'min' => '',
+      'min' => 1,
       'prefix' => '',
       'suffix' => '',
       'user_register_form' => FALSE,
