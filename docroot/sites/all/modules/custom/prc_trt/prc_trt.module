@@ -299,8 +299,10 @@ function _prc_trt_view_entity_capacity_check($entity) {
   $entity->content['devices_required'] = array(
     '#type' => 'item',
     '#title' => t('# of devices required:'),
-    '#markup' => '<div class="field-devices-required">' . $devices_required . '</div>',
+    '#markup' => '<div class="field-devices-required">- ' . $devices_required . '</div>',
     '#weight' => 0.1,
+    '#prefix' => '<div class="field-devices-required">',
+    '#suffix' => '</div>',
   );
 
 
@@ -310,6 +312,8 @@ function _prc_trt_view_entity_capacity_check($entity) {
     '#title' => t('devices capacity:'),
     '#markup' => '<div class="field-devices-capacity">' . $devices_capacity . '</div>',
     '#weight' => 0.2,
+    '#prefix' => '<div class="field-devices-capacity">',
+    '#suffix' => '</div>',
   );
 
   $speed = $w->field_speed_of_connection->value();
