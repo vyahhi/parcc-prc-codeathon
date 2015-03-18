@@ -147,70 +147,94 @@ function prc_foundation_question_selection_table($variables) {
  * Implements hook_preprocess_entity()
  */
 function prc_foundation_preprocess_entity(&$variables) {
-  if ($variables['entity_type'] == 'prc_trt' && $variables['elements']['#bundle'] == 'system_check' && $variables['view_mode'] == 'full') {
-    // Adjust display for fields displayed before table.
-    $variables['content']['field_ref_school']['#label_display'] = "inline";
-    $variables['content']['field_result']['#label_display'] = "hidden";
-    $variables['content']['field_result'][0]['#markup'] = "<h2>" . $variables['content']['field_result'][0]['#markup'] . "</h2>";
-    $variables['content']['field_name']['#label_display'] = "inline";
-    $variables['content']['field_number_of_devices']['#label_display'] = "inline";
-    // Build table
-    $headers = array(t('Area'), t('System Details'), t('Results'));
-    $rows[] = array(
-      $variables['content']['field_device_type']['#title'],
-      $variables['content']['field_device_type'][0]['#markup'],
-      t('N/A'),
-    );
-    $rows[] = array(
-      $variables['content']['field_operating_system']['#title'],
-      $variables['content']['field_operating_system'][0]['#markup'],
-      $variables['content']['operating_system_pass']['#markup'],
-    );
-    $rows[] = array(
-      $variables['content']['field_monitor_size']['#title'],
-      $variables['content']['field_monitor_size'][0]['#markup'],
-      $variables['content']['monitor_size_pass']['#markup'],
-    );
-    $rows[] = array(
-      $variables['content']['field_monitor_color_depth']['#title'],
-      $variables['content']['field_monitor_color_depth'][0]['#markup'],
-      $variables['content']['monitor_color_depth_pass']['#markup'],
-    );
-    $rows[] = array(
-      t('Screen resolution'),
-      $variables['content']['field_screen_resolution_width'][0]['#markup'] .  ' X ' . $variables['content']['field_screen_resolution_height'][0]['#markup'],
-      $variables['content']['screen_resolution_pass']['#markup'],
-    );
-    $rows[] = array(
-      $variables['content']['field_processor_speed']['#title'],
-      $variables['content']['field_processor_speed'][0]['#markup'],
-      $variables['content']['processor_pass']['#markup'],
-    );
-    $rows[] = array(
-      $variables['content']['field_ram']['#title'],
-      $variables['content']['field_ram'][0]['#markup'],
-      $variables['content']['ram_pass']['#markup'],
-    );
-    $rows[] = array(
-      $variables['content']['field_browser']['#title'],
-      $variables['content']['field_browser'][0]['#markup'] . ' ' . $variables['content']['field_browser_version'][0]['#markup'],
-      $variables['content']['browser_pass']['#markup'],
-    );
-    $rows[] = array(
-      $variables['content']['field_browser_cookies_enabled']['#title'],
-      $variables['content']['field_browser_cookies_enabled'][0]['#markup'],
-      $variables['content']['cookies_pass']['#markup'],
-    );
-    $rows[] = array(
-      $variables['content']['field_browser_javascript_enabled']['#title'],
-      $variables['content']['field_browser_javascript_enabled'][0]['#markup'],
-      $variables['content']['javascript_pass']['#markup'],
-    );
-    $rows[] = array(
-      $variables['content']['field_browser_images_enabled']['#title'],
-      $variables['content']['field_browser_images_enabled'][0]['#markup'],
-      $variables['content']['images_pass']['#markup'],
-    );
-    $variables['table'] = theme('table', array('header' => $headers, 'rows' => $rows));
+  if ($variables['entity_type'] == 'prc_trt' && $variables['view_mode'] == 'full') {
+    if ($variables['elements']['#bundle'] == 'system_check') {
+      // Adjust display for fields displayed before table.
+      $variables['content']['field_ref_school']['#label_display'] = "inline";
+      $variables['content']['field_result']['#label_display'] = "hidden";
+      $variables['content']['field_result'][0]['#markup'] = "<h2>" . $variables['content']['field_result'][0]['#markup'] . "</h2>";
+      $variables['content']['field_name']['#label_display'] = "inline";
+      $variables['content']['field_number_of_devices']['#label_display'] = "inline";
+      // Build table
+      $headers = array(t('Area'), t('System Details'), t('Results'));
+      $rows[] = array(
+        $variables['content']['field_device_type']['#title'],
+        $variables['content']['field_device_type'][0]['#markup'],
+        t('N/A'),
+      );
+      $rows[] = array(
+        $variables['content']['field_operating_system']['#title'],
+        $variables['content']['field_operating_system'][0]['#markup'],
+        $variables['content']['operating_system_pass']['#markup'],
+      );
+      $rows[] = array(
+        $variables['content']['field_monitor_size']['#title'],
+        $variables['content']['field_monitor_size'][0]['#markup'],
+        $variables['content']['monitor_size_pass']['#markup'],
+      );
+      $rows[] = array(
+        $variables['content']['field_monitor_color_depth']['#title'],
+        $variables['content']['field_monitor_color_depth'][0]['#markup'],
+        $variables['content']['monitor_color_depth_pass']['#markup'],
+      );
+      $rows[] = array(
+        t('Screen resolution'),
+        $variables['content']['field_screen_resolution_width'][0]['#markup'] . ' X ' . $variables['content']['field_screen_resolution_height'][0]['#markup'],
+        $variables['content']['screen_resolution_pass']['#markup'],
+      );
+      $rows[] = array(
+        $variables['content']['field_processor_speed']['#title'],
+        $variables['content']['field_processor_speed'][0]['#markup'],
+        $variables['content']['processor_pass']['#markup'],
+      );
+      $rows[] = array(
+        $variables['content']['field_ram']['#title'],
+        $variables['content']['field_ram'][0]['#markup'],
+        $variables['content']['ram_pass']['#markup'],
+      );
+      $rows[] = array(
+        $variables['content']['field_browser']['#title'],
+        $variables['content']['field_browser'][0]['#markup'] . ' ' . $variables['content']['field_browser_version'][0]['#markup'],
+        $variables['content']['browser_pass']['#markup'],
+      );
+      $rows[] = array(
+        $variables['content']['field_browser_cookies_enabled']['#title'],
+        $variables['content']['field_browser_cookies_enabled'][0]['#markup'] ? 'Yes' : 'No',
+        $variables['content']['cookies_pass']['#markup'],
+      );
+      $rows[] = array(
+        $variables['content']['field_browser_javascript_enabled']['#title'],
+        $variables['content']['field_browser_javascript_enabled'][0]['#markup'] ? 'Yes' : 'No',
+        $variables['content']['javascript_pass']['#markup'],
+      );
+      $rows[] = array(
+        $variables['content']['field_browser_images_enabled']['#title'],
+        $variables['content']['field_browser_images_enabled'][0]['#markup'] ? 'Yes' : 'No',
+        $variables['content']['images_pass']['#markup'],
+      );
+      $variables['table'] = theme('table', array(
+        'header' => $headers,
+        'rows' => $rows
+      ));
+    }
+    else if ($variables['elements']['#bundle'] == 'capacity_check') {
+      // Adjust display for capacity check results page.
+      $variables['content']['field_ref_school']['#label_display'] = "inline";
+      $variables['content']['device_capacity_results']['devices_required_passfail']['#title'] = "<h2>".$variables['content']['device_capacity_results']['devices_required_passfail']['#title']."</h2>";
+      $variables['content']['device_capacity_results']['devices_required_passfail']['#markup'] = "<h3>".$variables['content']['device_capacity_results']['devices_required_passfail']['#markup']."</h3>";
+      $variables['content']['field_number_of_devices']['#label_display'] = "inline";
+      $variables['content']['field_number_of_students']['#label_display'] = "inline";
+      $variables['content']['field_number_testing_days']['#label_display'] = "inline";
+      $variables['content']['field_number_of_sessions']['#label_display'] = "inline";
+      $variables['content']['field_sittings_per_student']['#label_display'] = "inline";
+      $variables['content']['bandwidth_capacity_results']['bandwidth_status']['#title'] = "<h2>".$variables['content']['bandwidth_capacity_results']['bandwidth_status']['#title']."</h2>";
+      $variables['content']['bandwidth_capacity_results']['bandwidth_status']['#markup'] = "<h3>".$variables['content']['bandwidth_capacity_results']['bandwidth_status']['#markup']."</h3>";
+      $variables['content']['field_network_connection_type']['#label_display'] = "inline";
+      $variables['content']['field_wired_connection_speed']['#label_display'] = "inline";
+      $variables['content']['field_wireless_connection_speed']['#label_display'] = "inline";
+      $variables['content']['field_number_of_access_points']['#label_display'] = "inline";
+      $variables['content']['field_number_of_students']['#label_display'] = "inline";
+      $variables['content']['field_speed_of_connection']['#label_display'] = "inline";
+    }
   }
 }
