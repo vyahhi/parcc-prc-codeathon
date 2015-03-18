@@ -20,7 +20,12 @@ function prc_trt_request_readiness_checks_form($settings) {
 
   $to_schools = array();
   foreach ($settings['view']->result as $id => $result) {
-    $to_schools[] = $result->node_title;
+    $school_nid = $result->nid;
+    foreach($_POST['views_bulk_operations'] as $index => $nid) {
+      if ($nid == $school_nid) {
+        $to_schools[] = $result->node_title;
+      }
+    }
   }
 
   $to_schools_text = implode(', ', $to_schools);
