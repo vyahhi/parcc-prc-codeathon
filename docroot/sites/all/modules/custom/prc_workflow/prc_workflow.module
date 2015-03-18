@@ -717,7 +717,7 @@ function prc_workflow_libraries_info(){
  * Page callback for a node's Workflow page.
  */
 function prc_workflow_revisions_tab($node) {
-  drupal_add_css(drupal_get_path('module', 'prc_workflow') . '/prc_workflow.css');
+  drupal_add_css(drupal_get_path('module', 'prc_workflow') . '/prc-workflow.css');
 
   // Gather information on the current published revision
   $state_flow = state_flow_load_state_machine($node);
