@@ -534,6 +534,8 @@ function prc_trt_form_school_node_form_alter(&$form, &$form_state) {
     '#weight' => -12,
   );
 
+  $form['field_ref_district']['#access'] = FALSE;
+
   $form['#validate'][] = 'prc_trt_form_school_node_form_validate';
   $form['#submit'][] = 'prc_trt_form_school_node_form_submit';
 }

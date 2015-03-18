@@ -79,6 +79,7 @@ Feature: PRC-848 Manage Schools - Add School - Form
     And I click "PRC-860 @timestamp"
     # PRC-849 Edit form pre-populated
     Then I should see the heading "Edit School"
+    And I should not see the text "District"
     Then the "School name" field should contain "PRC-860 @timestamp"
     And the "School contact's email address" field should contain "ok@example.com"
     And I fill in "School name" with "@timestamp PRC-860"
