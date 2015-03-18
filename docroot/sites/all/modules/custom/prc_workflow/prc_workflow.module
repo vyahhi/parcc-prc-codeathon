@@ -114,6 +114,18 @@ function prc_workflow_menu_local_tasks_alter(&$data, $router_item, $root_path) {
 }
 
 /**
+ * Implements hook_node_presave
+ *
+ * @param $node
+ */
+function prc_workflow_node_presave($node){
+  if(isset($node->original)) {
+    //@todo: should be from_vid
+    $node->from_rid = $node->original->vid;
+  }
+}
+
+/**
  * Custom access check for interacting with digital library nodes
  *
  * @param $op
@@ -717,7 +729,7 @@ function prc_workflow_libraries_info(){
  * Page callback for a node's Workflow page.
  */
 function prc_workflow_revisions_tab($node) {
-  drupal_add_css(drupal_get_path('module', 'prc_workflow') . '/prc_workflow.css');
+  drupal_add_css(drupal_get_path('module', 'prc_workflow') . '/prc-workflow.css');
 
   // Gather information on the current published revision
   $state_flow = state_flow_load_state_machine($node);
@@ -740,11 +752,15 @@ function prc_workflow_revisions_tab($node) {
 
   $history = state_flow_get_history($node->nid);
   //reverse the array so we start with the most recent first so that diffs are correct
-  $history = array_reverse($history, TRUE);
   foreach ($history as $state) {
     $vid = intval($state->vid);
 
     $node_version = node_load($node->nid, $vid);
+    if($node_version->from_rid !== 0){
+      $previous_version = node_load($node->nid, $node->from_rid);
+    }else{
+      unset($previous_version);
+    }
 
     $path_view = ($vid == $node->vid) ? 'node/' . $node->nid : 'node/' . $node->nid . '/revisions/' . $vid . '/view';
     $state_date_str = format_date($state->timestamp, 'short');
@@ -775,10 +791,8 @@ function prc_workflow_revisions_tab($node) {
       $state_date_str,
       $history_str,
     );
-
-    $previous_version = $node_version;
   }
-  $rows = array_reverse($rows);
+
   $history_table['rows'] = $rows;
 
   // Give other modules a chance to modify the table data.
@@ -836,11 +850,9 @@ function prc_workflow_body_diff($previous_version, $node_version){
 
   $pbody = $pw->body->value();
   $nbody = $nw->body->value();
-  if($pbody !== $nbody  || $previous_version->title !== $node_version->title) {
+  if($pbody != $nbody  || $previous_version->title != $node_version->title) {
 
-    //@todo: when we do the fields diff, clean this up and create a single function to return the diffs
     $HtmlDiff = new HtmlDiff($pbody['safe_value'], $nbody['safe_value']);
-
     $HtmlDiff->build();
     $diff = $HtmlDiff->getDifference();
 

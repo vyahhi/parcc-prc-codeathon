@@ -5,6 +5,7 @@ version = 7.x-0.x
 
 dependencies[] = state_flow
 
+files[] = prc_workflow.install
 files[] = includes/views/prc_workflow.views.inc
 files[] = includes/views/prc_workflow_handler_field_state.inc
 files[] = includes/views/prc_workflow_handler_field_link_review.inc
