@@ -543,7 +543,7 @@ function prc_trt_form_school_node_form_alter(&$form, &$form_state) {
 function prc_trt_form_school_node_form_validate(&$form, &$form_state) {
   $field_name = 'field_contact_email';
   $email = $form_state['values'][$field_name]['und'][0]['value'];
-  if (!valid_email_address($email)) {
+  if ($email && !valid_email_address($email)) {
     form_set_error($field_name, t('%email is not a valid e-mail address.', array('%email' => $email)));
   }
 }

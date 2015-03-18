@@ -49,6 +49,8 @@ Feature: PRC-848 Manage Schools - Add School - Form
     When I press "Submit"
     Then I should see the error message containing "School name field is required."
     And I should see the error message containing "School contact's email address field is required."
+    # PRC-1048
+    And I should not see the error message containing "is not a valid e-mail address."
     When I fill in "School contact's email address" with "badmail"
     And I press "Submit"
     Then I should see the error message containing "is not a valid e-mail address."
