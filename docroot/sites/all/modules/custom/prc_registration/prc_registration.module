@@ -14,17 +14,35 @@
  * @param $form_state
  */
 function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
+
   drupal_set_title('Create User Account to Join Partnership Resource Center');
   $invite = invite_load_from_session();
+
+  $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
+
+  $form['field_user_state']['und']['#title'] = t('State where you teach');
+  //Mark the states that are PARCC in the user states dropdown
+  //Make it so the account number text box appears when they are selected
+  $p_states = db_query('select name from taxonomy_term_data where vid = (
+      select vid from taxonomy_vocabulary where machine_name = \'member_state\')')->fetchCol('vid');
+  //$form_state['p_states'] = $p_states;
+  $state_field = ':input[name="field_user_state[und]"]';
+
+  //Needed for the invite
+  $original_opts = $form['field_user_state']['und']['#options'];
+
+  foreach ($form['field_user_state']['und']['#options'] as $tid => &$term) {
+    if (in_array($term, $p_states)) {
+      $term = $term . ' - PARCC Member';
+      $form['state_account_number']['#states']['visible'][$state_field][] = array('value' => $tid);
+    }
+  }
+
   // We don't want to display any of this stuff if the user is coming from an invite
   if (!$invite) {
-    $profession_weight = $form['field_profession']['#weight'];
 
-    $form['has_member_state'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('My State is a PARCC Member'),
-      '#weight' => $profession_weight + 1,
-    );
+    $profession_weight = $form['field_user_state']['#weight'];
+    //variable to hold the selector for the state field
 
     $form['state_account_number'] = array(
       '#type' => 'textfield',
@@ -32,17 +50,38 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
       '#weight' => $profession_weight + 2,
       '#states' => array(
         'visible' => array(
-          ':input[name="has_member_state"]' => array('checked' => TRUE),
+          $state_field => array(),
         ),
         'required' => array(
-          ':input[name="has_member_state"]' => array('checked' => TRUE),
+          $state_field => array(),
         ),
       ),
     );
-  }
-  $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
-}
+  }else{
 
+    $w = entity_metadata_wrapper('invite', $invite);
+    $user_state = $w->field_user_state->value();
+    if(!empty($user_state)){
+      //Set the user state field
+      $original_opts = array_flip($original_opts);
+      $form['field_user_state']['und']['#default_value'] = $original_opts[$user_state->name];
+      $form['field_user_state']['und']['#access'] = FALSE;
+
+      $form['display_state'] = array(
+        '#title' => t('State where you teach'),
+        '#type' => 'textfield',
+        '#default_value' => $user_state->name,
+        '#disabled' => TRUE,
+        '#weight' => $form['field_user_state']['#weight'],
+      );
+      if(in_array($user_state->name, $p_states)){
+        // Set the member state
+        $member_opts = array_flip($form['field_member_state']['und']['#options']);
+        $form['field_member_state']['und']['#value'] = $member_opts[$user_state->name];
+      }
+    }
+  }
+}
 
 /**
  * Validate for user registration form
@@ -51,35 +90,21 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
  * @param $form_state
  */
 function prc_registration_form_user_register_form_validate(&$form, &$form_state) {
-  $invite = invite_load_from_session();
-  if ($invite && count($invite->field_member_state)) {
-    $tid = $invite->field_member_state[LANGUAGE_NONE][0]['tid'];
-    $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
-  }
-  if (
-    array_key_exists('has_member_state', $form_state['values']) && $form_state['values']['has_member_state']
-  ) {
 
-    if (!$form_state['values']['state_account_number']) {
-      form_set_error('state_account_number', t('State Account # field is required.'));
+  if (!empty($form_state['values']['state_account_number'])) {
+    $account_number = $form_state['values']['state_account_number'];
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'taxonomy_term')
+      ->entityCondition('bundle', 'member_state')
+      ->fieldCondition('field_state_code', 'value', $account_number, '=');
+    $result = $query->execute();
+    if (array_key_exists('taxonomy_term', $result)) {
+      $tids = array_keys($result['taxonomy_term']);
+      $tid = reset($tids);
+      $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
     }
     else {
-
-      $account_number = $form_state['values']['state_account_number'];
-
-      $query = new EntityFieldQuery();
-      $query->entityCondition('entity_type', 'taxonomy_term')
-        ->entityCondition('bundle', 'member_state')
-        ->fieldCondition('field_state_code', 'value', $account_number, '=');
-      $result = $query->execute();
-      if (array_key_exists('taxonomy_term', $result)) {
-        $tids = array_keys($result['taxonomy_term']);
-        $tid = reset($tids);
-        $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
-      }
-      else {
-        form_set_error('state_account_number', t('Valid State Account # is required.'));
-      }
+      form_set_error('state_account_number', t('Valid State Account # is incorrect. Leave this blank if you do not have one.'));
     }
   }
 }
