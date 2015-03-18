@@ -52,11 +52,12 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     And I click "My Draft @timestamp"
     # edit the content and save a new draft
     And I click "Edit"
-    And I fill in "Body" with "Making a new draft"
+    And I fill in "Body" with "Isn't this cool?"
     And I press "Save New Draft"
     # visit the revisions tab
     And I click "Revisions"
-    And the "ins" element should contain "Making a new draft"
+    And the "ins" element should contain "cool"
+    And the "del" element should contain "swell"
 
   Scenario: Contributor's comments show on history table
     # create content and walk it through past request changes

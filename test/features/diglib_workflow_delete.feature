@@ -39,8 +39,7 @@ Feature: PRC-857 & PRC-859 - Tests concerning delete access for different user r
     And I press "Update state"
     And I am logged in as "Joe Contributor"
     And I visit "admin-content"
-    # @todo: the following will likely fail if there are existing nodes
-    # Then I should not see the link "delete"
+    Then I do not see a "delete" link in the "Delete Me @timestamp" row
 
     # Can't delete published
     Given I am logged in as "Joe Curator"
@@ -116,8 +115,7 @@ Feature: PRC-857 & PRC-859 - Tests concerning delete access for different user r
     And I press "Update state"
     And I am logged in as "Joe Curator"
     And I visit "admin-content"
-# @todo: the following will likely fail if there are existing nodes
-# Then I should not see the link "delete"
+    Then I do not see a "delete" link in the "Delete Me @timestamp" row
 
 # Can't delete published
     Given I am logged in as "Joe Curator"
@@ -156,7 +154,6 @@ Feature: PRC-857 & PRC-859 - Tests concerning delete access for different user r
     And I press "Update state"
     And I am logged in as "Joe Curator"
     And I visit "admin-content"
-# @todo: fails if there is existing content
 # Then I should not see the link "delete"
     And I click "Delete Me @timestamp"
     And I should not see the button "Delete"

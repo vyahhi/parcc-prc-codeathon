@@ -44,7 +44,7 @@ Feature: Workflow is functional
     And I visit "user/logout"
     And I visit "digital-library"
     And I click "My first post @timestamp"
-    And I should see the text "My first post"
+    And I should see the text "My first post @timestamp"
     # prc-827 : Digital Library in email is not capitalized
     Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
     # prc-824
@@ -87,7 +87,7 @@ Feature: Workflow is functional
     #Curator approves new draft
     Given I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "edit"
+    And I click "My first post @timestamp"
     And I press the "Publish" button
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
@@ -116,7 +116,7 @@ Feature: Workflow is functional
     Then I press the "Update state" button
     And I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "edit"
+    And I click "My first post @timestamp"
     # Clear out old messages
     And the test email system is enabled
     And I press the "Request Change" button
@@ -143,7 +143,7 @@ Feature: Workflow is functional
     And I press the "Unpublish" button
     And I press the "Update state" button
     And I visit "admin-content"
-    And I click "My first post"
+    And I click "My first post @timestamp"
     # prc-872 : Change "private draft" to just draft
     And I should see the text "Revision State: Draft"
     Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been unpublished."
@@ -178,7 +178,7 @@ Feature: Workflow is functional
     #Curator publishes without needing approval
     Given I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "My first post"
+    And I click "My first post @timestamp"
     And I press the "Publish" button
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element

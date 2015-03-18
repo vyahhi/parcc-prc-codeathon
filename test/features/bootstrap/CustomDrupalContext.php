@@ -1466,4 +1466,18 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
     throw new \Exception(sprintf('Found a row containing "%s", but no "%s" link on the page %s', $rowText, $link, $this->getSession()->getCurrentUrl()));
   }
+
+  /**
+   * @Then /^I do not see a "([^"]*)" link in the "([^"]*)" row$/
+   */
+  public function iDoNotSeeALinkInTheRow($link, $row_text) {
+    $link = $this->fixStepArgument($link);
+    $row_text = $this->fixStepArgument($row_text);
+
+    $page = $this->getSession()->getPage();
+    if ($link = $this->getTableRow($page, $row_text)->findLink($link)) {
+      throw new \Exception(sprintf('Found a row containing "%s", but there was "%s" present %s', $row_text, $link, $this->getSession()->getCurrentUrl()));
+    }
+    return;
+  }
 }
