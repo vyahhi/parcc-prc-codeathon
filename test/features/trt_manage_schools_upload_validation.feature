@@ -14,6 +14,8 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
 
   Scenario: Upload file - File is not .csv
     Given I am logged in as a user with the "District Admin" role
+    And I have no "District" nodes
+    And I have no "School" nodes
     And "District" nodes:
       | title        | uid         |
       | District 851 | @currentuid |
@@ -26,6 +28,8 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
 
   Scenario: Upload file - Invalid email addresses
     Given I am logged in as a user with the "District Admin" role
+    And I have no "District" nodes
+    And I have no "School" nodes
     And "District" nodes:
       | title        | uid         |
       | District 851 | @currentuid |
@@ -64,6 +68,8 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
 
   Scenario: Upload file - Empty file
     Given I am logged in as a user with the "District Admin" role
+    And I have no "District" nodes
+    And I have no "School" nodes
     And "District" nodes:
       | title        | uid         |
       | District 851 | @currentuid |
@@ -90,6 +96,8 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
 
   Scenario: Upload file - One column
     Given I am logged in as a user with the "District Admin" role
+    And I have no "District" nodes
+    And I have no "School" nodes
     And "District" nodes:
       | title        | uid         |
       | District 851 | @currentuid |
@@ -128,6 +136,8 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
 
   Scenario: Upload file - Missing schools
     Given I am logged in as a user with the "District Admin" role
+    And I have no "District" nodes
+    And I have no "School" nodes
     And "District" nodes:
       | title        | uid         |
       | District 851 | @currentuid |
@@ -167,6 +177,8 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
 
   Scenario: File is required
     Given I am logged in as a user with the "District Admin" role
+    And I have no "District" nodes
+    And I have no "School" nodes
     And "District" nodes:
       | title        | uid         |
       | District 851 | @currentuid |
@@ -178,6 +190,8 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
 
   Scenario: Upload file - Some pass, some fail
     Given I am logged in as a user with the "District Admin" role
+    And I have no "District" nodes
+    And I have no "School" nodes
     And "District" nodes:
       | title        | uid         |
       | District 851 | @currentuid |
@@ -215,6 +229,8 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
 
   Scenario: Upload file - Existing schools - case insensitive
     Given I am logged in as a user with the "District Admin" role
+    And I have no "District" nodes
+    And I have no "School" nodes
     And "District" nodes:
       | title        | uid         |
       | District 851 | @currentuid |
