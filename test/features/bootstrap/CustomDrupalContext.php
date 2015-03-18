@@ -954,12 +954,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
     $contents = $this->fixStepArgument($contents);
     $message = $this->activeEmail;
-    if (strpos($message['body'], $contents) !== FALSE ||
+    $body = str_replace(PHP_EOL, ' ', $message['body']);
+    if (strpos($body, $contents) !== FALSE ||
       strpos($message['subject'], $contents) !== FALSE
     ) {
       return TRUE;
     }
-    print $message['body'];
+    print $body;
     throw new \Exception('Did not find expected content in message body or subject.');
   }
 

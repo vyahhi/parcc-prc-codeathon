@@ -1916,6 +1916,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['edit any district content'] = array(
     'name' => 'edit any district content',
     'roles' => array(
+      'District Admin' => 'District Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
