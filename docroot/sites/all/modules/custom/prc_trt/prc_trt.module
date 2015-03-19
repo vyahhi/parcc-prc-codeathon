@@ -107,7 +107,7 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
     '#type' => 'hidden',
   );
   $form['faux_images'] = array(
-    '#type' => 'textfield',
+    '#type' => 'hidden',
   );
   $form['faux_monitor_color_depth'] = array(
     '#type' => 'hidden',
