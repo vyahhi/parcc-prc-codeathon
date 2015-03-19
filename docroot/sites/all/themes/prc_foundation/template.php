@@ -199,17 +199,17 @@ function prc_foundation_preprocess_entity(&$variables) {
       );
       $rows[] = array(
         $variables['content']['field_browser_cookies_enabled']['#title'],
-        $variables['content']['field_browser_cookies_enabled'][0]['#markup'] ? 'Yes' : 'No',
+        $variables['content']['field_browser_cookies_enabled']['#items'][0]['value'] ? 'Yes' : 'No',
         $variables['content']['cookies_pass']['#markup'],
       );
       $rows[] = array(
         $variables['content']['field_browser_javascript_enabled']['#title'],
-        $variables['content']['field_browser_javascript_enabled'][0]['#markup'] ? 'Yes' : 'No',
+        $variables['content']['field_browser_javascript_enabled']['#items'][0]['value'] ? 'Yes' : 'No',
         $variables['content']['javascript_pass']['#markup'],
       );
       $rows[] = array(
         $variables['content']['field_browser_images_enabled']['#title'],
-        $variables['content']['field_browser_images_enabled'][0]['#markup'] ? 'Yes' : 'No',
+        $variables['content']['field_browser_images_enabled']['#items'][0]['value'] ? 'Yes' : 'No',
         $variables['content']['images_pass']['#markup'],
       );
       $variables['table'] = theme('table', array(
