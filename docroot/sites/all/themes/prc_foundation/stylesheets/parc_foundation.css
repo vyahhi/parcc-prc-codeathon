@@ -3471,188 +3471,216 @@ table tfoot tr td {
 }
 
 @media only screen {
-  /* line 62, ../sass/parc_foundation.scss */
+  /* line 61, ../sass/parc_foundation.scss */
+  .uppercase {
+    text-transform: uppercase;
+  }
+
+  /* line 65, ../sass/parc_foundation.scss */
   nav a#logo {
     display: inline-block;
     margin: 1.5625em 0.9375em;
   }
-  /* line 66, ../sass/parc_foundation.scss */
+  /* line 69, ../sass/parc_foundation.scss */
   nav li.toggle-topbar.menu-icon {
     right: 5px !important;
     margin-right: 0.9375em;
   }
-  /* line 70, ../sass/parc_foundation.scss */
+  /* line 73, ../sass/parc_foundation.scss */
   nav #block-search-form {
     float: left;
     width: 100%;
     padding: 20px 0.9375em 10px;
     background-color: #333333;
   }
-  /* line 75, ../sass/parc_foundation.scss */
+  /* line 78, ../sass/parc_foundation.scss */
   nav #block-search-form h2 {
     font-size: 0;
   }
-  /* line 78, ../sass/parc_foundation.scss */
+  /* line 81, ../sass/parc_foundation.scss */
   nav #block-search-form input {
     float: left;
     font-size: 0.8125em;
   }
-  /* line 82, ../sass/parc_foundation.scss */
+  /* line 85, ../sass/parc_foundation.scss */
   nav #block-search-form input#edit-search-block-form--2 {
     width: 175px;
   }
-  /* line 85, ../sass/parc_foundation.scss */
+  /* line 88, ../sass/parc_foundation.scss */
   nav #block-search-form input#edit-submit,
   nav #block-search-form input#edit-submit--2 {
     height: 32px;
   }
-  /* line 90, ../sass/parc_foundation.scss */
+  /* line 93, ../sass/parc_foundation.scss */
   nav .top-bar-section ul li > a {
     padding: 12px 0px 12px 16px;
   }
 
-  /* line 95, ../sass/parc_foundation.scss */
+  /* line 98, ../sass/parc_foundation.scss */
   #sub-header .breadcrumb {
     padding-top: .5em;
   }
-  /* line 97, ../sass/parc_foundation.scss */
+  /* line 100, ../sass/parc_foundation.scss */
   #sub-header .breadcrumb a {
     font-weight: bold;
     color: #464646;
   }
-  /* line 102, ../sass/parc_foundation.scss */
+  /* line 105, ../sass/parc_foundation.scss */
   #sub-header h1 {
     margin: 0 0 .75em;
     text-align: center;
     text-transform: uppercase;
   }
 
-  /* line 108, ../sass/parc_foundation.scss */
+  /* line 111, ../sass/parc_foundation.scss */
   #main-wrapper {
     background-color: #EEEEEE;
   }
+
+  /* line 114, ../sass/parc_foundation.scss */
+  footer {
+    background-color: #70547D;
+    color: white;
+  }
+  /* line 117, ../sass/parc_foundation.scss */
+  footer p {
+    font-size: 0.8125em;
+  }
+  /* line 120, ../sass/parc_foundation.scss */
+  footer #footer-contact {
+    text-align: right;
+  }
 }
 @media only screen and (min-width: 1025px) {
-  /* line 114, ../sass/parc_foundation.scss */
+  /* line 127, ../sass/parc_foundation.scss */
   .columns {
     padding-left: 1.875em;
     padding-right: 1.875em;
   }
 
-  /* line 118, ../sass/parc_foundation.scss */
+  /* line 131, ../sass/parc_foundation.scss */
   nav.top-bar {
     text-align: center;
   }
 
-  /* line 122, ../sass/parc_foundation.scss */
+  /* line 135, ../sass/parc_foundation.scss */
   nav a#logo {
     display: inline-block;
     margin: 1.5625em 0 1.5625em 1.875em;
   }
-  /* line 126, ../sass/parc_foundation.scss */
+  /* line 139, ../sass/parc_foundation.scss */
   nav #main-menu-section,
   nav #secondary-menu-section {
     display: inline-block;
   }
-  /* line 131, ../sass/parc_foundation.scss */
+  /* line 144, ../sass/parc_foundation.scss */
   nav .top-bar-section ul {
     background-color: #344758;
   }
-  /* line 134, ../sass/parc_foundation.scss */
+  /* line 147, ../sass/parc_foundation.scss */
   nav .top-bar-section li a:not(.button) {
     padding: 0 15px;
   }
-  /* line 137, ../sass/parc_foundation.scss */
+  /* line 150, ../sass/parc_foundation.scss */
   nav .top-bar-section li a:not(.button):hover,
   nav .top-bar-section ul li.active > a {
     background: none repeat scroll 0% 0% #2e3f4e;
   }
-  /* line 142, ../sass/parc_foundation.scss */
+  /* line 155, ../sass/parc_foundation.scss */
   nav #header-icons {
     float: right;
     margin: 1.0625em 1.875em 0 0;
     height: 65px;
   }
-  /* line 146, ../sass/parc_foundation.scss */
+  /* line 159, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon,
   nav #header-icons #profile-icon {
     height: 35px;
   }
-  /* line 150, ../sass/parc_foundation.scss */
+  /* line 163, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon {
     width: 42px;
     margin-right: 5px;
     background: url("../images/search-icon.png") no-repeat 10px;
   }
-  /* line 155, ../sass/parc_foundation.scss */
+  /* line 168, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon:before,
   nav #header-icons #profile-icon:before {
     display: none;
   }
-  /* line 159, ../sass/parc_foundation.scss */
+  /* line 172, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon:hover,
   nav #header-icons #search-icon:focus {
     background: url("../images/search-icon-active.png") no-repeat 10px;
   }
-  /* line 163, ../sass/parc_foundation.scss */
+  /* line 176, ../sass/parc_foundation.scss */
   nav #header-icons #profile-icon {
     width: 71px;
     margin-left: 5px;
     background: url("../images/profile-icon.png") no-repeat 15px 7px, url("../images/down-arrow.png") no-repeat 40px 12px;
   }
-  /* line 170, ../sass/parc_foundation.scss */
+  /* line 183, ../sass/parc_foundation.scss */
   nav #header-icons #profile-icon:hover,
   nav #header-icons #profile-icon:focus {
     background: url("../images/profile-icon-active.png") no-repeat 15px 7px, url("../images/down-arrow-active.png") no-repeat 40px 12px;
   }
-  /* line 176, ../sass/parc_foundation.scss */
+  /* line 189, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon.button,
   nav #header-icons #profile-icon.button {
     background-color: #44596F;
     border-width: 0;
     box-shadow: none;
   }
-  /* line 182, ../sass/parc_foundation.scss */
+  /* line 195, ../sass/parc_foundation.scss */
   nav #header-icons .button:hover,
   nav #header-icons .button:focus {
     background-color: #2e3f4e !important;
   }
-  /* line 186, ../sass/parc_foundation.scss */
+  /* line 199, ../sass/parc_foundation.scss */
   nav #header-icons #search-dropdown,
   nav #header-icons #profile-dropdown {
     position: absolute;
     left: -99999px;
   }
-  /* line 191, ../sass/parc_foundation.scss */
+  /* line 204, ../sass/parc_foundation.scss */
   nav #header-icons #block-search-form {
     padding: 0.3125em 0.9375em 1.25em;
     background-color: white;
     cursor: auto;
   }
-  /* line 195, ../sass/parc_foundation.scss */
+  /* line 208, ../sass/parc_foundation.scss */
   nav #header-icons #block-search-form input {
     margin: -1px 0px 2px -1px;
   }
-  /* line 198, ../sass/parc_foundation.scss */
+  /* line 211, ../sass/parc_foundation.scss */
   nav #header-icons #block-search-form input.form-submit {
     display: none;
   }
-  /* line 203, ../sass/parc_foundation.scss */
+  /* line 216, ../sass/parc_foundation.scss */
   nav .f-dropdown li a {
     font-size: 12px;
   }
+
+  /* line 221, ../sass/parc_foundation.scss */
+  footer #footer-contact {
+    text-align: center;
+  }
+  /* line 224, ../sass/parc_foundation.scss */
+  footer #footer-social {
+    text-align: right;
+  }
 }
 @media only screen and (min-width: 1280px) {
-  /* line 211, ../sass/parc_foundation.scss */
+  /* line 232, ../sass/parc_foundation.scss */
   nav .top-bar-section li a:not(.button) {
     padding: 0 1.75em;
     font-size: 0.875em;
   }
-  /* line 215, ../sass/parc_foundation.scss */
+  /* line 236, ../sass/parc_foundation.scss */
   nav .f-dropdown li a {
     font-size: 0.8125em;
   }
-  /* line 218, ../sass/parc_foundation.scss */
+  /* line 239, ../sass/parc_foundation.scss */
   nav #block-search-form input {
     font-size: 0.875em;
   }

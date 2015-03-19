@@ -58,6 +58,9 @@
 @import "prc-variables";
 
 @media #{$screen} {
+  .uppercase {
+    text-transform: uppercase;
+  }
   nav {
     a#logo {
       display: inline-block;
@@ -107,6 +110,16 @@
   }
   #main-wrapper {
     background-color: #EEEEEE;
+  }
+  footer {
+    background-color: $parcc-purple;
+    color: white;
+    p {
+      font-size: em-calc(13);
+    }
+    #footer-contact {
+      text-align: right;
+    }
   }
 }
 
@@ -202,6 +215,14 @@
     }
     .f-dropdown li a {
       font-size: 12px;
+    }
+  }
+  footer {
+    #footer-contact {
+      text-align: center;
+    }
+    #footer-social {
+      text-align: right;
     }
   }
 }
