@@ -11,13 +11,13 @@
 // and uncommenting what you want below. You must uncomment the following if customizing
 
 @import "foundation/components/global"; // *always required
-@import "foundation/components/grid";
+//@import "foundation/components/grid";
 
 //
 // Use this grid if you want to start using the new Foundation 5 grid early.
 // It will change breakpoints to min-width: 640px and 1024px.
 //
-// @import "foundation/components/grid-5";
+@import "foundation/components/grid-5";
 //
 
 @import "foundation/components/visibility";
@@ -109,13 +109,31 @@
     }
   }
   #main-wrapper {
+    // Enable for grid alignment debugging
     background-color: #EEEEEE;
   }
   footer {
     background-color: $parcc-purple;
     color: white;
+    padding: 50px 0 30px;
     p {
       font-size: em-calc(13);
+    }
+    a {
+      color: white;
+      text-decoration: underline;
+    }
+    #footer-copyright,
+    #footer-contact {
+      text-align: center;
+    }
+  }
+}
+
+@media #{$small} {
+  footer {
+    #footer-copyright{
+      text-align: left;
     }
     #footer-contact {
       text-align: right;
@@ -123,7 +141,7 @@
   }
 }
 
-@media #{$topbar-media-query} {
+@media #{$medium} {
   .columns {
     padding-left: $desktop-padding;
     padding-right: $desktop-padding;
@@ -227,7 +245,7 @@
   }
 }
 
-@media #{$medium} {
+@media #{$large} {
   nav {
     .top-bar-section li a:not(.button) {
       padding: 0 em-calc(28);

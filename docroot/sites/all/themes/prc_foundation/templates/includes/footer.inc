@@ -7,17 +7,21 @@
     <?php endif; ?>
 
     <?php if ($site_name) :?>
-      <div id="footer-copyright" class="small-6 large-4 columns">
-        <p>&copy; <?php print date('Y') . ' ' . check_plain($site_name) . ' ' . t('All rights reserved.'); ?> Lorem ipsum  dolor sit amet, consectetur adipiscing elit Aenean euismod bibendum la Proin gravida dolor sit amet lacus accumsan. <a href = "#">Terms of Use</a></p>
+      <div id="footer-copyright" class="medium-6 large-4 columns">
+        <p>Copyright &copy; <?php print date('Y') . '. ' . t('All rights reserved.'); ?> <br><a href = "#">Terms of Use</a></p>
       </div>
     <?php endif; ?>
-    <div id="footer-contact" class="small-6 large-4 columns">
-      <p><span class="uppercase">Contact PARCC</span><br />
-      info@EmailAddress.com<br />
-      !+ 000.000.000</p>
+    <div id="footer-contact" class="medium-6 large-4 columns">
+      <p><span class="uppercase">Contact PARCC</span><br>
+        1747 Pennsylvania Avenue NW<br>
+        6th Floor<br>
+        Washington, DC 20006<br>
+        Phone: 202-748-8100<br>
+        Email: <a href="mailtp:questions@parcconline.org">questions@parcconline.org</a></p>
     </div>
-    <div id="footer-social" class="show-for-medium-up large-4 columns">
-      <p>Social</p>
+    <div id="footer-social" class="hide-for-medium-down large-4 columns">
+      <a href = "https://www.facebook.com/PARCC" title="PARCC Facebook"><img src="/sites/all/themes/prc_foundation/images/facebook-icon.png" alt="Facebook"></a>
+      <a href = "https://twitter.com/parccplace" title="PARCC Twitter"><img src="/sites/all/themes/prc_foundation/images/twitter-icon.png" alt="Twitter"></a>
     </div>
   </div>
 </footer>
