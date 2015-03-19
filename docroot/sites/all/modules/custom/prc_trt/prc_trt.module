@@ -98,25 +98,25 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
   }
 
   $form['faux_browser'] = array(
-    '#type' => 'hidden'
+    '#type' => 'hidden',
   );
   $form['faux_javascript'] = array(
-    '#type' => 'hidden'
+    '#type' => 'hidden',
   );
   $form['faux_cookies'] = array(
-    '#type' => 'hidden'
+    '#type' => 'hidden',
   );
   $form['faux_images'] = array(
-    '#type' => 'hidden'
+    '#type' => 'textfield',
   );
   $form['faux_monitor_color_depth'] = array(
-    '#type' => 'hidden'
+    '#type' => 'hidden',
   );
   $form['faux_screen_resolution_width'] = array(
-    '#type' => 'hidden'
+    '#type' => 'hidden',
   );
   $form['faux_screen_resolution_height'] = array(
-    '#type' => 'hidden'
+    '#type' => 'hidden',
   );
 
   drupal_add_js(drupal_get_path('module', 'prc_trt') . '/prc_trt.js');
