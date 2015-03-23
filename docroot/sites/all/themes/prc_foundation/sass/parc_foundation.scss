@@ -119,7 +119,10 @@
     p {
       font-size: em-calc(13);
     }
-    a {
+    a,
+    a:visited,
+    a:hover,
+    a:active {
       color: white;
       text-decoration: underline;
     }
