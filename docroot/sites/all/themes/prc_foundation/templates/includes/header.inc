@@ -20,11 +20,11 @@
       <?php endif; ?>
 
       <div id="header-icons">
-        <a href="#" data-dropdown="search-dropdown" id="search-icon" class="button dropdown round show-for-large-up left"></a>
+        <a href="#" data-dropdown="search-dropdown" id="search-icon" class="button dropdown round show-for-large-up left" title="Search" alt="Profile"></a>
         <ul id="search-dropdown" class="f-dropdown" data-dropdown-content>
           <li><?php print render($page['header']); ?></li>
         </ul>
-        <a href="#" data-dropdown="profile-dropdown" id="profile-icon" class="button small dropdown round show-for-large-up left"></a>
+        <a href="#" data-dropdown="profile-dropdown" id="profile-icon" class="button small dropdown round show-for-large-up left" title="Profile" alt="Profile"></a>
         <?php print theme('links__system_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('id' => 'profile-dropdown', 'class' => 'f-dropdown', 'data-dropdown-content' => ''))); ?>
         <?php if ($secondary_menu): ?>
           <section id="secondary-menu-section" class="top-bar-section show-for-medium-down">

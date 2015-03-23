@@ -1,10 +1,5 @@
 <footer role="contentinfo">
   <div id="footer-wrapper" class="row">
-    <?php if (!empty($page['footer'])): ?>
-      <!--<div class="footer large-12 columns">
-        <?php // print render($page['footer']); ?>
-      </div> -->
-    <?php endif; ?>
 
     <?php if ($site_name) :?>
       <div id="footer-copyright" class="medium-6 large-4 columns">
@@ -20,8 +15,8 @@
         Email: <a href="mailtp:questions@parcconline.org">questions@parcconline.org</a></p>
     </div>
     <div id="footer-social" class="hide-for-medium-down large-4 columns">
-      <a href = "https://www.facebook.com/PARCC" title="PARCC Facebook"><img src="/sites/all/themes/prc_foundation/images/facebook-icon.png" alt="Facebook"></a>
-      <a href = "https://twitter.com/parccplace" title="PARCC Twitter"><img src="/sites/all/themes/prc_foundation/images/twitter-icon.png" alt="Twitter"></a>
+      <a href = "https://www.facebook.com/PARCC" title="PARCC Facebook"><img src="/<?php print path_to_theme(); ?>/images/facebook-icon.png" alt="Facebook"></a>
+      <a href = "https://twitter.com/parccplace" title="PARCC Twitter"><img src="/<?php print path_to_theme(); ?>/images/twitter-icon.png" alt="Twitter"></a>
     </div>
   </div>
 </footer>
