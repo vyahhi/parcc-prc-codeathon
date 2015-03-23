@@ -49,6 +49,8 @@ Feature: PRC-819 Request Readiness Checks - Compose Email
     And I should see the text "Message:"
     And I should see the text "Message goes here explaining importance of running checks and how to run them, emphasizing that it is important that admins run the checks from the provided link or results won't be saved or reported to District."
     And I should not see the text "\[message:field-comment\]"
+    # PRC-1068 site:url token includes the trailing / so that replace was incorrect
+    And I should not see the text "\[site:url\]"
     And I should see the text "Additional Comments \(optional\):"
     And I should see a "Next" button
     And I should see a "Cancel" link
