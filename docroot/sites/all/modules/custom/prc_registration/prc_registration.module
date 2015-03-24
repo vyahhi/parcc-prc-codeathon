@@ -40,6 +40,10 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
       ),
     );
   }
+  else {
+    $form['field_user_state']['#required'] = FALSE;
+    $form['field_user_state']['#access'] = FALSE;
+  }
   $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
 }
 
@@ -52,9 +56,15 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
  */
 function prc_registration_form_user_register_form_validate(&$form, &$form_state) {
   $invite = invite_load_from_session();
-  if ($invite && count($invite->field_member_state)) {
-    $tid = $invite->field_member_state[LANGUAGE_NONE][0]['tid'];
-    $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
+  if ($invite) {
+    if (count($invite->field_member_state)) {
+      $tid = $invite->field_member_state[LANGUAGE_NONE][0]['tid'];
+      $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
+    }
+    if (count($invite->field_user_state)) {
+      $tid = $invite->field_user_state[LANGUAGE_NONE][0]['tid'];
+      $form_state['values']['field_user_state'][LANGUAGE_NONE][0]['tid'] = $tid;
+    }
   }
   if (
     array_key_exists('has_member_state', $form_state['values']) && $form_state['values']['has_member_state']

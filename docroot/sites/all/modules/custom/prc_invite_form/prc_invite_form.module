@@ -248,6 +248,9 @@ function prc_invite_form_form_invite_form_submit(&$form, &$form_state)
  *  Implements hook_invite_accept().
  */
 function prc_invite_form_invite_accept($invite) {
+  // The field values from the invite are added to the user registration form
+  // in prc_registration_form_user_register_form_validate()
+
   $w = entity_metadata_wrapper('invite', $invite);
   $invitee = $invite->invitee;
   $account = user_load($invitee);

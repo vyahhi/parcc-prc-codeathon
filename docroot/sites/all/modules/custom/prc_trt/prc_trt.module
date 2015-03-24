@@ -471,6 +471,7 @@ function prc_trt_entity_presave($entity, $type) {
 
     $w = entity_metadata_wrapper('node', $entity);
     $member_state = NULL;
+    $user_state = NULL;
     if (isset($w->field_ref_district)) {
       $ref_district = $w->field_ref_district->value();
       $w_dist = entity_metadata_wrapper('node', $ref_district);
@@ -478,6 +479,9 @@ function prc_trt_entity_presave($entity, $type) {
       $w_state = entity_metadata_wrapper('node', $trt_state);
       if (isset($w_state->field_member_state)) {
         $member_state = $w_state->field_member_state->value();
+      }
+      if (isset($w_state->field_user_state)) {
+        $user_state = $w_state->field_user_state->value();
       }
     }
 
@@ -515,6 +519,9 @@ function prc_trt_entity_presave($entity, $type) {
       else {
         $educator_role = user_role_load_by_name('Educator');
         $educator_rid = $educator_role->rid;
+      }
+      if ($user_state) {
+        $wrapper->field_user_state->set($user_state);
       }
       $rids = array($school_admin_rid, $educator_rid);
 

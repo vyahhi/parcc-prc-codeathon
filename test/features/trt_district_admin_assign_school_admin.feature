@@ -28,20 +28,20 @@ Feature: PRC-944 School Admin - Assign Role
     And the user "example1@timestamp@example.com" should have a role of "School Admin"
     Then I delete the user with the email address "example1@timestamp@example.com"
 
-  Scenario: User doesn't exist in system - member
+  Scenario Outline: User doesn't exist in system - member
     Given I am logged in as a user with the "District Admin" role
     And "User States" terms:
-      | name           |
-      | South Illinois |
+      | name         |
+      | <user_state> |
     And "Member State" terms:
       | name           | field_state_code |
-      | South Illinois | SOIL1            |
+      | <member_state> | SOIL1            |
     And "State" nodes:
-      | title          | field_state    | field_member_state | uid |
-      | South Illinois | South Illinois | South Illinois     | 1   |
+      | title          | field_user_state | field_member_state | uid |
+      | <member_state> | <user_state>     | <member_state>     | 1   |
     And "District" nodes:
       | title                 | uid         | field_ref_trt_state  |
-      | PRC-944 S1 @timestamp | @currentuid | @nid[South Illinois] |
+      | PRC-944 S1 @timestamp | @currentuid | @nid[<member_state>] |
     And "School" nodes:
       | title                    | field_ref_district          | field_contact_email            | uid         |
       | School 944 S1 @timestamp | @nid[PRC-944 S1 @timestamp] | example1@timestamp@example.com | @currentuid |
@@ -62,9 +62,13 @@ Feature: PRC-944 School Admin - Assign Role
     And the user "example1@timestamp@example.com" should have a role of "School Admin"
     And I follow "My account"
     Then I should see the text "Member State:"
-    And I should see the link "South Illinois"
+    And I should see the link "<member_state>"
+    And I should see the text "State Where I Teach"
+    And I should see the link "<user_state>"
     Then I delete the user with the email address "example1@timestamp@example.com"
-
+  Examples:
+    | user_state    | member_state   |
+    | West Colorado | South Illinois
 #  Scenario 2: User exists in system and user is not already a school admin
 #    Given the user exists in the system
 #    And user is not already a school admin
