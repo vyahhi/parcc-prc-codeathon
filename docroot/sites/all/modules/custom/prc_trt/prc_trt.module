@@ -467,31 +467,40 @@ function prc_trt_entity_presave($entity, $type) {
     _prc_entity_capacity_check_presave($entity);
   }
   elseif ($type == 'node' && $entity->type == 'school') {
-    global $user;
+    _prc_trt_presave_school($entity);
 
-    $w = entity_metadata_wrapper('node', $entity);
-    $member_state = NULL;
-    $user_state = NULL;
-    $ref_district = $w->field_ref_district->value();
-    if ($ref_district) {
-      $w_dist = entity_metadata_wrapper('node', $ref_district);
-      $trt_state = $w_dist->field_ref_trt_state->value();
-      $w_state = entity_metadata_wrapper('node', $trt_state);
-      if (isset($w_state->field_member_state)) {
-        $member_state = $w_state->field_member_state->value();
-      }
-      if (isset($w_state->field_user_state)) {
-        $user_state = $w_state->field_user_state->value();
-      }
+  }
+}
+
+/**
+ * @param $entity
+ */
+function _prc_trt_presave_school($entity) {
+  $w = entity_metadata_wrapper('node', $entity);
+  $member_state = NULL;
+  $user_state = NULL;
+  $ref_district = $w->field_ref_district->value();
+  if ($ref_district) {
+    $w_dist = entity_metadata_wrapper('node', $ref_district);
+    $trt_state = $w_dist->field_ref_trt_state->value();
+    $w_state = entity_metadata_wrapper('node', $trt_state);
+    if (isset($w_state->field_member_state)) {
+      $member_state = $w_state->field_member_state->value();
     }
+    if (isset($w_state->field_user_state)) {
+      $user_state = $w_state->field_user_state->value();
+    }
+  }
 
-    $contact_email = $w->field_contact_email->value();
-    if ($contact_email) {
+  $contact_email = $w->field_contact_email->value();
+  if ($contact_email) {
 //      if (isset($entity->original)) {
 //        $w_orig = entity_metadata_wrapper('node', $entity->original);
 //        $orig_contact_email = $w_orig->field_contact_email->value();
 //      }
 
+    $account = user_load_by_mail($contact_email);
+    if (!$account) {
       $uid = $entity->uid;
       $account = user_load($uid);
       $subj = t('@user has sent you an invite!', array('@user' => $account->name));
@@ -528,9 +537,19 @@ function prc_trt_entity_presave($entity, $type) {
       $wrapper->field_role_id->set($rids);
 
       $wrapper->save();
-
+    } else {
+      // User exists, give the School Admin role
+      $role_name = 'School Admin';
+      $has_role = array_search($role_name, $account->roles);
+      if ($has_role == FALSE) {
+        $roles = user_roles(TRUE);
+        $rid = array_search($role_name, $roles);
+        if ($rid != FALSE) {
+          $new_role[$rid] = $role_name;
+          user_save($account, array('roles' => $new_role));
+        }
+      }
     }
-
   }
 }
 

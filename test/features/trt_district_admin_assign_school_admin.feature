@@ -69,13 +69,35 @@ Feature: PRC-944 School Admin - Assign Role
     Then I delete the user with the email address "example1@timestamp@example.com"
   Examples:
     | user_state    | member_state   |
-    | West Colorado | South Illinois
-#  Scenario 2: User exists in system and user is not already a school admin
-#    Given the user exists in the system
-#    And user is not already a school admin
-#    When school is saved
-#    Then user gets School Admin role
-#    And the School Admin has access to the associated School Readiness page
+    | West Colorado | South Illinois |
+
+  Scenario Outline: User exists in system and user is not already a school admin
+    Given I am logged in as a user with the "District Admin" role
+    And users:
+      | name         | mail        | pass   | field_first_name | field_last_name | status |
+      | Joe Educator | <user_name> | xyz123 | Joe              | Educator        | 1      |
+    And "User States" terms:
+      | name         |
+      | <user_state> |
+    And "Member State" terms:
+      | name           | field_state_code |
+      | <member_state> | SOIL1            |
+    And "State" nodes:
+      | title          | field_user_state | field_member_state | uid |
+      | <member_state> | <user_state>     | <member_state>     | 1   |
+    And "District" nodes:
+      | title                 | uid         | field_ref_trt_state  |
+      | PRC-944 S1 @timestamp | @currentuid | @nid[<member_state>] |
+    And "School" nodes:
+      | title                    | field_ref_district          | field_contact_email | uid         |
+      | School 944 S1 @timestamp | @nid[PRC-944 S1 @timestamp] | <user_name>         | @currentuid |
+    Then "<user_name>" should not have an email
+    And the user "<user_name>" should have a role of "School Admin"
+  Examples:
+    | user_state     | member_state   | user_name                          |
+    | North Virginia | Vermont Island | joe_prc_944a@timestamp@example.com |
+
+
 #  Scenario 3: User exists in system and user is not already a school admin and user has Educator role and school is in a PARCC-member state
 #    Given the user exists in the system
 #    And user is not already a school admin
@@ -85,11 +107,13 @@ Feature: PRC-944 School Admin - Assign Role
 #    Then user gets School Admin role
 #    And user gets PARCC-Member Educator role
 #    And the School Admin has access to the associated School Readiness page
+
 #  Scenario 4: User exists in system and user is already a school admin
 #    Given the user exists in the system
 #    And user is already a school admin
 #    When school is saved
 #    Then the School Admin has access to the associated School Readiness page
+
 #  Scenario 5: User exists in system and user is already a school admin and user has Educator role and new school is in a PARCC-member state
 #    Given the user exists in the system
 #    And user is already a school admin

@@ -918,6 +918,21 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Then /^"([^"]*)" should not have an email$/
+   */
+  public function shouldNotHaveAnEmail($to) {
+    $mail_to = $this->fixStepArgument($to);
+
+    $variables = array_map('unserialize', db_query("SELECT name, value FROM {variable} WHERE name = 'drupal_test_email_collector'")->fetchAllKeyed());
+    $this->activeEmail = FALSE;
+    foreach ($variables['drupal_test_email_collector'] as $message) {
+      if ($message['to'] == $mail_to) {
+        throw new \Exception(sprintf('Found message to %s but did not expect to', $mail_to));
+      }
+    }
+  }
+
+  /**
    * @Then /^the email to "([^"]*)" should contain "([^"]*)"$/
    */
   public function theEmailToShouldContain($to, $contents) {
