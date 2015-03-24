@@ -2,17 +2,7 @@
 Feature: PRC-944 School Admin - Assign Role
   As a District Admin, I want to be able to assign a user (who either does or doesn't exist in the system) to the School Admin role so that the user can run readiness checks and view school readiness.
   Acceptance Criteria
-#  Scenario 1: User doesn't exist in system
-#    Given the user doesn't exist in the system
-#    When readiness check request made
-#    Then Invite sent to user
-#    When user registers
 #  State where you teach field displays state associated with District is displayed (static text)
-#    Then user gets School Admin role
-#    And user gets role:
-#  PARCC-Member Educator role, if the state selected when invite create is a PARCC member state
-#  Educator role, if the state selected when invite create is NOT a PARCC member state
-#    And the School Admin has access to the associated School Readiness page
 
   Scenario: User doesn't exist in system - non-member
     Given I am logged in as a user with the "District Admin" role
@@ -70,6 +60,9 @@ Feature: PRC-944 School Admin - Assign Role
     And the user "example1@timestamp@example.com" should not have a role of "Educator"
     And the user "example1@timestamp@example.com" should have a role of "PARCC-Member Educator"
     And the user "example1@timestamp@example.com" should have a role of "School Admin"
+    And I follow "My account"
+    Then I should see the text "Member State:"
+    And I should see the link "South Illinois"
     Then I delete the user with the email address "example1@timestamp@example.com"
 
 #  Scenario 2: User exists in system and user is not already a school admin

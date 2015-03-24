@@ -31,7 +31,7 @@ Feature: PRC-363 State Association to Invited Users
     #  Creates a new account with the pre-defined role
     Then the user "example1@timestamp@example.com" should have a role of "Content Contributor"
     And the user "example1@timestamp@example.com" should not have a role of "Educator"
-    And I follow "My account"
+      And I follow "My account"
     Then I should see the text "Member State:"
     And I should see the link "Illinois"
     Then I delete the user with the email address "example1@timestamp@example.com"

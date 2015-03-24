@@ -510,6 +510,7 @@ function prc_trt_entity_presave($entity, $type) {
       if ($member_state) {
         $educator_role = user_role_load_by_name('PARCC-Member Educator');
         $educator_rid = $educator_role->rid;
+        $wrapper->field_member_state->set($member_state);
       }
       else {
         $educator_role = user_role_load_by_name('Educator');
