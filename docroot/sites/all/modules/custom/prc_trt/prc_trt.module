@@ -472,8 +472,8 @@ function prc_trt_entity_presave($entity, $type) {
     $w = entity_metadata_wrapper('node', $entity);
     $member_state = NULL;
     $user_state = NULL;
-    if (isset($w->field_ref_district)) {
-      $ref_district = $w->field_ref_district->value();
+    $ref_district = $w->field_ref_district->value();
+    if ($ref_district) {
       $w_dist = entity_metadata_wrapper('node', $ref_district);
       $trt_state = $w_dist->field_ref_trt_state->value();
       $w_state = entity_metadata_wrapper('node', $trt_state);
@@ -485,8 +485,8 @@ function prc_trt_entity_presave($entity, $type) {
       }
     }
 
-    if (isset($w->field_contact_email)) {
-      $contact_email = $w->field_contact_email->value();
+    $contact_email = $w->field_contact_email->value();
+    if ($contact_email) {
 //      if (isset($entity->original)) {
 //        $w_orig = entity_metadata_wrapper('node', $entity->original);
 //        $orig_contact_email = $w_orig->field_contact_email->value();
