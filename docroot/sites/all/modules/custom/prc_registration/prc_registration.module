@@ -43,6 +43,15 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
   else {
     $form['field_user_state']['#required'] = FALSE;
     $form['field_user_state']['#access'] = FALSE;
+    $w_invite = entity_metadata_wrapper('invite', $invite);
+    $user_state = $w_invite->field_user_state->value();
+    if ($user_state) {
+      $form['text_user_state'] = array(
+        '#type' => 'item',
+        '#title' => t('State Where I Teach'),
+        '#markup' => $user_state->name,
+      );
+    }
   }
   $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
 }
@@ -66,6 +75,7 @@ function prc_registration_form_user_register_form_validate(&$form, &$form_state)
       $form_state['values']['field_user_state'][LANGUAGE_NONE][0]['tid'] = $tid;
     }
   }
+
   if (
     array_key_exists('has_member_state', $form_state['values']) && $form_state['values']['has_member_state']
   ) {

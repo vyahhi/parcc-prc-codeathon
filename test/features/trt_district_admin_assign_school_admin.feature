@@ -53,6 +53,8 @@ Feature: PRC-944 School Admin - Assign Role
     And I fill in "First Name *" with "First"
     And I fill in "Last Name *" with "Last"
     And I should not see a "Member State" field
+    And I should see the text "State Where I Teach"
+    And I should see the text "<user_state>"
     And I press "Create new account"
     Then I should see the message containing "You have accepted the invitation from"
     And I should see the message containing "Registration successful. You are now logged in."
