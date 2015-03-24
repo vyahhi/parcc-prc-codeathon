@@ -1,0 +1,28 @@
+<?php
+
+
+ /**
+ * Implements hook_install().
+ */
+function prc_workflow_update_7100() {
+
+  $schema['node_revision'] = array();
+  prc_workflow_schema_alter($schema);
+  foreach ($schema['node_revision']['fields'] as $name => $spec) {
+    db_add_field('node_revision', $name, $spec);
+  }
+}
+
+/**
+ * Implements hook_schema_alter().
+ */
+function prc_workflow_schema_alter(&$schema) {
+  //Add a field to track which revision the draft originated from
+  if (isset($schema['node_revision'])) {
+    $schema['node_revision']['fields']['from_vid'] = array(
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+    );
+  }
+}
