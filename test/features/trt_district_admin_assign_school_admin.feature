@@ -2,7 +2,6 @@
 Feature: PRC-944 School Admin - Assign Role
   As a District Admin, I want to be able to assign a user (who either does or doesn't exist in the system) to the School Admin role so that the user can run readiness checks and view school readiness.
   Acceptance Criteria
-#  State where you teach field displays state associated with District is displayed (static text)
 
   Scenario: User doesn't exist in system - non-member
     Given I am logged in as a user with the "District Admin" role
