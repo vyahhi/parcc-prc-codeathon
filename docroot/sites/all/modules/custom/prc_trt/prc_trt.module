@@ -461,40 +461,96 @@ function _prc_trt_view_entity_system_check($entity) {
  */
 function prc_trt_entity_presave($entity, $type) {
   if ($type == 'prc_trt' && $entity->type == 'system_check') {
-    // TODO: Refactor this into a custom class
-    $w = entity_metadata_wrapper('prc_trt', $entity);
-    $os = $w->field_operating_system->value();
-    $size = $w->field_monitor_size->value();
-    $size_pass = $size >= 9.7;
-    $depth = $w->field_monitor_color_depth->value();
-    $depth_pass = $depth >= 16;
-    $resw = $w->field_screen_resolution_width->value();
-    $resw_pass = $resw >= 1024;
-    $resh = $w->field_screen_resolution_height->value();
-    $resh_pass = $resh >= 768;
-    $processor = $w->field_processor_speed->value();
-    $processor_pass = $processor >= 1;
-    $ram = $w->field_ram->value();
-    $ram_pass = $ram;
-    $browser = $w->field_browser->value();
-
-    $cookies_pass = $w->field_browser_cookies_enabled->value();
-    $js_pass = $w->field_browser_javascript_enabled->value();
-    $images_pass = $w->field_browser_images_enabled->value();
-
-    $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
-    $entity->field_result[LANGUAGE_NONE][0]['value'] = $all_pass;
+    _prc_entity_system_check_presave($entity);
   }
   elseif ($type == 'prc_trt' && $entity->type == 'capacity_check') {
-    $w = entity_metadata_wrapper('prc_trt', $entity);
-    $school = $w->field_ref_school->value();
-    if ($school) {
-      $students = $w->field_number_of_students->value();
-      $school_wrapper = entity_metadata_wrapper('node', $school);
-      $school_wrapper->field_number_of_students->set($students);
-      $school_wrapper->save();
-    }
+    _prc_entity_capacity_check_presave($entity);
   }
+  elseif ($type == 'node' && $entity->type == 'school') {
+    global $user;
+
+    $w = entity_metadata_wrapper('node', $entity);
+    if (isset($w->field_contact_email)) {
+      $contact_email = $w->field_contact_email->value();
+//      if (isset($entity->original)) {
+//        $w_orig = entity_metadata_wrapper('node', $entity->original);
+//        $orig_contact_email = $w_orig->field_contact_email->value();
+//      }
+
+      $uid = $entity->uid;
+      $account = user_load($uid);
+      $subj = t('@user has sent you an invite!', array('@user' => $account->name));
+
+      $info = field_info_instance('invite', 'field_invitation_email_body', 'invite_by_email');
+      $body_default = $info['default_value'][0]['value'];
+
+      $new_invite_type = 'invite';
+      $new_invite = entity_create($new_invite_type, array(
+        'type' => 'invite_by_email',
+        'uid' => $uid,
+      ));
+      $wrapper = entity_metadata_wrapper($new_invite_type, $new_invite);
+      $wrapper->field_invitation_email_address->set($contact_email);
+      $wrapper->field_invitation_email_subject->set($subj);
+      $wrapper->field_invitation_email_body->set($body_default);
+
+      $school_admin_role = user_role_load_by_name('School Admin');
+      $school_admin_rid = $school_admin_role->rid;
+
+      $educator_role = user_role_load_by_name('Educator');
+      $educator_rid = $educator_role->rid;
+
+      $rids = array($school_admin_rid, $educator_rid);
+
+      $wrapper->field_role_id->set($rids);
+
+      $wrapper->save();
+
+    }
+
+  }
+}
+
+/**
+ * @param $entity
+ */
+function _prc_entity_capacity_check_presave($entity) {
+  $w = entity_metadata_wrapper('prc_trt', $entity);
+  $school = $w->field_ref_school->value();
+  if ($school) {
+    $students = $w->field_number_of_students->value();
+    $school_wrapper = entity_metadata_wrapper('node', $school);
+    $school_wrapper->field_number_of_students->set($students);
+    $school_wrapper->save();
+  }
+}
+
+/**
+ * @param $entity
+ */
+function _prc_entity_system_check_presave($entity) {
+  $w = entity_metadata_wrapper('prc_trt', $entity);
+  $os = $w->field_operating_system->value();
+  $size = $w->field_monitor_size->value();
+  $size_pass = $size >= 9.7;
+  $depth = $w->field_monitor_color_depth->value();
+  $depth_pass = $depth >= 16;
+  $resw = $w->field_screen_resolution_width->value();
+  $resw_pass = $resw >= 1024;
+  $resh = $w->field_screen_resolution_height->value();
+  $resh_pass = $resh >= 768;
+  $processor = $w->field_processor_speed->value();
+  $processor_pass = $processor >= 1;
+  $ram = $w->field_ram->value();
+  $ram_pass = $ram;
+  $browser = $w->field_browser->value();
+
+  $cookies_pass = $w->field_browser_cookies_enabled->value();
+  $js_pass = $w->field_browser_javascript_enabled->value();
+  $images_pass = $w->field_browser_images_enabled->value();
+
+  $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
+  $entity->field_result[LANGUAGE_NONE][0]['value'] = $all_pass;
 }
 
 function prc_trt_form_district_node_form_alter(&$form, &$form_state) {
