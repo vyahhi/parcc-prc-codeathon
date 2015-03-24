@@ -470,6 +470,17 @@ function prc_trt_entity_presave($entity, $type) {
     global $user;
 
     $w = entity_metadata_wrapper('node', $entity);
+    $member_state = NULL;
+    if (isset($w->field_ref_district)) {
+      $ref_district = $w->field_ref_district->value();
+      $w_dist = entity_metadata_wrapper('node', $ref_district);
+      $trt_state = $w_dist->field_ref_trt_state->value();
+      $w_state = entity_metadata_wrapper('node', $trt_state);
+      if (isset($w_state->field_member_state)) {
+        $member_state = $w_state->field_member_state->value();
+      }
+    }
+
     if (isset($w->field_contact_email)) {
       $contact_email = $w->field_contact_email->value();
 //      if (isset($entity->original)) {
@@ -496,10 +507,14 @@ function prc_trt_entity_presave($entity, $type) {
 
       $school_admin_role = user_role_load_by_name('School Admin');
       $school_admin_rid = $school_admin_role->rid;
-
-      $educator_role = user_role_load_by_name('Educator');
-      $educator_rid = $educator_role->rid;
-
+      if ($member_state) {
+        $educator_role = user_role_load_by_name('PARCC-Member Educator');
+        $educator_rid = $educator_role->rid;
+      }
+      else {
+        $educator_role = user_role_load_by_name('Educator');
+        $educator_rid = $educator_role->rid;
+      }
       $rids = array($school_admin_rid, $educator_rid);
 
       $wrapper->field_role_id->set($rids);

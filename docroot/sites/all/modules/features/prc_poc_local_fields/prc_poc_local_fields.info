@@ -62,6 +62,7 @@ features[field_base][] = field_quiz_type
 features[field_base][] = field_ram
 features[field_base][] = field_ref_district
 features[field_base][] = field_ref_school
+features[field_base][] = field_ref_trt_state
 features[field_base][] = field_result
 features[field_base][] = field_role_id
 features[field_base][] = field_screen_resolution_height
