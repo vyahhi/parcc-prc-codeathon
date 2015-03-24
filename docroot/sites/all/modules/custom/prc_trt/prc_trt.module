@@ -538,20 +538,56 @@ function _prc_trt_presave_school($entity) {
 
       $wrapper->save();
     } else {
+
+      if ($member_state) {
+        $role_name = 'PARCC-Member Educator';
+        _prc_trt_user_add_role($role_name, $account);
+        _prc_trt_user_remove_role('Educator', $account);
+      }
+
       // User exists, give the School Admin role
       $role_name = 'School Admin';
-      $has_role = array_search($role_name, $account->roles);
-      if ($has_role == FALSE) {
-        $roles = user_roles(TRUE);
-        $rid = array_search($role_name, $roles);
-        if ($rid != FALSE) {
-          $new_role[$rid] = $role_name;
-          user_save($account, array('roles' => $new_role));
-        }
-      }
+      _prc_trt_user_add_role($role_name, $account);
     }
   }
 }
+
+/**
+ * @param $role_name
+ * @param $account
+ * @throws \Exception
+ */
+function _prc_trt_user_add_role($role_name, $account) {
+  $has_role = array_search($role_name, $account->roles);
+  if ($has_role == FALSE) {
+    $roles = user_roles(TRUE);
+    $rid = array_search($role_name, $roles);
+    if ($rid != FALSE) {
+      $new_role = $account->roles;
+      $new_role[$rid] = $role_name;
+      user_save($account, array('roles' => $new_role));
+    }
+  }
+}
+
+/**
+ * @param $role_name
+ * @param $account
+ * @throws \Exception
+ */
+function _prc_trt_user_remove_role($role_name, $account) {
+  $has_role = array_search($role_name, $account->roles);
+  if ($has_role == TRUE) {
+    $roles = user_roles(TRUE);
+    $rid = array_search($role_name, $roles);
+    if ($rid != FALSE) {
+      $new_role = $account->roles;
+      unset($new_role[$rid]);
+      user_save($account, array('roles' => $new_role));
+    }
+  }
+}
+
 
 /**
  * @param $entity
