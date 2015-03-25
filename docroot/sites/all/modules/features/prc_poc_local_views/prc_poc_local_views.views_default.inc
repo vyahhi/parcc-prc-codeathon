@@ -4657,7 +4657,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['created']['label'] = 'Date & Time';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: prc_trt: Number of devices */
+  /* Field: prc_trt: Number of devices ready for assessment */
   $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';

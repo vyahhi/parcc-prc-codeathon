@@ -63,11 +63,28 @@ Feature: PRC-760 System Check - Unstructured - Form
 
     And I should see the text "Monitor size \(in inches\)"
     And I should see the text "Processor speed"
-    And I select "under 1 Ghz" from "Processor speed"
-    And I select "1 Ghz or greater" from "Processor speed"
+
+    # PRC-962 Changes processor speed options
+    And I select "Less than 500 Mhz" from "Processor speed"
+    And I select "At least 500 Mhz and under 1 Ghz" from "Processor speed"
+    And I select "At least 1 Ghz and under 1.5 Ghz" from "Processor speed"
+    And I select "At least 1.5 Ghz and under 2 Ghz" from "Processor speed"
+    And I select "At least 2 Ghz and under 2.5 Ghz" from "Processor speed"
+    And I select "At least 2.5 Ghz and under 3.0 Ghz" from "Processor speed"
+    And I select "At least 3.0 Ghz and under 3.5 Ghz" from "Processor speed"
+    And I select "3.5 Ghz or greater" from "Processor speed"
+
     And I should see the text "RAM"
-    And I select "under 1 GB" from "RAM"
-    And I select "1 GB or greater" from "RAM"
+
+    # PRC-962 Changes RAM options
+    And I select "Less than 512 MB" from "RAM"
+    And I select "At least 512 and under 1 GB" from "RAM"
+    And I select "At least 1 GB and under 2 GB" from "RAM"
+    And I select "At least 2 GB and under 4 GB" from "RAM"
+    And I select "At least 4 GB and under 8 GB" from "RAM"
+    And I select "At least 8 GB and under 16 GB" from "RAM"
+    And I select "16 GB or greater" from "RAM"
+
     And I should see an "Submit" button
 
     And I should not see the text "Monitor color depth"

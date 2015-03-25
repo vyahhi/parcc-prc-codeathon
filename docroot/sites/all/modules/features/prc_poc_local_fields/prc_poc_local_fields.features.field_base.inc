@@ -1396,8 +1396,14 @@ function prc_poc_local_fields_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => 'under 1 Ghz',
-        1 => '1 Ghz or greater',
+        1 => 'Less than 500 Mhz',
+        500 => 'At least 500 Mhz and under 1 Ghz',
+        1000 => 'At least 1 Ghz and under 1.5 Ghz',
+        1500 => 'At least 1.5 Ghz and under 2 Ghz',
+        2000 => 'At least 2 Ghz and under 2.5 Ghz',
+        2500 => 'At least 2.5 Ghz and under 3.0 Ghz',
+        3000 => 'At least 3.0 Ghz and under 3.5 Ghz',
+        3500 => '3.5 Ghz or greater',
       ),
       'allowed_values_function' => '',
     ),
@@ -1486,8 +1492,13 @@ function prc_poc_local_fields_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => 'under 1 GB',
-        1 => '1 GB or greater',
+        '0.1' => 'Less than 512 MB',
+        '0.5' => 'At least 512 and under 1 GB',
+        1 => 'At least 1 GB and under 2 GB',
+        2 => 'At least 2 GB and under 4 GB',
+        4 => 'At least 4 GB and under 8 GB',
+        8 => 'At least 8 GB and under 16 GB',
+        16 => '16 GB or greater',
       ),
       'allowed_values_function' => '',
     ),
