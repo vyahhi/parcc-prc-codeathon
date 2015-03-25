@@ -212,14 +212,17 @@ To become a member of [site:name], click the link below or paste it into the add
     'entity_type' => 'invite',
     'field_name' => 'field_user_state',
     'label' => 'State Where You Teach',
-    'required' => FALSE,
+    'required' => 1,
     'settings' => array(
+      'course_enrollment' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'options',
       'settings' => array(
         'apply_chosen' => '',
+        'label_help_description' => '',
       ),
       'type' => 'options_select',
       'weight' => 34,
