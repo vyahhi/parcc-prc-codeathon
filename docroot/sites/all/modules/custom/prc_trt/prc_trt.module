@@ -509,10 +509,33 @@ function _prc_trt_presave_school($entity) {
       }
 
     if ($orig_contact_email && $contact_email != $orig_contact_email) {
-      // Different user
-      $orig_account = user_load_by_mail($orig_contact_email);
-      if ($orig_account) {
-        _prc_trt_user_remove_role('School Admin', $orig_account);
+
+      // First we have to see if this former school admin was admin of any
+      // other schools.
+
+      $query = new EntityFieldQuery();
+
+      $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'school')
+        ->fieldCondition('field_contact_email', 'value', $orig_contact_email, '=')
+        ->propertyCondition('nid', $entity->nid, '!=');
+      ;
+      $result = $query->execute();
+
+      $remove_school_admin = TRUE;
+
+      if (isset($result['node'])) {
+        $nids = array_keys($result['node']);
+        if (count($nids)) {
+          $remove_school_admin = FALSE;
+        }
+      }
+      if ($remove_school_admin) {
+        // Different user
+        $orig_account = user_load_by_mail($orig_contact_email);
+        if ($orig_account) {
+          _prc_trt_user_remove_role('School Admin', $orig_account);
+        }
       }
     }
 
