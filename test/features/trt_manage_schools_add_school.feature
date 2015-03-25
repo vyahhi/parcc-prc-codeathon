@@ -49,6 +49,8 @@ Feature: PRC-848 Manage Schools - Add School - Form
     When I press "Submit"
     Then I should see the error message containing "School name field is required."
     And I should see the error message containing "School contact's email address field is required."
+    # PRC-1048
+    And I should not see the error message containing "is not a valid e-mail address."
     When I fill in "School contact's email address" with "badmail"
     And I press "Submit"
     Then I should see the error message containing "is not a valid e-mail address."
@@ -79,6 +81,7 @@ Feature: PRC-848 Manage Schools - Add School - Form
     And I click "PRC-860 @timestamp"
     # PRC-849 Edit form pre-populated
     Then I should see the heading "Edit School"
+    And I should not see the text "District"
     Then the "School name" field should contain "PRC-860 @timestamp"
     And the "School contact's email address" field should contain "ok@example.com"
     And I fill in "School name" with "@timestamp PRC-860"

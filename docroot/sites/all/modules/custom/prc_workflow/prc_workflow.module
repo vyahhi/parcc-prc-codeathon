@@ -110,19 +110,6 @@ function prc_workflow_menu_local_tasks_alter(&$data, $router_item, $root_path) {
       $data['tabs'][0]['output'][1]['#active'] = FALSE;
       break;
   }
-
-}
-
-/**
- * Implements hook_node_presave
- *
- * @param $node
- */
-function prc_workflow_node_presave($node){
-  if(isset($node->original)) {
-    //@todo: should be from_vid
-    $node->from_rid = $node->original->vid;
-  }
 }
 
 /**
@@ -472,7 +459,7 @@ function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state
     $form['event_comment']['#type'] = 'hidden';
     $form['event_comment']['#required'] = FALSE;
     $event = $form['event']['#value'];
-    $form['event_comment']['#value'] = 'Event: ' . $event;
+    $form['event_comment']['#value'] = '[empty]';//State flow requires this to be more than an empty string
   }
 }
 
@@ -491,6 +478,7 @@ function prc_workflow_events_submit(&$form, &$form_state) {
  *
  */
 function prc_workflow_pre_submit_handler($form, &$form_state) {
+
   //Check if the button pressed is save draft
   $state_flow = state_flow_load_state_machine($form['#node']);
   //Only require confirmation when published
@@ -709,6 +697,17 @@ function prc_workflow_reported_state($nid) {
 }
 
 /**
+ * Implements hook_node_presave()
+ *
+ * @param $node
+ */
+function prc_workflow_node_presave($node){
+  if(isset($node->vid)){
+    $node->from_vid = $node->vid;
+  }
+}
+
+/**
  *
  */
 function prc_workflow_libraries_info(){
@@ -749,22 +748,27 @@ function prc_workflow_revisions_tab($node) {
 
   $rows = array();
 
-
+  $diffed = array();
   $history = state_flow_get_history($node->nid);
   //reverse the array so we start with the most recent first so that diffs are correct
-  foreach ($history as $state) {
+  foreach ($history as $index => $state) {
     $vid = intval($state->vid);
 
     $node_version = node_load($node->nid, $vid);
-    if($node_version->from_rid !== 0){
-      $previous_version = node_load($node->nid, $node->from_rid);
+    if($node_version->from_vid !== 0){
+      $previous_version = node_load($node->nid, $node->from_vid);
     }else{
       unset($previous_version);
     }
 
+    if($node_version->from_vid > 0) {
+      $previous_version = node_load($node->nid, $node_version->from_vid);
+    }else{
+      $previous_version = NULL;
+    }
     $path_view = ($vid == $node->vid) ? 'node/' . $node->nid : 'node/' . $node->nid . '/revisions/' . $vid . '/view';
     $state_date_str = format_date($state->timestamp, 'short');
-    $history_str = '';
+
     $user_name = format_username((object) array('uid' => (int) $state->uid, 'name' => $state->user_name));
     $history_str = t('!user transitioned revision !vid-link to %state.',
       array(
@@ -773,18 +777,24 @@ function prc_workflow_revisions_tab($node) {
         '%state' => $state->state
       )
     );
-    if (!empty($state->log)) {
+    if (!empty($state->log) && $state->log !== '[empty]') {
       $history_str .= '<br/>' . t('@user said: @log', array('@user' => $user_name, '@log' => $state->log));
     }
 
     //Render the diff if applicable
-    if(isset($previous_version)) {
-      $body_diff = prc_workflow_body_diff($previous_version, $node_version);
-      //@todo: display changes involving the fields
-      //$fields_diff = prc_workflow_fields_diff($previous_version, $node_version);
-      $history_str .= $body_diff;//.$fields_diff;
-    }else{
-      //$history_str = $node_version
+    if(isset($previous_version)  && $previous_version) {
+      $couple = array($previous_version->vid, $node_version->vid);
+
+      //Don't diff things twice and don't compare a less recent revision with a newer one.
+      //if($couple[0] < $couple[1]  && !in_array($couple, $diffed)) {
+      if(!in_array($couple, $diffed)){
+        $body_diff = prc_workflow_body_diff($previous_version, $node_version);
+        //@todo: display changes involving the fields
+        //$fields_diff = prc_workflow_fields_diff($previous_version, $node_version);
+        $history_str .= $body_diff;
+
+        $diffed[] = $couple;
+      }
     }
 
     $rows[] = array(
@@ -917,4 +927,19 @@ function prc_workflow_fields_diff($previous_version, $node_version){
   }
 
   return $html;
+}
+
+/**
+ * Implements hook_state_flow_change_vid()
+ *
+ * Fix the from_vid so that diffs won't break
+ */
+function prc_workflow_state_flow_change_vid($current_vid, $new_rev){
+  //Get the revision that needs to be updated
+  $num = db_update('node_revision',
+    array( 'vid' => $new_rev->vid))
+    ->fields(array('from_vid' => $new_rev->vid))
+    ->condition('from_vid', $current_vid)
+    ->execute();
+
 }

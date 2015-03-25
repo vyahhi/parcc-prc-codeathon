@@ -1,9 +1,9 @@
 <?php
 
-/**
- * Adds a from_rid column to node_revision
+ /**
+ * Implements hook_install().
  */
-function prc_workflow_update_7000(){
+function prc_workflow_install() {
   $schema['node_revision'] = array();
   prc_workflow_schema_alter($schema);
   foreach ($schema['node_revision']['fields'] as $name => $spec) {
@@ -12,16 +12,24 @@ function prc_workflow_update_7000(){
 }
 
 /**
+ * Introducing install function, run it if we are updating
+ */
+function prc_workflow_update_7000(){
+  prc_workflow_install();
+}
+
+/**
  * Implements hook_schema_alter()
  *
  * @param $schema
  */
 function prc_workflow_schema_alter(&$schema){
-  //@todo: should be from_vid
-  $schema['node_revision']['fields']['from_rid'] = array(
+
+  $schema['node_revision']['fields']['from_vid'] = array(
     'type' => 'int',
     'not null' => TRUE,
     'default' => 0,
     'description' => 'The revision that this draft was derived from',
   );
+
 }
