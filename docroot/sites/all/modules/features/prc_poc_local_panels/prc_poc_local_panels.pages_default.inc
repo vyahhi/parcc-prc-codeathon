@@ -3140,7 +3140,16 @@ function prc_poc_local_panels_default_page_manager_pages() {
     'body_classes_to_add' => '',
     'css_id' => '',
     'css' => '',
-    'contexts' => array(),
+    'contexts' => array(
+      0 => array(
+        'identifier' => 'User',
+        'keyword' => 'user',
+        'name' => 'user',
+        'type' => 'current',
+        'uid' => '',
+        'id' => 1,
+      ),
+    ),
     'relationships' => array(),
   );
   $display = new panels_display();
@@ -3189,7 +3198,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->subtype = 'schools-panel_pane_1';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_contact_email_value' => '%user:mail',
+      ),
+    );
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,

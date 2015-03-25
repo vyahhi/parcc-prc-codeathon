@@ -42,20 +42,49 @@ Feature: PRC-760 System Check - Unstructured - Form
     And I select "Thin client" from "Device type"
     And I select "Tablet" from "Device type"
     And I should see the text "Operating system"
-    And I select "Apple iOS 6, 7, or 8" from "Operating system"
-    And I select "Chrome OS (Chromebook)" from "Operating system"
-    And I select "Mac 10.8, 10.9 or 10.10" from "Operating system"
+
+    # PRC-962 Changes tech options
+    And I select "Android Lollipop" from "Operating system"
+    And I select "Apple iOS 6, 7 or 8" from "Operating system"
+    And I select "Chrome OS 35-39 (Chromebook)" from "Operating system"
+    And I select "Fedora 19 or 20" from "Operating system"
+    And I select "Mac 10.6" from "Operating system"
+    And I select "Mac 10.7" from "Operating system"
+    And I select "Mac 10.8" from "Operating system"
+    And I select "Mac 10.9" from "Operating system"
+    And I select "Mac 10.10" from "Operating system"
+    And I select "Ubuntu 12.04 or 14.04" from "Operating system"
+    And I select "Windows XP (SP 3)" from "Operating system"
+    And I select "Windows Vista" from "Operating system"
     And I select "Windows 7" from "Operating system"
     And I select "Windows 8" from "Operating system"
     And I select "Windows 8.1" from "Operating system"
     And I select "Other" from "Operating system"
+
     And I should see the text "Monitor size \(in inches\)"
     And I should see the text "Processor speed"
-    And I select "under 1 Ghz" from "Processor speed"
-    And I select "1 Ghz or greater" from "Processor speed"
+
+    # PRC-962 Changes processor speed options
+    And I select "Less than 500 Mhz" from "Processor speed"
+    And I select "At least 500 Mhz and under 1 Ghz" from "Processor speed"
+    And I select "At least 1 Ghz and under 1.5 Ghz" from "Processor speed"
+    And I select "At least 1.5 Ghz and under 2 Ghz" from "Processor speed"
+    And I select "At least 2 Ghz and under 2.5 Ghz" from "Processor speed"
+    And I select "At least 2.5 Ghz and under 3.0 Ghz" from "Processor speed"
+    And I select "At least 3.0 Ghz and under 3.5 Ghz" from "Processor speed"
+    And I select "3.5 Ghz or greater" from "Processor speed"
+
     And I should see the text "RAM"
-    And I select "under 1 GB" from "RAM"
-    And I select "1 GB or greater" from "RAM"
+
+    # PRC-962 Changes RAM options
+    And I select "Less than 512 MB" from "RAM"
+    And I select "At least 512 and under 1 GB" from "RAM"
+    And I select "At least 1 GB and under 2 GB" from "RAM"
+    And I select "At least 2 GB and under 4 GB" from "RAM"
+    And I select "At least 4 GB and under 8 GB" from "RAM"
+    And I select "At least 8 GB and under 16 GB" from "RAM"
+    And I select "16 GB or greater" from "RAM"
+
     And I should see an "Submit" button
 
     And I should not see the text "Monitor color depth"
@@ -94,8 +123,8 @@ Feature: PRC-760 System Check - Unstructured - Form
     And I select "Desktop" from "Device type"
     And I select "Windows 7" from "Operating system"
     And I fill in "Monitor size (in inches)" with "3453453453"
-    And I select "1 Ghz or greater" from "Processor speed"
-    And I select "1 GB or greater" from "RAM"
+    And I select "At least 1.5 Ghz and under 2 Ghz" from "Processor speed"
+    And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
     And I fill in the hidden field "faux_cookies" with "true"
