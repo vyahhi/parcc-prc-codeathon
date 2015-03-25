@@ -493,11 +493,26 @@ function _prc_trt_presave_school($entity) {
   }
 
   $contact_email = $w->field_contact_email->value();
+  $orig_contact_email = NULL;
   if ($contact_email) {
-//      if (isset($entity->original)) {
-//        $w_orig = entity_metadata_wrapper('node', $entity->original);
-//        $orig_contact_email = $w_orig->field_contact_email->value();
-//      }
+      if (isset($entity->original)) {
+        // This doesn't make any sense to me either.
+        // The way the Drupal extension creates the entity doesn't
+        // come through entity_presave the way we expect, so we
+        // have to check for both structures.
+        if (is_array($entity->original->field_contact_email)) {
+          $w_orig = entity_metadata_wrapper('node', $entity->original);
+          $orig_contact_email = $w_orig->field_contact_email->value();
+        } else {
+          $orig_contact_email = $entity->original->field_contact_email;
+        }
+      }
+
+    if ($orig_contact_email && $contact_email != $orig_contact_email) {
+      // Different user
+      $orig_account = user_load_by_mail($orig_contact_email);
+      _prc_trt_user_remove_role('School Admin', $orig_account);
+    }
 
     $account = user_load_by_mail($contact_email);
     if (!$account) {

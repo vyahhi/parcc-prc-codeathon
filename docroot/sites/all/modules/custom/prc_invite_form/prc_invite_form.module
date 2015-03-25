@@ -124,6 +124,21 @@ function prc_invite_form_form_invite_form_validate($form, &$form_state)
     $form_state['values']['field_invitation_email_address'] = $form_state['input']['field_invitation_email_address'];
   }
 
+  $rids = $form_state['values']['invite_role'];
+  $roles = user_roles();
+  $trt_roles = array('School Admin', 'District Admin', 'State Admin');
+  $roles_rids = array();
+  foreach($trt_roles as $role) {
+    $trt_rid = array_search($role, $roles);
+    $trt_rids[] = $trt_rid;
+  }
+
+  $diff = array_filter(array_diff($rids, $trt_rids));
+
+  if (!count($diff)) {
+    form_set_error('invite_role', t('A non-TRT role is required.'));
+  }
+
   $valid_emails = array();
   _prc_invite_form_validate_email_address_format($form_state, 'field_multi_emails', $valid_emails);
   $form_state['invitees'] = $valid_emails;
