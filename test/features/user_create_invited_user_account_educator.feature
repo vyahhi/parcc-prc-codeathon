@@ -10,6 +10,7 @@ Feature: Create User Account Following an Invite (PRC-73)
     Then I check the box "Educator"
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"
+    And I select "Wyoming" from "State Where You Teach"
     And I press "Send Invitation"
     Then the email to "example1@timestamp@example.com" should contain "has sent you an invite!"
     And the email should contain "has invited you to join Partnership Resource Center at"

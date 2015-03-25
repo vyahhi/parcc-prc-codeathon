@@ -88,6 +88,7 @@ Feature: PRC-217  Invite User with Additional Role Selection
     And I select "Ohio" from "State"
     Then I check the box "Educator"
     And I uncheck the box "Content Contributor"
+    And I select "Wyoming" from "State Where You Teach"
     And I press "Send Invitation"
     Then I should not see the text "Member State"
     And I should not see the text "Ohio"
