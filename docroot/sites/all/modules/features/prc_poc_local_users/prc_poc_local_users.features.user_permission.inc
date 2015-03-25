@@ -982,6 +982,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create state content'.
+  $permissions['create state content'] = array(
+    'name' => 'create state content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create url aliases'.
   $permissions['create url aliases'] = array(
     'name' => 'create url aliases',
@@ -1123,6 +1130,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any state content'.
+  $permissions['delete any state content'] = array(
+    'name' => 'delete any state content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own course content'.
   $permissions['delete own course content'] = array(
     'name' => 'delete own course content',
@@ -1255,6 +1269,13 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own state content'.
+  $permissions['delete own state content'] = array(
+    'name' => 'delete own state content',
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -2027,6 +2048,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any state content'.
+  $permissions['edit any state content'] = array(
+    'name' => 'edit any state content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own comments'.
   $permissions['edit own comments'] = array(
     'name' => 'edit own comments',
@@ -2178,6 +2206,13 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own state content'.
+  $permissions['edit own state content'] = array(
+    'name' => 'edit own state content',
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -2619,6 +2654,13 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
     ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search state content'.
+  $permissions['search state content'] = array(
+    'name' => 'search state content',
+    'roles' => array(),
     'module' => 'search_config',
   );
 

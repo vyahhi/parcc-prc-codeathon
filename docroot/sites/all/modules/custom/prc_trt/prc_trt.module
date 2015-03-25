@@ -330,7 +330,7 @@ function _prc_trt_view_entity_capacity_check($entity) {
     '#weight' => 0.4,
   );
 
-  $devices_required_passfail = $devices_capacity > 0 ? t('Passed') : t('Failed');
+  $devices_required_passfail = $devices_capacity >= 0 ? t('Passed') : t('Failed');
   $entity->content['device_capacity_results']["devices_required_passfail"] = array(
     '#type' => 'item',
     '#title' => t('Devices Capacity Results'),
@@ -461,40 +461,191 @@ function _prc_trt_view_entity_system_check($entity) {
  */
 function prc_trt_entity_presave($entity, $type) {
   if ($type == 'prc_trt' && $entity->type == 'system_check') {
-    // TODO: Refactor this into a custom class
-    $w = entity_metadata_wrapper('prc_trt', $entity);
-    $os = $w->field_operating_system->value();
-    $size = $w->field_monitor_size->value();
-    $size_pass = $size >= 9.7;
-    $depth = $w->field_monitor_color_depth->value();
-    $depth_pass = $depth >= 16;
-    $resw = $w->field_screen_resolution_width->value();
-    $resw_pass = $resw >= 1024;
-    $resh = $w->field_screen_resolution_height->value();
-    $resh_pass = $resh >= 768;
-    $processor = $w->field_processor_speed->value();
-    $processor_pass = $processor >= 1;
-    $ram = $w->field_ram->value();
-    $ram_pass = $ram;
-    $browser = $w->field_browser->value();
-
-    $cookies_pass = $w->field_browser_cookies_enabled->value();
-    $js_pass = $w->field_browser_javascript_enabled->value();
-    $images_pass = $w->field_browser_images_enabled->value();
-
-    $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
-    $entity->field_result[LANGUAGE_NONE][0]['value'] = $all_pass;
+    _prc_entity_system_check_presave($entity);
   }
   elseif ($type == 'prc_trt' && $entity->type == 'capacity_check') {
-    $w = entity_metadata_wrapper('prc_trt', $entity);
-    $school = $w->field_ref_school->value();
-    if ($school) {
-      $students = $w->field_number_of_students->value();
-      $school_wrapper = entity_metadata_wrapper('node', $school);
-      $school_wrapper->field_number_of_students->set($students);
-      $school_wrapper->save();
+    _prc_entity_capacity_check_presave($entity);
+  }
+  elseif ($type == 'node' && $entity->type == 'school') {
+    _prc_trt_presave_school($entity);
+
+  }
+}
+
+/**
+ * @param $entity
+ */
+function _prc_trt_presave_school($entity) {
+  $w = entity_metadata_wrapper('node', $entity);
+  $member_state = NULL;
+  $user_state = NULL;
+  $ref_district = $w->field_ref_district->value();
+  if ($ref_district) {
+    $w_dist = entity_metadata_wrapper('node', $ref_district);
+    $trt_state = $w_dist->field_ref_trt_state->value();
+    $w_state = entity_metadata_wrapper('node', $trt_state);
+    if (isset($w_state->field_member_state)) {
+      $member_state = $w_state->field_member_state->value();
+    }
+    if (isset($w_state->field_user_state)) {
+      $user_state = $w_state->field_user_state->value();
     }
   }
+
+  $contact_email = $w->field_contact_email->value();
+  $orig_contact_email = NULL;
+  if ($contact_email) {
+      if (isset($entity->original)) {
+        // This doesn't make any sense to me either.
+        // The way the Drupal extension creates the entity doesn't
+        // come through entity_presave the way we expect, so we
+        // have to check for both structures.
+        if (is_array($entity->original->field_contact_email)) {
+          $w_orig = entity_metadata_wrapper('node', $entity->original);
+          $orig_contact_email = $w_orig->field_contact_email->value();
+        } else {
+          $orig_contact_email = $entity->original->field_contact_email;
+        }
+      }
+
+    if ($orig_contact_email && $contact_email != $orig_contact_email) {
+      // Different user
+      $orig_account = user_load_by_mail($orig_contact_email);
+      if ($orig_account) {
+        _prc_trt_user_remove_role('School Admin', $orig_account);
+      }
+    }
+
+    $account = user_load_by_mail($contact_email);
+    if (!$account) {
+      $uid = $entity->uid;
+      $account = user_load($uid);
+      $subj = t('@user has sent you an invite!', array('@user' => $account->name));
+
+      $info = field_info_instance('invite', 'field_invitation_email_body', 'invite_by_email');
+      $body_default = $info['default_value'][0]['value'];
+
+      $new_invite_type = 'invite';
+      $new_invite = entity_create($new_invite_type, array(
+        'type' => 'invite_by_email',
+        'uid' => $uid,
+      ));
+      $wrapper = entity_metadata_wrapper($new_invite_type, $new_invite);
+      $wrapper->field_invitation_email_address->set($contact_email);
+      $wrapper->field_invitation_email_subject->set($subj);
+      $wrapper->field_invitation_email_body->set($body_default);
+
+      $school_admin_role = user_role_load_by_name('School Admin');
+      $school_admin_rid = $school_admin_role->rid;
+      if ($member_state) {
+        $educator_role = user_role_load_by_name('PARCC-Member Educator');
+        $educator_rid = $educator_role->rid;
+        $wrapper->field_member_state->set($member_state);
+      }
+      else {
+        $educator_role = user_role_load_by_name('Educator');
+        $educator_rid = $educator_role->rid;
+      }
+      if ($user_state) {
+        $wrapper->field_user_state->set($user_state);
+      }
+      $rids = array($school_admin_rid, $educator_rid);
+
+      $wrapper->field_role_id->set($rids);
+
+      $wrapper->save();
+    } else {
+
+      if ($member_state) {
+        $role_name = 'PARCC-Member Educator';
+        _prc_trt_user_add_role($role_name, $account);
+        _prc_trt_user_remove_role('Educator', $account);
+      }
+
+      // User exists, give the School Admin role
+      $role_name = 'School Admin';
+      _prc_trt_user_add_role($role_name, $account);
+    }
+  }
+}
+
+/**
+ * @param $role_name
+ * @param $account
+ * @throws \Exception
+ */
+function _prc_trt_user_add_role($role_name, $account) {
+  $has_role = array_search($role_name, $account->roles);
+  if ($has_role == FALSE) {
+    $roles = user_roles(TRUE);
+    $rid = array_search($role_name, $roles);
+    if ($rid != FALSE) {
+      $new_role = $account->roles;
+      $new_role[$rid] = $role_name;
+      user_save($account, array('roles' => $new_role));
+    }
+  }
+}
+
+/**
+ * @param $role_name
+ * @param $account
+ * @throws \Exception
+ */
+function _prc_trt_user_remove_role($role_name, $account) {
+  $has_role = array_search($role_name, $account->roles);
+  if ($has_role == TRUE) {
+    $roles = user_roles(TRUE);
+    $rid = array_search($role_name, $roles);
+    if ($rid != FALSE) {
+      $new_role = $account->roles;
+      unset($new_role[$rid]);
+      user_save($account, array('roles' => $new_role));
+    }
+  }
+}
+
+
+/**
+ * @param $entity
+ */
+function _prc_entity_capacity_check_presave($entity) {
+  $w = entity_metadata_wrapper('prc_trt', $entity);
+  $school = $w->field_ref_school->value();
+  if ($school) {
+    $students = $w->field_number_of_students->value();
+    $school_wrapper = entity_metadata_wrapper('node', $school);
+    $school_wrapper->field_number_of_students->set($students);
+    $school_wrapper->save();
+  }
+}
+
+/**
+ * @param $entity
+ */
+function _prc_entity_system_check_presave($entity) {
+  $w = entity_metadata_wrapper('prc_trt', $entity);
+  $os = $w->field_operating_system->value();
+  $size = $w->field_monitor_size->value();
+  $size_pass = $size >= 9.7;
+  $depth = $w->field_monitor_color_depth->value();
+  $depth_pass = $depth >= 16;
+  $resw = $w->field_screen_resolution_width->value();
+  $resw_pass = $resw >= 1024;
+  $resh = $w->field_screen_resolution_height->value();
+  $resh_pass = $resh >= 768;
+  $processor = $w->field_processor_speed->value();
+  $processor_pass = $processor >= 1;
+  $ram = $w->field_ram->value();
+  $ram_pass = $ram;
+  $browser = $w->field_browser->value();
+
+  $cookies_pass = $w->field_browser_cookies_enabled->value();
+  $js_pass = $w->field_browser_javascript_enabled->value();
+  $images_pass = $w->field_browser_images_enabled->value();
+
+  $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
+  $entity->field_result[LANGUAGE_NONE][0]['value'] = $all_pass;
 }
 
 function prc_trt_form_district_node_form_alter(&$form, &$form_state) {

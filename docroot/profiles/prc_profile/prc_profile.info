@@ -211,6 +211,7 @@ dependencies[] = prc_poc_local_node_school
 dependencies[] = prc_poc_local_search_api
 dependencies[] = prc_poc_local_seo
 dependencies[] = prc_poc_local_site
+dependencies[] = prc_poc_local_node_state
 dependencies[] = prc_poc_local_taxonomy
 dependencies[] = prc_poc_local_users
 dependencies[] = prc_poc_local_views

@@ -163,7 +163,7 @@ function prc_poc_local_users_field_default_field_instances() {
     ),
     'entity_type' => 'user',
     'field_name' => 'field_user_state',
-    'label' => 'User State',
+    'label' => 'State Where I Teach',
     'required' => 0,
     'settings' => array(
       'course_enrollment' => FALSE,
@@ -187,7 +187,7 @@ function prc_poc_local_users_field_default_field_instances() {
   t('Last Name');
   t('Member State');
   t('Profession');
-  t('User State');
+  t('State Where I Teach');
 
   return $field_instances;
 }

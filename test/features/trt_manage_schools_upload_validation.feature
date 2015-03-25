@@ -12,28 +12,51 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
   The email address in the second column must be valid
   File must have at least one valid row
 
-  Scenario: Upload file - File is not .csv
+  Scenario Outline: Upload file - File is not .csv
     Given I am logged in as a user with the "District Admin" role
+    And I have no "State" nodes
     And I have no "District" nodes
     And I have no "School" nodes
+    And "User States" terms:
+      | name         |
+      | <user_state> |
+    And "Member State" terms:
+      | name           | field_state_code |
+      | <member_state> | SOIL1            |
+    And "State" nodes:
+      | title          | field_user_state | field_member_state | uid         |
+      | <member_state> | <user_state>     | <member_state>     | @currentuid |
     And "District" nodes:
-      | title        | uid         |
-      | District 851 | @currentuid |
-    And I visit the first node created
+      | title        | uid         | field_ref_trt_state  |
+      | District 851 | @currentuid | @nid[<member_state>] |
+    And I visit the last node created
     And I click "Manage Schools"
     When I click "Add School(s) - upload csv file"
     And I attach the file "testfiles/FireflyIpsum.docx" to "edit-file-upload"
     And I press "edit-upload"
     Then I should see the text "The specified file FireflyIpsum.docx could not be uploaded. Only files with the following extensions are allowed: csv."
+  Examples:
+    | user_state    | member_state   |
+    | West Colorado | South Illinois |
 
-  Scenario: Upload file - Invalid email addresses
+  Scenario Outline: Upload file - Invalid email addresses
     Given I am logged in as a user with the "District Admin" role
+    And I have no "State" nodes
     And I have no "District" nodes
     And I have no "School" nodes
+    And "User States" terms:
+      | name         |
+      | <user_state> |
+    And "Member State" terms:
+      | name           | field_state_code |
+      | <member_state> | SOIL1            |
+    And "State" nodes:
+      | title          | field_user_state | field_member_state | uid         |
+      | <member_state> | <user_state>     | <member_state>     | @currentuid |
     And "District" nodes:
-      | title        | uid         |
-      | District 851 | @currentuid |
-    And I visit the first node created
+      | title        | uid         | field_ref_trt_state  |
+      | District 851 | @currentuid | @nid[<member_state>] |
+    And I visit the last node created
     And I click "Manage Schools"
     When I click "Add School(s) - upload csv file"
     And I attach the file "testfiles/trt_upload_schools_invalid_emails.csv" to "edit-file-upload"
@@ -65,15 +88,28 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
     And I should see the text "Contact E-mail: Invalid"
     And I should see the text "Second Uploaded School"
     And I should see the text "example2@examplecom"
+  Examples:
+    | user_state    | member_state   |
+    | West Colorado | South Illinois |
 
-  Scenario: Upload file - Empty file
+  Scenario Outline: Upload file - Empty file
     Given I am logged in as a user with the "District Admin" role
+    And I have no "State" nodes
     And I have no "District" nodes
     And I have no "School" nodes
+    And "User States" terms:
+      | name         |
+      | <user_state> |
+    And "Member State" terms:
+      | name           | field_state_code |
+      | <member_state> | SOIL1            |
+    And "State" nodes:
+      | title          | field_user_state | field_member_state | uid         |
+      | <member_state> | <user_state>     | <member_state>     | @currentuid |
     And "District" nodes:
-      | title        | uid         |
-      | District 851 | @currentuid |
-    And I visit the first node created
+      | title        | uid         | field_ref_trt_state  |
+      | District 851 | @currentuid | @nid[<member_state>] |
+    And I visit the last node created
     And I click "Manage Schools"
     When I click "Add School(s) - upload csv file"
     And I attach the file "testfiles/trt_upload_schools_invalid_empty.csv" to "edit-file-upload"
@@ -93,15 +129,28 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
     And I should not see the button "Create School Records"
     And I should not see the button "View Errors"
     And I should see a "Back to Re-upload" button
+  Examples:
+    | user_state    | member_state   |
+    | West Colorado | South Illinois |
 
-  Scenario: Upload file - One column
+  Scenario Outline: Upload file - One column
     Given I am logged in as a user with the "District Admin" role
+    And I have no "State" nodes
     And I have no "District" nodes
     And I have no "School" nodes
+    And "User States" terms:
+      | name         |
+      | <user_state> |
+    And "Member State" terms:
+      | name           | field_state_code |
+      | <member_state> | SOIL1            |
+    And "State" nodes:
+      | title          | field_user_state | field_member_state | uid         |
+      | <member_state> | <user_state>     | <member_state>     | @currentuid |
     And "District" nodes:
-      | title        | uid         |
-      | District 851 | @currentuid |
-    And I visit the first node created
+      | title        | uid         | field_ref_trt_state  |
+      | District 851 | @currentuid | @nid[<member_state>] |
+    And I visit the last node created
     And I click "Manage Schools"
     When I click "Add School(s) - upload csv file"
     And I attach the file "testfiles/trt_upload_schools_invalid_columns.csv" to "edit-file-upload"
@@ -133,15 +182,28 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
     And I should see the text "Contact E-mail: Required"
     And I should see the text "Second Uploaded School"
     And I should not see the text "example2@examplecom"
+  Examples:
+    | user_state    | member_state   |
+    | West Colorado | South Illinois |
 
-  Scenario: Upload file - Missing schools
+  Scenario Outline: Upload file - Missing schools
     Given I am logged in as a user with the "District Admin" role
+    And I have no "State" nodes
     And I have no "District" nodes
     And I have no "School" nodes
+    And "User States" terms:
+      | name         |
+      | <user_state> |
+    And "Member State" terms:
+      | name           | field_state_code |
+      | <member_state> | SOIL1            |
+    And "State" nodes:
+      | title          | field_user_state | field_member_state | uid         |
+      | <member_state> | <user_state>     | <member_state>     | @currentuid |
     And "District" nodes:
-      | title        | uid         |
-      | District 851 | @currentuid |
-    And I visit the first node created
+      | title        | uid         | field_ref_trt_state  |
+      | District 851 | @currentuid | @nid[<member_state>] |
+    And I visit the last node created
     And I click "Manage Schools"
     When I click "Add School(s) - upload csv file"
     And I attach the file "testfiles/trt_upload_schools_missing_school.csv" to "edit-file-upload"
@@ -174,28 +236,54 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
     And I should see the text "School Name: Required"
     And I should not see the text "Second Uploaded School"
     And I should see the text "example2@example.com"
+  Examples:
+    | user_state    | member_state   |
+    | West Colorado | South Illinois |
 
-  Scenario: File is required
+  Scenario Outline: File is required
     Given I am logged in as a user with the "District Admin" role
+    And I have no "State" nodes
     And I have no "District" nodes
     And I have no "School" nodes
+    And "User States" terms:
+      | name         |
+      | <user_state> |
+    And "Member State" terms:
+      | name           | field_state_code |
+      | <member_state> | SOIL1            |
+    And "State" nodes:
+      | title          | field_user_state | field_member_state | uid         |
+      | <member_state> | <user_state>     | <member_state>     | @currentuid |
     And "District" nodes:
-      | title        | uid         |
-      | District 851 | @currentuid |
-    And I visit the first node created
+      | title        | uid         | field_ref_trt_state  |
+      | District 851 | @currentuid | @nid[<member_state>] |
+    And I visit the last node created
     And I click "Manage Schools"
     When I click "Add School(s) - upload csv file"
     And I press "edit-upload"
     Then I should see the error message containing "File Name field is required."
+  Examples:
+    | user_state    | member_state   |
+    | West Colorado | South Illinois |
 
-  Scenario: Upload file - Some pass, some fail
+  Scenario Outline: Upload file - Some pass, some fail
     Given I am logged in as a user with the "District Admin" role
+    And I have no "State" nodes
     And I have no "District" nodes
     And I have no "School" nodes
+    And "User States" terms:
+      | name         |
+      | <user_state> |
+    And "Member State" terms:
+      | name           | field_state_code |
+      | <member_state> | SOIL1            |
+    And "State" nodes:
+      | title          | field_user_state | field_member_state | uid         |
+      | <member_state> | <user_state>     | <member_state>     | @currentuid |
     And "District" nodes:
-      | title        | uid         |
-      | District 851 | @currentuid |
-    And I visit the first node created
+      | title        | uid         | field_ref_trt_state  |
+      | District 851 | @currentuid | @nid[<member_state>] |
+    And I visit the last node created
     And I click "Manage Schools"
     When I click "Add School(s) - upload csv file"
     And I attach the file "testfiles/trt_upload_schools_mixed_valid_invalid.csv" to "edit-file-upload"
@@ -226,21 +314,33 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
     And I should see the text "Contact E-mail: Required"
     And I should see the text "School Name: Required"
     And I should see the text "second@example.com"
+  Examples:
+    | user_state    | member_state   |
+    | West Colorado | South Illinois |
 
-  Scenario: Upload file - Existing schools - case insensitive
+  Scenario Outline: Upload file - Existing schools - case insensitive
     Given I am logged in as a user with the "District Admin" role
+    And I have no "State" nodes
     And I have no "District" nodes
     And I have no "School" nodes
+    And "User States" terms:
+      | name         |
+      | <user_state> |
+    And "Member State" terms:
+      | name           | field_state_code |
+      | <member_state> | SOIL1            |
+    And "State" nodes:
+      | title          | field_user_state | field_member_state | uid         |
+      | <member_state> | <user_state>     | <member_state>     | @currentuid |
     And "District" nodes:
-      | title        | uid         |
-      | District 851 | @currentuid |
+      | title        | uid         | field_ref_trt_state  |
+      | District 851 | @currentuid | @nid[<member_state>] |
+    And I visit the last node created
+    And I click "Manage Schools"
+    When I click "Add School(s) - upload csv file"
     And "School" nodes:
       | title                 | field_ref_district |
       | first uploaded school | @nid[District 851] |
-    And I visit the first node created
-    And I click "Manage Schools"
-    And I should see the link "first uploaded school"
-    When I click "Add School(s) - upload csv file"
     And I attach the file "testfiles/trt_upload_schools_valid.csv" to "edit-file-upload"
     And I press "edit-upload"
     Then I should see the text "Processing Upload"
@@ -271,3 +371,6 @@ Feature: PRC-852 Manage Schools - Upload School - File Validation
     And I should see the text "School Name: First Uploaded School already exists"
     And I should not see the text "Second Uploaded School"
     And I should not see the text "example2@example.com"
+  Examples:
+    | user_state    | member_state   |
+    | West Colorado | South Illinois |
