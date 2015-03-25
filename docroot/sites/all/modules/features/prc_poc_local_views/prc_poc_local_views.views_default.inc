@@ -4657,7 +4657,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['created']['label'] = 'Date & Time';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: prc_trt: Number of devices ready for assessment */
+  /* Field: prc_trt: Number of devices */
   $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
@@ -4754,6 +4754,16 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: School contact&#039;s email address (field_contact_email) */
+  $handler->display->display_options['arguments']['field_contact_email_value']['id'] = 'field_contact_email_value';
+  $handler->display->display_options['arguments']['field_contact_email_value']['table'] = 'field_data_field_contact_email';
+  $handler->display->display_options['arguments']['field_contact_email_value']['field'] = 'field_contact_email_value';
+  $handler->display->display_options['arguments']['field_contact_email_value']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['field_contact_email_value']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_contact_email_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_contact_email_value']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_contact_email_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_contact_email_value']['limit'] = '0';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -4774,6 +4784,16 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['display_description'] = 'TRT School Readiness Links';
   $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
   $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_contact_email_value' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Content: School contact&#039;s email address (field_contact_email)',
+    ),
+  );
   $export['schools'] = $view;
 
   $view = new view();

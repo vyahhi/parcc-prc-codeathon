@@ -125,3 +125,24 @@ Feature: PRC-757 School Readiness - School Admin View
     And I should see the link "Date & Time"
     And I should see the link "Number of Devices"
     And I should see the link "Results"
+
+  Scenario Outline: PRC-939 School admin only sees own schools
+    Given I am logged in as a user with the "District Admin" role
+    And users:
+      | name   | mail               | pass   | field_first_name | field_last_name | status | roles                  |
+      | First  | <user_name>        | xyz123 | Joe              | Educator        | 1      | Educator, School Admin |
+      | Second | <second_user_name> | xyz123 | Joe              | Educator        | 1      | Educator, School Admin |
+    And "School" nodes:
+      | title                    | field_contact_email | uid         |
+      | School 939 S1 @timestamp | <user_name>         | @currentuid |
+      | School 939 S2 @timestamp | <user_name>         | @currentuid |
+      | School 939 S3 @timestamp | <second_user_name>  | @currentuid |
+    And I am an anonymous user
+    And I am logged in as "First"
+    And I click "Technology Readiness"
+    Then I should see the link "School 939 S1 @timestamp Readiness"
+    And I should see the link "School 939 S2 @timestamp Readiness"
+    And I should not see the text "School 939 S3 @timestamp Readiness"
+  Examples:
+    | user_name                          | second_user_name                      |
+    | joe_prc_960a@timestamp@example.com | second_prc_960b@timestamp@example.com |
