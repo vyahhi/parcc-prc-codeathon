@@ -511,7 +511,9 @@ function _prc_trt_presave_school($entity) {
     if ($orig_contact_email && $contact_email != $orig_contact_email) {
       // Different user
       $orig_account = user_load_by_mail($orig_contact_email);
-      _prc_trt_user_remove_role('School Admin', $orig_account);
+      if ($orig_account) {
+        _prc_trt_user_remove_role('School Admin', $orig_account);
+      }
     }
 
     $account = user_load_by_mail($contact_email);
