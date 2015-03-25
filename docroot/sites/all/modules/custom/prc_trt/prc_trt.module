@@ -495,18 +495,19 @@ function _prc_trt_presave_school($entity) {
   $contact_email = $w->field_contact_email->value();
   $orig_contact_email = NULL;
   if ($contact_email) {
-      if (isset($entity->original)) {
-        // This doesn't make any sense to me either.
-        // The way the Drupal extension creates the entity doesn't
-        // come through entity_presave the way we expect, so we
-        // have to check for both structures.
-        if (is_array($entity->original->field_contact_email)) {
-          $w_orig = entity_metadata_wrapper('node', $entity->original);
-          $orig_contact_email = $w_orig->field_contact_email->value();
-        } else {
-          $orig_contact_email = $entity->original->field_contact_email;
-        }
+    if (isset($entity->original)) {
+      // This doesn't make any sense to me either.
+      // The way the Drupal extension creates the entity doesn't
+      // come through entity_presave the way we expect, so we
+      // have to check for both structures.
+      if (is_array($entity->original->field_contact_email)) {
+        $w_orig = entity_metadata_wrapper('node', $entity->original);
+        $orig_contact_email = $w_orig->field_contact_email->value();
       }
+      else {
+        $orig_contact_email = $entity->original->field_contact_email;
+      }
+    }
 
     if ($orig_contact_email && $contact_email != $orig_contact_email) {
 
@@ -518,8 +519,7 @@ function _prc_trt_presave_school($entity) {
       $query->entityCondition('entity_type', 'node')
         ->entityCondition('bundle', 'school')
         ->fieldCondition('field_contact_email', 'value', $orig_contact_email, '=')
-        ->propertyCondition('nid', $entity->nid, '!=');
-      ;
+        ->propertyCondition('nid', $entity->nid, '!=');;
       $result = $query->execute();
 
       $remove_school_admin = TRUE;
@@ -577,7 +577,8 @@ function _prc_trt_presave_school($entity) {
       $wrapper->field_role_id->set($rids);
 
       $wrapper->save();
-    } else {
+    }
+    else {
 
       if ($member_state) {
         $role_name = 'PARCC-Member Educator';
@@ -719,6 +720,41 @@ function prc_trt_form_school_node_form_validate(&$form, &$form_state) {
   $email = $form_state['values'][$field_name]['und'][0]['value'];
   if ($email && !valid_email_address($email)) {
     form_set_error($field_name, t('%email is not a valid e-mail address.', array('%email' => $email)));
+  }
+
+  _prc_trt_form_school_name_unique_validate($form_state);
+
+}
+
+/**
+ * @param $form_state
+ */
+function _prc_trt_form_school_name_unique_validate(&$form_state) {
+  $district_target_id = $form_state['values']['field_ref_district']['und'][0]['target_id'];
+  $title = $form_state['values']['title'];
+  $query = new EntityFieldQuery();
+
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'school')
+    ->fieldCondition('field_ref_district', 'target_id', $district_target_id)
+    ->propertyCondition('title', $title);
+  // Validate that school's name is unique in this district
+  if (array_key_exists('nid', $form_state['node'])) {
+    $nid = $form_state['node']->nid;
+    $query->propertyCondition('nid', $nid, '!=');
+  }
+  $result = $query->execute();
+
+  $name_exists = FALSE;
+
+  if (isset($result['node'])) {
+    $nids = array_keys($result['node']);
+    if (count($nids)) {
+      $name_exists = TRUE;
+    }
+  }
+  if ($name_exists) {
+    form_set_error('title', t('The school name is being used by another school in your district. Please enter a different school name.'));
   }
 }
 
