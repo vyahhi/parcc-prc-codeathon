@@ -9,26 +9,35 @@ Feature: PRC-757 School Readiness - School Admin View
 
   Scenario: Seeing my schools on the TRT Page
     Given I have no "School" nodes
+    And users:
+      | name                     | mail                     | pass   | field_first_name | field_last_name | status | roles                  |
+      | a-@timestamp@example.com | a-@timestamp@example.com | xyz123 | Joe              | Educator        | 1      | Educator, School Admin |
     And "School" nodes:
-      | title        |
-      | School One   |
-      | School Two   |
-      | School Three |
-    And I am logged in as a user with the "School Admin" role
+      | title        | field_contact_email      |
+      | School One   | a-@timestamp@example.com |
+      | School Two   | a-@timestamp@example.com |
+      | School Three | a-@timestamp@example.com |
+      | School Four  |                          |
+#    And I am logged in as a user with the "School Admin" role
+    And I am logged in as "a-@timestamp@example.com"
     When I follow "Technology Readiness"
     Then I should see the link "School One"
     And I should see the link "School Two"
     And I should see the link "School Three"
+    And I should not see the link "School Four"
     And I should see the text "Summary of what user can do here view readiness by school, run readiness checks, view readiness check results."
 
   Scenario: School readiness page
     Given I have no "School" nodes
+    And users:
+      | name                     | mail                     | pass   | field_first_name | field_last_name | status | roles                  |
+      | a-@timestamp@example.com | a-@timestamp@example.com | xyz123 | Joe              | Educator        | 1      | Educator, School Admin |
     And "School" nodes:
-      | title        |
-      | School One   |
-      | School Two   |
-      | School Three |
-    And I am logged in as a user with the "School Admin" role
+      | title        | field_contact_email      |
+      | School One   | a-@timestamp@example.com |
+      | School Two   | a-@timestamp@example.com |
+      | School Three | a-@timestamp@example.com |
+    And I am logged in as "a-@timestamp@example.com"
     And I follow "Technology Readiness"
     When I click "School One"
     Then I should see the heading "School One Readiness"
@@ -41,10 +50,13 @@ Feature: PRC-757 School Readiness - School Admin View
 
   Scenario Outline: Run a capacity check
     Given I have no "School" nodes
+    And users:
+      | name                     | mail                     | pass   | field_first_name | field_last_name | status | roles                  |
+      | a-@timestamp@example.com | a-@timestamp@example.com | xyz123 | Joe              | Educator        | 1      | Educator, School Admin |
     And "School" nodes:
-      | title      |
-      | School One |
-    And I am logged in as a user with the "School Admin" role
+      | title      | field_contact_email      |
+      | School One | a-@timestamp@example.com |
+    And I am logged in as "a-@timestamp@example.com"
     And I follow "Technology Readiness"
     When I click "School One"
     Then I should not see the text "Devices capacity"
@@ -77,10 +89,13 @@ Feature: PRC-757 School Readiness - School Admin View
 
   Scenario: PRC-804 Structured form validation
     Given I have no "School" nodes
+    And users:
+      | name                     | mail                     | pass   | field_first_name | field_last_name | status | roles                  |
+      | a-@timestamp@example.com | a-@timestamp@example.com | xyz123 | Joe              | Educator        | 1      | Educator, School Admin |
     And "School" nodes:
-      | title      |
-      | School One |
-    And I am logged in as a user with the "School Admin" role
+      | title      | field_contact_email      |
+      | School One | a-@timestamp@example.com |
+    And I am logged in as "a-@timestamp@example.com"
     And I follow "Technology Readiness"
     When I click "School One"
     And I should see the text "System checks"
@@ -95,10 +110,13 @@ Feature: PRC-757 School Readiness - School Admin View
 
   Scenario: I have a system check
     Given I have no "School" nodes
+    And users:
+      | name                     | mail                     | pass   | field_first_name | field_last_name | status | roles                  |
+      | a-@timestamp@example.com | a-@timestamp@example.com | xyz123 | Joe              | Educator        | 1      | Educator, School Admin |
     And "School" nodes:
-      | title      |
-      | School One |
-    And I am logged in as a user with the "School Admin" role
+      | title      | field_contact_email      |
+      | School One | a-@timestamp@example.com |
+    And I am logged in as "a-@timestamp@example.com"
     And I follow "Technology Readiness"
     When I click "School One"
     And I should see the text "System checks"
@@ -110,8 +128,8 @@ Feature: PRC-757 School Readiness - School Admin View
     And I select "Desktop" from "Device type"
     And I select "Windows 7" from "Operating system"
     And I fill in "Monitor size (in inches)" with "17"
-    And I select "1 Ghz or greater" from "Processor speed"
-    And I select "1 GB or greater" from "RAM"
+    And I select "At least 1.5 Ghz and under 2 Ghz" from "Processor speed"
+    And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
     And I fill in the hidden field "faux_cookies" with "true"

@@ -255,7 +255,7 @@ function _prc_trt_field_overall_results($entity) {
   $processor = $w->field_processor_speed->value();
   $processor_pass = $processor >= 1;
   $ram = $w->field_ram->value();
-  $ram_pass = $ram;
+  $ram_pass = $ram >= 1.0;
   $browser = $w->field_browser->value();
 
   $cookies_pass = $w->field_browser_cookies_enabled->value();
@@ -397,7 +397,7 @@ function _prc_trt_view_entity_system_check($entity) {
   $processor = $w->field_processor_speed->value();
   $processor_pass = $processor >= 1;
   $ram = $w->field_ram->value();
-  $ram_pass = $ram;
+  $ram_pass = $ram >= 1.0;
   $browser = $w->field_browser->value();
 
   $cookies_pass = $w->field_browser_cookies_enabled->value();
@@ -661,7 +661,7 @@ function _prc_entity_system_check_presave($entity) {
   $processor = $w->field_processor_speed->value();
   $processor_pass = $processor >= 1;
   $ram = $w->field_ram->value();
-  $ram_pass = $ram;
+  $ram_pass = $ram >= 1.0;
   $browser = $w->field_browser->value();
 
   $cookies_pass = $w->field_browser_cookies_enabled->value();
