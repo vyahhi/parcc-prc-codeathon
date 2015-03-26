@@ -133,4 +133,93 @@ class PrcTrtSystemCheck {
     $all_pass = $os_pass && $size_pass && $depth_pass && $res_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
     return $all_pass ? 1 : 0;
   }
+
+  public function browserOSCompatibilityCheck($browser, $browser_version, $os) {
+    $result = FALSE;
+
+    $compatibility = array();
+    $compatibility['winxpsp3']['chrome']['35'] = TRUE;
+    $compatibility['winxpsp3']['chrome']['36'] = TRUE;
+    $compatibility['winxpsp3']['chrome']['37'] = TRUE;
+    $compatibility['winxpsp3']['chrome']['38'] = TRUE;
+    $compatibility['winxpsp3']['chrome']['39'] = TRUE;
+    $compatibility['winxpsp3']['ff']['28'] = TRUE;
+    $compatibility['winxpsp3']['ff']['29'] = TRUE;
+    $compatibility['winxpsp3']['ff']['30'] = TRUE;
+    $compatibility['winxpsp3']['ff']['31'] = TRUE;
+    $compatibility['winxpsp3']['ff']['32'] = TRUE;
+    $compatibility['winxpsp3']['ff']['33'] = TRUE;
+    $compatibility['winxpsp3']['ff']['34'] = TRUE;
+    $compatibility['winxpsp3']['ff']['35'] = TRUE;
+
+    $compatibility['winvista']['ie']['9'] = TRUE;
+    $compatibility['winvista']['chrome']['35'] = TRUE;
+    $compatibility['winvista']['chrome']['36'] = TRUE;
+    $compatibility['winvista']['chrome']['37'] = TRUE;
+    $compatibility['winvista']['chrome']['38'] = TRUE;
+    $compatibility['winvista']['chrome']['39'] = TRUE;
+    $compatibility['winvista']['ff']['28'] = TRUE;
+    $compatibility['winvista']['ff']['29'] = TRUE;
+    $compatibility['winvista']['ff']['30'] = TRUE;
+    $compatibility['winvista']['ff']['31'] = TRUE;
+    $compatibility['winvista']['ff']['32'] = TRUE;
+    $compatibility['winvista']['ff']['33'] = TRUE;
+    $compatibility['winvista']['ff']['34'] = TRUE;
+    $compatibility['winvista']['ff']['35'] = TRUE;
+
+    $compatibility['win7']['ie']['9'] = TRUE;
+    $compatibility['win7']['ie']['10'] = TRUE;
+    $compatibility['win7']['ie']['11'] = TRUE;
+    $compatibility['win7']['chrome']['35'] = TRUE;
+    $compatibility['win7']['chrome']['36'] = TRUE;
+    $compatibility['win7']['chrome']['37'] = TRUE;
+    $compatibility['win7']['chrome']['38'] = TRUE;
+    $compatibility['win7']['chrome']['39'] = TRUE;
+    $compatibility['win7']['ff']['28'] = TRUE;
+    $compatibility['win7']['ff']['29'] = TRUE;
+    $compatibility['win7']['ff']['30'] = TRUE;
+    $compatibility['win7']['ff']['31'] = TRUE;
+    $compatibility['win7']['ff']['32'] = TRUE;
+    $compatibility['win7']['ff']['33'] = TRUE;
+    $compatibility['win7']['ff']['34'] = TRUE;
+    $compatibility['win7']['ff']['35'] = TRUE;
+
+    $compatibility['win8']['ie']['10'] = TRUE;
+    $compatibility['win8']['chrome']['35'] = TRUE;
+    $compatibility['win8']['chrome']['36'] = TRUE;
+    $compatibility['win8']['chrome']['37'] = TRUE;
+    $compatibility['win8']['chrome']['38'] = TRUE;
+    $compatibility['win8']['chrome']['39'] = TRUE;
+    $compatibility['win8']['ff']['28'] = TRUE;
+    $compatibility['win8']['ff']['29'] = TRUE;
+    $compatibility['win8']['ff']['30'] = TRUE;
+    $compatibility['win8']['ff']['31'] = TRUE;
+    $compatibility['win8']['ff']['32'] = TRUE;
+    $compatibility['win8']['ff']['33'] = TRUE;
+    $compatibility['win8']['ff']['34'] = TRUE;
+    $compatibility['win8']['ff']['35'] = TRUE;
+
+    $compatibility['win81']['ie']['11'] = TRUE;
+    $compatibility['win81']['chrome']['35'] = TRUE;
+    $compatibility['win81']['chrome']['36'] = TRUE;
+    $compatibility['win81']['chrome']['37'] = TRUE;
+    $compatibility['win81']['chrome']['38'] = TRUE;
+    $compatibility['win81']['chrome']['39'] = TRUE;
+    $compatibility['win81']['ff']['28'] = TRUE;
+    $compatibility['win81']['ff']['29'] = TRUE;
+    $compatibility['win81']['ff']['30'] = TRUE;
+    $compatibility['win81']['ff']['31'] = TRUE;
+    $compatibility['win81']['ff']['32'] = TRUE;
+    $compatibility['win81']['ff']['33'] = TRUE;
+    $compatibility['win81']['ff']['34'] = TRUE;
+    $compatibility['win81']['ff']['35'] = TRUE;
+
+    $result = array_key_exists($os, $compatibility) &&
+      array_key_exists($browser, $compatibility[$os]) &&
+      array_key_exists($browser_version, $compatibility[$os][$browser]) &&
+      $compatibility[$os][$browser][$browser_version];
+
+    return $result;
+  }
+
 }
