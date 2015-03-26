@@ -261,7 +261,6 @@ function _prc_trt_field_overall_results($entity) {
   $resh = $w->field_screen_resolution_height->value();
   $resh_pass = $resh >= MINIMUM_SCREEN_HEIGHT;
   $processor = $w->field_processor_speed->value();
-  $processor_pass = $processor >= MINIMUM_PROCESSOR_SPEED;
   $ram = $w->field_ram->value();
   $ram_pass = $ram >= MINIMUM_RAM;
   $browser = $w->field_browser->value();
@@ -270,7 +269,7 @@ function _prc_trt_field_overall_results($entity) {
   $js_pass = $w->field_browser_javascript_enabled->value();
   $images_pass = $w->field_browser_images_enabled->value();
 
-  $all_pass = $os_pass && $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
+  $all_pass = $os_pass && $size_pass && $depth_pass && $resw_pass && $resh_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
   return $all_pass;
 }
 
@@ -404,7 +403,6 @@ function _prc_trt_view_entity_system_check($entity) {
   $resh = $w->field_screen_resolution_height->value();
   $resh_pass = $resh >= MINIMUM_SCREEN_HEIGHT;
   $processor = $w->field_processor_speed->value();
-  $processor_pass = $processor >= MINIMUM_PROCESSOR_SPEED;
   $ram = $w->field_ram->value();
   $ram_pass = $ram >= MINIMUM_RAM;
   $browser = $w->field_browser->value();
@@ -436,7 +434,7 @@ function _prc_trt_view_entity_system_check($entity) {
   $entity->content['processor_pass'] = array(
     '#type' => 'item',
     '#title' => t('Processor speed Results:'),
-    '#markup' => $processor_pass ? 'Pass' : 'Fail',
+    '#markup' => t('N/A'),
   );
   $entity->content['ram_pass'] = array(
     '#type' => 'item',
@@ -669,7 +667,6 @@ function _prc_entity_system_check_presave($entity) {
   $resh = $w->field_screen_resolution_height->value();
   $resh_pass = $resh >= MINIMUM_SCREEN_HEIGHT;
   $processor = $w->field_processor_speed->value();
-  $processor_pass = $processor >= MINIMUM_PROCESSOR_SPEED;
   $ram = $w->field_ram->value();
   $ram_pass = $ram >= MINIMUM_RAM;
   $browser = $w->field_browser->value();
@@ -678,7 +675,7 @@ function _prc_entity_system_check_presave($entity) {
   $js_pass = $w->field_browser_javascript_enabled->value();
   $images_pass = $w->field_browser_images_enabled->value();
 
-  $all_pass = $os_pass && $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
+  $all_pass = $os_pass && $size_pass && $depth_pass && $resw_pass && $resh_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
   $entity->field_result[LANGUAGE_NONE][0]['value'] = $all_pass;
 }
 
