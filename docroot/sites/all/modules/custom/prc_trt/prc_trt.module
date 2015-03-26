@@ -4,13 +4,6 @@
  * PRC Technology Readiness Tool module code.
  */
 
-const MINIMUM_MONITOR_SIZE = 9.5;
-const MINIMUM_COLOR_DEPTH = 16;
-const MINIMUM_SCREEN_WIDTH = 1024;
-const MINIMUM_SCREEN_HEIGHT = 768;
-const MINIMUM_RAM = 1.0;
-const MINIMUM_PROCESSOR_SPEED = 1;
-
 module_load_include('inc', 'prc_trt', 'prc_trt_request_readiness_checks');
 
 function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form, &$form_state) {
@@ -67,7 +60,20 @@ function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form,
   $form['field_ref_school']['#access'] = FALSE;
 }
 
+function prc_trt_form_eck__entity__form_edit_prc_trt_system_check_alter(&$form, &$form_state) {
+  $form = _prc_trt_alter_system_check_form($form, $form_state);
+}
+
 function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &$form_state) {
+  $form = _prc_trt_alter_system_check_form($form, $form_state);
+}
+
+/**
+ * @param $form
+ * @param $form_state
+ * @return mixed
+ */
+function _prc_trt_alter_system_check_form(&$form, &$form_state) {
   $form['actions']['submit']['#value'] = t('Submit');
 
   if (array_key_exists('entityreference_prepopulate', $form_state)) {
@@ -129,6 +135,7 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
   drupal_add_js(drupal_get_path('module', 'prc_trt') . '/prc_trt.js');
 
   $form['#validate'][] = 'prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate';
+  return $form;
 }
 
 function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form, &$form_state) {
@@ -200,7 +207,7 @@ function prc_trt_field_extra_fields() {
     'processor_pass' => array(
       'label' => t('Processor speed: Results'),
       'description' => t('Did processor pass?'),
-      'weight' => MINIMUM_COLOR_DEPTH,
+      'weight' => 16,
     ),
     'ram_pass' => array(
       'label' => t('RAM: Results'),
@@ -249,27 +256,8 @@ function prc_trt_field_extra_fields() {
 }
 
 function _prc_trt_field_overall_results($entity) {
-  $w = entity_metadata_wrapper('prc_trt', $entity);
-  $os = $w->field_operating_system->value();
-  $os_pass = $os != 'other';
-  $size = $w->field_monitor_size->value();
-  $size_pass = $size >= MINIMUM_MONITOR_SIZE;
-  $depth = $w->field_monitor_color_depth->value();
-  $depth_pass = $depth >= MINIMUM_COLOR_DEPTH;
-  $resw = $w->field_screen_resolution_width->value();
-  $resw_pass = $resw >= MINIMUM_SCREEN_WIDTH;
-  $resh = $w->field_screen_resolution_height->value();
-  $resh_pass = $resh >= MINIMUM_SCREEN_HEIGHT;
-  $processor = $w->field_processor_speed->value();
-  $ram = $w->field_ram->value();
-  $ram_pass = $ram >= MINIMUM_RAM;
-  $browser = $w->field_browser->value();
-
-  $cookies_pass = $w->field_browser_cookies_enabled->value();
-  $js_pass = $w->field_browser_javascript_enabled->value();
-  $images_pass = $w->field_browser_images_enabled->value();
-
-  $all_pass = $os_pass && $size_pass && $depth_pass && $resw_pass && $resh_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $all_pass = $systemChecker->overallPass();
   return $all_pass;
 }
 
@@ -391,25 +379,16 @@ function _prc_trt_view_entity_capacity_check($entity) {
  */
 function _prc_trt_view_entity_system_check($entity) {
   drupal_set_title(t('System Check'));
-  $w = entity_metadata_wrapper('prc_trt', $entity);
-  $os = $w->field_operating_system->value();
-  $os_pass = $os != 'other';
-  $size = $w->field_monitor_size->value();
-  $size_pass = $size >= MINIMUM_MONITOR_SIZE;
-  $depth = $w->field_monitor_color_depth->value();
-  $depth_pass = $depth >= MINIMUM_COLOR_DEPTH;
-  $resw = $w->field_screen_resolution_width->value();
-  $resw_pass = $resw >= MINIMUM_SCREEN_WIDTH;
-  $resh = $w->field_screen_resolution_height->value();
-  $resh_pass = $resh >= MINIMUM_SCREEN_HEIGHT;
-  $processor = $w->field_processor_speed->value();
-  $ram = $w->field_ram->value();
-  $ram_pass = $ram >= MINIMUM_RAM;
-  $browser = $w->field_browser->value();
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $os_pass = $systemChecker->operatingSystemPass();
+  $size_pass = $systemChecker->monitorSizePass();
+  $depth_pass = $systemChecker->colorDepthPass();
+  $res_pass = $systemChecker->resolutionPass();
+  $ram_result = $systemChecker->ramResult();
 
-  $cookies_pass = $w->field_browser_cookies_enabled->value();
-  $js_pass = $w->field_browser_javascript_enabled->value();
-  $images_pass = $w->field_browser_images_enabled->value();
+  $cookies_pass = $systemChecker->cookiesPass();
+  $js_pass = $systemChecker->jsPass();
+  $images_pass = $systemChecker->imagesPass();
 
   $entity->content['operating_system_pass'] = array(
     '#type' => 'item',
@@ -429,7 +408,7 @@ function _prc_trt_view_entity_system_check($entity) {
   $entity->content['screen_resolution_pass'] = array(
     '#type' => 'item',
     '#title' => t('Screen resolution Results:'),
-    '#markup' => $resh_pass && $resw_pass ? 'Pass' : 'Fail',
+    '#markup' => $res_pass ? 'Pass' : 'Fail',
   );
   $entity->content['processor_pass'] = array(
     '#type' => 'item',
@@ -439,7 +418,7 @@ function _prc_trt_view_entity_system_check($entity) {
   $entity->content['ram_pass'] = array(
     '#type' => 'item',
     '#title' => t('RAM Results:'),
-    '#markup' => $ram_pass ? 'Pass' : 'Fail',
+    '#markup' => $ram_result,
   );
   $entity->content['browser_pass'] = array(
     '#type' => 'item',
@@ -655,27 +634,8 @@ function _prc_entity_capacity_check_presave($entity) {
  * @param $entity
  */
 function _prc_entity_system_check_presave($entity) {
-  $w = entity_metadata_wrapper('prc_trt', $entity);
-  $os = $w->field_operating_system->value();
-  $os_pass = $os != 'other';
-  $size = $w->field_monitor_size->value();
-  $size_pass = $size >= MINIMUM_MONITOR_SIZE;
-  $depth = $w->field_monitor_color_depth->value();
-  $depth_pass = $depth >= MINIMUM_COLOR_DEPTH;
-  $resw = $w->field_screen_resolution_width->value();
-  $resw_pass = $resw >= MINIMUM_SCREEN_WIDTH;
-  $resh = $w->field_screen_resolution_height->value();
-  $resh_pass = $resh >= MINIMUM_SCREEN_HEIGHT;
-  $processor = $w->field_processor_speed->value();
-  $ram = $w->field_ram->value();
-  $ram_pass = $ram >= MINIMUM_RAM;
-  $browser = $w->field_browser->value();
-
-  $cookies_pass = $w->field_browser_cookies_enabled->value();
-  $js_pass = $w->field_browser_javascript_enabled->value();
-  $images_pass = $w->field_browser_images_enabled->value();
-
-  $all_pass = $os_pass && $size_pass && $depth_pass && $resw_pass && $resh_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $all_pass = $systemChecker->overallPass();
   $entity->field_result[LANGUAGE_NONE][0]['value'] = $all_pass;
 }
 
