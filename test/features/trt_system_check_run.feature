@@ -276,7 +276,8 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I fill in "Number of devices" with "23"
     And I select "Desktop" from "Device type"
     And I select "Windows 7" from "Operating system"
-    And I fill in "Monitor size (in inches)" with "9.6"
+    # PRC-964 Change to minimum monitor size
+    And I fill in "Monitor size (in inches)" with "9.4"
     And I select "At least 2 Ghz and under 2.5 Ghz" from "Processor speed"
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
