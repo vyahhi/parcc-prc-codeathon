@@ -5,7 +5,7 @@ class PrcTrtSystemCheck {
   const MINIMUM_COLOR_DEPTH = 16;
   const MINIMUM_SCREEN_WIDTH = 1024;
   const MINIMUM_SCREEN_HEIGHT = 768;
-  const MINIMUM_RAM = 1.0;
+  const MINIMUM_RAM = 0.5;
   const MINIMUM_PROCESSOR_SPEED = 1;
 
   protected $system_check;
@@ -76,15 +76,17 @@ class PrcTrtSystemCheck {
   }
 
   public function browserPass() {
-    $browser = $this->wrapper->field_browser->value() . ' ' . $this->wrapper->field_browser_version->value();
+    $browser = $this->wrapper->field_browser->value();
+    $version = $this->wrapper->field_browser_version->value();
+    $browser_full = $browser . ' ' . $version;
     $os = $this->wrapper->field_operating_system->value();
     $upgrade_rec_os = array('mac106', 'win7', 'winvista');
     $upgrade_rec_browser = array('safari 5', 'ie 9');
-    if (array_search($os, $upgrade_rec_os) !== FALSE && array_search($browser, $upgrade_rec_browser) !== FALSE) {
+    if (array_search($os, $upgrade_rec_os) !== FALSE && array_search($browser_full, $upgrade_rec_browser) !== FALSE) {
       $browser_pass = -1;
     }
     else {
-      $browser_pass = 1;
+      $browser_pass = $this->browserOSCompatibilityCheck($browser, $version, $os);
     }
     return $browser_pass;
   }
