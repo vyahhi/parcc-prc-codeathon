@@ -222,14 +222,13 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I should not see the text "Passed"
     And I should see the text "Failed"
 
-  Scenario: Run check headless - Browser/OS Fail
+  Scenario Outline: Run check headless - Browser/OS Pass
     Given I am logged in as a user with the "Educator" role
-# TODO: Replace with actual TRT System Check form
     And I am on "admin/structure/entity-type/prc_trt/system_check/add"
     And I fill in "System check name" with "Check 2"
     And I fill in "Number of devices" with "23"
     And I select "Desktop" from "Device type"
-    And I select "Windows 7" from "Operating system"
+    And I select "<operating_system>" from "Operating system"
     And I fill in "Monitor size (in inches)" with "17"
     And I select "At least 2 Ghz and under 2.5 Ghz" from "Processor speed"
     And I select "At least 2 GB and under 4 GB" from "RAM"
@@ -241,9 +240,48 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-#    Then I should see the text "Fail"
-#    And I should not see the text "Passed"
-#    And I should see the text "Failed"
+    Then I should not see the text "Fail"
+    And I should see the text "Passed"
+    And I should not see the text "Failed"
+  Examples:
+    | operating_system             |
+    | Android Lollipop             |
+    | Apple iOS 6, 7 or 8          |
+    | Chrome OS 35-39 (Chromebook) |
+    | Fedora 19 or 20              |
+    | Mac 10.6                     |
+    | Mac 10.7                     |
+    | Mac 10.8                     |
+    | Mac 10.9                     |
+    | Mac 10.10                    |
+    | Ubuntu 12.04 or 14.04        |
+    | Windows XP (SP 3)            |
+    | Windows Vista                |
+    | Windows 7                    |
+    | Windows 8                    |
+    | Windows 8.1                  |
+
+  Scenario: PRC-964 Change  Run check headless - Browser/OS Fail
+    Given I am logged in as a user with the "Educator" role
+    And I am on "admin/structure/entity-type/prc_trt/system_check/add"
+    And I fill in "System check name" with "Check 2"
+    And I fill in "Number of devices" with "23"
+    And I select "Desktop" from "Device type"
+    And I select "Other" from "Operating system"
+    And I fill in "Monitor size (in inches)" with "17"
+    And I select "At least 2 Ghz and under 2.5 Ghz" from "Processor speed"
+    And I select "At least 2 GB and under 4 GB" from "RAM"
+    And I fill in the hidden field "faux_browser" with "ff 33"
+    And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_cookies" with "true"
+    And I fill in the hidden field "faux_images" with "true"
+    And I fill in the hidden field "faux_monitor_color_depth" with "16"
+    And I fill in the hidden field "faux_screen_resolution_width" with "1024"
+    And I fill in the hidden field "faux_screen_resolution_height" with "768"
+    When I press "Submit"
+    Then I should see the text "Fail"
+    And I should not see the text "Passed"
+    And I should see the text "Failed"
 
   Scenario: Run check headless - RAM Fail
     Given I am logged in as a user with the "Educator" role

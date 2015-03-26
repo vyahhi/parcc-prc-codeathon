@@ -10,6 +10,7 @@ const MINIMUM_SCREEN_WIDTH = 1024;
 const MINIMUM_SCREEN_HEIGHT = 768;
 const MINIMUM_RAM = 1.0;
 const MINIMUM_PROCESSOR_SPEED = 1;
+
 module_load_include('inc', 'prc_trt', 'prc_trt_request_readiness_checks');
 
 function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form, &$form_state) {
@@ -250,6 +251,7 @@ function prc_trt_field_extra_fields() {
 function _prc_trt_field_overall_results($entity) {
   $w = entity_metadata_wrapper('prc_trt', $entity);
   $os = $w->field_operating_system->value();
+  $os_pass = $os != 'other';
   $size = $w->field_monitor_size->value();
   $size_pass = $size >= MINIMUM_MONITOR_SIZE;
   $depth = $w->field_monitor_color_depth->value();
@@ -268,7 +270,7 @@ function _prc_trt_field_overall_results($entity) {
   $js_pass = $w->field_browser_javascript_enabled->value();
   $images_pass = $w->field_browser_images_enabled->value();
 
-  $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
+  $all_pass = $os_pass && $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
   return $all_pass;
 }
 
@@ -392,6 +394,7 @@ function _prc_trt_view_entity_system_check($entity) {
   drupal_set_title(t('System Check'));
   $w = entity_metadata_wrapper('prc_trt', $entity);
   $os = $w->field_operating_system->value();
+  $os_pass = $os != 'other';
   $size = $w->field_monitor_size->value();
   $size_pass = $size >= MINIMUM_MONITOR_SIZE;
   $depth = $w->field_monitor_color_depth->value();
@@ -413,7 +416,7 @@ function _prc_trt_view_entity_system_check($entity) {
   $entity->content['operating_system_pass'] = array(
     '#type' => 'item',
     '#title' => t('Operating system Results:'),
-    '#markup' => $js_pass ? 'Pass' : 'Fail',
+    '#markup' => $os_pass ? 'Pass' : 'Fail',
   );
   $entity->content['monitor_size_pass'] = array(
     '#type' => 'item',
@@ -656,6 +659,7 @@ function _prc_entity_capacity_check_presave($entity) {
 function _prc_entity_system_check_presave($entity) {
   $w = entity_metadata_wrapper('prc_trt', $entity);
   $os = $w->field_operating_system->value();
+  $os_pass = $os != 'other';
   $size = $w->field_monitor_size->value();
   $size_pass = $size >= MINIMUM_MONITOR_SIZE;
   $depth = $w->field_monitor_color_depth->value();
@@ -674,7 +678,7 @@ function _prc_entity_system_check_presave($entity) {
   $js_pass = $w->field_browser_javascript_enabled->value();
   $images_pass = $w->field_browser_images_enabled->value();
 
-  $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
+  $all_pass = $os_pass && $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
   $entity->field_result[LANGUAGE_NONE][0]['value'] = $all_pass;
 }
 
