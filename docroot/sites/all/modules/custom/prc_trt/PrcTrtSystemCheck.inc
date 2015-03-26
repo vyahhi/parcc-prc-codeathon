@@ -214,10 +214,85 @@ class PrcTrtSystemCheck {
     $compatibility['win81']['ff']['34'] = TRUE;
     $compatibility['win81']['ff']['35'] = TRUE;
 
+    $compatibility['mac106']['safari']['5'] = TRUE;
+    $compatibility['mac106']['ff']['28'] = TRUE;
+    $compatibility['mac106']['ff']['29'] = TRUE;
+    $compatibility['mac106']['ff']['30'] = TRUE;
+    $compatibility['mac106']['ff']['31'] = TRUE;
+    $compatibility['mac106']['ff']['32'] = TRUE;
+    $compatibility['mac106']['ff']['33'] = TRUE;
+    $compatibility['mac106']['ff']['34'] = TRUE;
+    $compatibility['mac106']['ff']['35'] = TRUE;
+
+    $compatibility['mac107']['safari']['6'] = TRUE;
+    $compatibility['mac107']['ff']['28'] = TRUE;
+    $compatibility['mac107']['ff']['29'] = TRUE;
+    $compatibility['mac107']['ff']['30'] = TRUE;
+    $compatibility['mac107']['ff']['31'] = TRUE;
+    $compatibility['mac107']['ff']['32'] = TRUE;
+    $compatibility['mac107']['ff']['33'] = TRUE;
+    $compatibility['mac107']['ff']['34'] = TRUE;
+    $compatibility['mac107']['ff']['35'] = TRUE;
+
+    $compatibility['mac108']['safari']['6'] = TRUE;
+    $compatibility['mac108']['ff']['28'] = TRUE;
+    $compatibility['mac108']['ff']['29'] = TRUE;
+    $compatibility['mac108']['ff']['30'] = TRUE;
+    $compatibility['mac108']['ff']['31'] = TRUE;
+    $compatibility['mac108']['ff']['32'] = TRUE;
+    $compatibility['mac108']['ff']['33'] = TRUE;
+    $compatibility['mac108']['ff']['34'] = TRUE;
+    $compatibility['mac108']['ff']['35'] = TRUE;
+
+    $compatibility['mac109']['safari']['7'] = TRUE;
+    $compatibility['mac109']['ff']['28'] = TRUE;
+    $compatibility['mac109']['ff']['29'] = TRUE;
+    $compatibility['mac109']['ff']['30'] = TRUE;
+    $compatibility['mac109']['ff']['31'] = TRUE;
+    $compatibility['mac109']['ff']['32'] = TRUE;
+    $compatibility['mac109']['ff']['33'] = TRUE;
+    $compatibility['mac109']['ff']['34'] = TRUE;
+    $compatibility['mac109']['ff']['35'] = TRUE;
+
+    $compatibility['mac1010']['safari']['8'] = TRUE;
+    $compatibility['mac1010']['ff']['28'] = TRUE;
+    $compatibility['mac1010']['ff']['29'] = TRUE;
+    $compatibility['mac1010']['ff']['30'] = TRUE;
+    $compatibility['mac1010']['ff']['31'] = TRUE;
+    $compatibility['mac1010']['ff']['32'] = TRUE;
+    $compatibility['mac1010']['ff']['33'] = TRUE;
+    $compatibility['mac1010']['ff']['34'] = TRUE;
+    $compatibility['mac1010']['ff']['35'] = TRUE;
+
+    $compatibility['fedora19']['ff']['28'] = TRUE;
+    $compatibility['fedora19']['ff']['29'] = TRUE;
+    $compatibility['fedora19']['ff']['30'] = TRUE;
+    $compatibility['fedora19']['ff']['31'] = TRUE;
+    $compatibility['fedora19']['ff']['32'] = TRUE;
+    $compatibility['fedora19']['ff']['33'] = TRUE;
+    $compatibility['fedora19']['ff']['34'] = TRUE;
+    $compatibility['fedora19']['ff']['35'] = TRUE;
+
+    $compatibility['ubuntu12']['ff']['28'] = TRUE;
+    $compatibility['ubuntu12']['ff']['29'] = TRUE;
+    $compatibility['ubuntu12']['ff']['30'] = TRUE;
+    $compatibility['ubuntu12']['ff']['31'] = TRUE;
+    $compatibility['ubuntu12']['ff']['32'] = TRUE;
+    $compatibility['ubuntu12']['ff']['33'] = TRUE;
+    $compatibility['ubuntu12']['ff']['34'] = TRUE;
+    $compatibility['ubuntu12']['ff']['35'] = TRUE;
+
     $result = array_key_exists($os, $compatibility) &&
       array_key_exists($browser, $compatibility[$os]) &&
       array_key_exists($browser_version, $compatibility[$os][$browser]) &&
       $compatibility[$os][$browser][$browser_version];
+
+    $always_allow_os = array('chrome35', 'ios6', 'android_lollipop');
+
+    if (array_search($os, $always_allow_os) !== FALSE) {
+      // OSs with no browser requirement
+      $result = TRUE;
+    }
 
     return $result;
   }
