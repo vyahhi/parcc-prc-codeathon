@@ -385,6 +385,7 @@ function _prc_trt_view_entity_system_check($entity) {
   $depth_pass = $systemChecker->colorDepthPass();
   $res_pass = $systemChecker->resolutionPass();
   $ram_result = $systemChecker->ramResult();
+  $browser_result = $systemChecker->browserResult();
 
   $cookies_pass = $systemChecker->cookiesPass();
   $js_pass = $systemChecker->jsPass();
@@ -423,7 +424,7 @@ function _prc_trt_view_entity_system_check($entity) {
   $entity->content['browser_pass'] = array(
     '#type' => 'item',
     '#title' => t('Browser Results:'),
-    '#markup' => $js_pass ? 'Pass' : 'Fail',
+    '#markup' => $browser_result,
   );
   $entity->content['cookies_pass'] = array(
     '#type' => 'item',

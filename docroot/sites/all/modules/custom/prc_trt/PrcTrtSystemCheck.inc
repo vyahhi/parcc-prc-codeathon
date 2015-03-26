@@ -52,7 +52,8 @@ class PrcTrtSystemCheck {
     $na_os = array('ios6', 'chrome35');
     if (array_search($os, $na_os) !== FALSE) {
       $ram_pass = -1;
-    } else {
+    }
+    else {
       $ram = $this->wrapper->field_ram->value();
       $ram_pass = $ram >= $this::MINIMUM_RAM ? 1 : 0;
     }
@@ -75,7 +76,32 @@ class PrcTrtSystemCheck {
   }
 
   public function browserPass() {
-    $browser = $this->wrapper->field_browser->value();
+    $browser = $this->wrapper->field_browser->value() . ' ' . $this->wrapper->field_browser_version->value();
+    $os = $this->wrapper->field_operating_system->value();
+    $upgrade_rec_os = array('mac106', 'win7', 'winvista');
+    $upgrade_rec_browser = array('safari 5', 'ie 9');
+    if (array_search($os, $upgrade_rec_os) !== FALSE && array_search($browser, $upgrade_rec_browser) !== FALSE) {
+      $browser_pass = -1;
+    }
+    else {
+      $browser_pass = 1;
+    }
+    return $browser_pass;
+  }
+
+  public function browserResult() {
+    switch ($this->browserPass()) {
+      case -1:
+        $browser_result = t('Upgrade recommended');
+        break;
+      case 0;
+        $browser_result = t('Fail');
+        break;
+      case 1;
+        $browser_result = t('Pass');
+        break;
+    }
+    return $browser_result;
   }
 
   public function cookiesPass() {

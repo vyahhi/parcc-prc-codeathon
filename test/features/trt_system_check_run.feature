@@ -271,6 +271,34 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     | Apple iOS 6, 7 or 8          |
     | Chrome OS 35-39 (Chromebook) |
 
+  Scenario Outline: PRC-964 Browser/OS check - Upgrade recommended
+    Given I am logged in as a user with the "Educator" role
+    And I am on "admin/structure/entity-type/prc_trt/system_check/add"
+    And I fill in "System check name" with "Check 2"
+    And I fill in "Number of devices" with "23"
+    And I select "Desktop" from "Device type"
+    And I select "<operating_system>" from "Operating system"
+    And I fill in "Monitor size (in inches)" with "17"
+    And I select "At least 2 Ghz and under 2.5 Ghz" from "Processor speed"
+    And I select "At least 2 GB and under 4 GB" from "RAM"
+    And I fill in the hidden field "faux_browser" with "<browser>"
+    And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_cookies" with "true"
+    And I fill in the hidden field "faux_images" with "true"
+    And I fill in the hidden field "faux_monitor_color_depth" with "16"
+    And I fill in the hidden field "faux_screen_resolution_width" with "1024"
+    And I fill in the hidden field "faux_screen_resolution_height" with "768"
+    When I press "Submit"
+    Then I should not see the text "Fail"
+    And I should see the text "Passed"
+    And I should see the text "Upgrade recommended"
+    And I should not see the text "Failed"
+  Examples:
+    | operating_system | browser    |
+    | Mac 10.6         | safari 5.1 |
+    | Windows Vista    | ie 9       |
+    | Windows 7        | ie 9       |
+
   Scenario Outline: Run check headless - Browser/OS Pass
     Given I am logged in as a user with the "Educator" role
     And I am on "admin/structure/entity-type/prc_trt/system_check/add"
