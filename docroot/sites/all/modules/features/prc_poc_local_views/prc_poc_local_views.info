@@ -42,6 +42,7 @@ features[views_view][] = sample_article
 features[views_view][] = school_readiness_last_capacity_check_result
 features[views_view][] = school_readiness_system_checks
 features[views_view][] = schools
+features[views_view][] = system_check_export
 features[views_view][] = taxonomy_term
 features[views_view][] = test_search_two
 features[views_view][] = top_content

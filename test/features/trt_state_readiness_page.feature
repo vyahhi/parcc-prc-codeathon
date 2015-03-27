@@ -73,7 +73,8 @@ Feature: PRC-707 State Readiness
     And I should see the text "Overview / instructional copy goes here \(admin can export all test results data for state to csv or click district name to view results of technology checks by school\)."
     But I should not see the text "No districts in your state have been created"
     And I should see the link "<district_name>"
-
+    And I should see the link "Export all system checks data to .csv"
+    And I should see the link "Export all testing capacity checks data to .csv"
   Examples:
     | user_state     | member_state | user_name                          | district_name         |
     | South Virginia | Old York     | joe_prc_707a@timestamp@example.com | PRC-707 S1 @timestamp |

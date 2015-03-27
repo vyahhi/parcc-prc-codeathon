@@ -4801,6 +4801,39 @@ message explaining what the check does and the importance of running it.';
   $export['schools'] = $view;
 
   $view = new view();
+  $view->name = 'system_check_export';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'eck_prc_trt';
+  $view->human_name = 'System Check Export';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Prc_trt: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  /* Filter criterion: Prc_trt: prc_trt type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'system_check' => 'system_check',
+  );
+  $export['system_check_export'] = $view;
+
+  $view = new view();
   $view->name = 'taxonomy_term';
   $view->description = 'A view to emulate Drupal core\'s handling of taxonomy/term.';
   $view->tag = 'default';
