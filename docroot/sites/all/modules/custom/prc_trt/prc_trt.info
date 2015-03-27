@@ -4,6 +4,8 @@ package = PRC
 core = 7.x
 
 files[] = prc_trt_request_readiness_checks
+files[] = PrcTrtSystemCheck.inc
+
 
 dependencies[] = browserclass
 dependencies[] = pm_existing_pages

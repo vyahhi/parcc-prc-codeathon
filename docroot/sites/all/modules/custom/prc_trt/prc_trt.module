@@ -60,7 +60,20 @@ function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form,
   $form['field_ref_school']['#access'] = FALSE;
 }
 
+function prc_trt_form_eck__entity__form_edit_prc_trt_system_check_alter(&$form, &$form_state) {
+  $form = _prc_trt_alter_system_check_form($form, $form_state);
+}
+
 function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &$form_state) {
+  $form = _prc_trt_alter_system_check_form($form, $form_state);
+}
+
+/**
+ * @param $form
+ * @param $form_state
+ * @return mixed
+ */
+function _prc_trt_alter_system_check_form(&$form, &$form_state) {
   $form['actions']['submit']['#value'] = t('Submit');
 
   if (array_key_exists('entityreference_prepopulate', $form_state)) {
@@ -122,6 +135,7 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
   drupal_add_js(drupal_get_path('module', 'prc_trt') . '/prc_trt.js');
 
   $form['#validate'][] = 'prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate';
+  return $form;
 }
 
 function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form, &$form_state) {
@@ -242,27 +256,8 @@ function prc_trt_field_extra_fields() {
 }
 
 function _prc_trt_field_overall_results($entity) {
-  $w = entity_metadata_wrapper('prc_trt', $entity);
-  $os = $w->field_operating_system->value();
-  $size = $w->field_monitor_size->value();
-  $size_pass = $size >= 9.7;
-  $depth = $w->field_monitor_color_depth->value();
-  $depth_pass = $depth >= 16;
-  $resw = $w->field_screen_resolution_width->value();
-  $resw_pass = $resw >= 1024;
-  $resh = $w->field_screen_resolution_height->value();
-  $resh_pass = $resh >= 768;
-  $processor = $w->field_processor_speed->value();
-  $processor_pass = $processor >= 1;
-  $ram = $w->field_ram->value();
-  $ram_pass = $ram >= 1.0;
-  $browser = $w->field_browser->value();
-
-  $cookies_pass = $w->field_browser_cookies_enabled->value();
-  $js_pass = $w->field_browser_javascript_enabled->value();
-  $images_pass = $w->field_browser_images_enabled->value();
-
-  $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $all_pass = $systemChecker->overallPass();
   return $all_pass;
 }
 
@@ -295,7 +290,7 @@ function _prc_trt_view_entity_capacity_check($entity) {
   $days = $w->field_number_testing_days->value();
   $sessions = $w->field_number_of_sessions->value();
 
-  $devices_required = (($students * $sittings) / ($days * $sessions)) * 1.1;
+  $devices_required = ceil((($students * $sittings) / ($days * $sessions)) * 1.1);
   $entity->content['devices_required'] = array(
     '#type' => 'item',
     '#title' => t('# of devices required:'),
@@ -317,7 +312,7 @@ function _prc_trt_view_entity_capacity_check($entity) {
   );
 
   $speed = $w->field_speed_of_connection->value();
-  $bandwidth_capacity = $speed / $students;
+  $bandwidth_capacity = round($speed / $students, 3);
   $entity->content['bandwidth_capacity'] = array(
     '#type' => 'item',
     '#title' => t('bandwidth capacity:'),
@@ -384,30 +379,22 @@ function _prc_trt_view_entity_capacity_check($entity) {
  */
 function _prc_trt_view_entity_system_check($entity) {
   drupal_set_title(t('System Check'));
-  $w = entity_metadata_wrapper('prc_trt', $entity);
-  $os = $w->field_operating_system->value();
-  $size = $w->field_monitor_size->value();
-  $size_pass = $size >= 9.7;
-  $depth = $w->field_monitor_color_depth->value();
-  $depth_pass = $depth >= 16;
-  $resw = $w->field_screen_resolution_width->value();
-  $resw_pass = $resw >= 1024;
-  $resh = $w->field_screen_resolution_height->value();
-  $resh_pass = $resh >= 768;
-  $processor = $w->field_processor_speed->value();
-  $processor_pass = $processor >= 1;
-  $ram = $w->field_ram->value();
-  $ram_pass = $ram >= 1.0;
-  $browser = $w->field_browser->value();
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $os_pass = $systemChecker->operatingSystemPass();
+  $size_pass = $systemChecker->monitorSizePass();
+  $depth_pass = $systemChecker->colorDepthPass();
+  $res_pass = $systemChecker->resolutionPass();
+  $ram_result = $systemChecker->ramResult();
+  $browser_result = $systemChecker->browserResult();
 
-  $cookies_pass = $w->field_browser_cookies_enabled->value();
-  $js_pass = $w->field_browser_javascript_enabled->value();
-  $images_pass = $w->field_browser_images_enabled->value();
+  $cookies_pass = $systemChecker->cookiesPass();
+  $js_pass = $systemChecker->jsPass();
+  $images_pass = $systemChecker->imagesPass();
 
   $entity->content['operating_system_pass'] = array(
     '#type' => 'item',
     '#title' => t('Operating system Results:'),
-    '#markup' => $js_pass ? 'Pass' : 'Fail',
+    '#markup' => $os_pass ? 'Pass' : 'Fail',
   );
   $entity->content['monitor_size_pass'] = array(
     '#type' => 'item',
@@ -422,22 +409,22 @@ function _prc_trt_view_entity_system_check($entity) {
   $entity->content['screen_resolution_pass'] = array(
     '#type' => 'item',
     '#title' => t('Screen resolution Results:'),
-    '#markup' => $resh_pass && $resw_pass ? 'Pass' : 'Fail',
+    '#markup' => $res_pass ? 'Pass' : 'Fail',
   );
   $entity->content['processor_pass'] = array(
     '#type' => 'item',
     '#title' => t('Processor speed Results:'),
-    '#markup' => $processor_pass ? 'Pass' : 'Fail',
+    '#markup' => t('N/A'),
   );
   $entity->content['ram_pass'] = array(
     '#type' => 'item',
     '#title' => t('RAM Results:'),
-    '#markup' => $ram_pass ? 'Pass' : 'Fail',
+    '#markup' => $ram_result,
   );
   $entity->content['browser_pass'] = array(
     '#type' => 'item',
     '#title' => t('Browser Results:'),
-    '#markup' => $js_pass ? 'Pass' : 'Fail',
+    '#markup' => $browser_result,
   );
   $entity->content['cookies_pass'] = array(
     '#type' => 'item',
@@ -648,27 +635,8 @@ function _prc_entity_capacity_check_presave($entity) {
  * @param $entity
  */
 function _prc_entity_system_check_presave($entity) {
-  $w = entity_metadata_wrapper('prc_trt', $entity);
-  $os = $w->field_operating_system->value();
-  $size = $w->field_monitor_size->value();
-  $size_pass = $size >= 9.7;
-  $depth = $w->field_monitor_color_depth->value();
-  $depth_pass = $depth >= 16;
-  $resw = $w->field_screen_resolution_width->value();
-  $resw_pass = $resw >= 1024;
-  $resh = $w->field_screen_resolution_height->value();
-  $resh_pass = $resh >= 768;
-  $processor = $w->field_processor_speed->value();
-  $processor_pass = $processor >= 1;
-  $ram = $w->field_ram->value();
-  $ram_pass = $ram >= 1.0;
-  $browser = $w->field_browser->value();
-
-  $cookies_pass = $w->field_browser_cookies_enabled->value();
-  $js_pass = $w->field_browser_javascript_enabled->value();
-  $images_pass = $w->field_browser_images_enabled->value();
-
-  $all_pass = $size_pass && $depth_pass && $resw_pass && $resh_pass && $processor_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass ? 1 : 0;
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $all_pass = $systemChecker->overallPass();
   $entity->field_result[LANGUAGE_NONE][0]['value'] = $all_pass;
 }
 

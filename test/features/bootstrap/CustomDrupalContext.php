@@ -17,6 +17,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
   protected $originalMailSystem;
   protected $customParameters;
+  protected $sysCheckResult;
+
   /**
    * Initializes context.
    *
@@ -1375,6 +1377,38 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   /**
    * @} End of defgroup "workflow steps"
    */
+
+
+  /**
+   * @defgroup "trt browser steps"
+   * @{
+   */
+
+  /**
+   * @When /^I run a system check with the "([^"]*)" operating system and the "([^"]*)" browser version "([^"]*)"$/
+   */
+  public function iRunASystemCheckWithTheOperatingSystemAndTheBrowserVersion($os, $browser, $version) {
+    $entity = NULL;
+    $sysCheck = new PrcTrtSystemCheck($entity);
+    $result = $sysCheck->browserOSCompatibilityCheck($browser, $version, $os);
+    $this->sysCheckResult = $result;
+  }
+
+
+  /**
+   * @Then /^I should get a "([^"]*)" result$/
+   */
+  public function iShouldGetAResult($result) {
+    $expected_result = $result === 'true';
+    if ($this->sysCheckResult !== $expected_result) {
+      throw new \Exception(sprintf('The result was not %s', $result));
+    }
+
+  }
+  /**
+   * @} End of defgroup "workflow steps"
+   */
+
 
   /**
    * @When /^I am browsing using a "([^"]*)"$/
