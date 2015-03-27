@@ -7,6 +7,7 @@ dependencies[] = options
 dependencies[] = prc_poc_local_fields
 dependencies[] = strongarm
 dependencies[] = taxonomy
+features[field_instance][] = node-state-field_contact_email
 features[field_instance][] = node-state-field_member_state
 features[field_instance][] = node-state-field_user_state
 features[node][] = state

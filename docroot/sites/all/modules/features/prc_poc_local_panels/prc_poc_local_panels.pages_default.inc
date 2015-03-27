@@ -3377,6 +3377,29 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->uuid = '2639295c-be52-4569-a027-c64a045a7a1e';
     $display->content['new-2639295c-be52-4569-a027-c64a045a7a1e'] = $pane;
     $display->panels['middle'][8] = 'new-2639295c-be52-4569-a027-c64a045a7a1e';
+    $pane = new stdClass();
+    $pane->pid = 'new-e9c22381-16b2-4fbc-91a5-2adcd2a58b2b';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'trt_states-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_contact_email_value' => '%user:mail',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 9;
+    $pane->locks = array();
+    $pane->uuid = 'e9c22381-16b2-4fbc-91a5-2adcd2a58b2b';
+    $display->content['new-e9c22381-16b2-4fbc-91a5-2adcd2a58b2b'] = $pane;
+    $display->panels['middle'][9] = 'new-e9c22381-16b2-4fbc-91a5-2adcd2a58b2b';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
