@@ -424,6 +424,29 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->uuid = '48e2fd47-665f-49f1-a263-b9fe56f1093c';
     $display->content['new-48e2fd47-665f-49f1-a263-b9fe56f1093c'] = $pane;
     $display->panels['middle'][3] = 'new-48e2fd47-665f-49f1-a263-b9fe56f1093c';
+    $pane = new stdClass();
+    $pane->pid = 'new-f101267e-aa69-4019-b48c-d011f1d51c9d';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'trt_district_readiness_schools-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_ref_district_target_id' => '%node:nid',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 4;
+    $pane->locks = array();
+    $pane->uuid = 'f101267e-aa69-4019-b48c-d011f1d51c9d';
+    $display->content['new-f101267e-aa69-4019-b48c-d011f1d51c9d'] = $pane;
+    $display->panels['middle'][4] = 'new-f101267e-aa69-4019-b48c-d011f1d51c9d';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
