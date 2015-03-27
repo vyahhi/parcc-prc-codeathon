@@ -290,7 +290,7 @@ function _prc_trt_view_entity_capacity_check($entity) {
   $days = $w->field_number_testing_days->value();
   $sessions = $w->field_number_of_sessions->value();
 
-  $devices_required = floor((($students * $sittings) / ($days * $sessions)) * 1.1);
+  $devices_required = ceil((($students * $sittings) / ($days * $sessions)) * 1.1);
   $entity->content['devices_required'] = array(
     '#type' => 'item',
     '#title' => t('# of devices required:'),
