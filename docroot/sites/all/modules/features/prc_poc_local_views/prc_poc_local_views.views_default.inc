@@ -5932,6 +5932,40 @@ message explaining what the check does and the importance of running it.';
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
   $handler->display->display_options['pane_category']['weight'] = '0';
+
+  /* Display: State Readiness District List */
+  $handler = $view->new_display('panel_pane', 'State Readiness District List', 'panel_pane_2');
+  $handler->display->display_options['display_description'] = 'District List filtered by State';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No districts in your state have been created';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: State (field_ref_trt_state) */
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['id'] = 'field_ref_trt_state_target_id';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['table'] = 'field_data_field_ref_trt_state';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['field'] = 'field_ref_trt_state_target_id';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['pane_category']['name'] = 'TRT State Readiness';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_ref_trt_state_target_id' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Content: State (field_ref_trt_state)',
+    ),
+  );
   $export['trt_districts'] = $view;
 
   $view = new view();

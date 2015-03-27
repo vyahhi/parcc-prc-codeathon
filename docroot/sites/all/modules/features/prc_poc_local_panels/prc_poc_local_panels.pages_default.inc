@@ -674,6 +674,54 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $display->uuid = '41927865-41af-4132-ad7c-66a71ae067f2';
   $display->content = array();
   $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-6e5ea1dd-72ca-4647-a6b6-df46b52c297d';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'State Readiness Overview Copy',
+      'title' => '',
+      'body' => 'Overview / instructional copy goes here (admin can export all test results data for state to csv or click district name to view results of technology checks by school).',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '6e5ea1dd-72ca-4647-a6b6-df46b52c297d';
+    $display->content['new-6e5ea1dd-72ca-4647-a6b6-df46b52c297d'] = $pane;
+    $display->panels['middle'][0] = 'new-6e5ea1dd-72ca-4647-a6b6-df46b52c297d';
+    $pane = new stdClass();
+    $pane->pid = 'new-1991df92-3c85-441c-ba76-931b6f73ba4d';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'trt_districts-panel_pane_2';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_ref_trt_state_target_id' => '%node:nid',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '1991df92-3c85-441c-ba76-931b6f73ba4d';
+    $display->content['new-1991df92-3c85-441c-ba76-931b6f73ba4d'] = $pane;
+    $display->panels['middle'][1] = 'new-1991df92-3c85-441c-ba76-931b6f73ba4d';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
