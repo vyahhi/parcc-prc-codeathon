@@ -1394,7 +1394,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $this->sysCheckResult = $result;
   }
 
-
   /**
    * @Then /^I should get a "([^"]*)" result$/
    */
@@ -1403,10 +1402,33 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     if ($this->sysCheckResult !== $expected_result) {
       throw new \Exception(sprintf('The result was not %s', $result));
     }
+  }
 
+  /**
+   * @Given /^the school "([^"]*)" has run a system check$/
+   */
+  public function theSchoolHasRunASystemCheck($school_name) {
+    $school_name = $this->fixStepArgument($school_name);
+    foreach ($this->nodes as $node) {
+      if ($node->title == $school_name) {
+        $found_nid = $node->nid;
+        break;
+      }
+    }
+    if (!$found_nid) {
+      throw new \Exception(sprintf('The school %s was not found', $school_name));
+    }
+    $school_node = node_load($found_nid);
+    $entity_type = 'prc_trt';
+    $entity = entity_create($entity_type, array('type' => 'system_check'));
+    $wrapper = entity_metadata_wrapper($entity_type, $entity);
+    $wrapper->uid = $school_node->uid;
+    $wrapper->field_ref_school->set($school_node);
+    $wrapper->field_name = 'Fakey Check';
+    $wrapper->save();
   }
   /**
-   * @} End of defgroup "workflow steps"
+   * @} End of defgroup "trt browser steps"
    */
 
 

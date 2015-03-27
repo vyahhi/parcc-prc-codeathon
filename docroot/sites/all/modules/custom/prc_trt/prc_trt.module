@@ -6,6 +6,10 @@
 
 module_load_include('inc', 'prc_trt', 'prc_trt_request_readiness_checks');
 
+function prc_trt_form_eck__entity__form_edit_prc_trt_capacity_check_alter(&$form, &$form_state) {
+  prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter($form, $form_state);
+}
+
 function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form, &$form_state) {
   drupal_set_title(t('Testing Capacity Check'));
   $form['actions']['submit']['#value'] = t('Submit');
@@ -58,6 +62,11 @@ function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form,
   $form['field_wired_connection_speed']['und']['#options']['_none'] = t('Please select');
   $form['field_wireless_connection_speed']['und']['#options']['_none'] = t('Please select');
   $form['field_ref_school']['#access'] = FALSE;
+
+  $form['field_devices_capacity']['#access'] = FALSE;
+  $form['field_devices_capacity_results']['#access'] = FALSE;
+  $form['field_bandwidth_capacity']['#access'] = FALSE;
+  $form['field_bandwidth_capacity_result']['#access'] = FALSE;
 }
 
 function prc_trt_form_eck__entity__form_edit_prc_trt_system_check_alter(&$form, &$form_state) {
@@ -455,7 +464,6 @@ function prc_trt_entity_presave($entity, $type) {
   }
   elseif ($type == 'node' && $entity->type == 'school') {
     _prc_trt_presave_school($entity);
-
   }
 }
 
@@ -629,6 +637,37 @@ function _prc_entity_capacity_check_presave($entity) {
     $school_wrapper->field_number_of_students->set($students);
     $school_wrapper->save();
   }
+
+  // Save the calculated values
+  $students = $w->field_number_of_students->value();
+  $sittings = $w->field_sittings_per_student->value();
+  $devices = $w->field_number_of_devices->value();
+  $days = $w->field_number_testing_days->value();
+  $sessions = $w->field_number_of_sessions->value();
+
+  $devices_required = ceil((($students * $sittings) / ($days * $sessions)) * 1.1);
+  $devices_capacity = $devices - $devices_required;
+  $devices_capacity_results = $devices_capacity >= 0 ? t('Passed') : t('Failed');
+
+  $speed = $w->field_speed_of_connection->value();
+  $bandwidth_capacity = round($speed / $students, 3);
+
+  $cap_good = floatval(variable_get('prc_trt_capacity_minimum_good', .1));
+  $cap_ok = floatval(variable_get('prc_trt_capacity_minimum_ok', .05));
+  if ($bandwidth_capacity >= $cap_good) {
+    $bandwidth_capacity_results = t('Good');
+  }
+  elseif ($bandwidth_capacity >= $cap_ok) {
+    $bandwidth_capacity_results = t('OK');
+  }
+  else {
+    $bandwidth_capacity_results = t('Poor');
+  }
+  $entity->field_devices_capacity[LANGUAGE_NONE][0]['value'] = $devices_capacity;
+  $entity->field_devices_capacity_results[LANGUAGE_NONE][0]['value'] = $devices_capacity_results;
+  $entity->field_bandwidth_capacity[LANGUAGE_NONE][0]['value'] = $bandwidth_capacity;
+  $entity->field_bandwidth_capacity_results[LANGUAGE_NONE][0]['value'] = $bandwidth_capacity_results;
+
 }
 
 /**
