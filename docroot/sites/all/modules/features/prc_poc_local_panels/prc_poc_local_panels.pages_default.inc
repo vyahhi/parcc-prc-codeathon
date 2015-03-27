@@ -432,11 +432,11 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
-  $handler->name = 'node_view__trt_state_readiness_view';
+  $handler->name = 'node_view__trt_school_readiness_view';
   $handler->task = 'node_view';
   $handler->subtask = '';
   $handler->handler = 'panel_context';
-  $handler->weight = 3;
+  $handler->weight = 5;
   $handler->conf = array(
     'title' => 'TRT School Readiness View',
     'no_blocks' => 0,
@@ -447,7 +447,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     'css' => '',
     'contexts' => array(),
     'relationships' => array(),
-    'name' => 'trt_state_readiness_view',
+    'name' => 'trt_school_readiness_view',
     'access' => array(
       'plugins' => array(
         0 => array(
@@ -620,6 +620,60 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->uuid = '04e25c5c-97dc-4c6d-bc1c-4f50428042ac';
     $display->content['new-04e25c5c-97dc-4c6d-bc1c-4f50428042ac'] = $pane;
     $display->panels['middle'][5] = 'new-04e25c5c-97dc-4c6d-bc1c-4f50428042ac';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $export['node_view__trt_school_readiness_view'] = $handler;
+
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'node_view__trt_state_readiness_view';
+  $handler->task = 'node_view';
+  $handler->subtask = '';
+  $handler->handler = 'panel_context';
+  $handler->weight = 3;
+  $handler->conf = array(
+    'title' => 'TRT State Readiness View',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => 'trt_state_readiness_view',
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'state' => 'state',
+            ),
+          ),
+          'context' => 'argument_entity_id:node_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '%node:title Readiness';
+  $display->uuid = '41927865-41af-4132-ad7c-66a71ae067f2';
+  $display->content = array();
+  $display->panels = array();
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

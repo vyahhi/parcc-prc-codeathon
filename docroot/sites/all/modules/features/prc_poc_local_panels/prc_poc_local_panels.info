@@ -14,6 +14,7 @@ features[page_manager_existing_pages][] = node_overview
 features[page_manager_handlers][] = node_edit__digital_library_content
 features[page_manager_handlers][] = node_view__digital_library_content
 features[page_manager_handlers][] = node_view__trt_district
+features[page_manager_handlers][] = node_view__trt_school_readiness_view
 features[page_manager_handlers][] = node_view__trt_state_readiness_view
 features[page_manager_handlers][] = node_view_panel_context
 features[page_manager_handlers][] = node_view_panel_context_2
