@@ -49,6 +49,7 @@ features[views_view][] = tracker
 features[views_view][] = transcript
 features[views_view][] = trt_district_schools
 features[views_view][] = trt_districts
+features[views_view][] = trt_states
 features[features_api][] = api:2
 features[ctools][] = 1
 features_exclude[dependencies][views] = views
