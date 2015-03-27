@@ -438,7 +438,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $handler->handler = 'panel_context';
   $handler->weight = 3;
   $handler->conf = array(
-    'title' => 'TRT State Readiness View',
+    'title' => 'TRT School Readiness View',
     'no_blocks' => 0,
     'pipeline' => 'standard',
     'body_classes_to_remove' => '',
