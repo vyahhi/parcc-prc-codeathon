@@ -47,7 +47,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       $argument = str_replace($whole_token, $uid, $argument);
     }
     if (strpos($argument, '@nid') !== FALSE) {
-      print $argument . PHP_EOL;
       $start = strpos($argument, '@nid');
       $bracket_open = strpos($argument, '[', $start);
       $bracket_close = strpos($argument, ']', $start);
