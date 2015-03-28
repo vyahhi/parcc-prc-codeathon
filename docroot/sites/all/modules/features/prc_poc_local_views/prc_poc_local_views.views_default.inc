@@ -4657,7 +4657,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['created']['label'] = 'Date & Time';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: prc_trt: Number of devices ready for assessment */
+  /* Field: prc_trt: Number of devices */
   $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
@@ -5702,12 +5702,46 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_number_of_students']['table'] = 'field_data_field_number_of_students';
   $handler->display->display_options['fields']['field_number_of_students']['field'] = 'field_number_of_students';
   $handler->display->display_options['fields']['field_number_of_students']['relationship'] = 'reverse_field_ref_school_prc_trt';
-  $handler->display->display_options['fields']['field_number_of_students']['label'] = 'No. of students';
+  $handler->display->display_options['fields']['field_number_of_students']['label'] = 'No. of Students';
   $handler->display->display_options['fields']['field_number_of_students']['empty'] = '—';
   $handler->display->display_options['fields']['field_number_of_students']['settings'] = array(
     'thousand_separator' => ' ',
     'prefix_suffix' => 1,
   );
+  /* Field: prc_trt: Devices Capacity */
+  $handler->display->display_options['fields']['field_devices_capacity']['id'] = 'field_devices_capacity';
+  $handler->display->display_options['fields']['field_devices_capacity']['table'] = 'field_data_field_devices_capacity';
+  $handler->display->display_options['fields']['field_devices_capacity']['field'] = 'field_devices_capacity';
+  $handler->display->display_options['fields']['field_devices_capacity']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['field_devices_capacity']['empty'] = '—';
+  $handler->display->display_options['fields']['field_devices_capacity']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Devices Capacity Results */
+  $handler->display->display_options['fields']['field_devices_capacity_results']['id'] = 'field_devices_capacity_results';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['table'] = 'field_data_field_devices_capacity_results';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['field'] = 'field_devices_capacity_results';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['empty'] = '—';
+  /* Field: prc_trt: Bandwidth Capacity */
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['id'] = 'field_bandwidth_capacity';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['table'] = 'field_data_field_bandwidth_capacity';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['field'] = 'field_bandwidth_capacity';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['empty'] = '—';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['settings'] = array(
+    'thousand_separator' => ' ',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Bandwidth Capacity Results */
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['id'] = 'field_bandwidth_capacity_results';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['table'] = 'field_data_field_bandwidth_capacity_results';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['field'] = 'field_bandwidth_capacity_results';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['empty'] = '—';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';

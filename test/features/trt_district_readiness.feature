@@ -1,4 +1,4 @@
-@api @district @admin
+@api @district @admin @trt
 Feature: PRC-706 District Readiness - District Admin View
   As a District Admin,
   I want to be able to see the results of the structured readiness checks run by schools in my district I
@@ -59,16 +59,22 @@ Feature: PRC-706 District Readiness - District Admin View
       | <user_name> | <user_name> | xyz123 | Joe              | Educator        | 1      | Educator, District Admin |
     And I am logged in as "<user_name>"
     And "District" nodes:
-      | title           | uid         | field_ref_trt_state  |
-      | <district_name> | @currentuid | @nid[<member_state>] |
+      | title           | uid         |
+      | <district_name> | @currentuid |
     And "School" nodes:
       | title         | field_ref_district          | field_contact_email            | uid         |
-      | <school_name> | @nid[PRC-944 S1 @timestamp] | example1@timestamp@example.com | @currentuid |
+      | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
     And the school "<school_name>" has run a system check
     And I click "Technology Readiness"
     And I click "<district_name>"
     Then I should see the heading "<district_name> Readiness"
     And I should see the text "<school_name>"
+    And I should see the text "No. of Students"
+    And I should see the text "Devices Capacity"
+    And I should see the text "Devices Capacity Results"
+    And I should see the text "Bandwidth Capacity"
+    And I should see the text "Bandwidth Capacity Results"
+    And I should see the text "—"
   Examples:
-    | member_state | user_name                          | district_name         | school_name              |
-    | Old York     | joe_prc_706a@timestamp@example.com | PRC-706 S1 @timestamp | School 706 S1 @timestamp |
+    | user_name                          | district_name         | school_name              |
+    | joe_prc_706a@timestamp@example.com | PRC-706 S1 @timestamp | School 706 S1 @timestamp |
