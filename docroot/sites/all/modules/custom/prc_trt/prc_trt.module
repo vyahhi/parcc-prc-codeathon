@@ -738,13 +738,13 @@ function prc_trt_form_school_node_form_validate(&$form, &$form_state) {
  */
 function _prc_trt_form_school_name_unique_validate(&$form_state) {
   $district_target_id = $form_state['values']['field_ref_district']['und'][0]['target_id'];
-  $title = $form_state['values']['title'];
+  $title = trim($form_state['values']['title']);
   $query = new EntityFieldQuery();
 
   $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'school')
     ->fieldCondition('field_ref_district', 'target_id', $district_target_id)
-    ->propertyCondition('title', $title);
+    ->propertyCondition('title', $title, 'CONTAINS');
   // Validate that school's name is unique in this district
   if (array_key_exists('nid', $form_state['node'])) {
     $nid = $form_state['node']->nid;
@@ -757,7 +757,14 @@ function _prc_trt_form_school_name_unique_validate(&$form_state) {
   if (isset($result['node'])) {
     $nids = array_keys($result['node']);
     if (count($nids)) {
-      $name_exists = TRUE;
+      $nodes = entity_load('node', $nids);
+      foreach ($nodes as $node) {
+        $raw_title = $node->title;
+        $trimmed = trim($raw_title);
+        if ($title == $trimmed) {
+          $name_exists = TRUE;
+        }
+      }
     }
   }
   if ($name_exists) {
