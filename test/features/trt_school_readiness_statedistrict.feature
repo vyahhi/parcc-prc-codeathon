@@ -15,10 +15,10 @@ Feature: PRC-814 School Readiness - District and State Admins View
 #  No link to run system check
 
   Scenario Outline: State or District Admin
-    Given I am logged in as a user with the "State Admin" role
-    And users:
+    Given users:
       | name        | mail        | pass   | field_first_name | field_last_name | status | roles                 |
       | <user_name> | <user_name> | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
+    And I am logged in as "<user_name>"
     And "User States" terms:
       | name         |
       | <user_state> |
@@ -34,10 +34,9 @@ Feature: PRC-814 School Readiness - District and State Admins View
       | <district_name> | @currentuid | @nid[<member_state>] |
       | Other           | @currentuid | @nid[Another State]  |
     And "School" nodes:
-      | title         | field_ref_district          | field_contact_email            | uid         |
-      | <school_name> | @nid[PRC-944 S1 @timestamp] | example1@timestamp@example.com | @currentuid |
-    And I am an anonymous user
-    And I am logged in as "<user_name>"
+      | title         | field_ref_district    | field_contact_email            | uid         |
+      | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
+    And the school "<school_name>" has run a system check
     And I click "Technology Readiness"
     Then I click "<member_state>"
     And I click "<district_name>"

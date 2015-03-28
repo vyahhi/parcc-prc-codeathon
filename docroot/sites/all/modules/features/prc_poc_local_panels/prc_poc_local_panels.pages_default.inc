@@ -580,7 +580,20 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->type = 'block';
     $pane->subtype = 'menu-menu-trt-school-readiness-capaci';
     $pane->shown = TRUE;
-    $pane->access = array();
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 9,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
     $pane->configuration = array(
       'override_title' => 1,
       'override_title_text' => '',
@@ -603,7 +616,20 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->type = 'block';
     $pane->subtype = 'menu-menu-trt-school-readiness-system';
     $pane->shown = TRUE;
-    $pane->access = array();
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 9,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
     $pane->configuration = array(
       'override_title' => 1,
       'override_title_text' => 'System checks',
