@@ -58,6 +58,12 @@
 @import "prc-variables";
 
 @media #{$screen} {
+  body {
+    background-color: $parcc-purple;
+  }
+  #page {
+    background-color: white;
+  }
   .uppercase {
     text-transform: uppercase;
   }
@@ -110,10 +116,11 @@
   }
   #main-wrapper {
     // Enable for grid alignment debugging
-    background-color: #EEEEEE;
+    // background-color: #EEEEEE;
   }
   footer {
-    background-color: $parcc-purple;
+    background: url('../images/footer-image.jpg') no-repeat center center;
+    background-size: cover;
     color: white;
     padding: 50px 0 30px;
     p {

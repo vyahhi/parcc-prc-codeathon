@@ -59,6 +59,5 @@ Feature: Footer Responsive Behavior (PRC-750)
     And "footer p a" should have a "font-family" css value of "'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif"
     And I hover over the element "#footer-copyright p a"
     And "#footer-copyright p a" should have a "color" css value of "rgb(255, 255, 255)"
-    And "#footer-contact span.uppercase" should have a "text-transform" css value of "uppercase"
     And "#footer-social a:first-child img" should have an "src" attribute value of "/sites/all/themes/prc_foundation/images/facebook-icon.png"
     And "#footer-social a:last-child img" should have an "src" attribute value of "/sites/all/themes/prc_foundation/images/twitter-icon.png"

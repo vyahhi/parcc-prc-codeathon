@@ -7,8 +7,7 @@
       </div>
     <?php endif; ?>
     <div id="footer-contact" class="medium-6 large-4 columns">
-      <p><span class="uppercase">Contact PARCC</span><br>
-        1747 Pennsylvania Avenue NW<br>
+      <p>1747 Pennsylvania Avenue NW<br>
         6th Floor<br>
         Washington, DC 20006<br>
         Phone: 202-748-8100<br>
