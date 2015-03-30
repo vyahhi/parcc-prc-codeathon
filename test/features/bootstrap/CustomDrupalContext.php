@@ -1536,4 +1536,21 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
     print $message . PHP_EOL;
   }
+
+  /**
+   * @Given /^"([^"]*)" should have an "([^"]*)" attribute value of "([^"]*)"$/
+   * @param $selector, $attribute, $value
+   * @throws Exception
+   */
+  public function shouldHaveAnAttributeValueOf($selector, $attribute, $value) {
+    $computed = $this->getSession()->evaluateScript("
+      return jQuery( '" . $selector . "' ).attr('" . $attribute . "');
+    ");
+    // Convert double quotes to single quotes for matching purposes.
+    $computed = str_replace('"',"'",$computed);
+    if ($value != $computed) {
+      throw new Exception("Element ({$selector}) does not have a ({$attribute}) value of ({$value}).  The actual value is ({$computed})");
+    }
+  }
+
 }
