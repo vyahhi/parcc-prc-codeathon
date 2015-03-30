@@ -86,21 +86,22 @@ class PrcTrtSystemCheck {
       $browser_pass = -1;
     }
     else {
-      $browser_pass = $this->browserOSCompatibilityCheck($browser, $version, $os);
+      $browser_pass = $this->browserOSCompatibilityCheck($browser, $version, $os) ? 1 : 0;
     }
     return $browser_pass;
   }
 
   public function browserResult() {
-    switch ($this->browserPass()) {
+    $pass_result = $this->browserPass();
+    switch ($pass_result) {
+      case 1;
+        $browser_result = t('Pass');
+        break;
       case -1:
         $browser_result = t('Upgrade recommended');
         break;
-      case 0;
+      default;
         $browser_result = t('Fail');
-        break;
-      case 1;
-        $browser_result = t('Pass');
         break;
     }
     return $browser_result;

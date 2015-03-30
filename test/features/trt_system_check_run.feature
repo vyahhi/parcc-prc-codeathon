@@ -272,9 +272,8 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should not see the text "Fail"
-    And I should see the text "Passed"
-    And I should not see the text "Failed"
+    And I should see the text "Less than 512 MB" in the "RAM" row
+    And I should see the text "N/A" in the "RAM" row
   Examples:
     | operating_system             |
     | Apple iOS 6, 7 or 8          |
@@ -299,10 +298,7 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should not see the text "Fail"
-    And I should see the text "Passed"
-    And I should see the text "Upgrade recommended"
-    And I should not see the text "Failed"
+    And I should see the text "Upgrade recommended" in the "Browser" row
   Examples:
     | operating_system | browser    |
     | Mac 10.6         | safari 5.1 |
@@ -328,9 +324,9 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should not see the text "Fail"
-    And I should see the text "Passed"
-    And I should not see the text "Failed"
+    And I should see the text "Pass" in the "Operating system" row
+    And I should see the text "Pass" in the "Browser" row
+    And I should not see the text "Upgrade recommended"
   Examples:
     | operating_system             |
     | Android Lollipop             |
@@ -368,9 +364,9 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should see the text "Fail"
-    And I should not see the text "Passed"
-    And I should see the text "Failed"
+    Then I should see the text "Fail" in the "Operating system" row
+    And I should see the text "Fail" in the "Browser" row
+    And I should not see the text "Upgrade recommended"
 
   Scenario: Run check headless - RAM Fail
     Given I am logged in as a user with the "Educator" role
@@ -391,9 +387,7 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should see the text "Fail"
-    And I should not see the text "Passed"
-    And I should see the text "Failed"
+    Then I should see the text "Fail" in the "RAM" row
 
   Scenario: Run check headless - RAM Minimum pass
     Given I am logged in as a user with the "Educator" role
@@ -414,13 +408,10 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should not see the text "Fail"
-    And I should see the text "Passed"
-    And I should see the text "Passed"
+    And I should see the text "Pass" in the "RAM" row
 
   Scenario: Run check headless - Monitor size Fail
     Given I am logged in as a user with the "Educator" role
-# TODO: Replace with actual TRT System Check form
     And I am on "admin/structure/entity-type/prc_trt/system_check/add"
     And I fill in "System check name" with "Check 2"
     And I fill in "Number of devices" with "23"
@@ -439,9 +430,7 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should see the text "Fail"
-    And I should not see the text "Passed"
-    And I should see the text "Failed"
+    And I should see the text "Fail" in the "Monitor" row
 
   Scenario Outline: OS/Browser results
     When I run a system check with the "<os>" operating system and the "<browser>" browser version "<version>"
@@ -958,7 +947,5 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should see the text "Fail"
-    And I should not see the text "Passed"
-    And I should see the text "Failed"
+    Then I should see the text "Fail" in the "Java" row
 
