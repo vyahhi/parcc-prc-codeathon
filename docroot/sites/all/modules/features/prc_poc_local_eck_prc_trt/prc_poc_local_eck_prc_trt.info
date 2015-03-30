@@ -33,6 +33,7 @@ features[field_instance][] = prc_trt-system_check-field_browser_images_enabled
 features[field_instance][] = prc_trt-system_check-field_browser_javascript_enabled
 features[field_instance][] = prc_trt-system_check-field_browser_version
 features[field_instance][] = prc_trt-system_check-field_device_type
+features[field_instance][] = prc_trt-system_check-field_jre_version
 features[field_instance][] = prc_trt-system_check-field_monitor_color_depth
 features[field_instance][] = prc_trt-system_check-field_monitor_size
 features[field_instance][] = prc_trt-system_check-field_name
