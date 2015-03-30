@@ -47,9 +47,14 @@ Feature: Footer Responsive Behavior (PRC-750)
     Given I am an anonymous user
     And I am on "assessments"
     When I am browsing using a "phone"
-    Then "footer" should have a "padding-top" css value of "50px"
+    Then "body" should have a "background-color" css value of "rgb(112, 84, 125)"
+    And "#page" should have a "background-color" css value of "rgb(255, 255, 255)"
+    And "footer" should have a "padding-top" css value of "50px"
     And "footer" should have a "padding-bottom" css value of "30px"
-    And "footer" should have a "background-color" css value of "rgb(112, 84, 125)"
+    # Todo - Once footer image is finalized, test for existance of background image
+    # Will require a new function that does a contains match on a URL so we can test for a path and ignore the host.  Will also have to check for different versions of the background image at different breakpoints.
+    And "footer" should have a "background-size" css value of "cover"
+    And "footer" should have a "background-position" css value of "50% 50%"
     And "footer p" should have a "color" css value of "rgb(255, 255, 255)"
     And "footer p" should have a "font-size" css value of "13px"
     And "footer p" should have a "font-family" css value of "'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif"
