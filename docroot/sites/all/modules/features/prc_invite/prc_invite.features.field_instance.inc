@@ -177,8 +177,9 @@ To become a member of [site:name], click the link below or paste it into the add
     ),
     'entity_type' => 'invite',
     'field_name' => 'field_user_state',
-    'label' => 'State where they teach',
-    'required' => 0,
+
+    'label' => 'State Where You Teach',
+    'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
       'user_register_form' => FALSE,
@@ -202,7 +203,7 @@ To become a member of [site:name], click the link below or paste it into the add
   t('Enter e-mail body.');
   t('Enter e-mail subject.');
   t('Role ID');
-  t('State where they teach');
+  t('State Where You Teach');
   t('Subject');
   t('Type e-mail address of person you wish invite.');
 

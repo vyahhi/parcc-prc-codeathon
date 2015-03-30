@@ -100,6 +100,53 @@ function prc_poc_local_fields_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_bandwidth_capacity'
+  $field_bases['field_bandwidth_capacity'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_bandwidth_capacity',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(
+      'decimal_separator' => '.',
+    ),
+    'translatable' => 0,
+    'type' => 'number_float',
+  );
+
+  // Exported field_base: 'field_bandwidth_capacity_results'
+  $field_bases['field_bandwidth_capacity_results'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_bandwidth_capacity_results',
+    'foreign keys' => array(
+      'format' => array(
+        'columns' => array(
+          'format' => 'format',
+        ),
+        'table' => 'filter_format',
+      ),
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_browser'
   $field_bases['field_browser'] = array(
     'active' => 1,
@@ -365,6 +412,51 @@ function prc_poc_local_fields_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_devices_capacity'
+  $field_bases['field_devices_capacity'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_devices_capacity',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
+  );
+
+  // Exported field_base: 'field_devices_capacity_results'
+  $field_bases['field_devices_capacity_results'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_devices_capacity_results',
+    'foreign keys' => array(
+      'format' => array(
+        'columns' => array(
+          'format' => 'format',
+        ),
+        'table' => 'filter_format',
+      ),
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_document'
@@ -1329,9 +1421,18 @@ function prc_poc_local_fields_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'ios' => 'Apple iOS 6, 7, or 8',
-        'chrome' => 'Chrome OS (Chromebook)',
-        'mac' => 'Mac 10.8, 10.9 or 10.10',
+        'android_lollipop' => 'Android Lollipop',
+        'ios6' => 'Apple iOS 6, 7 or 8',
+        'chrome35' => 'Chrome OS 35-39 (Chromebook)',
+        'fedora19' => 'Fedora 19 or 20',
+        'mac106' => 'Mac 10.6',
+        'mac107' => 'Mac 10.7',
+        'mac108' => 'Mac 10.8',
+        'mac109' => 'Mac 10.9',
+        'mac1010' => 'Mac 10.10',
+        'ubuntu12' => 'Ubuntu 12.04 or 14.04',
+        'winxpsp3' => 'Windows XP (SP 3)',
+        'winvista' => 'Windows Vista',
         'win7' => 'Windows 7',
         'win8' => 'Windows 8',
         'win81' => 'Windows 8.1',
@@ -1387,8 +1488,14 @@ function prc_poc_local_fields_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => 'under 1 Ghz',
-        1 => '1 Ghz or greater',
+        1 => 'Less than 500 Mhz',
+        500 => 'At least 500 Mhz and under 1 Ghz',
+        1000 => 'At least 1 Ghz and under 1.5 Ghz',
+        1500 => 'At least 1.5 Ghz and under 2 Ghz',
+        2000 => 'At least 2 Ghz and under 2.5 Ghz',
+        2500 => 'At least 2.5 Ghz and under 3.0 Ghz',
+        3000 => 'At least 3.0 Ghz and under 3.5 Ghz',
+        3500 => '3.5 Ghz or greater',
       ),
       'allowed_values_function' => '',
     ),
@@ -1477,8 +1584,13 @@ function prc_poc_local_fields_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => 'under 1 GB',
-        1 => '1 GB or greater',
+        '0.1' => 'Less than 512 MB',
+        '0.5' => 'At least 512 and under 1 GB',
+        1 => 'At least 1 GB and under 2 GB',
+        2 => 'At least 2 GB and under 4 GB',
+        4 => 'At least 4 GB and under 8 GB',
+        8 => 'At least 8 GB and under 16 GB',
+        16 => '16 GB or greater',
       ),
       'allowed_values_function' => '',
     ),
@@ -1564,6 +1676,49 @@ function prc_poc_local_fields_field_default_field_bases() {
         ),
         'target_bundles' => array(
           'school' => 'school',
+        ),
+      ),
+      'target_type' => 'node',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_ref_trt_state'
+  $field_bases['field_ref_trt_state'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ref_trt_state',
+    'foreign keys' => array(
+      'node' => array(
+        'columns' => array(
+          'target_id' => 'nid',
+        ),
+        'table' => 'node',
+      ),
+    ),
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'state' => 'state',
         ),
       ),
       'target_type' => 'node',

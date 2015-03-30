@@ -424,6 +424,29 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->uuid = '48e2fd47-665f-49f1-a263-b9fe56f1093c';
     $display->content['new-48e2fd47-665f-49f1-a263-b9fe56f1093c'] = $pane;
     $display->panels['middle'][3] = 'new-48e2fd47-665f-49f1-a263-b9fe56f1093c';
+    $pane = new stdClass();
+    $pane->pid = 'new-f101267e-aa69-4019-b48c-d011f1d51c9d';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'trt_district_readiness_schools-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_ref_district_target_id' => '%node:nid',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 4;
+    $pane->locks = array();
+    $pane->uuid = 'f101267e-aa69-4019-b48c-d011f1d51c9d';
+    $display->content['new-f101267e-aa69-4019-b48c-d011f1d51c9d'] = $pane;
+    $display->panels['middle'][4] = 'new-f101267e-aa69-4019-b48c-d011f1d51c9d';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -432,13 +455,13 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
-  $handler->name = 'node_view__trt_state_readiness_view';
+  $handler->name = 'node_view__trt_school_readiness_view';
   $handler->task = 'node_view';
   $handler->subtask = '';
   $handler->handler = 'panel_context';
-  $handler->weight = 3;
+  $handler->weight = 5;
   $handler->conf = array(
-    'title' => 'TRT State Readiness View',
+    'title' => 'TRT School Readiness View',
     'no_blocks' => 0,
     'pipeline' => 'standard',
     'body_classes_to_remove' => '',
@@ -447,7 +470,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     'css' => '',
     'contexts' => array(),
     'relationships' => array(),
-    'name' => 'trt_state_readiness_view',
+    'name' => 'trt_school_readiness_view',
     'access' => array(
       'plugins' => array(
         0 => array(
@@ -479,6 +502,82 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
+    $pane->pid = 'new-5ef92aa0-6938-4530-92ab-53ee6ed3c816';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 9,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => TRUE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'admin_title' => '',
+      'title' => '',
+      'body' => '<h3>School Contact</h3>',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '5ef92aa0-6938-4530-92ab-53ee6ed3c816';
+    $display->content['new-5ef92aa0-6938-4530-92ab-53ee6ed3c816'] = $pane;
+    $display->panels['middle'][0] = 'new-5ef92aa0-6938-4530-92ab-53ee6ed3c816';
+    $pane = new stdClass();
+    $pane->pid = 'new-d050f917-b9ec-4348-b672-965c8a5513fc';
+    $pane->panel = 'middle';
+    $pane->type = 'token';
+    $pane->subtype = 'node:field-contact-email';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 9,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => TRUE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'sanitize' => 1,
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 1,
+      'override_title_text' => 'School Contact:',
+      'override_title_heading' => 'div',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'd050f917-b9ec-4348-b672-965c8a5513fc';
+    $display->content['new-d050f917-b9ec-4348-b672-965c8a5513fc'] = $pane;
+    $display->panels['middle'][1] = 'new-d050f917-b9ec-4348-b672-965c8a5513fc';
+    $pane = new stdClass();
     $pane->pid = 'new-e09235d5-f9b8-47be-b599-5e5dd15cc764';
     $pane->panel = 'middle';
     $pane->type = 'views_panes';
@@ -496,11 +595,11 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 2;
     $pane->locks = array();
     $pane->uuid = 'e09235d5-f9b8-47be-b599-5e5dd15cc764';
     $display->content['new-e09235d5-f9b8-47be-b599-5e5dd15cc764'] = $pane;
-    $display->panels['middle'][0] = 'new-e09235d5-f9b8-47be-b599-5e5dd15cc764';
+    $display->panels['middle'][2] = 'new-e09235d5-f9b8-47be-b599-5e5dd15cc764';
     $pane = new stdClass();
     $pane->pid = 'new-347e0309-14bb-4070-89bd-843879688491';
     $pane->panel = 'middle';
@@ -523,11 +622,11 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 3;
     $pane->locks = array();
     $pane->uuid = '347e0309-14bb-4070-89bd-843879688491';
     $display->content['new-347e0309-14bb-4070-89bd-843879688491'] = $pane;
-    $display->panels['middle'][1] = 'new-347e0309-14bb-4070-89bd-843879688491';
+    $display->panels['middle'][3] = 'new-347e0309-14bb-4070-89bd-843879688491';
     $pane = new stdClass();
     $pane->pid = 'new-562620d6-c79a-4e2e-922e-515396305ea9';
     $pane->panel = 'middle';
@@ -546,18 +645,31 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 2;
+    $pane->position = 4;
     $pane->locks = array();
     $pane->uuid = '562620d6-c79a-4e2e-922e-515396305ea9';
     $display->content['new-562620d6-c79a-4e2e-922e-515396305ea9'] = $pane;
-    $display->panels['middle'][2] = 'new-562620d6-c79a-4e2e-922e-515396305ea9';
+    $display->panels['middle'][4] = 'new-562620d6-c79a-4e2e-922e-515396305ea9';
     $pane = new stdClass();
     $pane->pid = 'new-716b17e6-2505-403c-a307-1f0544ce8c2b';
     $pane->panel = 'middle';
     $pane->type = 'block';
     $pane->subtype = 'menu-menu-trt-school-readiness-capaci';
     $pane->shown = TRUE;
-    $pane->access = array();
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 9,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
     $pane->configuration = array(
       'override_title' => 1,
       'override_title_text' => '',
@@ -569,18 +681,31 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 3;
+    $pane->position = 5;
     $pane->locks = array();
     $pane->uuid = '716b17e6-2505-403c-a307-1f0544ce8c2b';
     $display->content['new-716b17e6-2505-403c-a307-1f0544ce8c2b'] = $pane;
-    $display->panels['middle'][3] = 'new-716b17e6-2505-403c-a307-1f0544ce8c2b';
+    $display->panels['middle'][5] = 'new-716b17e6-2505-403c-a307-1f0544ce8c2b';
     $pane = new stdClass();
     $pane->pid = 'new-c2068615-7c35-4855-8a58-df9ac5e9053d';
     $pane->panel = 'middle';
     $pane->type = 'block';
     $pane->subtype = 'menu-menu-trt-school-readiness-system';
     $pane->shown = TRUE;
-    $pane->access = array();
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 9,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
     $pane->configuration = array(
       'override_title' => 1,
       'override_title_text' => 'System checks',
@@ -592,11 +717,11 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 4;
+    $pane->position = 6;
     $pane->locks = array();
     $pane->uuid = 'c2068615-7c35-4855-8a58-df9ac5e9053d';
     $display->content['new-c2068615-7c35-4855-8a58-df9ac5e9053d'] = $pane;
-    $display->panels['middle'][4] = 'new-c2068615-7c35-4855-8a58-df9ac5e9053d';
+    $display->panels['middle'][6] = 'new-c2068615-7c35-4855-8a58-df9ac5e9053d';
     $pane = new stdClass();
     $pane->pid = 'new-04e25c5c-97dc-4c6d-bc1c-4f50428042ac';
     $pane->panel = 'middle';
@@ -615,11 +740,136 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 5;
+    $pane->position = 7;
     $pane->locks = array();
     $pane->uuid = '04e25c5c-97dc-4c6d-bc1c-4f50428042ac';
     $display->content['new-04e25c5c-97dc-4c6d-bc1c-4f50428042ac'] = $pane;
-    $display->panels['middle'][5] = 'new-04e25c5c-97dc-4c6d-bc1c-4f50428042ac';
+    $display->panels['middle'][7] = 'new-04e25c5c-97dc-4c6d-bc1c-4f50428042ac';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $export['node_view__trt_school_readiness_view'] = $handler;
+
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'node_view__trt_state_readiness_view';
+  $handler->task = 'node_view';
+  $handler->subtask = '';
+  $handler->handler = 'panel_context';
+  $handler->weight = 3;
+  $handler->conf = array(
+    'title' => 'TRT State Readiness View',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => 'trt_state_readiness_view',
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'state' => 'state',
+            ),
+          ),
+          'context' => 'argument_entity_id:node_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '%node:title Readiness';
+  $display->uuid = '41927865-41af-4132-ad7c-66a71ae067f2';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-6e5ea1dd-72ca-4647-a6b6-df46b52c297d';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'State Readiness Overview Copy',
+      'title' => '',
+      'body' => 'Overview / instructional copy goes here (admin can export all test results data for state to csv or click district name to view results of technology checks by school).',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '6e5ea1dd-72ca-4647-a6b6-df46b52c297d';
+    $display->content['new-6e5ea1dd-72ca-4647-a6b6-df46b52c297d'] = $pane;
+    $display->panels['middle'][0] = 'new-6e5ea1dd-72ca-4647-a6b6-df46b52c297d';
+    $pane = new stdClass();
+    $pane->pid = 'new-1991df92-3c85-441c-ba76-931b6f73ba4d';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'trt_districts-panel_pane_2';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_ref_trt_state_target_id' => '%node:nid',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '1991df92-3c85-441c-ba76-931b6f73ba4d';
+    $display->content['new-1991df92-3c85-441c-ba76-931b6f73ba4d'] = $pane;
+    $display->panels['middle'][1] = 'new-1991df92-3c85-441c-ba76-931b6f73ba4d';
+    $pane = new stdClass();
+    $pane->pid = 'new-357a0309-ed14-4166-9bb3-fdbee82bb75c';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-trt-state-check-export';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = '357a0309-ed14-4166-9bb3-fdbee82bb75c';
+    $display->content['new-357a0309-ed14-4166-9bb3-fdbee82bb75c'] = $pane;
+    $display->panels['middle'][2] = 'new-357a0309-ed14-4166-9bb3-fdbee82bb75c';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -3140,7 +3390,16 @@ function prc_poc_local_panels_default_page_manager_pages() {
     'body_classes_to_add' => '',
     'css_id' => '',
     'css' => '',
-    'contexts' => array(),
+    'contexts' => array(
+      0 => array(
+        'identifier' => 'User',
+        'keyword' => 'user',
+        'name' => 'user',
+        'type' => 'current',
+        'uid' => '',
+        'id' => 1,
+      ),
+    ),
     'relationships' => array(),
   );
   $display = new panels_display();
@@ -3189,7 +3448,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->subtype = 'schools-panel_pane_1';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_contact_email_value' => '%user:mail',
+      ),
+    );
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
@@ -3364,6 +3627,29 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->uuid = '2639295c-be52-4569-a027-c64a045a7a1e';
     $display->content['new-2639295c-be52-4569-a027-c64a045a7a1e'] = $pane;
     $display->panels['middle'][8] = 'new-2639295c-be52-4569-a027-c64a045a7a1e';
+    $pane = new stdClass();
+    $pane->pid = 'new-e9c22381-16b2-4fbc-91a5-2adcd2a58b2b';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'trt_states-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_contact_email_value' => '%user:mail',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 9;
+    $pane->locks = array();
+    $pane->uuid = 'e9c22381-16b2-4fbc-91a5-2adcd2a58b2b';
+    $display->content['new-e9c22381-16b2-4fbc-91a5-2adcd2a58b2b'] = $pane;
+    $display->panels['middle'][9] = 'new-e9c22381-16b2-4fbc-91a5-2adcd2a58b2b';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

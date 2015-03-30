@@ -48,3 +48,32 @@ Feature: PRC-838 District Name - Edit Form
     And I press "Submit"
     # PRC-841
     Then I should see the text "PRC-1034 @timestamp New Text Readiness"
+
+  Scenario Outline: PRC-995 - District name must be unique in state
+    Given users:
+      | name        | mail        | pass   | field_first_name | field_last_name | status | roles                    |
+      | <user_name> | <user_name> | xyz123 | Joe              | Educator        | 1      | Educator, District Admin |
+    And I am logged in as "<user_name>"
+    And "User States" terms:
+      | name         |
+      | <user_state> |
+    And "Member State" terms:
+      | name           | field_state_code |
+      | <member_state> | SOIL1            |
+    And "State" nodes:
+      | title            | field_user_state | field_member_state | uid |
+      | 1 <member_state> | <user_state>     | <member_state>     | 1   |
+      | 2 <member_state> | <user_state>     | <member_state>     | 1   |
+    And "District" nodes:
+      | title                 | uid         | field_ref_trt_state    |
+      | PRC-996 D1 @timestamp | @currentuid | @nid[1 <member_state>] |
+      | PRC-996 D2 @timestamp | @currentuid | @nid[2 <member_state>] |
+    And I click "Technology Readiness"
+    And I click "Add District"
+    And I fill in "District Name" with "PRC-996 D1 @timestamp"
+    And I select "1 <member_state>" from "State"
+    When I press "Submit"
+    Then I should see the error message containing "The district name is being used by another district in your state. Please enter a different district name."
+  Examples:
+    | user_state     | member_state   | user_name                          | second_user_name                      |
+    | North Virginia | Vermont Island | joe_prc_960a@timestamp@example.com | second_prc_960b@timestamp@example.com |

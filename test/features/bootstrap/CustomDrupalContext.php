@@ -16,6 +16,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
   protected $originalMailSystem;
   protected $customParameters;
+  protected $sysCheckResult;
+
   /**
    * Initializes context.
    *
@@ -55,7 +57,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
           break;
         }
       }
-      $whole_token = "@nid[$node_name]";
+      $whole_token = '@nid[' . $node_name . ']';
       $argument = str_replace($whole_token, $found_nid, $argument);
     }
     if (strpos($argument, '@currentuid') !== FALSE) {
@@ -322,6 +324,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function assertUserHasRole($username, $role) {
     $username = $this->fixStepArgument($username);
+    entity_get_controller('user')->resetCache();
     $account = user_load_by_mail($username);
     if (!$account) {
       throw new \Exception(sprintf("The user '%s' does not exist", $username));
@@ -917,6 +920,21 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @Then /^"([^"]*)" should not have an email$/
+   */
+  public function shouldNotHaveAnEmail($to) {
+    $mail_to = $this->fixStepArgument($to);
+
+    $variables = array_map('unserialize', db_query("SELECT name, value FROM {variable} WHERE name = 'drupal_test_email_collector'")->fetchAllKeyed());
+    $this->activeEmail = FALSE;
+    foreach ($variables['drupal_test_email_collector'] as $message) {
+      if ($message['to'] == $mail_to) {
+        throw new \Exception(sprintf('Found message to %s but did not expect to', $mail_to));
+      }
+    }
+  }
+
+  /**
    * @Then /^the email to "([^"]*)" should contain "([^"]*)"$/
    */
   public function theEmailToShouldContain($to, $contents) {
@@ -1265,19 +1283,6 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   public function recordFailedEvent($event) {
-    $fileName = $this->timestamp;
-    // TODO: Make this a setting in behat.yml?
-    $html_dump_path = 'failures';
-
-    $message = '';
-    $session = $this->getSession();
-    $page = $session->getPage();
-    $driver = $session->getDriver();
-    $date = date('Y-m-d H:i:s');
-    $url = $session->getCurrentUrl();
-    $html = $page->getContent();
-
-
     $event_class = get_class($event);
     if (strpos($event_class, 'OutlineExampleEvent') !== FALSE) {
       $scenario = $event->getOutline();
@@ -1289,34 +1294,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     } else {
       $feature_file_full = 'failure';
     }
-    $ff = explode('/', $feature_file_full);
-    $feature_file_name = array_pop($ff);
 
-    if (!file_exists($html_dump_path)) {
-      mkdir($html_dump_path);
-    }
-
-    $html = "<!-- HTML dump from behat  \nDate: $date  \nUrl:  $url  -->\n " . $html;
-
-    $htmlCapturePath = $html_dump_path . '/' . $fileName . '.' . $feature_file_name . '.html';
-    file_put_contents($htmlCapturePath, $html);
-
-    $message .= "\nHTML available at: " . $htmlCapturePath;
-
-
-    if ($driver instanceof \Behat\Mink\Driver\Selenium2Driver) {
-      if (!file_exists($html_dump_path)) {
-        mkdir($html_dump_path);
-      }
-
-      $screenshot = $driver->getScreenshot();
-      $screenshotFilePath = $html_dump_path . '/' . $fileName . '.png';
-      file_put_contents($screenshotFilePath, $screenshot);
-
-      $message .= "\nScreenshot available at: " . $screenshotFilePath;
-    }
-
-    print $message . PHP_EOL;
+    $this->iTakeAScreenshot($feature_file_full);
   }
 
   /**
@@ -1397,6 +1376,60 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   /**
    * @} End of defgroup "workflow steps"
    */
+
+
+  /**
+   * @defgroup "trt browser steps"
+   * @{
+   */
+
+  /**
+   * @When /^I run a system check with the "([^"]*)" operating system and the "([^"]*)" browser version "([^"]*)"$/
+   */
+  public function iRunASystemCheckWithTheOperatingSystemAndTheBrowserVersion($os, $browser, $version) {
+    $entity = NULL;
+    $sysCheck = new PrcTrtSystemCheck($entity);
+    $result = $sysCheck->browserOSCompatibilityCheck($browser, $version, $os);
+    $this->sysCheckResult = $result;
+  }
+
+  /**
+   * @Then /^I should get a "([^"]*)" result$/
+   */
+  public function iShouldGetAResult($result) {
+    $expected_result = $result === 'true';
+    if ($this->sysCheckResult !== $expected_result) {
+      throw new \Exception(sprintf('The result was not %s', $result));
+    }
+  }
+
+  /**
+   * @Given /^the school "([^"]*)" has run a system check$/
+   */
+  public function theSchoolHasRunASystemCheck($school_name) {
+    $school_name = $this->fixStepArgument($school_name);
+    foreach ($this->nodes as $node) {
+      if ($node->title == $school_name) {
+        $found_nid = $node->nid;
+        break;
+      }
+    }
+    if (!$found_nid) {
+      throw new \Exception(sprintf('The school %s was not found', $school_name));
+    }
+    $school_node = node_load($found_nid);
+    $entity_type = 'prc_trt';
+    $entity = entity_create($entity_type, array('type' => 'system_check'));
+    $wrapper = entity_metadata_wrapper($entity_type, $entity);
+    $wrapper->uid = $school_node->uid;
+    $wrapper->field_ref_school->set($school_node);
+    $wrapper->field_name = 'Fakey Check';
+    $wrapper->save();
+  }
+  /**
+   * @} End of defgroup "trt browser steps"
+   */
+
 
   /**
    * @When /^I am browsing using a "([^"]*)"$/
@@ -1498,6 +1531,53 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     if($found === FALSE){
       throw new \Exception(sprintf('There was no %s element found with the text %s', $element, $text));
     }
+  }
+
+  /**
+   * @Then /^I take a screenshot$/
+   */
+  public function iTakeAScreenshot($feature_file_full = 'shot') {
+    $fileName = time(); //$this->timestamp;
+    // TODO: Make this a setting in behat.yml?
+    $html_dump_path = 'failures';
+
+    $message = '';
+    $session = $this->getSession();
+    $page = $session->getPage();
+    $driver = $session->getDriver();
+    $date = date('Y-m-d H:i:s');
+    $url = $session->getCurrentUrl();
+    $html = $page->getContent();
+
+
+    $ff = explode('/', $feature_file_full);
+    $feature_file_name = array_pop($ff);
+
+    if (!file_exists($html_dump_path)) {
+      mkdir($html_dump_path);
+    }
+
+    $html = "<!-- HTML dump from behat  \nDate: $date  \nUrl:  $url  -->\n " . $html;
+
+    $htmlCapturePath = $html_dump_path . '/' . $fileName . '.' . $feature_file_name . '.html';
+    file_put_contents($htmlCapturePath, $html);
+
+    $message .= "\nHTML available at: " . $htmlCapturePath;
+
+
+    if ($driver instanceof \Behat\Mink\Driver\Selenium2Driver) {
+      if (!file_exists($html_dump_path)) {
+        mkdir($html_dump_path);
+      }
+
+      $screenshot = $driver->getScreenshot();
+      $screenshotFilePath = $html_dump_path . '/' . $fileName . '.png';
+      file_put_contents($screenshotFilePath, $screenshot);
+
+      $message .= "\nScreenshot available at: " . $screenshotFilePath;
+    }
+
+    print $message . PHP_EOL;
   }
 
 }

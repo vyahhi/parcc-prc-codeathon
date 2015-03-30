@@ -58,29 +58,19 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
       ),
     );
   }else{
-
-    $w = entity_metadata_wrapper('invite', $invite);
-    $user_state = $w->field_user_state->value();
-    if(!empty($user_state)){
-      //Set the user state field
-      $original_opts = array_flip($original_opts);
-      $form['field_user_state']['und']['#default_value'] = $original_opts[$user_state->name];
-      $form['field_user_state']['und']['#access'] = FALSE;
-
-      $form['display_state'] = array(
-        '#title' => t('State where you teach'),
-        '#type' => 'textfield',
-        '#default_value' => $user_state->name,
-        '#disabled' => TRUE,
-        '#weight' => $form['field_user_state']['#weight'],
+    $form['field_user_state']['#required'] = FALSE;
+    $form['field_user_state']['#access'] = FALSE;
+    $w_invite = entity_metadata_wrapper('invite', $invite);
+    $user_state = $w_invite->field_user_state->value();
+    if ($user_state) {
+      $form['text_user_state'] = array(
+        '#type' => 'item',
+        '#title' => t('State Where I Teach'),
+        '#markup' => $user_state->name,
       );
-      if(in_array($user_state->name, $p_states)){
-        // Set the member state
-        $member_opts = array_flip($form['field_member_state']['und']['#options']);
-        $form['field_member_state']['und']['#value'] = $member_opts[$user_state->name];
-      }
     }
   }
+  $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
 }
 
 /**
@@ -91,7 +81,22 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
  */
 function prc_registration_form_user_register_form_validate(&$form, &$form_state) {
 
-  if (!empty($form_state['values']['state_account_number'])) {
+  $invite = invite_load_from_session();
+  if ($invite) {
+    if (count($invite->field_member_state)) {
+      $tid = $invite->field_member_state[LANGUAGE_NONE][0]['tid'];
+      $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
+    }
+    if (count($invite->field_user_state)) {
+      $tid = $invite->field_user_state[LANGUAGE_NONE][0]['tid'];
+      $form_state['values']['field_user_state'][LANGUAGE_NONE][0]['tid'] = $tid;
+    }
+  }
+
+  if (
+    array_key_exists('has_member_state', $form_state['values']) && $form_state['values']['has_member_state']
+  ) {
+
     $account_number = $form_state['values']['state_account_number'];
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'taxonomy_term')

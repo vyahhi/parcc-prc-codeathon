@@ -4749,11 +4749,25 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Summary of what user can do here view readiness by school, run readiness checks, view readiness check results.';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: State contact&#039;s email address (field_contact_email) */
+  $handler->display->display_options['arguments']['field_contact_email_value']['id'] = 'field_contact_email_value';
+  $handler->display->display_options['arguments']['field_contact_email_value']['table'] = 'field_data_field_contact_email';
+  $handler->display->display_options['arguments']['field_contact_email_value']['field'] = 'field_contact_email_value';
+  $handler->display->display_options['arguments']['field_contact_email_value']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['field_contact_email_value']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_contact_email_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_contact_email_value']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_contact_email_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_contact_email_value']['limit'] = '0';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -4774,7 +4788,50 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['display_description'] = 'TRT School Readiness Links';
   $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
   $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_contact_email_value' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Content: School contact&#039;s email address (field_contact_email)',
+    ),
+  );
   $export['schools'] = $view;
+
+  $view = new view();
+  $view->name = 'system_check_export';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'eck_prc_trt';
+  $view->human_name = 'System Check Export';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Prc_trt: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  /* Filter criterion: Prc_trt: prc_trt type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'system_check' => 'system_check',
+  );
+  $export['system_check_export'] = $view;
 
   $view = new view();
   $view->name = 'taxonomy_term';
@@ -5597,6 +5654,140 @@ message explaining what the check does and the importance of running it.';
   $export['transcript'] = $view;
 
   $view = new view();
+  $view->name = 'trt_district_readiness_schools';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'TRT District Readiness Schools';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Relationship: Entity Reference: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['id'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['field'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['required'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Field: Number of students */
+  $handler->display->display_options['fields']['field_number_of_students']['id'] = 'field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['table'] = 'field_data_field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['field'] = 'field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['field_number_of_students']['label'] = 'No. of Students';
+  $handler->display->display_options['fields']['field_number_of_students']['empty'] = '—';
+  $handler->display->display_options['fields']['field_number_of_students']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Devices Capacity */
+  $handler->display->display_options['fields']['field_devices_capacity']['id'] = 'field_devices_capacity';
+  $handler->display->display_options['fields']['field_devices_capacity']['table'] = 'field_data_field_devices_capacity';
+  $handler->display->display_options['fields']['field_devices_capacity']['field'] = 'field_devices_capacity';
+  $handler->display->display_options['fields']['field_devices_capacity']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['field_devices_capacity']['empty'] = '—';
+  $handler->display->display_options['fields']['field_devices_capacity']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Devices Capacity Results */
+  $handler->display->display_options['fields']['field_devices_capacity_results']['id'] = 'field_devices_capacity_results';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['table'] = 'field_data_field_devices_capacity_results';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['field'] = 'field_devices_capacity_results';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['empty'] = '—';
+  /* Field: prc_trt: Bandwidth Capacity */
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['id'] = 'field_bandwidth_capacity';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['table'] = 'field_data_field_bandwidth_capacity';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['field'] = 'field_bandwidth_capacity';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['empty'] = '—';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['settings'] = array(
+    'thousand_separator' => ' ',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Bandwidth Capacity Results */
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['id'] = 'field_bandwidth_capacity_results';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['table'] = 'field_data_field_bandwidth_capacity_results';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['field'] = 'field_bandwidth_capacity_results';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['empty'] = '—';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: District (field_ref_district) */
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['id'] = 'field_ref_district_target_id';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['table'] = 'field_data_field_ref_district';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['field'] = 'field_ref_district_target_id';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_ref_district_target_id']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'school' => 'school',
+  );
+
+  /* Display: TRT District Readiness Schools */
+  $handler = $view->new_display('panel_pane', 'TRT District Readiness Schools', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'TRT District Readiness';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_ref_district_target_id' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Content: District (field_ref_district)',
+    ),
+  );
+  $export['trt_district_readiness_schools'] = $view;
+
+  $view = new view();
   $view->name = 'trt_district_schools';
   $view->description = '';
   $view->tag = 'default';
@@ -5804,7 +5995,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: School contact's email address */
+  /* Field: Content: State contact's email address */
   $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
@@ -5908,7 +6099,123 @@ message explaining what the check does and the importance of running it.';
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $handler->display->display_options['pane_category']['name'] = 'PRC TRT';
   $handler->display->display_options['pane_category']['weight'] = '0';
+
+  /* Display: State Readiness District List */
+  $handler = $view->new_display('panel_pane', 'State Readiness District List', 'panel_pane_2');
+  $handler->display->display_options['display_description'] = 'District List filtered by State';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No districts in your state have been created';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: State (field_ref_trt_state) */
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['id'] = 'field_ref_trt_state_target_id';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['table'] = 'field_data_field_ref_trt_state';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['field'] = 'field_ref_trt_state_target_id';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_ref_trt_state_target_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['pane_category']['name'] = 'TRT State Readiness';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_ref_trt_state_target_id' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Content: State (field_ref_trt_state)',
+    ),
+  );
   $export['trt_districts'] = $view;
+
+  $view = new view();
+  $view->name = 'trt_states';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'TRT States';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = '[title] Readiness';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Summary of what user can do here: export state readiness check data, view readiness by district, export district readiness checks data view school readiness data.';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  /* Contextual filter: Content: State contact&#039;s email address (field_contact_email) */
+  $handler->display->display_options['arguments']['field_contact_email_value']['id'] = 'field_contact_email_value';
+  $handler->display->display_options['arguments']['field_contact_email_value']['table'] = 'field_data_field_contact_email';
+  $handler->display->display_options['arguments']['field_contact_email_value']['field'] = 'field_contact_email_value';
+  $handler->display->display_options['arguments']['field_contact_email_value']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['field_contact_email_value']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_contact_email_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_contact_email_value']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_contact_email_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_contact_email_value']['limit'] = '0';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'state' => 'state',
+  );
+
+  /* Display: TRT Readiness Page State List */
+  $handler = $view->new_display('panel_pane', 'TRT Readiness Page State List', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'TRT Readiness';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['argument_input'] = array(
+    'field_contact_email_value' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Content: School contact&#039;s email address (field_contact_email)',
+    ),
+  );
+  $export['trt_states'] = $view;
 
   return $export;
 }

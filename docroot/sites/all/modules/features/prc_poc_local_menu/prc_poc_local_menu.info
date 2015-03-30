@@ -19,6 +19,7 @@ features[menu_custom][] = menu-trt-manage-schools
 features[menu_custom][] = menu-trt-manage-schools-add-form
 features[menu_custom][] = menu-trt-school-readiness-capaci
 features[menu_custom][] = menu-trt-school-readiness-system
+features[menu_custom][] = menu-trt-state-check-export
 features[menu_custom][] = menu-trt-system-check
 features[menu_custom][] = menu-trt-testing-capacity-check
 features[menu_custom][] = navigation

@@ -11,6 +11,7 @@ Feature: PRC-363 State Association to Invited Users
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"
     And I select "Illinois" from "State"
+    And I select "Wyoming" from "State Where You Teach"
     And I press "Send Invitation"
     Then the email to "example1@timestamp@example.com" should contain "has sent you an invite!"
     And the email should contain "has invited you to join Partnership Resource Center at"
@@ -31,7 +32,7 @@ Feature: PRC-363 State Association to Invited Users
     #  Creates a new account with the pre-defined role
     Then the user "example1@timestamp@example.com" should have a role of "Content Contributor"
     And the user "example1@timestamp@example.com" should not have a role of "Educator"
-    And I follow "My account"
+      And I follow "My account"
     Then I should see the text "Member State:"
     And I should see the link "Illinois"
     Then I delete the user with the email address "example1@timestamp@example.com"

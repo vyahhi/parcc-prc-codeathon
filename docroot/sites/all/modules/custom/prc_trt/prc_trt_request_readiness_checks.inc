@@ -16,7 +16,7 @@ function prc_trt_request_readiness_checks_form($settings) {
   $subject = $mt->message_text[LANGUAGE_NONE][0]['safe_value'];
   //TODO: Replace these with something more elegant
   $body = str_replace('[message:field-comment]', '', $mt->message_text[LANGUAGE_NONE][1]['safe_value']);
-  $body = str_replace('[site:url]/technology-readiness', '', $body);
+  $body = str_replace('[site:url]technology-readiness', '', $body);
 
   $to_schools = array();
   foreach ($settings['view']->result as $id => $result) {

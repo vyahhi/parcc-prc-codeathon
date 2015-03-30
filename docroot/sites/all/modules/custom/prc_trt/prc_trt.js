@@ -10,15 +10,11 @@
             // This will occasionally not return the right value on a first run but always seems to be correct on the second.
             imagesOn = (function () {
                 var i = new Image();
-                i.src = 'data:image/gif,GIF89a%01%00%01%00%80%00%00%00%00%00%FF%FF%FF!%F9%04%01%00%00%00%00%2C%00%00%00%00%01%00%01%00%00%02%01D%00%3B';
+                i.setAttribute('onload', "window.hasImages = true;window.setHasImageValue();");
+                i.setAttribute('onerror', "window.hasImages = false;window.setHasImageValue();");
+                i.src = '/sites/all/themes/prc_foundation/logo.png';
                 return !!i.width
             })();
-            imagesOn = (function () {
-                var i = new Image();
-                i.src = 'data:image/gif,GIF89a%01%00%01%00%80%00%00%00%00%00%FF%FF%FF!%F9%04%01%00%00%00%00%2C%00%00%00%00%01%00%01%00%00%02%01D%00%3B';
-                return !!i.width
-            })();
-            $('input[name="faux_images"]').val(imagesOn);
 
             $('input[name="faux_monitor_color_depth"]').val(screen.colorDepth);
             $('input[name="faux_screen_resolution_width"]').val(screen.width);
@@ -36,3 +32,7 @@
         }
     };
 })(jQuery);
+window.setHasImageValue = function() {
+    var setVal = !!window.hasImages;
+    (jQuery)('input[name="faux_images"]').val(setVal);
+}
