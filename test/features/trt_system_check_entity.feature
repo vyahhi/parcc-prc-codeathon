@@ -127,6 +127,7 @@ Feature: PRC-760 System Check - Unstructured - Form
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"

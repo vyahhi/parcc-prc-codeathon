@@ -58,7 +58,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
           break;
         }
       }
-      $whole_token = "@nid[$node_name]";
+      $whole_token = '@nid[' . $node_name . ']';
       $argument = str_replace($whole_token, $found_nid, $argument);
     }
     if (strpos($argument, '@currentuid') !== FALSE) {
@@ -1394,6 +1394,15 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $this->sysCheckResult = $result;
   }
 
+  /**
+   * @When /^I run a system check with the "([^"]*)" JRE version and the "([^"]*)" operating system and the "([^"]*)" browser version "([^"]*)"$/
+   */
+  public function iRunASystemCheckWithTheJREVersionAndTheBrowserVersion($jre, $os, $browser, $version) {
+    $entity = NULL;
+    $sysCheck = new PrcTrtSystemCheck($entity);
+    $result = $sysCheck->jreBrowserCheck($browser, $version, $os, $jre);
+    $this->sysCheckResult = $result;
+  }
 
   /**
    * @Then /^I should get a "([^"]*)" result$/
@@ -1403,10 +1412,33 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     if ($this->sysCheckResult !== $expected_result) {
       throw new \Exception(sprintf('The result was not %s', $result));
     }
+  }
 
+  /**
+   * @Given /^the school "([^"]*)" has run a system check$/
+   */
+  public function theSchoolHasRunASystemCheck($school_name) {
+    $school_name = $this->fixStepArgument($school_name);
+    foreach ($this->nodes as $node) {
+      if ($node->title == $school_name) {
+        $found_nid = $node->nid;
+        break;
+      }
+    }
+    if (!$found_nid) {
+      throw new \Exception(sprintf('The school %s was not found', $school_name));
+    }
+    $school_node = node_load($found_nid);
+    $entity_type = 'prc_trt';
+    $entity = entity_create($entity_type, array('type' => 'system_check'));
+    $wrapper = entity_metadata_wrapper($entity_type, $entity);
+    $wrapper->uid = $school_node->uid;
+    $wrapper->field_ref_school->set($school_node);
+    $wrapper->field_name = 'Fakey Check';
+    $wrapper->save();
   }
   /**
-   * @} End of defgroup "workflow steps"
+   * @} End of defgroup "trt browser steps"
    */
 
 
@@ -1514,4 +1546,21 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
     print $message . PHP_EOL;
   }
+
+  /**
+   * @Given /^"([^"]*)" should have an "([^"]*)" attribute value of "([^"]*)"$/
+   * @param $selector, $attribute, $value
+   * @throws Exception
+   */
+  public function shouldHaveAnAttributeValueOf($selector, $attribute, $value) {
+    $computed = $this->getSession()->evaluateScript("
+      return jQuery( '" . $selector . "' ).attr('" . $attribute . "');
+    ");
+    // Convert double quotes to single quotes for matching purposes.
+    $computed = str_replace('"',"'",$computed);
+    if ($value != $computed) {
+      throw new Exception("Element ({$selector}) does not have a ({$attribute}) value of ({$value}).  The actual value is ({$computed})");
+    }
+  }
+
 }

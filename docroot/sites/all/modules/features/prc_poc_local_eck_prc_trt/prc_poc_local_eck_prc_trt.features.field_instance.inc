@@ -10,6 +10,212 @@
 function prc_poc_local_eck_prc_trt_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'prc_trt-capacity_check-field_bandwidth_capacity'
+  $field_instances['prc_trt-capacity_check-field_bandwidth_capacity'] = array(
+    'bundle' => 'capacity_check',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 13,
+      ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_bandwidth_capacity',
+    'label' => 'Bandwidth Capacity',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(
+        'label_help_description' => '',
+      ),
+      'type' => 'number',
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance: 'prc_trt-capacity_check-field_bandwidth_capacity_results'
+  $field_instances['prc_trt-capacity_check-field_bandwidth_capacity_results'] = array(
+    'bundle' => 'capacity_check',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 14,
+      ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_bandwidth_capacity_results',
+    'label' => 'Bandwidth Capacity Results',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'label_help_description' => '',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 14,
+    ),
+  );
+
+  // Exported field_instance: 'prc_trt-capacity_check-field_devices_capacity'
+  $field_instances['prc_trt-capacity_check-field_devices_capacity'] = array(
+    'bundle' => 'capacity_check',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 11,
+      ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_devices_capacity',
+    'label' => 'Devices Capacity',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(
+        'label_help_description' => '',
+      ),
+      'type' => 'number',
+      'weight' => 11,
+    ),
+  );
+
+  // Exported field_instance: 'prc_trt-capacity_check-field_devices_capacity_results'
+  $field_instances['prc_trt-capacity_check-field_devices_capacity_results'] = array(
+    'bundle' => 'capacity_check',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 15,
+      ),
+      'school_readiness' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_devices_capacity_results',
+    'label' => 'Devices Capacity Results',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'label_help_description' => '',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 12,
+    ),
+  );
+
   // Exported field_instance: 'prc_trt-capacity_check-field_network_connection_type'
   $field_instances['prc_trt-capacity_check-field_network_connection_type'] = array(
     'bundle' => 'capacity_check',
@@ -391,7 +597,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_select',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -863,6 +1069,48 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
       ),
       'type' => 'options_select',
       'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'prc_trt-system_check-field_jre_version'
+  $field_instances['prc_trt-system_check-field_jre_version'] = array(
+    'bundle' => 'system_check',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 27,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_jre_version',
+    'label' => 'Browser: Java runtime plugin version',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'label_help_description' => '',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 17,
     ),
   );
 
@@ -1373,12 +1621,17 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Bandwidth Capacity');
+  t('Bandwidth Capacity Results');
   t('Browser');
   t('Browser Version');
   t('Browser: Cookies enabled');
   t('Browser: Images enabled');
+  t('Browser: Java runtime plugin version');
   t('Browser: JavaScript enabled');
   t('Device type');
+  t('Devices Capacity');
+  t('Devices Capacity Results');
   t('Enter a name to describe the lab or device(s) you are testing.');
   t('Enter the number of access points to the network.');
   t('Enter the number of days over which the assessment testing will take place.');

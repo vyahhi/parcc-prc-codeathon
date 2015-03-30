@@ -1,4 +1,4 @@
-@api @d7 @user @invite
+@api @d7 @user @invite @prc-834 @prc-1199
 Feature: PRC-834 Registration from Invite - Make State Required
   As a PRC Admin or District Admin I want to invite users to register for PRC website and provide their state, so the users are connected with their states.
   Acceptance Criteria
@@ -87,3 +87,11 @@ Feature: PRC-834 Registration from Invite - Make State Required
     And I should see the text "State Where I Teach:"
     And I should see the link "Wyoming"
     Then I delete the user with the email address "example1@timestamp@example.com"
+
+  Scenario: PRC-1199 Other option in dropdown
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    Then I check the box "Educator"
+    And I fill in "Message" with "4321MESSAGE1234"
+    And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"
+    And I select "Other" from "State Where You Teach"

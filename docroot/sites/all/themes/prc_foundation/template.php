@@ -212,6 +212,11 @@ function prc_foundation_preprocess_entity(&$variables) {
         $variables['content']['field_browser_images_enabled']['#items'][0]['value'] ? 'Yes' : 'No',
         $variables['content']['images_pass']['#markup'],
       );
+      $rows[] = array(
+        $variables['content']['field_jre_version']['#title'],
+        $variables['content']['field_jre_version']['#items'][0]['value'],
+        $variables['content']['jre_version_pass']['#markup'],
+      );
       $variables['table'] = theme('table', array(
         'header' => $headers,
         'rows' => $rows

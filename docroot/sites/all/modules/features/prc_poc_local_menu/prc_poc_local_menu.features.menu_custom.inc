@@ -106,6 +106,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'TRT School Readiness System Check',
     'description' => '',
   );
+  // Exported menu: menu-trt-state-check-export.
+  $menus['menu-trt-state-check-export'] = array(
+    'menu_name' => 'menu-trt-state-check-export',
+    'title' => 'TRT State Check Export',
+    'description' => '',
+  );
   // Exported menu: menu-trt-system-check.
   $menus['menu-trt-system-check'] = array(
     'menu_name' => 'menu-trt-system-check',
@@ -153,6 +159,7 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('TRT Manage Schools Add School Form');
   t('TRT School Readiness Capacity Check');
   t('TRT School Readiness System Check');
+  t('TRT State Check Export');
   t('TRT System Check');
   t('TRT Testing Capacity Check');
   t('The <em>Main</em> menu is used on many sites to show the major sections of the site, often in a top navigation bar.');

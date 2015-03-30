@@ -504,6 +504,46 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-trt-state-check-export_export-all-system-checks-data-to-csv:technology-readiness
+  $menu_links['menu-trt-state-check-export_export-all-system-checks-data-to-csv:technology-readiness'] = array(
+    'menu_name' => 'menu-trt-state-check-export',
+    'link_path' => 'technology-readiness',
+    'router_path' => 'technology-readiness',
+    'link_title' => 'Export all system checks data to .csv',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-trt-state-check-export_export-all-system-checks-data-to-csv:technology-readiness',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-trt-state-check-export_export-all-testing-capacity-checks-data-to-csv:technology-readiness
+  $menu_links['menu-trt-state-check-export_export-all-testing-capacity-checks-data-to-csv:technology-readiness'] = array(
+    'menu_name' => 'menu-trt-state-check-export',
+    'link_path' => 'technology-readiness',
+    'router_path' => 'technology-readiness',
+    'link_title' => 'Export all testing capacity checks data to .csv',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-trt-state-check-export_export-all-testing-capacity-checks-data-to-csv:technology-readiness',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-trt-system-check_system-check:admin/structure/entity-type/prc_trt/system_check/add
   $menu_links['menu-trt-system-check_system-check:admin/structure/entity-type/prc_trt/system_check/add'] = array(
     'menu_name' => 'menu-trt-system-check',
@@ -594,6 +634,8 @@ function prc_menu_links_menu_default_menu_links() {
   t('Course Management');
   t('Create New Quiz');
   t('Digital Library');
+  t('Export all system checks data to .csv');
+  t('Export all testing capacity checks data to .csv');
   t('Home');
   t('Invite New User');
   t('Log out');
