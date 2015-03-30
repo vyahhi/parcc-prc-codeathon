@@ -121,6 +121,15 @@ class PrcTrtSystemCheck {
     return $images_pass;
   }
 
+  public function jrePass() {
+    $browser = $this->wrapper->field_browser->value();
+    $version = $this->wrapper->field_browser_version->value();
+    $os = $this->wrapper->field_operating_system->value();
+    $jre = $this->wrapper->field_jre_version->value();
+    $browser_pass = $this->jreBrowserCheck($browser, $version, $os, $jre);
+    return $browser_pass;
+  }
+
   public function overallPass() {
     $os_pass = $this->operatingSystemPass();
     $size_pass = $this->monitorSizePass();
@@ -131,8 +140,9 @@ class PrcTrtSystemCheck {
     $cookies_pass = $this->cookiesPass();
     $js_pass = $this->jsPass();
     $images_pass = $this->imagesPass();
+    $jre_pass = $this->jrePass();
 
-    $all_pass = $os_pass && $size_pass && $depth_pass && $res_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
+    $all_pass = $os_pass && $size_pass && $depth_pass && $res_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass && $jre_pass;
     return $all_pass ? 1 : 0;
   }
 

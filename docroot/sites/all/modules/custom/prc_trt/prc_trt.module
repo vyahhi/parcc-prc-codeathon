@@ -194,6 +194,8 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form
   $res_h = $form_state['input']['faux_screen_resolution_height'];
   form_set_value($form['field_screen_resolution_height'], array(LANGUAGE_NONE => array(0 => array('value' => $res_h))), $form_state);
 
+  $jre_version = $form_state['input']['faux_jre_version'];
+  form_set_value($form['field_jre_version'], array(LANGUAGE_NONE => array(0 => array('value' => $jre_version))), $form_state);
 }
 
 /**
@@ -249,6 +251,11 @@ function prc_trt_field_extra_fields() {
     'images_pass' => array(
       'label' => t('Images: Results'),
       'description' => t('Did images pass?'),
+      'weight' => 21,
+    ),
+    'jre_version_pass' => array (
+      'label' => t('Java: Results'),
+      'description' => t('Did Java pass?'),
       'weight' => 21,
     ),
   );
@@ -407,6 +414,7 @@ function _prc_trt_view_entity_system_check($entity) {
   $cookies_pass = $systemChecker->cookiesPass();
   $js_pass = $systemChecker->jsPass();
   $images_pass = $systemChecker->imagesPass();
+  $jre_pass = $systemChecker->jrePass();
 
   $entity->content['operating_system_pass'] = array(
     '#type' => 'item',
@@ -457,6 +465,11 @@ function _prc_trt_view_entity_system_check($entity) {
     '#type' => 'item',
     '#title' => t('Images Results:'),
     '#markup' => $images_pass ? 'Pass' : 'Fail',
+  );
+  $entity->content['jre_version_pass'] = array(
+    '#type' => 'item',
+    '#title' => t('Java Results:'),
+    '#markup' => $jre_pass ? 'Pass' : 'Fail',
   );
 }
 
