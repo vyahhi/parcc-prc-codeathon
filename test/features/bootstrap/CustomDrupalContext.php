@@ -1481,4 +1481,23 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
     return;
   }
+
+  /**
+   * @Given /^at least one "([^"]*)" element should contain "([^"]*)"$/
+   */
+  public function atLeastOneElementShouldContain($element, $text) {
+    $page = $this->getSession()->getPage();
+    $elements = $page->findAll('css', $element);
+    $found = FALSE;
+    foreach($elements as $element){
+      if (strpos($element->getText(), $text) === FALSE) {
+        $found = TRUE;
+        exit;
+      }
+    }
+    if($found === FALSE){
+      throw new \Exception(sprintf('There was no %s element found with the text %s', $element, $text));
+    }
+  }
+
 }

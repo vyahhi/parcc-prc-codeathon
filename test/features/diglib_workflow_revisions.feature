@@ -185,5 +185,12 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     And I click "Revisions"
     Then I should see the text "Current Revision"
     And I should see the text "History"
+    # selected items to validate the diffs
+    And at least one "ins" element should contain "really"
+    And at least one "del" element should contain "swell?"
+    And at least one "ins" element should contain "Here"
+    And at least one "del" element should contain "have to say"
     And I click "Joe Curator"
     And I should not see "Access Denied"
+
+

@@ -304,6 +304,10 @@ function prc_workflow_state_flow_machine_type_alter(&$machine_type, $node) {
 function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$form_state) {
   $node = $form['#node'];
 
+  if(isset($node->vid)){
+    $node->from_vid = $node->vid;
+  }
+
   if (!empty($form_state['display_confirmation'])) {
     prc_workflow_draft_confirm_form($form, $form_state);
   }
@@ -409,78 +413,12 @@ function prc_workflow_draft_confirm_form(&$form, &$form_state) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter()
- * @param $form
- * @param $form_state
- */
-function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state) {
-  $form['#submit'][] = 'prc_workflow_events_submit';
-
-  if ($form['event']['#value'] == 'denied') {
-    // Changes before Approval for PRC-592 @timestamp (revision #)
-    $title = $form_state['build_info']['args'][0]->title;
-    $vid = $form_state['build_info']['args'][0]->vid;
-    $new_title = t('Changes before Approval for @title (revision @vid)', array(
-      '@title' => $title,
-      '@vid' => $vid
-    ));
-    drupal_set_title($new_title);
-
-    $form['event_comment']['#title'] = t('Message');
-
-    $form['submit']['#value'] = t('Send Request');
-
-    $form['instructions'] = array(
-      '#markup' => t('Instructions: (to be added)'),
-      '#prefix' => '<div class="instructions">',
-      '#suffix' => '</div>',
-      '#weight' => -1,
-    );
-
-  }
-  else {
-    $node = $form['node_revision']['#value'];
-    $state_flow = $form['state_flow']['#value'];
-
-    $vid = $node->vid;
-    $node_title = $node->title;
-
-    $event = $state_flow->get_event($form['event']['#value']);
-
-    $state_key = $event->get_option('target');
-
-    $options = $state_flow->get_states_options();
-    $new_state = $options[$state_key]['label'];
-    $new_title = "Transition $node_title (revision $vid) to \"$new_state\"";
-
-    drupal_set_title($new_title);
-
-    //Don't show the text area for other state changes (prc-873)
-    $form['event_comment']['#type'] = 'hidden';
-    $form['event_comment']['#required'] = FALSE;
-    $event = $form['event']['#value'];
-    $form['event_comment']['#value'] = '[empty]';//State flow requires this to be more than an empty string
-  }
-}
-
-/**
- * Additional submit handler for revisions.
- *
- * @param $form
- * @param $form_state
- */
-function prc_workflow_events_submit(&$form, &$form_state) {
-  //Redirect to our content tab instead of the workflow pages
-  $form_state['redirect'] = 'admin-content';
-}
-
-/**
  *
  */
 function prc_workflow_pre_submit_handler($form, &$form_state) {
-
+  $node = $form['#node'];
   //Check if the button pressed is save draft
-  $state_flow = state_flow_load_state_machine($form['#node']);
+  $state_flow = state_flow_load_state_machine($node);
   //Only require confirmation when published
   if($state_flow->get_current_state() === 'published') {
     if ($form_state['triggering_element']['#value'] == 'Save New Draft') {
@@ -493,7 +431,6 @@ function prc_workflow_pre_submit_handler($form, &$form_state) {
     }
   }
 }
-
 
 /**
  * Handles submission of the form by workflow actions
@@ -535,6 +472,71 @@ function prc_workflow_submit_handler($form, &$form_state) {
       }
     }
   }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ * @param $form
+ * @param $form_state
+ */
+function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state) {
+  $form['#submit'][] = 'prc_workflow_events_submit';
+
+  if ($form['event']['#value'] == 'denied') {
+    // Changes before Approval for PRC-592 @timestamp (revision #)
+    $title = $form_state['build_info']['args'][0]->title;
+    $vid = $form_state['build_info']['args'][0]->vid;
+    $new_title = t('Changes before Approval for @title (revision @vid)', array(
+      '@title' => $title,
+      '@vid' => $vid
+    ));
+    drupal_set_title($new_title);
+
+    $form['event_comment']['#title'] = t('Message');
+
+    $form['submit']['#value'] = t('Send Request');
+
+    $form['instructions'] = array(
+      '#markup' => t('Instructions: (to be added)'),
+      '#prefix' => '<div class="instructions">',
+      '#suffix' => '</div>',
+      '#weight' => -1,
+    );
+
+  } else {
+    $node = $form['node_revision']['#value'];
+    $state_flow = $form['state_flow']['#value'];
+
+    $vid = $node->vid;
+    $node_title = $node->title;
+
+    $event = $state_flow->get_event($form['event']['#value']);
+
+    $state_key = $event->get_option('target');
+
+    $options = $state_flow->get_states_options();
+    $new_state = $options[$state_key]['label'];
+    $new_title = "Transition $node_title (revision $vid) to \"$new_state\"";
+
+    drupal_set_title($new_title);
+
+    //Don't show the text area for other state changes (prc-873)
+    $form['event_comment']['#type'] = 'hidden';
+    $form['event_comment']['#required'] = FALSE;
+    $event = $form['event']['#value'];
+    $form['event_comment']['#value'] = '[empty]';//State flow requires this to be more than an empty string
+  }
+}
+
+/**
+ * Additional submit handler for revisions.
+ *
+ * @param $form
+ * @param $form_state
+ */
+function prc_workflow_events_submit(&$form, &$form_state) {
+  //Redirect to our content tab instead of the workflow pages
+  $form_state['redirect'] = 'admin-content';
 }
 
 /**
@@ -702,9 +704,18 @@ function prc_workflow_reported_state($nid) {
  * @param $node
  */
 function prc_workflow_node_presave($node){
-  if(isset($node->vid)){
+  /*
+  $published_revision = state_flow_live_revision($node->nid);
+
+  // If we are saving a new draft then from_vid equals the node vid
+  // If we are publishing then the from_vid should not change
+  if (isset($node->vid) && !empty($published_revision[0]->vid) && $published_revision[0]->vid != $node->vid) {
+    //@todo: do nothing?
+  }elseif(isset($node->vid) && !empty($published_revision[0]->vid) && $published_revision[0]->vid === $node->vid){
+    //@todo: do nothing?
+  }elseif(isset($node->vid)){
     $node->from_vid = $node->vid;
-  }
+  }*/
 }
 
 /**
@@ -930,16 +941,19 @@ function prc_workflow_fields_diff($previous_version, $node_version){
 }
 
 /**
- * Implements hook_state_flow_change_vid()
+ * Implements hook_node_revision_delete
  *
- * Fix the from_vid so that diffs won't break
+ * Point deleted revisions to the published version to avoid breaking the revision chain.
+ *
+ * @param $node
  */
-function prc_workflow_state_flow_change_vid($current_vid, $new_rev){
-  //Get the revision that needs to be updated
-  $num = db_update('node_revision',
-    array( 'vid' => $new_rev->vid))
-    ->fields(array('from_vid' => $new_rev->vid))
-    ->condition('from_vid', $current_vid)
-    ->execute();
+function prc_workflow_node_revision_delete($node){
+  //this will work when revisions are deleted by state flow, but not if a user deletes a revision.
+  //@todo: if users are allowed to delete revisions we may need to revisit this.
+  $published_revision = state_flow_live_revision($node->nid);
 
+  $num = db_update('node_revision')
+    ->fields(array('from_vid' => $published_revision[0]->vid))
+    ->condition('from_vid', $node->vid)
+    ->execute();
 }
