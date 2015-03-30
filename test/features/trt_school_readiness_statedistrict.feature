@@ -45,7 +45,6 @@ Feature: PRC-814 School Readiness - District and State Admins View
     But I should not see the link "run testing capacity check"
     And I should not see the link "run system check"
     And I should see the text "School Contact: example1@timestamp@example.com"
-
   Examples:
     | user_state     | member_state | user_name                          | district_name         | school_name              |
     | South Virginia | Old York     | joe_prc_814a@timestamp@example.com | PRC-814 S1 @timestamp | School 814 S1 @timestamp |
