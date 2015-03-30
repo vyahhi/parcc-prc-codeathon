@@ -1395,6 +1395,16 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @When /^I run a system check with the "([^"]*)" JRE version and the "([^"]*)" operating system and the "([^"]*)" browser version "([^"]*)"$/
+   */
+  public function iRunASystemCheckWithTheJREVersionAndTheBrowserVersion($jre, $os, $browser, $version) {
+    $entity = NULL;
+    $sysCheck = new PrcTrtSystemCheck($entity);
+    $result = $sysCheck->jreBrowserCheck($browser, $version, $os, $jre);
+    $this->sysCheckResult = $result;
+  }
+
+  /**
    * @Then /^I should get a "([^"]*)" result$/
    */
   public function iShouldGetAResult($result) {

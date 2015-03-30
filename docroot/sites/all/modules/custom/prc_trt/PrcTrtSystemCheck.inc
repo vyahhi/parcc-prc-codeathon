@@ -136,6 +136,67 @@ class PrcTrtSystemCheck {
     return $all_pass ? 1 : 0;
   }
 
+  public function jreBrowserCheck($browser, $browser_version, $os, $jre) {
+    $result = FALSE;
+    if ($jre) {
+      $jre_pieces = explode('_', $jre);
+      $jre_little_version = intval($jre_pieces[1]);
+      $jre_big_version = floatval($jre_pieces[0]);
+
+      if (strpos($os, 'win') !== FALSE) {
+        switch ($browser) {
+          case 'ie':
+            switch ($browser_version) {
+              case 9:
+                $result = $jre_big_version >= 1.5;
+                break;
+              case 10:
+                $result = $jre_big_version >= 1.6;
+                break;
+              case 11:
+                $result = $jre_big_version >= 1.7;
+                break;
+            }
+            break;
+          case 'chrome':
+            if ($browser_version > 34 && $browser_version < 40) {
+              $result = $jre_big_version >= 1.6;
+            }
+            break;
+          case 'ff':
+            if ($browser_version > 27 && $browser_version < 36) {
+              $result = $jre_big_version >= 1.6 && $jre_little_version >= 30;
+            }
+            break;
+        }
+      }
+      elseif (strpos($os, 'mac') !== FALSE) {
+        switch ($browser) {
+          case 'safari':
+            switch ($browser_version) {
+              case 5:
+                $result = $jre_big_version >= 1.6 && $jre_little_version >= 65;
+                break;
+              default:
+                $result = $jre_big_version >= 1.6;
+                break;
+            }
+          case 'ff':
+            if ($browser_version > 27 && $browser_version < 36) {
+              $result = $jre_big_version >= 1.6 && $jre_little_version >= 30;
+            }
+            break;
+        }
+      }
+      elseif (strpos($os, 'fedora') !== FALSE || strpos($os, 'ubuntu') !== FALSE) {
+        if ($browser == 'ff' && $browser_version > 27 && $browser_version < 36) {
+          $result = $jre_big_version >= 1.7;
+        }
+      }
+    }
+    return $result;
+  }
+
   public function browserOSCompatibilityCheck($browser, $browser_version, $os) {
     $result = FALSE;
 

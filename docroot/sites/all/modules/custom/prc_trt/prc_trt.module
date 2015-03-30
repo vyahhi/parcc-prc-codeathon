@@ -83,6 +83,10 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
  * @return mixed
  */
 function _prc_trt_alter_system_check_form(&$form, &$form_state) {
+
+  // This is how we can determine what version of Java the user has.
+  drupal_add_js('http://java.com/js/deployJava.js', 'external');
+
   $form['actions']['submit']['#value'] = t('Submit');
 
   if (array_key_exists('entityreference_prepopulate', $form_state)) {
@@ -113,6 +117,7 @@ function _prc_trt_alter_system_check_form(&$form, &$form_state) {
     'field_browser_images_enabled',
     'field_result',
     'field_ref_school',
+    'field_jre_version',
   );
 
   foreach ($hide_fields as $hide_field) {
@@ -138,6 +143,9 @@ function _prc_trt_alter_system_check_form(&$form, &$form_state) {
     '#type' => 'hidden',
   );
   $form['faux_screen_resolution_height'] = array(
+    '#type' => 'hidden',
+  );
+  $form['faux_jre_version'] = array(
     '#type' => 'hidden',
   );
 

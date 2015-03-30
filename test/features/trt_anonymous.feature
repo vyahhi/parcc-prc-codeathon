@@ -83,6 +83,7 @@ Feature: PRC-954 Anonymous users cannot see System Check or Testing Capacity lin
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     When I press "Submit"
     Then I should see the heading "System Check"
     Then I should see the text "System check name:"

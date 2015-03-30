@@ -20,6 +20,11 @@
             $('input[name="faux_screen_resolution_width"]').val(screen.width);
             $('input[name="faux_screen_resolution_height"]').val(screen.height);
 
+            var jres = deployJava.getJREs();
+            if (jres.length) {
+                $('input[name="faux_jre_version"]').val(jres[0]);
+            }
+
             function are_cookies_enabled() {
                 var cookieEnabled = (navigator.cookieEnabled) ? true : false;
 
