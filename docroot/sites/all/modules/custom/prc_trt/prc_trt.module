@@ -371,16 +371,16 @@ function _prc_trt_view_entity_capacity_check($entity) {
   $cap_good = floatval(variable_get('prc_trt_capacity_minimum_good', .1));
   $cap_ok = floatval(variable_get('prc_trt_capacity_minimum_ok', .05));
   if ($bandwidth_capacity >= $cap_good) {
-    $bandwidth_result = t('Good');
+    $bandwidth_result = t('Exceeds Requirements');
     $bandwidth_extra_text = '';
   }
   elseif ($bandwidth_capacity >= $cap_ok) {
-    $bandwidth_result = t('OK');
-    $bandwidth_extra_text = t('Provide explanation of what OK means and any next steps.');
+    $bandwidth_result = t('Meets Minimum Requirements (for no Caching)');
+    $bandwidth_extra_text = t('Provide explanation of what Meets Minimum Requirements (for no Caching) means and any next steps.');
   }
   else {
-    $bandwidth_result = t('Poor');
-    $bandwidth_extra_text = t('Provide explanation of what poor means (will not be able to run successful assessment) and any next steps.');
+    $bandwidth_result = t('Requires Test Caching');
+    $bandwidth_extra_text = t('Provide explanation of what Requires Test Caching means (will not be able to run successful assessment) and any next steps.');
   }
 
   $entity->content['bandwidth_capacity_results']["bandwidth_status"] = array(
