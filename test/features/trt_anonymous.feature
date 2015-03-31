@@ -1,4 +1,4 @@
-@api @trt @structured @school @capacity_check @prc-954 @prc-1051
+@api @trt @structured @school @capacity_check @prc-954 @prc-1051 @prc-1058
 Feature: PRC-954 Anonymous users cannot see System Check or Testing Capacity links
 
   Scenario: Anon
@@ -8,7 +8,7 @@ Feature: PRC-954 Anonymous users cannot see System Check or Testing Capacity lin
     And I should see the text "Overview / instructional copy goes here. Consider explaining importance of testing prior to assessment to increase chances of successful assessment."
     And I should see the text "Important: If you are a school administrator, please run these checks from your school readiness page. Contact your District Administrator to have the link to that page emailed to you."
     And I should see the link "System Check"
-    And I should see the text "Description of test and importance of running it: The system check assesses whether a device or similar configuration of devices meets the PARCC minimum requirements."
+    And I should see the text "Description of test and importance of running it: The system check assesses whether a device or similar configuration of devices meets the PARCC minimum technology requirements."
     And I should see the link "Testing Capacity Check"
     And I should see the text "Description of test and importance of running it: The testing capacity check assesses whether your school has sufficient bandwidth and a sufficient number of devices that meet PARCC minimum requirement in order to run a successful assessment."
 
