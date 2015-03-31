@@ -1,4 +1,4 @@
-@api @trt @structured @district
+@api @trt @structured @district @prc-838 @prc-995 @prc-940
 Feature: PRC-838 District Name - Edit Form
   As a District Admin, I want to be able to edit my district name so I can make any corrections to my district name.
 
@@ -51,9 +51,10 @@ Feature: PRC-838 District Name - Edit Form
 
   Scenario Outline: PRC-995 - District name must be unique in state
     Given users:
-      | name        | mail        | pass   | field_first_name | field_last_name | status | roles                    |
-      | <user_name> | <user_name> | xyz123 | Joe              | Educator        | 1      | Educator, District Admin |
-    And I am logged in as "<user_name>"
+      | name        | mail                         | pass   | field_first_name | field_last_name | status | roles                    |
+      | <user_name> | <user_name>                  | xyz123 | Joe              | Educator        | 1      | Educator, District Admin |
+      | second@timestamp@example.com | second@timestamp@example.com | xyz123 | Joey             | Admin           | 1      | Educator, District Admin |
+    And I am logged in as "second@timestamp@example.com"
     And "User States" terms:
       | name         |
       | <user_state> |
@@ -68,6 +69,8 @@ Feature: PRC-838 District Name - Edit Form
       | title                 | uid         | field_ref_trt_state    |
       | PRC-996 D1 @timestamp | @currentuid | @nid[1 <member_state>] |
       | PRC-996 D2 @timestamp | @currentuid | @nid[2 <member_state>] |
+    # PRC-940 changed District Admins. Now only allowed to have one district, so this link is hidden for the user who owns those other districts.
+    And I am logged in as "<user_name>"
     And I click "Technology Readiness"
     And I click "Add District"
     And I fill in "District Name" with "PRC-996 D1 @timestamp"
