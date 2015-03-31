@@ -849,3 +849,26 @@ function prc_trt_action_info() {
     ),
   );
 }
+
+/**
+ * Implements hook_node_access().
+ */
+function prc_trt_node_access($node, $op, $account) {
+  if ($op == 'create' && $node == 'district') {
+    $allowed = user_access('create district content', $account);
+    if ($allowed) {
+      $uid = $account->uid;
+      $query = new EntityFieldQuery();
+
+      $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'district')
+        ->propertyCondition('uid', $uid);
+      $result = $query->execute();
+
+      if (isset($result['node'])) {
+        return NODE_ACCESS_DENY;
+      }
+    }
+    return NODE_ACCESS_IGNORE;
+  }
+}
