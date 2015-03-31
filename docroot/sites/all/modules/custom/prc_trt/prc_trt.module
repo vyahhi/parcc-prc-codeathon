@@ -251,7 +251,7 @@ function prc_trt_field_extra_fields() {
       'description' => t('Did images pass?'),
       'weight' => 21,
     ),
-    'jre_version_pass' => array (
+    'jre_version_pass' => array(
       'label' => t('Java: Results'),
       'description' => t('Did Java pass?'),
       'weight' => 21,
@@ -872,3 +872,154 @@ function prc_trt_node_access($node, $op, $account) {
     return NODE_ACCESS_IGNORE;
   }
 }
+
+/**
+ * Implements hook_preprocess_breadcrumb().
+ */
+function prc_trt_preprocess_breadcrumb(&$variables) {
+  global $user;
+  $full_admin = array_search('administrator', $user->roles);
+  $state_admin = array_search('State Admin', $user->roles);
+  $district_admin = array_search('District Admin', $user->roles);
+  $school_admin = array_search('School Admin', $user->roles);
+
+  $item = menu_get_item();
+
+  switch ($item['path']) {
+    case 'node/%':
+      $node = $item['page_arguments'][0];
+      switch ($node->type) {
+        case 'school':
+          if ($full_admin || $district_admin || $state_admin) {
+            $breadcrumbs = array();
+            $w_school = entity_metadata_wrapper('node', $node);
+            $district = $w_school->field_ref_district->value();
+            $breadcrumb = _prc_trt_breadcrumb_readiness_page($district);
+            $breadcrumbs[] = $breadcrumb;
+            if ($full_admin || $state_admin) {
+              $w_district = entity_metadata_wrapper('node', $district);
+              $state = $w_district->field_ref_trt_state->value();
+              if ($state) {
+                array_unshift($breadcrumbs, _prc_trt_breadcrumb_readiness_page($state));
+              }
+            }
+          }
+          $variables['breadcrumb'] = $breadcrumbs;
+          break;
+
+        case 'district':
+          if ($full_admin || $state_admin) {
+            $breadcrumbs = array();
+            $w_district = entity_metadata_wrapper('node', $node);
+            $state = $w_district->field_ref_trt_state->value();
+            if ($state) {
+              $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($state);
+              $variables['breadcrumb'] = $breadcrumbs;
+            }
+          }
+          break;
+        case 'state':
+          break;
+      }
+      break;
+    case 'node/%/edit':
+      $node = $item['page_arguments'][0];
+      switch ($node->type) {
+        case 'district':
+          $breadcrumbs = array();
+          $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($node);
+          $variables['breadcrumb'] = $breadcrumbs;
+          break;
+      }
+      break;
+    case 'node/%/manage-schools':
+      $node = $item['page_arguments'][1]->data;
+      switch ($node->type) {
+        case 'district':
+          $breadcrumbs = array();
+          $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($node);
+          $variables['breadcrumb'] = $breadcrumbs;
+          if (array_key_exists('op', $_POST) && $_POST['op'] == 'Request Readiness Checks') {
+            $nid = $node->nid;
+            $breadcrumbs[] = l(t('Manage Schools'), "node/$nid/manage-schools");
+          }
+          $variables['breadcrumb'] = $breadcrumbs;
+          break;
+      }
+      break;
+    case 'district/%/upload-schools':
+      $node = $item['page_arguments'][0];
+      $nid = $node->nid;
+      $breadcrumbs = array();
+      $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($node);
+      $breadcrumbs[] = l(t('Manage Schools'), "node/$nid/manage-schools");
+      $variables['breadcrumb'] = $breadcrumbs;
+      break;
+    case 'node/add/school':
+      if (array_key_exists('field_ref_district', $_GET)) {
+        $district_nid = $_GET['field_ref_district'];
+        $district = node_load($district_nid);
+        $breadcrumbs = array();
+        $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($district);
+        if ($full_admin || $district_admin) {
+          $breadcrumbs[] = l(t('Manage Schools'), "node/$district_nid/manage-schools");
+        }
+        $variables['breadcrumb'] = $breadcrumbs;
+      }
+      break;
+    case 'prc_trt/system_check/%':
+    case 'prc_trt/capacity_check/%':
+      $syscheck = $item['page_arguments'][2];
+      $w_syscheck = entity_metadata_wrapper('prc_trt', $syscheck);
+      $node = $w_syscheck->field_ref_school->value();
+      if ($node) {
+        if ($full_admin || $school_admin || $district_admin || $state_admin) {
+          $breadcrumbs = array();
+          $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($node);
+          if ($full_admin || $district_admin || $state_admin) {
+            $w_school = entity_metadata_wrapper('node', $node);
+            $district = $w_school->field_ref_district->value();
+            if ($district) {
+              array_unshift($breadcrumbs, _prc_trt_breadcrumb_readiness_page($district));
+              if ($full_admin || $state_admin) {
+                $w_district = entity_metadata_wrapper('node', $district);
+                $state = $w_district->field_ref_trt_state->value();
+                if ($state) {
+                  array_unshift($breadcrumbs, _prc_trt_breadcrumb_readiness_page($state));
+                }
+              }
+            }
+          }
+        }
+        $variables['breadcrumb'] = $breadcrumbs;
+      }
+      break;
+    case 'admin/structure/entity-type/prc_trt/system_check/add':
+    case 'admin/structure/entity-type/prc_trt/capacity_check/add':
+      if (array_key_exists('field_ref_school', $_GET)) {
+        $school_nid = $_GET['field_ref_school'];
+        $school = node_load($school_nid);
+        $breadcrumbs = array();
+        $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($school);
+        if ($full_admin || $district_admin) {
+          $breadcrumbs[] = l(t('Manage Schools'), "node/$school_nid/manage-schools");
+        }
+        $variables['breadcrumb'] = $breadcrumbs;
+      }
+      break;
+    default:
+      array_shift($variables['breadcrumb']);
+  }
+}
+
+/**
+ * @param $district
+ * @return string
+ */
+function _prc_trt_breadcrumb_readiness_page($node) {
+  $uri = entity_uri('node', $node)['path'];
+  $name = $node->title;
+  $breadcrumb = l(t('@node Readiness', array('@node' => $name)), $uri);
+  return $breadcrumb;
+}
+
