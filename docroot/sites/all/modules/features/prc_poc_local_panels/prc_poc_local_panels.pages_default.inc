@@ -1238,7 +1238,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->configuration = array(
       'admin_title' => '',
       'title' => 'Overview/ Instructional copy:',
-      'body' => 'Overview and instructional copy goes here. Consider explaining importance of running system check and how to do it: To prepare school for successful assessment, user can run system check to make sure device or devices meet PARCC minimum requirements. Include instructions that user can run test for on single device and apply the results to multiple devices with same configuration.',
+      'body' => 'Overview and instructional copy goes here. Consider explaining importance of running system check and how to do it: To prepare school for successful assessment, user can run system check to make sure device or devices meet <a href="http://www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf" target="_blank">PARCC minimum technology requirements</a>. Include instructions that user can run test for on single device and apply the results to multiple devices with same configuration.',
       'format' => 'filtered_html',
       'substitute' => TRUE,
     );
@@ -3561,9 +3561,9 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => 'TRT Page System Check section',
       'title' => '',
-      'body' => 'Description of test and importance of running it: The system check assesses whether a device or similar configuration of devices meets the PARCC minimum requirements.',
+      'body' => 'Description of test and importance of running it: The system check assesses whether a device or similar configuration of devices meets the <a href="http://www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf">PARCC minimum technology requirements</a>.',
       'format' => 'filtered_html',
-      'substitute' => TRUE,
+      'substitute' => 1,
     );
     $pane->cache = array();
     $pane->style = array(
@@ -3653,7 +3653,20 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->type = 'views_panes';
     $pane->subtype = 'trt_districts-panel_pane_1';
     $pane->shown = TRUE;
-    $pane->access = array();
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 5,
+            ),
+          ),
+          'context' => 'context_user_1',
+          'not' => FALSE,
+        ),
+      ),
+    );
     $pane->configuration = array();
     $pane->cache = array();
     $pane->style = array(

@@ -42,11 +42,20 @@
 
   <div class="content"<?php print $content_attributes; ?>>
     <?php
-      print render($content['field_ref_school']);
-      print render($content['field_result']);
-      print render($content['field_name']);
-      print render($content['field_number_of_devices']);
-      print render($table);
+    print render($content['field_ref_school']);
+    print render($content['field_result']);
+    print render($content['field_name']);
+
+    if ($content['field_result']['#object']->field_result['und'][0]['value'] == 0): ?>
+    <div>Instructions or next steps go here. Consider linking to
+      <a
+        href="http://www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf"
+        target="_blank">PARCC minimum technology requirements</a>.
+    </div>
+    <?php endif;
+
+    print render($content['field_number_of_devices']);
+    print render($table);
     ?>
   </div>
 </div>

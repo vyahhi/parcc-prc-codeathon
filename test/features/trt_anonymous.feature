@@ -1,4 +1,4 @@
-@api @trt @structured @school @capacity_check
+@api @trt @structured @school @capacity_check @prc-954 @prc-1051 @prc-1058
 Feature: PRC-954 Anonymous users cannot see System Check or Testing Capacity links
 
   Scenario: Anon
@@ -8,7 +8,7 @@ Feature: PRC-954 Anonymous users cannot see System Check or Testing Capacity lin
     And I should see the text "Overview / instructional copy goes here. Consider explaining importance of testing prior to assessment to increase chances of successful assessment."
     And I should see the text "Important: If you are a school administrator, please run these checks from your school readiness page. Contact your District Administrator to have the link to that page emailed to you."
     And I should see the link "System Check"
-    And I should see the text "Description of test and importance of running it: The system check assesses whether a device or similar configuration of devices meets the PARCC minimum requirements."
+    And I should see the text "Description of test and importance of running it: The system check assesses whether a device or similar configuration of devices meets the PARCC minimum technology requirements."
     And I should see the link "Testing Capacity Check"
     And I should see the text "Description of test and importance of running it: The testing capacity check assesses whether your school has sufficient bandwidth and a sufficient number of devices that meet PARCC minimum requirement in order to run a successful assessment."
 
@@ -61,10 +61,10 @@ Feature: PRC-954 Anonymous users cannot see System Check or Testing Capacity lin
     And I should see the text "<bandwidth_text_result>"
     And I should not see the text "<bandwidth_text_not_result1>"
     And I should not see the text "<bandwidth_text_not_result2>"
-
+    # Updated for PRC-1051
   Examples:
-    | students | devices | sittings | testing_days | sessions | connection_type | wired_speed | access_points | connection_speed | devices_required | devices_capacity | bandwidth_capacity | device_result | device_not_result | device_follow_up                    | device_not_follow_up                | bandwidth_result | bandwidth_not_result1 | bandwidth_not_result2 | bandwidth_text_result                                                                                        | bandwidth_text_not_result1                               | bandwidth_text_not_result2                                                                                   |
-    | 100      | 50      | 4        | 10           | 4        | Wired           | 100 Mbps    | 600           | 50               | 11               | 39               | 5                  | Passed        | Failed            |                                     | Instructions or next steps go here. | Good             | OK                    | Poor                  | Good                                                                                                         | Provide explanation of what OK means and any next steps. | Provide explanation of what poor means \(will not be able to run successful assessment\) and any next steps. |
+    | students | devices | sittings | testing_days | sessions | connection_type | wired_speed | access_points | connection_speed | devices_required | devices_capacity | bandwidth_capacity | device_result | device_not_result | device_follow_up | device_not_follow_up                | bandwidth_result     | bandwidth_not_result1                       | bandwidth_not_result2 | bandwidth_text_result | bandwidth_text_not_result1                                                                        | bandwidth_text_not_result2                                                                                                  |
+    | 100      | 50      | 4        | 10           | 4        | Wired           | 100 Mbps    | 600           | 50               | 11               | 39               | 5                  | Passed        | Failed            |                  | Instructions or next steps go here. | Exceeds Requirements | Meets Minimum Requirements (for no Caching) | Requires Test Caching | Exceeds Requirements  | Provide explanation of what Meets Minimum Requirements (for no Caching) means and any next steps. | Provide explanation of what Requires Test Caching means (will not be able to run successful assessment) and any next steps. |
 
   Scenario: Run check headless
     Given I am an anonymous user

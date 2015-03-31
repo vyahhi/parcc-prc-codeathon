@@ -187,6 +187,23 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     parent::assertLinkVisible($link);
   }
 
+  /**
+   * @Given /^the "([^"]*)" link should point to "([^"]*)"$/
+   */
+  public function theLinkShouldPointTo($link, $href) {
+    $link = $this->fixStepArgument($link);
+    $element = $this->getSession()->getPage();
+    $result = $element->findLink($link);
+
+    if (empty($result)) {
+      throw new \Exception(sprintf("No link to '%s' on the page %s", $link, $this->getSession()->getCurrentUrl()));
+    }
+    $actual_href = $result->getAttribute('href');
+    if (strpos($actual_href, $href) === FALSE) {
+      throw new \Exception(sprintf("The link '%s' does not point to '%s', it points to '%s'", $link, $href, $actual_href));
+    }
+
+  }
 
   /**
    * @Then /^"([^"]*)" in "([^"]*)" should be selected$/

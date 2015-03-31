@@ -83,10 +83,6 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
  * @return mixed
  */
 function _prc_trt_alter_system_check_form(&$form, &$form_state) {
-
-  // This is how we can determine what version of Java the user has.
-  drupal_add_js('http://java.com/js/deployJava.js', 'external');
-
   $form['actions']['submit']['#value'] = t('Submit');
 
   if (array_key_exists('entityreference_prepopulate', $form_state)) {
@@ -150,6 +146,8 @@ function _prc_trt_alter_system_check_form(&$form, &$form_state) {
   );
 
   drupal_add_js(drupal_get_path('module', 'prc_trt') . '/prc_trt.js');
+  // This is how we can determine what version of Java the user has.
+  drupal_add_js(drupal_get_path('module', 'prc_trt') . '/deployJava.js');
 
   $form['#validate'][] = 'prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate';
   return $form;
@@ -371,16 +369,16 @@ function _prc_trt_view_entity_capacity_check($entity) {
   $cap_good = floatval(variable_get('prc_trt_capacity_minimum_good', .1));
   $cap_ok = floatval(variable_get('prc_trt_capacity_minimum_ok', .05));
   if ($bandwidth_capacity >= $cap_good) {
-    $bandwidth_result = t('Good');
+    $bandwidth_result = t('Exceeds Requirements');
     $bandwidth_extra_text = '';
   }
   elseif ($bandwidth_capacity >= $cap_ok) {
-    $bandwidth_result = t('OK');
-    $bandwidth_extra_text = t('Provide explanation of what OK means and any next steps.');
+    $bandwidth_result = t('Meets Minimum Requirements (for no Caching)');
+    $bandwidth_extra_text = t('Provide explanation of what Meets Minimum Requirements (for no Caching) means and any next steps.');
   }
   else {
-    $bandwidth_result = t('Poor');
-    $bandwidth_extra_text = t('Provide explanation of what poor means (will not be able to run successful assessment) and any next steps.');
+    $bandwidth_result = t('Requires Test Caching');
+    $bandwidth_extra_text = t('Provide explanation of what Requires Test Caching means (will not be able to run successful assessment) and any next steps.');
   }
 
   $entity->content['bandwidth_capacity_results']["bandwidth_status"] = array(
@@ -850,4 +848,27 @@ function prc_trt_action_info() {
       'triggers' => array('any'),
     ),
   );
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function prc_trt_node_access($node, $op, $account) {
+  if ($op == 'create' && $node == 'district') {
+    $allowed = user_access('create district content', $account);
+    if ($allowed) {
+      $uid = $account->uid;
+      $query = new EntityFieldQuery();
+
+      $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'district')
+        ->propertyCondition('uid', $uid);
+      $result = $query->execute();
+
+      if (isset($result['node'])) {
+        return NODE_ACCESS_DENY;
+      }
+    }
+    return NODE_ACCESS_IGNORE;
+  }
 }
