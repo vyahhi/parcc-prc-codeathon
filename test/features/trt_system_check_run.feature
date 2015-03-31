@@ -1,4 +1,4 @@
-@api @trt @system_check @prc-791 @prc-964 @prc-1045
+@api @trt @system_check @prc-791 @prc-964 @prc-1045 @prc-1059
 Feature: PRC-791 System Check - Unstructured - View Results Page
   As an unstructured user
   I want to view the results page of a System Check I have run
@@ -252,6 +252,9 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I should see the text "Passed"
     And I should not see the text "Failed"
     And I should see the text "N/A"
+    And I should not see the text "Instructions or next steps go here. Consider linking to PARCC minimum technology requirements."
+    Then I should not see the link "PARCC minimum technology requirements"
+
 
   Scenario Outline: PRC-964 RAM doesn't fail on Chromebook or iPad
     Given I am logged in as a user with the "Educator" role
@@ -409,6 +412,30 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
     And I should see the text "Pass" in the "RAM" row
+
+  Scenario: PRC-1059 Add fail copy with minimum requirements link
+    Given I am logged in as a user with the "Educator" role
+    And I am on "admin/structure/entity-type/prc_trt/system_check/add"
+    And I fill in "System check name" with "Check 2"
+    And I fill in "Number of devices" with "23"
+    And I select "Desktop" from "Device type"
+    And I select "Windows 7" from "Operating system"
+    And I fill in "Monitor size (in inches)" with "17"
+    And I select "At least 2 Ghz and under 2.5 Ghz" from "Processor speed"
+    And I select "Less than 512 MB" from "RAM"
+    And I fill in the hidden field "faux_browser" with "ff 33"
+    And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
+    And I fill in the hidden field "faux_cookies" with "true"
+    And I fill in the hidden field "faux_images" with "true"
+    And I fill in the hidden field "faux_monitor_color_depth" with "16"
+    And I fill in the hidden field "faux_screen_resolution_width" with "1024"
+    And I fill in the hidden field "faux_screen_resolution_height" with "768"
+    When I press "Submit"
+    Then I should see the text "Fail" in the "RAM" row
+    And I should see the text "Instructions or next steps go here. Consider linking to PARCC minimum technology requirements."
+    Then I should see the link "PARCC minimum technology requirements"
+    And the "PARCC minimum technology requirements" link should point to "www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf"
 
   Scenario: Run check headless - Monitor size Fail
     Given I am logged in as a user with the "Educator" role
