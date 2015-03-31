@@ -3653,7 +3653,20 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->type = 'views_panes';
     $pane->subtype = 'trt_districts-panel_pane_1';
     $pane->shown = TRUE;
-    $pane->access = array();
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 5,
+            ),
+          ),
+          'context' => 'context_user_1',
+          'not' => FALSE,
+        ),
+      ),
+    );
     $pane->configuration = array();
     $pane->cache = array();
     $pane->style = array(
