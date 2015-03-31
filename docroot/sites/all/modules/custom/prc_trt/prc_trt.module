@@ -85,7 +85,7 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_alter(&$form, &
 function _prc_trt_alter_system_check_form(&$form, &$form_state) {
 
   // This is how we can determine what version of Java the user has.
-  drupal_add_js('http://java.com/js/deployJava.js', 'external');
+  drupal_add_js('//java.com/js/deployJava.js', 'external');
 
   $form['actions']['submit']['#value'] = t('Submit');
 
