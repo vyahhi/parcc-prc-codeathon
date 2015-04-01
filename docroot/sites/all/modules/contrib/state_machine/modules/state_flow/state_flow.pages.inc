@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Page callback for a node's Workflow page.
  */
@@ -185,6 +184,7 @@ function state_flow_events($node) {
 
   return $output;
 }
+
 
 /**
  * Form builder for the node revision workflow transition form.

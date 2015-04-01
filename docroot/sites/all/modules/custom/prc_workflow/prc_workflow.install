@@ -1,0 +1,35 @@
+<?php
+
+ /**
+ * Implements hook_install().
+ */
+function prc_workflow_install() {
+  $schema['node_revision'] = array();
+  prc_workflow_schema_alter($schema);
+  foreach ($schema['node_revision']['fields'] as $name => $spec) {
+    db_add_field('node_revision', $name, $spec);
+  }
+}
+
+/**
+ * Introducing install function, run it if we are updating
+ */
+function prc_workflow_update_7000(){
+  prc_workflow_install();
+}
+
+/**
+ * Implements hook_schema_alter()
+ *
+ * @param $schema
+ */
+function prc_workflow_schema_alter(&$schema){
+
+  $schema['node_revision']['fields']['from_vid'] = array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+    'description' => 'The revision that this draft was derived from',
+  );
+
+}

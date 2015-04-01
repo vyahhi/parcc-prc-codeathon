@@ -18,7 +18,6 @@ features[features_api][] = api:2
 features[field_instance][] = invite-invite_by_email-field_invitation_email_address
 features[field_instance][] = invite-invite_by_email-field_invitation_email_body
 features[field_instance][] = invite-invite_by_email-field_invitation_email_subject
-features[field_instance][] = invite-invite_by_email-field_member_state
 features[field_instance][] = invite-invite_by_email-field_role_id
 features[field_instance][] = invite-invite_by_email-field_user_state
 features[invite_type][] = invite_by_email

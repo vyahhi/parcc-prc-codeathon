@@ -35,7 +35,7 @@ Feature: Workflow is functional
     # Curator approves review
     Given I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "edit"
+    And I click "My first post @timestamp"
     # prc-826 : Publish button is not correct
     And I press the "Publish" button
     #PRC-873 : should not see text area for publish
@@ -44,7 +44,7 @@ Feature: Workflow is functional
     And I visit "user/logout"
     And I visit "digital-library"
     And I click "My first post @timestamp"
-    And I should see the text "My first post"
+    And I should see the text "My first post @timestamp"
     # prc-827 : Digital Library in email is not capitalized
     Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
     # prc-824
@@ -76,9 +76,10 @@ Feature: Workflow is functional
     And I click "Edit"
     And I fill in "Body" with "Here is my clever addition."
     And I press the "Save New Draft" button
-    And I click "My first post @timestamp"
-    And I click "Workflow"
-    When I click "Request Approval"
+    And I press "Confirm"
+    And I click "Edit Revision"
+    When I press "Request Approval"
+
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
     Then I press the "Update state" button
@@ -86,7 +87,7 @@ Feature: Workflow is functional
     #Curator approves new draft
     Given I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "edit"
+    And I click "My first post @timestamp"
     And I press the "Publish" button
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
@@ -115,7 +116,7 @@ Feature: Workflow is functional
     Then I press the "Update state" button
     And I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "edit"
+    And I click "My first post @timestamp"
     # Clear out old messages
     And the test email system is enabled
     And I press the "Request Change" button
@@ -142,7 +143,7 @@ Feature: Workflow is functional
     And I press the "Unpublish" button
     And I press the "Update state" button
     And I visit "admin-content"
-    And I click "My first post"
+    And I click "My first post @timestamp"
     # prc-872 : Change "private draft" to just draft
     And I should see the text "Revision State: Draft"
     Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been unpublished."
@@ -177,8 +178,7 @@ Feature: Workflow is functional
     #Curator publishes without needing approval
     Given I am logged in as "Joe Curator"
     And I visit "admin-content"
-    And I click "My first post"
-    And I click "Edit"
+    And I click "My first post @timestamp"
     And I press the "Publish" button
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
@@ -194,7 +194,7 @@ Feature: Workflow is functional
     Given I am logged in as "Joe Contributor"
     And I visit "admin-content"
     And I click "Add content"
-    And I fill in "edit-title" with "My second post."
+    And I fill in "edit-title" with "My second post @timestamp"
     And I fill in "Body" with "Isn't this swell?"
     And I select the radio button "Public" with the id "edit-field-permissions-und-public"
     And I press the "Save" button
@@ -204,19 +204,21 @@ Feature: Workflow is functional
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
     And press the "Update state" button
-    And I visit "content/my-second-post"
+    And I visit "admin-content"
+    And I click "My second post @timestamp"
     And I should see the text "Approval Requested"
     And the email to "joe_1prc_58ca@example.com" should contain "The following content is awaiting approval"
     #PRC-873 : should not see text area for rescind request
     And I click "Rescind Request"
     And I should not see an "textarea" element
     Then I press the "Update state" button
-    And I visit "content/my-second-post"
+    And I visit "admin-content"
+    And I click "My second post @timestamp"
     # PRC-813
     And I should see the text "Revision State: Draft"
     # PRC-853
     And I visit "admin-content"
-    And I should see the text "Draft" in the "My second post." row
+    And I should see the text "Draft" in the "My second post @timestamp" row
 
   Scenario: Content is published, but changes don't show up until after it has been approved
     And the test email system is enabled
@@ -253,18 +255,12 @@ Feature: Workflow is functional
     # prc-856
     And I press the "Save New Draft" button
     And I press the "Confirm" button
+    And I click "Edit Revision"
+    And I press "Request Approval"
+    And I press "Update state"
     And I visit "admin-content"
     # prc-844
-    And I should see the text "Draft" in the "My first post @timestamp" row
-    #Go into workflow and find the new draft
-    And I click "My first post @timestamp"
-    # click the link in the breadcrumb
-    And I click "My first post @timestamp"
-    And I click "Workflow"
-    And I click "Request Approval"
-    #PRC-873 : should not see text area for request approval
-    And I should not see an "textarea" element
-    When  I press "Update state"
+    And I should see the text "Approval Requested" in the "My first post @timestamp" row
     And I visit "user/logout"
     And I am an anonymous user
     Then I visit "digital-library"
@@ -456,7 +452,7 @@ Feature: Workflow is functional
     And I should see an "Confirm" button
     And I click "Cancel"
     # We should now be on the node view page
-    And I click "Workflow"
+    And I click "Revisions"
     Then I should not see the link "My new draft @timestamp"
     And I click "Edit"
     When I fill in "Body" with "testing confirm button"

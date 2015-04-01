@@ -49,13 +49,20 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
     '#options' => $roles,
   );
 
+  //Mark the states that are PARCC in the user states dropdown
+  $p_states = db_query('select name from taxonomy_term_data where vid = (
+      select vid from taxonomy_vocabulary where machine_name = \'member_state\')')->fetchCol('vid');
+
+  foreach ($form['field_user_state']['und']['#options'] as $tid => &$term) {
+    if (in_array($term, $p_states)) {
+      $term = $term . ' - PARCC Member';
+    }
+  }
+
   // Hide the field_role_id field - we'll use this to save the role we pick in invite_role
   if (array_key_exists('field_role_id', $form)) {
     $form['field_role_id']['#access'] = FALSE;
   }
-
-  // Change the text of the -- None -- option
-  $form['field_member_state'][LANGUAGE_NONE]['#options']['_none'] = t('Select a state');
 
   $roles = user_roles();
   $roles_with_states = array('PARCC-Member Educator', 'Content Contributor');
@@ -71,15 +78,15 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
     $role_states[] = array(':input[name="invite_role[' . $rid . ']"]' => array('checked' => TRUE));
   }
 
-// Now make the Member State dropdown dependent on the Role selected
-  $form['field_member_state']['#states'] = array(
+  // Now make the Member State dropdown dependent on the Role selected
+  $form['field_user_state']['#states'] = array(
     'visible' => array(
       $role_states,
     ),
+    'required' => array(
+      $role_states,
+    )
   );
-
-  // Change the title of Member State to State
-  $form['field_member_state']['und']['#title'] = t('State');
 
   $form['#validate'][] = 'prc_invite_form_form_invite_form_validate';
 
@@ -99,7 +106,6 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
       }
     }
   }
-
 }
 
 function _prc_invite_form_invite_roles() {
@@ -115,6 +121,21 @@ function _prc_invite_form_set_title() {
 
 function prc_invite_form_form_invite_form_validate($form, &$form_state)
 {
+  //Require user state if it is one of the roles
+  $roles = user_roles();
+  $roles_with_states = array('PARCC-Member Educator', 'Content Contributor');
+  $roles_rids = array();
+  $role_states = array();
+  foreach($roles_with_states as $role) {
+    $rids[] = array_search($role, $roles);
+  }
+  $uid = $form_state['values']['uid'];
+  $state = $form_state['values']['field_user_state']['und'][0]['tid'];
+
+  if(in_array($uid, $rids)  && empty($state)){
+    form_set_error('prc_invite_form', 'State where they teach field is required.');
+  }
+
   _prc_invite_form_set_title();
 
   if (
