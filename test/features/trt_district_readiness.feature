@@ -1,15 +1,11 @@
-@api @district @admin @trt @prc-706
+@api @district @admin @trt @prc-706 @prc-878
 Feature: PRC-706 District Readiness - District Admin View
   As a District Admin,
   I want to be able to see the results of the structured readiness checks run by schools in my district I
   so that I can understand if the schools are ready to run PARCC assessment tests.
 
-#  Scenario 4: At least one school in my district has run structured testing capacity check
-#  Schools table
-#  School Name	No. of Students	Devices Capacity	Devices Capacity Results	Bandwidth Capacity	Bandwidth Capacity Results
-#  <School Name>(link)	<number of students>	<devices capacity>	<Devices capacity results>	<bandwidth capacity>	<Bandwidth capacity results>
-#  Export all system checks data to .csv [link]
-#  Export all testing capacity checks data to .csv [link to the right of link to export system checks data]
+  PRC-878 District Readiness - sort school list
+  As a School, District or State Admin, I want to sort the list of schools on my District Readiness page so that I can find the information that I want.
 
   Scenario Outline: No schools have run checks
     Given users:
@@ -88,6 +84,15 @@ Feature: PRC-706 District Readiness - District Admin View
     And I should see the text "10" in the "<school_name>" row
     And I should see the link "Export all system checks data to .csv"
     And I should see the link "Export all testing capacity checks data to .csv"
+
+    # PRC-878 Sorts these results
+    And I should see the link "School Name"
+    And I should see the link "No. of Students"
+    And I should see the link "Devices Capacity"
+    And I should see the link "Devices Capacity Results"
+    And I should see the link "Bandwidth Capacity"
+    And I should see the link "Bandwidth Capacity Results"
+
   Examples:
     | user_name                          | district_name         | school_name              |
     | joe_prc_706a@timestamp@example.com | PRC-706 S1 @timestamp | School 706 S1 @timestamp |
