@@ -6,6 +6,14 @@
 
 module_load_include('inc', 'prc_trt', 'prc_trt_request_readiness_checks');
 
+/**
+ * Implements hook_form_alter().
+ */
+function prc_trt_form_alter(&$form, &$form_state, $form_id) {
+dpm($form_id);
+  $x = 'x';
+}
+
 function prc_trt_form_eck__entity__form_edit_prc_trt_capacity_check_alter(&$form, &$form_state) {
   prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter($form, $form_state);
 }
