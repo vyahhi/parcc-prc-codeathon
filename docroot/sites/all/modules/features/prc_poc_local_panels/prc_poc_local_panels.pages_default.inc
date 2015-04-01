@@ -311,6 +311,10 @@ function prc_poc_local_panels_default_page_manager_handlers() {
       ),
       'logic' => 'and',
     ),
+    'panels_breadcrumbs_state' => 1,
+    'panels_breadcrumbs_titles' => '%node:field-ref-trt-state Readiness',
+    'panels_breadcrumbs_paths' => '%node:field-ref-trt-state:url',
+    'panels_breadcrumbs_home' => 0,
   );
   $display = new panels_display();
   $display->layout = 'onecol';
@@ -363,7 +367,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 5,
+              0 => 11,
+              1 => 5,
             ),
           ),
           'context' => 'logged-in-user',
@@ -401,7 +406,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 5,
+              0 => 11,
+              1 => 5,
             ),
           ),
           'context' => 'logged-in-user',
@@ -437,7 +443,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 5,
+              0 => 11,
+              1 => 5,
             ),
           ),
           'context' => 'logged-in-user',
@@ -525,6 +532,12 @@ function prc_poc_local_panels_default_page_manager_handlers() {
       ),
       'logic' => 'and',
     ),
+    'panels_breadcrumbs_state' => 1,
+    'panels_breadcrumbs_titles' => '%node:field-ref-district:field-ref-trt-state Readiness
+%node:field-ref-district Readiness',
+    'panels_breadcrumbs_paths' => '%node:field-ref-district:field-ref-trt-state:url
+%node:field-ref-district:url',
+    'panels_breadcrumbs_home' => 1,
   );
   $display = new panels_display();
   $display->layout = 'onecol';
@@ -701,7 +714,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 9,
+              0 => 11,
+              1 => 9,
             ),
           ),
           'context' => 'logged-in-user',
@@ -737,7 +751,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 9,
+              0 => 11,
+              1 => 9,
             ),
           ),
           'context' => 'logged-in-user',
@@ -874,6 +889,9 @@ function prc_poc_local_panels_default_page_manager_handlers() {
       'arguments' => array(
         'field_ref_trt_state_target_id' => '%node:nid',
       ),
+      'override_title' => 1,
+      'override_title_text' => 'Districts',
+      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -3561,7 +3579,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => 'TRT Page System Check section',
       'title' => '',
-      'body' => 'Description of test and importance of running it: The system check assesses whether a device or similar configuration of devices meets the <a href="http://www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf">PARCC minimum technology requirements</a>.',
+      'body' => 'Description of test and importance of running it: The system check assesses whether a device or similar configuration of devices meets the <a href="http://www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf" target="_blank">PARCC minimum technology requirements</a>.',
       'format' => 'filtered_html',
       'substitute' => 1,
     );
@@ -3659,7 +3677,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 5,
+              0 => 11,
+              1 => 5,
             ),
           ),
           'context' => 'context_user_1',

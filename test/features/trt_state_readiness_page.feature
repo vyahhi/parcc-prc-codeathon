@@ -4,9 +4,6 @@ Feature: PRC-707 State Readiness
   I want to view my State Readiness page,
   so that I can access the results of readiness checks run by schools in my district.
 
-#  Acceptance Criteria
-#  Subhead
-#  Districts
 #  Scenario 2: At least one District Created
 #  Export all system checks data to .csv [link]
 #  Export all testing capacity checks data to .csv [link to the right of link to export system checks data]
@@ -41,7 +38,7 @@ Feature: PRC-707 State Readiness
     Then I should see the heading "<member_state> Readiness"
     And I should see the text "Overview / instructional copy goes here \(admin can export all test results data for state to csv or click district name to view results of technology checks by school\)."
     And I should see the text "No districts in your state have been created"
-
+    And I should see the heading "Districts"
   Examples:
     | user_state     | member_state | user_name                          |
     | South Virginia | Old York     | joe_prc_707a@timestamp@example.com |
@@ -72,6 +69,7 @@ Feature: PRC-707 State Readiness
     Then I should see the heading "<member_state> Readiness"
     And I should see the text "Overview / instructional copy goes here \(admin can export all test results data for state to csv or click district name to view results of technology checks by school\)."
     But I should not see the text "No districts in your state have been created"
+    And I should see the heading "Districts"
     And I should see the link "<district_name>"
     And I should see the link "Export all system checks data to .csv"
     And I should see the link "Export all testing capacity checks data to .csv"
