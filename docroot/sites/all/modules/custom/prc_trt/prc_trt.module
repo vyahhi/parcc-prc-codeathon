@@ -1065,3 +1065,28 @@ function _prc_trt_breadcrumb_readiness_page($node) {
   return $breadcrumb;
 }
 
+/**
+ * Implements hook_views_pre_render().
+ */
+function prc_trt_views_pre_render(&$view) {
+  if ($view->name == 'trt_district_readiness_schools') {
+    $rows = array();
+    // First we catalog rows
+    foreach ($view->result as $row) {
+      $school_name = $row->node_title;
+      $check_type = $row->_field_data['field_ref_school_node_id']['entity']->type;
+      if (!array_key_exists($school_name, $rows) || $check_type == 'capacity_check') {
+        $rows[$school_name] = $check_type;
+      }
+    }
+    // Now we start hiding rows for schools with both types of checks
+    foreach ($view->result as $index => $row) {
+      $school_name = $row->node_title;
+      $check_type = $row->_field_data['field_ref_school_node_id']['entity']->type;
+      if ($rows[$school_name] != $check_type) {
+        // System check where school has multiple rows. Kill it.
+        unset($view->result[$index]);
+      }
+    }
+  }
+}

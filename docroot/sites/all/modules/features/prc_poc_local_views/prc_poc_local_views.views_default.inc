@@ -5670,6 +5670,7 @@ message explaining what the check does and the importance of running it.';
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -5682,10 +5683,58 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
+    'field_number_of_students' => 'field_number_of_students',
+    'field_devices_capacity' => 'field_devices_capacity',
+    'field_devices_capacity_results' => 'field_devices_capacity_results',
+    'field_bandwidth_capacity' => 'field_bandwidth_capacity',
+    'field_bandwidth_capacity_results' => 'field_bandwidth_capacity_results',
+    'id' => 'id',
   );
-  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['default'] = 'title';
   $handler->display->display_options['style_options']['info'] = array(
     'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_number_of_students' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_devices_capacity' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_devices_capacity_results' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_bandwidth_capacity' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_bandwidth_capacity_results' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'id' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -5697,12 +5746,13 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['id'] = 'reverse_field_ref_school_prc_trt';
   $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['field'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['label'] = 'Capacity Check referencing School';
   $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['required'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['label'] = 'School';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   /* Field: Field: Number of students */
@@ -5716,27 +5766,32 @@ message explaining what the check does and the importance of running it.';
     'thousand_separator' => ' ',
     'prefix_suffix' => 1,
   );
-  /* Field: prc_trt: Devices Capacity */
+  /* Field: MAX(prc_trt: Devices Capacity) */
   $handler->display->display_options['fields']['field_devices_capacity']['id'] = 'field_devices_capacity';
   $handler->display->display_options['fields']['field_devices_capacity']['table'] = 'field_data_field_devices_capacity';
   $handler->display->display_options['fields']['field_devices_capacity']['field'] = 'field_devices_capacity';
   $handler->display->display_options['fields']['field_devices_capacity']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['field_devices_capacity']['group_type'] = 'max';
   $handler->display->display_options['fields']['field_devices_capacity']['empty'] = '—';
   $handler->display->display_options['fields']['field_devices_capacity']['settings'] = array(
     'thousand_separator' => ' ',
     'prefix_suffix' => 1,
   );
-  /* Field: prc_trt: Devices Capacity Results */
+  $handler->display->display_options['fields']['field_devices_capacity']['group_column'] = 'entity_id';
+  /* Field: MAX(prc_trt: Devices Capacity Results) */
   $handler->display->display_options['fields']['field_devices_capacity_results']['id'] = 'field_devices_capacity_results';
   $handler->display->display_options['fields']['field_devices_capacity_results']['table'] = 'field_data_field_devices_capacity_results';
   $handler->display->display_options['fields']['field_devices_capacity_results']['field'] = 'field_devices_capacity_results';
   $handler->display->display_options['fields']['field_devices_capacity_results']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['group_type'] = 'max';
   $handler->display->display_options['fields']['field_devices_capacity_results']['empty'] = '—';
-  /* Field: prc_trt: Bandwidth Capacity */
+  $handler->display->display_options['fields']['field_devices_capacity_results']['group_column'] = 'entity_id';
+  /* Field: MAX(prc_trt: Bandwidth Capacity) */
   $handler->display->display_options['fields']['field_bandwidth_capacity']['id'] = 'field_bandwidth_capacity';
   $handler->display->display_options['fields']['field_bandwidth_capacity']['table'] = 'field_data_field_bandwidth_capacity';
   $handler->display->display_options['fields']['field_bandwidth_capacity']['field'] = 'field_bandwidth_capacity';
   $handler->display->display_options['fields']['field_bandwidth_capacity']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['group_type'] = 'max';
   $handler->display->display_options['fields']['field_bandwidth_capacity']['empty'] = '—';
   $handler->display->display_options['fields']['field_bandwidth_capacity']['settings'] = array(
     'thousand_separator' => ' ',
@@ -5744,12 +5799,15 @@ message explaining what the check does and the importance of running it.';
     'scale' => '2',
     'prefix_suffix' => 1,
   );
-  /* Field: prc_trt: Bandwidth Capacity Results */
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['group_column'] = 'entity_id';
+  /* Field: MAX(prc_trt: Bandwidth Capacity Results) */
   $handler->display->display_options['fields']['field_bandwidth_capacity_results']['id'] = 'field_bandwidth_capacity_results';
   $handler->display->display_options['fields']['field_bandwidth_capacity_results']['table'] = 'field_data_field_bandwidth_capacity_results';
   $handler->display->display_options['fields']['field_bandwidth_capacity_results']['field'] = 'field_bandwidth_capacity_results';
   $handler->display->display_options['fields']['field_bandwidth_capacity_results']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['group_type'] = 'max';
   $handler->display->display_options['fields']['field_bandwidth_capacity_results']['empty'] = '—';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['group_column'] = 'entity_id';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -5764,6 +5822,10 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['arguments']['field_ref_district_target_id']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_ref_district_target_id']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_ref_district_target_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -5778,6 +5840,23 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['filters']['type']['value'] = array(
     'school' => 'school',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Prc_trt: prc_trt type */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'system_check' => 'system_check',
+  );
+  $handler->display->display_options['filters']['type_1']['group'] = 2;
+  /* Filter criterion: prc_trt: Devices Capacity (field_devices_capacity) */
+  $handler->display->display_options['filters']['field_devices_capacity_value']['id'] = 'field_devices_capacity_value';
+  $handler->display->display_options['filters']['field_devices_capacity_value']['table'] = 'field_data_field_devices_capacity';
+  $handler->display->display_options['filters']['field_devices_capacity_value']['field'] = 'field_devices_capacity_value';
+  $handler->display->display_options['filters']['field_devices_capacity_value']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['filters']['field_devices_capacity_value']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['field_devices_capacity_value']['group'] = 2;
 
   /* Display: TRT District Readiness Schools */
   $handler = $view->new_display('panel_pane', 'TRT District Readiness Schools', 'panel_pane_1');
