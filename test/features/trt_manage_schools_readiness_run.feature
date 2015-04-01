@@ -42,7 +42,6 @@ Feature: PRC-1055 Manage Schools - Indicate if readiness checks run
     Then I should see the text "Readiness Checks Run?"
     And I should see the text "Yes" in the "School Two Checks" row
     And I should see the text "No" in the "<school_name>" row
-    Then I break
   Examples:
     | user_state     | member_state   | user_name                          | district_name            | school_name            |
     | North Virginia | Vermont Island | joe_prc_960a@timestamp@example.com | District 1064 @timestamp | School 1064 @timestamp |
