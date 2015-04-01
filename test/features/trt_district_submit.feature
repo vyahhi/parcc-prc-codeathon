@@ -1,4 +1,4 @@
-@api @trt @structured @district
+@api @trt @structured @district @prc-840 @prc-706
 Feature: PRC-840 District Readiness - Name Added
   As a District Admin, I want to be able to add my district name so I can set up my district readiness page.
 
@@ -24,7 +24,8 @@ Feature: PRC-840 District Readiness - Name Added
     And I fill in "District Name" with "PRC-840 @timestamp"
     And I press "Submit"
     Then I should see the heading "PRC-840 @timestamp Readiness"
-    And I should see the text "Overview / instructional copy goes here \(click on school name to see admin can add / edit school, request that readiness checks be run, view results of technology checks by school and export all test results data to csv\)."
+    # Text changed by PRC-706
+    And I should see the text "Overview / instructional copy goes here \(admin can export all test results data for district to csv or click school name to view results of technology checks for school\). Note only schools that have run structured readiness checks display on this page."
     And I should see the link "Edit district name"
     And I should see the link "Manage Schools"
     And I should see the text "add schools and request readiness checks"

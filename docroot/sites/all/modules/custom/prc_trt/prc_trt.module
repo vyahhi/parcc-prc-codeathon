@@ -66,7 +66,7 @@ function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form,
   $form['field_devices_capacity']['#access'] = FALSE;
   $form['field_devices_capacity_results']['#access'] = FALSE;
   $form['field_bandwidth_capacity']['#access'] = FALSE;
-  $form['field_bandwidth_capacity_result']['#access'] = FALSE;
+  $form['field_bandwidth_capacity_results']['#access'] = FALSE;
 }
 
 function prc_trt_form_eck__entity__form_edit_prc_trt_system_check_alter(&$form, &$form_state) {
@@ -251,7 +251,7 @@ function prc_trt_field_extra_fields() {
       'description' => t('Did images pass?'),
       'weight' => 21,
     ),
-    'jre_version_pass' => array (
+    'jre_version_pass' => array(
       'label' => t('Java: Results'),
       'description' => t('Did Java pass?'),
       'weight' => 21,
@@ -834,6 +834,20 @@ function prc_trt_form_school_node_form_submit(&$form, &$form_state) {
   }
 }
 
+function prc_trt_form_node_delete_confirm_alter(&$form, &$form_state) {
+  if ($form['#node']->type == 'school') {
+    $form['actions']['submit']['#submit'][] = 'node_delete_confirm_submit';
+    $form['actions']['submit']['#submit'][] = '_prc_trt_school_delete_redirect';
+  }
+}
+
+function _prc_trt_school_delete_redirect($form, &$form_state) {
+  if (array_key_exists('0', $form_state['build_info']['args'])) {
+    $district_nid = $form_state['build_info']['args'][0]->field_ref_district['und'][0]['target_id'];
+    //$form_state['redirect'] = "node/$district_nid/manage-schools";
+    $_GET['destination'] = "node/$district_nid/manage-schools";
+  }
+}
 
 /**
  * Implements hook_action_info().
@@ -870,5 +884,209 @@ function prc_trt_node_access($node, $op, $account) {
       }
     }
     return NODE_ACCESS_IGNORE;
+  }
+}
+
+/**
+ * Implements hook_preprocess_breadcrumb().
+ */
+function prc_trt_preprocess_breadcrumb(&$variables) {
+  global $user;
+  $full_admin = array_search('administrator', $user->roles);
+  $state_admin = array_search('State Admin', $user->roles);
+  $district_admin = array_search('District Admin', $user->roles);
+  $school_admin = array_search('School Admin', $user->roles);
+
+  $item = menu_get_item();
+
+  switch ($item['path']) {
+    case 'node/%':
+      $node = $item['page_arguments'][0];
+      switch ($node->type) {
+        case 'school':
+          if ($full_admin || $district_admin || $state_admin) {
+            $breadcrumbs = array();
+            $w_school = entity_metadata_wrapper('node', $node);
+            $district = $w_school->field_ref_district->value();
+            if ($district) {
+              $breadcrumb = _prc_trt_breadcrumb_readiness_page($district);
+              $breadcrumbs[] = $breadcrumb;
+              if ($full_admin || $state_admin) {
+                $w_district = entity_metadata_wrapper('node', $district);
+                $state = $w_district->field_ref_trt_state->value();
+                if ($state) {
+                  array_unshift($breadcrumbs, _prc_trt_breadcrumb_readiness_page($state));
+                }
+              }
+            }
+          }
+          $variables['breadcrumb'] = $breadcrumbs;
+          break;
+
+        case 'district':
+          if ($full_admin || $state_admin) {
+            $breadcrumbs = array();
+            $w_district = entity_metadata_wrapper('node', $node);
+            $state = $w_district->field_ref_trt_state->value();
+            if ($state) {
+              $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($state);
+              $variables['breadcrumb'] = $breadcrumbs;
+            }
+          }
+          break;
+        case 'state':
+          break;
+      }
+      break;
+    case 'node/%/edit':
+      $node = $item['page_arguments'][0];
+      switch ($node->type) {
+        case 'district':
+          $breadcrumbs = array();
+          $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($node);
+          $variables['breadcrumb'] = $breadcrumbs;
+          break;
+      }
+      break;
+    case 'node/%/manage-schools':
+      $node = $item['page_arguments'][1]->data;
+      switch ($node->type) {
+        case 'district':
+          $breadcrumbs = array();
+          $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($node);
+          $variables['breadcrumb'] = $breadcrumbs;
+          if (array_key_exists('op', $_POST) && $_POST['op'] == 'Request Readiness Checks') {
+            $nid = $node->nid;
+            $breadcrumbs[] = l(t('Manage Schools'), "node/$nid/manage-schools");
+          }
+          $variables['breadcrumb'] = $breadcrumbs;
+          break;
+      }
+      break;
+    case 'district/%/upload-schools':
+      $node = $item['page_arguments'][0];
+      $nid = $node->nid;
+      $breadcrumbs = array();
+      $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($node);
+      $breadcrumbs[] = l(t('Manage Schools'), "node/$nid/manage-schools");
+      $variables['breadcrumb'] = $breadcrumbs;
+      break;
+    case 'node/add/school':
+      if (array_key_exists('field_ref_district', $_GET)) {
+        $district_nid = $_GET['field_ref_district'];
+        $district = node_load($district_nid);
+        $breadcrumbs = array();
+        $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($district);
+        if ($full_admin || $district_admin) {
+          $breadcrumbs[] = l(t('Manage Schools'), "node/$district_nid/manage-schools");
+        }
+        $variables['breadcrumb'] = $breadcrumbs;
+      }
+      break;
+    case 'prc_trt/system_check/%':
+    case 'prc_trt/capacity_check/%':
+      $syscheck = $item['page_arguments'][2];
+      $w_syscheck = entity_metadata_wrapper('prc_trt', $syscheck);
+      $node = $w_syscheck->field_ref_school->value();
+      if ($node) {
+        // Structured...
+        if ($full_admin || $school_admin || $district_admin || $state_admin) {
+          $breadcrumbs = array();
+          $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($node);
+          if ($full_admin || $district_admin || $state_admin) {
+            $w_school = entity_metadata_wrapper('node', $node);
+            $district = $w_school->field_ref_district->value();
+            if ($district) {
+              array_unshift($breadcrumbs, _prc_trt_breadcrumb_readiness_page($district));
+              if ($full_admin || $state_admin) {
+                $w_district = entity_metadata_wrapper('node', $district);
+                $state = $w_district->field_ref_trt_state->value();
+                if ($state) {
+                  array_unshift($breadcrumbs, _prc_trt_breadcrumb_readiness_page($state));
+                }
+              }
+            }
+          }
+        }
+        $variables['breadcrumb'] = $breadcrumbs;
+      }
+      else {
+        // Unstructured.
+        if (strpos($item['path'], 'system')) {
+          $breadcrumbs[] = t('System Check');
+          $breadcrumbs[] = l(t('Testing Capacity Checks'), 'admin/structure/entity-type/prc_trt/capacity_check/add');
+        }
+        else {
+          $breadcrumbs[] = l(t('System Check'), 'admin/structure/entity-type/prc_trt/system_check/add');
+          $breadcrumbs[] = t('Testing Capacity Checks');
+        }
+        $variables['breadcrumb'] = $breadcrumbs;
+      }
+      break;
+    case 'admin/structure/entity-type/prc_trt/system_check/add':
+    case 'admin/structure/entity-type/prc_trt/capacity_check/add':
+      if (array_key_exists('field_ref_school', $_GET)) {
+        // Structured...
+        $school_nid = $_GET['field_ref_school'];
+        $school = node_load($school_nid);
+        $breadcrumbs = array();
+        $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($school);
+        if ($full_admin || $district_admin) {
+          $breadcrumbs[] = l(t('Manage Schools'), "node/$school_nid/manage-schools");
+        }
+        $variables['breadcrumb'] = $breadcrumbs;
+      }
+      else {
+        // Unstructured...
+        if (strpos($item['path'], 'system')) {
+          $breadcrumbs[] = t('System Check');
+          $breadcrumbs[] = l(t('Testing Capacity Checks'), 'admin/structure/entity-type/prc_trt/capacity_check/add');
+        }
+        else {
+          $breadcrumbs[] = l(t('System Check'), 'admin/structure/entity-type/prc_trt/system_check/add');
+          $breadcrumbs[] = t('Testing Capacity Checks');
+        }
+      }
+      $variables['breadcrumb'] = $breadcrumbs;
+      break;
+    default:
+      array_shift($variables['breadcrumb']);
+  }
+}
+
+/**
+ * @param $district
+ * @return string
+ */
+function _prc_trt_breadcrumb_readiness_page($node) {
+  $uri = entity_uri('node', $node)['path'];
+  $name = $node->title;
+  $breadcrumb = l(t('@node Readiness', array('@node' => $name)), $uri);
+  return $breadcrumb;
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function prc_trt_views_pre_render(&$view) {
+  if ($view->name == 'trt_district_readiness_schools') {
+    $rows = array();
+    // First we catalog rows
+    foreach ($view->result as $row) {
+      $school_name = $row->node_title;
+      $check_type = $row->_field_data['field_ref_school_node_id']['entity']->type;
+      if (!array_key_exists($school_name, $rows) || $check_type == 'capacity_check') {
+        $rows[$school_name] = $check_type;
+      }
+    }
+    // Now we start hiding rows for schools with both types of checks
+    foreach ($view->result as $index => $row) {
+      $school_name = $row->node_title;
+      $check_type = $row->_field_data['field_ref_school_node_id']['entity']->type;
+      if ($rows[$school_name] != $check_type) {
+        // System check where school has multiple rows. Kill it.
+        unset($view->result[$index]);
+      }
+    }
   }
 }

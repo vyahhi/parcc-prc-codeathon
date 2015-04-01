@@ -311,6 +311,10 @@ function prc_poc_local_panels_default_page_manager_handlers() {
       ),
       'logic' => 'and',
     ),
+    'panels_breadcrumbs_state' => 1,
+    'panels_breadcrumbs_titles' => '%node:field-ref-trt-state Readiness',
+    'panels_breadcrumbs_paths' => '%node:field-ref-trt-state:url',
+    'panels_breadcrumbs_home' => 0,
   );
   $display = new panels_display();
   $display->layout = 'onecol';
@@ -336,7 +340,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->configuration = array(
       'admin_title' => 'District Readiness Overview',
       'title' => '',
-      'body' => 'Overview / instructional copy goes here (click on school name to see admin can add / edit school, request that readiness checks be run, view results of technology checks by school and export all test results data to csv).',
+      'body' => 'Overview / instructional copy goes here (admin can export all test results data for district to csv or click school name to view results of technology checks for school). Note only schools that have run structured readiness checks display on this page.',
       'format' => 'filtered_html',
       'substitute' => 1,
     );
@@ -363,7 +367,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 5,
+              0 => 11,
+              1 => 5,
             ),
           ),
           'context' => 'logged-in-user',
@@ -401,7 +406,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 5,
+              0 => 11,
+              1 => 5,
             ),
           ),
           'context' => 'logged-in-user',
@@ -437,7 +443,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 5,
+              0 => 11,
+              1 => 5,
             ),
           ),
           'context' => 'logged-in-user',
@@ -486,6 +493,32 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->uuid = 'f101267e-aa69-4019-b48c-d011f1d51c9d';
     $display->content['new-f101267e-aa69-4019-b48c-d011f1d51c9d'] = $pane;
     $display->panels['middle'][4] = 'new-f101267e-aa69-4019-b48c-d011f1d51c9d';
+    $pane = new stdClass();
+    $pane->pid = 'new-946a6cb3-72b6-461d-8fb0-21d0785c53c7';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'TEMPORARY - Export checks to CSV links',
+      'title' => '',
+      'body' => '<a href="#">Export all system checks data to .csv</a>
+<a href="#">Export all testing capacity checks data to .csv</a>',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 5;
+    $pane->locks = array();
+    $pane->uuid = '946a6cb3-72b6-461d-8fb0-21d0785c53c7';
+    $display->content['new-946a6cb3-72b6-461d-8fb0-21d0785c53c7'] = $pane;
+    $display->panels['middle'][5] = 'new-946a6cb3-72b6-461d-8fb0-21d0785c53c7';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -525,6 +558,12 @@ function prc_poc_local_panels_default_page_manager_handlers() {
       ),
       'logic' => 'and',
     ),
+    'panels_breadcrumbs_state' => 1,
+    'panels_breadcrumbs_titles' => '%node:field-ref-district:field-ref-trt-state Readiness
+%node:field-ref-district Readiness',
+    'panels_breadcrumbs_paths' => '%node:field-ref-district:field-ref-trt-state:url
+%node:field-ref-district:url',
+    'panels_breadcrumbs_home' => 1,
   );
   $display = new panels_display();
   $display->layout = 'onecol';
@@ -701,7 +740,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 9,
+              0 => 11,
+              1 => 9,
             ),
           ),
           'context' => 'logged-in-user',
@@ -737,7 +777,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 9,
+              0 => 11,
+              1 => 9,
             ),
           ),
           'context' => 'logged-in-user',
@@ -874,6 +915,9 @@ function prc_poc_local_panels_default_page_manager_handlers() {
       'arguments' => array(
         'field_ref_trt_state_target_id' => '%node:nid',
       ),
+      'override_title' => 1,
+      'override_title_text' => 'Districts',
+      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -3561,7 +3605,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => 'TRT Page System Check section',
       'title' => '',
-      'body' => 'Description of test and importance of running it: The system check assesses whether a device or similar configuration of devices meets the <a href="http://www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf">PARCC minimum technology requirements</a>.',
+      'body' => 'Description of test and importance of running it: The system check assesses whether a device or similar configuration of devices meets the <a href="http://www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf" target="_blank">PARCC minimum technology requirements</a>.',
       'format' => 'filtered_html',
       'substitute' => 1,
     );
@@ -3659,7 +3703,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 5,
+              0 => 11,
+              1 => 5,
             ),
           ),
           'context' => 'context_user_1',

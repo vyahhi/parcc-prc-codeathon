@@ -1454,6 +1454,39 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $wrapper->field_name = 'Fakey Check';
     $wrapper->save();
   }
+
+  /**
+   * @Given /^the school "([^"]*)" has run a capacity check$/
+   */
+  public function theSchoolHasRunACapacityCheck($school_name) {
+    $school_name = $this->fixStepArgument($school_name);
+    foreach ($this->nodes as $node) {
+      if ($node->title == $school_name) {
+        $found_nid = $node->nid;
+        break;
+      }
+    }
+    if (!$found_nid) {
+      throw new \Exception(sprintf('The school %s was not found', $school_name));
+    }
+    $school_node = node_load($found_nid);
+    $entity_type = 'prc_trt';
+    $entity = entity_create($entity_type, array('type' => 'capacity_check'));
+    $wrapper = entity_metadata_wrapper($entity_type, $entity);
+    $wrapper->uid = $school_node->uid;
+    $wrapper->field_ref_school->set($school_node);
+    $wrapper->field_devices_capacity->set(10);
+    $wrapper->field_devices_capacity_results->set(20);
+    $wrapper->field_bandwidth_capacity->set(30);
+    $wrapper->field_bandwidth_capacity_results->set(40);
+    $wrapper->field_number_of_students->set(2);
+    $wrapper->field_number_of_devices->set(2);
+    $wrapper->field_number_testing_days->set(2);
+    $wrapper->field_number_of_sessions->set(2);
+    $wrapper->field_sittings_per_student->set(2);
+    $wrapper->field_speed_of_connection->set(2);
+    $wrapper->save();
+  }
   /**
    * @} End of defgroup "trt browser steps"
    */
