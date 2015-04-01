@@ -1,4 +1,4 @@
-@api @district @admin @trt
+@api @district @admin @trt @prc-706
 Feature: PRC-706 District Readiness - District Admin View
   As a District Admin,
   I want to be able to see the results of the structured readiness checks run by schools in my district I
@@ -33,7 +33,7 @@ Feature: PRC-706 District Readiness - District Admin View
 
   Scenario Outline: No schools have run checks
     Given users:
-      | name        | mail        | pass   | field_first_name | field_last_name | status | roles                 |
+      | name        | mail        | pass   | field_first_name | field_last_name | status | roles                    |
       | <user_name> | <user_name> | xyz123 | Joe              | Educator        | 1      | Educator, District Admin |
     And I am logged in as "<user_name>"
     And "District" nodes:
@@ -55,14 +55,14 @@ Feature: PRC-706 District Readiness - District Admin View
 
   Scenario Outline: 3 - School has run system check but not capacity check
     Given users:
-      | name        | mail        | pass   | field_first_name | field_last_name | status | roles                 |
+      | name        | mail        | pass   | field_first_name | field_last_name | status | roles                    |
       | <user_name> | <user_name> | xyz123 | Joe              | Educator        | 1      | Educator, District Admin |
     And I am logged in as "<user_name>"
     And "District" nodes:
       | title           | uid         |
       | <district_name> | @currentuid |
     And "School" nodes:
-      | title         | field_ref_district          | field_contact_email            | uid         |
+      | title         | field_ref_district    | field_contact_email            | uid         |
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
     And the school "<school_name>" has run a system check
     And I click "Technology Readiness"

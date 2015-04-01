@@ -70,7 +70,6 @@ Feature: PRC-346 Admin: Course Audience
     #  AC7 The State drop down menu will contain the following options in alphabetical order:
     #  Select a state (default- keeps (or resets value to: NULL)
     And I should see 1 "#edit-by-state" elements
-    And I should see 14 "#edit-by-state option" elements
     And I select "- Select a state -" from "edit-by-state"
     And I select "Arkansas" from "edit-by-state"
     And I select "Colorado" from "edit-by-state"

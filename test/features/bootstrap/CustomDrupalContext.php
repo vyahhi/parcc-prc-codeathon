@@ -186,6 +186,23 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     parent::assertLinkVisible($link);
   }
 
+  /**
+   * @Given /^the "([^"]*)" link should point to "([^"]*)"$/
+   */
+  public function theLinkShouldPointTo($link, $href) {
+    $link = $this->fixStepArgument($link);
+    $element = $this->getSession()->getPage();
+    $result = $element->findLink($link);
+
+    if (empty($result)) {
+      throw new \Exception(sprintf("No link to '%s' on the page %s", $link, $this->getSession()->getCurrentUrl()));
+    }
+    $actual_href = $result->getAttribute('href');
+    if (strpos($actual_href, $href) === FALSE) {
+      throw new \Exception(sprintf("The link '%s' does not point to '%s', it points to '%s'", $link, $href, $actual_href));
+    }
+
+  }
 
   /**
    * @Then /^"([^"]*)" in "([^"]*)" should be selected$/
@@ -1394,6 +1411,16 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * @When /^I run a system check with the "([^"]*)" JRE version and the "([^"]*)" operating system and the "([^"]*)" browser version "([^"]*)"$/
+   */
+  public function iRunASystemCheckWithTheJREVersionAndTheBrowserVersion($jre, $os, $browser, $version) {
+    $entity = NULL;
+    $sysCheck = new PrcTrtSystemCheck($entity);
+    $result = $sysCheck->jreBrowserCheck($browser, $version, $os, $jre);
+    $this->sysCheckResult = $result;
+  }
+
+  /**
    * @Then /^I should get a "([^"]*)" result$/
    */
   public function iShouldGetAResult($result) {
@@ -1580,4 +1607,19 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     print $message . PHP_EOL;
   }
 
+  /**
+   * @Given /^"([^"]*)" should have an "([^"]*)" attribute value of "([^"]*)"$/
+   * @param $selector, $attribute, $value
+   * @throws Exception
+   */
+  public function shouldHaveAnAttributeValueOf($selector, $attribute, $value) {
+    $computed = $this->getSession()->evaluateScript("
+      return jQuery( '" . $selector . "' ).attr('" . $attribute . "');
+    ");
+    // Convert double quotes to single quotes for matching purposes.
+    $computed = str_replace('"',"'",$computed);
+    if ($value != $computed) {
+      throw new Exception("Element ({$selector}) does not have a ({$attribute}) value of ({$value}).  The actual value is ({$computed})");
+    }
+  }
 }

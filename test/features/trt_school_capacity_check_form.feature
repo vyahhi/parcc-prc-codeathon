@@ -1,4 +1,4 @@
-@api @trt @structured @school @capacity_check
+@api @trt @structured @school @capacity_check @prc-805 @prc-1051
 Feature: PRC-805 Testing Capacity Check - Structured - Form
   As a school admin
   I want to run a Testing Capacity check
@@ -54,7 +54,7 @@ Feature: PRC-805 Testing Capacity Check - Structured - Form
     And I visit the last node created
     And I click "run testing capacity check"
     Then the "Number of students" field should contain "<devices>"
-
+    # Change text for PRC-1051
   Examples:
-    | students | devices | sittings | testing_days | sessions | connection_type | wired_speed | access_points | connection_speed | devices_required | devices_capacity | bandwidth_capacity | device_result | device_not_result | device_follow_up | device_not_follow_up                | bandwidth_result | bandwidth_not_result1 | bandwidth_not_result2 | bandwidth_text_result | bandwidth_text_not_result1                               | bandwidth_text_not_result2                                                                                   |
-    | 100      | 50      | 4        | 10           | 4        | Wired           | 100 Mbps    | 600           | 50               | 11               | 39               | 5                  | Passed        | Failed            |                  | Instructions or next steps go here. | Good             | OK                    | Poor                  | Good                  | Provide explanation of what OK means and any next steps. | Provide explanation of what poor means \(will not be able to run successful assessment\) and any next steps. |
+    | students | devices | sittings | testing_days | sessions | connection_type | wired_speed | access_points | connection_speed | devices_required | devices_capacity | bandwidth_capacity | device_result | device_not_result | device_follow_up | device_not_follow_up                | bandwidth_result     | bandwidth_not_result1                       | bandwidth_not_result2 | bandwidth_text_result | bandwidth_text_not_result1                                                                        | bandwidth_text_not_result2                                                                                                  |
+    | 100      | 50      | 4        | 10           | 4        | Wired           | 100 Mbps    | 600           | 50               | 11               | 39               | 5                  | Passed        | Failed            |                  | Instructions or next steps go here. | Exceeds Requirements | Meets Minimum Requirements (for no Caching) | Requires Test Caching | Exceeds Requirements  | Provide explanation of what Meets Minimum Requirements (for no Caching) means and any next steps. | Provide explanation of what Requires Test Caching means (will not be able to run successful assessment) and any next steps. |

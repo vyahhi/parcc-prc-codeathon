@@ -120,8 +120,6 @@
     </div>
   </section>
 
-    <div id="footer"><div class="section">
-      <?php print render($page['footer']); ?>
-    </div></div> <!-- /.section, /#footer -->
+  <?php include path_to_theme() . '/templates/includes/footer.inc'; ?>
 
 </div> <!-- /#page -->

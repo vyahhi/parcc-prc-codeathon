@@ -1,4 +1,4 @@
-@api @trt @structured @school @capacity_check
+@api @trt @structured @school @capacity_check @prc-757 @prc-1051 @prc-1000 @prc-999 @prc-802
 Feature: PRC-757 School Readiness - School Admin View
   As a School Admin,
   I want to be able to run structured readiness checks and see the results of the structured readiness checks I have run
@@ -83,9 +83,10 @@ Feature: PRC-757 School Readiness - School Admin View
     And I should see the link "run testing capacity check"
     And I should see the text "Number of students:"
     And I should see the text "100"
+    # Change text for PRC-1051
   Examples:
-    | students | devices | sittings | testing_days | sessions | connection_type | wired_speed | access_points | connection_speed | devices_required | devices_capacity | bandwidth_capacity | device_result | device_not_result | device_follow_up | device_not_follow_up                | bandwidth_result | bandwidth_not_result1 | bandwidth_not_result2 | bandwidth_text_result | bandwidth_text_not_result1                               | bandwidth_text_not_result2                                                                                   |
-    | 100      | 50      | 4        | 10           | 4        | Wired           | 100 Mbps    | 600           | 50               | 11               | 39               | 5                  | Passed        | Failed            |                  | Instructions or next steps go here. | Good             | OK                    | Poor                  | Good                  | Provide explanation of what OK means and any next steps. | Provide explanation of what poor means \(will not be able to run successful assessment\) and any next steps. |
+    | students | devices | sittings | testing_days | sessions | connection_type | wired_speed | access_points | connection_speed | devices_required | devices_capacity | bandwidth_capacity | device_result | device_not_result | device_follow_up | device_not_follow_up                | bandwidth_result     | bandwidth_not_result1                       | bandwidth_not_result2 | bandwidth_text_result | bandwidth_text_not_result1                                                                        | bandwidth_text_not_result2                                                                                   |
+    | 100      | 50      | 4        | 10           | 4        | Wired           | 100 Mbps    | 600           | 50               | 11               | 39               | 5                  | Passed        | Failed            |                  | Instructions or next steps go here. | Exceeds Requirements | Meets Minimum Requirements (for no Caching) | Requires Test Caching | Exceeds Requirements  | Provide explanation of what Meets Minimum Requirements (for no Caching) means and any next steps. | Provide explanation of what Requires Test Caching means (will not be able to run successful assessment) and any next steps. |
 
   Scenario: PRC-804 Structured form validation
     Given I have no "School" nodes
@@ -132,6 +133,7 @@ Feature: PRC-757 School Readiness - School Admin View
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"

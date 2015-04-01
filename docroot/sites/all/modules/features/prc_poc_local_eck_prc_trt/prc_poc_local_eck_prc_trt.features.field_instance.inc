@@ -1072,6 +1072,48 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'prc_trt-system_check-field_jre_version'
+  $field_instances['prc_trt-system_check-field_jre_version'] = array(
+    'bundle' => 'system_check',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 27,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'prc_trt',
+    'field_name' => 'field_jre_version',
+    'label' => 'Browser: Java runtime plugin version',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'label_help_description' => '',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 17,
+    ),
+  );
+
   // Exported field_instance: 'prc_trt-system_check-field_monitor_color_depth'
   $field_instances['prc_trt-system_check-field_monitor_color_depth'] = array(
     'bundle' => 'system_check',
@@ -1585,6 +1627,7 @@ function prc_poc_local_eck_prc_trt_field_default_field_instances() {
   t('Browser Version');
   t('Browser: Cookies enabled');
   t('Browser: Images enabled');
+  t('Browser: Java runtime plugin version');
   t('Browser: JavaScript enabled');
   t('Device type');
   t('Devices Capacity');

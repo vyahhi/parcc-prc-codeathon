@@ -1,4 +1,4 @@
-@api @trt @system_check
+@api @trt @system_check @prc-791 @prc-964 @prc-1045 @prc-1059
 Feature: PRC-791 System Check - Unstructured - View Results Page
   As an unstructured user
   I want to view the results page of a System Check I have run
@@ -53,6 +53,7 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
@@ -97,6 +98,7 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "false"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
@@ -120,6 +122,7 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "false"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
@@ -143,6 +146,7 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "false"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
@@ -166,6 +170,7 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
@@ -189,6 +194,7 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
@@ -212,6 +218,7 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "15"
@@ -234,6 +241,7 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
@@ -244,6 +252,9 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I should see the text "Passed"
     And I should not see the text "Failed"
     And I should see the text "N/A"
+    And I should not see the text "Instructions or next steps go here. Consider linking to PARCC minimum technology requirements."
+    Then I should not see the link "PARCC minimum technology requirements"
+
 
   Scenario Outline: PRC-964 RAM doesn't fail on Chromebook or iPad
     Given I am logged in as a user with the "Educator" role
@@ -257,15 +268,15 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "Less than 512 MB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should not see the text "Fail"
-    And I should see the text "Passed"
-    And I should not see the text "Failed"
+    And I should see the text "Less than 512 MB" in the "RAM" row
+    And I should see the text "N/A" in the "RAM" row
   Examples:
     | operating_system             |
     | Apple iOS 6, 7 or 8          |
@@ -283,16 +294,14 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "<browser>"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should not see the text "Fail"
-    And I should see the text "Passed"
-    And I should see the text "Upgrade recommended"
-    And I should not see the text "Failed"
+    And I should see the text "Upgrade recommended" in the "Browser" row
   Examples:
     | operating_system | browser    |
     | Mac 10.6         | safari 5.1 |
@@ -311,15 +320,16 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should not see the text "Fail"
-    And I should see the text "Passed"
-    And I should not see the text "Failed"
+    And I should see the text "Pass" in the "Operating system" row
+    And I should see the text "Pass" in the "Browser" row
+    And I should not see the text "Upgrade recommended"
   Examples:
     | operating_system             |
     | Android Lollipop             |
@@ -350,15 +360,16 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should see the text "Fail"
-    And I should not see the text "Passed"
-    And I should see the text "Failed"
+    Then I should see the text "Fail" in the "Operating system" row
+    And I should see the text "Fail" in the "Browser" row
+    And I should not see the text "Upgrade recommended"
 
   Scenario: Run check headless - RAM Fail
     Given I am logged in as a user with the "Educator" role
@@ -372,15 +383,14 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "Less than 512 MB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should see the text "Fail"
-    And I should not see the text "Passed"
-    And I should see the text "Failed"
+    Then I should see the text "Fail" in the "RAM" row
 
   Scenario: Run check headless - RAM Minimum pass
     Given I am logged in as a user with the "Educator" role
@@ -394,19 +404,41 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "At least 512 and under 1 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should not see the text "Fail"
-    And I should see the text "Passed"
-    And I should see the text "Passed"
+    And I should see the text "Pass" in the "RAM" row
+
+  Scenario: PRC-1059 Add fail copy with minimum requirements link
+    Given I am logged in as a user with the "Educator" role
+    And I am on "admin/structure/entity-type/prc_trt/system_check/add"
+    And I fill in "System check name" with "Check 2"
+    And I fill in "Number of devices" with "23"
+    And I select "Desktop" from "Device type"
+    And I select "Windows 7" from "Operating system"
+    And I fill in "Monitor size (in inches)" with "17"
+    And I select "At least 2 Ghz and under 2.5 Ghz" from "Processor speed"
+    And I select "Less than 512 MB" from "RAM"
+    And I fill in the hidden field "faux_browser" with "ff 33"
+    And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
+    And I fill in the hidden field "faux_cookies" with "true"
+    And I fill in the hidden field "faux_images" with "true"
+    And I fill in the hidden field "faux_monitor_color_depth" with "16"
+    And I fill in the hidden field "faux_screen_resolution_width" with "1024"
+    And I fill in the hidden field "faux_screen_resolution_height" with "768"
+    When I press "Submit"
+    Then I should see the text "Fail" in the "RAM" row
+    And I should see the text "Instructions or next steps go here. Consider linking to PARCC minimum technology requirements."
+    Then I should see the link "PARCC minimum technology requirements"
+    And the "PARCC minimum technology requirements" link should point to "www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf"
 
   Scenario: Run check headless - Monitor size Fail
     Given I am logged in as a user with the "Educator" role
-# TODO: Replace with actual TRT System Check form
     And I am on "admin/structure/entity-type/prc_trt/system_check/add"
     And I fill in "System check name" with "Check 2"
     And I fill in "Number of devices" with "23"
@@ -418,15 +450,14 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I select "At least 2 GB and under 4 GB" from "RAM"
     And I fill in the hidden field "faux_browser" with "ff 33"
     And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.6.0_65"
     And I fill in the hidden field "faux_cookies" with "true"
     And I fill in the hidden field "faux_images" with "true"
     And I fill in the hidden field "faux_monitor_color_depth" with "16"
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-    Then I should see the text "Fail"
-    And I should not see the text "Passed"
-    And I should see the text "Failed"
+    And I should see the text "Fail" in the "Monitor" row
 
   Scenario Outline: OS/Browser results
     When I run a system check with the "<os>" operating system and the "<browser>" browser version "<version>"
@@ -732,3 +763,216 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     | ubuntu12 | chrome  | 38      | false  |
     | ubuntu12 | chrome  | 39      | false  |
     | ubuntu12 | chrome  | 40      | false  |
+
+  Scenario Outline: PRC-1045 Java plugin pass/fail
+    When I run a system check with the "<jre>" JRE version and the "<os>" operating system and the "<browser>" browser version "<version>"
+    Then I should get a "<result>" result
+  Examples:
+    | jre      | os       | browser | version | result |
+    | 1.4.0_65 | winxpsp3 | ie      | 9       | false  |
+    | 1.4.0_65 | winxpsp3 | ie      | 10      | false  |
+    | 1.4.0_65 | winxpsp3 | ie      | 11      | false  |
+    | 1.5.0_65 | winxpsp3 | ie      | 9       | true   |
+    | 1.5.0_65 | winxpsp3 | ie      | 10      | false  |
+    | 1.5.0_65 | winxpsp3 | ie      | 11      | false  |
+    | 1.6.0_65 | winxpsp3 | ie      | 9       | true   |
+    | 1.6.0_65 | winxpsp3 | ie      | 10      | true   |
+    | 1.6.0_65 | winxpsp3 | ie      | 11      | false  |
+    | 1.7.0_65 | winxpsp3 | ie      | 9       | true   |
+    | 1.7.0_65 | winxpsp3 | ie      | 10      | true   |
+    | 1.7.0_65 | winxpsp3 | ie      | 11      | true   |
+    | 1.5.0_65 | winxpsp3 | chrome  | 34      | false  |
+    | 1.5.0_65 | winxpsp3 | chrome  | 35      | false  |
+    | 1.5.0_65 | winxpsp3 | chrome  | 36      | false  |
+    | 1.5.0_65 | winxpsp3 | chrome  | 37      | false  |
+    | 1.5.0_65 | winxpsp3 | chrome  | 38      | false  |
+    | 1.5.0_65 | winxpsp3 | chrome  | 39      | false  |
+    | 1.5.0_65 | winxpsp3 | chrome  | 40      | false  |
+    | 1.6.0_65 | winxpsp3 | chrome  | 34      | false  |
+    | 1.6.0_65 | winxpsp3 | chrome  | 35      | true   |
+    | 1.6.0_65 | winxpsp3 | chrome  | 36      | true   |
+    | 1.6.0_65 | winxpsp3 | chrome  | 37      | true   |
+    | 1.6.0_65 | winxpsp3 | chrome  | 38      | true   |
+    | 1.6.0_65 | winxpsp3 | chrome  | 39      | true   |
+    | 1.6.0_65 | winxpsp3 | chrome  | 40      | false  |
+    | 1.6.0_65 | winxpsp3 | ff      | 27      | false  |
+    | 1.6.0_65 | winxpsp3 | ff      | 28      | true   |
+    | 1.6.0_65 | winxpsp3 | ff      | 29      | true   |
+    | 1.6.0_65 | winxpsp3 | ff      | 30      | true   |
+    | 1.6.0_65 | winxpsp3 | ff      | 31      | true   |
+    | 1.6.0_65 | winxpsp3 | ff      | 32      | true   |
+    | 1.6.0_65 | winxpsp3 | ff      | 33      | true   |
+    | 1.6.0_65 | winxpsp3 | ff      | 34      | true   |
+    | 1.6.0_65 | winxpsp3 | ff      | 35      | true   |
+    | 1.6.0_65 | winxpsp3 | ff      | 36      | false  |
+    | 1.6.0_25 | winxpsp3 | ff      | 27      | false  |
+    | 1.6.0_25 | winxpsp3 | ff      | 28      | false  |
+    | 1.6.0_25 | winxpsp3 | ff      | 29      | false  |
+    | 1.6.0_25 | winxpsp3 | ff      | 30      | false  |
+    | 1.6.0_25 | winxpsp3 | ff      | 31      | false  |
+    | 1.6.0_25 | winxpsp3 | ff      | 32      | false  |
+    | 1.6.0_25 | winxpsp3 | ff      | 33      | false  |
+    | 1.6.0_25 | winxpsp3 | ff      | 34      | false  |
+    | 1.6.0_25 | winxpsp3 | ff      | 35      | false  |
+    | 1.6.0_25 | winxpsp3 | ff      | 36      | false  |
+
+    | 1.5.0_65 | mac106   | safari  | 5       | false  |
+    | 1.5.0_65 | mac106   | safari  | 6       | false  |
+    | 1.5.0_65 | mac106   | safari  | 7       | false  |
+    | 1.5.0_65 | mac106   | safari  | 8       | false  |
+    | 1.6.0_35 | mac106   | safari  | 5       | false  |
+    | 1.6.0_35 | mac106   | safari  | 6       | true   |
+    | 1.6.0_35 | mac106   | safari  | 7       | true   |
+    | 1.6.0_35 | mac106   | safari  | 8       | true   |
+
+    | 1.6.0_65 | mac106   | safari  | 5       | true   |
+    | 1.6.0_65 | mac106   | safari  | 6       | true   |
+    | 1.6.0_65 | mac106   | safari  | 7       | true   |
+    | 1.6.0_65 | mac106   | safari  | 8       | true   |
+    | 1.6.0_30 | mac106   | ff      | 27      | false  |
+    | 1.6.0_30 | mac106   | ff      | 28      | true   |
+    | 1.6.0_30 | mac106   | ff      | 29      | true   |
+    | 1.6.0_30 | mac106   | ff      | 30      | true   |
+    | 1.6.0_30 | mac106   | ff      | 31      | true   |
+    | 1.6.0_30 | mac106   | ff      | 32      | true   |
+    | 1.6.0_30 | mac106   | ff      | 33      | true   |
+    | 1.6.0_30 | mac106   | ff      | 34      | true   |
+    | 1.6.0_30 | mac106   | ff      | 35      | true   |
+    | 1.6.0_30 | mac106   | ff      | 36      | false  |
+    | 1.6.0_65 | mac106   | chrome  | 34      | false  |
+    | 1.6.0_65 | mac106   | chrome  | 35      | false  |
+    | 1.6.0_65 | mac106   | chrome  | 36      | false  |
+    | 1.6.0_65 | mac106   | chrome  | 37      | false  |
+    | 1.6.0_65 | mac106   | chrome  | 38      | false  |
+    | 1.6.0_65 | mac106   | chrome  | 39      | false  |
+    | 1.6.0_65 | mac106   | chrome  | 40      | false  |
+
+    | 1.6.0_65 | chrome35 | safari  | 5       | false  |
+    | 1.6.0_65 | chrome35 | safari  | 6       | false  |
+    | 1.6.0_65 | chrome35 | safari  | 7       | false  |
+    | 1.6.0_65 | chrome35 | safari  | 8       | false  |
+    | 1.6.0_65 | chrome35 | ff      | 27      | false  |
+    | 1.6.0_65 | chrome35 | ff      | 28      | false  |
+    | 1.6.0_65 | chrome35 | ff      | 29      | false  |
+    | 1.6.0_65 | chrome35 | ff      | 30      | false  |
+    | 1.6.0_65 | chrome35 | ff      | 31      | false  |
+    | 1.6.0_65 | chrome35 | ff      | 32      | false  |
+    | 1.6.0_65 | chrome35 | ff      | 33      | false  |
+    | 1.6.0_65 | chrome35 | ff      | 34      | false  |
+    | 1.6.0_65 | chrome35 | ff      | 35      | false  |
+    | 1.6.0_65 | chrome35 | ff      | 36      | false  |
+    | 1.6.0_65 | chrome35 | chrome  | 34      | false  |
+    | 1.6.0_65 | chrome35 | chrome  | 35      | false  |
+    | 1.6.0_65 | chrome35 | chrome  | 36      | false  |
+    | 1.6.0_65 | chrome35 | chrome  | 37      | false  |
+    | 1.6.0_65 | chrome35 | chrome  | 38      | false  |
+    | 1.6.0_65 | chrome35 | chrome  | 39      | false  |
+    | 1.6.0_65 | chrome35 | chrome  | 40      | false  |
+
+    | 1.6.0_65 | ios6     | safari  | 5       | false  |
+    | 1.6.0_65 | ios6     | safari  | 6       | false  |
+    | 1.6.0_65 | ios6     | safari  | 7       | false  |
+    | 1.6.0_65 | ios6     | safari  | 8       | false  |
+    | 1.6.0_65 | ios6     | ff      | 27      | false  |
+    | 1.6.0_65 | ios6     | ff      | 28      | false  |
+    | 1.6.0_65 | ios6     | ff      | 29      | false  |
+    | 1.6.0_65 | ios6     | ff      | 30      | false  |
+    | 1.6.0_65 | ios6     | ff      | 31      | false  |
+    | 1.6.0_65 | ios6     | ff      | 32      | false  |
+    | 1.6.0_65 | ios6     | ff      | 33      | false  |
+    | 1.6.0_65 | ios6     | ff      | 34      | false  |
+    | 1.6.0_65 | ios6     | ff      | 35      | false  |
+    | 1.6.0_65 | ios6     | ff      | 36      | false  |
+    | 1.6.0_65 | ios6     | chrome  | 34      | false  |
+    | 1.6.0_65 | ios6     | chrome  | 35      | false  |
+    | 1.6.0_65 | ios6     | chrome  | 36      | false  |
+    | 1.6.0_65 | ios6     | chrome  | 37      | false  |
+    | 1.6.0_65 | ios6     | chrome  | 38      | false  |
+    | 1.6.0_65 | ios6     | chrome  | 39      | false  |
+    | 1.6.0_65 | ios6     | chrome  | 40      | false  |
+
+    | 1.6.0_65 | fedora19 | safari  | 5       | false  |
+    | 1.6.0_65 | fedora19 | safari  | 6       | false  |
+    | 1.6.0_65 | fedora19 | safari  | 7       | false  |
+    | 1.6.0_65 | fedora19 | safari  | 8       | false  |
+    | 1.6.0_65 | fedora19 | ff      | 27      | false  |
+    | 1.6.0_65 | fedora19 | ff      | 28      | false  |
+    | 1.6.0_65 | fedora19 | ff      | 29      | false  |
+    | 1.6.0_65 | fedora19 | ff      | 30      | false  |
+    | 1.6.0_65 | fedora19 | ff      | 31      | false  |
+    | 1.6.0_65 | fedora19 | ff      | 32      | false  |
+    | 1.6.0_65 | fedora19 | ff      | 33      | false  |
+    | 1.6.0_65 | fedora19 | ff      | 34      | false  |
+    | 1.6.0_65 | fedora19 | ff      | 35      | false  |
+    | 1.6.0_65 | fedora19 | ff      | 36      | false  |
+    | 1.7.0_65 | fedora19 | ff      | 27      | false  |
+    | 1.7.0_65 | fedora19 | ff      | 28      | true   |
+    | 1.7.0_65 | fedora19 | ff      | 29      | true   |
+    | 1.7.0_65 | fedora19 | ff      | 30      | true   |
+    | 1.7.0_65 | fedora19 | ff      | 31      | true   |
+    | 1.7.0_65 | fedora19 | ff      | 32      | true   |
+    | 1.7.0_65 | fedora19 | ff      | 33      | true   |
+    | 1.7.0_65 | fedora19 | ff      | 34      | true   |
+    | 1.7.0_65 | fedora19 | ff      | 35      | true   |
+    | 1.7.0_65 | fedora19 | ff      | 36      | false  |
+    | 1.6.0_65 | fedora19 | chrome  | 34      | false  |
+    | 1.6.0_65 | fedora19 | chrome  | 35      | false  |
+    | 1.6.0_65 | fedora19 | chrome  | 36      | false  |
+    | 1.6.0_65 | fedora19 | chrome  | 37      | false  |
+    | 1.6.0_65 | fedora19 | chrome  | 38      | false  |
+    | 1.6.0_65 | fedora19 | chrome  | 39      | false  |
+    | 1.6.0_65 | fedora19 | chrome  | 40      | false  |
+
+    | 1.6.0_65 | ubuntu12 | safari  | 5       | false  |
+    | 1.6.0_65 | ubuntu12 | safari  | 6       | false  |
+    | 1.6.0_65 | ubuntu12 | safari  | 7       | false  |
+    | 1.6.0_65 | ubuntu12 | safari  | 8       | false  |
+    | 1.6.0_65 | ubuntu12 | ff      | 27      | false  |
+    | 1.6.0_65 | ubuntu12 | ff      | 28      | false  |
+    | 1.6.0_65 | ubuntu12 | ff      | 29      | false  |
+    | 1.6.0_65 | ubuntu12 | ff      | 30      | false  |
+    | 1.6.0_65 | ubuntu12 | ff      | 31      | false  |
+    | 1.6.0_65 | ubuntu12 | ff      | 32      | false  |
+    | 1.6.0_65 | ubuntu12 | ff      | 33      | false  |
+    | 1.6.0_65 | ubuntu12 | ff      | 34      | false  |
+    | 1.6.0_65 | ubuntu12 | ff      | 35      | false  |
+    | 1.6.0_65 | ubuntu12 | ff      | 36      | false  |
+    | 1.7.0_65 | ubuntu12 | ff      | 27      | false  |
+    | 1.7.0_65 | ubuntu12 | ff      | 28      | true   |
+    | 1.7.0_65 | ubuntu12 | ff      | 29      | true   |
+    | 1.7.0_65 | ubuntu12 | ff      | 30      | true   |
+    | 1.7.0_65 | ubuntu12 | ff      | 31      | true   |
+    | 1.7.0_65 | ubuntu12 | ff      | 32      | true   |
+    | 1.7.0_65 | ubuntu12 | ff      | 33      | true   |
+    | 1.7.0_65 | ubuntu12 | ff      | 34      | true   |
+    | 1.7.0_65 | ubuntu12 | ff      | 35      | true   |
+    | 1.7.0_65 | ubuntu12 | ff      | 36      | false  |
+    | 1.6.0_65 | ubuntu12 | chrome  | 34      | false  |
+    | 1.6.0_65 | ubuntu12 | chrome  | 35      | false  |
+    | 1.6.0_65 | ubuntu12 | chrome  | 36      | false  |
+    | 1.6.0_65 | ubuntu12 | chrome  | 37      | false  |
+    | 1.6.0_65 | ubuntu12 | chrome  | 38      | false  |
+    | 1.6.0_65 | ubuntu12 | chrome  | 39      | false  |
+    | 1.6.0_65 | ubuntu12 | chrome  | 40      | false  |
+
+  Scenario: PRC-1045 - Run check headless - JRE Version Fail
+    Given I am logged in as a user with the "Educator" role
+    And I am on "admin/structure/entity-type/prc_trt/system_check/add"
+    And I fill in "System check name" with "Check 2"
+    And I fill in "Number of devices" with "23"
+    And I select "Desktop" from "Device type"
+    And I select "Windows 7" from "Operating system"
+    And I fill in "Monitor size (in inches)" with "17"
+    And I select "At least 2 Ghz and under 2.5 Ghz" from "Processor speed"
+    And I select "At least 2 GB and under 4 GB" from "RAM"
+    And I fill in the hidden field "faux_browser" with "ff 33"
+    And I fill in the hidden field "faux_javascript" with "true"
+    And I fill in the hidden field "faux_jre_version" with "1.5.0_65"
+    And I fill in the hidden field "faux_cookies" with "true"
+    And I fill in the hidden field "faux_images" with "true"
+    And I fill in the hidden field "faux_monitor_color_depth" with "16"
+    And I fill in the hidden field "faux_screen_resolution_width" with "1024"
+    And I fill in the hidden field "faux_screen_resolution_height" with "768"
+    When I press "Submit"
+    Then I should see the text "Fail" in the "Java" row
+

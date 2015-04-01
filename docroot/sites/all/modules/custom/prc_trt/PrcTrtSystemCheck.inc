@@ -86,21 +86,22 @@ class PrcTrtSystemCheck {
       $browser_pass = -1;
     }
     else {
-      $browser_pass = $this->browserOSCompatibilityCheck($browser, $version, $os);
+      $browser_pass = $this->browserOSCompatibilityCheck($browser, $version, $os) ? 1 : 0;
     }
     return $browser_pass;
   }
 
   public function browserResult() {
-    switch ($this->browserPass()) {
+    $pass_result = $this->browserPass();
+    switch ($pass_result) {
+      case 1;
+        $browser_result = t('Pass');
+        break;
       case -1:
         $browser_result = t('Upgrade recommended');
         break;
-      case 0;
+      default;
         $browser_result = t('Fail');
-        break;
-      case 1;
-        $browser_result = t('Pass');
         break;
     }
     return $browser_result;
@@ -121,6 +122,15 @@ class PrcTrtSystemCheck {
     return $images_pass;
   }
 
+  public function jrePass() {
+    $browser = $this->wrapper->field_browser->value();
+    $version = $this->wrapper->field_browser_version->value();
+    $os = $this->wrapper->field_operating_system->value();
+    $jre = $this->wrapper->field_jre_version->value();
+    $browser_pass = $this->jreBrowserCheck($browser, $version, $os, $jre);
+    return $browser_pass;
+  }
+
   public function overallPass() {
     $os_pass = $this->operatingSystemPass();
     $size_pass = $this->monitorSizePass();
@@ -131,9 +141,71 @@ class PrcTrtSystemCheck {
     $cookies_pass = $this->cookiesPass();
     $js_pass = $this->jsPass();
     $images_pass = $this->imagesPass();
+    $jre_pass = $this->jrePass();
 
-    $all_pass = $os_pass && $size_pass && $depth_pass && $res_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass;
+    $all_pass = $os_pass && $size_pass && $depth_pass && $res_pass && $ram_pass && $cookies_pass && $js_pass && $images_pass && $jre_pass;
     return $all_pass ? 1 : 0;
+  }
+
+  public function jreBrowserCheck($browser, $browser_version, $os, $jre) {
+    $result = FALSE;
+    if ($jre) {
+      $jre_pieces = explode('_', $jre);
+      $jre_little_version = intval($jre_pieces[1]);
+      $jre_big_version = floatval($jre_pieces[0]);
+
+      if (strpos($os, 'win') !== FALSE) {
+        switch ($browser) {
+          case 'ie':
+            switch ($browser_version) {
+              case 9:
+                $result = $jre_big_version >= 1.5;
+                break;
+              case 10:
+                $result = $jre_big_version >= 1.6;
+                break;
+              case 11:
+                $result = $jre_big_version >= 1.7;
+                break;
+            }
+            break;
+          case 'chrome':
+            if ($browser_version > 34 && $browser_version < 40) {
+              $result = $jre_big_version >= 1.6;
+            }
+            break;
+          case 'ff':
+            if ($browser_version > 27 && $browser_version < 36) {
+              $result = $jre_big_version >= 1.6 && $jre_little_version >= 30;
+            }
+            break;
+        }
+      }
+      elseif (strpos($os, 'mac') !== FALSE) {
+        switch ($browser) {
+          case 'safari':
+            switch ($browser_version) {
+              case 5:
+                $result = $jre_big_version >= 1.6 && $jre_little_version >= 65;
+                break;
+              default:
+                $result = $jre_big_version >= 1.6;
+                break;
+            }
+          case 'ff':
+            if ($browser_version > 27 && $browser_version < 36) {
+              $result = $jre_big_version >= 1.6 && $jre_little_version >= 30;
+            }
+            break;
+        }
+      }
+      elseif (strpos($os, 'fedora') !== FALSE || strpos($os, 'ubuntu') !== FALSE) {
+        if ($browser == 'ff' && $browser_version > 27 && $browser_version < 36) {
+          $result = $jre_big_version >= 1.7;
+        }
+      }
+    }
+    return $result;
   }
 
   public function browserOSCompatibilityCheck($browser, $browser_version, $os) {
