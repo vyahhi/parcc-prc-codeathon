@@ -5886,6 +5886,7 @@ message explaining what the check does and the importance of running it.';
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -6134,6 +6135,50 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['filters']['type']['value'] = array(
     'school' => 'school',
   );
+  /* Filter criterion: COUNT(DISTINCT Prc_trt: Id) */
+  $handler->display->display_options['filters']['id']['id'] = 'id';
+  $handler->display->display_options['filters']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['filters']['id']['field'] = 'id';
+  $handler->display->display_options['filters']['id']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['filters']['id']['group_type'] = 'count_distinct';
+  $handler->display->display_options['filters']['id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['id']['expose']['operator_id'] = 'id_op';
+  $handler->display->display_options['filters']['id']['expose']['label'] = 'Id';
+  $handler->display->display_options['filters']['id']['expose']['operator'] = 'id_op';
+  $handler->display->display_options['filters']['id']['expose']['identifier'] = 'id';
+  $handler->display->display_options['filters']['id']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['id']['group_info']['label'] = 'Readiness Checks Run?';
+  $handler->display->display_options['filters']['id']['group_info']['identifier'] = 'id';
+  $handler->display->display_options['filters']['id']['group_info']['widget'] = 'radios';
+  $handler->display->display_options['filters']['id']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'Yes',
+      'operator' => '!=',
+      'value' => array(
+        'value' => '0',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+    2 => array(
+      'title' => 'No',
+      'operator' => '=',
+      'value' => array(
+        'value' => '0',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => array(
+        'value' => '',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+  );
 
   /* Display: TRT District Schools List */
   $handler = $view->new_display('panel_pane', 'TRT District Schools List', 'panel_pane_1');
@@ -6149,6 +6194,7 @@ message explaining what the check does and the importance of running it.';
       'label' => 'Content: District (field_ref_district)',
     ),
   );
+  $handler->display->display_options['inherit_panels_path'] = '1';
   $export['trt_district_schools'] = $view;
 
   $view = new view();
