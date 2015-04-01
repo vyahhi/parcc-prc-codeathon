@@ -5887,6 +5887,7 @@ message explaining what the check does and the importance of running it.';
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -5917,6 +5918,10 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = 'No schools have been added to your district. Please click one of the Add School links above to add schools.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Relationship: Entity Reference: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['id'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['field'] = 'reverse_field_ref_school_prc_trt';
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
@@ -6090,6 +6095,17 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['label'] = 'School Contact Email Address';
+  /* Field: COUNT(DISTINCT Prc_trt: Id) */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['id']['group_type'] = 'count_distinct';
+  $handler->display->display_options['fields']['id']['label'] = 'Readiness Checks Run?';
+  $handler->display->display_options['fields']['id']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['id']['alter']['text'] = 'Yes';
+  $handler->display->display_options['fields']['id']['empty'] = 'No';
+  $handler->display->display_options['fields']['id']['empty_zero'] = TRUE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
