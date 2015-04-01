@@ -66,7 +66,7 @@ function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form,
   $form['field_devices_capacity']['#access'] = FALSE;
   $form['field_devices_capacity_results']['#access'] = FALSE;
   $form['field_bandwidth_capacity']['#access'] = FALSE;
-  $form['field_bandwidth_capacity_result']['#access'] = FALSE;
+  $form['field_bandwidth_capacity_results']['#access'] = FALSE;
 }
 
 function prc_trt_form_eck__entity__form_edit_prc_trt_system_check_alter(&$form, &$form_state) {
@@ -973,6 +973,7 @@ function prc_trt_preprocess_breadcrumb(&$variables) {
       $w_syscheck = entity_metadata_wrapper('prc_trt', $syscheck);
       $node = $w_syscheck->field_ref_school->value();
       if ($node) {
+        // Structured...
         if ($full_admin || $school_admin || $district_admin || $state_admin) {
           $breadcrumbs = array();
           $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($node);
@@ -992,11 +993,22 @@ function prc_trt_preprocess_breadcrumb(&$variables) {
           }
         }
         $variables['breadcrumb'] = $breadcrumbs;
+      } else {
+        // Unstructured.
+        if (strpos($item['path'], 'system')) {
+          $breadcrumbs[] = t('System Check');
+          $breadcrumbs[] = l(t('Testing Capacity Checks'), 'admin/structure/entity-type/prc_trt/capacity_check/add');
+        } else {
+          $breadcrumbs[] = l(t('System Check'), 'admin/structure/entity-type/prc_trt/system_check/add');
+          $breadcrumbs[] = t('Testing Capacity Checks');
+        }
+        $variables['breadcrumb'] = $breadcrumbs;
       }
       break;
     case 'admin/structure/entity-type/prc_trt/system_check/add':
     case 'admin/structure/entity-type/prc_trt/capacity_check/add':
       if (array_key_exists('field_ref_school', $_GET)) {
+        // Structured...
         $school_nid = $_GET['field_ref_school'];
         $school = node_load($school_nid);
         $breadcrumbs = array();
@@ -1005,7 +1017,17 @@ function prc_trt_preprocess_breadcrumb(&$variables) {
           $breadcrumbs[] = l(t('Manage Schools'), "node/$school_nid/manage-schools");
         }
         $variables['breadcrumb'] = $breadcrumbs;
+      } else {
+        // Unstructured...
+        if (strpos($item['path'], 'system')) {
+          $breadcrumbs[] = t('System Check');
+          $breadcrumbs[] = l(t('Testing Capacity Checks'), 'admin/structure/entity-type/prc_trt/capacity_check/add');
+        } else {
+          $breadcrumbs[] = l(t('System Check'), 'admin/structure/entity-type/prc_trt/system_check/add');
+          $breadcrumbs[] = t('Testing Capacity Checks');
+        }
       }
+    $variables['breadcrumb'] = $breadcrumbs;
       break;
     default:
       array_shift($variables['breadcrumb']);

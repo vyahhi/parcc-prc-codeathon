@@ -1,4 +1,4 @@
-@api @trt @state
+@api @trt @state @prc-707
 Feature: PRC-707 State Readiness
   As a State Admin,
   I want to view my State Readiness page,
