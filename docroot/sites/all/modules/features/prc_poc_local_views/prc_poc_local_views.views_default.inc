@@ -5962,6 +5962,13 @@ message explaining what the check does and the importance of running it.';
       'override_label' => 0,
       'label' => '',
     ),
+    'action::prc_trt_delete_schools' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
     'action::views_bulk_operations_script_action' => array(
       'selected' => 0,
       'postpone_processing' => 0,

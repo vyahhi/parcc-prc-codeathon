@@ -34,8 +34,8 @@ Feature: PRC-997 Manage Schools - Delete Schools - Select Schools
       | <school_name> | @nid[<district_name>] | <user_name>         | @currentuid |
     And I click "Technology Readiness"
     And I click "<district_name>"
-    And I click "Manage Schools"
-    Then I break
+    When I click "Manage Schools"
+    Then I should see a "Delete Schools" button
   Examples:
     | user_state     | member_state   | user_name                          | district_name            | school_name            |
     | North Virginia | Vermont Island | joe_prc_960a@timestamp@example.com | District 1064 @timestamp | School 1064 @timestamp |

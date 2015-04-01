@@ -3,7 +3,8 @@ description = Performs a test to determine whether the user's machine is capable
 package = PRC
 core = 7.x
 
-files[] = prc_trt_request_readiness_checks
+files[] = prc_trt_request_readiness_checks.inc
+files[] = prc_trt_request_delete_schools.inc
 files[] = PrcTrtSystemCheck.inc
 
 
