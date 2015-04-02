@@ -4,12 +4,7 @@ Feature: PRC-1070 Export System Check Data - District Readiness
   I want to export all system checks data for the schools in my district
   so that I can use the data to understand the schools' technology resources and needs.
 
-  Given that I am logged in as a District Admin
-  And I am on my District Readiness page
-  When I click the Export all system checks data to csv link
-  Then I see a csv file containing:
-  Difference from Export System Check Data - State Readiness (PRC-1069)
-  A row for each system check run by each school in my district in alphabetical order by district name, then in alphabetical order by school name then in reverse-chronological order by date and time system check was run.
+#  A row for each system check run by each school in my district in alphabetical order by district name, then in alphabetical order by school name then in reverse-chronological order by date and time system check was run.
 
   Scenario Outline: Export system checks
     Given users:
