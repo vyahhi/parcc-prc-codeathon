@@ -498,12 +498,14 @@ function _prc_trt_presave_school($entity) {
   if ($ref_district) {
     $w_dist = entity_metadata_wrapper('node', $ref_district);
     $trt_state = $w_dist->field_ref_trt_state->value();
-    $w_state = entity_metadata_wrapper('node', $trt_state);
-    if (isset($w_state->field_member_state)) {
-      $member_state = $w_state->field_member_state->value();
-    }
-    if (isset($w_state->field_user_state)) {
-      $user_state = $w_state->field_user_state->value();
+    if ($trt_state) {
+      $w_state = entity_metadata_wrapper('node', $trt_state);
+      if (isset($w_state->field_member_state)) {
+        $member_state = $w_state->field_member_state->value();
+      }
+      if (isset($w_state->field_user_state)) {
+        $user_state = $w_state->field_user_state->value();
+      }
     }
   }
 

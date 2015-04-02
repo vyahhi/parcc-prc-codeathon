@@ -1581,23 +1581,19 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   public function atLeastOneElementShouldContain($element, $text) {
     $page = $this->getSession()->getPage();
     $elements = $page->findAll('css', $element);
-    $found = FALSE;
     foreach($elements as $element){
-      if (strpos($element->getText(), $text) === FALSE) {
-        $found = TRUE;
-        exit;
+      if (strpos($element->getText(), $text) !== FALSE) {
+        return;
       }
     }
-    if($found === FALSE){
-      throw new \Exception(sprintf('There was no %s element found with the text %s', $element, $text));
-    }
+    throw new \Exception(sprintf('There was no %s element found with the text %s', $element, $text));
   }
 
   /**
    * @Then /^I take a screenshot$/
    */
   public function iTakeAScreenshot($feature_file_full = 'shot') {
-    $fileName = time(); //$this->timestamp;
+    $fileName = time();
     // TODO: Make this a setting in behat.yml?
     $html_dump_path = 'failures';
 
