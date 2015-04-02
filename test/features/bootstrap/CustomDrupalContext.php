@@ -1286,13 +1286,12 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^I should see CSV text matching "([^"]*)"$/
    */
   public function iShouldSeeCsvTextMatching($arg1) {
+    $arg1 = $this->fixStepArgument($arg1);
     $actual = $this->getSession()->getPage()->getContent();
-//    print $actual . PHP_EOL;
     if (strpos($actual, $arg1) === FALSE) {
       throw new \Exception(sprintf('The pattern %s was not found anywhere in the text of the current response.', $arg1));
     }
   }
-
 
   public function afterScenario($event) {
     variable_del('drupal_test_email_collector');

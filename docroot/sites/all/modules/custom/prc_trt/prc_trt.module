@@ -263,7 +263,15 @@ function _prc_trt_system_check_extra_field_jre_version_pass($entity) {
   return $field_result;
 }
 
-
+function _prc_trt_capacity_check_extra_field_devices_required($entity) {
+  $w = entity_metadata_wrapper('prc_trt', $entity);
+  $students = $w->field_number_of_students->value();
+  $sittings = $w->field_sittings_per_student->value();
+  $days = $w->field_number_testing_days->value();
+  $sessions = $w->field_number_of_sessions->value();
+  $devices_required = ceil((($students * $sittings) / ($days * $sessions)) * 1.1);
+  return $devices_required;
+}
 /**
  * Implements hook_field_extra_fields().
  */
@@ -341,6 +349,7 @@ function prc_trt_field_extra_fields() {
       'label' => t('Number of devices required'),
       'description' => t('How many devices are required?'),
       'weight' => 4,
+      'callback' => '_prc_trt_capacity_check_extra_field_devices_required',
     ),
     'devices_capacity' => array(
       'label' => t('Devices capacity'),
@@ -1215,6 +1224,25 @@ function prc_trt_views_pre_render(&$view) {
       $school_name = $row->node_title;
       $check_type = $row->_field_data['field_ref_school_node_id']['entity']->type;
       if ($rows[$school_name] != $check_type) {
+        // System check where school has multiple rows. Kill it.
+        unset($view->result[$index]);
+      }
+    }
+  } elseif ($view->name == 'trt_capacity_check_export') {
+    $rows = array();
+    // First we catalog rows
+    foreach ($view->result as $row) {
+      $school_nid = $row->node_field_data_field_ref_school_nid;
+      $check_id = $row->id;
+      if (!array_key_exists($school_nid, $rows) || $rows[$school_nid] < $check_id) {
+        $rows[$school_nid] = $check_id;
+      }
+    }
+    // Now we start hiding rows for schools with both types of checks
+    foreach ($view->result as $index => $row) {
+      $school_nid = $row->node_field_data_field_ref_school_nid;
+      $check_id = $row->id;
+      if ($rows[$school_nid] != $check_id) {
         // System check where school has multiple rows. Kill it.
         unset($view->result[$index]);
       }

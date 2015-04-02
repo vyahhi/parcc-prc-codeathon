@@ -4661,7 +4661,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['created']['label'] = 'Date & Time';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: prc_trt: Number of devices ready for assessment */
+  /* Field: prc_trt: Number of devices */
   $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
@@ -5658,6 +5658,247 @@ message explaining what the check does and the importance of running it.';
   $export['transcript'] = $view;
 
   $view = new view();
+  $view->name = 'trt_capacity_check_export';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'eck_prc_trt';
+  $view->human_name = 'TRT Capacity Check Export';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'id' => 'id',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'id' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_ref_district_target_id';
+  $handler->display->display_options['fields']['title_1']['label'] = 'District';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['fields']['title']['label'] = 'School';
+  /* Field: Content: State contact's email address */
+  $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['fields']['field_contact_email']['label'] = 'School Contact Email Address';
+  /* Field: prc_trt: Devices Capacity */
+  $handler->display->display_options['fields']['field_devices_capacity']['id'] = 'field_devices_capacity';
+  $handler->display->display_options['fields']['field_devices_capacity']['table'] = 'field_data_field_devices_capacity';
+  $handler->display->display_options['fields']['field_devices_capacity']['field'] = 'field_devices_capacity';
+  $handler->display->display_options['fields']['field_devices_capacity']['empty'] = '-';
+  $handler->display->display_options['fields']['field_devices_capacity']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Devices Capacity Results */
+  $handler->display->display_options['fields']['field_devices_capacity_results']['id'] = 'field_devices_capacity_results';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['table'] = 'field_data_field_devices_capacity_results';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['field'] = 'field_devices_capacity_results';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['label'] = 'Devices Capacity results';
+  /* Field: prc_trt: Bandwidth Capacity */
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['id'] = 'field_bandwidth_capacity';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['table'] = 'field_data_field_bandwidth_capacity';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['field'] = 'field_bandwidth_capacity';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['settings'] = array(
+    'thousand_separator' => ' ',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Bandwidth Capacity Results */
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['id'] = 'field_bandwidth_capacity_results';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['table'] = 'field_data_field_bandwidth_capacity_results';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['field'] = 'field_bandwidth_capacity_results';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['label'] = 'Bandwidth Capacity results';
+  /* Field: prc_trt: Number of devices */
+  $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['label'] = 'Number of devices ready for assessment';
+  $handler->display->display_options['fields']['field_number_of_devices']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Field: Number of students */
+  $handler->display->display_options['fields']['field_number_of_students']['id'] = 'field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['table'] = 'field_data_field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['field'] = 'field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Number of days of testing */
+  $handler->display->display_options['fields']['field_number_testing_days']['id'] = 'field_number_testing_days';
+  $handler->display->display_options['fields']['field_number_testing_days']['table'] = 'field_data_field_number_testing_days';
+  $handler->display->display_options['fields']['field_number_testing_days']['field'] = 'field_number_testing_days';
+  $handler->display->display_options['fields']['field_number_testing_days']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Number of test sessions per day */
+  $handler->display->display_options['fields']['field_number_of_sessions']['id'] = 'field_number_of_sessions';
+  $handler->display->display_options['fields']['field_number_of_sessions']['table'] = 'field_data_field_number_of_sessions';
+  $handler->display->display_options['fields']['field_number_of_sessions']['field'] = 'field_number_of_sessions';
+  $handler->display->display_options['fields']['field_number_of_sessions']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Number of sittings per student */
+  $handler->display->display_options['fields']['field_sittings_per_student']['id'] = 'field_sittings_per_student';
+  $handler->display->display_options['fields']['field_sittings_per_student']['table'] = 'field_data_field_sittings_per_student';
+  $handler->display->display_options['fields']['field_sittings_per_student']['field'] = 'field_sittings_per_student';
+  $handler->display->display_options['fields']['field_sittings_per_student']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Number of devices required */
+  $handler->display->display_options['fields']['devices_required']['id'] = 'devices_required';
+  $handler->display->display_options['fields']['devices_required']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['devices_required']['field'] = 'devices_required';
+  $handler->display->display_options['fields']['devices_required']['label'] = 'Number of devices required';
+  /* Field: prc_trt: Speed of connection (in Mbps) */
+  $handler->display->display_options['fields']['field_speed_of_connection']['id'] = 'field_speed_of_connection';
+  $handler->display->display_options['fields']['field_speed_of_connection']['table'] = 'field_data_field_speed_of_connection';
+  $handler->display->display_options['fields']['field_speed_of_connection']['field'] = 'field_speed_of_connection';
+  $handler->display->display_options['fields']['field_speed_of_connection']['label'] = 'Speed of connection';
+  $handler->display->display_options['fields']['field_speed_of_connection']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Network connection */
+  $handler->display->display_options['fields']['field_network_connection_type']['id'] = 'field_network_connection_type';
+  $handler->display->display_options['fields']['field_network_connection_type']['table'] = 'field_data_field_network_connection_type';
+  $handler->display->display_options['fields']['field_network_connection_type']['field'] = 'field_network_connection_type';
+  $handler->display->display_options['fields']['field_network_connection_type']['empty'] = '-';
+  /* Field: prc_trt: Wired connection speed */
+  $handler->display->display_options['fields']['field_wired_connection_speed']['id'] = 'field_wired_connection_speed';
+  $handler->display->display_options['fields']['field_wired_connection_speed']['table'] = 'field_data_field_wired_connection_speed';
+  $handler->display->display_options['fields']['field_wired_connection_speed']['field'] = 'field_wired_connection_speed';
+  $handler->display->display_options['fields']['field_wired_connection_speed']['empty'] = '-';
+  /* Field: prc_trt: Wireless connection speed */
+  $handler->display->display_options['fields']['field_wireless_connection_speed']['id'] = 'field_wireless_connection_speed';
+  $handler->display->display_options['fields']['field_wireless_connection_speed']['table'] = 'field_data_field_wireless_connection_speed';
+  $handler->display->display_options['fields']['field_wireless_connection_speed']['field'] = 'field_wireless_connection_speed';
+  $handler->display->display_options['fields']['field_wireless_connection_speed']['empty'] = '-';
+  /* Field: prc_trt: Number of access points */
+  $handler->display->display_options['fields']['field_number_of_access_points']['id'] = 'field_number_of_access_points';
+  $handler->display->display_options['fields']['field_number_of_access_points']['table'] = 'field_data_field_number_of_access_points';
+  $handler->display->display_options['fields']['field_number_of_access_points']['field'] = 'field_number_of_access_points';
+  $handler->display->display_options['fields']['field_number_of_access_points']['empty'] = '-';
+  $handler->display->display_options['fields']['field_number_of_access_points']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['sorts']['title']['relationship'] = 'field_ref_district_target_id';
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['sorts']['title_1']['table'] = 'node';
+  $handler->display->display_options['sorts']['title_1']['field'] = 'title';
+  $handler->display->display_options['sorts']['title_1']['relationship'] = 'field_ref_school_target_id';
+  /* Filter criterion: Prc_trt: prc_trt type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'capacity_check' => 'capacity_check',
+  );
+
+  /* Display: District Capacity Check Export */
+  $handler = $view->new_display('views_data_export', 'District Capacity Check Export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['table'] = 'field_data_field_ref_school';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['field'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['id'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['table'] = 'field_data_field_ref_district';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['field'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['required'] = TRUE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_ref_district_target_id';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['path'] = 'trt/capacity-check/export/district/%';
+
+  /* Display: State Capacity Check Export */
+  $handler = $view->new_display('views_data_export', 'State Capacity Check Export', 'views_data_export_2');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['table'] = 'field_data_field_ref_school';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['field'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['id'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['table'] = 'field_data_field_ref_district';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['field'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['id'] = 'field_ref_trt_state_target_id';
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['table'] = 'field_data_field_ref_trt_state';
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['field'] = 'field_ref_trt_state_target_id';
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['relationship'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['required'] = TRUE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_ref_trt_state_target_id';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['path'] = 'trt/capacity-check/export/state/%';
+  $export['trt_capacity_check_export'] = $view;
+
+  $view = new view();
   $view->name = 'trt_district_readiness_schools';
   $view->description = '';
   $view->tag = 'default';
@@ -6439,10 +6680,11 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['created']['label'] = 'Date & Time System Check Run';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: prc_trt: Number of devices ready for assessment */
+  /* Field: prc_trt: Number of devices */
   $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['label'] = 'Number of devices ready for assessment';
   $handler->display->display_options['fields']['field_number_of_devices']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
@@ -6619,6 +6861,21 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['jre_version_pass']['alter']['text'] = 'Pass';
   $handler->display->display_options['fields']['jre_version_pass']['empty'] = 'Fail';
   $handler->display->display_options['fields']['jre_version_pass']['empty_zero'] = TRUE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['sorts']['title']['relationship'] = 'field_ref_district_target_id';
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['sorts']['title_1']['table'] = 'node';
+  $handler->display->display_options['sorts']['title_1']['field'] = 'title';
+  $handler->display->display_options['sorts']['title_1']['relationship'] = 'field_ref_school_target_id';
+  /* Sort criterion: Prc_trt: Created */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   /* Filter criterion: Prc_trt: prc_trt type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'eck_prc_trt';
@@ -6669,10 +6926,11 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['created']['label'] = 'Date & Time System Check Run';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: prc_trt: Number of devices ready for assessment */
+  /* Field: prc_trt: Number of devices */
   $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['label'] = 'Number of devices ready for assessment';
   $handler->display->display_options['fields']['field_number_of_devices']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
@@ -6910,7 +7168,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['created']['label'] = 'Date & Time System Check Run';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: prc_trt: Number of devices ready for assessment */
+  /* Field: prc_trt: Number of devices */
   $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
@@ -7165,7 +7423,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['created']['label'] = 'Date & Time System Check Run';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: prc_trt: Number of devices ready for assessment */
+  /* Field: prc_trt: Number of devices */
   $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
@@ -7353,6 +7611,22 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['jre_version_pass']['alter']['text'] = 'Pass';
   $handler->display->display_options['fields']['jre_version_pass']['empty'] = 'Fail';
   $handler->display->display_options['fields']['jre_version_pass']['empty_zero'] = TRUE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['sorts']['title']['relationship'] = 'field_ref_district_target_id';
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['sorts']['title_1']['table'] = 'node';
+  $handler->display->display_options['sorts']['title_1']['field'] = 'title';
+  $handler->display->display_options['sorts']['title_1']['relationship'] = 'field_ref_school_target_id';
+  /* Sort criterion: Prc_trt: Created */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['path'] = 'trt/system-check/export/state/%';
   $export['trt_system_check_export'] = $view;
 

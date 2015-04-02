@@ -48,6 +48,7 @@ features[views_view][] = test_search_two
 features[views_view][] = top_content
 features[views_view][] = tracker
 features[views_view][] = transcript
+features[views_view][] = trt_capacity_check_export
 features[views_view][] = trt_district_readiness_schools
 features[views_view][] = trt_district_schools
 features[views_view][] = trt_districts
