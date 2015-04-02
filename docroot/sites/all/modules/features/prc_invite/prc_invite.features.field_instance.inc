@@ -121,6 +121,41 @@ To become a member of [site:name], click the link below or paste it into the add
     ),
   );
 
+  // Exported field_instance: 'invite-invite_by_email-field_member_state'
+  $field_instances['invite-invite_by_email-field_member_state'] = array(
+    'bundle' => 'invite_by_email',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 34,
+      ),
+    ),
+    'entity_type' => 'invite',
+    'field_name' => 'field_member_state',
+    'label' => 'Member State',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+        'label_help_description' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 36,
+    ),
+  );
+
   // Exported field_instance: 'invite-invite_by_email-field_role_id'
   $field_instances['invite-invite_by_email-field_role_id'] = array(
     'bundle' => 'invite_by_email',
@@ -177,7 +212,6 @@ To become a member of [site:name], click the link below or paste it into the add
     ),
     'entity_type' => 'invite',
     'field_name' => 'field_user_state',
-
     'label' => 'State Where You Teach',
     'required' => 1,
     'settings' => array(
@@ -202,6 +236,7 @@ To become a member of [site:name], click the link below or paste it into the add
   t('E-mail');
   t('Enter e-mail body.');
   t('Enter e-mail subject.');
+  t('Member State');
   t('Role ID');
   t('State Where You Teach');
   t('Subject');
