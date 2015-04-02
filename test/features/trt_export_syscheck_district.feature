@@ -33,10 +33,41 @@ Feature: PRC-1070 Export System Check Data - District Readiness
     And "School" nodes:
       | title         | field_ref_district    | field_contact_email            | uid         |
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
-#    And the school "<school_name>" has run a system check
+    And the school "<school_name>" has run a system check
     And I click "Technology Readiness"
     Then I click "<member_state>"
     And I click "<district_name>"
+    When I click "Export all system checks data to .csv"
+    Then I should see CSV text matching "District"
+    Then I should see CSV text matching "School"
+    Then I should see CSV text matching "School Contact Email Address"
+    Then I should see CSV text matching "System Check Name"
+    Then I should see CSV text matching "Date & Time System Check Run"
+    Then I should see CSV text matching "Number of Devices in system check"
+    Then I should see CSV text matching "System Check Results"
+    Then I should see CSV text matching "Device Type"
+    Then I should see CSV text matching "Operating System name"
+    Then I should see CSV text matching "Operating System results"
+    Then I should see CSV text matching "Monitor Size"
+    Then I should see CSV text matching "Monitor Size results"
+    Then I should see CSV text matching "Monitor color depth"
+    Then I should see CSV text matching "Monitor color depth results"
+    Then I should see CSV text matching "Screen resolution"
+    Then I should see CSV text matching "Screen resolution results"
+    Then I should see CSV text matching "Processor speed"
+    Then I should see CSV text matching "Processor speed results"
+    Then I should see CSV text matching "RAM"
+    Then I should see CSV text matching "RAM results"
+    Then I should see CSV text matching "Browser name"
+    Then I should see CSV text matching "Browser results"
+    Then I should see CSV text matching "Cookies enabled"
+    Then I should see CSV text matching "Cookies enabled results"
+    Then I should see CSV text matching "JavaScript enabled"
+    Then I should see CSV text matching "JavaScript enabled results"
+    Then I should see CSV text matching "Images enabled"
+    Then I should see CSV text matching "Images enabled results"
+    Then I should see CSV text matching "Java plugin version"
+    Then I should see CSV text matching "Java plugin results"
   Examples:
     | user_state     | member_state | user_name                          | district_name         | school_name              |
     | South Virginia | Old York     | joe_prc_814a@timestamp@example.com | PRC-814 S1 @timestamp | School 814 S1 @timestamp |

@@ -197,6 +197,73 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form
   form_set_value($form['field_jre_version'], array(LANGUAGE_NONE => array(0 => array('value' => $jre_version))), $form_state);
 }
 
+function _prc_trt_system_check_extra_field_operating_system_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->operatingSystemPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_monitor_size_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->monitorSizePass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_monitor_color_depth_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->colorDepthPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_screen_resolution_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->resolutionPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_processor_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->processorPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_ram_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->ramPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_browser_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->browserResult();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_cookies_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->cookiesPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_javascript_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->jsPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_images_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->imagesPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_jre_version_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->jrePass();
+  return $field_result;
+}
+
+
 /**
  * Implements hook_field_extra_fields().
  */
@@ -206,56 +273,67 @@ function prc_trt_field_extra_fields() {
       'label' => t('Operating system: Results'),
       'description' => t('Did operating system pass?'),
       'weight' => 12,
+      'callback' => '_prc_trt_system_check_extra_field_operating_system_pass',
     ),
     'monitor_size_pass' => array(
       'label' => t('Monitor size: Results'),
       'description' => t('Did monitor size pass?'),
       'weight' => 13,
+      'callback' => '_prc_trt_system_check_extra_field_monitor_size_pass',
     ),
     'monitor_color_depth_pass' => array(
       'label' => t('Monitor color depth: Results'),
       'description' => t('Did monitor color depth pass?'),
       'weight' => 14,
+      'callback' => '_prc_trt_system_check_extra_field_monitor_color_depth_pass',
     ),
     'screen_resolution_pass' => array(
       'label' => t('Screen resolution: Results'),
       'description' => t('Did screen resolution pass?'),
       'weight' => 15,
+      'callback' => '_prc_trt_system_check_extra_field_screen_resolution_pass',
     ),
     'processor_pass' => array(
       'label' => t('Processor speed: Results'),
       'description' => t('Did processor pass?'),
       'weight' => 16,
+      'callback' => '_prc_trt_system_check_extra_field_processor_pass',
     ),
     'ram_pass' => array(
       'label' => t('RAM: Results'),
       'description' => t('Did RAM pass?'),
       'weight' => 17,
+      'callback' => '_prc_trt_system_check_extra_field_ram_pass',
     ),
     'browser_pass' => array(
       'label' => t('Browser: Results'),
       'description' => t('Did browser pass?'),
       'weight' => 18,
+      'callback' => '_prc_trt_system_check_extra_field_browser_pass',
     ),
     'cookies_pass' => array(
       'label' => t('Cookies: Results'),
       'description' => t('Did cookies pass?'),
       'weight' => 19,
+      'callback' => '_prc_trt_system_check_extra_field_cookies_pass',
     ),
     'javascript_pass' => array(
       'label' => t('Javascript: Results'),
       'description' => t('Did Javascript pass?'),
       'weight' => 20,
+      'callback' => '_prc_trt_system_check_extra_field_javascript_pass',
     ),
     'images_pass' => array(
       'label' => t('Images: Results'),
       'description' => t('Did images pass?'),
       'weight' => 21,
+      'callback' => '_prc_trt_system_check_extra_field_images_pass',
     ),
     'jre_version_pass' => array(
       'label' => t('Java: Results'),
       'description' => t('Did Java pass?'),
       'weight' => 21,
+      'callback' => '_prc_trt_system_check_extra_field_jre_version_pass',
     ),
   );
   $extra['prc_trt']['capacity_check']['display'] = array(

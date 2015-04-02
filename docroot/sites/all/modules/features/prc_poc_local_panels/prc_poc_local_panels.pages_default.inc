@@ -494,19 +494,16 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $display->content['new-f101267e-aa69-4019-b48c-d011f1d51c9d'] = $pane;
     $display->panels['middle'][4] = 'new-f101267e-aa69-4019-b48c-d011f1d51c9d';
     $pane = new stdClass();
-    $pane->pid = 'new-946a6cb3-72b6-461d-8fb0-21d0785c53c7';
+    $pane->pid = 'new-3826c54d-c118-435f-abec-49ed01ab353c';
     $pane->panel = 'middle';
-    $pane->type = 'custom';
-    $pane->subtype = 'custom';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-trt-district-export';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'admin_title' => 'TEMPORARY - Export checks to CSV links',
-      'title' => '',
-      'body' => '<a href="#">Export all system checks data to .csv</a>
-<a href="#">Export all testing capacity checks data to .csv</a>',
-      'format' => 'filtered_html',
-      'substitute' => 1,
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -516,9 +513,9 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 5;
     $pane->locks = array();
-    $pane->uuid = '946a6cb3-72b6-461d-8fb0-21d0785c53c7';
-    $display->content['new-946a6cb3-72b6-461d-8fb0-21d0785c53c7'] = $pane;
-    $display->panels['middle'][5] = 'new-946a6cb3-72b6-461d-8fb0-21d0785c53c7';
+    $pane->uuid = '3826c54d-c118-435f-abec-49ed01ab353c';
+    $display->content['new-3826c54d-c118-435f-abec-49ed01ab353c'] = $pane;
+    $display->panels['middle'][5] = 'new-3826c54d-c118-435f-abec-49ed01ab353c';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
