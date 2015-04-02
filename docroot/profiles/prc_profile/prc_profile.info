@@ -89,6 +89,7 @@ dependencies[] = email_registration
 dependencies[] = entity
 dependencies[] = entity_token
 dependencies[] = environment_indicator
+dependencies[] = extrafield_views_integration
 dependencies[] = label_help
 dependencies[] = libraries
 dependencies[] = menu_token

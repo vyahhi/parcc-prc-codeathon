@@ -37,7 +37,6 @@ Feature: PRC-1070 Export System Check Data - District Readiness
     And I click "Technology Readiness"
     Then I click "<member_state>"
     And I click "<district_name>"
-    Then I break
   Examples:
     | user_state     | member_state | user_name                          | district_name         | school_name              |
     | South Virginia | Old York     | joe_prc_814a@timestamp@example.com | PRC-814 S1 @timestamp | School 814 S1 @timestamp |
