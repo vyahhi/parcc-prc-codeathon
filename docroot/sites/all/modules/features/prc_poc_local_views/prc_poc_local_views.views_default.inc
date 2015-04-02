@@ -7152,11 +7152,12 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['relationship'] = 'field_ref_school_target_id';
-  $handler->display->display_options['fields']['field_contact_email']['label'] = 'State Contact Email Address';
+  $handler->display->display_options['fields']['field_contact_email']['label'] = 'School Contact Email Address';
   /* Field: prc_trt: System check name */
   $handler->display->display_options['fields']['field_name']['id'] = 'field_name';
   $handler->display->display_options['fields']['field_name']['table'] = 'field_data_field_name';
   $handler->display->display_options['fields']['field_name']['field'] = 'field_name';
+  $handler->display->display_options['fields']['field_name']['label'] = 'System Check Name';
   /* Field: Prc_trt: Created */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'eck_prc_trt';
@@ -7168,6 +7169,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['label'] = 'Number of Devices in system check';
   $handler->display->display_options['fields']['field_number_of_devices']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
@@ -7176,14 +7178,17 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_result']['id'] = 'field_result';
   $handler->display->display_options['fields']['field_result']['table'] = 'field_data_field_result';
   $handler->display->display_options['fields']['field_result']['field'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['label'] = 'System Check Results';
   /* Field: prc_trt: Device type */
   $handler->display->display_options['fields']['field_device_type']['id'] = 'field_device_type';
   $handler->display->display_options['fields']['field_device_type']['table'] = 'field_data_field_device_type';
   $handler->display->display_options['fields']['field_device_type']['field'] = 'field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['label'] = 'Device Type';
   /* Field: prc_trt: Operating system */
   $handler->display->display_options['fields']['field_operating_system']['id'] = 'field_operating_system';
   $handler->display->display_options['fields']['field_operating_system']['table'] = 'field_data_field_operating_system';
   $handler->display->display_options['fields']['field_operating_system']['field'] = 'field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['label'] = 'Operating System name';
   /* Field: Prc_trt: Extrafield Operating system: Results */
   $handler->display->display_options['fields']['operating_system_pass']['id'] = 'operating_system_pass';
   $handler->display->display_options['fields']['operating_system_pass']['table'] = 'eck_prc_trt';
@@ -7197,6 +7202,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_monitor_size']['id'] = 'field_monitor_size';
   $handler->display->display_options['fields']['field_monitor_size']['table'] = 'field_data_field_monitor_size';
   $handler->display->display_options['fields']['field_monitor_size']['field'] = 'field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['label'] = 'Monitor Size';
   $handler->display->display_options['fields']['field_monitor_size']['settings'] = array(
     'thousand_separator' => ' ',
     'decimal_separator' => '.',
@@ -7238,6 +7244,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_screen_resolution_height']['id'] = 'field_screen_resolution_height';
   $handler->display->display_options['fields']['field_screen_resolution_height']['table'] = 'field_data_field_screen_resolution_height';
   $handler->display->display_options['fields']['field_screen_resolution_height']['field'] = 'field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['label'] = 'Screen resolution';
   $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['text'] = '[field_screen_resolution_width] x [field_screen_resolution_height]';
   $handler->display->display_options['fields']['field_screen_resolution_height']['settings'] = array(
@@ -7279,6 +7286,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser']['id'] = 'field_browser';
   $handler->display->display_options['fields']['field_browser']['table'] = 'field_data_field_browser';
   $handler->display->display_options['fields']['field_browser']['field'] = 'field_browser';
+  $handler->display->display_options['fields']['field_browser']['label'] = 'Browser name';
   /* Field: prc_trt: Browser Version */
   $handler->display->display_options['fields']['field_browser_version']['id'] = 'field_browser_version';
   $handler->display->display_options['fields']['field_browser_version']['table'] = 'field_data_field_browser_version';
@@ -7335,6 +7343,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_jre_version']['id'] = 'field_jre_version';
   $handler->display->display_options['fields']['field_jre_version']['table'] = 'field_data_field_jre_version';
   $handler->display->display_options['fields']['field_jre_version']['field'] = 'field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['label'] = 'Java plugin version';
   /* Field: Prc_trt: Extrafield Java: Results */
   $handler->display->display_options['fields']['jre_version_pass']['id'] = 'jre_version_pass';
   $handler->display->display_options['fields']['jre_version_pass']['table'] = 'eck_prc_trt';

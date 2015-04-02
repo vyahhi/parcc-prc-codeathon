@@ -928,10 +928,10 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $display->content['new-1991df92-3c85-441c-ba76-931b6f73ba4d'] = $pane;
     $display->panels['middle'][1] = 'new-1991df92-3c85-441c-ba76-931b6f73ba4d';
     $pane = new stdClass();
-    $pane->pid = 'new-357a0309-ed14-4166-9bb3-fdbee82bb75c';
+    $pane->pid = 'new-4152d717-046b-4fd4-a3dc-1122465d63b7';
     $pane->panel = 'middle';
     $pane->type = 'block';
-    $pane->subtype = 'menu-menu-trt-state-check-export';
+    $pane->subtype = 'menu-menu-trt-district-export';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -947,9 +947,9 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
-    $pane->uuid = '357a0309-ed14-4166-9bb3-fdbee82bb75c';
-    $display->content['new-357a0309-ed14-4166-9bb3-fdbee82bb75c'] = $pane;
-    $display->panels['middle'][2] = 'new-357a0309-ed14-4166-9bb3-fdbee82bb75c';
+    $pane->uuid = '4152d717-046b-4fd4-a3dc-1122465d63b7';
+    $display->content['new-4152d717-046b-4fd4-a3dc-1122465d63b7'] = $pane;
+    $display->panels['middle'][2] = 'new-4152d717-046b-4fd4-a3dc-1122465d63b7';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
