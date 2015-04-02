@@ -1,4 +1,4 @@
-@api @trt @school @vbo @prc-1056
+@api @trt @school @vbo @prc-1057
 Feature: PRC-1057 Manage Schools - Delete Schools - Select Schools - Form Validation
   As a District Admin,
   I want to get feedback about any errors that occur when I delete schools
