@@ -24,6 +24,7 @@ Feature: PRC-941 Technology Readiness - State Admin View
     And I click "Technology Readiness"
     Then I should see the link "<member_state>"
     And I should see the text "Summary of what user can do here: export state readiness check data, view readiness by district, export district readiness checks data view school readiness data."
+    And I take a screenshot
   Examples:
     | user_state     | member_state | user_name                          |
     | South Virginia | Old York     | joe_prc_941a@timestamp@example.com |

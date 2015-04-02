@@ -6396,5 +6396,140 @@ message explaining what the check does and the importance of running it.';
   );
   $export['trt_states'] = $view;
 
+  $view = new view();
+  $view->name = 'trt_system_check_export';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'eck_prc_trt';
+  $view->human_name = 'TRT System Check Export';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'id' => 'id',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'id' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Field: Prc_trt: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  /* Field: prc_trt: Browser */
+  $handler->display->display_options['fields']['field_browser']['id'] = 'field_browser';
+  $handler->display->display_options['fields']['field_browser']['table'] = 'field_data_field_browser';
+  $handler->display->display_options['fields']['field_browser']['field'] = 'field_browser';
+  /* Field: prc_trt: Browser Version */
+  $handler->display->display_options['fields']['field_browser_version']['id'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['table'] = 'field_data_field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['field'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Browser: Cookies enabled */
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['id'] = 'field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['table'] = 'field_data_field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['field'] = 'field_browser_cookies_enabled';
+  /* Field: prc_trt: Browser: Images enabled */
+  $handler->display->display_options['fields']['field_browser_images_enabled']['id'] = 'field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['table'] = 'field_data_field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['field'] = 'field_browser_images_enabled';
+  /* Field: prc_trt: Browser: Java runtime plugin version */
+  $handler->display->display_options['fields']['field_jre_version']['id'] = 'field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['table'] = 'field_data_field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['field'] = 'field_jre_version';
+  /* Field: prc_trt: Browser: JavaScript enabled */
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['id'] = 'field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['table'] = 'field_data_field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['field'] = 'field_browser_javascript_enabled';
+  /* Field: prc_trt: Device type */
+  $handler->display->display_options['fields']['field_device_type']['id'] = 'field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['table'] = 'field_data_field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['field'] = 'field_device_type';
+  /* Field: prc_trt: Monitor color depth */
+  $handler->display->display_options['fields']['field_monitor_color_depth']['id'] = 'field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['table'] = 'field_data_field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['field'] = 'field_monitor_color_depth';
+  /* Field: prc_trt: Monitor size (in inches) */
+  $handler->display->display_options['fields']['field_monitor_size']['id'] = 'field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['table'] = 'field_data_field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['field'] = 'field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['settings'] = array(
+    'thousand_separator' => ' ',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Number of devices */
+  $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Operating system */
+  $handler->display->display_options['fields']['field_operating_system']['id'] = 'field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['table'] = 'field_data_field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['field'] = 'field_operating_system';
+  /* Field: prc_trt: Processor speed */
+  $handler->display->display_options['fields']['field_processor_speed']['id'] = 'field_processor_speed';
+  $handler->display->display_options['fields']['field_processor_speed']['table'] = 'field_data_field_processor_speed';
+  $handler->display->display_options['fields']['field_processor_speed']['field'] = 'field_processor_speed';
+  /* Field: prc_trt: RAM */
+  $handler->display->display_options['fields']['field_ram']['id'] = 'field_ram';
+  $handler->display->display_options['fields']['field_ram']['table'] = 'field_data_field_ram';
+  $handler->display->display_options['fields']['field_ram']['field'] = 'field_ram';
+  /* Field: prc_trt: Result */
+  $handler->display->display_options['fields']['field_result']['id'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['table'] = 'field_data_field_result';
+  $handler->display->display_options['fields']['field_result']['field'] = 'field_result';
+  /* Field: prc_trt: Screen Resolution Height */
+  $handler->display->display_options['fields']['field_screen_resolution_height']['id'] = 'field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['table'] = 'field_data_field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['field'] = 'field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Screen Resolution Width */
+  $handler->display->display_options['fields']['field_screen_resolution_width']['id'] = 'field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['table'] = 'field_data_field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['field'] = 'field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: System check name */
+  $handler->display->display_options['fields']['field_name']['id'] = 'field_name';
+  $handler->display->display_options['fields']['field_name']['table'] = 'field_data_field_name';
+  $handler->display->display_options['fields']['field_name']['field'] = 'field_name';
+  /* Filter criterion: Prc_trt: prc_trt type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'system_check' => 'system_check',
+  );
+  $export['trt_system_check_export'] = $view;
+
   return $export;
 }

@@ -52,6 +52,7 @@ features[views_view][] = trt_district_readiness_schools
 features[views_view][] = trt_district_schools
 features[views_view][] = trt_districts
 features[views_view][] = trt_states
+features[views_view][] = trt_system_check_export
 features[features_api][] = api:2
 features[ctools][] = 1
 features_exclude[dependencies][views] = views
