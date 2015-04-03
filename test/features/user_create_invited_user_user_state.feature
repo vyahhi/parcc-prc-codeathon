@@ -15,7 +15,7 @@ Feature: PRC-834 Registration from Invite - Make State Required
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"
     When I press "Send Invitation"
-    Then I should see the error message containing "State Where You Teach field is required."
+    Then I should see the error message containing "State where the invitee teaches field is required."
 
   Scenario: Non-member
     Given I am logged in as a user with the "PRC Admin" role
@@ -23,7 +23,7 @@ Feature: PRC-834 Registration from Invite - Make State Required
     Then I check the box "Educator"
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"
-    And I select "Wyoming" from "State Where You Teach"
+    And I select "Wyoming" from "State where the invitee teaches"
     And I press "Send Invitation"
     Then the email to "example1@timestamp@example.com" should contain "has sent you an invite!"
     And the email should contain "has invited you to join Partnership Resource Center at"
@@ -40,6 +40,7 @@ Feature: PRC-834 Registration from Invite - Make State Required
     And I should not see a "Member State" field
     But I should see the text "State Where I Teach"
     And I should see the text "Wyoming"
+    And I check the box "I have read and agree with the Terms of Use and User Generated Content Disclaimer."
     And I press "Create new account"
     Then I should see the message containing "You have accepted the invitation from"
     And I should see the message containing "Registration successful. You are now logged in."
@@ -57,8 +58,9 @@ Feature: PRC-834 Registration from Invite - Make State Required
     Then I check the box "PARCC-Member Educator"
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"
-    And I select "Illinois" from "State"
-    And I select "Wyoming" from "State Where You Teach"
+    And I select "Illinois - PARCC Member" from "State where the invitee teaches"
+    And I select "Illinois" from "Member State"
+    And I select "Wyoming" from "State where the invitee teaches"
     And I press "Send Invitation"
     Then the email to "example1@timestamp@example.com" should contain "has sent you an invite!"
     And the email should contain "has invited you to join Partnership Resource Center at"
@@ -75,6 +77,7 @@ Feature: PRC-834 Registration from Invite - Make State Required
     And I should not see a "Member State" field
     But I should see the text "State Where I Teach"
     And I should see the text "Wyoming"
+    And I check the box "I have read and agree with the Terms of Use and User Generated Content Disclaimer."
     And I press "Create new account"
     Then I should see the message containing "You have accepted the invitation from"
     And I should see the message containing "Registration successful. You are now logged in."
@@ -94,4 +97,4 @@ Feature: PRC-834 Registration from Invite - Make State Required
     Then I check the box "Educator"
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"
-    And I select "Other" from "State Where You Teach"
+    And I select "Other" from "State where the invitee teaches"

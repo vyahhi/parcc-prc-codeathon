@@ -201,6 +201,7 @@ dependencies[] = prc_poc_local_node_digital_library_content
 dependencies[] = prc_poc_local_node_district
 dependencies[] = prc_poc_local_node_favorites_list
 dependencies[] = prc_poc_local_node_multichoice
+dependencies[] = prc_poc_local_node_page
 dependencies[] = prc_poc_local_node_panel
 dependencies[] = prc_poc_local_node_pd_course
 dependencies[] = prc_poc_local_node_pd_module
