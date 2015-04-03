@@ -439,7 +439,7 @@ function _prc_trt_view_entity_capacity_check($entity) {
   $entity->content['device_capacity_results']["devices_required_passfail"] = array(
     '#type' => 'item',
     '#title' => t('Devices Capacity Results'),
-    '#markup' => $devices_required_passfail,
+    '#markup' => $devices_required_passfail . ' — ' . $devices_capacity,
     '#weight' => 0.6,
   );
   if ($devices_capacity <= 0) {
