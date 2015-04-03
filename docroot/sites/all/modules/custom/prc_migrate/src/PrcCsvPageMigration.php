@@ -31,7 +31,7 @@ class PrcCsvPageMigration extends Migration {
 
     $this->source = new MigrateSourceCSV($path, $columns, $options, $fields);
 
-    $this->destination = new MigrateDestinationNode($content_type);
+    $this->destination = new MigrateDestinationNode($content_type, array('text_format' => 'filtered_html'));
 
     $this->map = new MigrateSQLMap($content_type, self::getKeySchema(), $this->destination->getKeySchema());
 
