@@ -1,7 +1,8 @@
 @api @user @invite @state @prc-1020 @prc-1032
 Feature: PRC-1020 Registration from Invite - State
-  As an anonymous user, I want to register from an invitation for the PRC site and see my state displayed, so I can verify that it is correct.
-  Acceptance Criteria
+  As an anonymous user,
+  I want to register from an invitation for the PRC site and see my state displayed,
+  so I can verify that it is correct.
   Given that I received an invitation to the PRC site
   When I click on the link to become a member in the invite email
   Then I see the Create User Account to Join Partnership Resource Center page
@@ -26,3 +27,15 @@ Feature: PRC-1020 Registration from Invite - State
     Given I am logged in as a user with the "PRC Admin" role
     When I visit "invite/add/invite_by_email"
     Then I select "Illinois - PARCC Member" from "State where the invitee teaches"
+
+  Scenario: PRC-1032 - State where invitee teaches saved on invitation
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    Then I check the box "Educator"
+    And I fill in "Message" with "MESSAGE1234"
+    And I fill in "E-mail" with "example@timestamp@example.com"
+    Given I am logged in as a user with the "PRC Admin" role
+    When I visit "invite/add/invite_by_email"
+    Then I select "Illinois - PARCC Member" from "State where the invitee teaches"
+    And I press "Send Invitation"
+    Then I should see the text "Illinois"

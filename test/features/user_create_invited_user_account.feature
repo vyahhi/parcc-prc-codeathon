@@ -1,4 +1,4 @@
-@api @d7 @user @invite
+@api @d7 @user @invite @prc-73 @prc-1020
 Feature: Create User Account Following an Invite (PRC-73)
   As a potential PRC Administrator,
   I want to create a new user account for myself after having received the create user account invitation from my fellow PRC Administrators,
@@ -10,7 +10,7 @@ Feature: Create User Account Following an Invite (PRC-73)
     Then I check the box "Content Contributor"
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"
-    And I select "Wyoming" from "State Where You Teach"
+    And I select "Wyoming" from "State where the invitee teaches"
     And I press "Send Invitation"
     Then the email to "example1@timestamp@example.com" should contain "has sent you an invite!"
     And the email should contain "has invited you to join Partnership Resource Center at"
@@ -57,9 +57,16 @@ Feature: Create User Account Following an Invite (PRC-73)
     And I fill in "Confirm password" with "abc123"
     And I fill in "First Name *" with "First"
     And I fill in "Last Name *" with "Last"
+    # PRC-1020 State where I teach should be filled in
+    And I should see the text "State Where I Teach"
+    And I should see the text "Wyoming"
+    And I check the box "I have read and agree with the Terms of Use and User Generated Content Disclaimer."
     And I press "Create new account"
     Then I should see the message containing "You have accepted the invitation from"
     And I should see the message containing "Registration successful. You are now logged in."
+    # PRC-1020 State where I teach should be saved
+    When I click "My account"
+    Then I should see the text "Wyoming"
     #  Creates a new account with the pre-defined role
     Then the user "example1@timestamp@example.com" should have a role of "Content Contributor"
     And the user "example1@timestamp@example.com" should not have a role of "Educator"
