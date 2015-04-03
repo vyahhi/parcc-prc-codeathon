@@ -30,6 +30,7 @@ Feature: Forgot Password (PRC-146)
     Then I should see the message containing "You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password."
     And I fill in "Password" with "password1"
     And I fill in "Confirm password" with "password1"
+    And I select "Wyoming" from "State Where I Teach"
     And I press "Save"
     Then I should see the message containing "The changes have been saved."
     Then I click "Log out"
