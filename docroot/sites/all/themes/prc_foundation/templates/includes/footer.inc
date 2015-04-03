@@ -3,7 +3,16 @@
 
     <?php if ($site_name) :?>
       <div id="footer-copyright" class="medium-6 large-4 columns">
-        <p>Copyright &copy; <?php print date('Y') . '. ' . t('All rights reserved.'); ?> <br><a href = "#">Terms of Use</a></p>
+        <p>Copyright &copy; <?php print date('Y') . '. ' . t('All rights reserved.'); ?> <br><a href = "<?php
+          global $base_url;
+          $tos_url = $base_url . '/content/terms-use';
+          print $tos_url;
+          ?>">Terms of Use</a><br>
+        <a href = "<?php
+        global $base_url;
+        $tos_url = $base_url . '/content/user-generated-content-disclaimer';
+        print $tos_url;
+        ?>">User Generated Content Disclaimer</a></p>
       </div>
     <?php endif; ?>
     <div id="footer-contact" class="medium-6 large-4 columns">
