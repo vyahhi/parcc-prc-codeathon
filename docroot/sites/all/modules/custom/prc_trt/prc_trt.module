@@ -1044,8 +1044,8 @@ function prc_trt_preprocess_breadcrumb(&$variables) {
       $node = $item['page_arguments'][0];
       switch ($node->type) {
         case 'school':
+          $breadcrumbs = array();
           if ($full_admin || $district_admin || $state_admin) {
-            $breadcrumbs = array();
             $w_school = entity_metadata_wrapper('node', $node);
             $district = $w_school->field_ref_district->value();
             if ($district) {
