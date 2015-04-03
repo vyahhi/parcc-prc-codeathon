@@ -24,6 +24,7 @@ default:
       region_map:
         content: '#content'
         header: '#header'
+        footer_copyright: '#footer-copyright'
   context:
     class: FeatureContext
     parameters:
