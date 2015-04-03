@@ -5,16 +5,6 @@
  * Alters to registration forms.
  */
 
-function _prc_member_states() {
-  $member_states = array();
-  $vid = taxonomy_vocabulary_machine_name_load('member_state')->vid;
-  $terms = taxonomy_get_tree($vid);
-  foreach ($terms as $term) {
-    $member_states[] = $term->name;
-  }
-  return $member_states;
-}
-
 /**
  * Implements hook_form_FORM_ID_alter
  *
@@ -38,15 +28,7 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
 //  //Needed for the invite
 //  $original_opts = $form['field_user_state']['und']['#options'];
 
-  $member_tids = array();
-
-  // Add text to each member state
-  foreach ($form['field_user_state']['und']['#options'] as $tid => &$term) {
-    if (in_array($term, $p_states)) {
-      $term = $term . ' - PARCC Member';
-      $member_tids[] = $tid;
-    }
-  }
+  $member_tids = _prc_add_member_state_text($form, $p_states);
 
   // We don't want to display any of this stuff if the user is coming from an invite
   if (!$invite) {

@@ -185,7 +185,6 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     And I click "Revisions"
     Then I should see the text "Current Revision"
     And I should see the text "History"
-    Then I take a screenshot
     # selected items to validate the diffs
     And at least one "ins" element should contain "really"
     And at least one "del" element should contain "swell?"
