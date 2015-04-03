@@ -714,6 +714,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^I click on the edit link for the user "(?P<username>[^"]*)"$/
    */
   public function clickUserViewEditLink($username) {
+    $username = $this->fixStepArgument($username);
     $user = $this->users[$username];
     $uid = $user->uid;
     $this->clickLink($uid);
@@ -725,6 +726,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^I should be at the edit page for the user "(?P<username>[^"]*)"$/
    */
   public function assertUserEditUrl($username) {
+    $username = $this->fixStepArgument($username);
     $user = $this->users[$username];
     $uid = $user->uid;
 
