@@ -164,7 +164,7 @@ function prc_poc_local_users_field_default_field_instances() {
     'entity_type' => 'user',
     'field_name' => 'field_user_state',
     'label' => 'State Where I Teach',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
       'user_register_form' => 1,
