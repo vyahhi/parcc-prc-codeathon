@@ -11,7 +11,7 @@ Feature: PRC-347 Top Nav Bar for Anonymous Users
     And I should see the link "Digital Library"
     And I should see the link "Assessments"
     And I should see the link "Professional Development"
-    And I should not see the link "Content"
+    And I should not see the link "Content" in the "main_menu" region
     And I should not see the link "Users"
 
   Scenario: PRC-435 Anon should see DL content
