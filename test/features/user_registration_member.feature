@@ -1,4 +1,4 @@
-@api @user
+@api @user @registration @prc-262 @prc-888 @prc-430
 Feature: PRC-262 PARCC-Member Educator- Self Registration
   As a PARCC-Member Educator,
   I want to self-register for access to the PRC website,
@@ -7,45 +7,32 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
   Scenario: AC1. A new role called PARCC-Member Educator exists.
     Given I am logged in as a user with the "PARCC-Member Educator" role
 
-  @javascript
-  Scenario: AC3. The following additional components will display on the registration form:
-    # Field Display Name         | Data Type   | Required (Y/N) |
-    # My State is a PARCC Member | Checkbox    | N              |
-    # State Account #            | String(255) | N              |
-    Given I am on the homepage
-    And I follow "Join now!"
-    Then I should see an "My State is a PARCC Member" field
-    And I should not see the text "State Account #"
+#  @javascript
+#  Scenario: AC3. The following additional components will display on the registration form:
+#    # Field Display Name         | Data Type   | Required (Y/N) |
+#    # My State is a PARCC Member | Checkbox    | N              |
+#    # State Account #            | String(255) | N              |
+#    Given I am on the homepage
+#    And I follow "Join now!"
+# TODO: Update
+#    Then I should see an "My State is a PARCC Member" field
+#    And I should not see the text "State Account #"
 
   @javascript
   Scenario: AC5. When the "My State is a PARCC Member" checkbox is selected, the State Account # field will be required.
     Given I am on the homepage
     And I follow "Join now!"
     Then I should not see a "State Account # *" field
-    Then I check the box "My State is a PARCC Member"
-    And I should see a "State Account # *" field
-
-  Scenario: AC6. Validations:
-    If the "My State is a PARCC Member" checkbox is selected and a State Account # is NOT entered after the Create New Account button is selected,
-    The system will display the following feedback on the top of the form:
-    <Field Name> field is required.
-    Given I am on the homepage
-    And I follow "Join now!"
-    Then I fill in "@timestamp@example.com" for "E-mail"
-    And I fill in "abc123" for "Password"
-    And I fill in "abc123" for "Confirm password"
-    And I fill in "First" for "First Name"
-    And I fill in "Last" for "Last Name"
-    And I fill in "Automated Test Robot" for "Profession"
-    And I check the box "My State is a PARCC Member"
-    Then I press the "Create new account" button
-    Then I should see the error message "State Account # field is required."
+# Changed due to change to member/state registration
+# TODO: Update
+#    Then I check the box "My State is a PARCC Member"
+    And I should see a "State Account #" field
 
   Scenario Outline: AC6 Validations:
-    If the "My State is a PARCC Member" checkbox is selected and a State Account # is correctly entered after the Create New Account button is selected, The system will add the user as a PARCC-Member Educator and display the following feedback on the top of the form:
-    Registration successful. You are now logged in.
-    The selected PARCC Member State will be saved and associated with the PARCC-Member Educator account.
-    Code is not case sensitive
+#    If the "My State is a PARCC Member" checkbox is selected and a State Account # is correctly entered after the Create New Account button is selected, The system will add the user as a PARCC-Member Educator and display the following feedback on the top of the form:
+#    Registration successful. You are now logged in.
+#    The selected PARCC Member State will be saved and associated with the PARCC-Member Educator account.
+#    Code is not case sensitive
     Given I am on the homepage
     And I follow "Join now!"
     Then I fill in "@timestamp@example.com" for "E-mail"
@@ -54,8 +41,9 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
     And I fill in "First" for "First Name"
     And I fill in "Last" for "Last Name"
     And I fill in "Automated Test Robot" for "Profession"
-    And I check the box "My State is a PARCC Member"
+    And I select "<state> - PARCC Member" from "State where you teach"
     And I fill in "<account>" for "State Account #"
+    Then I check the box "I have read and agree with the Terms of Use and User Generated Content Disclaimer."
     Then I press the "Create new account" button
     Then I should see the message containing "Registration successful. You are now logged in."
     And I follow "My account"
@@ -93,6 +81,8 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
     And I fill in "First" for "First Name"
     And I fill in "Last" for "Last Name"
     And I fill in "Automated Test Robot" for "Profession"
+    And I select "Wyoming" from "State where you teach"
+    Then I check the box "I have read and agree with the Terms of Use and User Generated Content Disclaimer."
     Then I press the "Create new account" button
     Then I should see the message "Registration successful. You are now logged in."
     And I follow "My account"
@@ -107,10 +97,10 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
     And I fill in "First" for "First Name"
     And I fill in "Last" for "Last Name"
     And I fill in "Automated Test Robot" for "Profession"
-    And I check the box "My State is a PARCC Member"
+    And I select "Illinois - PARCC Member" from "State where you teach"
     And I fill in "Bad Account" for "State Account #"
     Then I press the "Create new account" button
-    Then I should see the error message "Valid State Account # is required."
+    Then I should see the error message "Valid State Account # is incorrect. Leave this blank if you do not have one."
 
   Scenario: User cannot edit his own Member State
     Given I am logged in as a user with the "PARCC-Member Educator" role

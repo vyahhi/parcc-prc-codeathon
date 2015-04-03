@@ -5,6 +5,16 @@
  * Alters to registration forms.
  */
 
+function _prc_member_states() {
+  $member_states = array();
+  $vid = taxonomy_vocabulary_machine_name_load('member_state')->vid;
+  $terms = taxonomy_get_tree($vid);
+  foreach ($terms as $term) {
+    $member_states[] = $term->name;
+  }
+  return $member_states;
+}
+
 /**
  * Implements hook_form_FORM_ID_alter
  *
@@ -21,28 +31,34 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
   $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
 
   $form['field_user_state']['und']['#title'] = t('State where you teach');
-  //Mark the states that are PARCC in the user states dropdown
-  //Make it so the account number text box appears when they are selected
-  $p_states = db_query('select name from taxonomy_term_data where vid = (
-      select vid from taxonomy_vocabulary where machine_name = \'member_state\')')->fetchCol('vid');
-  //$form_state['p_states'] = $p_states;
+
+  $p_states = _prc_member_states();
   $state_field = ':input[name="field_user_state[und]"]';
 
-  //Needed for the invite
-  $original_opts = $form['field_user_state']['und']['#options'];
+//  //Needed for the invite
+//  $original_opts = $form['field_user_state']['und']['#options'];
 
+  $member_tids = array();
+
+  // Add text to each member state
   foreach ($form['field_user_state']['und']['#options'] as $tid => &$term) {
     if (in_array($term, $p_states)) {
       $term = $term . ' - PARCC Member';
-      $form['state_account_number']['#states']['visible'][$state_field][] = array('value' => $tid);
+      $member_tids[] = $tid;
     }
   }
 
   // We don't want to display any of this stuff if the user is coming from an invite
   if (!$invite) {
-
     $profession_weight = $form['field_user_state']['#weight'];
-    //variable to hold the selector for the state field
+
+    foreach ($member_tids as $index => $member_tid) {
+      if ($index) {
+        // We don't need or for the first item, but for every item after.
+        $account_number_states[] = 'or';
+      }
+      $account_number_states[] = array($state_field => array('value' => $member_tid));
+    }
 
     $form['state_account_number'] = array(
       '#type' => 'textfield',
@@ -50,14 +66,14 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
       '#weight' => $profession_weight + 2,
       '#states' => array(
         'visible' => array(
-          $state_field => array(),
-        ),
-        'required' => array(
-          $state_field => array(),
+          array(
+            $account_number_states,
+          ),
         ),
       ),
     );
-  }else{
+  }
+  else {
     $form['field_user_state']['#required'] = FALSE;
     $form['field_user_state']['#access'] = FALSE;
     $w_invite = entity_metadata_wrapper('invite', $invite);
@@ -70,6 +86,30 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
       );
     }
   }
+
+  $titles = array('Terms of Use', 'User Generated Content Disclaimer');
+  $page_uris = _prc_registration_get_node_uris($titles);
+
+  $tos_link = l(t('Terms of Use'), $page_uris['Terms of Use']);
+  $ugcd_link = l(t('User Generated Content Disclaimer'), $page_uris['User Generated Content Disclaimer']);
+
+  // The stupid #states here just a shortcut so we can make it "required"
+  // but customize the message without dipping into template validation messages.
+  $form['accept_privacy'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'I have read and agree with the ' . $tos_link . ' and ' . $ugcd_link . '.',
+    '#weight' => $profession_weight + 3,
+    '#states' => array(
+      'required' => array(
+        array(
+          array(':input[name="accept_privacy"]' => array('checked' => FALSE)),
+          'or',
+          array(':input[name="accept_privacy"]' => array('checked' => TRUE)),
+        ),
+      ),
+    ),
+  );
+
   $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
 }
 
@@ -80,6 +120,10 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
  * @param $form_state
  */
 function prc_registration_form_user_register_form_validate(&$form, &$form_state) {
+
+  if (!array_key_exists('accept_privacy', $form_state['values']) || !$form_state['values']['accept_privacy']) {
+    form_set_error('accept_privacy', t('Accepting the Terms of Use and User Generated Content Disclaimer is required.'));
+  };
 
   $invite = invite_load_from_session();
   if ($invite) {
@@ -93,11 +137,7 @@ function prc_registration_form_user_register_form_validate(&$form, &$form_state)
     }
   }
 
-  if (
-    array_key_exists('has_member_state', $form_state['values']) && $form_state['values']['has_member_state']
-  ) {
-
-    $account_number = $form_state['values']['state_account_number'];
+  if (array_key_exists('state_account_number', $form_state['values']) && $account_number = $form_state['values']['state_account_number']) {
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'taxonomy_term')
       ->entityCondition('bundle', 'member_state')
@@ -112,4 +152,24 @@ function prc_registration_form_user_register_form_validate(&$form, &$form_state)
       form_set_error('state_account_number', t('Valid State Account # is incorrect. Leave this blank if you do not have one.'));
     }
   }
+}
+
+function _prc_registration_get_node_uris($titles) {
+  $query = new EntityFieldQuery();
+
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'page')
+    ->propertyCondition('title', $titles, 'IN');
+  $result = $query->execute();
+  $uris = array();
+  if (isset($result['node'])) {
+    $nids = array_keys($result['node']);
+    $items = entity_load('node', $nids);
+    foreach ($items as $item) {
+      $title = $item->title;
+      $uri = entity_uri('node', $item)['path'];
+      $uris[$title] = $uri;
+    }
+  }
+  return $uris;
 }
