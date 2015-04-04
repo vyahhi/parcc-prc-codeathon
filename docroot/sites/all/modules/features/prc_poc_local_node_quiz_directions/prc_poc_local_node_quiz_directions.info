@@ -6,7 +6,6 @@ dependencies[] = features
 dependencies[] = prc_poc_local_fields
 dependencies[] = strongarm
 features[field_instance][] = node-quiz_directions-body
-features[field_instance][] = node-quiz_directions-field_item_order
 features[node][] = quiz_directions
 features[variable][] = menu_options_quiz_directions
 features[variable][] = menu_parent_quiz_directions

@@ -7,7 +7,6 @@ Feature: PRC-527 Preview an item in Assessment Details page
   Acceptance Criteria
   AC1 Clicking an item in the Assessment Details page (implemented in PRC-490) provides a new section underneath the test metadata for the selected item metadata and preview.
   AC2 Item Metadata: Display the following item attributes:
-  Item order
   Item Type
   Item Standard (line-separated: 1 standard per line)
   Q1 (Choice Interaction)
@@ -43,12 +42,10 @@ Feature: PRC-527 Preview an item in Assessment Details page
     Then I click "Quiz directions"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-527 Directions 1"
-    And I fill in "Item Order" with "D1"
     And I press "Save"
     Then I click "Create new question"
     Then I click "Multiple choice question"
     And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
-    And I fill in "Item Order" with "Q2"
     And I fill in "Title" with "PRC-527 Multi"
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
@@ -56,7 +53,6 @@ Feature: PRC-527 Preview an item in Assessment Details page
     And I check the box "edit-alternatives-1-correct"
     And I press "Save"
     Then I visit the last node created
-    And I should see the text "Item Order"
     And I should see the text "Item Type"
 
     And I should not see the text "Body Body Directions Directions"
@@ -73,7 +69,6 @@ Feature: PRC-527 Preview an item in Assessment Details page
 
     When I am an anonymous user
     And I visit the last node created
-    Then I should see the text "Item Order"
     And I should see the text "Item Type"
 
     And I should not see the text "Body Body Directions Directions"

@@ -24,6 +24,7 @@ Feature: PRC ??? - User edits own account
     And I fill in "Current password" with "xyz123"
     And I fill in "Password" with "password1"
     And I fill in "Confirm password" with "password1"
+    And I select "Wyoming" from "State Where I Teach"
     And I press "Save"
     Then I should see the message containing "The changes have been saved."
     Then the user "joe_000@example.com" should have a role of "Educator"

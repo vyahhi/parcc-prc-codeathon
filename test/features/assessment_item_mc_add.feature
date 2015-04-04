@@ -15,7 +15,6 @@ Feature: PRC-547 Add New Item to a Quiz
 #  •	Short Answer
 #  When the user clicks the Interactive Choice option, a set of attributes for an interactive choice item appears, defined below.
 #  Item Metadata: The following attributes shall be available for the user to define as item metadata:
-#  Item Order- Required, String(255)
 #  Item Title- Required, String(255)
 #  Item Standard: Required (at least 1)- more than 1 standard may be selected- options are the same as what is implemented for content and courses so far
 #  Item attributes:
@@ -27,7 +26,6 @@ Feature: PRC-547 Add New Item to a Quiz
 #  The user shall define which answer choice is the correct answer. At least one distractor must be selected as correct answer when Multiple correct answers is checked.
 #  A Save Draft button is available to save any changes to the item order/removal for that assessment. At click, the system stores the changes associated to that user.
 #  If a user navigates away from the page without saving the changes, the system prompts the user to confirm.
-#  If the user clicks Save Draft button and Item Order is blank, a validation error message is displayed, saying "Item Order field is required."
 #  If the user clicks Save Draft button and Item Title is blank, a validation error message is displayed, saying "Item Title field is required."
 #  If the user clicks Save Draft button and Question (Item Stem) is blank, a validation error message is displayed, saying "Question (Item Stem) field is required."
 #  If the user clicks Save Draft button and all Item Standard dropdowns are "- None -", a validation error message is displayed, saying "At least one Item Standard is required."
@@ -124,7 +122,6 @@ Feature: PRC-547 Add New Item to a Quiz
     When I press "Save Draft"
     Then I should see the error message containing "Item Title field is required."
     Then I should see the error message containing "Question (Item Stem) field is required."
-    Then I should see the error message containing "Item Order field is required."
     Then I should see the error message containing "At least one Item Standard is required."
     Then I should see the error message containing "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
 
@@ -147,7 +144,6 @@ Feature: PRC-547 Add New Item to a Quiz
   Scenario: Full cycle - save, check, change, remove, add
     When I click "Add Item"
     Then I click "Interactive Choice"
-    And I fill in "Item Order" with "O1"
     And I fill in "Item Title" with "T1"
     And I fill in "Question" with "Q1"
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
@@ -181,7 +177,6 @@ Feature: PRC-547 Add New Item to a Quiz
   Scenario: If the user clicks Save Draft button, and the form contains any blank distractors (with both Correct checkbox unchecked and no data in answer field) that do not precede any non-blank distractors (with Correct checkbox unchecked and/or data in answer field), the form is submitted blank distractors are ignored and do not appear in the saved draft.
     When I click "Add Item"
     Then I click "Interactive Choice"
-    And I fill in "Item Order" with "O1"
     And I fill in "Item Title" with "T1"
     And I fill in "Question" with "Q1"
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
@@ -204,7 +199,6 @@ Feature: PRC-547 Add New Item to a Quiz
 
   Scenario: If the user clicks Save Draft button, and the form contains any blank distractors (with Correct checkbox unchecked and no data in answer field) that precede any non-blank distractors (with Correct checkbox unchecked and/or data in answer field), a validation error message is displayed saying, "All answer choices (distractors) require an Answer. Please enter an Answer or click the Remove button to remove the answer choice (distractor)."
     Then I click "Interactive Choice"
-    And I fill in "Item Order" with "O1"
     And I fill in "Item Title" with "T1"
     And I fill in "Question" with "Q1"
     # Skip alternatives-0

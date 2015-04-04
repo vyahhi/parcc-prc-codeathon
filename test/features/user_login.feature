@@ -83,7 +83,7 @@ Feature: PRC Administrators (PRC-61)
       | Second York |
     Given users:
       | name                              | mail                              | pass   | First Name | Last Name | status | State Where I Teach |
-      | joe_prc_368@timestamp@example.com | joe_prc_368@timestamp@example.com | xyz123 | Joe        | User      | 1      | Second York         |
+      | joe_prc_368@example.com | joe_prc_368@example.com | xyz123 | Joe        | User      | 1      | Second York         |
     And I am an anonymous user
     And I am on the homepage
     # Fail login 5 times
