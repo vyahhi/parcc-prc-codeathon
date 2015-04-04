@@ -36,7 +36,7 @@ function prc_trt_school_uploads_upload_form($form, &$form_state, $type, $distric
 
   $form['overview'] = array(
     '#type' => 'item',
-    '#markup' => 'Overview / instructional copy. Consider explaining that for each school, there must be two columns: one for school name and one for school contact email address and that file must be .csv.',
+    '#markup' => t('Overview / instructional copy. Consider explaining that for each school, there must be two columns: one for school name and one for school contact email address; the first row is treated as a header and its contents are ignored; and that file must be .csv.'),
   );
   $form['note'] = array(
     '#type' => 'item',
@@ -49,7 +49,7 @@ function prc_trt_school_uploads_upload_form($form, &$form_state, $type, $distric
 
   $form['contents']['file'] = array(
     '#label' => t('File Name'),
-    '#description' => t('File must have .csv extension and have the following columns in this order: School Name, School Contact\'s Email Address'),
+    '#description' => t('File must have .csv extension and have two columns in this order: School Name, School Contact\'s Email Address. The first row is treated as a header and its contents are ignored, and the naming of the columns is ignored.'),
     '#title' => t('File Name'),
     '#type' => 'managed_file',
     '#required' => TRUE,

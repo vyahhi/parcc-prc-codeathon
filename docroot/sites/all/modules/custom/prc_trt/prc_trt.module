@@ -5,6 +5,7 @@
  */
 
 module_load_include('inc', 'prc_trt', 'prc_trt_request_readiness_checks');
+module_load_include('inc', 'prc_trt', 'prc_trt_delete_schools');
 
 function prc_trt_form_eck__entity__form_edit_prc_trt_capacity_check_alter(&$form, &$form_state) {
   prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter($form, $form_state);
@@ -196,6 +197,81 @@ function prc_trt_form_eck__entity__form_add_prc_trt_system_check_validate(&$form
   form_set_value($form['field_jre_version'], array(LANGUAGE_NONE => array(0 => array('value' => $jre_version))), $form_state);
 }
 
+function _prc_trt_system_check_extra_field_operating_system_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->operatingSystemPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_monitor_size_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->monitorSizePass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_monitor_color_depth_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->colorDepthPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_screen_resolution_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->resolutionPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_processor_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->processorPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_ram_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->ramPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_browser_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->browserResult();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_cookies_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->cookiesPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_javascript_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->jsPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_images_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->imagesPass();
+  return $field_result;
+}
+
+function _prc_trt_system_check_extra_field_jre_version_pass($entity) {
+  $systemChecker = new PrcTrtSystemCheck($entity);
+  $field_result = $systemChecker->jrePass();
+  return $field_result;
+}
+
+function _prc_trt_capacity_check_extra_field_devices_required($entity) {
+  $w = entity_metadata_wrapper('prc_trt', $entity);
+  $students = $w->field_number_of_students->value();
+  $sittings = $w->field_sittings_per_student->value();
+  $days = $w->field_number_testing_days->value();
+  $sessions = $w->field_number_of_sessions->value();
+  $devices_required = ceil((($students * $sittings) / ($days * $sessions)) * 1.1);
+  return $devices_required;
+}
 /**
  * Implements hook_field_extra_fields().
  */
@@ -205,56 +281,67 @@ function prc_trt_field_extra_fields() {
       'label' => t('Operating system: Results'),
       'description' => t('Did operating system pass?'),
       'weight' => 12,
+      'callback' => '_prc_trt_system_check_extra_field_operating_system_pass',
     ),
     'monitor_size_pass' => array(
       'label' => t('Monitor size: Results'),
       'description' => t('Did monitor size pass?'),
       'weight' => 13,
+      'callback' => '_prc_trt_system_check_extra_field_monitor_size_pass',
     ),
     'monitor_color_depth_pass' => array(
       'label' => t('Monitor color depth: Results'),
       'description' => t('Did monitor color depth pass?'),
       'weight' => 14,
+      'callback' => '_prc_trt_system_check_extra_field_monitor_color_depth_pass',
     ),
     'screen_resolution_pass' => array(
       'label' => t('Screen resolution: Results'),
       'description' => t('Did screen resolution pass?'),
       'weight' => 15,
+      'callback' => '_prc_trt_system_check_extra_field_screen_resolution_pass',
     ),
     'processor_pass' => array(
       'label' => t('Processor speed: Results'),
       'description' => t('Did processor pass?'),
       'weight' => 16,
+      'callback' => '_prc_trt_system_check_extra_field_processor_pass',
     ),
     'ram_pass' => array(
       'label' => t('RAM: Results'),
       'description' => t('Did RAM pass?'),
       'weight' => 17,
+      'callback' => '_prc_trt_system_check_extra_field_ram_pass',
     ),
     'browser_pass' => array(
       'label' => t('Browser: Results'),
       'description' => t('Did browser pass?'),
       'weight' => 18,
+      'callback' => '_prc_trt_system_check_extra_field_browser_pass',
     ),
     'cookies_pass' => array(
       'label' => t('Cookies: Results'),
       'description' => t('Did cookies pass?'),
       'weight' => 19,
+      'callback' => '_prc_trt_system_check_extra_field_cookies_pass',
     ),
     'javascript_pass' => array(
       'label' => t('Javascript: Results'),
       'description' => t('Did Javascript pass?'),
       'weight' => 20,
+      'callback' => '_prc_trt_system_check_extra_field_javascript_pass',
     ),
     'images_pass' => array(
       'label' => t('Images: Results'),
       'description' => t('Did images pass?'),
       'weight' => 21,
+      'callback' => '_prc_trt_system_check_extra_field_images_pass',
     ),
     'jre_version_pass' => array(
       'label' => t('Java: Results'),
       'description' => t('Did Java pass?'),
       'weight' => 21,
+      'callback' => '_prc_trt_system_check_extra_field_jre_version_pass',
     ),
   );
   $extra['prc_trt']['capacity_check']['display'] = array(
@@ -262,6 +349,7 @@ function prc_trt_field_extra_fields() {
       'label' => t('Number of devices required'),
       'description' => t('How many devices are required?'),
       'weight' => 4,
+      'callback' => '_prc_trt_capacity_check_extra_field_devices_required',
     ),
     'devices_capacity' => array(
       'label' => t('Devices capacity'),
@@ -351,7 +439,7 @@ function _prc_trt_view_entity_capacity_check($entity) {
   $entity->content['device_capacity_results']["devices_required_passfail"] = array(
     '#type' => 'item',
     '#title' => t('Devices Capacity Results'),
-    '#markup' => $devices_required_passfail,
+    '#markup' => $devices_required_passfail . ' — ' . $devices_capacity,
     '#weight' => 0.6,
   );
   if ($devices_capacity <= 0) {
@@ -497,12 +585,14 @@ function _prc_trt_presave_school($entity) {
   if ($ref_district) {
     $w_dist = entity_metadata_wrapper('node', $ref_district);
     $trt_state = $w_dist->field_ref_trt_state->value();
-    $w_state = entity_metadata_wrapper('node', $trt_state);
-    if (isset($w_state->field_member_state)) {
-      $member_state = $w_state->field_member_state->value();
-    }
-    if (isset($w_state->field_user_state)) {
-      $user_state = $w_state->field_user_state->value();
+    if ($trt_state) {
+      $w_state = entity_metadata_wrapper('node', $trt_state);
+      if (isset($w_state->field_member_state)) {
+        $member_state = $w_state->field_member_state->value();
+      }
+      if (isset($w_state->field_user_state)) {
+        $user_state = $w_state->field_user_state->value();
+      }
     }
   }
 
@@ -861,7 +951,57 @@ function prc_trt_action_info() {
       'vbo_configurable' => FALSE,
       'triggers' => array('any'),
     ),
+    'prc_trt_delete_schools' => array(
+      'type' => 'node',
+      'label' => t('Delete Schools'),
+      'configurable' => FALSE,
+      'vbo_configurable' => FALSE,
+      'triggers' => array('any'),
+    ),
   );
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function prc_trt_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'views_form_trt_district_schools_panel_pane_1') {
+    $form['select']['action::prc_trt_delete_schools']['#validate'][] = 'prc_trt_views_bulk_operations_form_validate';
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function prc_trt_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'form_alter' && isset($implementations['prc_trt'])) {
+    $group = $implementations['prc_trt'];
+    unset($implementations['prc_trt']);
+    $implementations['prc_trt'] = $group;
+  }
+}
+
+function prc_trt_views_bulk_operations_form_validate(&$form, &$form_state) {
+  $vbo = _views_bulk_operations_get_field($form_state['build_info']['args'][0]);
+  $field_name = $vbo->options['id'];
+  $nids = $form_state['values']['views_bulk_operations'];
+  $has_checks = _prc_trt_schools_have_checks($nids);
+  if ($has_checks) {
+    form_set_error($field_name, t('Only schools that haven\'t run readiness checks can be deleted.'));
+  }
+}
+
+/**
+ * @param $nids
+ * @return bool
+ */
+function _prc_trt_schools_have_checks($nids) {
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'prc_trt')
+    ->fieldCondition('field_ref_school', 'target_id', $nids, 'IN');
+  $result = $query->execute();
+  $has_checks = isset($result['prc_trt']);
+  return $has_checks;
 }
 
 /**
@@ -904,8 +1044,8 @@ function prc_trt_preprocess_breadcrumb(&$variables) {
       $node = $item['page_arguments'][0];
       switch ($node->type) {
         case 'school':
+          $breadcrumbs = array();
           if ($full_admin || $district_admin || $state_admin) {
-            $breadcrumbs = array();
             $w_school = entity_metadata_wrapper('node', $node);
             $district = $w_school->field_ref_district->value();
             if ($district) {
@@ -1084,6 +1224,25 @@ function prc_trt_views_pre_render(&$view) {
       $school_name = $row->node_title;
       $check_type = $row->_field_data['field_ref_school_node_id']['entity']->type;
       if ($rows[$school_name] != $check_type) {
+        // System check where school has multiple rows. Kill it.
+        unset($view->result[$index]);
+      }
+    }
+  } elseif ($view->name == 'trt_capacity_check_export') {
+    $rows = array();
+    // First we catalog rows
+    foreach ($view->result as $row) {
+      $school_nid = $row->node_field_data_field_ref_school_nid;
+      $check_id = $row->id;
+      if (!array_key_exists($school_nid, $rows) || $rows[$school_nid] < $check_id) {
+        $rows[$school_nid] = $check_id;
+      }
+    }
+    // Now we start hiding rows for schools with both types of checks
+    foreach ($view->result as $index => $row) {
+      $school_nid = $row->node_field_data_field_ref_school_nid;
+      $check_id = $row->id;
+      if ($rows[$school_nid] != $check_id) {
         // System check where school has multiple rows. Kill it.
         unset($view->result[$index]);
       }

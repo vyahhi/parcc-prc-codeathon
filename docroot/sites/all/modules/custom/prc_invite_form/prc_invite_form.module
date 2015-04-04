@@ -5,6 +5,34 @@
  * Alters to user edit forms.
  */
 
+function _prc_member_states() {
+  $member_states = array();
+  $vid = taxonomy_vocabulary_machine_name_load('member_state')->vid;
+  $terms = taxonomy_get_tree($vid);
+  foreach ($terms as $term) {
+    $member_states[] = $term->name;
+  }
+  return $member_states;
+}
+
+/**
+ * @param $form
+ * @param $p_states
+ * @return $member_tids
+ */
+function _prc_add_member_state_text(&$form, $p_states) {
+  $member_tids = array();
+
+  // Add text to each member state
+  foreach ($form['field_user_state']['und']['#options'] as $tid => &$term) {
+    if (in_array($term, $p_states)) {
+      $term = $term . ' - PARCC Member';
+      $member_tids[] = $tid;
+    }
+  }
+  return $member_tids;
+}
+
 /**
  * Implements hook_form_FORM_ID_alter().
  */
@@ -49,13 +77,15 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
     '#options' => $roles,
   );
 
+  $p_states = _prc_member_states();
+  $member_tids = _prc_add_member_state_text($form, $p_states);
+
+  $form['field_user_state']['und']['#title'] = t('State where the invitee teaches');
+
   // Hide the field_role_id field - we'll use this to save the role we pick in invite_role
   if (array_key_exists('field_role_id', $form)) {
     $form['field_role_id']['#access'] = FALSE;
   }
-
-  // Change the text of the -- None -- option
-  $form['field_member_state'][LANGUAGE_NONE]['#options']['_none'] = t('Select a state');
 
   $roles = user_roles();
   $roles_with_states = array('PARCC-Member Educator', 'Content Contributor');
@@ -71,15 +101,12 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
     $role_states[] = array(':input[name="invite_role[' . $rid . ']"]' => array('checked' => TRUE));
   }
 
-// Now make the Member State dropdown dependent on the Role selected
+  // Now make the Member State dropdown dependent on the Role selected
   $form['field_member_state']['#states'] = array(
     'visible' => array(
       $role_states,
     ),
   );
-
-  // Change the title of Member State to State
-  $form['field_member_state']['und']['#title'] = t('State');
 
   $form['#validate'][] = 'prc_invite_form_form_invite_form_validate';
 
@@ -99,7 +126,6 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
       }
     }
   }
-
 }
 
 function _prc_invite_form_invite_roles() {
@@ -115,6 +141,21 @@ function _prc_invite_form_set_title() {
 
 function prc_invite_form_form_invite_form_validate($form, &$form_state)
 {
+  //Require user state if it is one of the roles
+  $roles = user_roles();
+  $roles_with_states = array('PARCC-Member Educator', 'Content Contributor');
+  $roles_rids = array();
+  $role_states = array();
+  foreach($roles_with_states as $role) {
+    $rids[] = array_search($role, $roles);
+  }
+  $uid = $form_state['values']['uid'];
+  $state = $form_state['values']['field_user_state']['und'][0]['tid'];
+
+  if(in_array($uid, $rids)  && empty($state)){
+    form_set_error('prc_invite_form', 'State where they teach field is required.');
+  }
+
   _prc_invite_form_set_title();
 
   if (

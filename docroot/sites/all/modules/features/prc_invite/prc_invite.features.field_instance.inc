@@ -133,7 +133,7 @@ To become a member of [site:name], click the link below or paste it into the add
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 32,
+        'weight' => 34,
       ),
     ),
     'entity_type' => 'invite',
@@ -141,6 +141,7 @@ To become a member of [site:name], click the link below or paste it into the add
     'label' => 'Member State',
     'required' => 0,
     'settings' => array(
+      'course_enrollment' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -151,7 +152,7 @@ To become a member of [site:name], click the link below or paste it into the add
         'label_help_description' => '',
       ),
       'type' => 'options_select',
-      'weight' => 32,
+      'weight' => 36,
     ),
   );
 

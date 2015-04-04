@@ -14,17 +14,34 @@
  * @param $form_state
  */
 function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
+
   drupal_set_title('Create User Account to Join Partnership Resource Center');
   $invite = invite_load_from_session();
+
+  $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
+
+  $form['field_user_state']['und']['#title'] = t('State where you teach');
+
+  $p_states = _prc_member_states();
+  $state_field = ':input[name="field_user_state[und]"]';
+
+//  //Needed for the invite
+//  $original_opts = $form['field_user_state']['und']['#options'];
+
+  $member_tids = _prc_add_member_state_text($form, $p_states);
+
+  $profession_weight = $form['field_user_state']['#weight'];
+
   // We don't want to display any of this stuff if the user is coming from an invite
   if (!$invite) {
-    $profession_weight = $form['field_profession']['#weight'];
 
-    $form['has_member_state'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('My State is a PARCC Member'),
-      '#weight' => $profession_weight + 1,
-    );
+    foreach ($member_tids as $index => $member_tid) {
+      if ($index) {
+        // We don't need or for the first item, but for every item after.
+        $account_number_states[] = 'or';
+      }
+      $account_number_states[] = array($state_field => array('value' => $member_tid));
+    }
 
     $form['state_account_number'] = array(
       '#type' => 'textfield',
@@ -32,10 +49,9 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
       '#weight' => $profession_weight + 2,
       '#states' => array(
         'visible' => array(
-          ':input[name="has_member_state"]' => array('checked' => TRUE),
-        ),
-        'required' => array(
-          ':input[name="has_member_state"]' => array('checked' => TRUE),
+          array(
+            $account_number_states,
+          ),
         ),
       ),
     );
@@ -53,9 +69,32 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
       );
     }
   }
+
+  $titles = array('Terms of Use', 'User Generated Content Disclaimer');
+  $page_uris = _prc_registration_get_node_uris($titles);
+
+  $tos_link = l(t('Terms of Use'), $page_uris['Terms of Use']);
+  $ugcd_link = l(t('User Generated Content Disclaimer'), $page_uris['User Generated Content Disclaimer']);
+
+  // The stupid #states here just a shortcut so we can make it "required"
+  // but customize the message without dipping into template validation messages.
+  $form['accept_privacy'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'I have read and agree with the ' . $tos_link . ' and ' . $ugcd_link . '.',
+    '#weight' => $profession_weight + 3,
+    '#states' => array(
+      'required' => array(
+        array(
+          array(':input[name="accept_privacy"]' => array('checked' => FALSE)),
+          'or',
+          array(':input[name="accept_privacy"]' => array('checked' => TRUE)),
+        ),
+      ),
+    ),
+  );
+
   $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
 }
-
 
 /**
  * Validate for user registration form
@@ -64,6 +103,11 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
  * @param $form_state
  */
 function prc_registration_form_user_register_form_validate(&$form, &$form_state) {
+
+  if (!array_key_exists('accept_privacy', $form_state['values']) || !$form_state['values']['accept_privacy']) {
+    form_set_error('accept_privacy', t('Accepting the Terms of Use and User Generated Content Disclaimer is required.'));
+  };
+
   $invite = invite_load_from_session();
   if ($invite) {
     if (count($invite->field_member_state)) {
@@ -76,30 +120,39 @@ function prc_registration_form_user_register_form_validate(&$form, &$form_state)
     }
   }
 
-  if (
-    array_key_exists('has_member_state', $form_state['values']) && $form_state['values']['has_member_state']
-  ) {
-
-    if (!$form_state['values']['state_account_number']) {
-      form_set_error('state_account_number', t('State Account # field is required.'));
+  if (array_key_exists('state_account_number', $form_state['values']) && $account_number = $form_state['values']['state_account_number']) {
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'taxonomy_term')
+      ->entityCondition('bundle', 'member_state')
+      ->fieldCondition('field_state_code', 'value', $account_number, '=');
+    $result = $query->execute();
+    if (array_key_exists('taxonomy_term', $result)) {
+      $tids = array_keys($result['taxonomy_term']);
+      $tid = reset($tids);
+      $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
     }
     else {
-
-      $account_number = $form_state['values']['state_account_number'];
-
-      $query = new EntityFieldQuery();
-      $query->entityCondition('entity_type', 'taxonomy_term')
-        ->entityCondition('bundle', 'member_state')
-        ->fieldCondition('field_state_code', 'value', $account_number, '=');
-      $result = $query->execute();
-      if (array_key_exists('taxonomy_term', $result)) {
-        $tids = array_keys($result['taxonomy_term']);
-        $tid = reset($tids);
-        $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
-      }
-      else {
-        form_set_error('state_account_number', t('Valid State Account # is required.'));
-      }
+      form_set_error('state_account_number', t('Valid State Account # is incorrect. Leave this blank if you do not have one.'));
     }
   }
+}
+
+function _prc_registration_get_node_uris($titles) {
+  $query = new EntityFieldQuery();
+
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'page')
+    ->propertyCondition('title', $titles, 'IN');
+  $result = $query->execute();
+  $uris = array();
+  if (isset($result['node'])) {
+    $nids = array_keys($result['node']);
+    $items = entity_load('node', $nids);
+    foreach ($items as $item) {
+      $title = $item->title;
+      $uri = entity_uri('node', $item)['path'];
+      $uris[$title] = $uri;
+    }
+  }
+  return $uris;
 }

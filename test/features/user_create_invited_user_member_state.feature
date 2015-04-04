@@ -10,8 +10,8 @@ Feature: PRC-363 State Association to Invited Users
     Then I check the box "Content Contributor"
     And I fill in "Message" with "4321MESSAGE1234"
     And I fill in "E-mail" with "example1@timestamp@example.com,example2@timestamp@example.com"
-    And I select "Illinois" from "State"
-    And I select "Wyoming" from "State Where You Teach"
+    And I select "Illinois" from "Member State"
+    And I select "Wyoming" from "State where the invitee teaches"
     And I press "Send Invitation"
     Then the email to "example1@timestamp@example.com" should contain "has sent you an invite!"
     And the email should contain "has invited you to join Partnership Resource Center at"
@@ -26,6 +26,7 @@ Feature: PRC-363 State Association to Invited Users
     And I fill in "First Name *" with "First"
     And I fill in "Last Name *" with "Last"
     And I should not see a "Member State" field
+    And I check the box "I have read and agree with the Terms of Use and User Generated Content Disclaimer."
     And I press "Create new account"
     Then I should see the message containing "You have accepted the invitation from"
     And I should see the message containing "Registration successful. You are now logged in."

@@ -31,6 +31,24 @@ function prc_workflow_permission() {
 }
 
 /**
+ * Implements hook_menu().
+ */
+function prc_workflow_menu() {
+  $items = array();
+  $items['node/%node/prc_revisions'] = array(
+    'title' => t('Revisions'),
+    'description' => 'Information about the workflow status of this content',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'prc_workflow_revisions_tab',
+    'page arguments' => array(1),
+    'access callback' => '_node_revision_access',//'state_flow_menu_node_access',
+    'access arguments' => array(1),
+    'weight' => 10,
+  );
+  return $items;
+}
+
+/**
  * Implements hook_menu_alter()
  */
 function prc_workflow_menu_alter(&$menu) {
@@ -38,6 +56,9 @@ function prc_workflow_menu_alter(&$menu) {
   $menu['node/%node/revisions/%/workflow']['access callback'] = 'prc_workflow_events_revision_access';
   $menu['node/%node/revisions/%/edit']['access callback'] = 'prc_workflow_access';
   $menu['node/%node/delete']['access callback'] = 'prc_workflow_delete_access';
+  //Disable the stateflow workflow tab, and core revisions tab
+  unset($menu['node/%node/workflow']);
+  unset($menu['node/%node/revisions']);
 }
 
 /**
@@ -89,7 +110,6 @@ function prc_workflow_menu_local_tasks_alter(&$data, $router_item, $root_path) {
       $data['tabs'][0]['output'][1]['#active'] = FALSE;
       break;
   }
-
 }
 
 /**
@@ -266,7 +286,6 @@ function prc_workflow_tokens($type, $tokens, $data = array(), $options = array()
   return $replacements;
 }
 
-
 /**
  * Implements hook_state_flow_machine_type_alter()
  *
@@ -284,6 +303,10 @@ function prc_workflow_state_flow_machine_type_alter(&$machine_type, $node) {
  */
 function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$form_state) {
   $node = $form['#node'];
+
+  if(isset($node->vid)){
+    $node->from_vid = $node->vid;
+  }
 
   if (!empty($form_state['display_confirmation'])) {
     prc_workflow_draft_confirm_form($form, $form_state);
@@ -390,78 +413,12 @@ function prc_workflow_draft_confirm_form(&$form, &$form_state) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter()
- * @param $form
- * @param $form_state
- */
-function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state) {
-  $form['#submit'][] = 'prc_workflow_events_submit';
-
-  if ($form['event']['#value'] == 'denied') {
-    // Changes before Approval for PRC-592 @timestamp (revision #)
-    $title = $form_state['build_info']['args'][0]->title;
-    $vid = $form_state['build_info']['args'][0]->vid;
-    $new_title = t('Changes before Approval for @title (revision @vid)', array(
-      '@title' => $title,
-      '@vid' => $vid
-    ));
-    drupal_set_title($new_title);
-
-    $form['event_comment']['#title'] = t('Message');
-
-    $form['submit']['#value'] = t('Send Request');
-
-    $form['instructions'] = array(
-      '#markup' => t('Instructions: (to be added)'),
-      '#prefix' => '<div class="instructions">',
-      '#suffix' => '</div>',
-      '#weight' => -1,
-    );
-
-  }
-  else {
-    //@todo: form title for rescind request
-    $node = $form['node_revision']['#value'];
-    $state_flow = $form['state_flow']['#value'];
-
-    $vid = $node->vid;
-    $node_title = $node->title;
-
-    $event = $state_flow->get_event($form['event']['#value']);
-
-    $state_key = $event->get_option('target');
-
-    $options = $state_flow->get_states_options();
-    $new_state = $options[$state_key]['label'];
-    $new_title = "Transition $node_title (revision $vid) to \"$new_state\"";
-
-    drupal_set_title($new_title);
-
-    //Don't show the text area for other state changes (prc-873)
-    $form['event_comment']['#type'] = 'hidden';
-    $form['event_comment']['#required'] = FALSE;
-    $event = $form['event']['#value'];
-    $form['event_comment']['#value'] = 'Event: ' . $event;
-  }
-}
-
-/**
- * Additional submit handler for revisions.
- *
- * @param $form
- * @param $form_state
- */
-function prc_workflow_events_submit(&$form, &$form_state) {
-  //Redirect to our content tab instead of the workflow pages
-  $form_state['redirect'] = 'admin-content';
-}
-
-/**
  *
  */
 function prc_workflow_pre_submit_handler($form, &$form_state) {
+  $node = $form['#node'];
   //Check if the button pressed is save draft
-  $state_flow = state_flow_load_state_machine($form['#node']);
+  $state_flow = state_flow_load_state_machine($node);
   //Only require confirmation when published
   if($state_flow->get_current_state() === 'published') {
     if ($form_state['triggering_element']['#value'] == 'Save New Draft') {
@@ -474,7 +431,6 @@ function prc_workflow_pre_submit_handler($form, &$form_state) {
     }
   }
 }
-
 
 /**
  * Handles submission of the form by workflow actions
@@ -516,6 +472,71 @@ function prc_workflow_submit_handler($form, &$form_state) {
       }
     }
   }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ * @param $form
+ * @param $form_state
+ */
+function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state) {
+  $form['#submit'][] = 'prc_workflow_events_submit';
+
+  if ($form['event']['#value'] == 'denied') {
+    // Changes before Approval for PRC-592 @timestamp (revision #)
+    $title = $form_state['build_info']['args'][0]->title;
+    $vid = $form_state['build_info']['args'][0]->vid;
+    $new_title = t('Changes before Approval for @title (revision @vid)', array(
+      '@title' => $title,
+      '@vid' => $vid
+    ));
+    drupal_set_title($new_title);
+
+    $form['event_comment']['#title'] = t('Message');
+
+    $form['submit']['#value'] = t('Send Request');
+
+    $form['instructions'] = array(
+      '#markup' => t('Instructions: (to be added)'),
+      '#prefix' => '<div class="instructions">',
+      '#suffix' => '</div>',
+      '#weight' => -1,
+    );
+
+  } else {
+    $node = $form['node_revision']['#value'];
+    $state_flow = $form['state_flow']['#value'];
+
+    $vid = $node->vid;
+    $node_title = $node->title;
+
+    $event = $state_flow->get_event($form['event']['#value']);
+
+    $state_key = $event->get_option('target');
+
+    $options = $state_flow->get_states_options();
+    $new_state = $options[$state_key]['label'];
+    $new_title = "Transition $node_title (revision $vid) to \"$new_state\"";
+
+    drupal_set_title($new_title);
+
+    //Don't show the text area for other state changes (prc-873)
+    $form['event_comment']['#type'] = 'hidden';
+    $form['event_comment']['#required'] = FALSE;
+    $event = $form['event']['#value'];
+    $form['event_comment']['#value'] = '[empty]';//State flow requires this to be more than an empty string
+  }
+}
+
+/**
+ * Additional submit handler for revisions.
+ *
+ * @param $form
+ * @param $form_state
+ */
+function prc_workflow_events_submit(&$form, &$form_state) {
+  //Redirect to our content tab instead of the workflow pages
+  $form_state['redirect'] = 'admin-content';
 }
 
 /**
@@ -663,7 +684,7 @@ function prc_workflow_reported_state($nid) {
         break;
     }
   }
-
+  
   if ($active_review) {
     $reported_state = 'ready_for_review';
   }
@@ -675,4 +696,264 @@ function prc_workflow_reported_state($nid) {
   }
 
   return $reported_state;
+}
+
+/**
+ * Implements hook_node_presave()
+ *
+ * @param $node
+ */
+function prc_workflow_node_presave($node){
+  /*
+  $published_revision = state_flow_live_revision($node->nid);
+
+  // If we are saving a new draft then from_vid equals the node vid
+  // If we are publishing then the from_vid should not change
+  if (isset($node->vid) && !empty($published_revision[0]->vid) && $published_revision[0]->vid != $node->vid) {
+    //@todo: do nothing?
+  }elseif(isset($node->vid) && !empty($published_revision[0]->vid) && $published_revision[0]->vid === $node->vid){
+    //@todo: do nothing?
+  }elseif(isset($node->vid)){
+    $node->from_vid = $node->vid;
+  }*/
+}
+
+/**
+ *
+ */
+function prc_workflow_libraries_info(){
+  return array(
+    'php-htmldiff-master' => array(
+      'name' => 'PHP HTML Diff',
+      'vendor url' => 'https://github.com/rashid2538/php-htmldiff',
+      'files' => array(
+        'php' => array('HtmlDiff.php'),
+      ),
+
+      'version' => '1',
+    ),
+  );
+}
+
+/**
+ * Page callback for a node's Workflow page.
+ */
+function prc_workflow_revisions_tab($node) {
+  drupal_add_css(drupal_get_path('module', 'prc_workflow') . '/prc-workflow.css');
+
+  // Gather information on the current published revision
+  $state_flow = state_flow_load_state_machine($node);
+  $events = $state_flow->get_available_events();
+
+  //Load the diff library
+  libraries_load('php-htmldiff-master');
+
+  // Build a table for the history of this node
+  $history_table = array(
+    'header' => array(
+      t('Date'),
+      t('Message'),
+    ),
+    'rows' => array(),
+  );
+
+  $rows = array();
+
+  $diffed = array();
+  $history = state_flow_get_history($node->nid);
+  //reverse the array so we start with the most recent first so that diffs are correct
+  foreach ($history as $index => $state) {
+    $vid = intval($state->vid);
+
+    $node_version = node_load($node->nid, $vid);
+    if($node_version->from_vid !== 0){
+      $previous_version = node_load($node->nid, $node->from_vid);
+    }else{
+      unset($previous_version);
+    }
+
+    if($node_version->from_vid > 0) {
+      $previous_version = node_load($node->nid, $node_version->from_vid);
+    }else{
+      $previous_version = NULL;
+    }
+    $path_view = ($vid == $node->vid) ? 'node/' . $node->nid : 'node/' . $node->nid . '/revisions/' . $vid . '/view';
+    $state_date_str = format_date($state->timestamp, 'short');
+
+    $user_name = format_username((object) array('uid' => (int) $state->uid, 'name' => $state->user_name));
+    $history_str = t('!user transitioned revision !vid-link to %state.',
+      array(
+        '!user' => l(check_plain($user_name), 'user/' . $state->uid, array('attributes' => array('class' => array('revision-user-link')))),
+        '!vid-link' => l($vid,  $path_view, array('attributes' => array('class' => array('revision-version-link')))),
+        '%state' => $state->state
+      )
+    );
+    if (!empty($state->log) && $state->log !== '[empty]') {
+      $history_str .= '<br/>' . t('@user said: @log', array('@user' => $user_name, '@log' => $state->log));
+    }
+
+    //Render the diff if applicable
+    if(isset($previous_version)  && $previous_version) {
+      $couple = array($previous_version->vid, $node_version->vid);
+
+      //Don't diff things twice and don't compare a less recent revision with a newer one.
+      //if($couple[0] < $couple[1]  && !in_array($couple, $diffed)) {
+      if(!in_array($couple, $diffed)){
+        $body_diff = prc_workflow_body_diff($previous_version, $node_version);
+        //@todo: display changes involving the fields
+        //$fields_diff = prc_workflow_fields_diff($previous_version, $node_version);
+        $history_str .= $body_diff;
+
+        $diffed[] = $couple;
+      }
+    }
+
+    $rows[] = array(
+      $state_date_str,
+      $history_str,
+    );
+  }
+
+  $history_table['rows'] = $rows;
+
+  // Give other modules a chance to modify the table data.
+  drupal_alter('state_flow_history_table', $history_table, $node);
+
+  // Set the title for this page
+  drupal_set_title(t('Revisions for @title', array('@title' => $node->title)), PASS_THROUGH);
+
+  // Build the render array
+  $output = array(
+    'current_revision' => array(
+      '#type' => 'fieldset',
+      '#title' => t('Current Revision'),
+      'current_revision_status' => array(
+        '#type' => 'item',
+        '#title' => t('Status'),
+        '#markup' => check_plain($state_flow->get_current_state()),
+      ),
+      'current_revision_vid' => array(
+        '#type' => 'item',
+        '#title' => t('Revision ID'),
+        '#markup' => l(check_plain($node->vid), 'node/' . $node->nid),
+      ),
+    ),
+    '#sorted' => TRUE,
+  );
+
+  $output['content']['history'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('History'),
+    'history_table' => array(
+      '#markup' => theme('table', $history_table),
+    ),
+  );
+
+  // Allow other modules to modify the output of the workflow tab
+  // before it is rendered.
+  drupal_alter('state_flow_events_page', $output, $node, $events);
+
+  return $output;
+}
+
+/**
+ * Returns an HTML diff of the body
+ *
+ * @param $previous_version
+ * @param $node_version
+ */
+function prc_workflow_body_diff($previous_version, $node_version){
+  $html = '';
+
+  $pw = entity_metadata_wrapper('node', $previous_version);
+
+  $nw = entity_metadata_wrapper('node', $node_version);
+
+  $pbody = $pw->body->value();
+  $nbody = $nw->body->value();
+  if($pbody != $nbody  || $previous_version->title != $node_version->title) {
+
+    $HtmlDiff = new HtmlDiff($pbody['safe_value'], $nbody['safe_value']);
+    $HtmlDiff->build();
+    $diff = $HtmlDiff->getDifference();
+
+    // diff of the titles
+    $titleDiff = new HtmlDiff($previous_version->title, $node_version->title);
+    $titleDiff->build();
+
+    $title = "<h4>{$titleDiff->getDifference()}</h4>";
+
+    $html = "<div class='diff'><div class='row'><div class='body-diff-deletions large-6 column'>$title $diff</div><div class='large-6 column body-diff-inserts'>$title $diff</div></div></div>";
+  }
+  return $html;
+}
+
+/**
+ * Return HTML representing differences in the fields between the two versions
+ * of the node
+ *
+ * @param $previous_version
+ * @param $node_version
+ */
+function prc_workflow_fields_diff($previous_version, $node_version){
+  $html = '';
+  $field_out_left = '';
+  $field_out_right = '';
+
+  $pw = entity_metadata_wrapper('node', $previous_version);
+
+  $nw = entity_metadata_wrapper('node', $node_version);
+
+  foreach($previous_version as $key => $property){
+    //If it starts with field, then check for differences
+    if(strpos($key, 'field') === 0){
+      $info = field_info_instance('node', $key, $node_version->type);
+      $label = $info['label'];
+
+      if($pw->{$key}->value() !== $nw->{$key}->value()){
+        $field_left = $pw->{$key}->value();
+        $field_right = $pw->{$key}->value();
+
+        $most_fields = count($field_left) >= count($field_right) ? 'left' : 'right';
+        $most = count($field_left) >= count($field_right) ? $field_left : $field_right;
+        $least = count($field_left) <= count($field_right) ? $field_left : $field_right;
+        foreach($most as $key => $most_value){
+          foreach($least as $key => $least_value){
+            if($most_value != $least_value){
+              $field_out_left = $most_fields === 'left' ? $most_value : $least_value;
+              $field_out_right = $most_fields === 'right' ? $most_value : $least_value;
+            }
+            continue;
+          }
+          $field_out_left = $most_fields === 'left' ? $most_value : '';
+          $field_out_right = $most_fields === 'right' ? $most_value : '';
+
+        }
+        $field_header = "<div class='diff-field-header'>$label</div>";
+        $fields_diff = "<div class='diff-field-previous'>$field_out_left</div>
+                        <div class='diff-field-next'>$field_out_right</div>";
+        $html .= "<div class='fields-diff'>$field_header.$fields_diff</div>";
+      }
+    }
+  }
+
+  return $html;
+}
+
+/**
+ * Implements hook_node_revision_delete
+ *
+ * Point deleted revisions to the published version to avoid breaking the revision chain.
+ *
+ * @param $node
+ */
+function prc_workflow_node_revision_delete($node){
+  //this will work when revisions are deleted by state flow, but not if a user deletes a revision.
+  //@todo: if users are allowed to delete revisions we may need to revisit this.
+  $published_revision = state_flow_live_revision($node->nid);
+
+  $num = db_update('node_revision')
+    ->fields(array('from_vid' => $published_revision[0]->vid))
+    ->condition('from_vid', $node->vid)
+    ->execute();
 }

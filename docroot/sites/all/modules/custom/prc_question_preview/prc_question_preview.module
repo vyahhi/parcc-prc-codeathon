@@ -70,7 +70,6 @@ function prc_question_view_question_preview_form($form, $form_state, $nodes, $re
   $form['question'][$nid]['header']['title'][0]['#markup'] = '<p>' . $nodes->title . '</p>';
 
   $form['question'][$nid]['header']['question_type']['#weight'] = -2;
-  $form['question'][$nid]['header']['field_item_order']['#weight'] = -1;
   $form['question'][$nid]['header']['title']['#weight'] = 0;
   $form['question'][$nid]['header']['field_standard']['#weight'] = 1;
 
@@ -256,7 +255,6 @@ function _prc_question_preview_quiz_add_questions_to_form(&$form, &$questions, &
     $form[$fieldset]['titles'][$id] = array('#markup' => $question_titles);
 
     $question_wrapper = entity_metadata_wrapper('node', $question);
-    $item_order = isset($question->field_item_order) ? $question_wrapper->field_item_order->value() : '';
     $item_standard = '';
     if (isset($question->field_standard)) {
       // && $question_wrapper->field_standard->value() ? $question_wrapper->field_standard->value()->name : '';
@@ -268,7 +266,6 @@ function _prc_question_preview_quiz_add_questions_to_form(&$form, &$questions, &
       }
       $item_standard = implode('<br />', $standards_descriptions);
     }
-    $form[$fieldset]['item_orders'][$id] = array('#markup' => $item_order);
     $form[$fieldset]['item_standards'][$id] = array('#markup' => $item_standard);
 
 
@@ -342,7 +339,6 @@ function _prc_question_preview_quiz_get_question_row($sub_form, $id) {
     ($qnr_pid ? theme('indentation', array('size' => 1)) : NULL) . drupal_render($sub_form['titles'][$id]),
     $type,
     $action,
-    drupal_render($sub_form['item_orders'][$id]),
     drupal_render($sub_form['item_standards'][$id]),
     drupal_render($sub_form['stayers'][$id]),
   );

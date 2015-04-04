@@ -1,11 +1,10 @@
-@d7 @api @user
+@d7 @api @user @registration @prc-48 @prc-888
 Feature: Login & Public Registration (PRC-48)
   As an educator,
   I want to register and log in to the PRC website,
   So that I can benefit from the contents and features provided by PRC in the website.
 
   # This was taken out of this story and has moved somewhere else - keeping it here until permissions are introduced
-  @api @d7
   Scenario: A new role Educator shall be created. This role can view content, but cannot make any changes to the update. (AC1)
     Given I am logged in as a user with the "Educator" role
     Then I should not be able to edit an "article" node
@@ -50,6 +49,8 @@ Feature: Login & Public Registration (PRC-48)
     And I fill in "First" for "First Name"
     And I fill in "Last" for "Last Name"
     And I fill in "Automated Test Robot" for "Profession"
+    And I select "Wyoming" from "State where you teach"
+    Then I check the box "I have read and agree with the Terms of Use and User Generated Content Disclaimer."
     Then I press the "Create new account" button
     Then I should see the message "Registration successful. You are now logged in."
 
@@ -62,6 +63,8 @@ Feature: Login & Public Registration (PRC-48)
     And I fill in "First" for "First Name"
     And I fill in "Last" for "Last Name"
     And I fill in "Automated Test Robot" for "Profession"
+    And I select "Wyoming" from "State where you teach"
+    Then I check the box "I have read and agree with the Terms of Use and User Generated Content Disclaimer."
     Then I press the "Create new account" button
     Then the email to "@timestamp@example.com" should contain "First Last,"
     And the email should contain "Thank you for registering at Partnership Resource Center. You may now log in"
@@ -112,6 +115,8 @@ Feature: Login & Public Registration (PRC-48)
     And I fill in "First" for "First Name"
     And I fill in "Last" for "Last Name"
     And I fill in "Automated Test Robot" for "Profession"
+    And I select "Wyoming" from "State where you teach"
+    Then I check the box "I have read and agree with the Terms of Use and User Generated Content Disclaimer."
     Then I press the "Create new account" button
     Then I should see the message "Registration successful. You are now logged in."
     Then the user "test@timestamp@example.com" should have a role of "Educator"

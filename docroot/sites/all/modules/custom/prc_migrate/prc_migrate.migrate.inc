@@ -15,7 +15,10 @@ function prc_migrate_migrate_api() {
         'title' => t('Migrate Taxonomy Terms'),
       ),
       'prc_standard' => array(
-          'title' => t('Migrate Standards Terms'),
+        'title' => t('Migrate Standards Terms'),
+      ),
+      'prc_content' => array(
+        'title' => t('Migrate Content'),
       ),
     ),
     'migrations' => array(
@@ -50,6 +53,10 @@ function prc_migrate_migrate_api() {
       'PrcJsonStandardMigration' => array(
         'class_name' => 'PrcJsonStandardMigration',
         'group_name' => 'prc_standard',
+      ),
+      'PrcCsvPage' => array (
+        'class_name' => 'PrcCsvPageMigration',
+        'group_name' => 'prc_content',
       ),
     ),
 

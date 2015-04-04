@@ -8,24 +8,24 @@ Feature: Admin UI: Edit User (PRC-105)
     Given I am logged in as a user with the "PRC Admin" role
     And I am on "prc/admin"
     And users:
-      | name     | mail                    | pass     | field_first_name | field_last_name | status |
-      | Joe User | joe_prc_105@example.com | xyz123   | Joe              | User            | 1      |
+      | name                    | mail                    | pass   | field_first_name | field_last_name | status |
+      | joe_prc_105@example.com | joe_prc_105@example.com | xyz123 | Joe              | User            | 1      |
     Then I click "Users"
     Then the url should match "admin-users"
     # Now sort by User ID descending so that the new user we created is up top
     Then I click "User ID"
-    Then I click on the edit link for the user "Joe User"
+    Then I click on the edit link for the user "joe_prc_105@example.com"
 
   Scenario: AC1 - Clickable user ID column
-    Then I should be at the edit page for the user "Joe User"
+    Then I should be at the edit page for the user "joe_prc_105@example.com"
 
   Scenario: AC2 - The header for this Admin page shall be the user's name (First Name + Last Name), followed by the User ID in the parentheses.
-    Then I should see the heading "Joe User (@uname[Joe User])" in the "content" region
+    Then I should see the heading "Joe User (@uname[joe_prc_105@example.com])" in the "content" region
 
   Scenario: AC2 - The header should stay the same on failed validation
     Then I fill in "E-mail *" with ""
     Then I press the "Save" button
-    Then I should see the heading "Joe User (@uname[Joe User])" in the "content" region
+    Then I should see the heading "Joe User (@uname[joe_prc_105@example.com])" in the "content" region
 
   Scenario: AC3 - Keep the top nav bar (now in content area)
     Then I am on "prc/admin"
@@ -77,6 +77,7 @@ Feature: Admin UI: Edit User (PRC-105)
     Then I fill in "Last Name *" with "New Last"
     Then I fill in "Profession" with "New Job"
     Then I fill in "E-mail *" with "new@example.com"
+    Then I select "Wyoming" from "State Where I Teach"
     Then I press the "Save" button
     Then I should see the message containing "The changes have been saved."
 

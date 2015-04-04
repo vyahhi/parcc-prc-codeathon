@@ -52,7 +52,6 @@ Feature: PRC-490 View Test Details
     Then I click "Quiz directions"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 1"
     And I fill in "Title" with "PRC-490 Directions 1"
-    And I fill in "Item Order" with "D1"
     And I press "Save"
     Then I click "Multiple choice question"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 2"
@@ -60,10 +59,8 @@ Feature: PRC-490 View Test Details
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     And I fill in "edit-alternatives-1-answer-value" with "Answer 2"
     And I check the box "edit-alternatives-1-correct"
-    And I fill in "Item Order" with "Q1"
     And I press "Save"
     Then I visit the last node created
-    And I should see the text "Item Order"
     And I should see the text "Item Type"
     # Standard requires manual testing because it's all javascript
     # and questions don't scaffold correctly.

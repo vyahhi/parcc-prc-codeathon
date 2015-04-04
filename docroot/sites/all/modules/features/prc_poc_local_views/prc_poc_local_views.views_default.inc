@@ -878,17 +878,6 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['relationships']['child_nid']['field'] = 'child_nid';
   $handler->display->display_options['relationships']['child_nid']['label'] = 'Question';
   $handler->display->display_options['relationships']['child_nid']['required'] = TRUE;
-  /* Relationship: Broken/missing handler */
-  $handler->display->display_options['relationships']['field_standard_single_tid']['id'] = 'field_standard_single_tid';
-  $handler->display->display_options['relationships']['field_standard_single_tid']['table'] = 'field_data_field_standard_single';
-  $handler->display->display_options['relationships']['field_standard_single_tid']['field'] = 'field_standard_single_tid';
-  $handler->display->display_options['relationships']['field_standard_single_tid']['relationship'] = 'child_nid';
-  $handler->display->display_options['relationships']['field_standard_single_tid']['label'] = 'term from field_standard_single';
-  /* Field: Content: Item Order */
-  $handler->display->display_options['fields']['field_item_order']['id'] = 'field_item_order';
-  $handler->display->display_options['fields']['field_item_order']['table'] = 'field_data_field_item_order';
-  $handler->display->display_options['fields']['field_item_order']['field'] = 'field_item_order';
-  $handler->display->display_options['fields']['field_item_order']['relationship'] = 'child_nid';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -914,13 +903,6 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['type']['field'] = 'type';
   $handler->display->display_options['fields']['type']['relationship'] = 'child_nid';
   $handler->display->display_options['fields']['type']['label'] = 'Item Type';
-  /* Field: Taxonomy term: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['relationship'] = 'field_standard_single_tid';
-  $handler->display->display_options['fields']['name']['label'] = 'Item Standard';
-  $handler->display->display_options['fields']['name']['hide_empty'] = TRUE;
   /* Contextual filter: Quiz question relationship: Parent_vid */
   $handler->display->display_options['arguments']['parent_vid']['id'] = 'parent_vid';
   $handler->display->display_options['arguments']['parent_vid']['table'] = 'quiz_node_relationship';
@@ -4806,8 +4788,8 @@ message explaining what the check does and the importance of running it.';
 
   $view = new view();
   $view->name = 'system_check_export';
-  $view->description = '';
-  $view->tag = 'default';
+  $view->description = 'TRT Export System Check';
+  $view->tag = 'PRC,TRT';
   $view->base_table = 'eck_prc_trt';
   $view->human_name = 'System Check Export';
   $view->core = 7;
@@ -5658,6 +5640,247 @@ message explaining what the check does and the importance of running it.';
   $export['transcript'] = $view;
 
   $view = new view();
+  $view->name = 'trt_capacity_check_export';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'eck_prc_trt';
+  $view->human_name = 'TRT Capacity Check Export';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'id' => 'id',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'id' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_ref_district_target_id';
+  $handler->display->display_options['fields']['title_1']['label'] = 'District';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['fields']['title']['label'] = 'School';
+  /* Field: Content: State contact's email address */
+  $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['fields']['field_contact_email']['label'] = 'School Contact Email Address';
+  /* Field: prc_trt: Devices Capacity */
+  $handler->display->display_options['fields']['field_devices_capacity']['id'] = 'field_devices_capacity';
+  $handler->display->display_options['fields']['field_devices_capacity']['table'] = 'field_data_field_devices_capacity';
+  $handler->display->display_options['fields']['field_devices_capacity']['field'] = 'field_devices_capacity';
+  $handler->display->display_options['fields']['field_devices_capacity']['empty'] = '-';
+  $handler->display->display_options['fields']['field_devices_capacity']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Devices Capacity Results */
+  $handler->display->display_options['fields']['field_devices_capacity_results']['id'] = 'field_devices_capacity_results';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['table'] = 'field_data_field_devices_capacity_results';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['field'] = 'field_devices_capacity_results';
+  $handler->display->display_options['fields']['field_devices_capacity_results']['label'] = 'Devices Capacity results';
+  /* Field: prc_trt: Bandwidth Capacity */
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['id'] = 'field_bandwidth_capacity';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['table'] = 'field_data_field_bandwidth_capacity';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['field'] = 'field_bandwidth_capacity';
+  $handler->display->display_options['fields']['field_bandwidth_capacity']['settings'] = array(
+    'thousand_separator' => ' ',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Bandwidth Capacity Results */
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['id'] = 'field_bandwidth_capacity_results';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['table'] = 'field_data_field_bandwidth_capacity_results';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['field'] = 'field_bandwidth_capacity_results';
+  $handler->display->display_options['fields']['field_bandwidth_capacity_results']['label'] = 'Bandwidth Capacity results';
+  /* Field: prc_trt: Number of devices */
+  $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['label'] = 'Number of devices ready for assessment';
+  $handler->display->display_options['fields']['field_number_of_devices']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Field: Number of students */
+  $handler->display->display_options['fields']['field_number_of_students']['id'] = 'field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['table'] = 'field_data_field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['field'] = 'field_number_of_students';
+  $handler->display->display_options['fields']['field_number_of_students']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Number of days of testing */
+  $handler->display->display_options['fields']['field_number_testing_days']['id'] = 'field_number_testing_days';
+  $handler->display->display_options['fields']['field_number_testing_days']['table'] = 'field_data_field_number_testing_days';
+  $handler->display->display_options['fields']['field_number_testing_days']['field'] = 'field_number_testing_days';
+  $handler->display->display_options['fields']['field_number_testing_days']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Number of test sessions per day */
+  $handler->display->display_options['fields']['field_number_of_sessions']['id'] = 'field_number_of_sessions';
+  $handler->display->display_options['fields']['field_number_of_sessions']['table'] = 'field_data_field_number_of_sessions';
+  $handler->display->display_options['fields']['field_number_of_sessions']['field'] = 'field_number_of_sessions';
+  $handler->display->display_options['fields']['field_number_of_sessions']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Number of sittings per student */
+  $handler->display->display_options['fields']['field_sittings_per_student']['id'] = 'field_sittings_per_student';
+  $handler->display->display_options['fields']['field_sittings_per_student']['table'] = 'field_data_field_sittings_per_student';
+  $handler->display->display_options['fields']['field_sittings_per_student']['field'] = 'field_sittings_per_student';
+  $handler->display->display_options['fields']['field_sittings_per_student']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Number of devices required */
+  $handler->display->display_options['fields']['devices_required']['id'] = 'devices_required';
+  $handler->display->display_options['fields']['devices_required']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['devices_required']['field'] = 'devices_required';
+  $handler->display->display_options['fields']['devices_required']['label'] = 'Number of devices required';
+  /* Field: prc_trt: Speed of connection (in Mbps) */
+  $handler->display->display_options['fields']['field_speed_of_connection']['id'] = 'field_speed_of_connection';
+  $handler->display->display_options['fields']['field_speed_of_connection']['table'] = 'field_data_field_speed_of_connection';
+  $handler->display->display_options['fields']['field_speed_of_connection']['field'] = 'field_speed_of_connection';
+  $handler->display->display_options['fields']['field_speed_of_connection']['label'] = 'Speed of connection';
+  $handler->display->display_options['fields']['field_speed_of_connection']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Network connection */
+  $handler->display->display_options['fields']['field_network_connection_type']['id'] = 'field_network_connection_type';
+  $handler->display->display_options['fields']['field_network_connection_type']['table'] = 'field_data_field_network_connection_type';
+  $handler->display->display_options['fields']['field_network_connection_type']['field'] = 'field_network_connection_type';
+  $handler->display->display_options['fields']['field_network_connection_type']['empty'] = '-';
+  /* Field: prc_trt: Wired connection speed */
+  $handler->display->display_options['fields']['field_wired_connection_speed']['id'] = 'field_wired_connection_speed';
+  $handler->display->display_options['fields']['field_wired_connection_speed']['table'] = 'field_data_field_wired_connection_speed';
+  $handler->display->display_options['fields']['field_wired_connection_speed']['field'] = 'field_wired_connection_speed';
+  $handler->display->display_options['fields']['field_wired_connection_speed']['empty'] = '-';
+  /* Field: prc_trt: Wireless connection speed */
+  $handler->display->display_options['fields']['field_wireless_connection_speed']['id'] = 'field_wireless_connection_speed';
+  $handler->display->display_options['fields']['field_wireless_connection_speed']['table'] = 'field_data_field_wireless_connection_speed';
+  $handler->display->display_options['fields']['field_wireless_connection_speed']['field'] = 'field_wireless_connection_speed';
+  $handler->display->display_options['fields']['field_wireless_connection_speed']['empty'] = '-';
+  /* Field: prc_trt: Number of access points */
+  $handler->display->display_options['fields']['field_number_of_access_points']['id'] = 'field_number_of_access_points';
+  $handler->display->display_options['fields']['field_number_of_access_points']['table'] = 'field_data_field_number_of_access_points';
+  $handler->display->display_options['fields']['field_number_of_access_points']['field'] = 'field_number_of_access_points';
+  $handler->display->display_options['fields']['field_number_of_access_points']['empty'] = '-';
+  $handler->display->display_options['fields']['field_number_of_access_points']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['sorts']['title']['relationship'] = 'field_ref_district_target_id';
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['sorts']['title_1']['table'] = 'node';
+  $handler->display->display_options['sorts']['title_1']['field'] = 'title';
+  $handler->display->display_options['sorts']['title_1']['relationship'] = 'field_ref_school_target_id';
+  /* Filter criterion: Prc_trt: prc_trt type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'capacity_check' => 'capacity_check',
+  );
+
+  /* Display: District Capacity Check Export */
+  $handler = $view->new_display('views_data_export', 'District Capacity Check Export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['table'] = 'field_data_field_ref_school';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['field'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['id'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['table'] = 'field_data_field_ref_district';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['field'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['required'] = TRUE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_ref_district_target_id';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['path'] = 'trt/capacity-check/export/district/%';
+
+  /* Display: State Capacity Check Export */
+  $handler = $view->new_display('views_data_export', 'State Capacity Check Export', 'views_data_export_2');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['table'] = 'field_data_field_ref_school';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['field'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['id'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['table'] = 'field_data_field_ref_district';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['field'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['id'] = 'field_ref_trt_state_target_id';
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['table'] = 'field_data_field_ref_trt_state';
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['field'] = 'field_ref_trt_state_target_id';
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['relationship'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['required'] = TRUE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_ref_trt_state_target_id';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['path'] = 'trt/capacity-check/export/state/%';
+  $export['trt_capacity_check_export'] = $view;
+
+  $view = new view();
   $view->name = 'trt_district_readiness_schools';
   $view->description = '';
   $view->tag = 'default';
@@ -5886,7 +6109,9 @@ message explaining what the check does and the importance of running it.';
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -5917,6 +6142,10 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = 'No schools have been added to your district. Please click one of the Add School links above to add schools.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Relationship: Entity Reference: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['id'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_ref_school_prc_trt']['field'] = 'reverse_field_ref_school_prc_trt';
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
@@ -5951,6 +6180,13 @@ message explaining what the check does and the importance of running it.';
     ),
     'action::views_bulk_operations_delete_revision' => array(
       'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::prc_trt_delete_schools' => array(
+      'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
@@ -6090,6 +6326,17 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['label'] = 'School Contact Email Address';
+  /* Field: COUNT(DISTINCT Prc_trt: Id) */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['fields']['id']['group_type'] = 'count_distinct';
+  $handler->display->display_options['fields']['id']['label'] = 'Readiness Checks Run?';
+  $handler->display->display_options['fields']['id']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['id']['alter']['text'] = 'Yes';
+  $handler->display->display_options['fields']['id']['empty'] = 'No';
+  $handler->display->display_options['fields']['id']['empty_zero'] = TRUE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -6118,6 +6365,50 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['filters']['type']['value'] = array(
     'school' => 'school',
   );
+  /* Filter criterion: COUNT(DISTINCT Prc_trt: Id) */
+  $handler->display->display_options['filters']['id']['id'] = 'id';
+  $handler->display->display_options['filters']['id']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['filters']['id']['field'] = 'id';
+  $handler->display->display_options['filters']['id']['relationship'] = 'reverse_field_ref_school_prc_trt';
+  $handler->display->display_options['filters']['id']['group_type'] = 'count_distinct';
+  $handler->display->display_options['filters']['id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['id']['expose']['operator_id'] = 'id_op';
+  $handler->display->display_options['filters']['id']['expose']['label'] = 'Id';
+  $handler->display->display_options['filters']['id']['expose']['operator'] = 'id_op';
+  $handler->display->display_options['filters']['id']['expose']['identifier'] = 'id';
+  $handler->display->display_options['filters']['id']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['id']['group_info']['label'] = 'Readiness Checks Run?';
+  $handler->display->display_options['filters']['id']['group_info']['identifier'] = 'id';
+  $handler->display->display_options['filters']['id']['group_info']['widget'] = 'radios';
+  $handler->display->display_options['filters']['id']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'Yes',
+      'operator' => '!=',
+      'value' => array(
+        'value' => '0',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+    2 => array(
+      'title' => 'No',
+      'operator' => '=',
+      'value' => array(
+        'value' => '0',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => array(
+        'value' => '',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+  );
 
   /* Display: TRT District Schools List */
   $handler = $view->new_display('panel_pane', 'TRT District Schools List', 'panel_pane_1');
@@ -6133,6 +6424,7 @@ message explaining what the check does and the importance of running it.';
       'label' => 'Content: District (field_ref_district)',
     ),
   );
+  $handler->display->display_options['inherit_panels_path'] = '1';
   $export['trt_district_schools'] = $view;
 
   $view = new view();
@@ -6326,6 +6618,999 @@ message explaining what the check does and the importance of running it.';
     ),
   );
   $export['trt_states'] = $view;
+
+  $view = new view();
+  $view->name = 'trt_system_check_export';
+  $view->description = '';
+  $view->tag = 'PRC,TRT';
+  $view->base_table = 'eck_prc_trt';
+  $view->human_name = 'TRT System Check Export';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'id' => 'id',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'id' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Field: prc_trt: System check name */
+  $handler->display->display_options['fields']['field_name']['id'] = 'field_name';
+  $handler->display->display_options['fields']['field_name']['table'] = 'field_data_field_name';
+  $handler->display->display_options['fields']['field_name']['field'] = 'field_name';
+  /* Field: Prc_trt: Created */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Date & Time System Check Run';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: prc_trt: Number of devices */
+  $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['label'] = 'Number of devices ready for assessment';
+  $handler->display->display_options['fields']['field_number_of_devices']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Result */
+  $handler->display->display_options['fields']['field_result']['id'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['table'] = 'field_data_field_result';
+  $handler->display->display_options['fields']['field_result']['field'] = 'field_result';
+  /* Field: prc_trt: Device type */
+  $handler->display->display_options['fields']['field_device_type']['id'] = 'field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['table'] = 'field_data_field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['field'] = 'field_device_type';
+  /* Field: prc_trt: Operating system */
+  $handler->display->display_options['fields']['field_operating_system']['id'] = 'field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['table'] = 'field_data_field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['field'] = 'field_operating_system';
+  /* Field: Prc_trt: Extrafield Operating system: Results */
+  $handler->display->display_options['fields']['operating_system_pass']['id'] = 'operating_system_pass';
+  $handler->display->display_options['fields']['operating_system_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['operating_system_pass']['field'] = 'operating_system_pass';
+  $handler->display->display_options['fields']['operating_system_pass']['label'] = 'Operating System results';
+  $handler->display->display_options['fields']['operating_system_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['operating_system_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['operating_system_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['operating_system_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Monitor size (in inches) */
+  $handler->display->display_options['fields']['field_monitor_size']['id'] = 'field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['table'] = 'field_data_field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['field'] = 'field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['settings'] = array(
+    'thousand_separator' => ' ',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Monitor size: Results */
+  $handler->display->display_options['fields']['monitor_size_pass']['id'] = 'monitor_size_pass';
+  $handler->display->display_options['fields']['monitor_size_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['monitor_size_pass']['field'] = 'monitor_size_pass';
+  $handler->display->display_options['fields']['monitor_size_pass']['label'] = 'Monitor Size results';
+  $handler->display->display_options['fields']['monitor_size_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['monitor_size_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['monitor_size_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['monitor_size_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Monitor color depth */
+  $handler->display->display_options['fields']['field_monitor_color_depth']['id'] = 'field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['table'] = 'field_data_field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['field'] = 'field_monitor_color_depth';
+  /* Field: Prc_trt: Extrafield Monitor color depth: Results */
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['id'] = 'monitor_color_depth_pass';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['field'] = 'monitor_color_depth_pass';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['label'] = 'Monitor color depth results';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Screen Resolution Width */
+  $handler->display->display_options['fields']['field_screen_resolution_width']['id'] = 'field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['table'] = 'field_data_field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['field'] = 'field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_screen_resolution_width']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Screen Resolution Height */
+  $handler->display->display_options['fields']['field_screen_resolution_height']['id'] = 'field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['table'] = 'field_data_field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['field'] = 'field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['text'] = '[field_screen_resolution_width] x [field_screen_resolution_height]';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Screen resolution: Results */
+  $handler->display->display_options['fields']['screen_resolution_pass']['id'] = 'screen_resolution_pass';
+  $handler->display->display_options['fields']['screen_resolution_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['screen_resolution_pass']['field'] = 'screen_resolution_pass';
+  $handler->display->display_options['fields']['screen_resolution_pass']['label'] = 'Screen resolution results';
+  $handler->display->display_options['fields']['screen_resolution_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['screen_resolution_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['screen_resolution_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['screen_resolution_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Processor speed */
+  $handler->display->display_options['fields']['field_processor_speed']['id'] = 'field_processor_speed';
+  $handler->display->display_options['fields']['field_processor_speed']['table'] = 'field_data_field_processor_speed';
+  $handler->display->display_options['fields']['field_processor_speed']['field'] = 'field_processor_speed';
+  /* Field: Prc_trt: Extrafield Processor speed: Results */
+  $handler->display->display_options['fields']['processor_pass']['id'] = 'processor_pass';
+  $handler->display->display_options['fields']['processor_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['processor_pass']['field'] = 'processor_pass';
+  $handler->display->display_options['fields']['processor_pass']['label'] = 'Processor speed results';
+  /* Field: prc_trt: RAM */
+  $handler->display->display_options['fields']['field_ram']['id'] = 'field_ram';
+  $handler->display->display_options['fields']['field_ram']['table'] = 'field_data_field_ram';
+  $handler->display->display_options['fields']['field_ram']['field'] = 'field_ram';
+  /* Field: Prc_trt: Extrafield RAM: Results */
+  $handler->display->display_options['fields']['ram_pass']['id'] = 'ram_pass';
+  $handler->display->display_options['fields']['ram_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['ram_pass']['field'] = 'ram_pass';
+  $handler->display->display_options['fields']['ram_pass']['label'] = 'RAM results';
+  $handler->display->display_options['fields']['ram_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['ram_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['ram_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['ram_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser */
+  $handler->display->display_options['fields']['field_browser']['id'] = 'field_browser';
+  $handler->display->display_options['fields']['field_browser']['table'] = 'field_data_field_browser';
+  $handler->display->display_options['fields']['field_browser']['field'] = 'field_browser';
+  /* Field: prc_trt: Browser Version */
+  $handler->display->display_options['fields']['field_browser_version']['id'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['table'] = 'field_data_field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['field'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Browser: Results */
+  $handler->display->display_options['fields']['browser_pass']['id'] = 'browser_pass';
+  $handler->display->display_options['fields']['browser_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['browser_pass']['field'] = 'browser_pass';
+  $handler->display->display_options['fields']['browser_pass']['label'] = 'Browser results';
+  /* Field: prc_trt: Browser: Cookies enabled */
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['id'] = 'field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['table'] = 'field_data_field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['field'] = 'field_browser_cookies_enabled';
+  /* Field: Prc_trt: Extrafield Cookies: Results */
+  $handler->display->display_options['fields']['cookies_pass']['id'] = 'cookies_pass';
+  $handler->display->display_options['fields']['cookies_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['cookies_pass']['field'] = 'cookies_pass';
+  $handler->display->display_options['fields']['cookies_pass']['label'] = 'Cookies enabled results';
+  $handler->display->display_options['fields']['cookies_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['cookies_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['cookies_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['cookies_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser: JavaScript enabled */
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['id'] = 'field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['table'] = 'field_data_field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['field'] = 'field_browser_javascript_enabled';
+  /* Field: Prc_trt: Extrafield Javascript: Results */
+  $handler->display->display_options['fields']['javascript_pass']['id'] = 'javascript_pass';
+  $handler->display->display_options['fields']['javascript_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['javascript_pass']['field'] = 'javascript_pass';
+  $handler->display->display_options['fields']['javascript_pass']['label'] = 'JavaScript enabled results';
+  $handler->display->display_options['fields']['javascript_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['javascript_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['javascript_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['javascript_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser: Images enabled */
+  $handler->display->display_options['fields']['field_browser_images_enabled']['id'] = 'field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['table'] = 'field_data_field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['field'] = 'field_browser_images_enabled';
+  /* Field: Prc_trt: Extrafield Images: Results */
+  $handler->display->display_options['fields']['images_pass']['id'] = 'images_pass';
+  $handler->display->display_options['fields']['images_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['images_pass']['field'] = 'images_pass';
+  $handler->display->display_options['fields']['images_pass']['label'] = 'Images enabled results';
+  $handler->display->display_options['fields']['images_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['images_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['images_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['images_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser: Java runtime plugin version */
+  $handler->display->display_options['fields']['field_jre_version']['id'] = 'field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['table'] = 'field_data_field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['field'] = 'field_jre_version';
+  /* Field: Prc_trt: Extrafield Java: Results */
+  $handler->display->display_options['fields']['jre_version_pass']['id'] = 'jre_version_pass';
+  $handler->display->display_options['fields']['jre_version_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['jre_version_pass']['field'] = 'jre_version_pass';
+  $handler->display->display_options['fields']['jre_version_pass']['label'] = 'Java plugin results';
+  $handler->display->display_options['fields']['jre_version_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['jre_version_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['jre_version_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['jre_version_pass']['empty_zero'] = TRUE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['sorts']['title']['relationship'] = 'field_ref_district_target_id';
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['sorts']['title_1']['table'] = 'node';
+  $handler->display->display_options['sorts']['title_1']['field'] = 'title';
+  $handler->display->display_options['sorts']['title_1']['relationship'] = 'field_ref_school_target_id';
+  /* Sort criterion: Prc_trt: Created */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Prc_trt: prc_trt type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'system_check' => 'system_check',
+  );
+
+  /* Display: Raw Data export */
+  $handler = $view->new_display('views_data_export', 'Raw Data export', 'views_data_export_1');
+  $handler->display->display_options['display_description'] = 'No School, district, state';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['path'] = 'trt/system-check/export';
+
+  /* Display: School Data export */
+  $handler = $view->new_display('views_data_export', 'School Data export', 'views_data_export_2');
+  $handler->display->display_options['display_description'] = 'System check export by School';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['table'] = 'field_data_field_ref_school';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['field'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['required'] = TRUE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['fields']['title']['label'] = 'School';
+  /* Field: Content: State contact's email address */
+  $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['fields']['field_contact_email']['label'] = 'School Contact Email Address';
+  /* Field: prc_trt: System check name */
+  $handler->display->display_options['fields']['field_name']['id'] = 'field_name';
+  $handler->display->display_options['fields']['field_name']['table'] = 'field_data_field_name';
+  $handler->display->display_options['fields']['field_name']['field'] = 'field_name';
+  /* Field: Prc_trt: Created */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Date & Time System Check Run';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: prc_trt: Number of devices */
+  $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['label'] = 'Number of devices ready for assessment';
+  $handler->display->display_options['fields']['field_number_of_devices']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Result */
+  $handler->display->display_options['fields']['field_result']['id'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['table'] = 'field_data_field_result';
+  $handler->display->display_options['fields']['field_result']['field'] = 'field_result';
+  /* Field: prc_trt: Device type */
+  $handler->display->display_options['fields']['field_device_type']['id'] = 'field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['table'] = 'field_data_field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['field'] = 'field_device_type';
+  /* Field: prc_trt: Operating system */
+  $handler->display->display_options['fields']['field_operating_system']['id'] = 'field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['table'] = 'field_data_field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['field'] = 'field_operating_system';
+  /* Field: Prc_trt: Extrafield Operating system: Results */
+  $handler->display->display_options['fields']['operating_system_pass']['id'] = 'operating_system_pass';
+  $handler->display->display_options['fields']['operating_system_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['operating_system_pass']['field'] = 'operating_system_pass';
+  $handler->display->display_options['fields']['operating_system_pass']['label'] = 'Operating System results';
+  $handler->display->display_options['fields']['operating_system_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['operating_system_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['operating_system_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['operating_system_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Monitor size (in inches) */
+  $handler->display->display_options['fields']['field_monitor_size']['id'] = 'field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['table'] = 'field_data_field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['field'] = 'field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['settings'] = array(
+    'thousand_separator' => ' ',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Monitor size: Results */
+  $handler->display->display_options['fields']['monitor_size_pass']['id'] = 'monitor_size_pass';
+  $handler->display->display_options['fields']['monitor_size_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['monitor_size_pass']['field'] = 'monitor_size_pass';
+  $handler->display->display_options['fields']['monitor_size_pass']['label'] = 'Monitor Size results';
+  $handler->display->display_options['fields']['monitor_size_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['monitor_size_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['monitor_size_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['monitor_size_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Monitor color depth */
+  $handler->display->display_options['fields']['field_monitor_color_depth']['id'] = 'field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['table'] = 'field_data_field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['field'] = 'field_monitor_color_depth';
+  /* Field: Prc_trt: Extrafield Monitor color depth: Results */
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['id'] = 'monitor_color_depth_pass';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['field'] = 'monitor_color_depth_pass';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['label'] = 'Monitor color depth results';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Screen Resolution Width */
+  $handler->display->display_options['fields']['field_screen_resolution_width']['id'] = 'field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['table'] = 'field_data_field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['field'] = 'field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_screen_resolution_width']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Screen Resolution Height */
+  $handler->display->display_options['fields']['field_screen_resolution_height']['id'] = 'field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['table'] = 'field_data_field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['field'] = 'field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['text'] = '[field_screen_resolution_width] x [field_screen_resolution_height]';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Screen resolution: Results */
+  $handler->display->display_options['fields']['screen_resolution_pass']['id'] = 'screen_resolution_pass';
+  $handler->display->display_options['fields']['screen_resolution_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['screen_resolution_pass']['field'] = 'screen_resolution_pass';
+  $handler->display->display_options['fields']['screen_resolution_pass']['label'] = 'Screen resolution results';
+  $handler->display->display_options['fields']['screen_resolution_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['screen_resolution_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['screen_resolution_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['screen_resolution_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Processor speed */
+  $handler->display->display_options['fields']['field_processor_speed']['id'] = 'field_processor_speed';
+  $handler->display->display_options['fields']['field_processor_speed']['table'] = 'field_data_field_processor_speed';
+  $handler->display->display_options['fields']['field_processor_speed']['field'] = 'field_processor_speed';
+  /* Field: Prc_trt: Extrafield Processor speed: Results */
+  $handler->display->display_options['fields']['processor_pass']['id'] = 'processor_pass';
+  $handler->display->display_options['fields']['processor_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['processor_pass']['field'] = 'processor_pass';
+  $handler->display->display_options['fields']['processor_pass']['label'] = 'Processor speed results';
+  /* Field: prc_trt: RAM */
+  $handler->display->display_options['fields']['field_ram']['id'] = 'field_ram';
+  $handler->display->display_options['fields']['field_ram']['table'] = 'field_data_field_ram';
+  $handler->display->display_options['fields']['field_ram']['field'] = 'field_ram';
+  /* Field: Prc_trt: Extrafield RAM: Results */
+  $handler->display->display_options['fields']['ram_pass']['id'] = 'ram_pass';
+  $handler->display->display_options['fields']['ram_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['ram_pass']['field'] = 'ram_pass';
+  $handler->display->display_options['fields']['ram_pass']['label'] = 'RAM results';
+  $handler->display->display_options['fields']['ram_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['ram_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['ram_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['ram_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser */
+  $handler->display->display_options['fields']['field_browser']['id'] = 'field_browser';
+  $handler->display->display_options['fields']['field_browser']['table'] = 'field_data_field_browser';
+  $handler->display->display_options['fields']['field_browser']['field'] = 'field_browser';
+  /* Field: prc_trt: Browser Version */
+  $handler->display->display_options['fields']['field_browser_version']['id'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['table'] = 'field_data_field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['field'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Browser: Results */
+  $handler->display->display_options['fields']['browser_pass']['id'] = 'browser_pass';
+  $handler->display->display_options['fields']['browser_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['browser_pass']['field'] = 'browser_pass';
+  $handler->display->display_options['fields']['browser_pass']['label'] = 'Browser results';
+  /* Field: prc_trt: Browser: Cookies enabled */
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['id'] = 'field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['table'] = 'field_data_field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['field'] = 'field_browser_cookies_enabled';
+  /* Field: Prc_trt: Extrafield Cookies: Results */
+  $handler->display->display_options['fields']['cookies_pass']['id'] = 'cookies_pass';
+  $handler->display->display_options['fields']['cookies_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['cookies_pass']['field'] = 'cookies_pass';
+  $handler->display->display_options['fields']['cookies_pass']['label'] = 'Cookies enabled results';
+  $handler->display->display_options['fields']['cookies_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['cookies_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['cookies_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['cookies_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser: JavaScript enabled */
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['id'] = 'field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['table'] = 'field_data_field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['field'] = 'field_browser_javascript_enabled';
+  /* Field: Prc_trt: Extrafield Javascript: Results */
+  $handler->display->display_options['fields']['javascript_pass']['id'] = 'javascript_pass';
+  $handler->display->display_options['fields']['javascript_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['javascript_pass']['field'] = 'javascript_pass';
+  $handler->display->display_options['fields']['javascript_pass']['label'] = 'JavaScript enabled results';
+  $handler->display->display_options['fields']['javascript_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['javascript_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['javascript_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['javascript_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser: Images enabled */
+  $handler->display->display_options['fields']['field_browser_images_enabled']['id'] = 'field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['table'] = 'field_data_field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['field'] = 'field_browser_images_enabled';
+  /* Field: Prc_trt: Extrafield Images: Results */
+  $handler->display->display_options['fields']['images_pass']['id'] = 'images_pass';
+  $handler->display->display_options['fields']['images_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['images_pass']['field'] = 'images_pass';
+  $handler->display->display_options['fields']['images_pass']['label'] = 'Images enabled results';
+  $handler->display->display_options['fields']['images_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['images_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['images_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['images_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser: Java runtime plugin version */
+  $handler->display->display_options['fields']['field_jre_version']['id'] = 'field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['table'] = 'field_data_field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['field'] = 'field_jre_version';
+  /* Field: Prc_trt: Extrafield Java: Results */
+  $handler->display->display_options['fields']['jre_version_pass']['id'] = 'jre_version_pass';
+  $handler->display->display_options['fields']['jre_version_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['jre_version_pass']['field'] = 'jre_version_pass';
+  $handler->display->display_options['fields']['jre_version_pass']['label'] = 'Java plugin results';
+  $handler->display->display_options['fields']['jre_version_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['jre_version_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['jre_version_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['jre_version_pass']['empty_zero'] = TRUE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['path'] = 'trt/system-check/export/school/%';
+
+  /* Display: District Data export */
+  $handler = $view->new_display('views_data_export', 'District Data export', 'views_data_export_3');
+  $handler->display->display_options['display_description'] = 'Data export by district';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['table'] = 'field_data_field_ref_school';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['field'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['id'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['table'] = 'field_data_field_ref_district';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['field'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['required'] = TRUE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_ref_district_target_id';
+  $handler->display->display_options['fields']['title_1']['label'] = 'District';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['fields']['title']['label'] = 'School';
+  /* Field: Content: State contact's email address */
+  $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['fields']['field_contact_email']['label'] = 'School Contact Email Address';
+  /* Field: prc_trt: System check name */
+  $handler->display->display_options['fields']['field_name']['id'] = 'field_name';
+  $handler->display->display_options['fields']['field_name']['table'] = 'field_data_field_name';
+  $handler->display->display_options['fields']['field_name']['field'] = 'field_name';
+  $handler->display->display_options['fields']['field_name']['label'] = 'System Check Name';
+  /* Field: Prc_trt: Created */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Date & Time System Check Run';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: prc_trt: Number of devices */
+  $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['label'] = 'Number of Devices in system check';
+  $handler->display->display_options['fields']['field_number_of_devices']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Result */
+  $handler->display->display_options['fields']['field_result']['id'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['table'] = 'field_data_field_result';
+  $handler->display->display_options['fields']['field_result']['field'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['label'] = 'System Check Results';
+  /* Field: prc_trt: Device type */
+  $handler->display->display_options['fields']['field_device_type']['id'] = 'field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['table'] = 'field_data_field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['field'] = 'field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['label'] = 'Device Type';
+  /* Field: prc_trt: Operating system */
+  $handler->display->display_options['fields']['field_operating_system']['id'] = 'field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['table'] = 'field_data_field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['field'] = 'field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['label'] = 'Operating System name';
+  /* Field: Prc_trt: Extrafield Operating system: Results */
+  $handler->display->display_options['fields']['operating_system_pass']['id'] = 'operating_system_pass';
+  $handler->display->display_options['fields']['operating_system_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['operating_system_pass']['field'] = 'operating_system_pass';
+  $handler->display->display_options['fields']['operating_system_pass']['label'] = 'Operating System results';
+  $handler->display->display_options['fields']['operating_system_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['operating_system_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['operating_system_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['operating_system_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Monitor size (in inches) */
+  $handler->display->display_options['fields']['field_monitor_size']['id'] = 'field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['table'] = 'field_data_field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['field'] = 'field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['label'] = 'Monitor Size';
+  $handler->display->display_options['fields']['field_monitor_size']['settings'] = array(
+    'thousand_separator' => ' ',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Monitor size: Results */
+  $handler->display->display_options['fields']['monitor_size_pass']['id'] = 'monitor_size_pass';
+  $handler->display->display_options['fields']['monitor_size_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['monitor_size_pass']['field'] = 'monitor_size_pass';
+  $handler->display->display_options['fields']['monitor_size_pass']['label'] = 'Monitor Size results';
+  $handler->display->display_options['fields']['monitor_size_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['monitor_size_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['monitor_size_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['monitor_size_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Monitor color depth */
+  $handler->display->display_options['fields']['field_monitor_color_depth']['id'] = 'field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['table'] = 'field_data_field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['field'] = 'field_monitor_color_depth';
+  /* Field: Prc_trt: Extrafield Monitor color depth: Results */
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['id'] = 'monitor_color_depth_pass';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['field'] = 'monitor_color_depth_pass';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['label'] = 'Monitor color depth results';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Screen Resolution Width */
+  $handler->display->display_options['fields']['field_screen_resolution_width']['id'] = 'field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['table'] = 'field_data_field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['field'] = 'field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_screen_resolution_width']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Screen Resolution Height */
+  $handler->display->display_options['fields']['field_screen_resolution_height']['id'] = 'field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['table'] = 'field_data_field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['field'] = 'field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['label'] = 'Screen resolution';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['text'] = '[field_screen_resolution_width] x [field_screen_resolution_height]';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Screen resolution: Results */
+  $handler->display->display_options['fields']['screen_resolution_pass']['id'] = 'screen_resolution_pass';
+  $handler->display->display_options['fields']['screen_resolution_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['screen_resolution_pass']['field'] = 'screen_resolution_pass';
+  $handler->display->display_options['fields']['screen_resolution_pass']['label'] = 'Screen resolution results';
+  $handler->display->display_options['fields']['screen_resolution_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['screen_resolution_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['screen_resolution_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['screen_resolution_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Processor speed */
+  $handler->display->display_options['fields']['field_processor_speed']['id'] = 'field_processor_speed';
+  $handler->display->display_options['fields']['field_processor_speed']['table'] = 'field_data_field_processor_speed';
+  $handler->display->display_options['fields']['field_processor_speed']['field'] = 'field_processor_speed';
+  /* Field: Prc_trt: Extrafield Processor speed: Results */
+  $handler->display->display_options['fields']['processor_pass']['id'] = 'processor_pass';
+  $handler->display->display_options['fields']['processor_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['processor_pass']['field'] = 'processor_pass';
+  $handler->display->display_options['fields']['processor_pass']['label'] = 'Processor speed results';
+  /* Field: prc_trt: RAM */
+  $handler->display->display_options['fields']['field_ram']['id'] = 'field_ram';
+  $handler->display->display_options['fields']['field_ram']['table'] = 'field_data_field_ram';
+  $handler->display->display_options['fields']['field_ram']['field'] = 'field_ram';
+  /* Field: Prc_trt: Extrafield RAM: Results */
+  $handler->display->display_options['fields']['ram_pass']['id'] = 'ram_pass';
+  $handler->display->display_options['fields']['ram_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['ram_pass']['field'] = 'ram_pass';
+  $handler->display->display_options['fields']['ram_pass']['label'] = 'RAM results';
+  $handler->display->display_options['fields']['ram_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['ram_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['ram_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['ram_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser */
+  $handler->display->display_options['fields']['field_browser']['id'] = 'field_browser';
+  $handler->display->display_options['fields']['field_browser']['table'] = 'field_data_field_browser';
+  $handler->display->display_options['fields']['field_browser']['field'] = 'field_browser';
+  $handler->display->display_options['fields']['field_browser']['label'] = 'Browser name';
+  /* Field: prc_trt: Browser Version */
+  $handler->display->display_options['fields']['field_browser_version']['id'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['table'] = 'field_data_field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['field'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Browser: Results */
+  $handler->display->display_options['fields']['browser_pass']['id'] = 'browser_pass';
+  $handler->display->display_options['fields']['browser_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['browser_pass']['field'] = 'browser_pass';
+  $handler->display->display_options['fields']['browser_pass']['label'] = 'Browser results';
+  /* Field: prc_trt: Browser: Cookies enabled */
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['id'] = 'field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['table'] = 'field_data_field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['field'] = 'field_browser_cookies_enabled';
+  /* Field: Prc_trt: Extrafield Cookies: Results */
+  $handler->display->display_options['fields']['cookies_pass']['id'] = 'cookies_pass';
+  $handler->display->display_options['fields']['cookies_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['cookies_pass']['field'] = 'cookies_pass';
+  $handler->display->display_options['fields']['cookies_pass']['label'] = 'Cookies enabled results';
+  $handler->display->display_options['fields']['cookies_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['cookies_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['cookies_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['cookies_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser: JavaScript enabled */
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['id'] = 'field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['table'] = 'field_data_field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['field'] = 'field_browser_javascript_enabled';
+  /* Field: Prc_trt: Extrafield Javascript: Results */
+  $handler->display->display_options['fields']['javascript_pass']['id'] = 'javascript_pass';
+  $handler->display->display_options['fields']['javascript_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['javascript_pass']['field'] = 'javascript_pass';
+  $handler->display->display_options['fields']['javascript_pass']['label'] = 'JavaScript enabled results';
+  $handler->display->display_options['fields']['javascript_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['javascript_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['javascript_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['javascript_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser: Images enabled */
+  $handler->display->display_options['fields']['field_browser_images_enabled']['id'] = 'field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['table'] = 'field_data_field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['field'] = 'field_browser_images_enabled';
+  /* Field: Prc_trt: Extrafield Images: Results */
+  $handler->display->display_options['fields']['images_pass']['id'] = 'images_pass';
+  $handler->display->display_options['fields']['images_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['images_pass']['field'] = 'images_pass';
+  $handler->display->display_options['fields']['images_pass']['label'] = 'Images enabled results';
+  $handler->display->display_options['fields']['images_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['images_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['images_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['images_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser: Java runtime plugin version */
+  $handler->display->display_options['fields']['field_jre_version']['id'] = 'field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['table'] = 'field_data_field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['field'] = 'field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['label'] = 'Java plugin version';
+  /* Field: Prc_trt: Extrafield Java: Results */
+  $handler->display->display_options['fields']['jre_version_pass']['id'] = 'jre_version_pass';
+  $handler->display->display_options['fields']['jre_version_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['jre_version_pass']['field'] = 'jre_version_pass';
+  $handler->display->display_options['fields']['jre_version_pass']['label'] = 'Java plugin results';
+  $handler->display->display_options['fields']['jre_version_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['jre_version_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['jre_version_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['jre_version_pass']['empty_zero'] = TRUE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_ref_district_target_id';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['path'] = 'trt/system-check/export/district/%';
+
+  /* Display: State Data export */
+  $handler = $view->new_display('views_data_export', 'State Data export', 'views_data_export_4');
+  $handler->display->display_options['display_description'] = 'State export for system checks';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['table'] = 'field_data_field_ref_school';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['field'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_school_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['id'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['table'] = 'field_data_field_ref_district';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['field'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['relationships']['field_ref_district_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['id'] = 'field_ref_trt_state_target_id';
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['table'] = 'field_data_field_ref_trt_state';
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['field'] = 'field_ref_trt_state_target_id';
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['relationship'] = 'field_ref_district_target_id';
+  $handler->display->display_options['relationships']['field_ref_trt_state_target_id']['required'] = TRUE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_ref_district_target_id';
+  $handler->display->display_options['fields']['title_1']['label'] = 'District';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['fields']['title']['label'] = 'School';
+  /* Field: Content: State contact's email address */
+  $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['relationship'] = 'field_ref_school_target_id';
+  $handler->display->display_options['fields']['field_contact_email']['label'] = 'School Contact Email Address';
+  /* Field: prc_trt: System check name */
+  $handler->display->display_options['fields']['field_name']['id'] = 'field_name';
+  $handler->display->display_options['fields']['field_name']['table'] = 'field_data_field_name';
+  $handler->display->display_options['fields']['field_name']['field'] = 'field_name';
+  $handler->display->display_options['fields']['field_name']['label'] = 'System Check Name';
+  /* Field: Prc_trt: Created */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Date & Time System Check Run';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: prc_trt: Number of devices */
+  $handler->display->display_options['fields']['field_number_of_devices']['id'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
+  $handler->display->display_options['fields']['field_number_of_devices']['label'] = 'Number of Devices in system check';
+  $handler->display->display_options['fields']['field_number_of_devices']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Result */
+  $handler->display->display_options['fields']['field_result']['id'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['table'] = 'field_data_field_result';
+  $handler->display->display_options['fields']['field_result']['field'] = 'field_result';
+  $handler->display->display_options['fields']['field_result']['label'] = 'System Check Results';
+  /* Field: prc_trt: Device type */
+  $handler->display->display_options['fields']['field_device_type']['id'] = 'field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['table'] = 'field_data_field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['field'] = 'field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['label'] = 'Device Type';
+  /* Field: prc_trt: Operating system */
+  $handler->display->display_options['fields']['field_operating_system']['id'] = 'field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['table'] = 'field_data_field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['field'] = 'field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['label'] = 'Operating System name';
+  /* Field: Prc_trt: Extrafield Operating system: Results */
+  $handler->display->display_options['fields']['operating_system_pass']['id'] = 'operating_system_pass';
+  $handler->display->display_options['fields']['operating_system_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['operating_system_pass']['field'] = 'operating_system_pass';
+  $handler->display->display_options['fields']['operating_system_pass']['label'] = 'Operating System results';
+  $handler->display->display_options['fields']['operating_system_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['operating_system_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['operating_system_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['operating_system_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Monitor size (in inches) */
+  $handler->display->display_options['fields']['field_monitor_size']['id'] = 'field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['table'] = 'field_data_field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['field'] = 'field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['label'] = 'Monitor Size';
+  $handler->display->display_options['fields']['field_monitor_size']['settings'] = array(
+    'thousand_separator' => ' ',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Monitor size: Results */
+  $handler->display->display_options['fields']['monitor_size_pass']['id'] = 'monitor_size_pass';
+  $handler->display->display_options['fields']['monitor_size_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['monitor_size_pass']['field'] = 'monitor_size_pass';
+  $handler->display->display_options['fields']['monitor_size_pass']['label'] = 'Monitor Size results';
+  $handler->display->display_options['fields']['monitor_size_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['monitor_size_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['monitor_size_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['monitor_size_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Monitor color depth */
+  $handler->display->display_options['fields']['field_monitor_color_depth']['id'] = 'field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['table'] = 'field_data_field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['field'] = 'field_monitor_color_depth';
+  /* Field: Prc_trt: Extrafield Monitor color depth: Results */
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['id'] = 'monitor_color_depth_pass';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['field'] = 'monitor_color_depth_pass';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['label'] = 'Monitor color depth results';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['monitor_color_depth_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Screen Resolution Width */
+  $handler->display->display_options['fields']['field_screen_resolution_width']['id'] = 'field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['table'] = 'field_data_field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['field'] = 'field_screen_resolution_width';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_screen_resolution_width']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: prc_trt: Screen Resolution Height */
+  $handler->display->display_options['fields']['field_screen_resolution_height']['id'] = 'field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['table'] = 'field_data_field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['field'] = 'field_screen_resolution_height';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['label'] = 'Screen resolution';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['text'] = '[field_screen_resolution_width] x [field_screen_resolution_height]';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Screen resolution: Results */
+  $handler->display->display_options['fields']['screen_resolution_pass']['id'] = 'screen_resolution_pass';
+  $handler->display->display_options['fields']['screen_resolution_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['screen_resolution_pass']['field'] = 'screen_resolution_pass';
+  $handler->display->display_options['fields']['screen_resolution_pass']['label'] = 'Screen resolution results';
+  $handler->display->display_options['fields']['screen_resolution_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['screen_resolution_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['screen_resolution_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['screen_resolution_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Processor speed */
+  $handler->display->display_options['fields']['field_processor_speed']['id'] = 'field_processor_speed';
+  $handler->display->display_options['fields']['field_processor_speed']['table'] = 'field_data_field_processor_speed';
+  $handler->display->display_options['fields']['field_processor_speed']['field'] = 'field_processor_speed';
+  /* Field: Prc_trt: Extrafield Processor speed: Results */
+  $handler->display->display_options['fields']['processor_pass']['id'] = 'processor_pass';
+  $handler->display->display_options['fields']['processor_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['processor_pass']['field'] = 'processor_pass';
+  $handler->display->display_options['fields']['processor_pass']['label'] = 'Processor speed results';
+  /* Field: prc_trt: RAM */
+  $handler->display->display_options['fields']['field_ram']['id'] = 'field_ram';
+  $handler->display->display_options['fields']['field_ram']['table'] = 'field_data_field_ram';
+  $handler->display->display_options['fields']['field_ram']['field'] = 'field_ram';
+  /* Field: Prc_trt: Extrafield RAM: Results */
+  $handler->display->display_options['fields']['ram_pass']['id'] = 'ram_pass';
+  $handler->display->display_options['fields']['ram_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['ram_pass']['field'] = 'ram_pass';
+  $handler->display->display_options['fields']['ram_pass']['label'] = 'RAM results';
+  $handler->display->display_options['fields']['ram_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['ram_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['ram_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['ram_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser */
+  $handler->display->display_options['fields']['field_browser']['id'] = 'field_browser';
+  $handler->display->display_options['fields']['field_browser']['table'] = 'field_data_field_browser';
+  $handler->display->display_options['fields']['field_browser']['field'] = 'field_browser';
+  $handler->display->display_options['fields']['field_browser']['label'] = 'Browser name';
+  /* Field: prc_trt: Browser Version */
+  $handler->display->display_options['fields']['field_browser_version']['id'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['table'] = 'field_data_field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['field'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Prc_trt: Extrafield Browser: Results */
+  $handler->display->display_options['fields']['browser_pass']['id'] = 'browser_pass';
+  $handler->display->display_options['fields']['browser_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['browser_pass']['field'] = 'browser_pass';
+  $handler->display->display_options['fields']['browser_pass']['label'] = 'Browser results';
+  /* Field: prc_trt: Browser: Cookies enabled */
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['id'] = 'field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['table'] = 'field_data_field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['field'] = 'field_browser_cookies_enabled';
+  /* Field: Prc_trt: Extrafield Cookies: Results */
+  $handler->display->display_options['fields']['cookies_pass']['id'] = 'cookies_pass';
+  $handler->display->display_options['fields']['cookies_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['cookies_pass']['field'] = 'cookies_pass';
+  $handler->display->display_options['fields']['cookies_pass']['label'] = 'Cookies enabled results';
+  $handler->display->display_options['fields']['cookies_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['cookies_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['cookies_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['cookies_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser: JavaScript enabled */
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['id'] = 'field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['table'] = 'field_data_field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['field'] = 'field_browser_javascript_enabled';
+  /* Field: Prc_trt: Extrafield Javascript: Results */
+  $handler->display->display_options['fields']['javascript_pass']['id'] = 'javascript_pass';
+  $handler->display->display_options['fields']['javascript_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['javascript_pass']['field'] = 'javascript_pass';
+  $handler->display->display_options['fields']['javascript_pass']['label'] = 'JavaScript enabled results';
+  $handler->display->display_options['fields']['javascript_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['javascript_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['javascript_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['javascript_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser: Images enabled */
+  $handler->display->display_options['fields']['field_browser_images_enabled']['id'] = 'field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['table'] = 'field_data_field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['field'] = 'field_browser_images_enabled';
+  /* Field: Prc_trt: Extrafield Images: Results */
+  $handler->display->display_options['fields']['images_pass']['id'] = 'images_pass';
+  $handler->display->display_options['fields']['images_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['images_pass']['field'] = 'images_pass';
+  $handler->display->display_options['fields']['images_pass']['label'] = 'Images enabled results';
+  $handler->display->display_options['fields']['images_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['images_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['images_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['images_pass']['empty_zero'] = TRUE;
+  /* Field: prc_trt: Browser: Java runtime plugin version */
+  $handler->display->display_options['fields']['field_jre_version']['id'] = 'field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['table'] = 'field_data_field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['field'] = 'field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['label'] = 'Java plugin version';
+  /* Field: Prc_trt: Extrafield Java: Results */
+  $handler->display->display_options['fields']['jre_version_pass']['id'] = 'jre_version_pass';
+  $handler->display->display_options['fields']['jre_version_pass']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['fields']['jre_version_pass']['field'] = 'jre_version_pass';
+  $handler->display->display_options['fields']['jre_version_pass']['label'] = 'Java plugin results';
+  $handler->display->display_options['fields']['jre_version_pass']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['jre_version_pass']['alter']['text'] = 'Pass';
+  $handler->display->display_options['fields']['jre_version_pass']['empty'] = 'Fail';
+  $handler->display->display_options['fields']['jre_version_pass']['empty_zero'] = TRUE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['sorts']['title']['relationship'] = 'field_ref_district_target_id';
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['sorts']['title_1']['table'] = 'node';
+  $handler->display->display_options['sorts']['title_1']['field'] = 'title';
+  $handler->display->display_options['sorts']['title_1']['relationship'] = 'field_ref_school_target_id';
+  /* Sort criterion: Prc_trt: Created */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'eck_prc_trt';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['path'] = 'trt/system-check/export/state/%';
+  $export['trt_system_check_export'] = $view;
 
   return $export;
 }

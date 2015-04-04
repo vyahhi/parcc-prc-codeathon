@@ -7,13 +7,13 @@ Feature: PRC Administrators (PRC-61)
     Given I am an anonymous user
     And I am on the homepage
     Then I should not see the text "Welcome,"
-  
+
   Scenario: AC1 - A user shall use the Login block of the Home page and enter the E-mail and password provided.
     Given users:
-      | name     | mail                   | pass     | field_first_name | field_last_name | status |
-      | Joe User | joe_prc_61@example.com | xyz123   | Joe              | User            | 1      |
+      | name                             | mail                             | pass   | field_first_name | field_last_name | status |
+      | joe_prc_61@timestamp@example.com | joe_prc_61@timestamp@example.com | xyz123 | Joe              | User            | 1      |
     And I am on the homepage
-    When I fill in "E-mail" with "joe_prc_61@example.com"
+    When I fill in "E-mail" with "joe_prc_61@timestamp@example.com"
     And I fill in "Password" with "xyz123"
     And I press "Log in"
     Then I should see the link "Log out"
@@ -50,8 +50,8 @@ Feature: PRC Administrators (PRC-61)
 
   Scenario: AC4 - If any of the credentials are wrong, the following message appears (wrong password)
     Given users:
-      | name     | mail                     | pass     | field_first_name | field_last_name | status |
-      | Joe User | joe_prc_61_4@example.com | xyz123   | Joe              | User            | 1      |
+      | name                               | mail                               | pass   | field_first_name | field_last_name | status |
+      | joe_prc_61_4@timestamp@example.com | joe_prc_61_4@timestamp@example.com | xyz123 | Joe              | User            | 1      |
     And I am on the homepage
     When I fill in "E-mail" with "joe_prc_61_4@example.com"
     And I fill in "Password" with "wrong"
@@ -78,9 +78,12 @@ Feature: PRC Administrators (PRC-61)
     And I should see the link "Have you forgotten your password?"
 
   Scenario: PRC-368 Max failed login attempts message includes a request a new password link. However, successfully changing the password does NOT unlock the account.
+    Given "User States" terms:
+      | name        |
+      | Second York |
     Given users:
-      | name     | mail                     | pass     | field_first_name | field_last_name | status |
-      | Joe User | joe_prc_368@example.com  | xyz123   | Joe              | User            | 1      |
+      | name                              | mail                              | pass   | First Name | Last Name | status | State Where I Teach |
+      | joe_prc_368@example.com | joe_prc_368@example.com | xyz123 | Joe        | User      | 1      | Second York         |
     And I am an anonymous user
     And I am on the homepage
     # Fail login 5 times
@@ -119,6 +122,9 @@ Feature: PRC Administrators (PRC-61)
     # Logged in from the email. Now reset password and try to log in with that new password.
     And I fill in "Password" with "password1"
     And I fill in "Confirm password" with "password1"
+    And I select "Wyoming" from "State Where I Teach"
+    And I fill in "First Name" with "Firsty"
+    And I fill in "Last Name" with "Lasty"
     And I press "Save"
     Then I should see the message containing "The changes have been saved."
     Then I click "Log out"
@@ -127,4 +133,4 @@ Feature: PRC Administrators (PRC-61)
     And I fill in "Password" with "password1"
     And I press "Log in"
     Then I should see the link "Log out"
-    And I should see "Welcome, Joe User"
+    And I should see "Welcome, Firsty Lasty"

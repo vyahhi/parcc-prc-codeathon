@@ -12,7 +12,6 @@ use Behat\Behat\Context\Step\Given;
 use Behat\Mink\Exception\ExpectationException;
 use Drupal\DrupalExtension\Event\EntityEvent;
 use Behat\Gherkin\Node\TableNode;
-
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
   protected $originalMailSystem;
@@ -715,6 +714,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^I click on the edit link for the user "(?P<username>[^"]*)"$/
    */
   public function clickUserViewEditLink($username) {
+    $username = $this->fixStepArgument($username);
     $user = $this->users[$username];
     $uid = $user->uid;
     $this->clickLink($uid);
@@ -726,6 +726,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^I should be at the edit page for the user "(?P<username>[^"]*)"$/
    */
   public function assertUserEditUrl($username) {
+    $username = $this->fixStepArgument($username);
     $user = $this->users[$username];
     $uid = $user->uid;
 
@@ -1283,7 +1284,20 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     return $message == $this->getSession()->getDriver()->getWebDriverSession()->getAlert_text();
   }
 
+  /**
+   * @Then /^I should see CSV text matching "([^"]*)"$/
+   */
+  public function iShouldSeeCsvTextMatching($arg1) {
+    $arg1 = $this->fixStepArgument($arg1);
+    $actual = $this->getSession()->getPage()->getContent();
+    if (strpos($actual, $arg1) === FALSE) {
+      throw new \Exception(sprintf('The pattern %s was not found anywhere in the text of the current response.', $arg1));
+    }
+  }
+
   public function afterScenario($event) {
+    variable_del('drupal_test_email_collector');
+
     if ($event->getResult()) {
       $this->recordFailedEvent($event);
     }
@@ -1550,11 +1564,51 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
   }
 
+  public function assertClickInTableRow($link, $row_text) {
+    $link = $this->fixStepArgument($link);
+    $row_text = $this->fixStepArgument($row_text);
+    $page = $this->getSession()->getPage();
+    if ($link = $this->getTableRow($page, $row_text)->findLink($link)) {
+      // Click the link and return.
+      $link->click();
+      return;
+    }
+    throw new \Exception(sprintf('Found a row containing "%s", but no "%s" link on the page %s', $rowText, $link, $this->getSession()->getCurrentUrl()));
+  }
+
+  /**
+   * @Then /^I do not see a "([^"]*)" link in the "([^"]*)" row$/
+   */
+  public function iDoNotSeeALinkInTheRow($link, $row_text) {
+    $link = $this->fixStepArgument($link);
+    $row_text = $this->fixStepArgument($row_text);
+
+    $page = $this->getSession()->getPage();
+    if ($link = $this->getTableRow($page, $row_text)->findLink($link)) {
+      throw new \Exception(sprintf('Found a row containing "%s", but there was "%s" present %s', $row_text, $link, $this->getSession()->getCurrentUrl()));
+    }
+    return;
+  }
+
+  /**
+   * @Given /^at least one "([^"]*)" element should contain "([^"]*)"$/
+   */
+  public function atLeastOneElementShouldContain($element, $text) {
+    $page = $this->getSession()->getPage();
+    $elements = $page->findAll('css', $element);
+    foreach($elements as $element){
+      if (strpos($element->getText(), $text) !== FALSE) {
+        return;
+      }
+    }
+    throw new \Exception(sprintf('There was no %s element found with the text %s', $element, $text));
+  }
+
   /**
    * @Then /^I take a screenshot$/
    */
   public function iTakeAScreenshot($feature_file_full = 'shot') {
-    $fileName = time(); //$this->timestamp;
+    $fileName = time();
     // TODO: Make this a setting in behat.yml?
     $html_dump_path = 'failures';
 
@@ -1612,5 +1666,4 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       throw new Exception("Element ({$selector}) does not have a ({$attribute}) value of ({$value}).  The actual value is ({$computed})");
     }
   }
-
 }

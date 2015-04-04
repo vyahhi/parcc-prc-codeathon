@@ -105,7 +105,7 @@ function prc_foundation_question_selection_table($variables) {
   drupal_add_tabledrag('question-list', 'order', 'sibling', 'question-list-weight');
 
   // Building headers
-  $headers = array(t('Preview'), t('Item Type'), t('Actions'), t('Item Order'), t('Item Standard'), t('Delete'));
+  $headers = array(t('Preview'), t('Item Type'), t('Actions'), t('Item Standard'), t('Delete'));
   if (isset($form['compulsories'])) {
     $headers[] = t('Compulsory');
   }
@@ -127,7 +127,7 @@ function prc_foundation_question_selection_table($variables) {
     }
     // Make sure the same fields aren't rendered twice
     unset($form['types'], $form['view_links'], $form['remove_links'], $form['stayers']);
-    unset($form['max_scores'], $form['auto_update_max_scores'], $form['revision'], $form['weights'], $form['titles'], $form['compulsories'], $form['qnr_ids'], $form['qnr_pids'], $form['item_orders'], $form['item_standards']);
+    unset($form['max_scores'], $form['auto_update_max_scores'], $form['revision'], $form['weights'], $form['titles'], $form['compulsories'], $form['qnr_ids'], $form['qnr_pids'], $form['item_standards']);
   }
   $html_attr = array('id' => 'question-list');
 

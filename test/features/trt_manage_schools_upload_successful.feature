@@ -1,4 +1,4 @@
-@api @trt @structured @school @upload
+@api @trt @structured @school @upload @prc-864 @prc-854
 Feature: PRC-864 Manage Schools - Upload School - No Schools Exist - School(s) Added
   As a District Admin, I want to view the schools I added to my district by uploading a .csv file so that I can see that the schools were added and I can request that the schools run readiness checks.
   Acceptance Criteria
@@ -95,4 +95,5 @@ Feature: PRC-864 Manage Schools - Upload School - No Schools Exist - School(s) A
     And I visit the last node created
     And I click "Manage Schools"
     When I click "Add School(s) - upload csv file"
-    And I should see the text "Overview / instructional copy. Consider explaining that for each school, there must be two columns: one for school name and one for school contact email address and that file must be .csv."
+    # PRC-854 changed this text
+    And I should see the text "Overview / instructional copy. Consider explaining that for each school, there must be two columns: one for school name and one for school contact email address; the first row is treated as a header and its contents are ignored; and that file must be .csv."

@@ -63,47 +63,6 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-multichoice-field_item_order'
-  $field_instances['node-multichoice-field_item_order'] = array(
-    'bundle' => 'multichoice',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_item_order',
-    'label' => 'Item Order',
-    'required' => 1,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'label_help_description' => '',
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 0,
-    ),
-  );
-
   // Exported field_instance: 'node-multichoice-field_standard'
   $field_instances['node-multichoice-field_standard'] = array(
     'bundle' => 'multichoice',
@@ -152,7 +111,6 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Item Order');
   t('Question (Item Stem)');
   t('Standard');
 

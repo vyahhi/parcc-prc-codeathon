@@ -41,33 +41,15 @@ Feature: PRC-217  Invite User with Additional Role Selection
     When I check the box "Content Administrator (Curator)"
     Then "#edit-field-member-state-und" should not be visible
 
-  Scenario:  The State dropdown menu contains the following options (notice they're in alphabetical order):
-    Given I am logged in as a user with the "PRC Admin" role
-    And I visit "invite/add/invite_by_email"
-    And I should see the text "Select a state"
-    And I should see the text "Arkansas"
-    And I should see the text "Colorado"
-    And I should see the text "District of Columbia"
-    And I should see the text "Illinois"
-    And I should see the text "Louisiana"
-    And I should see the text "Maryland"
-    And I should see the text "Massachusetts"
-    And I should see the text "Mississippi"
-    And I should see the text "New Jersey"
-    And I should see the text "New Mexico"
-    And I should see the text "New York"
-    And I should see the text "Ohio"
-    And I should see the text "Rhode Island"
-
   Scenario: Selecting a state saves the state to the invite
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
     Then I check the box "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com"
-    And I select "Illinois" from "State"
+    And I select "Wyoming" from "State where the invitee teaches"
     And I press "Send Invitation"
-    Then I should see the text "Illinois"
+    Then I should see the text "Wyoming"
 
   Scenario: The State field is optional. One or no option can be selected.
     Given I am logged in as a user with the "PRC Admin" role
@@ -75,7 +57,8 @@ Feature: PRC-217  Invite User with Additional Role Selection
     Then I check the box "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com"
-    And I select "Select a state" from "State"
+    And I select "Wyoming" from "State where the invitee teaches"
+    And I select "- None -" from "Member State"
     And I press "Send Invitation"
     Then I should not see the text "Member State"
 
@@ -85,10 +68,10 @@ Feature: PRC-217  Invite User with Additional Role Selection
     Then I check the box "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com"
-    And I select "Ohio" from "State"
+    And I select "Ohio - PARCC Member" from "State where the invitee teaches"
     Then I check the box "Educator"
     And I uncheck the box "Content Contributor"
-    And I select "Wyoming" from "State Where You Teach"
+    And I select "Wyoming" from "State where the invitee teaches"
     And I press "Send Invitation"
     Then I should not see the text "Member State"
     And I should not see the text "Ohio"

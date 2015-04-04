@@ -8,7 +8,6 @@ dependencies[] = shs
 dependencies[] = strongarm
 dependencies[] = taxonomy
 features[field_instance][] = node-multichoice-body
-features[field_instance][] = node-multichoice-field_item_order
 features[field_instance][] = node-multichoice-field_standard
 features[node][] = multichoice
 features[variable][] = menu_options_multichoice
