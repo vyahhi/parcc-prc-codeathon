@@ -1,4 +1,4 @@
-@api @diglib @sort @prc-962 @flag
+@api @diglib @sort @prc-982 @flag
 Feature: PRC-982 Search/Filter Bar: Sorting Results
   As a user, I want to be able to sort the items in the Digital Library gallery so that I can find the items that I want.
 
