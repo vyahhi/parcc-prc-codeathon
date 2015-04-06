@@ -64,6 +64,6 @@ Feature: PRC-982 Search/Filter Bar: Sorting Results
     Then I select "Date" from "Sort by"
     And I select "Desc" from "Order"
     And I press "Apply"
-    
+
     # This is not working in Mink. Every other sort works, and this sort works when
     # testing manually, but it doesn't work here.
