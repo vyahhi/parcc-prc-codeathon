@@ -2612,6 +2612,7 @@ function prc_poc_local_views_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -2622,6 +2623,13 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = '3';
   $handler->display->display_options['row_plugin'] = 'entity';
   $handler->display->display_options['row_options']['view_mode'] = 'gallery_view';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'There are no results to display. Please change the search or filter selections and try again.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Indexed Node: Node ID */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'search_api_index_digital_library_only';
@@ -2658,6 +2666,7 @@ function prc_poc_local_views_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Digital Library Search View', 'panel_pane_1');
   $handler->display->display_options['pane_category']['name'] = 'PRC Digital Library';
   $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['inherit_panels_path'] = '1';
   $export['digital_library_gallery'] = $view;
 
   $view = new view();
@@ -4959,7 +4968,7 @@ message explaining what the check does and the importance of running it.';
   $view = new view();
   $view->name = 'test_search_two';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'PRC,search';
   $view->base_table = 'search_api_index_digital_library_content_index';
   $view->human_name = 'Test Search Two';
   $view->core = 7;
