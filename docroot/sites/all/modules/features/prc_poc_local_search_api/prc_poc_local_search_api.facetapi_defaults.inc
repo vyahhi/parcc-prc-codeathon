@@ -591,13 +591,16 @@ function prc_poc_local_search_api_facetapi_default_facet_settings() {
   $facet->facet = 'field_media_type';
   $facet->enabled = FALSE;
   $facet->settings = array(
-    'operator' => 'and',
+    'operator' => 'or',
     'hard_limit' => '50',
     'dependencies' => array(
       'facets' => array(),
       'reverse_dependency' => FALSE,
       'force_deactivation' => TRUE,
       'regex' => FALSE,
+      'roles' => array(),
+      'bundle' => 'none',
+      'bundle_selected' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -605,7 +608,7 @@ function prc_poc_local_search_api_facetapi_default_facet_settings() {
     'individual_parent' => '0',
     'query_type' => 'term',
     'limit_active_items' => 0,
-    'default_true' => TRUE,
+    'default_true' => '1',
     'facet_search_ids' => array(),
     'exclude' => 0,
   );
@@ -649,7 +652,7 @@ function prc_poc_local_search_api_facetapi_default_facet_settings() {
   $facet->facet = 'field_subject';
   $facet->enabled = FALSE;
   $facet->settings = array(
-    'operator' => 'and',
+    'operator' => 'or',
     'hard_limit' => '50',
     'dependencies' => array(
       'facets' => array(),
@@ -666,7 +669,7 @@ function prc_poc_local_search_api_facetapi_default_facet_settings() {
     'individual_parent' => '0',
     'query_type' => 'term',
     'limit_active_items' => 0,
-    'default_true' => TRUE,
+    'default_true' => '1',
     'facet_search_ids' => array(),
     'exclude' => 0,
   );
@@ -965,7 +968,40 @@ function prc_poc_local_search_api_facetapi_default_facet_settings() {
   $facet->settings = array(
     'weight' => 0,
     'widget' => 'facetapi_checkbox_links',
-    'filters' => array(),
+    'filters' => array(
+      'active_items' => array(
+        'status' => 0,
+        'weight' => '-50',
+      ),
+      'current_depth' => array(
+        'status' => 0,
+        'weight' => '-49',
+      ),
+      'exclude_items' => array(
+        'status' => 0,
+        'weight' => '-48',
+      ),
+      'rewrite_items' => array(
+        'status' => 0,
+        'weight' => '-47',
+      ),
+      'narrow_results' => array(
+        'status' => 0,
+        'weight' => '-46',
+      ),
+      'show_if_minimum_items' => array(
+        'status' => 0,
+        'weight' => '-45',
+      ),
+      'deepest_level_items' => array(
+        'status' => 0,
+        'weight' => '-44',
+      ),
+      'parent_level_items' => array(
+        'status' => 1,
+        'weight' => '-43',
+      ),
+    ),
     'active_sorts' => array(
       'active' => 'active',
       'count' => 'count',
@@ -997,6 +1033,9 @@ function prc_poc_local_search_api_facetapi_default_facet_settings() {
       'value' => '',
       'format' => 'filtered_html',
     ),
+    'exclude' => '',
+    'regex' => 0,
+    'show_minimum_items' => 2,
   );
   $export['search_api@digital_library_only:block:field_subject'] = $facet;
 

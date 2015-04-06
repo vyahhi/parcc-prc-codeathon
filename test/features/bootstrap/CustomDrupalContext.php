@@ -12,6 +12,7 @@ use Behat\Behat\Context\Step\Given;
 use Behat\Mink\Exception\ExpectationException;
 use Drupal\DrupalExtension\Event\EntityEvent;
 use Behat\Gherkin\Node\TableNode;
+
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
   protected $originalMailSystem;
@@ -25,8 +26,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * You can also pass arbitrary arguments to the
    * context constructor through behat.yml.
    */
-  public function __construct($parameters)
-  {
+  public function __construct($parameters) {
     $this->timestamp = time();
     $this->customParameters = !empty($parameters) ? $parameters : array();
   }
@@ -64,7 +64,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       if ($this->user) {
         $current_uid = $this->user->uid;
         $argument = str_replace('@currentuid', $current_uid, $argument);
-      } else {
+      }
+      else {
         throw new Exception("Must be logged in as a user");
       }
     }
@@ -103,7 +104,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
 
     $found_node = NULL;
-    foreach($this->nodes as $node) {
+    foreach ($this->nodes as $node) {
       if ($node->title == $node_title) {
         $found_node = $node;
         break;
@@ -121,7 +122,10 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Given /^I follow meta refresh$/
    */
   public function iFollowMetaRefresh() {
-    while ($refresh = $this->getMainContext()->getSession()->getPage()->find('css', 'meta[http-equiv="Refresh"]')) {
+    while ($refresh = $this->getMainContext()
+      ->getSession()
+      ->getPage()
+      ->find('css', 'meta[http-equiv="Refresh"]')) {
       $content = $refresh->getAttribute('content');
       $url = str_replace('0; URL=', '', $content);
       $this->getMainContext()->getSession()->visit($url);
@@ -137,7 +141,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $el = $this->getSession()->getPage()->find('css', $selector);
     if (empty($el)) {
       throw new Exception("Element ({$selector}) not found");
-    } elseif (!$el->isVisible()) {
+    }
+    elseif (!$el->isVisible()) {
       throw new Exception("Element ({$selector}) is not visible");
     }
   }
@@ -149,7 +154,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $el = $this->getSession()->getPage()->find('css', $selector);
     if (empty($el)) {
       throw new Exception("Element ({$selector}) not found");
-    } elseif ($el->isVisible()) {
+    }
+    elseif ($el->isVisible()) {
       throw new Exception("Element ({$selector}) is visible");
     }
   }
@@ -160,14 +166,19 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function assertRadioButtonSelected($label, $id = FALSE) {
     $element = $this->getSession()->getPage();
-    $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
+    $radiobutton = $id ? $element->findById($id) : $element->find('named', array(
+      'radio',
+      $this->getSession()->getSelectorsHandler()->xpathLiteral($label)
+    ));
     if ($radiobutton === NULL) {
-      throw new \Exception(sprintf('The radio button with "%s" was not found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
+      throw new \Exception(sprintf('The radio button with "%s" was not found on the page %s', $id ? $id : $label, $this->getSession()
+        ->getCurrentUrl()));
     }
     $value = $radiobutton->getAttribute('value');
     $labelonpage = $radiobutton->getParent()->getText();
     if ($label != $labelonpage) {
-      throw new \Exception(sprintf("Button with id '%s' has label '%s' instead of '%s' on the page %s", $id, $labelonpage, $label, $this->getSession()->getCurrentUrl()));
+      throw new \Exception(sprintf("Button with id '%s' has label '%s' instead of '%s' on the page %s", $id, $labelonpage, $label, $this->getSession()
+        ->getCurrentUrl()));
     }
     $checked = $radiobutton->isChecked();
     if (!$checked) {
@@ -195,7 +206,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $result = $element->findLink($link);
 
     if (empty($result)) {
-      throw new \Exception(sprintf("No link to '%s' on the page %s", $link, $this->getSession()->getCurrentUrl()));
+      throw new \Exception(sprintf("No link to '%s' on the page %s", $link, $this->getSession()
+        ->getCurrentUrl()));
     }
     $actual_href = $result->getAttribute('href');
     if (strpos($actual_href, $href) === FALSE) {
@@ -208,8 +220,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^"([^"]*)" in "([^"]*)" should be selected$/
    */
   public function inShouldBeSelected($optionValue, $select) {
-    $selectElement = $this->getSession()->getPage()->find('named', array('select', "\"{$select}\""));
-    $optionElement = $selectElement->find('named', array('option', "\"{$optionValue}\""));
+    $selectElement = $this->getSession()
+      ->getPage()
+      ->find('named', array('select', "\"{$select}\""));
+    $optionElement = $selectElement->find('named', array(
+      'option',
+      "\"{$optionValue}\""
+    ));
     //it should have the attribute selected and it should be set to selected
     if (!$optionElement->hasAttribute("selected")) {
       throw new \Exception(sprintf('The select box with "%s" has nothing selected', $select));
@@ -273,12 +290,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @Then /^I should not be able to edit (?:a|an) "([^"]*)" node$/
    */
   public function assertNotEditNodeOfType($type) {
-    $node = (object)array('type' => $type);
+    $node = (object) array('type' => $type);
     $saved = $this->getDriver()->createNode($node);
     $this->nodes[] = $saved;
 
     // Set internal browser on the node edit page.
-    $this->getSession()->visit($this->locatePath('/node/' . $saved->nid . '/edit'));
+    $this->getSession()
+      ->visit($this->locatePath('/node/' . $saved->nid . '/edit'));
 
     // Test status.
     return new Then("I should get a \"403\" HTTP response");
@@ -432,7 +450,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
         unset($userHash['roles']);
       }
 
-      $user = (object)$userHash;
+      $user = (object) $userHash;
 
       // Set a password.
       if (!isset($user->pass)) {
@@ -469,7 +487,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
           $key = array_search($role_name, $curr_user->roles);
           if (isset($user->role)) {
             $user->role .= ', ' . $role_name;
-          } else {
+          }
+          else {
             $user->role = $role_name;
           }
           if ($key == FALSE) {
@@ -494,7 +513,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     if (substr($element, 0, 2) == '//') {
       // This is xpath
       $this->assertSession()->elementsCount('xpath', $element, intval($num));
-    } else {
+    }
+    else {
       // This is CSS
       parent::assertNumElements($num, $element);
     }
@@ -602,7 +622,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     if (!$this->user->uid) {
       throw new \Exception(sprintf('There is no current logged in user to create a node for.'));
     }
-    $node = (object)array(
+    $node = (object) array(
       'title' => $this->getDrupal()->random->string(255),
       'type' => $type,
       'body' => $this->getDrupal()->random->string(255),
@@ -612,7 +632,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $this->nodes[] = $saved;
 
     // Set internal browser on the node edit page.
-    $this->getSession()->visit($this->locatePath('/node/' . $saved->nid . '/edit'));
+    $this->getSession()
+      ->visit($this->locatePath('/node/' . $saved->nid . '/edit'));
 
     // Test status.
     return new Then("I should get a \"200\" HTTP response");
@@ -662,7 +683,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   public function createNode($type, $title) {
-    $node = (object)array(
+    $node = (object) array(
       'title' => $title,
       'type' => $type,
       'body' => $this->getDrupal()->random->string(255),
@@ -691,7 +712,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       throw new \Exception(sprintf('There is no current logged in user to create a node for.'));
     }
 
-    $node = (object)array(
+    $node = (object) array(
       'title' => $title,
       'type' => $type,
       'body' => $this->getDrupal()->random->string(255),
@@ -740,9 +761,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function assertCheckboxByIdPresent($label, $id = FALSE) {
     $element = $this->getSession()->getPage();
-    $checkbox = $id ? $element->findById($id) : $element->find('named', array('checkbox', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
+    $checkbox = $id ? $element->findById($id) : $element->find('named', array(
+      'checkbox',
+      $this->getSession()->getSelectorsHandler()->xpathLiteral($label)
+    ));
     if ($checkbox === NULL) {
-      throw new \Exception(sprintf('The checkbox with "%s" was not found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
+      throw new \Exception(sprintf('The checkbox with "%s" was not found on the page %s', $id ? $id : $label, $this->getSession()
+        ->getCurrentUrl()));
     }
   }
 
@@ -762,9 +787,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function assertCheckboxByIdNotPresent($label, $id = FALSE) {
     $element = $this->getSession()->getPage();
-    $checkbox = $id ? $element->findById($id) : $element->find('named', array('checkbox', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
+    $checkbox = $id ? $element->findById($id) : $element->find('named', array(
+      'checkbox',
+      $this->getSession()->getSelectorsHandler()->xpathLiteral($label)
+    ));
     if ($checkbox !== NULL) {
-      throw new \Exception(sprintf('The checkbox with "%s" was found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
+      throw new \Exception(sprintf('The checkbox with "%s" was found on the page %s', $id ? $id : $label, $this->getSession()
+        ->getCurrentUrl()));
     }
   }
 
@@ -773,9 +802,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function assertRadioByIdPresent($label, $id = FALSE) {
     $element = $this->getSession()->getPage();
-    $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
+    $radiobutton = $id ? $element->findById($id) : $element->find('named', array(
+      'radio',
+      $this->getSession()->getSelectorsHandler()->xpathLiteral($label)
+    ));
     if ($radiobutton === NULL) {
-      throw new \Exception(sprintf('The radio button with "%s" was not found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
+      throw new \Exception(sprintf('The radio button with "%s" was not found on the page %s', $id ? $id : $label, $this->getSession()
+        ->getCurrentUrl()));
     }
   }
 
@@ -784,9 +817,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    */
   public function assertRadioByIdNotPresent($label, $id = FALSE) {
     $element = $this->getSession()->getPage();
-    $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
+    $radiobutton = $id ? $element->findById($id) : $element->find('named', array(
+      'radio',
+      $this->getSession()->getSelectorsHandler()->xpathLiteral($label)
+    ));
     if ($radiobutton !== NULL) {
-      throw new \Exception(sprintf('The radio button with "%s" was found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
+      throw new \Exception(sprintf('The radio button with "%s" was found on the page %s', $id ? $id : $label, $this->getSession()
+        ->getCurrentUrl()));
     }
   }
 
@@ -819,7 +856,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       if (!$item->status) {
         throw new \Exception(sprintf('The node with the title "%s" was not published', $title));
       }
-    } else {
+    }
+    else {
       throw new \Exception(sprintf('The node with the title "%s" was not found', $title));
     }
   }
@@ -854,7 +892,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       if ($item->status) {
         throw new \Exception(sprintf('The node with the title "%s" was published', $title));
       }
-    } else {
+    }
+    else {
       throw new \Exception(sprintf('The node with the title "%s" was not found', $title));
     }
   }
@@ -889,7 +928,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $select_field = $this->getSession()->getPage()->findField($field);
 
     $opt = $select_field->find('named', array(
-      'option', $this->getSession()->getSelectorsHandler()->xpathLiteral('*')
+      'option',
+      $this->getSession()->getSelectorsHandler()->xpathLiteral('*')
     ));
 
 
@@ -907,6 +947,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $type = $this->nodeTypeByName($type);
     $arguments = "0 0 --types=$type --kill";
     $this->assertDrushCommandWithArgument($command, $arguments);
+  }
+
+  /**
+   * @When /^I index search results$/
+   */
+  public function iIndexSearchResults() {
+    $this->assertDrushCommand('sapi-i');
   }
 
   /**
@@ -977,7 +1024,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
     if (isset($message_found)) {
       throw new \Exception('Did not find expected content in message body or subject.');
-    } else {
+    }
+    else {
       throw new \Exception(sprintf('Did not find expected message to %s', $mail_to));
     }
   }
@@ -1089,7 +1137,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $value = $this->fixStepArgument($value);
     $found = $this->getSession()->getPage()->findField($field);
 
-    if (null === $found) {
+    if (NULL === $found) {
       throw new ElementNotFoundException(
         $this->getSession(), 'form field', 'id|name|label|value', $field
       );
@@ -1217,9 +1265,10 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $session = $this->getSession();
     $element = $session->getPage()->find(
       'xpath',
-      $session->getSelectorsHandler()->selectorToXpath('css', $cssSelector) // just changed xpath to css
+      $session->getSelectorsHandler()
+        ->selectorToXpath('css', $cssSelector) // just changed xpath to css
     );
-    if (null === $element) {
+    if (NULL === $element) {
       throw new \InvalidArgumentException(sprintf('Could not evaluate CSS Selector: "%s"', $cssSelector));
     }
 
@@ -1239,7 +1288,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       'xpath',
       $session->getSelectorsHandler()->selectorToXpath('xpath', $xpathSelector)
     );
-    if (null === $element) {
+    if (NULL === $element) {
       throw new \InvalidArgumentException(sprintf('Could not evaluate XPath Selector: "%s"', $xpathSelector));
     }
     $element->check();
@@ -1281,7 +1330,10 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @return bool
    */
   public function assertPopupMessage($message) {
-    return $message == $this->getSession()->getDriver()->getWebDriverSession()->getAlert_text();
+    return $message == $this->getSession()
+      ->getDriver()
+      ->getWebDriverSession()
+      ->getAlert_text();
   }
 
   /**
@@ -1318,12 +1370,14 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $event_class = get_class($event);
     if (strpos($event_class, 'OutlineExampleEvent') !== FALSE) {
       $scenario = $event->getOutline();
-    } elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
+    }
+    elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
       $scenario = $event->getScenario();
     }
     if ($scenario) {
       $feature_file_full = $scenario->getFeature()->getFile();
-    } else {
+    }
+    else {
       $feature_file_full = 'failure';
     }
 
@@ -1356,7 +1410,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $event_class = get_class($event);
     if (strpos($event_class, 'OutlineExampleEvent') !== FALSE) {
       $scenario = $event->getOutline();
-    } elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
+    }
+    elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
       $scenario = $event->getScenario();
     }
     if ($scenario) {
@@ -1510,24 +1565,28 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @When /^I am browsing using a "([^"]*)"$/
    */
   public function iAmBrowsingUsingA($device) {
-    switch($device) {
+    switch ($device) {
       case "phone":
-        $this->getSession()->resizeWindow((int)$this->customParameters['phone_width'], (int)$this->customParameters['phone_height'], 'current');
+        $this->getSession()
+          ->resizeWindow((int) $this->customParameters['phone_width'], (int) $this->customParameters['phone_height'], 'current');
         break;
       case "tablet":
-        $this->getSession()->resizeWindow((int)$this->customParameters['tablet_width'], (int)$this->customParameters['tablet_height'], 'current');
+        $this->getSession()
+          ->resizeWindow((int) $this->customParameters['tablet_width'], (int) $this->customParameters['tablet_height'], 'current');
         break;
       case "small desktop":
-        $this->getSession()->resizeWindow((int)$this->customParameters['desktop_sm_width'], (int)$this->customParameters['desktop_sm_height'], 'current');
+        $this->getSession()
+          ->resizeWindow((int) $this->customParameters['desktop_sm_width'], (int) $this->customParameters['desktop_sm_height'], 'current');
         break;
       default:
-        $this->getSession()->resizeWindow((int)$this->customParameters['desktop_width'], (int)$this->customParameters['desktop_height'], 'current');
+        $this->getSession()
+          ->resizeWindow((int) $this->customParameters['desktop_width'], (int) $this->customParameters['desktop_height'], 'current');
     }
   }
 
   /**
    * @Given /^"([^"]*)" should have a "([^"]*)" css value of "([^"]*)"$/
-   * @param $selector, $rule, $value
+   * @param $selector , $rule, $value
    * @throws Exception
    */
   public function shouldHaveACssValueOf($selector, $rule, $value) {
@@ -1535,7 +1594,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       return jQuery( '" . $selector . "' ).css('" . $rule . "');
     ");
     // Convert double quotes to single quotes for matching purposes.
-    $computed = str_replace('"',"'",$computed);
+    $computed = str_replace('"', "'", $computed);
     if ($value != $computed) {
       throw new Exception("Element ({$selector}) does not have a ({$rule}) value of ({$value}).  The actual value is ({$computed})");
     }
@@ -1544,8 +1603,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   /**
    * @When /^I hover over the element "([^"]*)"$/
    */
-  public function iHoverOverTheElement($selector)
-  {
+  public function iHoverOverTheElement($selector) {
     $element = $this->getSession()->getPage()->find('css', $selector);
 
     if ($element === NULL) {
@@ -1573,7 +1631,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       $link->click();
       return;
     }
-    throw new \Exception(sprintf('Found a row containing "%s", but no "%s" link on the page %s', $rowText, $link, $this->getSession()->getCurrentUrl()));
+    throw new \Exception(sprintf('Found a row containing "%s", but no "%s" link on the page %s', $rowText, $link, $this->getSession()
+      ->getCurrentUrl()));
   }
 
   /**
@@ -1585,7 +1644,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
     $page = $this->getSession()->getPage();
     if ($link = $this->getTableRow($page, $row_text)->findLink($link)) {
-      throw new \Exception(sprintf('Found a row containing "%s", but there was "%s" present %s', $row_text, $link, $this->getSession()->getCurrentUrl()));
+      throw new \Exception(sprintf('Found a row containing "%s", but there was "%s" present %s', $row_text, $link, $this->getSession()
+        ->getCurrentUrl()));
     }
     return;
   }
@@ -1596,7 +1656,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   public function atLeastOneElementShouldContain($element, $text) {
     $page = $this->getSession()->getPage();
     $elements = $page->findAll('css', $element);
-    foreach($elements as $element){
+    foreach ($elements as $element) {
       if (strpos($element->getText(), $text) !== FALSE) {
         return;
       }
@@ -1653,7 +1713,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
 
   /**
    * @Given /^"([^"]*)" should have an "([^"]*)" attribute value of "([^"]*)"$/
-   * @param $selector, $attribute, $value
+   * @param $selector , $attribute, $value
    * @throws Exception
    */
   public function shouldHaveAnAttributeValueOf($selector, $attribute, $value) {
@@ -1661,7 +1721,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       return jQuery( '" . $selector . "' ).attr('" . $attribute . "');
     ");
     // Convert double quotes to single quotes for matching purposes.
-    $computed = str_replace('"',"'",$computed);
+    $computed = str_replace('"', "'", $computed);
     if ($value != $computed) {
       throw new Exception("Element ({$selector}) does not have a ({$attribute}) value of ({$value}).  The actual value is ({$computed})");
     }
