@@ -2638,11 +2638,20 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'search_api_index_digital_library_only';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  /* Sort criterion: Search: Relevance */
-  $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
-  $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_digital_library_only';
-  $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
-  $handler->display->display_options['sorts']['search_api_relevance']['order'] = 'DESC';
+  /* Sort criterion: Indexed Node: Date changed */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'search_api_index_digital_library_only';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['changed']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['changed']['expose']['label'] = 'Date';
+  /* Sort criterion: Indexed Node: Like Content Flag Count */
+  $handler->display->display_options['sorts']['flag_like_content_count']['id'] = 'flag_like_content_count';
+  $handler->display->display_options['sorts']['flag_like_content_count']['table'] = 'search_api_index_digital_library_only';
+  $handler->display->display_options['sorts']['flag_like_content_count']['field'] = 'flag_like_content_count';
+  $handler->display->display_options['sorts']['flag_like_content_count']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['flag_like_content_count']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['flag_like_content_count']['expose']['label'] = 'Popularity';
   /* Filter criterion: Search: Fulltext search */
   $handler->display->display_options['filters']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
   $handler->display->display_options['filters']['search_api_views_fulltext']['table'] = 'search_api_index_digital_library_only';

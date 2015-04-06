@@ -115,7 +115,8 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     }
 
     $nid = $found_node->nid;
-    $found_flag->flag('flag', $nid, NULL, TRUE);
+    $account = $this->user ? user_load($this->user->uid) : NULL;
+    $found_flag->flag('flag', $nid, $account, TRUE);
   }
 
   /**

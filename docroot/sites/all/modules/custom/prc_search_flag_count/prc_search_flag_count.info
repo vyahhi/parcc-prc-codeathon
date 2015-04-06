@@ -1,0 +1,6 @@
+name = PRC Search Flag Count Field
+description = Adds Flag Count field to Search API fields
+package = PRC
+core = 7.x
+
+dependencies[] = search_api

@@ -57,6 +57,7 @@ Feature: PRC-981 Search/Filter Bar: Pagination
       | Result Two Nine  | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
       | Result Two Ten   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
     And I am on the homepage
+    Then I break
     And I index search results
     When I am on "digital-library"
     Then I should not see the link "first"
