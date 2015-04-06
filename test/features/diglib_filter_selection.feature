@@ -1,4 +1,4 @@
-@api @diglig @filter @prc-968
+@api @diglig @filter @prc-968 @prc-967
 Feature: PRC-968 Search/Filter Bar: Filter the Digital Library Content
   As a user,
   I want to be able to filter any results in the Digital Library,
@@ -89,6 +89,7 @@ Feature: PRC-968 Search/Filter Bar: Filter the Digital Library Content
 #    And there are no search results
 #    Then I see the following message:
 #  There are no results to display. Please change your search or filter selections and try again.
+  @prc-967
   Scenario: Filters with no results don't show up
     Given I have no "Digital Library Content" nodes
     And "Subject" terms:
