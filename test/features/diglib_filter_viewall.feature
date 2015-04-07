@@ -65,7 +65,7 @@ Feature: PRC-980 Search/Filter Bar: View All
     And I press "Apply"
     Then I should not see the link "Result One"
     And I should not see the link "Result Two"
-    And I should not see the text "View All"
+    And I should see the text "View All"
     When I click "View All"
     Then I should not see the link "Result One"
     And I should not see the link "Result Two"
