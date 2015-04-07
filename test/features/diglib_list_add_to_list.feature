@@ -13,6 +13,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     Given I am logged in as a user with the "Educator" role
     And I have no "digital_library_content" nodes
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
+    And I index search results
     And I am on the homepage
     Then I click "Digital Library"
     Then I should see the link "Add to My Lists"
@@ -27,6 +28,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     And I have no "digital_library_content" nodes
     # Right now we are just using this line to create a node
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
+    And I index search results
     And I am viewing my "favorites_list" node with the title "My Only List"
     And I am on the homepage
     Then I click "Digital Library"
@@ -53,6 +55,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     | ninth list   | @currentuid |
     | tenth list   | @currentuid |
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
+    And I index search results
     And I am on the homepage
     Then I click "Digital Library"
     # AC1
