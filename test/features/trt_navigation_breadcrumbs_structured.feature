@@ -161,7 +161,7 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
     | user_state    | member_state   | district_name       | school_name       |
     | West Colorado | South Illinois | District @timestamp | School @timestamp |
 
-  Scenario Outline: District Admin on School Add/Edit form
+  Scenario Outline: District Admin on School Add form
     Given I am logged in as a user with the "District Admin" role
     And "User States" terms:
       | name         |
@@ -186,6 +186,35 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
   Examples:
     | user_state    | member_state   | district_name       |
     | West Colorado | South Illinois | District @timestamp |
+
+  Scenario Outline: District Admin on School Edit form
+    Given I am logged in as a user with the "District Admin" role
+    And "User States" terms:
+      | name         |
+      | <user_state> |
+    And "Member State" terms:
+      | name           | field_state_code |
+      | <member_state> | SOIL1            |
+    And "State" nodes:
+      | title          | field_user_state | field_member_state | uid         |
+      | <member_state> | <user_state>     | <member_state>     | @currentuid |
+    And "District" nodes:
+      | title           | uid         | field_ref_trt_state  |
+      | <district_name> | @currentuid | @nid[<member_state>] |
+    And I visit the last node created
+    And "School" nodes:
+      | title         | field_ref_district    | field_contact_email            | uid         |
+      | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
+    And I click "Manage Schools"
+    When I click "<school_name>"
+    Then I should not see the link "<member_state> Readiness"
+    But I should see the link "<district_name> Readiness"
+    And I should see the link "Manage Schools"
+    When I click "<district_name>"
+    Then I should see the heading "<district_name> Readiness"
+  Examples:
+    | user_state    | member_state   | district_name       | school_name |
+    | West Colorado | South Illinois | District @timestamp | My School   |
 
   Scenario Outline: District Admin on School Upload
     Given I am logged in as a user with the "District Admin" role

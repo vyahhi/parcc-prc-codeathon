@@ -53,7 +53,7 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
     And the user "@timestamp@example.com" should have a role of "PARCC-Member Educator"
     Then I delete the user with the email address "@timestamp@example.com"
 
-    Examples:
+  Examples:
     | account | state                |
     | ARKA1   | Arkansas             |
     | COLO1   | Colorado             |
@@ -100,7 +100,7 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
     And I select "Illinois - PARCC Member" from "State where you teach"
     And I fill in "Bad Account" for "State Account #"
     Then I press the "Create new account" button
-    Then I should see the error message "Valid State Account # is incorrect. Leave this blank if you do not have one."
+    Then I should see the error message "State Account # is incorrect. Leave this blank if you do not have one."
 
   Scenario: User cannot edit his own Member State
     Given I am logged in as a user with the "PARCC-Member Educator" role

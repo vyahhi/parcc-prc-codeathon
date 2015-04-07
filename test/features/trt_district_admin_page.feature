@@ -1,4 +1,4 @@
-@api @trt @district @prc-940 @structured
+@api @trt @district @prc-940 @structured @prc-1242
 Feature: PRC-940 Technology Readiness - District Admin View
   As a District Admin,
   I want to view the Technology Readiness page,
@@ -37,8 +37,9 @@ Feature: PRC-940 Technology Readiness - District Admin View
     When I click "Technology Readiness"
     Then I should see the link "Add District"
     And I should see the text "Instructions to District Admin to add district, which will allow results generate by School Admin to be reported to the district."
+    And I should not see the text "Summary of what user can do here: add schools, request school admins to run checks, view readiness by schools in district."
 
-  Scenario: 2 - I have a district
+  Scenario: 2 - I have a district (PRC-1242)
     Given users:
       | name                         | mail                         | pass   | field_first_name | field_last_name | status | roles                    |
       | prc940@timestamp@example.com | prc940@timestamp@example.com | xyz123 | District         | Administrator   | 1      | Educator, District Admin |
@@ -48,6 +49,6 @@ Feature: PRC-940 Technology Readiness - District Admin View
       | PRC-944 S1 @timestamp | @currentuid |
     When I click "Technology Readiness"
     Then I should not see the link "Add District"
-    But I should see the link "PRC-944 S1 @timestamp"
     And I should not see the text "Instructions to District Admin to add district, which will allow results generate by School Admin to be reported to the district."
-
+    But I should see the link "PRC-944 S1 @timestamp"
+    And I should see the text "Summary of what user can do here: add schools, request school admins to run checks, view readiness by schools in district."

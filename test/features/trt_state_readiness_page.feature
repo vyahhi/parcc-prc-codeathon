@@ -1,4 +1,4 @@
-@api @trt @state @prc-707
+@api @trt @state @prc-707 @prc-1223
 Feature: PRC-707 State Readiness
   As a State Admin,
   I want to view my State Readiness page,
@@ -59,9 +59,9 @@ Feature: PRC-707 State Readiness
       | <member_state> | <user_state>     | <member_state>     | 1   | <user_name>         |
       | Another State  | <user_state>     | <member_state>     | 1   | <user_name>         |
     And "District" nodes:
-      | title           | uid         | field_ref_trt_state   |
-      | <district_name> | @currentuid | @nid[<member_state>]  |
-      | Other           | @currentuid | @nid[Another State] |
+      | title           | uid         | field_ref_trt_state  |
+      | <district_name> | @currentuid | @nid[<member_state>] |
+      | Other           | @currentuid | @nid[Another State]  |
     And I am an anonymous user
     And I am logged in as "<user_name>"
     And I click "Technology Readiness"
@@ -76,3 +76,39 @@ Feature: PRC-707 State Readiness
   Examples:
     | user_state     | member_state | user_name                          | district_name         |
     | South Virginia | Old York     | joe_prc_707a@timestamp@example.com | PRC-707 S1 @timestamp |
+
+  Scenario Outline: PRC-1223 Districts not in alpha order
+    Given I am logged in as a user with the "State Admin" role
+    And users:
+      | name        | mail        | pass   | field_first_name | field_last_name | status | roles                 |
+      | <user_name> | <user_name> | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
+    And "User States" terms:
+      | name         |
+      | <user_state> |
+    And "Member State" terms:
+      | name           | field_state_code |
+      | <member_state> | SOIL1            |
+    And "State" nodes:
+      | title          | field_user_state | field_member_state | uid | field_contact_email |
+      | <member_state> | <user_state>     | <member_state>     | 1   | <user_name>         |
+      | Another State  | <user_state>     | <member_state>     | 1   | <user_name>         |
+    And "District" nodes:
+      | title   | uid         | field_ref_trt_state  |
+      | Alpha   | @currentuid | @nid[<member_state>] |
+      | Charlie | @currentuid | @nid[<member_state>] |
+      | Delta   | @currentuid | @nid[<member_state>] |
+      | Bravo   | @currentuid | @nid[<member_state>] |
+      | Echo    | @currentuid | @nid[<member_state>] |
+    And I am an anonymous user
+    And I am logged in as "<user_name>"
+    And I click "Technology Readiness"
+    Then I click "<member_state>"
+    Then I should see the link "Alpha"
+    And I should see the link "Echo"
+    And "Alpha Readiness" should precede "Bravo Readiness" for the query "a"
+    And "Bravo Readiness" should precede "Charlie Readiness" for the query "a"
+    And "Charlie Readiness" should precede "Delta Readiness" for the query "a"
+    And "Delta Readiness" should precede "Echo Readiness" for the query "a"
+  Examples:
+    | user_state     | member_state | user_name                          |
+    | South Virginia | Old York     | joe_prc_707a@timestamp@example.com |

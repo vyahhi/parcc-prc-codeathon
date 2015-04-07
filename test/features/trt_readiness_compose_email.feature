@@ -1,4 +1,4 @@
-@api @trt @structured @school @readiness
+@api @trt @structured @school @readiness @vbo @prc-819
 Feature: PRC-819 Request Readiness Checks - Compose Email
   As a District Admin, I want to ask schools in my district to run the readiness checks so I can understand if the schools are ready to run the PARCC assessment.
   Acceptance Criteria

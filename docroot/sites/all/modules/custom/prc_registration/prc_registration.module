@@ -129,10 +129,19 @@ function prc_registration_form_user_register_form_validate(&$form, &$form_state)
     if (array_key_exists('taxonomy_term', $result)) {
       $tids = array_keys($result['taxonomy_term']);
       $tid = reset($tids);
-      $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
+      $user_state_tid = array_key_exists('field_user_state', $form_state['values']) ? $form_state['values']['field_user_state']['und'][0]['tid'] : 0;
+
+      $user_state_term = taxonomy_term_load($user_state_tid);
+      $member_state_term = taxonomy_term_load($tid);
+
+      if ($user_state_term->name !== $member_state_term->name) {
+        form_set_error('state_account_number', t('State Account # is incorrect. Leave this blank if you do not have one.'));
+      } else {
+        $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
+      }
     }
     else {
-      form_set_error('state_account_number', t('Valid State Account # is incorrect. Leave this blank if you do not have one.'));
+      form_set_error('state_account_number', t('State Account # is incorrect. Leave this blank if you do not have one.'));
     }
   }
 }

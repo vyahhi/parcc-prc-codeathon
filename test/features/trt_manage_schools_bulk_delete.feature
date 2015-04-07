@@ -36,6 +36,13 @@ Feature: PRC-997 Manage Schools - Delete Schools - Select Schools
     And I click "<district_name>"
     When I click "Manage Schools"
     Then I should see a "Delete Schools" button
+    When I check the box "views_bulk_operations[0]"
+    And I press "Delete Schools"
+    Then I should see the heading "Delete Schools"
+    And I should see the heading "You selected the following item:"
+    And I should see the text "<school_name>"
+    And I should see a "Confirm" button
+    And I should see a "Cancel" link
   Examples:
     | user_state     | member_state   | user_name                          | district_name            | school_name            |
     | North Virginia | Vermont Island | joe_prc_960a@timestamp@example.com | District 1064 @timestamp | School 1064 @timestamp |
