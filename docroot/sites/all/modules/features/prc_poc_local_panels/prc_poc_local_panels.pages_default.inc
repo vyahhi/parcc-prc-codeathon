@@ -4229,7 +4229,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'php',
           'settings' => array(
             'description' => 'Is VBO',
-            'php' => 'return array_key_exists(\'op\', $_POST) && $_POST[\'op\'] == \'Request Readiness Checks\';',
+            'php' => 'return array_key_exists(\'op\', $_POST) && $_POST[\'op\'] != \'Delete Schools\';',
           ),
           'not' => FALSE,
         ),

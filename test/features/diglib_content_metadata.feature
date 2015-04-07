@@ -19,12 +19,12 @@ Feature: Admin UI: Define Content Metadata (PRC-30)
 
   # AC2 Test grade level options
 
-    Then I should see "PreK"
-    And I should see "Kindergarten"
-    And I should see "First Grade"
-    And I should see "Elementary School"
-    And I should see "Middle School "
-    And I should see "High School"
+    Then I select "PreK" from "Grade Level"
+    And I select "Kindergarten" from "Grade Level"
+    And I select "First Grade" from "Grade Level"
+    And I select "Elementary School" from "Grade Level"
+    And I select "Middle School" from "Grade Level"
+    And I select "High School" from "Grade Level"
 
   # AC3 Test subject options
 
@@ -36,10 +36,10 @@ Feature: Admin UI: Define Content Metadata (PRC-30)
     And I should see "Visual and Performing Arts"
     And I should see "Career and Technical Education"
     And I should see "STEM"
-    And I should see "Physical Education "
+    And I should see "Physical Education"
     And I should see "English Language Development"
     And I should see "Special Needs Support"
-    And I should see "Educational Leadership "
+    And I should see "Educational Leadership"
 
   # AC5 Test media type options
 
