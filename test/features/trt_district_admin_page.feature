@@ -68,4 +68,3 @@ Feature: PRC-940 Technology Readiness - District Admin View
     But I should see the link "Mine @timestamp Readiness"
     And I should see the text "Summary of what user can do here: add schools, request school admins to run checks, view readiness by schools in district."
     But I should not see the link "Yours @timestamp Readiness"
-    Then I take a screenshot
