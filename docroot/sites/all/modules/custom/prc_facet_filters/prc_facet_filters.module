@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * Implements hook_facetapi_filters().
+ */
+function prc_facet_filters_facetapi_filters() {
+  return array(
+    'parent_level_items' => array(
+      'handler' => array(
+        'label' => t('Show only top level items'),
+        'class' => 'FacetapiFilterShowTopLevelItems',
+      ),
+    ),
+  );
+}

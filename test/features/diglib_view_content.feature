@@ -1,4 +1,4 @@
-@api @diglib
+@api @diglib @prc-32
 Feature: View Content (PRC-32)
   As an educator,
   I want to view content posted to the Digital Library,
@@ -19,7 +19,7 @@ Feature: View Content (PRC-32)
       | Title1        | Trimmed Content 1 | 1      | 0       | 1   | Bob               | thumbnailimage.png       |
       | Title2        | Trimmed Content 2 | 1      | 0       | 1   | Prasdi            | thumbnailimage.png       |
       | Title3        | Trimmed Content 3 | 1      | 0       | 1   | Jimmy             | thumbnailimage.png       |
-
+    And I index search results
     And I am logged in as a user with the "authenticated user" role
     And I visit "digital-library"
     Then I should see "Title1"
@@ -55,6 +55,7 @@ Feature: View Content (PRC-32)
     And I select the radio button "Public"
     And I press "Save"
     And I should see the success message containing "Digital Library Content PRC-519 has been updated."
+    And I index search results
     Then I click "Digital Library"
     And I should not see the text "Add a Thumbnail Image"
     When I click "PRC-519"

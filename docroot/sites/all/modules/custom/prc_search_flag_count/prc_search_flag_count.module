@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * Get the flag count for a given node.
+ */
+function _prc_search_count_flag_get_flag_count($entity, $options, $name, $entity_type, &$info) {
+  $flag_counts = flag_get_counts($entity_type, $entity->nid);
+  $flag_name = $info['data']['flag']->name;
+  $count = array_key_exists($flag_name, $flag_counts) ? $flag_counts[$flag_name] : 0;
+  return $count;
+}
+
+/**
+ * Implements hook_entity_property_info_alter().
+ */
+function prc_search_flag_count_entity_property_info_alter(&$info) {
+  if (isset($info['node']['bundles'])) {
+    // For each content type.
+    foreach ($info['node']['bundles'] as $bundle_type => $bundle) {
+      // Find all applicable flags for this content type.
+      $flags = flag_get_flags('node', $bundle_type);
+      // For each applicable flag.
+      foreach ($flags as $fid => $flag) {
+        $info['node']['bundles'][$bundle_type]['properties']['flag_' . $flag->name . '_count'] = array(
+          'label' => t('@title Flag Count', array('@title' => $flag->title)),
+          'description' => t('The total number of @title flags for this node.', array('@title' => $flag->title)),
+          'type' => 'integer',
+          'getter callback' => '_prc_search_count_flag_get_flag_count',
+          'computed' => TRUE,
+          'data' => array('flag' => $flag),
+        );
+      }
+    }
+  }
+}

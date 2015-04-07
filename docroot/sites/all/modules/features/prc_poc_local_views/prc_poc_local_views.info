@@ -23,6 +23,7 @@ features[views_view][] = course_object_report
 features[views_view][] = course_report
 features[views_view][] = course_report_select
 features[views_view][] = digital_library_favorites
+features[views_view][] = digital_library_gallery
 features[views_view][] = digital_library_tree_view
 features[views_view][] = digital_library_view
 features[views_view][] = favorites_list

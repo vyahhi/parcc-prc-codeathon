@@ -40,6 +40,7 @@ Feature: PRC-828 Manage Schools
     And I should see the text "e@timestamp@example.com"
     And I should see a "Request Readiness Checks" button
 
+  @flag
   Scenario: District has an upload
     Given I am logged in as a user with the "District Admin" role
     And I have no "School" nodes

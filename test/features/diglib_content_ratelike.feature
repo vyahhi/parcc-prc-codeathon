@@ -12,6 +12,7 @@ Feature: PRC-39 Rate/Like Content (end user)
     Given "Digital Library Content" nodes:
       | title  | body           | field_permissions | uid | status |
       | Public | This is public | public            | 1   | 1      |
+    And I index search results
     And I am logged in as a user with the "Educator" role
     And I am on "digital-library"
     Then I should see the link "Public"
@@ -39,6 +40,7 @@ Feature: PRC-39 Rate/Like Content (end user)
     Given "Digital Library Content" nodes:
       | title  | body           | field_permissions | uid | status |
       | Public | This is public | public            | 1   | 1      |
+    And I index search results
     And I am logged in as a user with the "Educator" role
     And I am on "digital-library"
     And I click "Public"
@@ -61,6 +63,7 @@ Feature: PRC-39 Rate/Like Content (end user)
     Given "Digital Library Content" nodes:
       | title  | body           | field_permissions | uid | status |
       | Public | This is public | public            | 1   | 1      |
+    And I index search results
     And I am an anonymous user
     And I am on "digital-library"
     And I click "Public"

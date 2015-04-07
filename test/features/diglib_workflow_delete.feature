@@ -1,4 +1,4 @@
-@api @diglib @workflow
+@api @diglib @workflow @prc-857 @prc-859
 Feature: PRC-857 & PRC-859 - Tests concerning delete access for different user roles and different content states
 
   Background:
@@ -90,6 +90,7 @@ Feature: PRC-857 & PRC-859 - Tests concerning delete access for different user r
     And I click "Rescind Request"
     And I press "Update state"
     Given I am logged in as "Joe Curator"
+    And I index search results
     And I visit "digital-library"
     And I click "Delete Me @timestamp"
     And I click "Edit"
@@ -165,6 +166,7 @@ Feature: PRC-857 & PRC-859 - Tests concerning delete access for different user r
     And I click "Rescind Request"
     And I press "Update state"
     Given I am logged in as "Joe Curator"
+    And I index search results
     And I visit "digital-library"
     And I click "Delete Me @timestamp"
     And I click "Edit"

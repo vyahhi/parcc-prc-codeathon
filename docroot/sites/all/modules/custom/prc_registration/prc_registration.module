@@ -40,7 +40,7 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
         // We don't need or for the first item, but for every item after.
         $account_number_states[] = 'or';
       }
-      $account_number_states[] = array($state_field => array('value' => $member_tid));
+      $account_number_states[] = array($state_field => array('value' => "$member_tid"));
     }
 
     $form['state_account_number'] = array(

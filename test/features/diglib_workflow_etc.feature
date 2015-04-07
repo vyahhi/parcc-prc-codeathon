@@ -1,4 +1,4 @@
-@api @diglib @workflow
+@api @diglib @workflow @prc-873 @prc-826 @prc-824
 Feature: Workflow is functional
 
   Background:
@@ -42,6 +42,7 @@ Feature: Workflow is functional
     And I should not see an "textarea" element
     When I press the "Update state" button
     And I visit "user/logout"
+    And I index search results
     And I visit "digital-library"
     And I click "My first post @timestamp"
     And I should see the text "My first post @timestamp"
@@ -64,6 +65,7 @@ Feature: Workflow is functional
     And I press the "Update state" button
     Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
     And I visit "user/logout"
+    And I index search results
     And I visit "digital-library"
     And I click "My first post @timestamp"
     And I should see the text "This is what I have to say."
@@ -263,6 +265,7 @@ Feature: Workflow is functional
     And I should see the text "Approval Requested" in the "My first post @timestamp" row
     And I visit "user/logout"
     And I am an anonymous user
+    And I index search results
     Then I visit "digital-library"
     And I click "My first post @timestamp"
     And I should see "Isn't this swell?"

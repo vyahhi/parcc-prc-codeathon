@@ -1,4 +1,4 @@
-@api @diglib @favorites
+@api @diglib @favorites @prc-53
 Feature: PRC-53 New Custom List Creation (End user)
   As an authenticated user,
   I want to create a new customized list,
@@ -26,6 +26,7 @@ Feature: PRC-53 New Custom List Creation (End user)
     Given I am logged in as a user with the "Educator" role
     # Right now we are just using this line to create a node
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
+    And I index search results
     And I am on the homepage
     Then I click "Digital Library"
     Then I should see the link "Add to My Lists"

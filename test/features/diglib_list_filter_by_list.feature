@@ -1,4 +1,4 @@
-@api @diglib @favorites
+@api @diglib @favorites @prc-253
 Feature: PRC-253 - Organize Content: Filter by Custom List
   As an Educator,
   I want to filter the listed content to include the ones I organized into my custom list,
@@ -42,6 +42,7 @@ Feature: PRC-253 - Organize Content: Filter by Custom List
     Then I click "Add to My Lists"
     And I select "PRC-253 AC5 List 1" from "List"
     And I press "Add to List"
+    And I index search results
     Then I visit "digital-library"
     Then I should see the link "PRC-253 AC5 List 1"
     And I should see the link "PRC-253 AC5 List 2"

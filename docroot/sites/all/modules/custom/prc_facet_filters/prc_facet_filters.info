@@ -1,0 +1,9 @@
+name = PRC Additional Facet API Filters
+package = PRC
+description = PRC Additions to facetapi
+core = 7.x
+dependencies[] = facetapi
+dependencies[] = facetapi_bonus
+
+files[] = plugins/facetapi/filter_show_top_level_items.inc
+
