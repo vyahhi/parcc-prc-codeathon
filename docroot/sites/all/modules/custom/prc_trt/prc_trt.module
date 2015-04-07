@@ -1086,6 +1086,18 @@ function prc_trt_preprocess_breadcrumb(&$variables) {
           $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($node);
           $variables['breadcrumb'] = $breadcrumbs;
           break;
+        case 'school':
+          $district_nid = array_key_exists(LANGUAGE_NONE, $node->field_ref_district) ? $node->field_ref_district[LANGUAGE_NONE][0]['target_id'] : NULL;
+          if ($district_nid) {
+            $district = node_load($district_nid);
+            $breadcrumbs = array();
+            $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($district);
+            if ($full_admin || $district_admin) {
+              $breadcrumbs[] = l(t('Manage Schools'), "node/$district_nid/manage-schools");
+            }
+            $variables['breadcrumb'] = $breadcrumbs;
+          }
+          break;
       }
       break;
     case 'node/%/manage-schools':
