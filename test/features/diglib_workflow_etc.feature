@@ -1,4 +1,4 @@
-@api @diglib @workflow
+@api @diglib @workflow @prc-873 @prc-826 @prc-824
 Feature: Workflow is functional
 
   Background:

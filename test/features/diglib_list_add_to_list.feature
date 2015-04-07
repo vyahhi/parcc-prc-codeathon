@@ -1,4 +1,4 @@
-@api @diglib @favorites
+@api @diglib @favorites @prc-52
 Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
   As an authenticated user,
   I want to organize content into one of my existing custom lists,
