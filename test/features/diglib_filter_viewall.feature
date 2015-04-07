@@ -1,4 +1,4 @@
-@api @diglig @filter @prc-980
+@api @diglib @filter @prc-980
 Feature: PRC-980 Search/Filter Bar: View All
   As a user, I want to be able to clear any of my searches and/or filter selections so that I may see all the items in the Digital Library gallery.
 
@@ -69,5 +69,5 @@ Feature: PRC-980 Search/Filter Bar: View All
     When I click "View All"
     Then I should not see the link "Result One"
     And I should not see the link "Result Two"
-    And I should not see the text "View All"
+    And I should see the text "View All"
     And the "edit-search-api-views-fulltext" field should contain ""
