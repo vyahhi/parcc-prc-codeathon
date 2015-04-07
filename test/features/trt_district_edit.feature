@@ -40,14 +40,7 @@ Feature: PRC-838 District Name - Edit Form
     Then I am an anonymous user
     And I am logged in as a user with the "District Admin" role
     And I click "Technology Readiness"
-    And I click "PRC-1034 @timestamp"
-    When I click "Edit district name"
-    Then I should see the heading "Edit District"
-    And the "District Name" field should contain "PRC-1034 @timestamp"
-    When I fill in "District Name" with "PRC-1034 @timestamp New Text"
-    And I press "Submit"
-    # PRC-841
-    Then I should see the text "PRC-1034 @timestamp New Text Readiness"
+    Then I should not see the link "PRC-1034 @timestamp"
 
   Scenario Outline: PRC-995 - District name must be unique in state
     Given users:

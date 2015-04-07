@@ -13,10 +13,10 @@ Feature: PRC-1064 Manage Schools - Edit School - Delete button
 #  Differences from existing Edit School page:
 #  Button: Delete Schools [to the right of the Submit button]
   Scenario Outline: Delete school
-    Given I am logged in as a user with the "District Admin" role
-    And users:
+    Given users:
       | name        | mail        | pass   | field_first_name | field_last_name | status | roles                    |
       | <user_name> | <user_name> | xyz123 | Joe              | Educator        | 1      | Educator, District Admin |
+    And I am logged in as "<user_name>"
     And "User States" terms:
       | name         |
       | <user_state> |
@@ -29,7 +29,6 @@ Feature: PRC-1064 Manage Schools - Edit School - Delete button
     And "District" nodes:
       | title           | uid         | field_ref_trt_state  |
       | <district_name> | @currentuid | @nid[<member_state>] |
-    And I am logged in as "<user_name>"
     And "School" nodes:
       | title         | field_ref_district    | field_contact_email | uid         |
       | <school_name> | @nid[<district_name>] | <user_name>         | @currentuid |
@@ -53,10 +52,10 @@ Feature: PRC-1064 Manage Schools - Edit School - Delete button
     | North Virginia | Vermont Island | joe_prc_960a@timestamp@example.com | District 1064 @timestamp | School 1064 @timestamp |
 
   Scenario Outline: PRC-1219 Can't delete school with readiness check
-    Given I am logged in as a user with the "District Admin" role
-    And users:
+    Given users:
       | name        | mail        | pass   | field_first_name | field_last_name | status | roles                    |
       | <user_name> | <user_name> | xyz123 | Joe              | Educator        | 1      | Educator, District Admin |
+    And I am logged in as "<user_name>"
     And "User States" terms:
       | name         |
       | <user_state> |
@@ -69,7 +68,6 @@ Feature: PRC-1064 Manage Schools - Edit School - Delete button
     And "District" nodes:
       | title           | uid         | field_ref_trt_state  |
       | <district_name> | @currentuid | @nid[<member_state>] |
-    And I am logged in as "<user_name>"
     And "School" nodes:
       | title         | field_ref_district    | field_contact_email | uid         |
       | <school_name> | @nid[<district_name>] | <user_name>         | @currentuid |
