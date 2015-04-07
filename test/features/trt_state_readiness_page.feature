@@ -109,6 +109,7 @@ Feature: PRC-707 State Readiness
     And "Bravo Readiness" should precede "Charlie Readiness" for the query "a"
     And "Charlie Readiness" should precede "Delta Readiness" for the query "a"
     And "Delta Readiness" should precede "Echo Readiness" for the query "a"
+    And I should not see the text "Summary of what user can do here: add schools, request school admins to run checks, view readiness by schools in district."
   Examples:
     | user_state     | member_state | user_name                          |
     | South Virginia | Old York     | joe_prc_707a@timestamp@example.com |
