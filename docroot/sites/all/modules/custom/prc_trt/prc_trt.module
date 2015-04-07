@@ -272,6 +272,7 @@ function _prc_trt_capacity_check_extra_field_devices_required($entity) {
   $devices_required = ceil((($students * $sittings) / ($days * $sessions)) * 1.1);
   return $devices_required;
 }
+
 /**
  * Implements hook_field_extra_fields().
  */
@@ -1025,6 +1026,14 @@ function prc_trt_node_access($node, $op, $account) {
     }
     return NODE_ACCESS_IGNORE;
   }
+  elseif ($op == 'delete' && $node->type == 'school') {
+    // Prevent deletion if the school has checks
+    $nids = array($node->nid);
+    if (_prc_trt_schools_have_checks($nids)) {
+      return NODE_ACCESS_DENY;
+    }
+    return NODE_ACCESS_IGNORE;
+  }
 }
 
 /**
@@ -1240,7 +1249,8 @@ function prc_trt_views_pre_render(&$view) {
         unset($view->result[$index]);
       }
     }
-  } elseif ($view->name == 'trt_capacity_check_export') {
+  }
+  elseif ($view->name == 'trt_capacity_check_export') {
     $rows = array();
     // First we catalog rows
     foreach ($view->result as $row) {
