@@ -1,4 +1,4 @@
-@api @user @registration @prc-608 @prc-1018
+@api @user @registration @prc-608 @prc-1018 @prc-1250
 Feature: PRC-608 Self-registration- State Attribute
   As an anonymous user,
   I want to enter the state in which I reside/work when self-registering to the PRC system,
@@ -39,3 +39,12 @@ Feature: PRC-608 Self-registration- State Attribute
     And I click "Join now!"
     When I press "Create new account"
     Then I should see the error message containing "State where you teach field is required."
+
+  Scenario: PRC-1250 State code has to match selected state
+    Given I am an anonymous user
+    And I click "Join now!"
+    And I should see the text "State where you teach"
+    And I select "Arkansas - PARCC Member" from "State where you teach"
+    And I fill in "State Account #" with "ILLI1"
+    And I press "Create new account"
+    Then I should see the error message containing "State Account # is incorrect. Leave this blank if you do not have one."
