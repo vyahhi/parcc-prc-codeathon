@@ -13,10 +13,10 @@ Feature: PRC-1055 Manage Schools - Indicate if readiness checks run
 #  <checkbox>	<School Name>	<School Contact's Email Addresss>	<Yes or No>
 
   Scenario Outline: Readiness checks run?
-    Given I am logged in as a user with the "District Admin" role
-    And users:
+    Given users:
       | name        | mail        | pass   | field_first_name | field_last_name | status | roles                    |
       | <user_name> | <user_name> | xyz123 | Joe              | Educator        | 1      | Educator, District Admin |
+    And I am logged in as "<user_name>"
     And "User States" terms:
       | name         |
       | <user_state> |
@@ -29,7 +29,6 @@ Feature: PRC-1055 Manage Schools - Indicate if readiness checks run
     And "District" nodes:
       | title           | uid         | field_ref_trt_state  |
       | <district_name> | @currentuid | @nid[<member_state>] |
-    And I am logged in as "<user_name>"
     And "School" nodes:
       | title             | field_ref_district    | field_contact_email | uid         |
       | <school_name>     | @nid[<district_name>] | <user_name>         | @currentuid |

@@ -78,10 +78,11 @@ Feature: PRC-707 State Readiness
     | South Virginia | Old York     | joe_prc_707a@timestamp@example.com | PRC-707 S1 @timestamp |
 
   Scenario Outline: PRC-1223 Districts not in alpha order
-    Given I am logged in as a user with the "State Admin" role
-    And users:
-      | name        | mail        | pass   | field_first_name | field_last_name | status | roles                 |
-      | <user_name> | <user_name> | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
+    Given users:
+      | name             | mail             | pass   | field_first_name | field_last_name | status | roles                 |
+      | <district_admin> | <district_admin> | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
+      | <state_admin>    | <state_admin>    | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
+    And I am logged in as "<district_admin>"
     And "User States" terms:
       | name         |
       | <user_state> |
@@ -90,8 +91,7 @@ Feature: PRC-707 State Readiness
       | <member_state> | SOIL1            |
     And "State" nodes:
       | title          | field_user_state | field_member_state | uid | field_contact_email |
-      | <member_state> | <user_state>     | <member_state>     | 1   | <user_name>         |
-      | Another State  | <user_state>     | <member_state>     | 1   | <user_name>         |
+      | <member_state> | <user_state>     | <member_state>     | 1   | <state_admin>    |
     And "District" nodes:
       | title   | uid         | field_ref_trt_state  |
       | Alpha   | @currentuid | @nid[<member_state>] |
@@ -100,7 +100,7 @@ Feature: PRC-707 State Readiness
       | Bravo   | @currentuid | @nid[<member_state>] |
       | Echo    | @currentuid | @nid[<member_state>] |
     And I am an anonymous user
-    And I am logged in as "<user_name>"
+    And I am logged in as "<state_admin>"
     And I click "Technology Readiness"
     Then I click "<member_state>"
     Then I should see the link "Alpha"
@@ -109,6 +109,7 @@ Feature: PRC-707 State Readiness
     And "Bravo Readiness" should precede "Charlie Readiness" for the query "a"
     And "Charlie Readiness" should precede "Delta Readiness" for the query "a"
     And "Delta Readiness" should precede "Echo Readiness" for the query "a"
+    And I should not see the text "Summary of what user can do here: add schools, request school admins to run checks, view readiness by schools in district."
   Examples:
-    | user_state     | member_state | user_name                          |
-    | South Virginia | Old York     | joe_prc_707a@timestamp@example.com |
+    | user_state     | member_state | district_admin                     | state_admin                 |
+    | South Virginia | Old York     | joe_prc_707a@timestamp@example.com | state@timestamp@example.com |

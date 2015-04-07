@@ -52,3 +52,19 @@ Feature: PRC-940 Technology Readiness - District Admin View
     And I should not see the text "Instructions to District Admin to add district, which will allow results generate by School Admin to be reported to the district."
     But I should see the link "PRC-944 S1 @timestamp"
     And I should see the text "Summary of what user can do here: add schools, request school admins to run checks, view readiness by schools in district."
+
+  Scenario: I can only see my own districts
+    Given users:
+      | name                         | mail                         | pass   | field_first_name | field_last_name | status | roles                    |
+      | prc940@timestamp@example.com | prc940@timestamp@example.com | xyz123 | District         | Administrator   | 1      | Educator, District Admin |
+    And I am logged in as "prc940@timestamp@example.com"
+    And "District" nodes:
+      | title            | uid         |
+      | Mine @timestamp  | @currentuid |
+      | Yours @timestamp | 1           |
+    When I click "Technology Readiness"
+    Then I should not see the link "Add District"
+    And I should not see the text "Instructions to District Admin to add district, which will allow results generate by School Admin to be reported to the district."
+    But I should see the link "Mine @timestamp Readiness"
+    And I should see the text "Summary of what user can do here: add schools, request school admins to run checks, view readiness by schools in district."
+    But I should not see the link "Yours @timestamp Readiness"

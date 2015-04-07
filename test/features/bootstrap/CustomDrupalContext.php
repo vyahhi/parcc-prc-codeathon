@@ -198,6 +198,11 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     parent::assertLinkVisible($link);
   }
 
+  public function assertNotLinkVisible($link) {
+    $link = $this->fixStepArgument($link);
+    parent::assertNotLinkVisible($link);
+  }
+
   /**
    * @Given /^the "([^"]*)" link should point to "([^"]*)"$/
    */
