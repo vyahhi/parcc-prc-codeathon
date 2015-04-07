@@ -4229,7 +4229,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'php',
           'settings' => array(
             'description' => 'Is VBO',
-            'php' => 'return array_key_exists(\'op\', $_POST);',
+            'php' => 'return array_key_exists(\'op\', $_POST) && $_POST[\'op\'] == \'Request Readiness Checks\';',
           ),
           'not' => FALSE,
         ),
@@ -4248,6 +4248,89 @@ function prc_poc_local_panels_default_page_manager_pages() {
   );
   $display->cache = array();
   $display->title = 'Request Readiness Checks';
+  $display->uuid = 'e7f4ed18-2b40-41cb-8c17-6cf861c34fae';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-e19f6de6-b37f-4d05-b4d3-1c286300e87e';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'trt_district_schools-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_ref_district_target_id' => '%node:nid',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'e19f6de6-b37f-4d05-b4d3-1c286300e87e';
+    $display->content['new-e19f6de6-b37f-4d05-b4d3-1c286300e87e'] = $pane;
+    $display->panels['middle'][0] = 'new-e19f6de6-b37f-4d05-b4d3-1c286300e87e';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_trt_district_manage_schools__panel_context_2ceafd8a-4164-452c-90da-9e112dfc4609';
+  $handler->task = 'page';
+  $handler->subtask = 'trt_district_manage_schools';
+  $handler->handler = 'panel_context';
+  $handler->weight = 2;
+  $handler->conf = array(
+    'title' => 'District Delete Schools VBO',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'district' => 'district',
+            ),
+          ),
+          'context' => 'argument_entity_id:node_1',
+          'not' => FALSE,
+        ),
+        1 => array(
+          'name' => 'php',
+          'settings' => array(
+            'description' => 'Is VBO',
+            'php' => 'return array_key_exists(\'op\', $_POST) && $_POST[\'op\'] == \'Delete Schools\';',
+          ),
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = 'Delete Schools';
   $display->uuid = 'e7f4ed18-2b40-41cb-8c17-6cf861c34fae';
   $display->content = array();
   $display->panels = array();
