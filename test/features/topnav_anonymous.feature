@@ -19,5 +19,6 @@ Feature: PRC-347 Top Nav Bar for Anonymous Users
       | title          | body           | field_permissions | uid | status |
       | Public PRC-435 | This is public | public            | 1   | 1      |
     And I am an anonymous user
+    And I index search results
     And I am on "digital-library"
     Then I should see the link "Public PRC-435"
