@@ -8,6 +8,13 @@
  * Implements hook_migrate_api().
  */
 function prc_migrate_migrate_api() {
+
+  $common_arguments = array(
+    'source_connection' => 'prc_to_prc',
+    'source_version' => 7,
+    'group_name' => 'prc_to_prc',
+  );
+
   $api = array(
     'api' => 2,
     'groups' => array(
@@ -19,6 +26,9 @@ function prc_migrate_migrate_api() {
       ),
       'prc_content' => array(
         'title' => t('Migrate Content'),
+      ),
+      'prc_to_prc' => array(
+        'title' => t('Migrate from another PRC'),
       ),
     ),
     'migrations' => array(
@@ -54,9 +64,13 @@ function prc_migrate_migrate_api() {
         'class_name' => 'PrcJsonStandardMigration',
         'group_name' => 'prc_standard',
       ),
-      'PrcCsvPage' => array (
+      'PrcCsvPage' => array(
         'class_name' => 'PrcCsvPageMigration',
         'group_name' => 'prc_content',
+      ),
+      'PrcToPrcUser' => $common_arguments + array(
+          'description' => t('Migration of users from another PRC'),
+          'class_name' => 'DrupalUser7Migration',
       ),
     ),
 
