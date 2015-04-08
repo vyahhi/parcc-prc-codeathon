@@ -1525,7 +1525,7 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $entity = entity_create($entity_type, array('type' => 'system_check'));
     $wrapper = entity_metadata_wrapper($entity_type, $entity);
     $wrapper->uid = $school_node->uid;
-    $wrapper->field_ref_school->set($found_nid);
+    $wrapper->field_ref_school->set($school_node);
     $wrapper->field_name = 'Fakey Check';
     $wrapper->save();
   }
