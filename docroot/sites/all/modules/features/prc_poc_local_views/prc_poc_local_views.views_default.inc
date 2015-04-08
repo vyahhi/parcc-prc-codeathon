@@ -4711,6 +4711,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
   $handler->display->display_options['fields']['id']['field'] = 'id';
   $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['id']['separator'] = '';
   /* Field: prc_trt: System check name */
   $handler->display->display_options['fields']['field_name']['id'] = 'field_name';
   $handler->display->display_options['fields']['field_name']['table'] = 'field_data_field_name';
