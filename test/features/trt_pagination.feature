@@ -17,8 +17,8 @@ Feature: TRT Pagination
       | name       | field_state_code |
       | West State | WEST1            |
     And "State" nodes:
-      | title      | field_user_state | field_member_state | uid | field_contact_email   |
-      | West State | West State       | West State         | 1   | paginator@example.com |
+      | title      | field_user_state | field_member_state | uid | field_contact_email         |
+      | West State | West State       | West State         | 1   | state_paginator@example.com |
     And I am an anonymous user
     And I am logged in as "district_paginator@example.com"
     And "District" nodes:
@@ -630,7 +630,7 @@ Feature: TRT Pagination
     And the school "School 149" has run a system check
     And the school "School 150" has run a system check
     And I am an anonymous user
-    And I am logged in as "district_paginator@example.com"
+    And I am logged in as "state_paginator@example.com"
     When I visit "technology-readiness"
     And I click "West State Readiness"
     Then I should not see the link "\b1\b"
