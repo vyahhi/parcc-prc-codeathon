@@ -4,10 +4,10 @@ Feature: TRT Pagination
 
   Scenario: Pagination
     Given users:
-      | name                           | mail                  | pass   | field_first_name | field_last_name | status | roles                 |
-      | state_paginator@example.com    | paginator@example.com | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
-      | district_paginator@example.com | paginator@example.com | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
-      | district_other@example.com     | paginator@example.com | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
+      | name                           | mail                           | pass   | field_first_name | field_last_name | status | roles                 |
+      | state_paginator@example.com    | state_paginator@example.com    | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
+      | district_paginator@example.com | district_paginator@example.com | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
+      | district_other@example.com     | other_paginator@example.com    | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
     And I am logged in as "state_paginator@example.com"
     And I am on the homepage
     And "User States" terms:
