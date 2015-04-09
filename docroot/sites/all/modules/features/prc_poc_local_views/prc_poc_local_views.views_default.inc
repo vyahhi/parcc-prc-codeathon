@@ -6789,6 +6789,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_name']['id'] = 'field_name';
   $handler->display->display_options['fields']['field_name']['table'] = 'field_data_field_name';
   $handler->display->display_options['fields']['field_name']['field'] = 'field_name';
+  $handler->display->display_options['fields']['field_name']['empty'] = '-';
   /* Field: Prc_trt: Created */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'eck_prc_trt';
@@ -6801,6 +6802,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_number_of_devices']['table'] = 'field_data_field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['field'] = 'field_number_of_devices';
   $handler->display->display_options['fields']['field_number_of_devices']['label'] = 'Number of devices ready for assessment';
+  $handler->display->display_options['fields']['field_number_of_devices']['empty'] = '-';
   $handler->display->display_options['fields']['field_number_of_devices']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
@@ -6813,10 +6815,14 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_device_type']['id'] = 'field_device_type';
   $handler->display->display_options['fields']['field_device_type']['table'] = 'field_data_field_device_type';
   $handler->display->display_options['fields']['field_device_type']['field'] = 'field_device_type';
+  $handler->display->display_options['fields']['field_device_type']['empty'] = '-';
+  $handler->display->display_options['fields']['field_device_type']['empty_zero'] = TRUE;
   /* Field: prc_trt: Operating system */
   $handler->display->display_options['fields']['field_operating_system']['id'] = 'field_operating_system';
   $handler->display->display_options['fields']['field_operating_system']['table'] = 'field_data_field_operating_system';
   $handler->display->display_options['fields']['field_operating_system']['field'] = 'field_operating_system';
+  $handler->display->display_options['fields']['field_operating_system']['empty'] = '-';
+  $handler->display->display_options['fields']['field_operating_system']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Operating system: Results */
   $handler->display->display_options['fields']['operating_system_pass']['id'] = 'operating_system_pass';
   $handler->display->display_options['fields']['operating_system_pass']['table'] = 'eck_prc_trt';
@@ -6830,6 +6836,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_monitor_size']['id'] = 'field_monitor_size';
   $handler->display->display_options['fields']['field_monitor_size']['table'] = 'field_data_field_monitor_size';
   $handler->display->display_options['fields']['field_monitor_size']['field'] = 'field_monitor_size';
+  $handler->display->display_options['fields']['field_monitor_size']['empty'] = '-';
+  $handler->display->display_options['fields']['field_monitor_size']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_monitor_size']['settings'] = array(
     'thousand_separator' => ' ',
     'decimal_separator' => '.',
@@ -6849,6 +6857,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_monitor_color_depth']['id'] = 'field_monitor_color_depth';
   $handler->display->display_options['fields']['field_monitor_color_depth']['table'] = 'field_data_field_monitor_color_depth';
   $handler->display->display_options['fields']['field_monitor_color_depth']['field'] = 'field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['empty'] = '-';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Monitor color depth: Results */
   $handler->display->display_options['fields']['monitor_color_depth_pass']['id'] = 'monitor_color_depth_pass';
   $handler->display->display_options['fields']['monitor_color_depth_pass']['table'] = 'eck_prc_trt';
@@ -6863,6 +6873,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_screen_resolution_width']['table'] = 'field_data_field_screen_resolution_width';
   $handler->display->display_options['fields']['field_screen_resolution_width']['field'] = 'field_screen_resolution_width';
   $handler->display->display_options['fields']['field_screen_resolution_width']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_screen_resolution_width']['empty'] = '-';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_screen_resolution_width']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
@@ -6873,6 +6885,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_screen_resolution_height']['field'] = 'field_screen_resolution_height';
   $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['text'] = '[field_screen_resolution_width] x [field_screen_resolution_height]';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['empty'] = '-';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_screen_resolution_height']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
@@ -6899,6 +6913,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_ram']['id'] = 'field_ram';
   $handler->display->display_options['fields']['field_ram']['table'] = 'field_data_field_ram';
   $handler->display->display_options['fields']['field_ram']['field'] = 'field_ram';
+  $handler->display->display_options['fields']['field_ram']['empty'] = '-';
+  $handler->display->display_options['fields']['field_ram']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield RAM: Results */
   $handler->display->display_options['fields']['ram_pass']['id'] = 'ram_pass';
   $handler->display->display_options['fields']['ram_pass']['table'] = 'eck_prc_trt';
@@ -6912,10 +6928,14 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser']['id'] = 'field_browser';
   $handler->display->display_options['fields']['field_browser']['table'] = 'field_data_field_browser';
   $handler->display->display_options['fields']['field_browser']['field'] = 'field_browser';
+  $handler->display->display_options['fields']['field_browser']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser']['empty_zero'] = TRUE;
   /* Field: prc_trt: Browser Version */
   $handler->display->display_options['fields']['field_browser_version']['id'] = 'field_browser_version';
   $handler->display->display_options['fields']['field_browser_version']['table'] = 'field_data_field_browser_version';
   $handler->display->display_options['fields']['field_browser_version']['field'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_version']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_browser_version']['settings'] = array(
     'thousand_separator' => ' ',
     'prefix_suffix' => 1,
@@ -6929,6 +6949,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser_cookies_enabled']['id'] = 'field_browser_cookies_enabled';
   $handler->display->display_options['fields']['field_browser_cookies_enabled']['table'] = 'field_data_field_browser_cookies_enabled';
   $handler->display->display_options['fields']['field_browser_cookies_enabled']['field'] = 'field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Cookies: Results */
   $handler->display->display_options['fields']['cookies_pass']['id'] = 'cookies_pass';
   $handler->display->display_options['fields']['cookies_pass']['table'] = 'eck_prc_trt';
@@ -6942,6 +6964,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser_javascript_enabled']['id'] = 'field_browser_javascript_enabled';
   $handler->display->display_options['fields']['field_browser_javascript_enabled']['table'] = 'field_data_field_browser_javascript_enabled';
   $handler->display->display_options['fields']['field_browser_javascript_enabled']['field'] = 'field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Javascript: Results */
   $handler->display->display_options['fields']['javascript_pass']['id'] = 'javascript_pass';
   $handler->display->display_options['fields']['javascript_pass']['table'] = 'eck_prc_trt';
@@ -6955,6 +6979,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser_images_enabled']['id'] = 'field_browser_images_enabled';
   $handler->display->display_options['fields']['field_browser_images_enabled']['table'] = 'field_data_field_browser_images_enabled';
   $handler->display->display_options['fields']['field_browser_images_enabled']['field'] = 'field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Images: Results */
   $handler->display->display_options['fields']['images_pass']['id'] = 'images_pass';
   $handler->display->display_options['fields']['images_pass']['table'] = 'eck_prc_trt';
