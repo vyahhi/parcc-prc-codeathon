@@ -6968,6 +6968,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_jre_version']['id'] = 'field_jre_version';
   $handler->display->display_options['fields']['field_jre_version']['table'] = 'field_data_field_jre_version';
   $handler->display->display_options['fields']['field_jre_version']['field'] = 'field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['empty'] = '-';
+  $handler->display->display_options['fields']['field_jre_version']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Java: Results */
   $handler->display->display_options['fields']['jre_version_pass']['id'] = 'jre_version_pass';
   $handler->display->display_options['fields']['jre_version_pass']['table'] = 'eck_prc_trt';

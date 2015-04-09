@@ -31,7 +31,7 @@ function prc_poc_local_search_api_default_search_api_index() {
     "server" : "database_server",
     "item_type" : "node",
     "options" : {
-      "index_directly" : 0,
+      "index_directly" : 1,
       "cron_limit" : "50",
       "fields" : {
         "attachments_field_document" : { "type" : "text" },
@@ -148,7 +148,7 @@ function prc_poc_local_search_api_default_search_api_index() {
     "server" : "database_server",
     "item_type" : "node",
     "options" : {
-      "index_directly" : 0,
+      "index_directly" : 1,
       "cron_limit" : "50",
       "fields" : {
         "attachments_field_document" : { "type" : "text" },
