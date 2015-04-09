@@ -7192,10 +7192,14 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser']['id'] = 'field_browser';
   $handler->display->display_options['fields']['field_browser']['table'] = 'field_data_field_browser';
   $handler->display->display_options['fields']['field_browser']['field'] = 'field_browser';
+  $handler->display->display_options['fields']['field_browser']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser']['empty_zero'] = TRUE;
   /* Field: prc_trt: Browser Version */
   $handler->display->display_options['fields']['field_browser_version']['id'] = 'field_browser_version';
   $handler->display->display_options['fields']['field_browser_version']['table'] = 'field_data_field_browser_version';
   $handler->display->display_options['fields']['field_browser_version']['field'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_version']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_browser_version']['settings'] = array(
     'thousand_separator' => ' ',
     'prefix_suffix' => 1,
@@ -7209,6 +7213,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser_cookies_enabled']['id'] = 'field_browser_cookies_enabled';
   $handler->display->display_options['fields']['field_browser_cookies_enabled']['table'] = 'field_data_field_browser_cookies_enabled';
   $handler->display->display_options['fields']['field_browser_cookies_enabled']['field'] = 'field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Cookies: Results */
   $handler->display->display_options['fields']['cookies_pass']['id'] = 'cookies_pass';
   $handler->display->display_options['fields']['cookies_pass']['table'] = 'eck_prc_trt';
@@ -7222,6 +7228,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser_javascript_enabled']['id'] = 'field_browser_javascript_enabled';
   $handler->display->display_options['fields']['field_browser_javascript_enabled']['table'] = 'field_data_field_browser_javascript_enabled';
   $handler->display->display_options['fields']['field_browser_javascript_enabled']['field'] = 'field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Javascript: Results */
   $handler->display->display_options['fields']['javascript_pass']['id'] = 'javascript_pass';
   $handler->display->display_options['fields']['javascript_pass']['table'] = 'eck_prc_trt';
@@ -7235,6 +7243,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser_images_enabled']['id'] = 'field_browser_images_enabled';
   $handler->display->display_options['fields']['field_browser_images_enabled']['table'] = 'field_data_field_browser_images_enabled';
   $handler->display->display_options['fields']['field_browser_images_enabled']['field'] = 'field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Images: Results */
   $handler->display->display_options['fields']['images_pass']['id'] = 'images_pass';
   $handler->display->display_options['fields']['images_pass']['table'] = 'eck_prc_trt';
@@ -7248,6 +7258,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_jre_version']['id'] = 'field_jre_version';
   $handler->display->display_options['fields']['field_jre_version']['table'] = 'field_data_field_jre_version';
   $handler->display->display_options['fields']['field_jre_version']['field'] = 'field_jre_version';
+  $handler->display->display_options['fields']['field_jre_version']['empty'] = '-';
+  $handler->display->display_options['fields']['field_jre_version']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Java: Results */
   $handler->display->display_options['fields']['jre_version_pass']['id'] = 'jre_version_pass';
   $handler->display->display_options['fields']['jre_version_pass']['table'] = 'eck_prc_trt';
@@ -7448,10 +7460,14 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser']['table'] = 'field_data_field_browser';
   $handler->display->display_options['fields']['field_browser']['field'] = 'field_browser';
   $handler->display->display_options['fields']['field_browser']['label'] = 'Browser name';
+  $handler->display->display_options['fields']['field_browser']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser']['empty_zero'] = TRUE;
   /* Field: prc_trt: Browser Version */
   $handler->display->display_options['fields']['field_browser_version']['id'] = 'field_browser_version';
   $handler->display->display_options['fields']['field_browser_version']['table'] = 'field_data_field_browser_version';
   $handler->display->display_options['fields']['field_browser_version']['field'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_version']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_browser_version']['settings'] = array(
     'thousand_separator' => ' ',
     'prefix_suffix' => 1,
@@ -7465,6 +7481,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser_cookies_enabled']['id'] = 'field_browser_cookies_enabled';
   $handler->display->display_options['fields']['field_browser_cookies_enabled']['table'] = 'field_data_field_browser_cookies_enabled';
   $handler->display->display_options['fields']['field_browser_cookies_enabled']['field'] = 'field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Cookies: Results */
   $handler->display->display_options['fields']['cookies_pass']['id'] = 'cookies_pass';
   $handler->display->display_options['fields']['cookies_pass']['table'] = 'eck_prc_trt';
@@ -7478,6 +7496,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser_javascript_enabled']['id'] = 'field_browser_javascript_enabled';
   $handler->display->display_options['fields']['field_browser_javascript_enabled']['table'] = 'field_data_field_browser_javascript_enabled';
   $handler->display->display_options['fields']['field_browser_javascript_enabled']['field'] = 'field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Javascript: Results */
   $handler->display->display_options['fields']['javascript_pass']['id'] = 'javascript_pass';
   $handler->display->display_options['fields']['javascript_pass']['table'] = 'eck_prc_trt';
@@ -7491,6 +7511,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser_images_enabled']['id'] = 'field_browser_images_enabled';
   $handler->display->display_options['fields']['field_browser_images_enabled']['table'] = 'field_data_field_browser_images_enabled';
   $handler->display->display_options['fields']['field_browser_images_enabled']['field'] = 'field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Images: Results */
   $handler->display->display_options['fields']['images_pass']['id'] = 'images_pass';
   $handler->display->display_options['fields']['images_pass']['table'] = 'eck_prc_trt';
@@ -7505,6 +7527,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_jre_version']['table'] = 'field_data_field_jre_version';
   $handler->display->display_options['fields']['field_jre_version']['field'] = 'field_jre_version';
   $handler->display->display_options['fields']['field_jre_version']['label'] = 'Java plugin version';
+  $handler->display->display_options['fields']['field_jre_version']['empty'] = '-';
+  $handler->display->display_options['fields']['field_jre_version']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Java: Results */
   $handler->display->display_options['fields']['jre_version_pass']['id'] = 'jre_version_pass';
   $handler->display->display_options['fields']['jre_version_pass']['table'] = 'eck_prc_trt';
@@ -7711,10 +7735,14 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser']['table'] = 'field_data_field_browser';
   $handler->display->display_options['fields']['field_browser']['field'] = 'field_browser';
   $handler->display->display_options['fields']['field_browser']['label'] = 'Browser name';
+  $handler->display->display_options['fields']['field_browser']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser']['empty_zero'] = TRUE;
   /* Field: prc_trt: Browser Version */
   $handler->display->display_options['fields']['field_browser_version']['id'] = 'field_browser_version';
   $handler->display->display_options['fields']['field_browser_version']['table'] = 'field_data_field_browser_version';
   $handler->display->display_options['fields']['field_browser_version']['field'] = 'field_browser_version';
+  $handler->display->display_options['fields']['field_browser_version']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_version']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_browser_version']['settings'] = array(
     'thousand_separator' => ' ',
     'prefix_suffix' => 1,
@@ -7728,6 +7756,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser_cookies_enabled']['id'] = 'field_browser_cookies_enabled';
   $handler->display->display_options['fields']['field_browser_cookies_enabled']['table'] = 'field_data_field_browser_cookies_enabled';
   $handler->display->display_options['fields']['field_browser_cookies_enabled']['field'] = 'field_browser_cookies_enabled';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_cookies_enabled']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Cookies: Results */
   $handler->display->display_options['fields']['cookies_pass']['id'] = 'cookies_pass';
   $handler->display->display_options['fields']['cookies_pass']['table'] = 'eck_prc_trt';
@@ -7741,6 +7771,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser_javascript_enabled']['id'] = 'field_browser_javascript_enabled';
   $handler->display->display_options['fields']['field_browser_javascript_enabled']['table'] = 'field_data_field_browser_javascript_enabled';
   $handler->display->display_options['fields']['field_browser_javascript_enabled']['field'] = 'field_browser_javascript_enabled';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_javascript_enabled']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Javascript: Results */
   $handler->display->display_options['fields']['javascript_pass']['id'] = 'javascript_pass';
   $handler->display->display_options['fields']['javascript_pass']['table'] = 'eck_prc_trt';
@@ -7754,6 +7786,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_browser_images_enabled']['id'] = 'field_browser_images_enabled';
   $handler->display->display_options['fields']['field_browser_images_enabled']['table'] = 'field_data_field_browser_images_enabled';
   $handler->display->display_options['fields']['field_browser_images_enabled']['field'] = 'field_browser_images_enabled';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['empty'] = '-';
+  $handler->display->display_options['fields']['field_browser_images_enabled']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Images: Results */
   $handler->display->display_options['fields']['images_pass']['id'] = 'images_pass';
   $handler->display->display_options['fields']['images_pass']['table'] = 'eck_prc_trt';
@@ -7768,6 +7802,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_jre_version']['table'] = 'field_data_field_jre_version';
   $handler->display->display_options['fields']['field_jre_version']['field'] = 'field_jre_version';
   $handler->display->display_options['fields']['field_jre_version']['label'] = 'Java plugin version';
+  $handler->display->display_options['fields']['field_jre_version']['empty'] = '-';
+  $handler->display->display_options['fields']['field_jre_version']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Java: Results */
   $handler->display->display_options['fields']['jre_version_pass']['id'] = 'jre_version_pass';
   $handler->display->display_options['fields']['jre_version_pass']['table'] = 'eck_prc_trt';
