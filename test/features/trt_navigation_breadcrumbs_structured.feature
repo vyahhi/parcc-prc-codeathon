@@ -64,7 +64,10 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
     | West Colorado | South Illinois | District @timestamp | School @timestamp |
 
   Scenario Outline: State Admin on a school's View System Check Results page
-    Given I am logged in as a user with the "State Admin" role
+    Given users:
+      | name                   | mail                   | pass   | field_first_name | field_last_name | status | roles                 |
+      | stateadmin@example.com | stateadmin@example.com | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
+    Given I am logged in as "stateadmin@example.com"
     And "User States" terms:
       | name         |
       | <user_state> |
@@ -72,8 +75,8 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
       | name           | field_state_code |
       | <member_state> | SOIL1            |
     And "State" nodes:
-      | title          | field_user_state | field_member_state | uid         |
-      | <member_state> | <user_state>     | <member_state>     | @currentuid |
+      | title          | field_user_state | field_member_state | uid         | field_contact_email    |
+      | <member_state> | <user_state>     | <member_state>     | @currentuid | stateadmin@example.com |
     And "District" nodes:
       | title           | uid         | field_ref_trt_state  |
       | <district_name> | @currentuid | @nid[<member_state>] |

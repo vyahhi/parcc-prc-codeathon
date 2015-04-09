@@ -2645,7 +2645,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   $handler->display->display_options['sorts']['changed']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['changed']['expose']['label'] = 'Date';
-  /* Sort criterion: Indexed Node: Like Content Flag Count */
+  /* Sort criterion: Broken/missing handler */
   $handler->display->display_options['sorts']['flag_like_content_count']['id'] = 'flag_like_content_count';
   $handler->display->display_options['sorts']['flag_like_content_count']['table'] = 'search_api_index_digital_library_only';
   $handler->display->display_options['sorts']['flag_like_content_count']['field'] = 'flag_like_content_count';
@@ -4711,6 +4711,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['id']['table'] = 'eck_prc_trt';
   $handler->display->display_options['fields']['id']['field'] = 'id';
   $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['id']['separator'] = '';
   /* Field: prc_trt: System check name */
   $handler->display->display_options['fields']['field_name']['id'] = 'field_name';
   $handler->display->display_options['fields']['field_name']['table'] = 'field_data_field_name';
@@ -5901,6 +5902,14 @@ message explaining what the check does and the importance of running it.';
   $handler = $view->new_display('views_data_export', 'District Capacity Check Export', 'views_data_export_1');
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = '%timestamp-full.csv';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 0;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
@@ -5930,6 +5939,14 @@ message explaining what the check does and the importance of running it.';
   $handler = $view->new_display('views_data_export', 'State Capacity Check Export', 'views_data_export_2');
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = '%timestamp-full.csv';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 0;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
@@ -6960,16 +6977,6 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['jre_version_pass']['alter']['text'] = 'Pass';
   $handler->display->display_options['fields']['jre_version_pass']['empty'] = 'Fail';
   $handler->display->display_options['fields']['jre_version_pass']['empty_zero'] = TRUE;
-  /* Sort criterion: Content: Title */
-  $handler->display->display_options['sorts']['title']['id'] = 'title';
-  $handler->display->display_options['sorts']['title']['table'] = 'node';
-  $handler->display->display_options['sorts']['title']['field'] = 'title';
-  $handler->display->display_options['sorts']['title']['relationship'] = 'field_ref_district_target_id';
-  /* Sort criterion: Content: Title */
-  $handler->display->display_options['sorts']['title_1']['id'] = 'title_1';
-  $handler->display->display_options['sorts']['title_1']['table'] = 'node';
-  $handler->display->display_options['sorts']['title_1']['field'] = 'title';
-  $handler->display->display_options['sorts']['title_1']['relationship'] = 'field_ref_school_target_id';
   /* Sort criterion: Prc_trt: Created */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'eck_prc_trt';
@@ -6988,6 +6995,14 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['display_description'] = 'No School, district, state';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = '%timestamp-full.csv';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 0;
   $handler->display->display_options['path'] = 'trt/system-check/export';
 
   /* Display: School Data export */
@@ -6995,6 +7010,14 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['display_description'] = 'System check export by School';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = '%timestamp-full.csv';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 0;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
@@ -7224,6 +7247,14 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['display_description'] = 'Data export by district';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = '%timestamp-full.csv';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 0;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';
@@ -7473,6 +7504,14 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['display_description'] = 'State export for system checks';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = '%timestamp-full.csv';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 0;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_ref_school_target_id']['id'] = 'field_ref_school_target_id';

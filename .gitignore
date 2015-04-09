@@ -53,7 +53,7 @@ Thumbs.db
 ########
 .idea
 
-# Composer Vendirs #
+# Composer Vendors #
 ####################
 # We don't want composer vendors acting like submodules
 # See https://getcomposer.org/doc/faqs/should-i-commit-the-dependencies-in-my-vendor-directory.md
