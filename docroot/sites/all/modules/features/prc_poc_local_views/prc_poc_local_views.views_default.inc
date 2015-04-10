@@ -7129,6 +7129,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_monitor_color_depth']['id'] = 'field_monitor_color_depth';
   $handler->display->display_options['fields']['field_monitor_color_depth']['table'] = 'field_data_field_monitor_color_depth';
   $handler->display->display_options['fields']['field_monitor_color_depth']['field'] = 'field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['empty'] = '-';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Monitor color depth: Results */
   $handler->display->display_options['fields']['monitor_color_depth_pass']['id'] = 'monitor_color_depth_pass';
   $handler->display->display_options['fields']['monitor_color_depth_pass']['table'] = 'eck_prc_trt';
@@ -7143,6 +7145,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_screen_resolution_width']['table'] = 'field_data_field_screen_resolution_width';
   $handler->display->display_options['fields']['field_screen_resolution_width']['field'] = 'field_screen_resolution_width';
   $handler->display->display_options['fields']['field_screen_resolution_width']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_screen_resolution_width']['empty'] = '-';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_screen_resolution_width']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
@@ -7153,6 +7157,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_screen_resolution_height']['field'] = 'field_screen_resolution_height';
   $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['text'] = '[field_screen_resolution_width] x [field_screen_resolution_height]';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['empty'] = '-';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_screen_resolution_height']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
@@ -7395,6 +7401,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_monitor_color_depth']['id'] = 'field_monitor_color_depth';
   $handler->display->display_options['fields']['field_monitor_color_depth']['table'] = 'field_data_field_monitor_color_depth';
   $handler->display->display_options['fields']['field_monitor_color_depth']['field'] = 'field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['empty'] = '-';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Monitor color depth: Results */
   $handler->display->display_options['fields']['monitor_color_depth_pass']['id'] = 'monitor_color_depth_pass';
   $handler->display->display_options['fields']['monitor_color_depth_pass']['table'] = 'eck_prc_trt';
@@ -7409,6 +7417,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_screen_resolution_width']['table'] = 'field_data_field_screen_resolution_width';
   $handler->display->display_options['fields']['field_screen_resolution_width']['field'] = 'field_screen_resolution_width';
   $handler->display->display_options['fields']['field_screen_resolution_width']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_screen_resolution_width']['empty'] = '-';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_screen_resolution_width']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
@@ -7420,6 +7430,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_screen_resolution_height']['label'] = 'Screen resolution';
   $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['text'] = '[field_screen_resolution_width] x [field_screen_resolution_height]';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['empty'] = '-';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_screen_resolution_height']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
@@ -7670,6 +7682,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_monitor_color_depth']['id'] = 'field_monitor_color_depth';
   $handler->display->display_options['fields']['field_monitor_color_depth']['table'] = 'field_data_field_monitor_color_depth';
   $handler->display->display_options['fields']['field_monitor_color_depth']['field'] = 'field_monitor_color_depth';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['empty'] = '-';
+  $handler->display->display_options['fields']['field_monitor_color_depth']['empty_zero'] = TRUE;
   /* Field: Prc_trt: Extrafield Monitor color depth: Results */
   $handler->display->display_options['fields']['monitor_color_depth_pass']['id'] = 'monitor_color_depth_pass';
   $handler->display->display_options['fields']['monitor_color_depth_pass']['table'] = 'eck_prc_trt';
@@ -7684,6 +7698,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_screen_resolution_width']['table'] = 'field_data_field_screen_resolution_width';
   $handler->display->display_options['fields']['field_screen_resolution_width']['field'] = 'field_screen_resolution_width';
   $handler->display->display_options['fields']['field_screen_resolution_width']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_screen_resolution_width']['empty'] = '-';
+  $handler->display->display_options['fields']['field_screen_resolution_width']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_screen_resolution_width']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
@@ -7695,6 +7711,8 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_screen_resolution_height']['label'] = 'Screen resolution';
   $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_screen_resolution_height']['alter']['text'] = '[field_screen_resolution_width] x [field_screen_resolution_height]';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['empty'] = '-';
+  $handler->display->display_options['fields']['field_screen_resolution_height']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_screen_resolution_height']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
