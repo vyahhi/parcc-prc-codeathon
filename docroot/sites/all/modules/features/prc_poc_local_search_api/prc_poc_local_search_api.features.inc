@@ -159,6 +159,7 @@ function prc_poc_local_search_api_default_search_api_index() {
         "field_grade_level" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_media_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_subject" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "flag_like_content_count" : { "type" : "integer" },
         "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
         "search_api_language" : { "type" : "string" },
         "status" : { "type" : "boolean" },
@@ -451,6 +452,12 @@ function prc_poc_local_search_api_default_search_api_server() {
             "table" : "search_api_db_digital_library_only",
             "column" : "changed",
             "type" : "date",
+            "boost" : "1.0"
+          },
+          "flag_like_content_count" : {
+            "table" : "search_api_db_digital_library_only",
+            "column" : "flag_like_content_count",
+            "type" : "integer",
             "boost" : "1.0"
           }
         }

@@ -33,3 +33,24 @@ function prc_search_flag_count_entity_property_info_alter(&$info) {
     }
   }
 }
+
+
+/**
+ * Implements hook_flag_flag().
+ */
+function prc_search_flag_count_flag_flag($flag, $entity_id, $account, $flagging) {
+  // Rebuild index for Search API
+  if (function_exists('search_api_track_item_change')) {
+    search_api_track_item_change($flag->entity_type, array($entity_id));
+  }
+}
+
+/**
+ * Implements hook_flag_unflag().
+ */
+function prc_search_flag_count_flag_unflag($flag, $entity_id, $account, $flagging) {
+  // Rebuild index for Search API
+  if (function_exists('search_api_track_item_change')) {
+    search_api_track_item_change($flag->entity_type, array($entity_id));
+  }
+}
