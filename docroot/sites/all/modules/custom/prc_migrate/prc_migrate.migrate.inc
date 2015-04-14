@@ -68,6 +68,10 @@ function prc_migrate_migrate_api() {
         'class_name' => 'PrcCsvPageMigration',
         'group_name' => 'prc_content',
       ),
+      'PrcCsvPdCourseMigration' => array(
+        'class_name' => 'PrcCsvPdCourseMigration',
+        'group_name' => 'prc_content',
+      ),
       'PrcToPrcUser' => $common_arguments + array(
           'description' => t('Migration of users from another PRC'),
           'class_name' => 'DrupalUser7Migration',
