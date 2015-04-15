@@ -41,7 +41,8 @@ function prc_workflow_menu() {
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'prc_workflow_revisions_tab',
     'page arguments' => array(1),
-    'access callback' => '_node_revision_access',//'state_flow_menu_node_access',
+    'access callback' => '_node_revision_access',
+    //'state_flow_menu_node_access',
     'access arguments' => array(1),
     'weight' => 10,
   );
@@ -166,7 +167,7 @@ function prc_workflow_events_revision_access($node, $event_name = NULL) {
  * @param null $account
  * @return bool
  */
-function prc_workflow_delete_access($op, $node, $account = NULL){
+function prc_workflow_delete_access($op, $node, $account = NULL) {
   if (empty($account)) {
     global $user;
     $account = $user;
@@ -176,9 +177,9 @@ function prc_workflow_delete_access($op, $node, $account = NULL){
 
     //states that should block delete access
     $blocking_states = array('published', 'ready_for_review');
-    foreach($blocking_states as $state){
+    foreach ($blocking_states as $state) {
       $vid = prc_workflow_fetch_latest_node_version_by_state($node->nid, $state);
-      if($vid){
+      if ($vid) {
         //Block access if we have a result
         return FALSE;
       }
@@ -304,7 +305,7 @@ function prc_workflow_state_flow_machine_type_alter(&$machine_type, $node) {
 function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$form_state) {
   $node = $form['#node'];
 
-  if(isset($node->vid)){
+  if (isset($node->vid)) {
     $node->from_vid = $node->vid;
   }
 
@@ -348,16 +349,16 @@ function prc_workflow_form_digital_library_content_node_form_alter(&$form, &$for
     //Change the text of the submit button to save draft
     $form['actions']['submit']['#value'] = "Save New Draft";
     //Require confirmation when in published state
-    if($state_flow->get_current_state() === 'published') {
+    if ($state_flow->get_current_state() === 'published') {
       $form['actions']['submit']['#submit'] = array('prc_workflow_pre_submit_handler');
     }
 
     //Hide delete button if our access callback fails
-    if(isset($form['actions']['delete']) && !prc_workflow_delete_access('delete', $node)){
+    if (isset($form['actions']['delete']) && !prc_workflow_delete_access('delete', $node)) {
       unset($form['actions']['delete']);
     }
   }
-  if(isset($form['revision_information'])){
+  if (isset($form['revision_information'])) {
     //Hide the revision vtab
     unset($form['revision_information']);
   }
@@ -381,7 +382,7 @@ function prc_workflow_draft_confirm_form(&$form, &$form_state) {
   );
 
   foreach ($disable as $element) {
-    if(isset($element)){
+    if (isset($element)) {
       unset($form[$element]);
     }
   }
@@ -408,7 +409,7 @@ function prc_workflow_draft_confirm_form(&$form, &$form_state) {
     ),
   );
   $form['actions']['cancel'] = array(
-    '#markup' => l(t('Cancel'), 'node/'.$form['#node']->nid),
+    '#markup' => l(t('Cancel'), 'node/' . $form['#node']->nid),
   );
 }
 
@@ -420,7 +421,7 @@ function prc_workflow_pre_submit_handler($form, &$form_state) {
   //Check if the button pressed is save draft
   $state_flow = state_flow_load_state_machine($node);
   //Only require confirmation when published
-  if($state_flow->get_current_state() === 'published') {
+  if ($state_flow->get_current_state() === 'published') {
     if ($form_state['triggering_element']['#value'] == 'Save New Draft') {
       $form_state['display_confirmation'] = TRUE;
       $form_state['saved_values'] = $form_state['values'];
@@ -503,7 +504,8 @@ function prc_workflow_form_state_flow_events_revision_alter(&$form, &$form_state
       '#weight' => -1,
     );
 
-  } else {
+  }
+  else {
     $node = $form['node_revision']['#value'];
     $state_flow = $form['state_flow']['#value'];
 
@@ -684,7 +686,7 @@ function prc_workflow_reported_state($nid) {
         break;
     }
   }
-  
+
   if ($active_review) {
     $reported_state = 'ready_for_review';
   }
@@ -703,7 +705,7 @@ function prc_workflow_reported_state($nid) {
  *
  * @param $node
  */
-function prc_workflow_node_presave($node){
+function prc_workflow_node_presave($node) {
   /*
   $published_revision = state_flow_live_revision($node->nid);
 
@@ -721,7 +723,7 @@ function prc_workflow_node_presave($node){
 /**
  *
  */
-function prc_workflow_libraries_info(){
+function prc_workflow_libraries_info() {
   return array(
     'php-htmldiff-master' => array(
       'name' => 'PHP HTML Diff',
@@ -729,7 +731,6 @@ function prc_workflow_libraries_info(){
       'files' => array(
         'php' => array('HtmlDiff.php'),
       ),
-
       'version' => '1',
     ),
   );
@@ -766,42 +767,50 @@ function prc_workflow_revisions_tab($node) {
     $vid = intval($state->vid);
 
     $node_version = node_load($node->nid, $vid);
-    if($node_version->from_vid !== 0){
+    if ($node_version->from_vid !== 0) {
       $previous_version = node_load($node->nid, $node->from_vid);
-    }else{
+    }
+    else {
       unset($previous_version);
     }
 
-    if($node_version->from_vid > 0) {
+    if ($node_version->from_vid > 0) {
       $previous_version = node_load($node->nid, $node_version->from_vid);
-    }else{
+    }
+    else {
       $previous_version = NULL;
     }
     $path_view = ($vid == $node->vid) ? 'node/' . $node->nid : 'node/' . $node->nid . '/revisions/' . $vid . '/view';
     $state_date_str = format_date($state->timestamp, 'short');
 
-    $user_name = format_username((object) array('uid' => (int) $state->uid, 'name' => $state->user_name));
+    $user_name = format_username((object) array(
+      'uid' => (int) $state->uid,
+      'name' => $state->user_name
+    ));
     $history_str = t('!user transitioned revision !vid-link to %state.',
       array(
         '!user' => l(check_plain($user_name), 'user/' . $state->uid, array('attributes' => array('class' => array('revision-user-link')))),
-        '!vid-link' => l($vid,  $path_view, array('attributes' => array('class' => array('revision-version-link')))),
+        '!vid-link' => l($vid, $path_view, array('attributes' => array('class' => array('revision-version-link')))),
         '%state' => $state->state
       )
     );
     if (!empty($state->log) && $state->log !== '[empty]') {
-      $history_str .= '<br/>' . t('@user said: @log', array('@user' => $user_name, '@log' => $state->log));
+      $history_str .= '<br/>' . t('@user said: @log', array(
+          '@user' => $user_name,
+          '@log' => $state->log
+        ));
     }
 
     //Render the diff if applicable
-    if(isset($previous_version)  && $previous_version) {
+    if (isset($previous_version) && $previous_version) {
       $couple = array($previous_version->vid, $node_version->vid);
 
       //Don't diff things twice and don't compare a less recent revision with a newer one.
       //if($couple[0] < $couple[1]  && !in_array($couple, $diffed)) {
-      if(!in_array($couple, $diffed)){
+      if (!in_array($couple, $diffed)) {
         $body_diff = prc_workflow_body_diff($previous_version, $node_version);
         //@todo: display changes involving the fields
-        //$fields_diff = prc_workflow_fields_diff($previous_version, $node_version);
+//        $fields_diff = prc_workflow_fields_diff($previous_version, $node_version);
         $history_str .= $body_diff;
 
         $diffed[] = $couple;
@@ -862,29 +871,80 @@ function prc_workflow_revisions_tab($node) {
  * @param $previous_version
  * @param $node_version
  */
-function prc_workflow_body_diff($previous_version, $node_version){
+function prc_workflow_body_diff($previous_version, $node_version) {
+  // Load the diff library
+  libraries_load('php-htmldiff-master');
+
   $html = '';
 
   $pw = entity_metadata_wrapper('node', $previous_version);
-
   $nw = entity_metadata_wrapper('node', $node_version);
+  $node_fields = field_info_instances('node', 'digital_library_content ');
 
-  $pbody = $pw->body->value();
-  $nbody = $nw->body->value();
-  if($pbody != $nbody  || $previous_version->title != $node_version->title) {
+  // diff of the titles
+  $titleDiff = new HtmlDiff($previous_version->title, $node_version->title);
+  $titleDiff->build();
 
-    $HtmlDiff = new HtmlDiff($pbody['safe_value'], $nbody['safe_value']);
-    $HtmlDiff->build();
-    $diff = $HtmlDiff->getDifference();
+  $title = "<h4>{$titleDiff->getDifference()}</h4>";
+  $diffs = array();
+  foreach ($node_fields as $node_field) {
+    $field_name = $node_field['field_name'];
+    $field_info = field_info_field($field_name);
+    $info = field_info_instance('node', $field_name, $node_version->type);
+    $label = $info['label'];
 
-    // diff of the titles
-    $titleDiff = new HtmlDiff($previous_version->title, $node_version->title);
-    $titleDiff->build();
+    $field_left = $pw->{$field_name}->value();
+    $field_right = $nw->{$field_name}->value();
 
-    $title = "<h4>{$titleDiff->getDifference()}</h4>";
-
-    $html = "<div class='diff'><div class='row'><div class='body-diff-deletions large-6 column'>$title $diff</div><div class='large-6 column body-diff-inserts'>$title $diff</div></div></div>";
+    if ($field_left !== $field_right) {
+      switch ($field_info['type']) {
+        case 'text_with_summary':
+          $left_val = $field_left['safe_value'];
+          $right_val = $field_right['safe_value'];
+          break;
+        case 'text':
+        case 'list_text':
+          $left_val = $field_left;
+          $right_val = $field_right;
+          break;
+        case 'image':
+          $left_val = $field_left['filename'];
+          $right_val = $field_right['filename'];
+          break;
+        case 'file':
+          $left_val = count($field_left) ? $field_left[0]['filename'] : '';
+          $right_val = count($field_right) ? $field_right[0]['filename'] : '';
+          break;
+        case 'taxonomy_term_reference':
+          if (is_array($field_left)) {
+            $left_val = '';
+            $right_val = '';
+            foreach($field_left as $val) {
+              $left_val = ' ' . $val->name;
+            }
+            foreach($field_right as $val) {
+              $right_val = ' ' . $val->name;
+            }
+          }
+          else {
+            $left_val = $field_left ? $field_left->name : '';
+            $right_val = $field_right ? $field_right->name : '';
+          }
+          break;
+        case 'link_field':
+          $left_val = $field_left['title'] . ' ' . $field_left['url'];
+          $right_val = $field_right['title'] . ' ' . $field_right['url'];
+          break;
+      }
+      $HtmlDiff = new HtmlDiff($left_val, $right_val);
+      $HtmlDiff->build();
+      $diff = $HtmlDiff->getDifference();
+      $diffs[] = $label . ': ' . $diff;
+    }
+    $html = implode('<br>', $diffs);
   }
+//    $title = "<h4>{$titleDiff->getDifference()}</h4>";
+//    $html = "<div class='diff'><div class='row'><div class='body-diff-deletions large-6 column'>$title $diff</div><div class='large-6 column body-diff-inserts'>$title $diff</div></div></div>";
   return $html;
 }
 
@@ -895,45 +955,24 @@ function prc_workflow_body_diff($previous_version, $node_version){
  * @param $previous_version
  * @param $node_version
  */
-function prc_workflow_fields_diff($previous_version, $node_version){
+function prc_workflow_fields_diff($previous_version, $node_version) {
   $html = '';
-  $field_out_left = '';
-  $field_out_right = '';
+
+  $node_fields = field_info_instances('node', 'digital_library_content ');
 
   $pw = entity_metadata_wrapper('node', $previous_version);
 
   $nw = entity_metadata_wrapper('node', $node_version);
 
-  foreach($previous_version as $key => $property){
-    //If it starts with field, then check for differences
-    if(strpos($key, 'field') === 0){
-      $info = field_info_instance('node', $key, $node_version->type);
-      $label = $info['label'];
+  foreach ($node_fields as $node_field) {
+    $field_name = $node_field['field_name'];
+    $info = field_info_instance('node', $field_name, $node_version->type);
+    $label = $info['label'];
 
-      if($pw->{$key}->value() !== $nw->{$key}->value()){
-        $field_left = $pw->{$key}->value();
-        $field_right = $pw->{$key}->value();
+    $field_left = $pw->{$field_name}->value();
+    $field_right = $nw->{$field_name}->value();
 
-        $most_fields = count($field_left) >= count($field_right) ? 'left' : 'right';
-        $most = count($field_left) >= count($field_right) ? $field_left : $field_right;
-        $least = count($field_left) <= count($field_right) ? $field_left : $field_right;
-        foreach($most as $key => $most_value){
-          foreach($least as $key => $least_value){
-            if($most_value != $least_value){
-              $field_out_left = $most_fields === 'left' ? $most_value : $least_value;
-              $field_out_right = $most_fields === 'right' ? $most_value : $least_value;
-            }
-            continue;
-          }
-          $field_out_left = $most_fields === 'left' ? $most_value : '';
-          $field_out_right = $most_fields === 'right' ? $most_value : '';
-
-        }
-        $field_header = "<div class='diff-field-header'>$label</div>";
-        $fields_diff = "<div class='diff-field-previous'>$field_out_left</div>
-                        <div class='diff-field-next'>$field_out_right</div>";
-        $html .= "<div class='fields-diff'>$field_header.$fields_diff</div>";
-      }
+    if ($field_left !== $field_right) {
     }
   }
 
@@ -947,7 +986,7 @@ function prc_workflow_fields_diff($previous_version, $node_version){
  *
  * @param $node
  */
-function prc_workflow_node_revision_delete($node){
+function prc_workflow_node_revision_delete($node) {
   //this will work when revisions are deleted by state flow, but not if a user deletes a revision.
   //@todo: if users are allowed to delete revisions we may need to revisit this.
   $published_revision = state_flow_live_revision($node->nid);
