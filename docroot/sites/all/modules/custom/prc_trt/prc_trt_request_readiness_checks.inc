@@ -15,8 +15,9 @@ function prc_trt_request_readiness_checks_form($settings) {
 
   $subject = $mt->message_text[LANGUAGE_NONE][0]['safe_value'];
   //TODO: Replace these with something more elegant
+  $subject = str_replace('[message:field-node:title]', '&lt;School Name&gt;', $mt->message_text[LANGUAGE_NONE][0]['safe_value']);
   $body = str_replace('[message:field-comment]', '', $mt->message_text[LANGUAGE_NONE][1]['safe_value']);
-  $body = str_replace('[site:url]technology-readiness', '', $body);
+  $body = str_replace('[message:field-node:url]', '', $body);
 
   $to_schools = array();
   foreach ($settings['view']->result as $id => $result) {
@@ -70,12 +71,12 @@ function prc_trt_request_readiness_checks_submit($form, &$form_state) {
 }
 
 function prc_trt_request_readiness_checks(&$node, $context) {
-
   global $user;
   $message = message_create('request_readiness_check', array('uid' => $user->uid));
   $comment = $context['values']['comment'];
   $wrapper = entity_metadata_wrapper('message', $message);
   $wrapper->field_comment->set($comment);
+  $wrapper->field_node->set($node);
   $wrapper->save();
 
   // This message type is associated with roles in prc_emails.
