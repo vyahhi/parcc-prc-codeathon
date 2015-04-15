@@ -919,11 +919,21 @@ function prc_workflow_body_diff($previous_version, $node_version) {
           if (is_array($field_left)) {
             $left_val = '';
             $right_val = '';
-            foreach($field_left as $val) {
-              $left_val = ' ' . $val->name;
+            foreach ($field_left as $val) {
+              if ($field_info['settings']['allowed_values'][0]['vocabulary'] == 'standard') {
+                $left_val = ' ' . $val->description;
+              }
+              else {
+                $left_val = ' ' . $val->name;
+              }
             }
-            foreach($field_right as $val) {
-              $right_val = ' ' . $val->name;
+            foreach ($field_right as $val) {
+              if ($field_info['settings']['allowed_values'][0]['vocabulary'] == 'standard') {
+                $right_val = ' ' . $val->description;
+              }
+              else {
+                $right_val = ' ' . $val->name;
+              }
             }
           }
           else {
@@ -941,7 +951,7 @@ function prc_workflow_body_diff($previous_version, $node_version) {
       $diff = $HtmlDiff->getDifference();
       $diffs[] = $label . ': ' . $diff;
     }
-    $html = implode('<br>', $diffs);
+    $html = $title . implode('<br>', $diffs);
   }
 //    $title = "<h4>{$titleDiff->getDifference()}</h4>";
 //    $html = "<div class='diff'><div class='row'><div class='body-diff-deletions large-6 column'>$title $diff</div><div class='large-6 column body-diff-inserts'>$title $diff</div></div></div>";
