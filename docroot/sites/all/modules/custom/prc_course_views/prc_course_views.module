@@ -13,3 +13,16 @@ function prc_course_views_views_api() {
     'path' => drupal_get_path('module', 'prc_course_views') . '/views',
   );
 }
+
+/**
+ * Implements hook_node_view().
+ */
+function prc_course_views_node_view($node, $view_mode, $langcode) {
+  if ($view_mode == 'full' && $node->type == 'pd_course') {
+    $w = entity_metadata_wrapper('node', $node);
+    $link = $w->field_link_to_a_url->value();
+    if ($link) {
+      $node->content['course']['#access'] = FALSE;
+    }
+  }
+}

@@ -4168,54 +4168,6 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['filters']['quiz_question']['field'] = 'quiz_question';
   $handler->display->display_options['filters']['quiz_question']['value'] = '1';
   $handler->display->display_options['filters']['quiz_question']['group'] = 1;
-  /* Filter criterion: Content: Grade Level (field_grade_level) */
-  $handler->display->display_options['filters']['field_grade_level_tid']['id'] = 'field_grade_level_tid';
-  $handler->display->display_options['filters']['field_grade_level_tid']['table'] = 'field_data_field_grade_level';
-  $handler->display->display_options['filters']['field_grade_level_tid']['field'] = 'field_grade_level_tid';
-  $handler->display->display_options['filters']['field_grade_level_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_grade_level_tid']['expose']['operator_id'] = 'field_grade_level_tid_op';
-  $handler->display->display_options['filters']['field_grade_level_tid']['expose']['label'] = 'Grade Level (field_grade_level)';
-  $handler->display->display_options['filters']['field_grade_level_tid']['expose']['operator'] = 'field_grade_level_tid_op';
-  $handler->display->display_options['filters']['field_grade_level_tid']['expose']['identifier'] = 'field_grade_level_tid';
-  $handler->display->display_options['filters']['field_grade_level_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    11 => 0,
-    6 => 0,
-    7 => 0,
-    4 => 0,
-    3 => 0,
-    8 => 0,
-    9 => 0,
-    5 => 0,
-    10 => 0,
-  );
-  $handler->display->display_options['filters']['field_grade_level_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_grade_level_tid']['vocabulary'] = 'grade_level';
-  /* Filter criterion: Content: Standard (field_standard) */
-  $handler->display->display_options['filters']['field_standard_tid']['id'] = 'field_standard_tid';
-  $handler->display->display_options['filters']['field_standard_tid']['table'] = 'field_data_field_standard';
-  $handler->display->display_options['filters']['field_standard_tid']['field'] = 'field_standard_tid';
-  $handler->display->display_options['filters']['field_standard_tid']['value'] = 'All';
-  $handler->display->display_options['filters']['field_standard_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_standard_tid']['expose']['operator_id'] = 'field_standard_tid_op';
-  $handler->display->display_options['filters']['field_standard_tid']['expose']['label'] = 'Standard (field_standard)';
-  $handler->display->display_options['filters']['field_standard_tid']['expose']['operator'] = 'field_standard_tid_op';
-  $handler->display->display_options['filters']['field_standard_tid']['expose']['identifier'] = 'field_standard_tid';
-  $handler->display->display_options['filters']['field_standard_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    11 => 0,
-    6 => 0,
-    7 => 0,
-    4 => 0,
-    3 => 0,
-    8 => 0,
-    9 => 0,
-    5 => 0,
-    10 => 0,
-  );
-  $handler->display->display_options['filters']['field_standard_tid']['vocabulary'] = 'standard';
   $export['quiz_question_bank'] = $view;
 
   $view = new view();

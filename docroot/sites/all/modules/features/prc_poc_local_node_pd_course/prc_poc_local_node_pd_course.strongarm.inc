@@ -52,6 +52,9 @@ function prc_poc_local_node_pd_course_strongarm() {
       'detail' => array(
         'custom_settings' => FALSE,
       ),
+      'external_course' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -68,7 +71,7 @@ function prc_poc_local_node_pd_course_strongarm() {
       'display' => array(
         'course' => array(
           'default' => array(
-            'weight' => '3',
+            'weight' => '4',
             'visible' => TRUE,
           ),
           'teaser' => array(
@@ -83,10 +86,14 @@ function prc_poc_local_node_pd_course_strongarm() {
             'weight' => '3',
             'visible' => TRUE,
           ),
+          'external_course' => array(
+            'weight' => '4',
+            'visible' => TRUE,
+          ),
         ),
         'course_messages' => array(
           'default' => array(
-            'weight' => '17',
+            'weight' => '18',
             'visible' => FALSE,
           ),
           'teaser' => array(
@@ -101,10 +108,14 @@ function prc_poc_local_node_pd_course_strongarm() {
             'weight' => '15',
             'visible' => FALSE,
           ),
+          'external_course' => array(
+            'weight' => '18',
+            'visible' => FALSE,
+          ),
         ),
         'sharethis' => array(
           'default' => array(
-            'weight' => '14',
+            'weight' => '15',
             'visible' => FALSE,
           ),
           'teaser' => array(
@@ -118,6 +129,10 @@ function prc_poc_local_node_pd_course_strongarm() {
           'search_result' => array(
             'weight' => '4',
             'visible' => TRUE,
+          ),
+          'external_course' => array(
+            'weight' => '15',
+            'visible' => FALSE,
           ),
         ),
       ),

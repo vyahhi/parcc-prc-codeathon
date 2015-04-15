@@ -1,4 +1,4 @@
-@api @footer @user_generated_content @prc-889
+@api @footer @user_generated_content @prc-889 @prc-1254
 Feature: PRC-889 Accessing User Generated Content Disclaimer
   As a user,
   I want to have access to PARCC User Generated Content Disclaimer when accessing PRC.
@@ -21,3 +21,8 @@ Feature: PRC-889 Accessing User Generated Content Disclaimer
     And I should see the text "January 01, 2015"
     And I should see the text "Placeholder content: Content standards apply to any and all material which you contribute to the Site"
     And I should see the text "and to any Interactive Services associated with it. You must comply with the spirit of the standards as well as the letter. The standards apply to each part of any Contribution as well as to its whole."
+
+  Scenario: PRC-1254 - No submitted by author or date
+    Given I am an anonymous user
+    And I click "User Generated Content Disclaimer" in the "footer_copyright" region
+    Then I should not see the text "Submitted by"
