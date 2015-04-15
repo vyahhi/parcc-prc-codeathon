@@ -5002,11 +5002,13 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'entity';
   $handler->display->display_options['row_options']['view_mode'] = 'teaser';
-  /* No results behavior: Global: Result summary */
-  $handler->display->display_options['empty']['result']['id'] = 'result';
-  $handler->display->display_options['empty']['result']['table'] = 'views';
-  $handler->display->display_options['empty']['result']['field'] = 'result';
-  $handler->display->display_options['empty']['result']['empty'] = TRUE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'There are no results to display. Please change the search keywords and try again.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Indexed Node: Node ID */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'search_api_index_digital_library_content_index';
