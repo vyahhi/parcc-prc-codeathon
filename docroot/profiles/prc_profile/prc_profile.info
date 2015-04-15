@@ -213,7 +213,6 @@ dependencies[] = prc_poc_local_node_quiz_directions
 dependencies[] = prc_poc_local_node_short_answer
 dependencies[] = prc_poc_local_panels
 dependencies[] = prc_poc_local_node_school
-dependencies[] = prc_poc_local_search_api
 dependencies[] = prc_poc_local_seo
 dependencies[] = prc_poc_local_site
 dependencies[] = prc_poc_local_node_state
