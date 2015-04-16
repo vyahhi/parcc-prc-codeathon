@@ -257,7 +257,6 @@ function _prc_question_preview_quiz_add_questions_to_form(&$form, &$questions, &
     $question_wrapper = entity_metadata_wrapper('node', $question);
     $item_standard = '';
     if (isset($question->field_standard)) {
-      // && $question_wrapper->field_standard->value() ? $question_wrapper->field_standard->value()->name : '';
       $standards_descriptions = array();
       $standards = $question_wrapper->field_standard->value();
       foreach ($standards as $tid => $term) {

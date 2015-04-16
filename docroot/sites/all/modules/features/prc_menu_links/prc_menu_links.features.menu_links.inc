@@ -241,6 +241,26 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-add-quiz_item-bank:item-bank
+  $menu_links['menu-add-quiz_item-bank:item-bank'] = array(
+    'menu_name' => 'menu-add-quiz',
+    'link_path' => 'item-bank',
+    'router_path' => 'item-bank',
+    'link_title' => 'Item Bank',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-add-quiz_item-bank:item-bank',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-assessment-left-nav_all-available-assessments:assessments
   $menu_links['menu-assessment-left-nav_all-available-assessments:assessments'] = array(
     'menu_name' => 'menu-assessment-left-nav',
@@ -722,6 +742,7 @@ function prc_menu_links_menu_default_menu_links() {
   t('Export all testing capacity checks data to .csv');
   t('Home');
   t('Invite New User');
+  t('Item Bank');
   t('Log out');
   t('Manage Schools');
   t('PARCC Readiness');
