@@ -25,6 +25,10 @@ function prc_foundation_html_head_alter(&$head_elements) {
  */
 function prc_foundation_preprocess_html(&$variables) {
   drupal_add_css('//fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:700', array('type' => 'external'));
+  if (request_path() == 'digital-library') {
+    drupal_add_js(path_to_theme() .'/javascripts/vendor/packery.pkgd.min.js');
+    drupal_add_js(path_to_theme() .'/javascripts/custom/gallery_view.js');
+  }
 }
 
 function prc_foundation_preprocess_page(&$vars, $hook) {
