@@ -208,6 +208,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'add parcc items'.
+  $permissions['add parcc items'] = array(
+    'name' => 'add parcc items',
+    'roles' => array(
+      'PARCC Item Author' => 'PARCC Item Author',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'prc_question_form',
+  );
+
   // Exported permission: 'add to my lists'.
   $permissions['add to my lists'] = array(
     'name' => 'add to my lists',
