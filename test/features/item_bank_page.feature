@@ -30,7 +30,7 @@ Feature: PRC-1001 Item Bank
     And I am on "node/add/quiz-directions"
     And I fill in "Title" with "QD"
     And I fill in "Question" with "QD"
-    And I press "Save"
+    And I press "Submit"
 
     When I am on "item-bank"
     Then I should not see the text "No items found."
