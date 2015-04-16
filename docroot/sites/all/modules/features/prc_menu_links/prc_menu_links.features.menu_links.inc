@@ -501,6 +501,26 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-trt-parcc-readiness_parcc-readiness:technology-readiness/parcc
+  $menu_links['menu-trt-parcc-readiness_parcc-readiness:technology-readiness/parcc'] = array(
+    'menu_name' => 'menu-trt-parcc-readiness',
+    'link_path' => 'technology-readiness/parcc',
+    'router_path' => 'technology-readiness/parcc',
+    'link_title' => 'PARCC Readiness',
+    'options' => array(
+      'attributes' => array(
+        'title' => 'Summary of what user can do here, for example: view readiness data by state, export state readiness check data, view readiness by district, export district readiness checks data, view school readiness data.',
+      ),
+      'identifier' => 'menu-trt-parcc-readiness_parcc-readiness:technology-readiness/parcc',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-trt-school-readiness-capaci_run-testing-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add
   $menu_links['menu-trt-school-readiness-capaci_run-testing-capacity-check:admin/structure/entity-type/prc_trt/capacity_check/add'] = array(
     'menu_name' => 'menu-trt-school-readiness-capaci',
@@ -704,6 +724,7 @@ function prc_menu_links_menu_default_menu_links() {
   t('Invite New User');
   t('Log out');
   t('Manage Schools');
+  t('PARCC Readiness');
   t('Professional Development');
   t('System Check');
   t('Technology Readiness');
