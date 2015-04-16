@@ -1,14 +1,14 @@
-@api @assessment @itembank @shortanswer @prc-1012
-Feature: PRC-1012 Item Bank - Create Non-PARCC Short Answer Item - Form
+@api @itembank @interactivechoice @prc-1011
+Feature: PRC-1011 Item Bank - Create Non-PARCC Interactive Choice Item - Form
   As a logged in user,
-  I want to be able to create a non-PARCC short answer item from the Item Bank
+  I want to be able to create a non-PARCC interactive choice item from the Item Bank
   so that I can add it to assessments I have created or will create.
 
   Scenario: Form
     Given I am logged in as a user with the "Educator" role
     And I am on "item-bank"
-    When I click "Short answer"
-    Then I should see the heading "Create Short Answer Item"
+    When I click "Interactive choice"
+    Then I should see the heading "Create Interactive Choice Item"
     And I should see a "Submit" button
     And I select "Pre-K" from "Grade Level"
     And I select "1st Grade" from "Grade Level"
@@ -24,8 +24,3 @@ Feature: PRC-1012 Item Bank - Create Non-PARCC Short Answer Item - Form
     And I select "11th Grade" from "Grade Level"
     And I select "12th Grade" from "Grade Level"
     And I should see the text "Item Standard"
-    And I should see the text "Specify the answer."
-    But I should not see the text "Specify the answer. If this question is manually scored, no answer needs to be supplied."
-    And I should not see the text "Provide the answer and the method by which the answer will be evaluated."
-    And I should not see the text "Choose how the answer shall be evaluated."
-    And I should not see the text "Pick an evaluation method"
