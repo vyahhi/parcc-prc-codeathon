@@ -1,4 +1,4 @@
-@api @trt @district @school
+@api @trt @district @school @prc-944
 Feature: PRC-944 School Admin - Assign Role
   As a District Admin, I want to be able to assign a user (who either does or doesn't exist in the system) to the School Admin role so that the user can run readiness checks and view school readiness.
   Acceptance Criteria
