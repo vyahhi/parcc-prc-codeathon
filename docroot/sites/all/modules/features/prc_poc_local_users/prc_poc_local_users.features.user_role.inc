@@ -34,6 +34,12 @@ function prc_poc_local_users_user_default_roles() {
     'weight' => 3,
   );
 
+  // Exported role: PARCC Item Author.
+  $roles['PARCC Item Author'] = array(
+    'name' => 'PARCC Item Author',
+    'weight' => 11,
+  );
+
   // Exported role: PARCC-Member Educator.
   $roles['PARCC-Member Educator'] = array(
     'name' => 'PARCC-Member Educator',

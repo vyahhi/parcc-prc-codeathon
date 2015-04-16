@@ -349,6 +349,7 @@ features[user_role][] = Content Administrator (Curator)
 features[user_role][] = Content Contributor
 features[user_role][] = District Admin
 features[user_role][] = Educator
+features[user_role][] = PARCC Item Author
 features[user_role][] = PARCC-Member Educator
 features[user_role][] = PRC Admin
 features[user_role][] = School Admin
