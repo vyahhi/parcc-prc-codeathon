@@ -63,6 +63,51 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-multichoice-field_parcc_item'
+  $field_instances['node-multichoice-field_parcc_item'] = array(
+    'bundle' => 'multichoice',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_parcc_item',
+    'label' => 'Make this a PARCC item',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+        'label_help_description' => '',
+      ),
+      'type' => 'options_onoff',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-multichoice-field_standard'
   $field_instances['node-multichoice-field_standard'] = array(
     'bundle' => 'multichoice',
@@ -111,6 +156,7 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Make this a PARCC item');
   t('Question (Item Stem)');
   t('Standard');
 

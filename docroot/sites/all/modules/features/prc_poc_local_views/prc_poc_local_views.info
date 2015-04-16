@@ -34,6 +34,7 @@ features[views_view][] = glossary
 features[views_view][] = invite
 features[views_view][] = message
 features[views_view][] = my_lists
+features[views_view][] = prc_item_bank
 features[views_view][] = professional_development_favorites
 features[views_view][] = professional_development_view
 features[views_view][] = quiz_question_bank

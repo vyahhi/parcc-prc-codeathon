@@ -59,6 +59,7 @@ features[field_base][] = field_number_of_sessions
 features[field_base][] = field_number_of_students
 features[field_base][] = field_number_testing_days
 features[field_base][] = field_operating_system
+features[field_base][] = field_parcc_item
 features[field_base][] = field_permissions
 features[field_base][] = field_processor_speed
 features[field_base][] = field_profession
