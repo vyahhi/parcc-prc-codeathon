@@ -6693,6 +6693,13 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No states have been created.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -6753,6 +6760,31 @@ message explaining what the check does and the importance of running it.';
       'label' => 'Content: School contact&#039;s email address (field_contact_email)',
     ),
   );
+
+  /* Display: All TRT States */
+  $handler = $view->new_display('panel_pane', 'All TRT States', 'panel_pane_2');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Field: Member State */
+  $handler->display->display_options['fields']['field_member_state']['id'] = 'field_member_state';
+  $handler->display->display_options['fields']['field_member_state']['table'] = 'field_data_field_member_state';
+  $handler->display->display_options['fields']['field_member_state']['field'] = 'field_member_state';
+  $handler->display->display_options['fields']['field_member_state']['label'] = 'Member State1';
+  $handler->display->display_options['fields']['field_member_state']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_member_state']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_member_state']['alter']['text'] = '- PARCC Member';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = '[title] [field_member_state]';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  $handler->display->display_options['pane_category']['name'] = 'TRT PARCC Readiness';
+  $handler->display->display_options['pane_category']['weight'] = '0';
   $export['trt_states'] = $view;
 
   $view = new view();
