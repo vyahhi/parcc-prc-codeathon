@@ -132,7 +132,11 @@ function prc_question_form_form_short_answer_node_form_alter(&$form, &$form_stat
   unset($form['answer']['#description']);
   $form['answer']['correct_answer_evaluation']['#access'] = FALSE;
   $form['answer']['regex_box']['#access'] = FALSE;
+
+  $form['field_standard'][LANGUAGE_NONE]['#title'] = t('Item Standard');
+  $form['field_standard'][LANGUAGE_NONE]['#required'] = TRUE;
   $form['#validate'][] = 'prc_question_form_standard_required_validate';
+
   $form['answer']['correct_answer']['#description'] = t('Specify the answer.');
 }
 
