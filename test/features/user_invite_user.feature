@@ -4,7 +4,7 @@ Feature: Invite User (PRC-92)
   I want to invite a new user with a pre-defined role/permission,
   So that the receiver can create a user account in PRC and access the system with designated role/permissions.
   # PRC-1260 - Add PARCC Item Author role
-  
+
   Scenario: AC1 - Role PRC Admin exists +
     Given I am logged in as a user with the "PRC Admin" role
 
