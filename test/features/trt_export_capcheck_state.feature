@@ -61,7 +61,7 @@ Feature: PRC-875 Export Testing Capacity Data - State Readiness
     Then I should see CSV text matching "0"
     Then I should see CSV text matching "Passed"
     Then I should see CSV text matching "1.00"
-    Then I should see CSV text matching "Good"
+    Then I should see CSV text matching "Exceeds Requirements"
     Then I should see CSV text matching "2"
     Then I should see CSV text matching "2"
     Then I should see CSV text matching "2"

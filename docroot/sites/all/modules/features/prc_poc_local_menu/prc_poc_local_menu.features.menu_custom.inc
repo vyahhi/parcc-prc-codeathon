@@ -100,6 +100,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'TRT Manage Schools Add School Form',
     'description' => '',
   );
+  // Exported menu: menu-trt-parcc-readiness.
+  $menus['menu-trt-parcc-readiness'] = array(
+    'menu_name' => 'menu-trt-parcc-readiness',
+    'title' => 'TRT PARCC Readiness',
+    'description' => '',
+  );
   // Exported menu: menu-trt-school-readiness-capaci.
   $menus['menu-trt-school-readiness-capaci'] = array(
     'menu_name' => 'menu-trt-school-readiness-capaci',
@@ -165,6 +171,7 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('TRT District Export');
   t('TRT Manage Schools');
   t('TRT Manage Schools Add School Form');
+  t('TRT PARCC Readiness');
   t('TRT School Readiness Capacity Check');
   t('TRT School Readiness System Check');
   t('TRT State Check Export');

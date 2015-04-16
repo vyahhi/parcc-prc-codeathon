@@ -1,4 +1,4 @@
-@api @trt @structured @school @capacity_check @prc-757 @prc-1051 @prc-1000 @prc-999 @prc-802
+@api @trt @structured @school @capacity_check @prc-757 @prc-1051 @prc-1000 @prc-999 @prc-802 @prc-1270
 Feature: PRC-757 School Readiness - School Admin View
   As a School Admin,
   I want to be able to run structured readiness checks and see the results of the structured readiness checks I have run
@@ -6,6 +6,7 @@ Feature: PRC-757 School Readiness - School Admin View
 #  Scenario 3: I have run a Testing Capacity Check
 #  Number of students
 #  Number of students: <number of students> above Testing capacity checks subhead
+  # PRC-1270 changes Check - Result to Check: Result
 
   Scenario: Seeing my schools on the TRT Page
     Given I have no "School" nodes
@@ -76,7 +77,7 @@ Feature: PRC-757 School Readiness - School Admin View
     When I visit the last node created
     # PRC-1000
     Then I should see the text "Bandwidth Capacity Results"
-    And I should see the text "<bandwidth_result> - 0.5 Mbps/student"
+    And I should see the text "<bandwidth_result>: 0.5 Mbps/student"
     And I should see the text "Devices Capacity Results"
     And I should see the text "<device_result>"
     # PRC-999

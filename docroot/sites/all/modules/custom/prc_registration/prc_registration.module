@@ -17,16 +17,12 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
 
   drupal_set_title('Create User Account to Join Partnership Resource Center');
   $invite = invite_load_from_session();
-
   $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
 
   $form['field_user_state']['und']['#title'] = t('State where you teach');
 
   $p_states = _prc_member_states();
   $state_field = ':input[name="field_user_state[und]"]';
-
-//  //Needed for the invite
-//  $original_opts = $form['field_user_state']['und']['#options'];
 
   $member_tids = _prc_add_member_state_text($form, $p_states);
 
@@ -109,6 +105,28 @@ function prc_registration_form_user_register_form_validate(&$form, &$form_state)
   };
 
   $invite = invite_load_from_session();
+
+  if (!$invite) {
+    // Not in session. Let's look at the email address.
+    $email = $form_state['values']['mail'];
+    if ($email) {
+      $query = new EntityFieldQuery();
+      $query->entityCondition('entity_type', 'invite')
+        ->fieldCondition('field_invitation_email_address', 'value', $email);
+      $result = $query->execute();
+      if (isset($result['invite'])) {
+        // Found one, now force it into session
+        $ids = $result['invite'];
+        if (count($ids)) {
+          $id = array_pop($ids);
+          $invite = entity_load_single('invite', $id->iid);
+          $regcode = $invite->reg_code;
+          $_SESSION[INVITE_SESSION_CODE] = $regcode;
+        }
+      }
+    }
+  }
+
   if ($invite) {
     if (count($invite->field_member_state)) {
       $tid = $invite->field_member_state[LANGUAGE_NONE][0]['tid'];
@@ -136,7 +154,8 @@ function prc_registration_form_user_register_form_validate(&$form, &$form_state)
 
       if ($user_state_term->name !== $member_state_term->name) {
         form_set_error('state_account_number', t('State Account # is incorrect. Leave this blank if you do not have one.'));
-      } else {
+      }
+      else {
         $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
       }
     }

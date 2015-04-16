@@ -1,18 +1,19 @@
-@api @trt @school @state @district @admin @prc-814
-Feature: PRC-814 School Readiness - District and State Admins View
-  As a District Admin or State Admin,
+@api @trt @school @state @district @admin @prc-1211
+Feature: PRC-1211
+  School Readiness - PRC Admin View
+  As a PRC Admin,
   I want to be able to view the results of school's readiness checks
   so that I can understand if the school is ready to run a PARCC assessment test.
 
-#  Acceptance Criteria
-#  Background
-#  Differences from School Readiness - School Admin View (PRC-757)
-#  School Contact (below page header)
-#  School Contact: <School contact's email address>
-#  Testing capacity checks
-#  No link to run or run again
-#  System checks
-#  No link to run system check
+#    Given I am logged in as a PRC Admin
+#    And I am on the District Readiness page
+#    When I click the School Name link
+#    Then I see the School Readiness page that has:
+#  Differences from School Readiness - District and State Admins View (PRC-814)
+#  None
+#  Additional Considerations
+#  Only schools that have structured readiness checks results are displayed on the District Readiness page (see District Readiness - District Admin View PRC-706).
+
 
   Scenario Outline: State or District Admin
     Given users:
@@ -37,7 +38,12 @@ Feature: PRC-814 School Readiness - District and State Admins View
       | title         | field_ref_district    | field_contact_email            | uid         |
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
     And the school "<school_name>" has run a system check
+    And I am logged in as a user with the "PRC Admin" role
     And I click "Technology Readiness"
+    Then I should not see the link "<member_state> Readiness"
+    And I should not see the link "<district_name> Readiness"
+    And I should not see the link "<school_name> Readiness"
+    When I click "PARCC Readiness"
     Then I click "<member_state>"
     And I click "<district_name>"
     And I click "<school_name>"

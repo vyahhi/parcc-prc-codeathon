@@ -949,43 +949,13 @@ function prc_workflow_body_diff($previous_version, $node_version) {
       $HtmlDiff = new HtmlDiff($left_val, $right_val);
       $HtmlDiff->build();
       $diff = $HtmlDiff->getDifference();
-      $diffs[] = $label . ': ' . $diff;
+      $newdiff = "<div class='diff'><div class='row'><div class='body-diff-deletions large-6 column'>$diff</div><div class='large-6 column body-diff-inserts'>$diff</div></div></div>";
+      $diffs[] = $label . ': ' . $newdiff;
     }
     $html = $title . implode('<br>', $diffs);
-  }
 //    $title = "<h4>{$titleDiff->getDifference()}</h4>";
 //    $html = "<div class='diff'><div class='row'><div class='body-diff-deletions large-6 column'>$title $diff</div><div class='large-6 column body-diff-inserts'>$title $diff</div></div></div>";
-  return $html;
-}
-
-/**
- * Return HTML representing differences in the fields between the two versions
- * of the node
- *
- * @param $previous_version
- * @param $node_version
- */
-function prc_workflow_fields_diff($previous_version, $node_version) {
-  $html = '';
-
-  $node_fields = field_info_instances('node', 'digital_library_content ');
-
-  $pw = entity_metadata_wrapper('node', $previous_version);
-
-  $nw = entity_metadata_wrapper('node', $node_version);
-
-  foreach ($node_fields as $node_field) {
-    $field_name = $node_field['field_name'];
-    $info = field_info_instance('node', $field_name, $node_version->type);
-    $label = $info['label'];
-
-    $field_left = $pw->{$field_name}->value();
-    $field_right = $nw->{$field_name}->value();
-
-    if ($field_left !== $field_right) {
-    }
   }
-
   return $html;
 }
 

@@ -1,12 +1,12 @@
-@api @diglib @pagination @filter @prc-981
+@api @diglib @pagination @filter @prc-981 @prc-1268
 Feature: PRC-981 Search/Filter Bar: Pagination
   As a user, I want to be able to page through Digital Library content so that I don't have to scroll through long lists.
-
+  PRC-1268 Changes page size to 21 items.
 #  Given that I am on Digital Library page
-#  And the number of results is > 20
+#  And the number of results is > 21
 #  Then I see pagination:
 #  Pagination
-#  Display 20 per page -use the default pagination: e.g. first previous 1 2 3 4 .... 26 next last
+#  Display 21 per page -use the default pagination: e.g. first previous 1 2 3 4 .... 26 next last
 #  If user is on the first page, the first link is disabled.
 #  If user is on the last page, the last link is disabled.
 
@@ -111,6 +111,7 @@ Feature: PRC-981 Search/Filter Bar: Pagination
       | Result One Eight | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
       | Result One Nine  | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
       | Result One Ten   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
+      | Result Two One   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
     And I am on the homepage
     And I index search results
     When I am on "digital-library"

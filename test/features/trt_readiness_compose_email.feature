@@ -1,4 +1,4 @@
-@api @trt @structured @school @readiness @vbo @prc-819
+@api @trt @structured @school @readiness @vbo @prc-819 @prc-1170
 Feature: PRC-819 Request Readiness Checks - Compose Email
   As a District Admin, I want to ask schools in my district to run the readiness checks so I can understand if the schools are ready to run the PARCC assessment.
   Acceptance Criteria
@@ -21,6 +21,8 @@ Feature: PRC-819 Request Readiness Checks - Compose Email
 #  Text box
 #  Next button
 #  Cancel link
+
+  # PRC-1170 puts school name in subject and link to school readiness page in email and takes TRT link out
 
   Scenario: Send email
     Given I am logged in as a user with the "District Admin" role
@@ -45,12 +47,12 @@ Feature: PRC-819 Request Readiness Checks - Compose Email
     Then I should see the text "To:"
     And I should see the text "School 828-1 @timestamp, School 828-2 @timestamp, School 828-3 @timestamp"
     And I should see the text "Subject:"
-    And I should see the text "Subject goes here. For example: Please run readiness checks."
+    And I should see the text "Subject goes here. For example: <School Name>: Please run readiness checks."
     And I should see the text "Message:"
     And I should see the text "Message goes here explaining importance of running checks and how to run them, emphasizing that it is important that admins run the checks from the provided link or results won't be saved or reported to District."
     And I should not see the text "\[message:field-comment\]"
     # PRC-1068 site:url token includes the trailing / so that replace was incorrect
-    And I should not see the text "\[site:url\]"
+    And I should not see the text "\[message"
     And I should see the text "Additional Comments \(optional\):"
     And I should see a "Next" button
     And I should see a "Cancel" link
@@ -65,15 +67,17 @@ Feature: PRC-819 Request Readiness Checks - Compose Email
     And I should see a "Cancel" link
     When I press "Confirm"
     And I follow meta refresh
-    Then the email to "e1@timestamp@example.com" should contain "Subject goes here. For example: Please run readiness checks."
+    Then the email to "e1@timestamp@example.com" should contain "Subject goes here. For example: School 828-1 @timestamp: Please run readiness checks"
     And the email should contain "Message goes here explaining importance of running checks and how to run them, emphasizing that it is important that admins run the checks from the provided link or results won't be saved or reported to District."
     And the email should contain "Something @timestamp For Testing"
-    Then the email to "e2@timestamp@example.com" should contain "Subject goes here. For example: Please run readiness checks."
+    Then the email to "e2@timestamp@example.com" should contain "Subject goes here. For example: School 828-2 @timestamp: Please run readiness checks."
     And the email should contain "Message goes here explaining importance of running checks and how to run them, emphasizing that it is important that admins run the checks from the provided link or results won't be saved or reported to District."
     And the email should contain "Something @timestamp For Testing"
-    Then the email to "e3@timestamp@example.com" should contain "Subject goes here. For example: Please run readiness checks."
+    Then the email to "e3@timestamp@example.com" should contain "Subject goes here. For example: School 828-3 @timestamp: Please run readiness checks."
     And the email should contain "Message goes here explaining importance of running checks and how to run them, emphasizing that it is important that admins run the checks from the provided link or results won't be saved or reported to District."
     And the email should contain "Something @timestamp For Testing"
     And I should see the text "Performed Request Readiness Checks on 3 items."
+    When I follow the link in the email
+    Then I should see the heading "School 828-3 @timestamp Readiness"
     # We get a serialization error here because of the test mail system.
     # We don't get this during normal emailing.

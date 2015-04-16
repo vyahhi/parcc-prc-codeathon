@@ -440,7 +440,7 @@ function _prc_trt_view_entity_capacity_check($entity) {
   $entity->content['device_capacity_results']["devices_required_passfail"] = array(
     '#type' => 'item',
     '#title' => t('Devices Capacity Results'),
-    '#markup' => $devices_required_passfail . ' — ' . $devices_capacity,
+    '#markup' => $devices_required_passfail . ': ' . $devices_capacity,
     '#weight' => 0.6,
   );
   if ($devices_capacity <= 0) {
@@ -473,7 +473,7 @@ function _prc_trt_view_entity_capacity_check($entity) {
   $entity->content['bandwidth_capacity_results']["bandwidth_status"] = array(
     '#type' => 'item',
     '#title' => t('Bandwidth Capacity Results'),
-    '#markup' => t('@result - @bandwidth_capacity Mbps/student', array(
+    '#markup' => t('@result: @bandwidth_capacity Mbps/student', array(
       '@result' => $bandwidth_result,
       '@bandwidth_capacity' => $bandwidth_capacity
     )),
@@ -765,13 +765,13 @@ function _prc_entity_capacity_check_presave($entity) {
   $cap_good = floatval(variable_get('prc_trt_capacity_minimum_good', .1));
   $cap_ok = floatval(variable_get('prc_trt_capacity_minimum_ok', .05));
   if ($bandwidth_capacity >= $cap_good) {
-    $bandwidth_capacity_results = t('Good');
+    $bandwidth_capacity_results = t('Exceeds Requirements');
   }
   elseif ($bandwidth_capacity >= $cap_ok) {
-    $bandwidth_capacity_results = t('OK');
+    $bandwidth_capacity_results = t('Meets Minimum Requirements (for no Caching)');
   }
   else {
-    $bandwidth_capacity_results = t('Poor');
+    $bandwidth_capacity_results = t('Requires Test Caching ');
   }
   $entity->field_devices_capacity[LANGUAGE_NONE][0]['value'] = $devices_capacity;
   $entity->field_devices_capacity_results[LANGUAGE_NONE][0]['value'] = $devices_capacity_results;

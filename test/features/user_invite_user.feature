@@ -1,8 +1,9 @@
-@api @d7 @user @invite
+@api @d7 @user @invite @prc-92 @prc-1260
 Feature: Invite User (PRC-92)
   As a PRC Administrator,
   I want to invite a new user with a pre-defined role/permission,
   So that the receiver can create a user account in PRC and access the system with designated role/permissions.
+  # PRC-1260 - Add PARCC Item Author role
 
   Scenario: AC1 - Role PRC Admin exists +
     Given I am logged in as a user with the "PRC Admin" role
@@ -43,6 +44,7 @@ Feature: Invite User (PRC-92)
     Then I should see the checkbox "Content Contributor"
     Then I should not see the checkbox "administrator"
     Then I should not see the checkbox "authenticated user"
+    But I should see the checkbox "PARCC Item Author"
 
   # AC7 - The Role selected will apply to all E-Mail addresses entered and the invitational message drafted before submission.
   # This is really a UI constraint, and the test for PRC-73 Create User Account Following an Invitation will cover it
