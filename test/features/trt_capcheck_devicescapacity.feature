@@ -41,7 +41,7 @@ Feature: PRC-1071 School Readiness - Devices capacity number
     Then I click "<member_state>"
     And I click "<district_name>"
     And I click "<school_name>"
-    Then I should see the text "Passed — 0"
+    Then I should see the text "Passed: 0"
   Examples:
     | user_state     | member_state | user_name                          | district_name         | school_name              |
     | South Virginia | Old York     | joe_prc_814a@timestamp@example.com | PRC-814 S1 @timestamp | School 814 S1 @timestamp |
