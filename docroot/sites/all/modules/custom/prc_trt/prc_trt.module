@@ -1042,6 +1042,7 @@ function prc_trt_node_access($node, $op, $account) {
 function prc_trt_preprocess_breadcrumb(&$variables) {
   global $user;
   $full_admin = array_search('administrator', $user->roles);
+  $prc_admin = array_search('PRC Admin', $user->roles);
   $state_admin = array_search('State Admin', $user->roles);
   $district_admin = array_search('District Admin', $user->roles);
   $school_admin = array_search('School Admin', $user->roles);
@@ -1052,15 +1053,22 @@ function prc_trt_preprocess_breadcrumb(&$variables) {
     case 'node/%':
       $node = $item['page_arguments'][0];
       switch ($node->type) {
+        case 'state':
+          $breadcrumbs = array();
+          if ($full_admin || $prc_admin) {
+            $breadcrumbs[] = l(t('PARCC Readiness'), "technology-readiness/parcc");
+          }
+          $variables['breadcrumb'] = $breadcrumbs;
+          break;
         case 'school':
           $breadcrumbs = array();
-          if ($full_admin || $district_admin || $state_admin) {
+          if ($full_admin || $prc_admin || $district_admin || $state_admin) {
             $w_school = entity_metadata_wrapper('node', $node);
             $district = $w_school->field_ref_district->value();
             if ($district) {
               $breadcrumb = _prc_trt_breadcrumb_readiness_page($district);
               $breadcrumbs[] = $breadcrumb;
-              if ($full_admin || $state_admin) {
+              if ($full_admin || $prc_admin || $state_admin) {
                 $w_district = entity_metadata_wrapper('node', $district);
                 $state = $w_district->field_ref_trt_state->value();
                 if ($state) {
@@ -1068,13 +1076,19 @@ function prc_trt_preprocess_breadcrumb(&$variables) {
                 }
               }
             }
+            if ($full_admin || $prc_admin) {
+              array_unshift($breadcrumbs, l(t('PARCC Readiness'), "technology-readiness/parcc"));
+            }
           }
           $variables['breadcrumb'] = $breadcrumbs;
           break;
 
         case 'district':
-          if ($full_admin || $state_admin) {
+          if ($full_admin || $prc_admin || $state_admin) {
             $breadcrumbs = array();
+            if ($full_admin || $prc_admin) {
+              $breadcrumbs[] = l(t('PARCC Readiness'), "technology-readiness/parcc");
+            }
             $w_district = entity_metadata_wrapper('node', $node);
             $state = $w_district->field_ref_trt_state->value();
             if ($state) {
@@ -1146,20 +1160,20 @@ function prc_trt_preprocess_breadcrumb(&$variables) {
       break;
     case 'prc_trt/system_check/%':
     case 'prc_trt/capacity_check/%':
+      $breadcrumbs = array();
       $syscheck = $item['page_arguments'][2];
       $w_syscheck = entity_metadata_wrapper('prc_trt', $syscheck);
       $node = $w_syscheck->field_ref_school->value();
       if ($node) {
         // Structured...
-        if ($full_admin || $school_admin || $district_admin || $state_admin) {
-          $breadcrumbs = array();
+        if ($full_admin || $prc_admin || $school_admin || $district_admin || $state_admin) {
           $breadcrumbs[] = _prc_trt_breadcrumb_readiness_page($node);
-          if ($full_admin || $district_admin || $state_admin) {
+          if ($full_admin || $prc_admin || $district_admin || $state_admin) {
             $w_school = entity_metadata_wrapper('node', $node);
             $district = $w_school->field_ref_district->value();
             if ($district) {
               array_unshift($breadcrumbs, _prc_trt_breadcrumb_readiness_page($district));
-              if ($full_admin || $state_admin) {
+              if ($full_admin || $prc_admin || $state_admin) {
                 $w_district = entity_metadata_wrapper('node', $district);
                 $state = $w_district->field_ref_trt_state->value();
                 if ($state) {
@@ -1168,6 +1182,9 @@ function prc_trt_preprocess_breadcrumb(&$variables) {
               }
             }
           }
+        }
+        if ($full_admin || $prc_admin) {
+          array_unshift($breadcrumbs, l(t('PARCC Readiness'), "technology-readiness/parcc"));
         }
         $variables['breadcrumb'] = $breadcrumbs;
       }
