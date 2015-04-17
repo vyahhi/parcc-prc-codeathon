@@ -116,7 +116,7 @@ function prc_question_form_standard_required_validate(&$form, &$form_state) {
 }
 
 function prc_question_form_make_parcc_item_validate(&$form, &$form_state) {
-  $was_parcc_item = $form_state['node']->field_parcc_item['und'][0]['value'];
+  $was_parcc_item = isset($form_state['node']->field_parcc_item) ? $form_state['node']->field_parcc_item['und'][0]['value'] : NULL;
   $still_is_parcc_item = $form_state['values']['field_parcc_item']['und'][0]['value'];
   if ($was_parcc_item && !$still_is_parcc_item) {
     $nid = $form_state['node']->nid;

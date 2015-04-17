@@ -1302,6 +1302,24 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   }
 
   /**
+   * Click the element with the provided XPath Selector
+   *
+   * @When /^I click the element with xpath selector "([^"]*)"$/
+   */
+  public function iClickTheElementWithXPathSelector($xpathSelector) {
+    $session = $this->getSession();
+    $element = $session->getPage()->find(
+      'xpath',
+      $session->getSelectorsHandler()->selectorToXpath('xpath', $xpathSelector)
+    );
+    if (NULL === $element) {
+      throw new \InvalidArgumentException(sprintf('Could not evaluate XPath Selector: "%s"', $xpathSelector));
+    }
+    $element->click();
+
+  }
+
+  /**
    * Dismisses a confirmation dialog
    *
    * @Then /^I dismiss the confirmation$/

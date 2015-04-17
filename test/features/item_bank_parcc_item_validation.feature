@@ -106,7 +106,7 @@ Feature: PRC-1316 Item Bank - Edit Item - Form Validation - PARCC Item unchecked
     Then I press "Save"
 
     Then I am on "item-bank"
-    And I should see the text "Yes" in the "IC 1" row
+    And I should see the text "Yes" in the "SA 1" row
     When I click "Edit"
     And I uncheck the box "Make this a PARCC item"
     And I press "Save"
