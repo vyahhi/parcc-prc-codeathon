@@ -819,6 +819,24 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'clone node'.
+  $permissions['clone node'] = array(
+    'name' => 'clone node',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+    ),
+    'module' => 'clone',
+  );
+
+  // Exported permission: 'clone own nodes'.
+  $permissions['clone own nodes'] = array(
+    'name' => 'clone own nodes',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+    ),
+    'module' => 'clone',
+  );
+
   // Exported permission: 'create any invite entities'.
   $permissions['create any invite entities'] = array(
     'name' => 'create any invite entities',

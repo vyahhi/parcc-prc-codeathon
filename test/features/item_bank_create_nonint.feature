@@ -9,4 +9,4 @@ Feature: PRC-1007 Item Bank - Create Non-PARCC Non-interactive Item (text only) 
     And I am on "item-bank"
     When I click "Non-interactive (text only)"
     Then I should see the heading "Create Non-interactive Item (text only)"
-    And I should see a "Submit" button
+    And I should see a "Save" button

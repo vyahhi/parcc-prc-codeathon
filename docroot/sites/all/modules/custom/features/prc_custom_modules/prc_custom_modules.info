@@ -5,6 +5,7 @@ package = PRC
 dependencies[] = admin_menu
 dependencies[] = admin_role_restrict
 dependencies[] = chosen
+dependencies[] = clone
 dependencies[] = course
 dependencies[] = course_content
 dependencies[] = course_quiz

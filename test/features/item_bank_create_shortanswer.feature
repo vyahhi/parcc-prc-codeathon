@@ -1,4 +1,4 @@
-@api @assessment @itembank @shortanswer @prc-1012
+@api @assessment @itembank @shortanswer @prc-1012 @prc-1275
 Feature: PRC-1012 Item Bank - Create Non-PARCC Short Answer Item - Form
   As a logged in user,
   I want to be able to create a non-PARCC short answer item from the Item Bank
@@ -9,7 +9,7 @@ Feature: PRC-1012 Item Bank - Create Non-PARCC Short Answer Item - Form
     And I am on "item-bank"
     When I click "Short answer"
     Then I should see the heading "Create Short Answer Item"
-    And I should see a "Submit" button
+    And I should see a "Save" button
     And I select "Pre-K" from "Grade Level"
     And I select "1st Grade" from "Grade Level"
     And I select "2nd Grade" from "Grade Level"

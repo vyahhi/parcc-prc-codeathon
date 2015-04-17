@@ -9,7 +9,7 @@ Feature: PRC-1011 Item Bank - Create Non-PARCC Interactive Choice Item - Form
     And I am on "item-bank"
     When I click "Interactive choice"
     Then I should see the heading "Create Interactive Choice Item"
-    And I should see a "Submit" button
+    And I should see a "Save" button
     And I select "Pre-K" from "Grade Level"
     And I select "1st Grade" from "Grade Level"
     And I select "2nd Grade" from "Grade Level"
