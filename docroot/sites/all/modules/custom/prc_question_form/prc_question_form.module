@@ -73,7 +73,9 @@ function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state
   // Not getting the results I want during getCreationForm()
   // Still have to go in here and modify stuff - without doing this,
   // we don't get the node fields.
-  drupal_set_title(t('Create Interactive Choice Item'));
+  $orig_title = drupal_get_title();
+  $new_title = str_replace(t('Multiple choice question'), t('Interactive Choice Item'), $orig_title);
+  drupal_set_title($new_title);
 
   $form['feedback']['#access'] = FALSE;
   $form['title']['#title'] = t('Item Title');
@@ -156,7 +158,10 @@ function prc_multichoice_remove_alternative_ajax_callback($form, &$form_state) {
  * Implements hook_form_alter().
  */
 function prc_question_form_form_quiz_directions_node_form_alter(&$form, &$form_state) {
-  drupal_set_title(t('Create Non-interactive Item (text only)'));
+  $orig_title = drupal_get_title();
+  $new_title = str_replace(t('Multiple choice question'), t('Non-interactive Item (text only)'), $orig_title);
+  drupal_set_title($new_title);
+
   $form['feedback']['#access'] = FALSE;
   $form['field_parcc_item']['#access'] = user_access('add parcc items');
   $form['#validate'][] = 'prc_question_form_make_parcc_item_validate';
@@ -167,6 +172,10 @@ function prc_question_form_form_quiz_directions_node_form_alter(&$form, &$form_s
  */
 function prc_question_form_form_short_answer_node_form_alter(&$form, &$form_state) {
   drupal_set_title(t('Create Short Answer Item'));
+  $orig_title = drupal_get_title();
+  $new_title = str_replace(t('Multiple choice question'), t('Short Answer Item'), $orig_title);
+  drupal_set_title($new_title);
+
   $form['feedback']['#access'] = FALSE;
   unset($form['answer']['#description']);
   $form['answer']['correct_answer_evaluation']['#access'] = FALSE;
