@@ -121,6 +121,7 @@ function prc_question_form_standard_required_validate(&$form, &$form_state) {
 function prc_question_form_quiz_question_info_alter(&$info) {
   // Change question provider from MultichoiceQuestion]
   $info['multichoice']['question provider'] = 'PRCMultichoiceQuestion';
+  $info['short_answer']['question provider'] = 'PRCShortAnswerQuestion';
 }
 
 /**

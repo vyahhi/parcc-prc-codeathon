@@ -76,14 +76,14 @@ Feature: PRC-547 Add New Item to a Quiz
   Scenario: If the user clicks Save Draft button, Multiple correct answers is not checked, and all Correct check boxes are unchecked, a validation error message is displayed, saying "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
     When I click "Interactive Choice"
     And the "Multiple correct answers" checkbox should not be checked
-    When I press "Save Draft"
+    When I press "Submit"
     Then I should see the error message containing "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
 
   Scenario: AC5 When Multiple correct answers is checked, no message on 0 selected.
     When I click "Interactive Choice"
     And the "Multiple correct answers" checkbox should not be checked
     And I check "Multiple correct answers"
-    When I press "Save Draft"
+    When I press "Submit"
     Then I should not see the error message containing "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
 
   Scenario: If the user clicks Save Draft button, Multiple correct answers is not checked, and the Correct check box is selected for more than one distractor, a validation error message is displayed, saying "One correct answer must be selected. To select multiple correct answers, check the Multiple correct answers box."
@@ -91,7 +91,7 @@ Feature: PRC-547 Add New Item to a Quiz
     And the "Multiple correct answers" checkbox should not be checked
     And I check the box "edit-alternatives-0-correct"
     And I check the box "edit-alternatives-1-correct"
-    Then I press "Save Draft"
+    Then I press "Submit"
     Then I should see the error message containing "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
 
   Scenario: AC7 A Remove button shall allow a user to remove a distractor
@@ -119,7 +119,7 @@ Feature: PRC-547 Add New Item to a Quiz
 
   Scenario: Field validation
     Then I click "Interactive Choice"
-    When I press "Save Draft"
+    When I press "Submit"
     Then I should see the error message containing "Item Title field is required."
     Then I should see the error message containing "Question (Item Stem) field is required."
     Then I should see the error message containing "At least one Item Standard is required."
@@ -150,13 +150,14 @@ Feature: PRC-547 Add New Item to a Quiz
     When I fill in "edit-alternatives-0-answer-value" with "Alpha"
     When I fill in "edit-alternatives-1-answer-value" with "Beta"
     And I check the box "edit-alternatives-1-correct"
-    Then I press "Save Draft"
+    And I select "1st Grade" from "Grade Level"
+    Then I press "Submit"
     And I follow "Edit"
     Then the "edit-alternatives-0-answer-value" field should contain "Alpha"
     Then the "edit-alternatives-1-answer-value" field should contain "Beta"
     When I press "ADD"
     And I fill in "edit-alternatives-2-answer-value" with "Gamma"
-    And I press "Save Draft"
+    And I press "Submit"
     And I follow "Edit"
     Then the "edit-alternatives-0-answer-value" field should contain "Alpha"
     Then the "edit-alternatives-1-answer-value" field should contain "Beta"
@@ -164,17 +165,17 @@ Feature: PRC-547 Add New Item to a Quiz
     And I press "edit-alternatives-1-remove"
     When I press "ADD"
     And I fill in "edit-alternatives-3-answer-value" with "Delta"
-    And I press "Save Draft"
+    And I press "Submit"
     Then I should see the error message containing "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
     Then I check the box "edit-alternatives-3-correct"
-    And I press "Save Draft"
+    And I press "Submit"
     And I follow "Edit"
     Then the "edit-alternatives-0-answer-value" field should contain "Alpha"
     Then the "edit-alternatives-1-answer-value" field should contain "Gamma"
     Then the "edit-alternatives-2-answer-value" field should contain "Delta"
 
   @javascript
-  Scenario: If the user clicks Save Draft button, and the form contains any blank distractors (with both Correct checkbox unchecked and no data in answer field) that do not precede any non-blank distractors (with Correct checkbox unchecked and/or data in answer field), the form is submitted blank distractors are ignored and do not appear in the saved draft.
+  Scenario: If the user clicks Submit button, and the form contains any blank distractors (with both Correct checkbox unchecked and no data in answer field) that do not precede any non-blank distractors (with Correct checkbox unchecked and/or data in answer field), the form is submitted blank distractors are ignored and do not appear in the saved draft.
     When I click "Add Item"
     Then I click "Interactive Choice"
     And I fill in "Item Title" with "T1"
@@ -189,7 +190,8 @@ Feature: PRC-547 Add New Item to a Quiz
     Then I should see a "edit-alternatives-2-answer-value--3" field
     Then I should see a "edit-alternatives-3-answer-value--2" field
     Then I should see a "edit-alternatives-4-answer-value" field
-    And I press "Save Draft"
+    And I select "1st Grade" from "Grade Level"
+    And I press "Submit"
     And I follow "Edit"
     Then the "edit-alternatives-0-answer-value" field should contain "Alpha"
     Then the "edit-alternatives-1-answer-value" field should contain "Beta"
@@ -197,7 +199,7 @@ Feature: PRC-547 Add New Item to a Quiz
     Then I should not see a "edit-alternatives-3-answer-value" field
     Then I should not see a "edit-alternatives-4-answer-value" field
 
-  Scenario: If the user clicks Save Draft button, and the form contains any blank distractors (with Correct checkbox unchecked and no data in answer field) that precede any non-blank distractors (with Correct checkbox unchecked and/or data in answer field), a validation error message is displayed saying, "All answer choices (distractors) require an Answer. Please enter an Answer or click the Remove button to remove the answer choice (distractor)."
+  Scenario: If the user clicks Submit button, and the form contains any blank distractors (with Correct checkbox unchecked and no data in answer field) that precede any non-blank distractors (with Correct checkbox unchecked and/or data in answer field), a validation error message is displayed saying, "All answer choices (distractors) require an Answer. Please enter an Answer or click the Remove button to remove the answer choice (distractor)."
     Then I click "Interactive Choice"
     And I fill in "Item Title" with "T1"
     And I fill in "Question" with "Q1"
@@ -210,16 +212,16 @@ Feature: PRC-547 Add New Item to a Quiz
     When I fill in "edit-alternatives-3-answer-value" with "Gamma"
     When I press "ADD"
     When I fill in "edit-alternatives-3-answer-value" with "Delta"
-    And I press "Save Draft"
+    And I press "Submit"
     Then I should see the error message containing "All answer choices (distractors) require an Answer. Please enter an Answer or click the Remove button to remove the answer choice (distractor)."
 
-  Scenario: If the user clicks Save Draft button, and fewer than two distractors are complete, a validation error message is displayed saying, "At least two answer choices (distractors) are required."
+  Scenario: If the user clicks Submit button, and fewer than two distractors are complete, a validation error message is displayed saying, "At least two answer choices (distractors) are required."
     Then I click "Interactive Choice"
-    Then I press "Save Draft"
+    Then I press "Submit"
     Then I should see the error message containing "At least two answer choices (distractors) are required."
     When I fill in "edit-alternatives-0-answer-value" with "Alpha"
-    Then I press "Save Draft"
+    Then I press "Submit"
     Then I should see the error message containing "At least two answer choices (distractors) are required."
     When I fill in "edit-alternatives-1-answer-value" with "Beta"
-    Then I press "Save Draft"
+    Then I press "Submit"
     Then I should not see the error message containing "At least two answer choices (distractors) are required."

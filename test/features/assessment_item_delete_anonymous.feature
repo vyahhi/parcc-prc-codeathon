@@ -32,14 +32,14 @@ Feature: PRC-528 Delete Item in Test Customization for Anonymous Users
     Then I click "Quiz directions"
     And I fill in "edit-body-und-0-value" with "PRC-528 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-528 Directions 1"
-    And I press "Save"
+    And I press "Submit"
     Then I click "Multiple choice question"
     And I fill in "edit-body-und-0-value" with "PRC-528 Multi Multi Question Question"
     And I fill in "Title" with "PRC-528 Multi"
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     And I fill in "edit-alternatives-1-answer-value" with "Answer 2"
     And I check the box "edit-alternatives-1-correct"
-    And I press "Save"
+    And I press "Submit"
     Then I am an anonymous user
     And I visit the last node created
     Then I should see the heading "PRC-528 Delete" in the "content" region

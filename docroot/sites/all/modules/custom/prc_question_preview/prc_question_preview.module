@@ -29,18 +29,7 @@ function prc_question_preview_menu() {
     'page arguments' => array(1),
     'access arguments' => array('access content'),
   );
-  $items['question-action'] = array(
-    'type' => MENU_CALLBACK,
-    'title' => t('Item Preview Action'),
-    'description' => t('Item Preview Action'),
-    'page callback' => 'prc_question_preview_action',
-    'access arguments' => array('access content'),
-  );
   return $items;
-}
-
-function prc_question_preview_action() {
-  $x = func_get_args();
 }
 
 function prc_question_preview_quiz_detail($node) {
@@ -116,34 +105,7 @@ function prc_question_view_question_preview_form($form, $form_state, $nodes, $re
     $form['question'][$nid]['header']['field_parcc_item']['#access'] = FALSE;
   }
 
-  $form['#action'] = 'question-action';
-
-  if (!$is_parcc_item || user_access('add parcc items')) {
-    $form['actions'] = array('#type' => 'actions');
-    $form['actions']['edit'] = array(
-      '#type' => 'submit',
-      '#value' => t('Edit Item'),
-      '#submit' => array(
-        'prc_question_preview_edit_item'
-      ),
-    );
-    $form['actions']['duplicate'] = array(
-      '#type' => 'submit',
-      '#value' => t('Duplicate Item'),
-      '#submit' => array(
-        'prc_question_preview_duplicate_item'
-      ),
-    );
-  }
   return $form;
-}
-
-function prc_question_preview_edit_item($form, &$form_state) {
-  $x = 'x';
-}
-
-function prc_question_preview_duplicate_item($form, &$form_state) {
-  $x = 'x';
 }
 
 /**
