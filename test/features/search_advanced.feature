@@ -203,7 +203,7 @@ Feature: PRC-106 Search Content- Advanced
     Given I have no "Digital Library Content" nodes
     And I have no "PD Course" nodes
     And I have no "Quiz" nodes
-    And I run drush "sapi-i"
+    And I run drush "sapi-c"
     When I visit "search-content"
     Then I should see the text "There are no results to display. Please change the search keywords and try again."
     # PRC-1354 - Heading

@@ -4165,7 +4165,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = '';
+  $display->title = 'Search Results';
   $display->uuid = 'cbe3f39c-e3ca-43c5-8a0b-8ab1dbfc54e1';
   $display->content = array();
   $display->panels = array();
