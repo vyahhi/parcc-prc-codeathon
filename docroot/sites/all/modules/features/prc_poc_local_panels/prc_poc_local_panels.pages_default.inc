@@ -3319,6 +3319,34 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->uuid = '10ba3e0e-837d-47e4-b5e3-11ae87f6c0af';
     $display->content['new-10ba3e0e-837d-47e4-b5e3-11ae87f6c0af'] = $pane;
     $display->panels['middle'][2] = 'new-10ba3e0e-837d-47e4-b5e3-11ae87f6c0af';
+    $pane = new stdClass();
+    $pane->pid = 'new-9d8a425c-633c-4671-9823-10707f9e9041';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Empty Placeholder for Item Preview',
+      'title' => '',
+      'body' => '&nbsp;',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'item-preview-pane',
+    );
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = '9d8a425c-633c-4671-9823-10707f9e9041';
+    $display->content['new-9d8a425c-633c-4671-9823-10707f9e9041'] = $pane;
+    $display->panels['middle'][3] = 'new-9d8a425c-633c-4671-9823-10707f9e9041';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

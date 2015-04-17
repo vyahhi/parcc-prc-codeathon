@@ -20,7 +20,27 @@ function prc_question_preview_menu() {
     'page arguments' => array(1, 2),
     'access arguments' => array('access content'),
   );
+  $items['question-preview/%ctools_js/close'] = array(
+    'type' => MENU_CALLBACK,
+    'title' => t('Close Item Preview'),
+    'description' => t('Close Question Item Preview'),
+    'page callback' => 'prc_question_preview_close_menu_item_preview',
+    'file' => 'prc_question_preview.ajax.inc',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+  );
+  $items['question-action'] = array(
+    'type' => MENU_CALLBACK,
+    'title' => t('Item Preview Action'),
+    'description' => t('Item Preview Action'),
+    'page callback' => 'prc_question_preview_action',
+    'access arguments' => array('access content'),
+  );
   return $items;
+}
+
+function prc_question_preview_action() {
+  $x = func_get_args();
 }
 
 function prc_question_preview_quiz_detail($node) {
@@ -75,7 +95,55 @@ function prc_question_view_question_preview_form($form, $form_state, $nodes, $re
 
   // Kill the buttons!
   unset($form['navigation']);
+
+  // Add a Close link
+  drupal_add_library('system', 'drupal.ajax');
+  $cancel_href = "question-preview/nojs/close";
+    ctools_include('ajax');
+    $markup = ctools_ajax_text_button('Close', $cancel_href, 'Close');
+
+  $form['cancel'] = array(
+    '#markup' => $markup,
+  );
+
+
+  $nid = $form_state['build_info']['args'][0]->nid;
+  $w = entity_metadata_wrapper('node', $form_state['build_info']['args'][0]);
+  $is_parcc_item = $w->field_parcc_item->value();
+  if ($is_parcc_item) {
+    $form['question'][$nid]['header']['field_parcc_item'][0]['#markup'] = 'Yes';
+  } else {
+    $form['question'][$nid]['header']['field_parcc_item']['#access'] = FALSE;
+  }
+
+  $form['#action'] = 'question-action';
+
+  if (!$is_parcc_item || user_access('add parcc items')) {
+    $form['actions'] = array('#type' => 'actions');
+    $form['actions']['edit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Edit Item'),
+      '#submit' => array(
+        'prc_question_preview_edit_item'
+      ),
+    );
+    $form['actions']['duplicate'] = array(
+      '#type' => 'submit',
+      '#value' => t('Duplicate Item'),
+      '#submit' => array(
+        'prc_question_preview_duplicate_item'
+      ),
+    );
+  }
   return $form;
+}
+
+function prc_question_preview_edit_item($form, &$form_state) {
+  $x = 'x';
+}
+
+function prc_question_preview_duplicate_item($form, &$form_state) {
+  $x = 'x';
 }
 
 /**
