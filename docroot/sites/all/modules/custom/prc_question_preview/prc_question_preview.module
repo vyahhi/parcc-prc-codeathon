@@ -609,6 +609,9 @@ function prc_question_preview_form_quiz_node_form_alter(&$form, &$form_state) {
   $form['actions']['submit']['#submit'][] = 'prc_question_preview_form_quiz_node_form_submit';
 
   $form['field_subject'][LANGUAGE_NONE]['#required'] = 1;
+  $form['faux_subject'] = array(
+    '#type' => 'hidden',
+  );
 
 }
 
@@ -616,13 +619,10 @@ function prc_question_preview_form_quiz_node_form_alter(&$form, &$form_state) {
  * Quiz node form validate callback.
  */
 function prc_question_preview_form_quiz_node_form_validate($form, &$form_state) {
-
   $tid = $form_state['input']['field_subject']['und'][0]['tid'];
-
-  if (!$tid) {
+  if (!$tid && (!array_key_exists('faux_subject', $form_state['values']) || !$form_state['values']['faux_subject'])) {
     form_set_error('field_subject', t('Subject') . ' ' . t('field is required.'));
   }
-
 }
 
 /**

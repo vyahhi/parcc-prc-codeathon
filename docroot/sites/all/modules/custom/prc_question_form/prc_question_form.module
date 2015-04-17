@@ -104,6 +104,7 @@ function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state
   $form['field_parcc_item']['#access'] = user_access('add parcc items');
 
   $form['#validate'][] = 'prc_question_form_standard_required_validate';
+  $form['#validate'][] = 'prc_question_form_make_parcc_item_validate';
 }
 
 function prc_question_form_standard_required_validate(&$form, &$form_state) {
@@ -112,6 +113,27 @@ function prc_question_form_standard_required_validate(&$form, &$form_state) {
   if (!$tid && (!array_key_exists('faux_standard', $form_state['values']) || !$form_state['values']['faux_standard'])) {
     form_set_error('field_standard', t('At least one Item Standard is required.'));
   }
+}
+
+function prc_question_form_make_parcc_item_validate(&$form, &$form_state) {
+  $was_parcc_item = $form_state['node']->field_parcc_item['und'][0]['value'];
+  $still_is_parcc_item = $form_state['values']['field_parcc_item']['und'][0]['value'];
+  if ($was_parcc_item && !$still_is_parcc_item) {
+    $nid = $form_state['node']->nid;
+    $in_quiz = prc_question_in_quiz($nid);
+    if ($in_quiz) {
+      form_set_error('field_is_parcc_item', t('A PARCC item that is in an assessment cannot be changed to a non-PARCC item.'));
+    }
+  }
+}
+
+function prc_question_in_quiz($question_nid) {
+  $result = db_select('quiz_node_relationship', 'qnr')
+    ->fields('qnr', array('parent_nid', 'child_nid', 'child_vid', 'question_status', 'weight', 'max_score', 'auto_update_max_score', 'qnr_id', 'qnr_pid'))
+    ->condition('child_nid', $question_nid)
+    ->execute();
+
+  return $result->rowCount();
 }
 
 /**
@@ -137,6 +159,7 @@ function prc_question_form_form_quiz_directions_node_form_alter(&$form, &$form_s
   drupal_set_title(t('Create Non-interactive Item (text only)'));
   $form['feedback']['#access'] = FALSE;
   $form['field_parcc_item']['#access'] = user_access('add parcc items');
+  $form['#validate'][] = 'prc_question_form_make_parcc_item_validate';
 }
 
 /**
@@ -159,6 +182,7 @@ function prc_question_form_form_short_answer_node_form_alter(&$form, &$form_stat
   $form['faux_standard'] = array(
     '#type' => 'hidden',
   );
+  $form['#validate'][] = 'prc_question_form_make_parcc_item_validate';
 
 }
 
