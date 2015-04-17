@@ -824,6 +824,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'clone node',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'clone',
   );
@@ -833,6 +834,7 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'clone own nodes',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'clone',
   );
