@@ -16,8 +16,9 @@ Feature: PRC-521 Create a New Quiz
   AC5 Permissions: All the above features are available to all roles, except for anonymous users (Future stories: e.g. PRC-526)
 
   # PRC-1259 Rename Create NewQuiz to Create New Assessment
+  # PRC-1286 PARCC Item Author can see Assessment Type
 
-  Scenario: Anonymous can't add quiz
+#  Scenario: Anonymous can't add quiz
 
   Scenario Outline: Add quiz - form
     Given I am logged in as a user with the "<role>" role
@@ -28,6 +29,7 @@ Feature: PRC-521 Create a New Quiz
     And I should see the text "Objectives"
     And I should see the text "Subject *"
     And I should see the text "Grade *"
+    But I should not see the text "Assessment Type"
     And I should see a "Save Draft" button
     And I should see an "Add" link
     Examples:
@@ -37,6 +39,19 @@ Feature: PRC-521 Create a New Quiz
       | PRC Admin                       |
       | Content Administrator (Curator) |
       | authenticated user              |
+
+  Scenario: PRC-1286 Item Author can see Assessment Type
+    Given I am logged in as a user with the "PARCC Item Author" role
+    And I am on "assessments"
+    Then I follow "Create New Assessment"
+    Then I should see the heading "Create Assessment" in the "content" region
+    Then I should see the text "Title *"
+    And I should see the text "Objectives"
+    And I should see the text "Subject *"
+    And I should see the text "Grade *"
+    But I should see the text "Assessment Type"
+    And I should see a "Save Draft" button
+    And I should see an "Add" link
 
   Scenario: Hidden fields!
     Given I am logged in as a user with the "Educator" role

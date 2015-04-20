@@ -23,7 +23,7 @@ Feature: PRC-1316 Item Bank - Edit Item - Form Validation - PARCC Item unchecked
     And I have no "Short answer question" nodes
     And I have no "Quiz directions" nodes
     And I am on "assessments"
-    And I click "Create New Quiz"
+    And I click "Create New Assessment"
     And I fill in "Title" with "Quiz Title"
     And I fill in "Objectives" with "Objectives"
     And I select "1st Grade" from "Grade Level"
@@ -53,7 +53,7 @@ Feature: PRC-1316 Item Bank - Edit Item - Form Validation - PARCC Item unchecked
     And I have no "Short answer question" nodes
     And I have no "Quiz directions" nodes
     And I am on "assessments"
-    And I click "Create New Quiz"
+    And I click "Create New Assessment"
     And I fill in "Title" with "Quiz Title"
     And I fill in "Objectives" with "Objectives"
     And I select "1st Grade" from "Grade Level"
@@ -87,7 +87,7 @@ Feature: PRC-1316 Item Bank - Edit Item - Form Validation - PARCC Item unchecked
     And I have no "Short answer question" nodes
     And I have no "Quiz directions" nodes
     And I am on "assessments"
-    And I click "Create New Quiz"
+    And I click "Create New Assessment"
     And I fill in "Title" with "Quiz Title"
     And I fill in "Objectives" with "Objectives"
     And I select "1st Grade" from "Grade Level"
