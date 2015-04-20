@@ -3367,8 +3367,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
         'name' => 'role',
         'settings' => array(
           'rids' => array(
-            0 => 11,
-            1 => 8,
+            0 => 12,
+            1 => 9,
           ),
         ),
         'context' => 'logged-in-user',
@@ -3401,6 +3401,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
     'css' => '',
     'contexts' => array(),
     'relationships' => array(),
+    'access' => array(
+      'plugins' => array(),
+      'logic' => 'and',
+    ),
   );
   $display = new panels_display();
   $display->layout = 'flexible';
