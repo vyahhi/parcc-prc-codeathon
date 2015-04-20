@@ -367,7 +367,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 11,
+              0 => 12,
               1 => 5,
             ),
           ),
