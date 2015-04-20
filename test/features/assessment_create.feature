@@ -50,6 +50,9 @@ Feature: PRC-521 Create a New Quiz
     And I should see the text "Subject *"
     And I should see the text "Grade *"
     But I should see the text "Assessment Type"
+    And I select "Custom Assessment" from "Assessment Type"
+    And I select "PD Exam" from "Assessment Type"
+    And I select "PARCC-Released Practice Assessment" from "Assessment Type"
     And I should see a "Save Draft" button
     And I should see an "Add" link
 
