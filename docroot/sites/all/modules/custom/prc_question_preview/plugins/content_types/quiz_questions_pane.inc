@@ -50,9 +50,16 @@ function quiz_questions_pane_render($subtype, $conf, $args, $contexts) {
   $form['additional_questions']['multichoice'] = $form['additional_questions']['fake_multichoice'];
   $form['additional_questions']['short_answer'] = $form['additional_questions']['fake_short_answer'];
 
+  $form['additional_questions']['#title'] = t('Create New Item');
+
   unset($form['additional_questions']['fake_quiz_directions']);
   unset($form['additional_questions']['fake_multichoice']);
   unset($form['additional_questions']['fake_short_answer']);
+
+  $form['add_existing_item'] = array(
+    '#type' => 'markup',
+    '#markup' => l(t('Add Existing Item'), 'node/' . $node->nid . '/quiz/questions'),
+  );
 
   $block = new stdClass();
   $block->title = '';

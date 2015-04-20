@@ -1,4 +1,4 @@
-@api @assessment
+@api @assessment @prc-489
 Feature: PRC-489 View A List of Tests
   As an educator,
   I want to access and view the practice tests released by PARCC,
@@ -17,13 +17,13 @@ Feature: PRC-489 View A List of Tests
     Then I should see the link "Assessments"
     When I click "Assessments"
     Then I should see the heading "Assessments" in the "content" region
-    Examples:
-      | role                            |
-      | administrator                   |
-      | PRC Admin                       |
-      | Content Administrator (Curator) |
-      | Educator                        |
-      | PARCC-Member Educator           |
+  Examples:
+    | role                            |
+    | administrator                   |
+    | PRC Admin                       |
+    | Content Administrator (Curator) |
+    | Educator                        |
+    | PARCC-Member Educator           |
 
 
   Scenario: Assessment View

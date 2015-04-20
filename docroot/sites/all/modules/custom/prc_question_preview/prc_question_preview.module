@@ -284,7 +284,7 @@ function _prc_question_preview_quiz_add_questions_to_form(&$form, &$questions, &
 
     $form[$fieldset]['titles'][$id] = array('#markup' => $question_titles);
 
-    $question_wrapper = entity_metadata_wrapper('node', $question);
+    $question_wrapper = entity_metadata_wrapper('node', $question_node);
     $item_standard = '';
     if (isset($question->field_standard)) {
       $standards_descriptions = array();
@@ -297,6 +297,9 @@ function _prc_question_preview_quiz_add_questions_to_form(&$form, &$questions, &
     }
     $form[$fieldset]['item_standards'][$id] = array('#markup' => $item_standard);
 
+
+    $is_parcc_item = $question_wrapper->field_parcc_item->value();
+    $form[$fieldset]['parcc_item'][$id] = array('#markup' => $is_parcc_item ? 'Yes' : 'No');
 
     $form[$fieldset]['types'][$id] = array(
       '#markup' => $question_types[$question->type]['name'],
@@ -369,6 +372,7 @@ function _prc_question_preview_quiz_get_question_row($sub_form, $id) {
     $type,
     $action,
     drupal_render($sub_form['item_standards'][$id]),
+    drupal_render($sub_form['parcc_item'][$id]),
     drupal_render($sub_form['stayers'][$id]),
   );
   if (isset($sub_form['compulsories'])) {

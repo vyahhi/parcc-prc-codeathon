@@ -5161,7 +5161,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Content: State contact&#039;s email address (field_contact_email) */
+  /* Contextual filter: Content: School contact&#039;s email address (field_contact_email) */
   $handler->display->display_options['arguments']['field_contact_email_value']['id'] = 'field_contact_email_value';
   $handler->display->display_options['arguments']['field_contact_email_value']['table'] = 'field_data_field_contact_email';
   $handler->display->display_options['arguments']['field_contact_email_value']['field'] = 'field_contact_email_value';
@@ -6102,7 +6102,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'field_ref_school_target_id';
   $handler->display->display_options['fields']['title']['label'] = 'School';
-  /* Field: Content: State contact's email address */
+  /* Field: Content: School contact's email address */
   $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
@@ -6756,7 +6756,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: State contact's email address */
+  /* Field: Content: School contact's email address */
   $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
@@ -7055,7 +7055,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
-  /* Contextual filter: Content: State contact&#039;s email address (field_contact_email) */
+  /* Contextual filter: Content: School contact&#039;s email address (field_contact_email) */
   $handler->display->display_options['arguments']['field_contact_email_value']['id'] = 'field_contact_email_value';
   $handler->display->display_options['arguments']['field_contact_email_value']['table'] = 'field_data_field_contact_email';
   $handler->display->display_options['arguments']['field_contact_email_value']['field'] = 'field_contact_email_value';
@@ -7427,7 +7427,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'field_ref_school_target_id';
   $handler->display->display_options['fields']['title']['label'] = 'School';
-  /* Field: Content: State contact's email address */
+  /* Field: Content: School contact's email address */
   $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
@@ -7694,7 +7694,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'field_ref_school_target_id';
   $handler->display->display_options['fields']['title']['label'] = 'School';
-  /* Field: Content: State contact's email address */
+  /* Field: Content: School contact's email address */
   $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
@@ -7975,7 +7975,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'field_ref_school_target_id';
   $handler->display->display_options['fields']['title']['label'] = 'School';
-  /* Field: Content: State contact's email address */
+  /* Field: Content: School contact's email address */
   $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';

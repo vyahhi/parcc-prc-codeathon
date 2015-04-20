@@ -1,4 +1,4 @@
-@api @assessment
+@api @assessment @prc-490 @prc-1353
 Feature: PRC-490 View Test Details
   As an educator,
   I want to view a practice test details,
@@ -13,17 +13,19 @@ Feature: PRC-490 View Test Details
 
 #Acceptance Criteria
 #PRE_REQUISITE: Dev team, please create a couple assessments for testing.
+
+
   Scenario: AC1 Clicking an assessment name in the assessments page opens a new Assessment Details page opens, where the assessment's information is displayed at the top of the page:
     Given "Subject" terms:
-    | name  |
-    | subj490-1 |
-    | subj490-2 |
+      | name      |
+      | subj490-1 |
+      | subj490-2 |
     And "Grade Level" terms:
-    | name      |
-    | Grade 490 |
+      | name      |
+      | Grade 490 |
     And "Quiz" nodes:
-    | title        | field_subject        | field_grade_level | field_quiz_type            | uid |
-    | PRC-490 View | subj490-1, subj490-2 | Grade 490         | PRC Released Practice Test | 1   |
+      | title        | field_subject        | field_grade_level | field_quiz_type            | uid |
+      | PRC-490 View | subj490-1, subj490-2 | Grade 490         | PRC Released Practice Test | 1   |
     When I visit the last node created
     Then I should see the heading "PRC-490 View" in the "content" region
     And I should see the link "subj490-1"
@@ -96,3 +98,47 @@ Feature: PRC-490 View Test Details
     And I press "Save Draft"
     Then I should see the text "PRC-490 Copy - copy"
     And I should not see the error message containing "prc"
+
+  Scenario: PRC-1353 Common page elements
+    Given I am logged in as a user with the "PRC Admin" role
+    And "Grade Level" terms:
+      | name          |
+      | Middle School |
+    And "Subject" terms:
+      | name                   |
+      | Educational Leadership |
+      | Math                   |
+    And "Quiz" nodes:
+      | title                      | body   | field_grade_level | field_subject                | field_quiz_type            | uid         |
+      | PRC-534 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | PRC Released Practice Test | @currentuid |
+      | PRC-534 Assessment Title 2 | Body 2 | Middle School     | Educational Leadership, Math | Custom Assessment          | @currentuid |
+      | PRC-534 Assessment Title 3 | Body 3 | Middle School     | Educational Leadership, Math | Custom Assessment          | @currentuid |
+    And I click "Assessments"
+    When I click "PRC-534 Assessment Title 2"
+    Then I should see the text "Assessment Type"
+    But I should not see the text "Quiz Type"
+    And I should see the text "Create New Item"
+    But I should not see the text "Add Item"
+    And I should see the link "Add Existing Item"
+
+  Scenario: PRC-1353 PARCC item?
+    Given I am logged in as a user with the "PARCC Item Author" role
+    And "Grade Level" terms:
+      | name          |
+      | Middle School |
+    And "Subject" terms:
+      | name                   |
+      | Educational Leadership |
+      | Math                   |
+    And "Quiz" nodes:
+      | title           | body   | field_grade_level | field_subject                | field_quiz_type            | uid         |
+      | 1353 PARCC Item | Body 1 | Middle School     | Educational Leadership, Math | PRC Released Practice Test | @currentuid |
+    And I click "Assessments"
+    And I click "1353 PARCC Item"
+    And I click "Non-interactive Item (text only)"
+    And I fill in "My Title" for "Title"
+    And I fill in "My Question" for "Question"
+    And I check the box "Make this a PARCC item"
+    And I press "Save"
+    Then I should see the text "Yes" in the "My Title" row
+    And I should see the text "PARCC Item?"
