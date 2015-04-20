@@ -58,7 +58,7 @@ function quiz_questions_pane_render($subtype, $conf, $args, $contexts) {
 
   $form['add_existing_item'] = array(
     '#type' => 'markup',
-    '#markup' => l(t('Add Existing Item'), 'node/' . $node->nid . '/quiz/questions'),
+    '#markup' => l(t('Add Existing Item'), 'node/' . $node->nid . '/itembank'),
   );
 
   $block = new stdClass();

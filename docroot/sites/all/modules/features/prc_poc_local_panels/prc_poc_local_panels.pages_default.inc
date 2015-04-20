@@ -1202,34 +1202,6 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->uuid = '5191f8c4-630f-4d52-a599-a94e80c3cfa6';
     $display->content['new-5191f8c4-630f-4d52-a599-a94e80c3cfa6'] = $pane;
     $display->panels['middle'][3] = 'new-5191f8c4-630f-4d52-a599-a94e80c3cfa6';
-    $pane = new stdClass();
-    $pane->pid = 'new-9d75fce3-4c32-4075-b0c5-6bb1a621dc5b';
-    $pane->panel = 'middle';
-    $pane->type = 'custom';
-    $pane->subtype = 'custom';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'admin_title' => 'Empty Placeholder for Item Preview',
-      'title' => '',
-      'body' => '&nbsp;',
-      'format' => 'filtered_html',
-      'substitute' => 0,
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array(
-      'css_id' => '',
-      'css_class' => 'item-preview-pane',
-    );
-    $pane->extras = array();
-    $pane->position = 4;
-    $pane->locks = array();
-    $pane->uuid = '9d75fce3-4c32-4075-b0c5-6bb1a621dc5b';
-    $display->content['new-9d75fce3-4c32-4075-b0c5-6bb1a621dc5b'] = $pane;
-    $display->panels['middle'][4] = 'new-9d75fce3-4c32-4075-b0c5-6bb1a621dc5b';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-173ef7c8-627c-4ffb-82c7-517f83c7974d';
   $handler->conf['display'] = $display;
@@ -3470,6 +3442,125 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['parcc_readiness'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
+  $page->name = 'prc_quiz_question_bank';
+  $page->task = 'page';
+  $page->admin_title = 'PRC Quiz Question Bank';
+  $page->admin_description = 'Question bank for adding items to an assessment';
+  $page->path = 'node/%nid/itembank';
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 1,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => TRUE,
+      ),
+    ),
+    'logic' => 'and',
+  );
+  $page->menu = array();
+  $page->arguments = array(
+    'nid' => array(
+      'id' => 1,
+      'identifier' => 'Node: ID',
+      'name' => 'entity_id:node',
+      'settings' => array(),
+    ),
+  );
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_prc_quiz_question_bank__panel_context_c5fc1c39-fe86-4415-a5e5-ca02a7274a7f';
+  $handler->task = 'page';
+  $handler->subtask = 'prc_quiz_question_bank';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Quiz Question Bank',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = '468160cd-8f37-4684-98d0-da042b753a29';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-ccdb8571-2e32-4deb-904d-fdce1948e7f8';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'prc_quiz_question_bank-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'ccdb8571-2e32-4deb-904d-fdce1948e7f8';
+    $display->content['new-ccdb8571-2e32-4deb-904d-fdce1948e7f8'] = $pane;
+    $display->panels['middle'][0] = 'new-ccdb8571-2e32-4deb-904d-fdce1948e7f8';
+    $pane = new stdClass();
+    $pane->pid = 'new-840078fc-f8a4-4e8e-9de5-5098f0ec652f';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Cancel link',
+      'title' => '',
+      'body' => '<a href="%nid:url">Back to Assessment</a>',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '840078fc-f8a4-4e8e-9de5-5098f0ec652f';
+    $display->content['new-840078fc-f8a4-4e8e-9de5-5098f0ec652f'] = $pane;
+    $display->panels['middle'][1] = 'new-840078fc-f8a4-4e8e-9de5-5098f0ec652f';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-ccdb8571-2e32-4deb-904d-fdce1948e7f8';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['prc_quiz_question_bank'] = $page;
 
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
