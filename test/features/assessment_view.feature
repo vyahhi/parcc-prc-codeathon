@@ -28,6 +28,9 @@ Feature: PRC-489 View A List of Tests
 
   Scenario: Assessment View
     Given I am logged in as a user with the "PRC Admin" role
+    And "Grade Level" terms:
+      | name          |
+      | Middle School |
     And "Quiz" nodes:
       | title                      | body   | field_grade_level | field_subject                | field_quiz_type   | uid         |
       | PRC-489 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | Custom Assessment | @currentuid |
@@ -62,6 +65,9 @@ Feature: PRC-489 View A List of Tests
   @javascript
   Scenario: PRC-534 Assessment update date sorting
     Given I am logged in as a user with the "PRC Admin" role
+    And "Grade Level" terms:
+      | name          |
+      | Middle School |
     And "Quiz" nodes:
       | title                      | body   | field_grade_level | field_subject                | field_quiz_type   | uid         |
       | PRC-534 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | Custom Assessment | @currentuid |

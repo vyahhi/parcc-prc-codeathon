@@ -51,7 +51,7 @@ Feature: PRC-547 Add New Item to a Quiz
     When I visit the last node created
 
   Scenario: Links are present and in the right order
-    Then I should see the text "Add Item"
+    Then I should see the text "Create New Item"
     And I should see the link "Non-interactive Item (text only)"
     And I should see the link "Interactive Choice"
     And I should see the link "Short Answer"
@@ -142,7 +142,7 @@ Feature: PRC-547 Add New Item to a Quiz
 
   @javascript
   Scenario: Full cycle - save, check, change, remove, add
-    When I click "Add Item"
+    When I click "Create New Item"
     Then I click "Interactive Choice"
     And I fill in "Item Title" with "T1"
     And I fill in "Question" with "Q1"
@@ -176,7 +176,7 @@ Feature: PRC-547 Add New Item to a Quiz
 
   @javascript
   Scenario: If the user clicks Save button, and the form contains any blank distractors (with both Correct checkbox unchecked and no data in answer field) that do not precede any non-blank distractors (with Correct checkbox unchecked and/or data in answer field), the form is submitted blank distractors are ignored and do not appear in the saved draft.
-    When I click "Add Item"
+    When I click "Create New Item"
     Then I click "Interactive Choice"
     And I fill in "Item Title" with "T1"
     And I fill in "Question" with "Q1"
