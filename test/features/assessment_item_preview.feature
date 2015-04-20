@@ -30,8 +30,8 @@ Feature: PRC-527 Preview an item in Assessment Details page
       | name      |
       | Grade 527 |
     And "Quiz" nodes:
-      | title        | field_subject | field_grade_level | field_quiz_type            | uid         |
-      | PRC-527 View | subj1, subj2  | Grade 527         | PRC Released Practice Test | @currentuid |
+      | title        | field_subject | field_grade_level | field_quiz_type                    | uid         |
+      | PRC-527 View | subj1, subj2  | Grade 527         | PARCC-Released Practice Assessment | @currentuid |
   # That standard already exists, and I hate it, but I am getting an error
   # creating a Standard term is giving me an error.
   # We're cheating and using one that exists already.

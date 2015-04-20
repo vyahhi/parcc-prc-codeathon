@@ -432,7 +432,7 @@ function prc_question_preview_quiz_questions_form_submit($form, &$form_state) {
   $w = entity_metadata_wrapper('node', $quiz);
   $quiz_type = $w->field_quiz_type->value();
 
-  if ($quiz_type->name == 'PRC Released Practice Test') {
+  if ($quiz_type->name == 'PARCC-Released Practice Assessment') {
     global $user;
     _prc_question_preview_clone_prc_quiz($form_state, $quiz, $user);
 
