@@ -56,6 +56,19 @@ Feature: PRC-521 Create a New Quiz
     And I should see a "Save Draft" button
     And I should see an "Add" link
 
+  Scenario: PRC-1343 Assessment created
+    Given I am logged in as a user with the "PARCC Item Author" role
+    And I am on "assessments"
+    Then I follow "Create New Assessment"
+    Then I should see the heading "Create Assessment" in the "content" region
+    And I fill in "Title" with "my Title"
+    And I fill in "Objectives" with "my Objectives"
+    And I select "1st Grade" from "Grade Level"
+    And I fill in the hidden field "faux_subject" with "Subject"
+    And I select "Custom Assessment" from "Assessment Type"
+    And I press "Save Draft"
+    Then I should see the heading "my Title"
+
   Scenario: Hidden fields!
     Given I am logged in as a user with the "Educator" role
     And I am on "assessments"
