@@ -443,7 +443,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 11,
+              0 => 12,
               1 => 5,
             ),
           ),
@@ -588,7 +588,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 9,
+              0 => 10,
             ),
           ),
           'context' => 'logged-in-user',
@@ -626,7 +626,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 9,
+              0 => 10,
             ),
           ),
           'context' => 'logged-in-user',
@@ -737,8 +737,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 11,
-              1 => 9,
+              0 => 12,
+              1 => 10,
             ),
           ),
           'context' => 'logged-in-user',
@@ -774,8 +774,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 11,
-              1 => 9,
+              0 => 12,
+              1 => 10,
             ),
           ),
           'context' => 'logged-in-user',
@@ -3868,8 +3868,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 11,
-              1 => 8,
+              0 => 12,
+              1 => 9,
             ),
           ),
           'context' => 'context_user_1',
