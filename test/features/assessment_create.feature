@@ -1,4 +1,4 @@
-@api @assessment
+@api @assessment @prc-521 @prc-1259
 Feature: PRC-521 Create a New Quiz
   As an educator, I want to add a new test, so that I can utilize my customized test with my classroom later.
 
@@ -15,13 +15,15 @@ Feature: PRC-521 Create a New Quiz
   AC4 If a user navigates away from the page without saving the changes, the system prompts the user to confirm.
   AC5 Permissions: All the above features are available to all roles, except for anonymous users (Future stories: e.g. PRC-526)
 
+  # PRC-1259 Rename Create NewQuiz to Create New Assessment
+
   Scenario: Anonymous can't add quiz
 
   Scenario Outline: Add quiz - form
     Given I am logged in as a user with the "<role>" role
     And I am on "assessments"
-    Then I follow "Create New Quiz"
-    Then I should see the heading "Create Quiz" in the "content" region
+    Then I follow "Create New Assessment"
+    Then I should see the heading "Create Assessment" in the "content" region
     Then I should see the text "Title *"
     And I should see the text "Objectives"
     And I should see the text "Subject *"
@@ -39,7 +41,7 @@ Feature: PRC-521 Create a New Quiz
   Scenario: Hidden fields!
     Given I am logged in as a user with the "Educator" role
     And I am on "assessments"
-    When I follow "Create New Quiz"
+    When I follow "Create New Assessment"
     Then I should not see the text "Quiz Type"
     And I should not see the text "Remember my settings"
     And I should not see the text "Taking options"
@@ -57,7 +59,7 @@ Feature: PRC-521 Create a New Quiz
       | name      |
       | Grade 521 |
     And I am on "assessments"
-    Then I follow "Create New Quiz"
+    Then I follow "Create New Assessment"
     And I fill in "Title" with "PRC-521 @timestamp"
     And I fill in "Objectives" with "PRC-521 @timestamp Objectives"
     And I select "Grade 521" from "Grade Level"

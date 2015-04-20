@@ -221,26 +221,6 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
-  // Exported menu link: menu-add-quiz_create-new-quiz:node/add/quiz
-  $menu_links['menu-add-quiz_create-new-quiz:node/add/quiz'] = array(
-    'menu_name' => 'menu-add-quiz',
-    'link_path' => 'node/add/quiz',
-    'router_path' => 'node/add/quiz',
-    'link_title' => 'Create New Quiz',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'menu-add-quiz_create-new-quiz:node/add/quiz',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 1,
-  );
   // Exported menu link: menu-add-quiz_item-bank:item-bank
   $menu_links['menu-add-quiz_item-bank:item-bank'] = array(
     'menu_name' => 'menu-add-quiz',
@@ -805,7 +785,6 @@ function prc_menu_links_menu_default_menu_links() {
   t('Assessments');
   t('Content');
   t('Course Management');
-  t('Create New Quiz');
   t('Digital Library');
   t('Export all system checks data to .csv');
   t('Export all testing capacity checks data to .csv');

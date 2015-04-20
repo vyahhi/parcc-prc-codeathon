@@ -595,6 +595,10 @@ function _prc_question_preview_user_has_role($roles) {
  * Implements hook_form_FORM_alter().
  */
 function prc_question_preview_form_quiz_node_form_alter(&$form, &$form_state) {
+  $title = drupal_get_title();
+  $title = str_replace('Quiz', 'Assessment', $title);
+  drupal_set_title($title, PASS_THROUGH);
+
   $form['actions']['submit']['#value'] = t('Save Draft');
 
   $form['taking']['allow_resume']['#default_value'] = 0;
