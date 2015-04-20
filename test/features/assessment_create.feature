@@ -1,4 +1,4 @@
-@api @assessment @prc-521 @prc-1259
+@api @assessment @prc-521 @prc-1259 @prc-1343 @prc-1344
 Feature: PRC-521 Create a New Quiz
   As an educator, I want to add a new test, so that I can utilize my customized test with my classroom later.
 
@@ -66,6 +66,11 @@ Feature: PRC-521 Create a New Quiz
     And I select "1st Grade" from "Grade Level"
     And I fill in the hidden field "faux_subject" with "Subject"
     And I select "Custom Assessment" from "Assessment Type"
+    And I press "Save Draft"
+    Then I should see the heading "my Title"
+    # PRC-1343 Edit goes back to View
+    When I click "Edit"
+    And I fill in the hidden field "faux_subject" with "Subject"
     And I press "Save Draft"
     Then I should see the heading "my Title"
 
