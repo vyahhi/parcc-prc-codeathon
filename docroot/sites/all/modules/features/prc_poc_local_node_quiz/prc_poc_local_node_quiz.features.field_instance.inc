@@ -142,7 +142,7 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
     'bundle' => 'quiz',
     'default_value' => array(
       0 => array(
-        'tid' => 26,
+        'tid' => 34,
       ),
     ),
     'deleted' => 0,
