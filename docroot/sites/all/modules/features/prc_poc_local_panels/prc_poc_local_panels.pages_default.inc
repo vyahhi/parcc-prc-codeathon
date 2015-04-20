@@ -2429,9 +2429,9 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 8,
+              0 => 12,
               1 => 3,
-              2 => 7,
+              2 => 9,
             ),
           ),
           'context' => 'logged-in-user',
