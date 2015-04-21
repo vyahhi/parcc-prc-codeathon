@@ -16,7 +16,7 @@ Feature: PRC-1023 Item Bank - Edit Non-Interactive Item - Form
     Given I am logged in as a user with the "Educator" role
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
-    And I have no "Quiz directions" nodes
+    And I have no "Assessment directions" nodes
     And I am on "item-bank"
     When I click "Non-interactive (text only)"
     And I fill in "Title" with "NII T"
@@ -33,7 +33,7 @@ Feature: PRC-1023 Item Bank - Edit Non-Interactive Item - Form
     Given I am logged in as a user with the "PARCC Item Author" role
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
-    And I have no "Quiz directions" nodes
+    And I have no "Assessment directions" nodes
     And I am on "item-bank"
     When I click "Non-interactive (text only)"
     And I fill in "Title" with "NII T"

@@ -16,7 +16,7 @@ Feature: PRC-1001 Item Bank
     Given I am logged in as a user with the "Educator" role
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
-    And I have no "Quiz directions" nodes
+    And I have no "Assessment directions" nodes
     When I am on "item-bank"
     Then I should see the text "No items found."
     But I should not see the text "Scoring note: All interactive choice and short answer questions are machine scored."
@@ -25,7 +25,7 @@ Feature: PRC-1001 Item Bank
     Given I am logged in as a user with the "Educator" role
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
-    And I have no "Quiz directions" nodes
+    And I have no "Assessment directions" nodes
 
     And I am on "node/add/quiz-directions"
     And I fill in "Title" with "QD"
@@ -35,7 +35,7 @@ Feature: PRC-1001 Item Bank
     When I am on "item-bank"
     Then I should not see the text "No items found."
     And I should see the text "Scoring note: All interactive choice and short answer questions are machine scored."
-    And I should see the text "Quiz directions" in the "QD" row
+    And I should see the text "Assessment directions" in the "QD" row
     And I should see the text "Title"
     And I should see the text "Type"
     And I should see the text "Last Updated"

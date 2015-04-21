@@ -25,7 +25,7 @@ Feature: PRC-1035 Item Bank - Duplicate Non-Interactive Item - Form
     Given I am logged in as a user with the "Educator" role
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
-    And I have no "Quiz directions" nodes
+    And I have no "Assessment directions" nodes
     And I am on "item-bank"
     When I click "Non-interactive (text only)"
     And I fill in "Title" with "NII T"

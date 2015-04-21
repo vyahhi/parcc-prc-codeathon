@@ -8,7 +8,7 @@ Feature: PRC-1027 Item Bank - Edit Interactive choice Item - Form
     Given I am logged in as a user with the "Educator" role
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
-    And I have no "Quiz directions" nodes
+    And I have no "Assessment directions" nodes
     And I am on "item-bank"
     And I click "Interactive choice"
     And I fill in "Item Title" with "IC 1"
@@ -32,7 +32,7 @@ Feature: PRC-1027 Item Bank - Edit Interactive choice Item - Form
     Given I am logged in as a user with the "PARCC Item Author" role
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
-    And I have no "Quiz directions" nodes
+    And I have no "Assessment directions" nodes
     And I am on "item-bank"
     And I click "Interactive choice"
     And I fill in "Item Title" with "IC 1"

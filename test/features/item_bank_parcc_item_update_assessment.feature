@@ -16,7 +16,7 @@ Feature: PRC-1026 Item Bank - Edit Item - Item Edited - Assessment/s Updated
     Given I am logged in as a user with the "PARCC Item Author" role
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
-    And I have no "Quiz directions" nodes
+    And I have no "Assessment directions" nodes
     And I am on "assessments"
     And I click "Create New Assessment"
     And I fill in "Title" with "Quiz Title"

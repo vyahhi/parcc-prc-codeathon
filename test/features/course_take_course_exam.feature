@@ -51,7 +51,7 @@ Feature: PRC-476 Take Course Exam
     And I click "Quiz"
     Then I click "Manage questions"
     Then I click "Create new question"
-    Then I click "Quiz directions"
+    Then I click "Assessment directions"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-527 Directions 1"
     And I press "Save"
