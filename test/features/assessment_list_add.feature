@@ -18,7 +18,7 @@ Feature: PRC-610 Assessment Custom List
     And "Subject" terms:
       | name  |
       | subj1 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title     | field_subject | field_quiz_type                    | author      |
       | PRC-610-1 | subj1         | PARCC-Released Practice Assessment | @currentuid |
       | PRC-610-2 | subj1         | PARCC-Released Practice Assessment | @currentuid |
@@ -38,7 +38,7 @@ Feature: PRC-610 Assessment Custom List
     And "Subject" terms:
       | name  |
       | subj1 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title     | field_subject | field_quiz_type                    | author      |
       | PRC-610-1 | subj1         | PARCC-Released Practice Assessment | @currentuid |
     And I am on the homepage
@@ -68,7 +68,7 @@ Feature: PRC-610 Assessment Custom List
     And "Subject" terms:
       | name  |
       | subj1 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title     | field_subject | field_quiz_type                    | author      |
       | PRC-610-1 | subj1         | PARCC-Released Practice Assessment | @currentuid |
     And I am on the homepage
@@ -89,7 +89,7 @@ Feature: PRC-610 Assessment Custom List
     And "Subject" terms:
       | name  |
       | subj1 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title     | field_subject | field_quiz_type                    | author      |
       | PRC-610-1 | subj1         | PARCC-Released Practice Assessment | @currentuid |
       | PRC-610-2 | subj1         | PARCC-Released Practice Assessment | @currentuid |

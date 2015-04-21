@@ -24,7 +24,7 @@ Feature: PRC-528 Delete Item in Test Customization
       | name  |
       | subj1 |
       | subj2 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title          | field_subject | field_quiz_type   | uid         |
       | PRC-528 Delete | subj1, subj2  | Custom Assessment | @currentuid |
     And I am on "assessments"
@@ -61,7 +61,7 @@ Feature: PRC-528 Delete Item in Test Customization
       | name  |
       | subj1 |
       | subj2 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title          | field_subject | field_quiz_type                    | author      |
       | PRC-528 Delete | subj1, subj2  | PARCC-Released Practice Assessment | @currentuid |
     And I am on "assessments"
@@ -97,7 +97,7 @@ Feature: PRC-528 Delete Item in Test Customization
       | name  |
       | subj1 |
       | subj2 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title          | field_subject | field_quiz_type                    | author      |
       | PRC-528 Delete | subj1, subj2  | PARCC-Released Practice Assessment | @currentuid |
     And I am on "assessments"

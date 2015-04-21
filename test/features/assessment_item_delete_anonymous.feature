@@ -22,7 +22,7 @@ Feature: PRC-528 Delete Item in Test Customization for Anonymous Users
       | name  |
       | subj1 |
       | subj2 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title          | field_subject | field_quiz_type                    | author      |
       | PRC-528 Delete | subj1, subj2  | PARCC-Released Practice Assessment | @currentuid |
     And I am on "assessments"

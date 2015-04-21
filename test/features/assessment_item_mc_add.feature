@@ -44,7 +44,7 @@ Feature: PRC-547 Add New Item to a Quiz
     And "Grade Level" terms:
       | name      |
       | Grade 547 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title        | field_subject | field_grade_level | field_quiz_type                    |
       | PRC-547 View | subj1, subj2  | Grade 547         | PARCC-Released Practice Assessment |
     And I am logged in as a user with the "Educator" role

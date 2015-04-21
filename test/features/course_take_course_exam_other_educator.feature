@@ -16,7 +16,7 @@ Feature: PRC-476 Take Course Exam
     And "Grade Level" terms:
       | name    |
       | Grade 1 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title        | field_subject | field_quiz_type | author      | field_grade_level |
       | PRC-476 Exam | Subj1         | PD Exam         | @currentuid | Grade 1           |
     And I visit the last node created
@@ -120,7 +120,7 @@ Feature: PRC-476 Take Course Exam
     And "Grade Level" terms:
       | name    |
       | Grade 1 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title        | field_subject | field_quiz_type   | author      | field_grade_level |
       | PRC-476 Exam | Subj1         | Custom Assessment | @currentuid | Grade 1           |
     And I visit the last node created

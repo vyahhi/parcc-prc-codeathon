@@ -3,11 +3,11 @@ Feature: Custom assessments are only visible to their creators
 
   Scenario: Any user can view PARCC-Released Practice Assessment, but only their own custom
     Given I am logged in as a user with the "Educator" role
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title       | uid         |
       | My Untagged | @currentuid |
       | U1 Untagged | 1           |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title      | uid         | field_quiz_type                    |
       | My Custom  | @currentuid | Custom Assessment                  |
       | My PD Exam | @currentuid | PD Exam                            |

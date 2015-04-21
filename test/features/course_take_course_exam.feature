@@ -33,7 +33,7 @@ Feature: PRC-476 Take Course Exam
     Given I am logged in as a user with the "administrator" role
     Given I have no "PD Module" nodes
     And I have no "PD Course" nodes
-    And I have no "Quiz" nodes
+    And I have no "Assessment" nodes
     Given "PD Module" nodes:
       | title       | field_course_objectives | status | uid | field_length | language |
       | PD Module 1 | Obj1                    | 1      | 1   | 4 day        | und      |
@@ -43,7 +43,7 @@ Feature: PRC-476 Take Course Exam
     And "Grade Level" terms:
       | name    |
       | Grade 1 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title        | field_subject | field_quiz_type | author      | field_grade_level |
       | PRC-476 Exam | Subj1         | PD Exam         | @currentuid | Grade 1           |
     And I visit the last node created

@@ -159,7 +159,7 @@ function prc_multichoice_remove_alternative_ajax_callback($form, &$form_state) {
  */
 function prc_question_form_form_quiz_directions_node_form_alter(&$form, &$form_state) {
   $orig_title = drupal_get_title();
-  $new_title = str_replace(t('Quiz directions'), t('Non-interactive Item (text only)'), $orig_title);
+  $new_title = str_replace(t('Assessment directions'), t('Non-interactive Item (text only)'), $orig_title);
   drupal_set_title($new_title);
 
   $form['feedback']['#access'] = FALSE;

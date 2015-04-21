@@ -11,7 +11,7 @@ Feature: PRC-476 Take Course Exam
   @javascript
   Scenario: Last object
     Given I am logged in as a user with the "administrator" role
-    And I have no "Quiz" nodes
+    And I have no "Assessment" nodes
     And I have no "PD Module" nodes
     Given "PD Module" nodes:
       | title       | field_course_objectives | status | uid | field_length | language |
@@ -22,7 +22,7 @@ Feature: PRC-476 Take Course Exam
     And "Grade Level" terms:
       | name    |
       | Grade 1 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title        | field_subject | field_quiz_type | author      | field_grade_level |
       | PRC-476 A Exam | Subj1         | PD Exam         | @currentuid | Grade 1           |
     And I visit the last node created
@@ -122,7 +122,7 @@ Feature: PRC-476 Take Course Exam
     And "Grade Level" terms:
       | name    |
       | Grade 1 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title        | field_subject | field_quiz_type | author      | field_grade_level |
       | PRC-476 B Exam | Subj1         | PD Exam         | @currentuid | Grade 1           |
     And I visit the last node created

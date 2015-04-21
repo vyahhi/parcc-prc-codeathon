@@ -23,7 +23,7 @@ Feature: PRC-490 View Test Details
     And "Grade Level" terms:
       | name      |
       | Grade 490 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title        | field_subject        | field_grade_level | field_quiz_type                    | uid |
       | PRC-490 View | subj490-1, subj490-2 | Grade 490         | PARCC-Released Practice Assessment | 1   |
     When I visit the last node created
@@ -41,7 +41,7 @@ Feature: PRC-490 View Test Details
     And "Grade Level" terms:
       | name      |
       | Grade 490 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title        | field_subject | field_grade_level | field_quiz_type                    |
       | PRC-490 View | subj1, subj2  | Grade 490         | PARCC-Released Practice Assessment |
     # That standard already exists, and I hate it, but I am getting an error
@@ -75,7 +75,7 @@ Feature: PRC-490 View Test Details
     And "Grade Level" terms:
       | name      |
       | Grade 490 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title        | field_subject | field_grade_level | field_quiz_type                    | uid |
       | PRC-490 Copy | subj1, subj2  | Grade 490         | PARCC-Released Practice Assessment | 1   |
     When I visit the last node created
@@ -90,7 +90,7 @@ Feature: PRC-490 View Test Details
     And "Grade Level" terms:
       | name      |
       | Grade 490 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title        | field_subject | field_grade_level | field_quiz_type                    | uid |
       | PRC-490 Copy | subj1, subj2  | Grade 490         | PARCC-Released Practice Assessment | 1   |
     And I am logged in as a user with the "Educator" role
@@ -108,7 +108,7 @@ Feature: PRC-490 View Test Details
       | name                   |
       | Educational Leadership |
       | Math                   |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title                      | body   | field_grade_level | field_subject                | field_quiz_type                    | uid         |
       | PRC-534 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | PARCC-Released Practice Assessment | @currentuid |
       | PRC-534 Assessment Title 2 | Body 2 | Middle School     | Educational Leadership, Math | Custom Assessment                  | @currentuid |
@@ -130,7 +130,7 @@ Feature: PRC-490 View Test Details
       | name                   |
       | Educational Leadership |
       | Math                   |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title           | body   | field_grade_level | field_subject                | field_quiz_type                    | uid         |
       | 1353 PARCC Item | Body 1 | Middle School     | Educational Leadership, Math | PARCC-Released Practice Assessment | @currentuid |
     And I click "Assessments"

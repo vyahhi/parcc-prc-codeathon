@@ -7,11 +7,11 @@ Feature: PRC-552 Use created test for course exam
 
   Scenario: PD Exam quizzes appear in list
     Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title       | uid         |
       | Ny Untagged | @currentuid |
       | U1 Untagged | 1           |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title      | uid         | field_quiz_type                    |
       | My Custom  | @currentuid | Custom Assessment                  |
       | My PD Exam | @currentuid | PD Exam                            |

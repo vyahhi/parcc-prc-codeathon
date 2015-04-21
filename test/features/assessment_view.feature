@@ -31,7 +31,7 @@ Feature: PRC-489 View A List of Tests
     And "Grade Level" terms:
       | name          |
       | Middle School |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title                      | body   | field_grade_level | field_subject                | field_quiz_type   | uid         |
       | PRC-489 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | Custom Assessment | @currentuid |
     And I click "Assessments"
@@ -68,7 +68,7 @@ Feature: PRC-489 View A List of Tests
     And "Grade Level" terms:
       | name          |
       | Middle School |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title                      | body   | field_grade_level | field_subject                | field_quiz_type   | uid         |
       | PRC-534 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | Custom Assessment | @currentuid |
       | PRC-534 Assessment Title 2 | Body 2 | Middle School     | Educational Leadership, Math | Custom Assessment | @currentuid |

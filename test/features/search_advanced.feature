@@ -202,7 +202,7 @@ Feature: PRC-106 Search Content- Advanced
   Scenario: PRC-1272 Site search - no results
     Given I have no "Digital Library Content" nodes
     And I have no "PD Course" nodes
-    And I have no "Quiz" nodes
+    And I have no "Assessment" nodes
     And I run drush "sapi-c"
     When I visit "search-content"
     Then I should see the text "There are no results to display. Please change the search keywords and try again."

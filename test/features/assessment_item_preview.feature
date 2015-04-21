@@ -29,7 +29,7 @@ Feature: PRC-527 Preview an item in Assessment Details page
     And "Grade Level" terms:
       | name      |
       | Grade 527 |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title        | field_subject | field_grade_level | field_quiz_type                    | uid         |
       | PRC-527 View | subj1, subj2  | Grade 527         | PARCC-Released Practice Assessment | @currentuid |
   # That standard already exists, and I hate it, but I am getting an error
