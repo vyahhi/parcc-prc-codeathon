@@ -25,7 +25,7 @@ function prc_poc_local_users_user_default_roles() {
   // Exported role: District Admin.
   $roles['District Admin'] = array(
     'name' => 'District Admin',
-    'weight' => 9,
+    'weight' => 10,
   );
 
   // Exported role: Educator.
@@ -37,7 +37,7 @@ function prc_poc_local_users_user_default_roles() {
   // Exported role: PARCC Item Author.
   $roles['PARCC Item Author'] = array(
     'name' => 'PARCC Item Author',
-    'weight' => 11,
+    'weight' => 7,
   );
 
   // Exported role: PARCC-Member Educator.
@@ -49,19 +49,19 @@ function prc_poc_local_users_user_default_roles() {
   // Exported role: PRC Admin.
   $roles['PRC Admin'] = array(
     'name' => 'PRC Admin',
-    'weight' => 7,
+    'weight' => 8,
   );
 
   // Exported role: School Admin.
   $roles['School Admin'] = array(
     'name' => 'School Admin',
-    'weight' => 8,
+    'weight' => 9,
   );
 
   // Exported role: State Admin.
   $roles['State Admin'] = array(
     'name' => 'State Admin',
-    'weight' => 10,
+    'weight' => 11,
   );
 
   // Exported role: administrator.
