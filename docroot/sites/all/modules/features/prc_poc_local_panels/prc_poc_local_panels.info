@@ -30,6 +30,7 @@ features[page_manager_pages][] = digital_library
 features[page_manager_pages][] = home_page
 features[page_manager_pages][] = item_bank
 features[page_manager_pages][] = parcc_readiness
+features[page_manager_pages][] = prc_quiz_question_bank
 features[page_manager_pages][] = professional_development
 features[page_manager_pages][] = technology_readiness_tool
 features[page_manager_pages][] = test_search

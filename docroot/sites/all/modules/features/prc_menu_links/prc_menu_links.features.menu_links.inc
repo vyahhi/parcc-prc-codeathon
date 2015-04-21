@@ -221,17 +221,37 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
-  // Exported menu link: menu-add-quiz_create-new-quiz:node/add/quiz
-  $menu_links['menu-add-quiz_create-new-quiz:node/add/quiz'] = array(
+  // Exported menu link: menu-add-quiz_create-new-assessment:node/add/quiz
+  $menu_links['menu-add-quiz_create-new-assessment:node/add/quiz'] = array(
     'menu_name' => 'menu-add-quiz',
     'link_path' => 'node/add/quiz',
     'router_path' => 'node/add/quiz',
-    'link_title' => 'Create New Quiz',
+    'link_title' => 'Create New Assessment',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'menu-add-quiz_create-new-quiz:node/add/quiz',
+      'identifier' => 'menu-add-quiz_create-new-assessment:node/add/quiz',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-add-quiz_item-bank:item-bank
+  $menu_links['menu-add-quiz_item-bank:item-bank'] = array(
+    'menu_name' => 'menu-add-quiz',
+    'link_path' => 'item-bank',
+    'router_path' => 'item-bank',
+    'link_title' => 'Item Bank',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-add-quiz_item-bank:item-bank',
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -299,6 +319,75 @@ function prc_menu_links_menu_default_menu_links() {
     'has_children' => 0,
     'expanded' => 0,
     'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-item-bank-add-questions_interactive-choice:node/add/multichoice
+  $menu_links['menu-item-bank-add-questions_interactive-choice:node/add/multichoice'] = array(
+    'menu_name' => 'menu-item-bank-add-questions',
+    'link_path' => 'node/add/multichoice',
+    'router_path' => 'node/add/multichoice',
+    'link_title' => 'Interactive choice',
+    'options' => array(
+      'query' => array(
+        'destination' => 'item-bank',
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-item-bank-add-questions_interactive-choice:node/add/multichoice',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -49,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-item-bank-add-questions_non-interactive-text-only:node/add/quiz-directions
+  $menu_links['menu-item-bank-add-questions_non-interactive-text-only:node/add/quiz-directions'] = array(
+    'menu_name' => 'menu-item-bank-add-questions',
+    'link_path' => 'node/add/quiz-directions',
+    'router_path' => 'node/add/quiz-directions',
+    'link_title' => 'Non-interactive (text only)',
+    'options' => array(
+      'query' => array(
+        'destination' => 'item-bank',
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-item-bank-add-questions_non-interactive-text-only:node/add/quiz-directions',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -50,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-item-bank-add-questions_short-answer:node/add/short-answer
+  $menu_links['menu-item-bank-add-questions_short-answer:node/add/short-answer'] = array(
+    'menu_name' => 'menu-item-bank-add-questions',
+    'link_path' => 'node/add/short-answer',
+    'router_path' => 'node/add/short-answer',
+    'link_title' => 'Short answer',
+    'options' => array(
+      'query' => array(
+        'destination' => 'item-bank',
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-item-bank-add-questions_short-answer:node/add/short-answer',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -48,
     'customized' => 1,
   );
   // Exported menu link: menu-professional-development-le_all-available-courses:professional-development
@@ -716,16 +805,19 @@ function prc_menu_links_menu_default_menu_links() {
   t('Assessments');
   t('Content');
   t('Course Management');
-  t('Create New Quiz');
+  t('Create New Assessment');
   t('Digital Library');
   t('Export all system checks data to .csv');
   t('Export all testing capacity checks data to .csv');
   t('Home');
+  t('Interactive choice');
   t('Invite New User');
+  t('Item Bank');
   t('Log out');
   t('Manage Schools');
   t('PARCC Readiness');
   t('Professional Development');
+  t('Short answer');
   t('System Check');
   t('Technology Readiness');
   t('Testing Capacity Check');

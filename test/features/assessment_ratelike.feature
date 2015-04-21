@@ -15,9 +15,9 @@ Feature: PRC-554 Social Media: Like an Assessment
     And "Grade Level" terms:
       | name      |
       | Grade 554 |
-    And "Quiz" nodes:
-      | title        | field_subject | field_grade_level | field_quiz_type            |
-      | PRC-554 View | subj1         | Grade 554         | PRC Released Practice Test |
+    And "Assessment" nodes:
+      | title        | field_subject | field_grade_level | field_quiz_type                    |
+      | PRC-554 View | subj1         | Grade 554         | PARCC-Released Practice Assessment |
     And I am logged in as a user with the "Educator" role
     And I am on "assessments"
     Then I should see the link "PRC-554 View"
@@ -47,9 +47,9 @@ Feature: PRC-554 Social Media: Like an Assessment
     And "Grade Level" terms:
       | name      |
       | Grade 554 |
-    And "Quiz" nodes:
-      | title        | field_subject | field_grade_level | field_quiz_type            |
-      | PRC-554 View | subj1         | Grade 554         | PRC Released Practice Test |
+    And "Assessment" nodes:
+      | title        | field_subject | field_grade_level | field_quiz_type                    |
+      | PRC-554 View | subj1         | Grade 554         | PARCC-Released Practice Assessment |
     And I am logged in as a user with the "Educator" role
     And I am on "assessments"
     And I click "PRC-554 View"
@@ -67,9 +67,9 @@ Feature: PRC-554 Social Media: Like an Assessment
     And "Grade Level" terms:
       | name      |
       | Grade 554 |
-    And "Quiz" nodes:
-      | title        | field_subject | field_grade_level | field_quiz_type            | uid         |
-      | PRC-554 View | subj1         | Grade 554         | PRC Released Practice Test | @currentuid |
+    And "Assessment" nodes:
+      | title        | field_subject | field_grade_level | field_quiz_type                    | uid         |
+      | PRC-554 View | subj1         | Grade 554         | PARCC-Released Practice Assessment | @currentuid |
     And I am logged in as a user with the "Educator" role
     And I am on "assessments"
     And I click "PRC-554 View"

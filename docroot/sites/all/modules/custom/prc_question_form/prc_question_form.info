@@ -4,3 +4,4 @@ package = PRC
 core = 7.x
 
 files[] = prc_multichoice.classes.inc
+files[] = prc_short_answer.classes.inc

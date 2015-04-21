@@ -20,7 +20,7 @@ Feature: PRC-346 Admin: Course Audience
     | PD Module               |
     | Digital Library Content |
     | Favorites List          |
-    | Quiz                    |
+    | Assessment              |
 
   Scenario Outline: Course Audience exists for Curators and Admins
     Given I am logged in as a user with the "<role>" role
@@ -37,10 +37,10 @@ Feature: PRC-346 Admin: Course Audience
     And I am viewing a "PD Course" node with the title "PRC-346 Course"
     Then I should not see the link "Course Audience"
   Examples:
-    | role                     |
-    | Educator                 |
-    | PARCC-Member Educator    |
-    | Content Contributor      |
+    | role                  |
+    | Educator              |
+    | PARCC-Member Educator |
+    | Content Contributor   |
 
   Scenario: AC3 From the Edit Course page, the Content Admin will select the Course Audience tab, and will be directed to the "Course Audience" page.
     Given I am logged in as a user with the "Content Administrator (Curator)" role
@@ -192,83 +192,83 @@ Feature: PRC-346 Admin: Course Audience
 
   Scenario: Saving content as Public; accessible to anonymous
     Given "PD Course" nodes:
-      | title      | field_course_objectives | field_permissions | uid | status |
-      | Public     | This is public          | public            | 1   | 1      |
+      | title  | field_course_objectives | field_permissions | uid | status |
+      | Public | This is public          | public            | 1   | 1      |
     And I am an anonymous user
     And I visit the last node created
     Then I should see the text "This is public"
 
   Scenario: Saving content as Members Only; hidden from anonymous
     Given "PD Course" nodes:
-      | title        | field_course_objectives | field_permissions  | uid | status |
-      | Members Only | This is private         | members            | 1   | 1      |
+      | title        | field_course_objectives | field_permissions | uid | status |
+      | Members Only | This is private         | members           | 1   | 1      |
     And I am an anonymous user
     And I cannot visit the last node created
 
   Scenario: Saving anonymous content as Members Only; hidden from anonymous
     Given "PD Course" nodes:
-      | title        | field_course_objectives | field_permissions  | uid | status |
-      | Members Only | This is private         | members            | 0   | 1      |
+      | title        | field_course_objectives | field_permissions | uid | status |
+      | Members Only | This is private         | members           | 0   | 1      |
     And I am an anonymous user
     And I cannot visit the last node created
 
   Scenario Outline: Saving content as Public; accessible to roles
     Given "PD Course" nodes:
-      | title      | field_course_objectives | field_permissions | uid | status |
-      | Public     | This is public          | public            | 1   | 1      |
+      | title  | field_course_objectives | field_permissions | uid | status |
+      | Public | This is public          | public            | 1   | 1      |
     And I am logged in as a user with the "<role>" role
     And I visit the last node created
     Then I should see the text "This is public"
-    Examples:
-      | role                            |
-      | Educator                        |
-      | Content Contributor             |
-      | PRC Admin                       |
-      | administrator                   |
-      | Content Administrator (Curator) |
-      | authenticated user              |
+  Examples:
+    | role                            |
+    | Educator                        |
+    | Content Contributor             |
+    | PRC Admin                       |
+    | administrator                   |
+    | Content Administrator (Curator) |
+    | authenticated user              |
 
   Scenario Outline: Saving content as Members Only; hidden from role
     Given "PD Course" nodes:
-      | title        | field_course_objectives | field_permissions  | uid | status |
-      | Members Only | This is private         | members            | 1   | 1      |
+      | title        | field_course_objectives | field_permissions | uid | status |
+      | Members Only | This is private         | members           | 1   | 1      |
     And I am logged in as a user with the "<role>" role
     And I cannot visit the last node created
-    Examples:
-      | role                |
-      | Educator            |
-      | authenticated user  |
+  Examples:
+    | role               |
+    | Educator           |
+    | authenticated user |
 
   Scenario Outline: Saving content as Members Only - All members; hidden from role
     Given "PD Course" nodes:
-      | title        | field_course_objectives | field_permissions  | uid | status |
-      | Members Only | This is private         | members            | 1   | 1      |
+      | title        | field_course_objectives | field_permissions | uid | status |
+      | Members Only | This is private         | members           | 1   | 1      |
     And I am logged in as a user with the "<role>" role
     And I visit the last node created
-    Examples:
-      | role                            |
-      | Content Contributor             |
-      | Content Administrator (Curator) |
-      | PRC Admin                       |
-      | administrator                   |
+  Examples:
+    | role                            |
+    | Content Contributor             |
+    | Content Administrator (Curator) |
+    | PRC Admin                       |
+    | administrator                   |
 
   Scenario Outline: Saving content as Members Only - All members; hidden from role
     Given "PD Course" nodes:
-      | title        | field_course_objectives | field_permissions  | uid | status |
-      | Members Only | This is private         | members            | 1   | 1      |
+      | title        | field_course_objectives | field_permissions | uid | status |
+      | Members Only | This is private         | members           | 1   | 1      |
     And I am logged in as a user with the "<role>" role
     And I visit the last node created
-    Examples:
-      | role                            |
-      | Content Contributor             |
-      | Content Administrator (Curator) |
-      | PRC Admin                       |
-      | administrator                   |
+  Examples:
+    | role                            |
+    | Content Contributor             |
+    | Content Administrator (Curator) |
+    | PRC Admin                       |
+    | administrator                   |
 
   Scenario: Audience by state
     Given "PD Course" nodes:
-      | title         | field_course_objectives | field_permissions  | uid | status |
-      | Illinois Only | This is private         | public             | 1   | 1      |
+      | title         | field_course_objectives | field_permissions | uid | status |
+      | Illinois Only | This is private         | public            | 1   | 1      |
     Given users:
       | name         | mail                                | pass   | field_first_name | field_last_name | status |
       | Joe Illinois | joe_prc_346il@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
@@ -311,8 +311,8 @@ Feature: PRC-346 Admin: Course Audience
 
   Scenario: Audience by roster
     Given "PD Course" nodes:
-      | title         | field_course_objectives | field_permissions  | uid | status |
-      | Illinois Only | This is private         | public             | 1   | 1      |
+      | title         | field_course_objectives | field_permissions | uid | status |
+      | Illinois Only | This is private         | public            | 1   | 1      |
     Given users:
       | name         | mail                                | pass   | field_first_name | field_last_name | status |
       | Joe Illinois | joe_prc_346il@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
@@ -353,8 +353,8 @@ Feature: PRC-346 Admin: Course Audience
 
   Scenario: PRC-480 Admin: Course Audience- Course disappears after rostering audience
     Given "PD Course" nodes:
-      | title         | field_course_objectives | field_permissions  | uid | status |
-      | PRC-480 Allow | This is private         | public             | 1   | 1      |
+      | title         | field_course_objectives | field_permissions | uid | status |
+      | PRC-480 Allow | This is private         | public            | 1   | 1      |
     Given users:
       | name       | mail                          | pass   | field_first_name | field_last_name | status |
       | Joe PRC480 | prc_480@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
@@ -376,8 +376,8 @@ Feature: PRC-346 Admin: Course Audience
 
   Scenario: Multiple roster emails
     Given "PD Course" nodes:
-      | title                 | field_course_objectives | field_permissions  | uid | status |
-      | Two Emails @timestamp | This is private         | public             | 1   | 1      |
+      | title                 | field_course_objectives | field_permissions | uid | status |
+      | Two Emails @timestamp | This is private         | public            | 1   | 1      |
     Given users:
       | name         | mail                                | pass   | field_first_name | field_last_name | status |
       | Joe Illinois | joe_prc_346il@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
@@ -432,8 +432,8 @@ Feature: PRC-346 Admin: Course Audience
 
   Scenario: All PARCC Members displays for PARCC-Member Educator with a state
     Given "PD Course" nodes:
-      | title         | field_course_objectives | field_permissions  | uid | status |
-      | Illinois Only | This is private         | public             | 1   | 1      |
+      | title         | field_course_objectives | field_permissions | uid | status |
+      | Illinois Only | This is private         | public            | 1   | 1      |
     Given users:
       | name         | mail                                | pass   | field_first_name | field_last_name | status |
       | Joe Illinois | joe_prc_346il@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
@@ -476,8 +476,8 @@ Feature: PRC-346 Admin: Course Audience
   @javascript
   Scenario: PRC-488 All members doesn't save after another audience selected
     Given "PD Course" nodes:
-      | title         | field_course_objectives | field_permissions  | uid | status |
-      | Illinois Only | This is private         | public             | 1   | 1      |
+      | title         | field_course_objectives | field_permissions | uid | status |
+      | Illinois Only | This is private         | public            | 1   | 1      |
     And I am logged in as a user with the "PRC Admin" role
     Then I visit the last node created
     When I click "Course Audience"

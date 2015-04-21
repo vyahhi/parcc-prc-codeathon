@@ -115,7 +115,7 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
           'taxonomy_term_separator' => ', ',
         ),
         'type' => 'ds_taxonomy_separator',
-        'weight' => 3,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -142,7 +142,7 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
     'bundle' => 'quiz',
     'default_value' => array(
       0 => array(
-        'tid' => 26,
+        'tid' => 34,
       ),
     ),
     'deleted' => 0,
@@ -173,12 +173,12 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_quiz_type',
-    'label' => 'Quiz Type',
+    'label' => 'Assessment Type',
     'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
@@ -235,7 +235,7 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
           'taxonomy_term_separator' => ', ',
         ),
         'type' => 'ds_taxonomy_separator',
-        'weight' => 4,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'node',
@@ -265,9 +265,9 @@ function prc_poc_local_node_quiz_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Assessment Type');
   t('Grade Level');
   t('Objectives');
-  t('Quiz Type');
   t('Subject');
 
   return $field_instances;

@@ -18,10 +18,10 @@ Feature: PRC-610 Assessment Custom List
     And "Subject" terms:
       | name  |
       | subj1 |
-    And "Quiz" nodes:
-      | title     | field_subject | field_quiz_type            | author      |
-      | PRC-610-1 | subj1         | PRC Released Practice Test | @currentuid |
-      | PRC-610-2 | subj1         | PRC Released Practice Test | @currentuid |
+    And "Assessment" nodes:
+      | title     | field_subject | field_quiz_type                    | author      |
+      | PRC-610-1 | subj1         | PARCC-Released Practice Assessment | @currentuid |
+      | PRC-610-2 | subj1         | PARCC-Released Practice Assessment | @currentuid |
     And I am on the homepage
     When I follow "Assessments"
     Then I should see the link "PRC-610-1"
@@ -38,9 +38,9 @@ Feature: PRC-610 Assessment Custom List
     And "Subject" terms:
       | name  |
       | subj1 |
-    And "Quiz" nodes:
-      | title     | field_subject | field_quiz_type            | author      |
-      | PRC-610-1 | subj1         | PRC Released Practice Test | @currentuid |
+    And "Assessment" nodes:
+      | title     | field_subject | field_quiz_type                    | author      |
+      | PRC-610-1 | subj1         | PARCC-Released Practice Assessment | @currentuid |
     And I am on the homepage
     When I follow "Assessments"
     Then I should see the link "PRC-610-1"
@@ -68,9 +68,9 @@ Feature: PRC-610 Assessment Custom List
     And "Subject" terms:
       | name  |
       | subj1 |
-    And "Quiz" nodes:
-      | title     | field_subject | field_quiz_type            | author      |
-      | PRC-610-1 | subj1         | PRC Released Practice Test | @currentuid |
+    And "Assessment" nodes:
+      | title     | field_subject | field_quiz_type                    | author      |
+      | PRC-610-1 | subj1         | PARCC-Released Practice Assessment | @currentuid |
     And I am on the homepage
     When I follow "Assessments"
     Then I should see the link "My Quiz 610 List"
@@ -89,10 +89,10 @@ Feature: PRC-610 Assessment Custom List
     And "Subject" terms:
       | name  |
       | subj1 |
-    And "Quiz" nodes:
-      | title     | field_subject | field_quiz_type            | author      |
-      | PRC-610-1 | subj1         | PRC Released Practice Test | @currentuid |
-      | PRC-610-2 | subj1         | PRC Released Practice Test | @currentuid |
+    And "Assessment" nodes:
+      | title     | field_subject | field_quiz_type                    | author      |
+      | PRC-610-1 | subj1         | PARCC-Released Practice Assessment | @currentuid |
+      | PRC-610-2 | subj1         | PARCC-Released Practice Assessment | @currentuid |
     And I visit "assessments"
     Then I click "Add to My Quiz Lists"
     And I select "My Quiz List b" from "List"

@@ -1,4 +1,4 @@
-@api @assessment
+@api @assessment @prc-489
 Feature: PRC-489 View A List of Tests
   As an educator,
   I want to access and view the practice tests released by PARCC,
@@ -17,18 +17,21 @@ Feature: PRC-489 View A List of Tests
     Then I should see the link "Assessments"
     When I click "Assessments"
     Then I should see the heading "Assessments" in the "content" region
-    Examples:
-      | role                            |
-      | administrator                   |
-      | PRC Admin                       |
-      | Content Administrator (Curator) |
-      | Educator                        |
-      | PARCC-Member Educator           |
+  Examples:
+    | role                            |
+    | administrator                   |
+    | PRC Admin                       |
+    | Content Administrator (Curator) |
+    | Educator                        |
+    | PARCC-Member Educator           |
 
 
   Scenario: Assessment View
     Given I am logged in as a user with the "PRC Admin" role
-    And "Quiz" nodes:
+    And "Grade Level" terms:
+      | name          |
+      | Middle School |
+    And "Assessment" nodes:
       | title                      | body   | field_grade_level | field_subject                | field_quiz_type   | uid         |
       | PRC-489 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | Custom Assessment | @currentuid |
     And I click "Assessments"
@@ -62,7 +65,10 @@ Feature: PRC-489 View A List of Tests
   @javascript
   Scenario: PRC-534 Assessment update date sorting
     Given I am logged in as a user with the "PRC Admin" role
-    And "Quiz" nodes:
+    And "Grade Level" terms:
+      | name          |
+      | Middle School |
+    And "Assessment" nodes:
       | title                      | body   | field_grade_level | field_subject                | field_quiz_type   | uid         |
       | PRC-534 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | Custom Assessment | @currentuid |
       | PRC-534 Assessment Title 2 | Body 2 | Middle School     | Educational Leadership, Math | Custom Assessment | @currentuid |

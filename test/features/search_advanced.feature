@@ -1,4 +1,4 @@
-@api @search @prc-106 @prc-560 @prc-559 @prc-1272
+@api @search @prc-106 @prc-560 @prc-559 @prc-1272 @prc-1354
 Feature: PRC-106 Search Content- Advanced
   As an educator,
   I want to narrow down my search results by entering advanced filtering criteria,
@@ -20,9 +20,9 @@ Feature: PRC-106 Search Content- Advanced
       | Subj one |
       | Subj two |
     And "Digital Library Content" nodes:
-      | title         | body      | status | promote | uid | language | field_subject |
-      | Africa        | Continent | 1      | 0       | 1   | und      | Subj one      |
-      | Europe        | Continent | 1      | 0       | 1   | und      | Subj two      |
+      | title  | body      | status | promote | uid | language | field_subject |
+      | Africa | Continent | 1      | 0       | 1   | und      | Subj one      |
+      | Europe | Continent | 1      | 0       | 1   | und      | Subj two      |
     And I run drush "sapi-i"
     When I visit "search-content"
     Then I should see the link "Subj one (1)"
@@ -42,14 +42,14 @@ Feature: PRC-106 Search Content- Advanced
 
   Scenario: Searches through types
     Given "Digital Library Content" nodes:
-      | title         | body      | status | promote | uid | language |
-      | Africa DLC    | Continent | 1      | 0       | 1   | und      |
+      | title      | body      | status | promote | uid | language |
+      | Africa DLC | Continent | 1      | 0       | 1   | und      |
     And "PD Course" nodes:
-      | title         | body      | status | promote | uid | language |
-      | Africa PDC    | Continent | 1      | 0       | 1   | und      |
+      | title      | body      | status | promote | uid | language |
+      | Africa PDC | Continent | 1      | 0       | 1   | und      |
     And "PD Module" nodes:
-      | title         | body      | status | promote | uid | language |
-      | Africa PDM    | Continent | 1      | 0       | 1   | und      |
+      | title      | body      | status | promote | uid | language |
+      | Africa PDM | Continent | 1      | 0       | 1   | und      |
     And I run drush "sapi-i"
     When I visit "search-content"
     Then I should not see the text "Subj one"
@@ -61,14 +61,14 @@ Feature: PRC-106 Search Content- Advanced
 
   Scenario: Searches through body
     Given "Digital Library Content" nodes:
-      | title         | body      | status | promote | uid | language |
-      | Africa DLC    | Body DLC  | 1      | 0       | 1   | und      |
+      | title      | body     | status | promote | uid | language |
+      | Africa DLC | Body DLC | 1      | 0       | 1   | und      |
     And "PD Course" nodes:
-      | title         | field_course_objectives | status | promote | uid | language |
-      | Africa PDC    | Body PDC                | 1      | 0       | 1   | und      |
+      | title      | field_course_objectives | status | promote | uid | language |
+      | Africa PDC | Body PDC                | 1      | 0       | 1   | und      |
     And "PD Module" nodes:
-      | title         | body      | status | promote | uid | language |
-      | Africa PDM    | Nope PDM  | 1      | 0       | 1   | und      |
+      | title      | body     | status | promote | uid | language |
+      | Africa PDM | Nope PDM | 1      | 0       | 1   | und      |
     And I run drush "sapi-i"
     When I visit "search-content"
     And I fill in "Enter your keywords" with "Body"
@@ -83,14 +83,14 @@ Feature: PRC-106 Search Content- Advanced
       | prc597 |
       | prc593 |
     Given "Digital Library Content" nodes:
-      | title         | body      | status | promote | uid | language | field_tags |
-      | Africa DLC    | Continent | 1      | 0       | 1   | und      | prc597     |
+      | title      | body      | status | promote | uid | language | field_tags |
+      | Africa DLC | Continent | 1      | 0       | 1   | und      | prc597     |
     And "PD Course" nodes:
-      | title         | body      | status | promote | uid | language | field_tags |
-      | Africa PDC    | Continent | 1      | 0       | 1   | und      | prc597     |
+      | title      | body      | status | promote | uid | language | field_tags |
+      | Africa PDC | Continent | 1      | 0       | 1   | und      | prc597     |
     And "PD Module" nodes:
-      | title         | body      | status | promote | uid | language | field_tags |
-      | Africa PDM    | Continent | 1      | 0       | 1   | und      | prc593     |
+      | title      | body      | status | promote | uid | language | field_tags |
+      | Africa PDM | Continent | 1      | 0       | 1   | und      | prc593     |
     And I run drush "sapi-i"
     When I visit "search-content"
     And I fill in "Enter your keywords" with "prc597"
@@ -107,14 +107,14 @@ Feature: PRC-106 Search Content- Advanced
       | name   |
       | AC3 Su |
     Given "Digital Library Content" nodes:
-      | title         | body      | status | promote | uid | language | field_author_name | field_media_type | field_subject | field_standard |
-      | Africa DLC    | Continent | 1      | 0       | 1   | und      | Author One        | AC3 MT           | AC3 Su        | s11436b2       |
+      | title      | body      | status | promote | uid | language | field_author_name | field_media_type | field_subject | field_standard |
+      | Africa DLC | Continent | 1      | 0       | 1   | und      | Author One        | AC3 MT           | AC3 Su        | s11436b2       |
     And "PD Course" nodes:
-      | title         | body      | status | promote | uid | language |
-      | Africa PDC    | Continent | 1      | 0       | 1   | und      |
+      | title      | body      | status | promote | uid | language |
+      | Africa PDC | Continent | 1      | 0       | 1   | und      |
     And "PD Module" nodes:
-      | title         | body      | status | promote | uid | language |
-      | Africa PDM    | Continent | 1      | 0       | 1   | und      |
+      | title      | body      | status | promote | uid | language |
+      | Africa PDM | Continent | 1      | 0       | 1   | und      |
     And I run drush "sapi-i"
     When I visit "search-content"
     Then I should see the text "By Content Type"
@@ -132,8 +132,8 @@ Feature: PRC-106 Search Content- Advanced
       | Subj one |
       | Subj two |
     And "Digital Library Content" nodes:
-      | title         | body      | status | promote | uid | language | field_subject |
-      | Africa        | Continent | 1      | 0       | 1   | und      | Subj one      |
+      | title  | body      | status | promote | uid | language | field_subject |
+      | Africa | Continent | 1      | 0       | 1   | und      | Subj one      |
     And I run drush "sapi-i"
     When I visit "search-content"
     Then I should see the link "Subj one (1)"
@@ -147,8 +147,8 @@ Feature: PRC-106 Search Content- Advanced
       | Subj one |
       | Subj two |
     And "Digital Library Content" nodes:
-      | title         | body      | status | promote | uid | language |
-      | Africa        | Continent | 1      | 0       | 1   | und      |
+      | title  | body      | status | promote | uid | language |
+      | Africa | Continent | 1      | 0       | 1   | und      |
     And I run drush "sapi-i"
     When I visit "search-content"
     Then I should not see the text "Subj one"
@@ -162,9 +162,9 @@ Feature: PRC-106 Search Content- Advanced
       | Subj one |
       | Subj two |
     And "Digital Library Content" nodes:
-      | title         | body      | status | promote | uid | language | field_subject |
-      | Africa        | Continent | 1      | 0       | 1   | und      | Subj one      |
-      | Europe        | Continent | 1      | 0       | 1   | und      | Subj two      |
+      | title  | body      | status | promote | uid | language | field_subject |
+      | Africa | Continent | 1      | 0       | 1   | und      | Subj one      |
+      | Europe | Continent | 1      | 0       | 1   | und      | Subj two      |
     And I run drush "sapi-i"
     When I visit "search-content"
     Then I should see the link "Subj one (1)"
@@ -187,9 +187,9 @@ Feature: PRC-106 Search Content- Advanced
   Scenario: PRC-560 Index field_author_name as string rather than fulltext
     Given I have no "Digital Library Content" nodes
     And "Digital Library Content" nodes:
-      | title         | body      | status | promote | uid | language | field_author_name |
-      | Africa        | Continent | 1      | 0       | 1   | und      | Auth One Alpha    |
-      | Europe        | Continent | 1      | 0       | 1   | und      | Auth Two Beta     |
+      | title  | body      | status | promote | uid | language | field_author_name |
+      | Africa | Continent | 1      | 0       | 1   | und      | Auth One Alpha    |
+      | Europe | Continent | 1      | 0       | 1   | und      | Auth Two Beta     |
     And I run drush "sapi-i"
     When I visit "search-content"
     Then I should see the link "auth one alpha"
@@ -202,7 +202,9 @@ Feature: PRC-106 Search Content- Advanced
   Scenario: PRC-1272 Site search - no results
     Given I have no "Digital Library Content" nodes
     And I have no "PD Course" nodes
-    And I have no "Quiz" nodes
-    And I run drush "sapi-i"
+    And I have no "Assessment" nodes
+    And I run drush "sapi-c"
     When I visit "search-content"
     Then I should see the text "There are no results to display. Please change the search keywords and try again."
+    # PRC-1354 - Heading
+    And I should see the heading "Search Results"

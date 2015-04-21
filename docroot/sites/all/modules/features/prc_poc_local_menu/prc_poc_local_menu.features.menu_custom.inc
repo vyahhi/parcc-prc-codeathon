@@ -70,6 +70,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Invite Users',
     'description' => '',
   );
+  // Exported menu: menu-item-bank-add-questions.
+  $menus['menu-item-bank-add-questions'] = array(
+    'menu_name' => 'menu-item-bank-add-questions',
+    'title' => 'Item Bank Add Questions',
+    'description' => 'Add question types menu for use in the item bank',
+  );
   // Exported menu: menu-professional-development-le.
   $menus['menu-professional-development-le'] = array(
     'menu_name' => 'menu-professional-development-le',
@@ -153,12 +159,14 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Add Course');
   t('Add Quiz');
   t('Add content');
+  t('Add question types menu for use in the item bank');
   t('Assessment Left Nav');
   t('Development');
   t('Development link');
   t('Digital Library Left Nav');
   t('Features');
   t('Invite Users');
+  t('Item Bank Add Questions');
   t('Links to export system and capacity checks for a district, from the district readiness page');
   t('Main menu');
   t('Management');

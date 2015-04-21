@@ -10,7 +10,7 @@ Feature: Anonymous User Home Page (PRC-51)
     And I have no "Digital Library Content" nodes
     And I have no "PD Course" nodes
     And I have no "PD Module" nodes
-    And I have no "Quiz" nodes
+    And I have no "Assessment" nodes
     And I have no "Panel" nodes
     And I have no "Course" nodes
     And "Digital Library Content" nodes:

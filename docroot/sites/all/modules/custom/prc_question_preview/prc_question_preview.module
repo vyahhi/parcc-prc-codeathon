@@ -20,6 +20,15 @@ function prc_question_preview_menu() {
     'page arguments' => array(1, 2),
     'access arguments' => array('access content'),
   );
+  $items['question-preview/%ctools_js/close'] = array(
+    'type' => MENU_CALLBACK,
+    'title' => t('Close Item Preview'),
+    'description' => t('Close Question Item Preview'),
+    'page callback' => 'prc_question_preview_close_menu_item_preview',
+    'file' => 'prc_question_preview.ajax.inc',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+  );
   return $items;
 }
 
@@ -75,6 +84,27 @@ function prc_question_view_question_preview_form($form, $form_state, $nodes, $re
 
   // Kill the buttons!
   unset($form['navigation']);
+
+  // Add a Close link
+  drupal_add_library('system', 'drupal.ajax');
+  $cancel_href = "question-preview/nojs/close";
+    ctools_include('ajax');
+    $markup = ctools_ajax_text_button('Close', $cancel_href, 'Close');
+
+  $form['cancel'] = array(
+    '#markup' => $markup,
+  );
+
+
+  $nid = $form_state['build_info']['args'][0]->nid;
+  $w = entity_metadata_wrapper('node', $form_state['build_info']['args'][0]);
+  $is_parcc_item = $w->field_parcc_item->value();
+  if ($is_parcc_item) {
+    $form['question'][$nid]['header']['field_parcc_item'][0]['#markup'] = 'Yes';
+  } else {
+    $form['question'][$nid]['header']['field_parcc_item']['#access'] = FALSE;
+  }
+
   return $form;
 }
 
@@ -254,10 +284,9 @@ function _prc_question_preview_quiz_add_questions_to_form(&$form, &$questions, &
 
     $form[$fieldset]['titles'][$id] = array('#markup' => $question_titles);
 
-    $question_wrapper = entity_metadata_wrapper('node', $question);
+    $question_wrapper = entity_metadata_wrapper('node', $question_node);
     $item_standard = '';
     if (isset($question->field_standard)) {
-      // && $question_wrapper->field_standard->value() ? $question_wrapper->field_standard->value()->name : '';
       $standards_descriptions = array();
       $standards = $question_wrapper->field_standard->value();
       foreach ($standards as $tid => $term) {
@@ -268,6 +297,9 @@ function _prc_question_preview_quiz_add_questions_to_form(&$form, &$questions, &
     }
     $form[$fieldset]['item_standards'][$id] = array('#markup' => $item_standard);
 
+
+    $is_parcc_item = $question_wrapper->field_parcc_item->value();
+    $form[$fieldset]['parcc_item'][$id] = array('#markup' => $is_parcc_item ? 'Yes' : 'No');
 
     $form[$fieldset]['types'][$id] = array(
       '#markup' => $question_types[$question->type]['name'],
@@ -340,6 +372,7 @@ function _prc_question_preview_quiz_get_question_row($sub_form, $id) {
     $type,
     $action,
     drupal_render($sub_form['item_standards'][$id]),
+    drupal_render($sub_form['parcc_item'][$id]),
     drupal_render($sub_form['stayers'][$id]),
   );
   if (isset($sub_form['compulsories'])) {
@@ -399,7 +432,7 @@ function prc_question_preview_quiz_questions_form_submit($form, &$form_state) {
   $w = entity_metadata_wrapper('node', $quiz);
   $quiz_type = $w->field_quiz_type->value();
 
-  if ($quiz_type->name == 'PRC Released Practice Test') {
+  if ($quiz_type->name == 'PARCC-Released Practice Assessment') {
     global $user;
     _prc_question_preview_clone_prc_quiz($form_state, $quiz, $user);
 
@@ -562,13 +595,16 @@ function _prc_question_preview_user_has_role($roles) {
  * Implements hook_form_FORM_alter().
  */
 function prc_question_preview_form_quiz_node_form_alter(&$form, &$form_state) {
+  $title = drupal_get_title();
+  $title = str_replace('Quiz', 'Assessment', $title);
+  drupal_set_title($title, PASS_THROUGH);
+
   $form['actions']['submit']['#value'] = t('Save Draft');
 
   $form['taking']['allow_resume']['#default_value'] = 0;
 
   global $user;
   if (!array_search('administrator', $user->roles)) {
-    $form['field_quiz_type']['#access'] = FALSE;
     $form['remember_settings']['#access'] = FALSE;
     $form['taking']['#access'] = FALSE;
 
@@ -576,10 +612,16 @@ function prc_question_preview_form_quiz_node_form_alter(&$form, &$form_state) {
     $form['summaryoptions']['#access'] = FALSE;
     $form['resultoptions']['#access'] = FALSE;
   }
+
+  $form['field_quiz_type']['#access'] = user_access('add parcc items');
+
   $form['#validate'][] = 'prc_question_preview_form_quiz_node_form_validate';
   $form['actions']['submit']['#submit'][] = 'prc_question_preview_form_quiz_node_form_submit';
 
   $form['field_subject'][LANGUAGE_NONE]['#required'] = 1;
+  $form['faux_subject'] = array(
+    '#type' => 'hidden',
+  );
 
 }
 
@@ -587,13 +629,10 @@ function prc_question_preview_form_quiz_node_form_alter(&$form, &$form_state) {
  * Quiz node form validate callback.
  */
 function prc_question_preview_form_quiz_node_form_validate($form, &$form_state) {
-
   $tid = $form_state['input']['field_subject']['und'][0]['tid'];
-
-  if (!$tid) {
+  if (!$tid && (!array_key_exists('faux_subject', $form_state['values']) || !$form_state['values']['faux_subject'])) {
     form_set_error('field_subject', t('Subject') . ' ' . t('field is required.'));
   }
-
 }
 
 /**

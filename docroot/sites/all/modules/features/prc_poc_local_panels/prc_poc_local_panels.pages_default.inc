@@ -367,7 +367,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 11,
+              0 => 12,
               1 => 5,
             ),
           ),
@@ -443,7 +443,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 11,
+              0 => 12,
               1 => 5,
             ),
           ),
@@ -588,7 +588,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 9,
+              0 => 10,
             ),
           ),
           'context' => 'logged-in-user',
@@ -626,7 +626,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 9,
+              0 => 10,
             ),
           ),
           'context' => 'logged-in-user',
@@ -737,8 +737,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 11,
-              1 => 9,
+              0 => 12,
+              1 => 10,
             ),
           ),
           'context' => 'logged-in-user',
@@ -774,8 +774,8 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 11,
-              1 => 9,
+              0 => 12,
+              1 => 10,
             ),
           ),
           'context' => 'logged-in-user',
@@ -1202,34 +1202,6 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->uuid = '5191f8c4-630f-4d52-a599-a94e80c3cfa6';
     $display->content['new-5191f8c4-630f-4d52-a599-a94e80c3cfa6'] = $pane;
     $display->panels['middle'][3] = 'new-5191f8c4-630f-4d52-a599-a94e80c3cfa6';
-    $pane = new stdClass();
-    $pane->pid = 'new-9d75fce3-4c32-4075-b0c5-6bb1a621dc5b';
-    $pane->panel = 'middle';
-    $pane->type = 'custom';
-    $pane->subtype = 'custom';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'admin_title' => 'Empty Placeholder for Item Preview',
-      'title' => '',
-      'body' => '&nbsp;',
-      'format' => 'filtered_html',
-      'substitute' => 0,
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array(
-      'css_id' => '',
-      'css_class' => 'item-preview-pane',
-    );
-    $pane->extras = array();
-    $pane->position = 4;
-    $pane->locks = array();
-    $pane->uuid = '9d75fce3-4c32-4075-b0c5-6bb1a621dc5b';
-    $display->content['new-9d75fce3-4c32-4075-b0c5-6bb1a621dc5b'] = $pane;
-    $display->panels['middle'][4] = 'new-9d75fce3-4c32-4075-b0c5-6bb1a621dc5b';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-173ef7c8-627c-4ffb-82c7-517f83c7974d';
   $handler->conf['display'] = $display;
@@ -2457,9 +2429,9 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 8,
+              0 => 12,
               1 => 3,
-              2 => 7,
+              2 => 9,
             ),
           ),
           'context' => 'logged-in-user',
@@ -3249,28 +3221,18 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-68ecd02d-29d3-453d-a2c7-7a5ca17ba4ca';
+    $pane->pid = 'new-2c59f977-874a-4b9e-b5b7-0ea42331ce64';
     $pane->panel = 'middle';
-    $pane->type = 'views';
-    $pane->subtype = 'quiz_question_bank';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_pager_settings' => 0,
-      'use_pager' => 1,
-      'nodes_per_page' => '25',
-      'pager_id' => '0',
-      'offset' => '0',
-      'more_link' => 0,
-      'feed_icons' => 0,
-      'panel_args' => 0,
-      'link_to_view' => 0,
-      'args' => '',
-      'url' => '',
-      'display' => 'default',
-      'override_title' => 0,
-      'override_title_text' => '',
-      'override_title_heading' => 'h2',
+      'admin_title' => 'Overview Copy',
+      'title' => '',
+      'body' => 'Overview / instructional copy goes here. Consider explaining importance of testing prior to assessment to increase chances of successful assessment.',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
     );
     $pane->cache = array();
     $pane->style = array(
@@ -3280,9 +3242,83 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '68ecd02d-29d3-453d-a2c7-7a5ca17ba4ca';
-    $display->content['new-68ecd02d-29d3-453d-a2c7-7a5ca17ba4ca'] = $pane;
-    $display->panels['middle'][0] = 'new-68ecd02d-29d3-453d-a2c7-7a5ca17ba4ca';
+    $pane->uuid = '2c59f977-874a-4b9e-b5b7-0ea42331ce64';
+    $display->content['new-2c59f977-874a-4b9e-b5b7-0ea42331ce64'] = $pane;
+    $display->panels['middle'][0] = 'new-2c59f977-874a-4b9e-b5b7-0ea42331ce64';
+    $pane = new stdClass();
+    $pane->pid = 'new-8df80840-0ee8-4df3-ae9c-9e9435eb33e7';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-item-bank-add-questions';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '8df80840-0ee8-4df3-ae9c-9e9435eb33e7';
+    $display->content['new-8df80840-0ee8-4df3-ae9c-9e9435eb33e7'] = $pane;
+    $display->panels['middle'][1] = 'new-8df80840-0ee8-4df3-ae9c-9e9435eb33e7';
+    $pane = new stdClass();
+    $pane->pid = 'new-10ba3e0e-837d-47e4-b5e3-11ae87f6c0af';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'prc_item_bank-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = '10ba3e0e-837d-47e4-b5e3-11ae87f6c0af';
+    $display->content['new-10ba3e0e-837d-47e4-b5e3-11ae87f6c0af'] = $pane;
+    $display->panels['middle'][2] = 'new-10ba3e0e-837d-47e4-b5e3-11ae87f6c0af';
+    $pane = new stdClass();
+    $pane->pid = 'new-9d8a425c-633c-4671-9823-10707f9e9041';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Empty Placeholder for Item Preview',
+      'title' => '',
+      'body' => '&nbsp;',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'item-preview-pane',
+    );
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = '9d8a425c-633c-4671-9823-10707f9e9041';
+    $display->content['new-9d8a425c-633c-4671-9823-10707f9e9041'] = $pane;
+    $display->panels['middle'][3] = 'new-9d8a425c-633c-4671-9823-10707f9e9041';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -3303,8 +3339,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
         'name' => 'role',
         'settings' => array(
           'rids' => array(
-            0 => 11,
-            1 => 8,
+            0 => 12,
+            1 => 9,
           ),
         ),
         'context' => 'logged-in-user',
@@ -3337,6 +3373,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
     'css' => '',
     'contexts' => array(),
     'relationships' => array(),
+    'access' => array(
+      'plugins' => array(),
+      'logic' => 'and',
+    ),
   );
   $display = new panels_display();
   $display->layout = 'flexible';
@@ -3402,6 +3442,125 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['parcc_readiness'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
+  $page->name = 'prc_quiz_question_bank';
+  $page->task = 'page';
+  $page->admin_title = 'PRC Quiz Question Bank';
+  $page->admin_description = 'Question bank for adding items to an assessment';
+  $page->path = 'node/%nid/itembank';
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 1,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => TRUE,
+      ),
+    ),
+    'logic' => 'and',
+  );
+  $page->menu = array();
+  $page->arguments = array(
+    'nid' => array(
+      'id' => 1,
+      'identifier' => 'Node: ID',
+      'name' => 'entity_id:node',
+      'settings' => array(),
+    ),
+  );
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_prc_quiz_question_bank__panel_context_c5fc1c39-fe86-4415-a5e5-ca02a7274a7f';
+  $handler->task = 'page';
+  $handler->subtask = 'prc_quiz_question_bank';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Quiz Question Bank',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = '468160cd-8f37-4684-98d0-da042b753a29';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-ccdb8571-2e32-4deb-904d-fdce1948e7f8';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'prc_quiz_question_bank-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'ccdb8571-2e32-4deb-904d-fdce1948e7f8';
+    $display->content['new-ccdb8571-2e32-4deb-904d-fdce1948e7f8'] = $pane;
+    $display->panels['middle'][0] = 'new-ccdb8571-2e32-4deb-904d-fdce1948e7f8';
+    $pane = new stdClass();
+    $pane->pid = 'new-840078fc-f8a4-4e8e-9de5-5098f0ec652f';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Cancel link',
+      'title' => '',
+      'body' => '<a href="%nid:url">Back to Assessment</a>',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '840078fc-f8a4-4e8e-9de5-5098f0ec652f';
+    $display->content['new-840078fc-f8a4-4e8e-9de5-5098f0ec652f'] = $pane;
+    $display->panels['middle'][1] = 'new-840078fc-f8a4-4e8e-9de5-5098f0ec652f';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-ccdb8571-2e32-4deb-904d-fdce1948e7f8';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['prc_quiz_question_bank'] = $page;
 
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
@@ -3800,8 +3959,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 11,
-              1 => 8,
+              0 => 12,
+              1 => 9,
             ),
           ),
           'context' => 'context_user_1',
@@ -4033,7 +4192,21 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->type = 'views_panes';
     $pane->subtype = 'trt_states-panel_pane_1';
     $pane->shown = TRUE;
-    $pane->access = array();
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 12,
+              1 => 11,
+            ),
+          ),
+          'context' => 'context_user_1',
+          'not' => FALSE,
+        ),
+      ),
+    );
     $pane->configuration = array(
       'arguments' => array(
         'field_contact_email_value' => '%user:mail',
@@ -4101,7 +4274,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = '';
+  $display->title = 'Search Results';
   $display->uuid = 'cbe3f39c-e3ca-43c5-8a0b-8ab1dbfc54e1';
   $display->content = array();
   $display->panels = array();

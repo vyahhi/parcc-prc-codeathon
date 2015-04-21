@@ -29,9 +29,9 @@ Feature: PRC-527 Preview an item in Assessment Details page
     And "Grade Level" terms:
       | name      |
       | Grade 527 |
-    And "Quiz" nodes:
-      | title        | field_subject | field_grade_level | field_quiz_type            | uid         |
-      | PRC-527 View | subj1, subj2  | Grade 527         | PRC Released Practice Test | @currentuid |
+    And "Assessment" nodes:
+      | title        | field_subject | field_grade_level | field_quiz_type                    | uid         |
+      | PRC-527 View | subj1, subj2  | Grade 527         | PARCC-Released Practice Assessment | @currentuid |
   # That standard already exists, and I hate it, but I am getting an error
   # creating a Standard term is giving me an error.
   # We're cheating and using one that exists already.
@@ -39,7 +39,7 @@ Feature: PRC-527 Preview an item in Assessment Details page
     And I click "Quiz"
     Then I click "Manage questions"
     Then I click "Create new question"
-    Then I click "Quiz directions"
+    Then I click "Assessment directions"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-527 Directions 1"
     And I press "Save"

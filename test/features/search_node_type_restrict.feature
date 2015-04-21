@@ -29,10 +29,10 @@ Feature: Search Content - Quick Search (PRC-31)
       | title         | body      | status | promote | uid         | language | tags         | field_author_name |
       | Africa FL     | Continent | 1      | 0       | @currentuid | und      | North        | Ted               |
       | Europe FL     | Continent | 1      | 0       | @currentuid | und      | South        | Fred              |
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title       | field_subject | field_grade_level | field_quiz_type            | uid |
-      | Africa Quiz | subj1, subj2  | Grade 490         | PRC Released Practice Test | 1   |
-      | Europe Quiz | subj1, subj2  | Grade 490         | PRC Released Practice Test | 1   |
+      | Africa Quiz | subj1, subj2  | Grade 490         | PARCC-Released Practice Assessment | 1   |
+      | Europe Quiz | subj1, subj2  | Grade 490         | PARCC-Released Practice Assessment | 1   |
     And I run drush "sapi-i"
     # Cron redirects us. Navigate back. Also cron will pop errors into the log but it still runs and indexes.
     And I am on "search-content"

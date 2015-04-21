@@ -7,18 +7,18 @@ Feature: PRC-552 Use created test for course exam
 
   Scenario: PD Exam quizzes appear in list
     Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And "Quiz" nodes:
+    And "Assessment" nodes:
       | title       | uid         |
       | Ny Untagged | @currentuid |
       | U1 Untagged | 1           |
-    And "Quiz" nodes:
-      | title       | uid         | field_quiz_type            |
-      | My Custom   | @currentuid | Custom Assessment          |
-      | My PD Exam  | @currentuid | PD Exam                    |
-      | My PRC Q    | @currentuid | PRC Released Practice Test |
-      | U1 Custom   | 1           | Custom Assessment          |
-      | U1 PD Exam  | 1           | PD Exam                    |
-      | U1 PRC Q    | 1           | PRC Released Practice Test |
+    And "Assessment" nodes:
+      | title      | uid         | field_quiz_type                    |
+      | My Custom  | @currentuid | Custom Assessment                  |
+      | My PD Exam | @currentuid | PD Exam                            |
+      | My PRC Q   | @currentuid | PARCC-Released Practice Assessment |
+      | U1 Custom  | 1           | Custom Assessment                  |
+      | U1 PD Exam | 1           | PD Exam                            |
+      | U1 PRC Q   | 1           | PARCC-Released Practice Assessment |
 
     And I am viewing my "PD Course" node with the title "PRC-350 AC4"
     And I follow "Course outline"

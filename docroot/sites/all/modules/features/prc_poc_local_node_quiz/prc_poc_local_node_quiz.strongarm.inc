@@ -91,7 +91,7 @@ function prc_poc_local_node_quiz_strongarm() {
             'visible' => FALSE,
           ),
           'teaser' => array(
-            'weight' => '15',
+            'weight' => '16',
             'visible' => FALSE,
           ),
           'full' => array(
@@ -109,7 +109,7 @@ function prc_poc_local_node_quiz_strongarm() {
             'visible' => FALSE,
           ),
           'teaser' => array(
-            'weight' => '14',
+            'weight' => '15',
             'visible' => FALSE,
           ),
           'full' => array(
@@ -127,7 +127,7 @@ function prc_poc_local_node_quiz_strongarm() {
             'visible' => TRUE,
           ),
           'teaser' => array(
-            'weight' => '6',
+            'weight' => '7',
             'visible' => TRUE,
           ),
           'full' => array(

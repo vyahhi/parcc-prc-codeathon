@@ -35,3 +35,18 @@ You'll need:
     Turn off automatic updates, otherwise FF will upgrade itself when you start it back up.
 - PHP 5.5
 - drush
+
+When Terms Change
+=================
+
+When taxnomy terms change, check the following:
+
+  - Content type: Assessment
+    Field: Assessment Type
+    Default Value: Custom Assessment
+
+  - Assessments view
+    Terms allowed:
+      Custom Assessment
+      PARCC-Released Practice Assessment
+
