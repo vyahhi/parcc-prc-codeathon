@@ -37,3 +37,9 @@ Feature: PRC-1208 PARCC Readiness
     And I should not see the text "No states have been created"
     But I should see the link "New Hampshire"
     And I should see the link "Illinois - PARCC Member"
+
+  Scenario: PRC-1382 PRC Admin should not display "No states have been created"
+    Given I am logged in as a user with the "PRC Admin" role
+    And I have no "State" nodes
+    And I am on "technology-readiness"
+    Then I should not see the text "No states have been created"
