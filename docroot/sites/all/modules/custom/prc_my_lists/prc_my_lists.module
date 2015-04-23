@@ -100,7 +100,7 @@ function _prc_my_lists_add_to_lists_link($node, $link_title, $link_id) {
   $nid = $node->nid;
 
   $links[$link_id] = array(
-    'title' => t($link_title),
+    'title' => t(''),
     'href' => "favorites-list/$nid/nojs/add-to-list",
     'attributes' => array(
       'title' => t($link_title),
