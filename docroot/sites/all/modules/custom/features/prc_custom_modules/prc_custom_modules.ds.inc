@@ -60,7 +60,7 @@ function prc_custom_modules_ds_field_settings_info() {
     'post_date' => array(
       'weight' => '2',
       'label' => 'hidden',
-      'format' => 'ds_post_date_gallery_view_date',
+      'format' => 'ds_post_date_prc_custom_modules_date_only',
     ),
   );
   $export['node|digital_library_content|gallery_view'] = $ds_fieldsetting;
