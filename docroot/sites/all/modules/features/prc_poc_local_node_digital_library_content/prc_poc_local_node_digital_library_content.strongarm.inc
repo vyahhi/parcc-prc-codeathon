@@ -85,7 +85,7 @@ function prc_poc_local_node_digital_library_content_strongarm() {
           ),
           'gallery_view' => array(
             'weight' => '6',
-            'visible' => TRUE,
+            'visible' => FALSE,
           ),
         ),
         'field_author_name' => array(

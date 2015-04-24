@@ -12,6 +12,7 @@ dependencies[] = list
 dependencies[] = options
 dependencies[] = prc_poc_local_fields
 dependencies[] = shs
+dependencies[] = smart_trim
 dependencies[] = strongarm
 dependencies[] = taxonomy
 features[field_group][] = group_add_a_thumbnail|node|digital_library_content|form
