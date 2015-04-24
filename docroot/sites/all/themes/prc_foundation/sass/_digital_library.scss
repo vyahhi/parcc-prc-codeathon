@@ -1,0 +1,176 @@
+@media #{$screen} {
+  .view-digital-library-gallery {
+    padding-bottom: 0;
+    background-color: $background-gray;
+    font-size: em-calc(16);
+    form {
+      margin-top: 1em;
+    }
+    form,
+    .form-item,
+    .views-exposed-widgets {
+      margin-bottom: 0;
+    }
+    .views-exposed-widget .form-submit {
+      margin-top: 1em;
+    }
+  }
+  .gallery-main {
+    // Add #main-wrapper for grid alignment debugging
+    background-color: $background-gray;
+    border-top: 1px solid #DBDBDB;
+    .view-content .gallery-tiles .columns {
+      border-top: 10px solid $background-gray;
+      border-bottom: 10px solid $background-gray;
+    }
+    .view-content .columns {
+      padding-bottom: 1em;
+      border-top: 10px solid $background-gray;
+      border-bottom: 10px solid $background-gray;
+      background-color: white;
+      font-size: em-calc(13);
+      .field-name-field-thumbnail {
+        margin-left: -0.9375em;
+        margin-right: -0.9375em;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+      .field-name-title {
+        margin-left: -0.9375em;
+        margin-right: -0.9375em;
+        padding-left: 0.9375em;
+        padding-right: 4.25em;
+        padding-top: 8px;
+        padding-bottom: 1px;
+        background: url('../images/text-icon.png') no-repeat 97% center $parcc-purple;
+        h3 {
+          margin-top: 0;
+          padding-top: 0.5em;
+          padding-bottom: 0.5em;
+          a {
+            color: white;
+          }
+        }
+      }
+      .media-type-text .field-name-title,
+      .media-type-image .field-name-title {
+        background: url('../images/attachment-icon.png') no-repeat 97% center $icon-gray;
+      }
+      .media-type-audio .field-name-title,
+      .media-type-video .field-name-title {
+        background: url('../images/video-icon.png') no-repeat 97% center $parcc-blue;
+      }
+      .flagged .field-name-title {
+        background-color: $parcc-orange;
+      }
+      .field-name-post-date {
+        margin: em-calc(20) 0;
+        color: $icon-gray;
+      }
+      .field-name-body {
+        margin-bottom: 1.5em;
+        border-bottom: 1px solid $icon-gray;
+        .field-items {
+          margin-bottom: 1.75em;
+        }
+      }
+      ul.links {
+        float: left;
+        margin-bottom: 1em;
+        min-width: 35px;
+        li {
+          padding-left: 0;
+        }
+        .prc_digital_library_add_to_favorites a {
+          padding: 0 10px;
+          background: url('../images/like-icon.png') no-repeat;
+        }
+        .prc_digital_library_add_to_favorites a:hover {
+          background: url('../images/like-icon-hover.png') no-repeat;
+        }
+        .flag-like_content a {
+          margin-right: 5px;
+          padding: 0 0 0 20px;
+          background: url('../images/favorite-icon.png') no-repeat;
+        }
+        .flag-like_content a.unflag-action,
+        .flag-like_content a:hover {
+          background: url('../images/favorite-icon-selected.png') no-repeat;
+        }
+        .flag-like_content .flag-message {
+          line-height: 0;
+          font-size: 0;
+          color: transparent;
+        }
+      }
+      ul.links .prc_digital_library_comment_email,
+      ul.links .pinit {
+        display: none;
+      }
+      .field-name-field-tags {
+        float: left;
+        color: $icon-gray;
+        .field-label {
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+}
+
+@media #{$small} {
+  .gallery-main {
+    .medium-6 {
+      width: 47%;
+      margin: 1.5%;
+    }
+    .view-content .gallery-tiles .columns {
+      border-top: none;
+      border-bottom: none;
+      .field-name-title {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .flagged .field-name-title {
+        background-color: $parcc-orange;
+      }
+    }
+  }
+}
+
+@media #{$medium} {
+  .gallery-main {
+    .view-content .large-4 {
+      width: 30.33333%;
+      margin: 1.5%;
+      .field-name-field-thumbnail {
+        margin-left: -1.875em;
+        margin-right: -1.875em;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+      .field-name-title {
+        margin-left: -1.875em;
+        margin-right: -1.875em;
+        padding-left: 1.875em;
+        padding-right: 4.25em;
+        background: url('../images/text-icon.png') no-repeat 95% center $parcc-purple;
+      }
+      .media-type-text .field-name-title,
+      .media-type-image .field-name-title {
+        background: url('../images/attachment-icon.png') no-repeat 95% center $icon-gray;
+      }
+      .media-type-audio .field-name-title,
+      .media-type-video .field-name-title {
+        background: url('../images/video-icon.png') no-repeat 95% center $parcc-blue;
+      }
+      .flagged .field-name-title {
+        background-color: $parcc-orange;
+      }
+    }
+  }
+}
