@@ -4105,22 +4105,22 @@ table tfoot tr td {
   /* line 86, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links .prc_digital_library_add_to_favorites a {
     padding: 0 10px;
-    background: url("../images/like-icon.png") no-repeat;
+    background: url("../images/favorite-icon.png") no-repeat;
   }
   /* line 90, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links .prc_digital_library_add_to_favorites a:hover {
-    background: url("../images/like-icon-hover.png") no-repeat;
+    background: url("../images/favorite-icon-selected.png") no-repeat;
   }
   /* line 93, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links .flag-like_content a {
     margin-right: 5px;
     padding: 0 0 0 20px;
-    background: url("../images/favorite-icon.png") no-repeat;
+    background: url("../images/like-icon.png") no-repeat;
   }
   /* line 98, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links .flag-like_content a.unflag-action,
   .gallery-main .view-content .columns ul.links .flag-like_content a:hover {
-    background: url("../images/favorite-icon-selected.png") no-repeat;
+    background: url("../images/like-icon-hover.png") no-repeat;
   }
   /* line 102, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links .flag-like_content .flag-message {

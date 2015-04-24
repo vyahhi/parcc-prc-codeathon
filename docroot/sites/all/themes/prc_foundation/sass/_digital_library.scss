@@ -85,19 +85,19 @@
         }
         .prc_digital_library_add_to_favorites a {
           padding: 0 10px;
-          background: url('../images/like-icon.png') no-repeat;
+          background: url('../images/favorite-icon.png') no-repeat;
         }
         .prc_digital_library_add_to_favorites a:hover {
-          background: url('../images/like-icon-hover.png') no-repeat;
+          background: url('../images/favorite-icon-selected.png') no-repeat;
         }
         .flag-like_content a {
           margin-right: 5px;
           padding: 0 0 0 20px;
-          background: url('../images/favorite-icon.png') no-repeat;
+          background: url('../images/like-icon.png') no-repeat;
         }
         .flag-like_content a.unflag-action,
         .flag-like_content a:hover {
-          background: url('../images/favorite-icon-selected.png') no-repeat;
+          background: url('../images/like-icon-hover.png') no-repeat;
         }
         .flag-like_content .flag-message {
           line-height: 0;
