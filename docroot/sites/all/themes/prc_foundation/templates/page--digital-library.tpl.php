@@ -77,46 +77,77 @@
 
   <?php include path_to_theme() . '/templates/includes/header.inc'; ?>
 
-<div id="main-wrapper">
-  <main role="main" class="row">
-      <div class="large-12 main columns">
-
-          <div id="content"><div class="section">
-            <section id="sub-header" class="row">
-              <div class="large-12 columns">
-                <?php if ($breadcrumb): ?>
-                  <div id="breadcrumb"><?php print $breadcrumb; ?></div>
-                <?php endif; ?>
-                <?php print render($title_prefix); ?>
-                <?php if ($title): ?><h1 class="title" id="page-title"><?php print $title; ?></h1><?php endif; ?>
-                <?php print render($title_suffix); ?>
-              </div>
-            </section>
-            <?php print $messages; ?>
-            <?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
-            <a id="main-content"></a>
-            <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
-            <?php print render($page['help']); ?>
-            <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
-            <?php print render($page['content']); ?>
-            <?php print $feed_icons; ?>
-          </div></div> <!-- /.section, /#content -->
-
-          <?php if ($page['sidebar_first']): ?>
-            <div id="sidebar-first" class="column sidebar"><div class="section">
-              <?php print render($page['sidebar_first']); ?>
-            </div></div> <!-- /.section, /#sidebar-first -->
-          <?php endif; ?>
-
-          <?php if ($page['sidebar_second']): ?>
-            <div id="sidebar-second" class="column sidebar"><div class="section">
-              <?php print render($page['sidebar_second']); ?>
-            </div></div> <!-- /.section, /#sidebar-second -->
-          <?php endif; ?>
-
+  <?php if ($messages): ?>
+     <section class="messages row">
+      <div class="large-12 columns">
+        <?php if ($messages): print $messages; endif; ?>
       </div>
-    </main>
-  </div> <!-- /#main-wrapper -->
+    </section>
+   <?php endif; ?>
+
+  <?php if (!empty($page['help'])): ?>
+    <section class="help row">
+      <div class="large-12 columns">
+        <?php print render($page['help']); ?>
+      </div>
+    </section>
+  <?php endif; ?>
+
+  <section id="sub-header" class="row">
+    <div class="large-12 columns">
+      <?php if (!empty($page['highlighted'])): ?>
+        <div class="highlight panel callout">
+          <?php print render($page['highlighted']); ?>
+        </div>
+      <?php endif; ?>
+
+      <a id="main-content"></a>
+
+      <?php if ($breadcrumb): print $breadcrumb; endif; ?>
+
+      <?php if ($title && !$is_front): ?>
+        <?php print render($title_prefix); ?>
+        <h1 id="page-title" class="title center"><?php print $title; ?></h1>
+        <?php print render($title_suffix); ?>
+      <?php endif; ?>
+
+      <?php if (!empty($tabs)): ?>
+        <?php print render($tabs); ?>
+        <?php if (!empty($tabs2)): print render($tabs2); endif; ?>
+      <?php endif; ?>
+
+      <?php if ($action_links): ?>
+        <ul class="action-links">
+          <?php print render($action_links); ?>
+        </ul>
+      <?php endif; ?>
+
+      <p class="center"><a href="#" class="filter-panel-toggle-link">Show/Hide Filter Panel (Temporary Control)</a></p>
+
+    </div>
+  </section>
+
+  <div id="main-wrapper" class="gallery-main"> <!-- This probably needs to move up to contain the subheader -->
+    <main role="main" class="row">
+        <div class="large-12 main columns">
+          <?php print render($page['content']); ?>
+          <?php print $feed_icons; ?>
+        </div>
+
+        <?php if (!empty($page['sidebar_first'])): ?>
+          <aside role="complementary" class="columns sidebar">
+            <?php print render($page['sidebar_first']); ?>
+          </aside>
+        <?php endif; ?>
+
+        <?php if (!empty($page['sidebar_second'])): ?>
+          <aside role="complementary" class="columns sidebar">
+            <?php print render($page['sidebar_second']); ?>
+          </aside>
+        <?php endif; ?>
+
+      </main>
+    </div> <!-- /#main-wrapper -->
 
   <?php include path_to_theme() . '/templates/includes/footer.inc'; ?>
 

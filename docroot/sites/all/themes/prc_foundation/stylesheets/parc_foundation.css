@@ -1779,13 +1779,13 @@ td {
 /* Default Link Styles */
 /* line 152, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
 a {
-  color: #2ba6cb;
+  color: #70547D;
   text-decoration: none;
   line-height: inherit;
 }
 /* line 157, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
 a:hover, a:focus {
-  color: #2795b6;
+  color: #624a6e;
 }
 /* line 160, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_type.scss */
 a img {
@@ -2192,13 +2192,13 @@ button, .button {
   padding-bottom: 0.8125em;
   padding-left: 1.5em;
   font-size: 1em;
-  background-color: #2ba6cb;
-  border-color: #2284a1;
+  background-color: #70547D;
+  border-color: #55405e;
   color: #fff;
 }
 /* line 121, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
 button:hover, button:focus, .button:hover, .button:focus {
-  background-color: #2284a1;
+  background-color: #55405e;
 }
 /* line 132, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
 button:hover, button:focus, .button:hover, .button:focus {
@@ -2288,8 +2288,8 @@ button.right-align, .button.right-align {
 }
 /* line 188, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
 button.disabled, button[disabled], .button.disabled, .button[disabled] {
-  background-color: #2ba6cb;
-  border-color: #2284a1;
+  background-color: #70547D;
+  border-color: #55405e;
   color: #fff;
   cursor: default;
   opacity: 0.6;
@@ -2298,7 +2298,7 @@ button.disabled, button[disabled], .button.disabled, .button[disabled] {
 }
 /* line 121, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
 button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
-  background-color: #2284a1;
+  background-color: #55405e;
 }
 /* line 132, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
 button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
@@ -2306,7 +2306,7 @@ button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[dis
 }
 /* line 145, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
 button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
-  background-color: #2ba6cb;
+  background-color: #70547D;
 }
 /* line 189, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
 button.disabled.secondary, button[disabled].secondary, .button.disabled.secondary, .button[disabled].secondary {
@@ -3158,14 +3158,14 @@ label.error {
 }
 /* line 269, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
 .top-bar-section ul li > a.button {
-  background: #2ba6cb;
+  background: #70547D;
   font-size: 0.8125em;
   padding-right: 28.33333px;
   padding-left: 28.33333px;
 }
 /* line 274, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
 .top-bar-section ul li > a.button:hover {
-  background: #2284a1;
+  background: #55405e;
 }
 /* line 278, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_top-bar.scss */
 .top-bar-section ul li > a.button.secondary {
@@ -3473,6 +3473,68 @@ label.error {
     display: block;
   }
 }
+/* Default Pagination */
+/* line 128, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_pagination.scss */
+ul.pagination {
+  display: block;
+  height: 1.5em;
+  margin-left: -0.3125em;
+}
+/* line 87, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_pagination.scss */
+ul.pagination li {
+  height: 1.5em;
+  color: #222;
+  font-size: 0.875em;
+  margin-left: 0.3125em;
+}
+/* line 93, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_pagination.scss */
+ul.pagination li a {
+  display: block;
+  padding: 0.0625em 0.4375em 0.0625em;
+  color: #70547D;
+}
+/* line 99, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_pagination.scss */
+ul.pagination li:hover a,
+ul.pagination li a:focus {
+  background: #e6e6e6;
+}
+/* line 45, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_pagination.scss */
+ul.pagination li.unavailable a {
+  cursor: default;
+  color: #999;
+}
+/* line 49, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_pagination.scss */
+ul.pagination li.unavailable:hover a, ul.pagination li.unavailable a:focus {
+  background: transparent;
+}
+/* line 57, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_pagination.scss */
+ul.pagination li.current a {
+  background: #70547D;
+  color: #fff;
+  font-weight: bold;
+  cursor: default;
+}
+/* line 63, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_pagination.scss */
+ul.pagination li.current a:hover, ul.pagination li.current a:focus {
+  background: #70547D;
+}
+/* line 110, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_pagination.scss */
+ul.pagination li {
+  float: left;
+  display: block;
+}
+
+/* Pagination centred wrapper */
+/* line 133, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_pagination.scss */
+.pagination-centered {
+  text-align: center;
+}
+/* line 110, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_pagination.scss */
+.pagination-centered ul.pagination li {
+  float: none;
+  display: inline-block;
+}
+
 /* Tables */
 /* line 80, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_tables.scss */
 table {
@@ -3657,78 +3719,124 @@ table tfoot tr td {
   }
 
   /* line 67, ../sass/parc_foundation.scss */
+  a:hover,
+  a:active {
+    text-decoration: underline;
+  }
+
+  /* line 71, ../sass/parc_foundation.scss */
   .uppercase {
     text-transform: uppercase;
   }
 
-  /* line 71, ../sass/parc_foundation.scss */
+  /* line 74, ../sass/parc_foundation.scss */
+  .center {
+    text-align: center;
+  }
+
+  /* line 77, ../sass/parc_foundation.scss */
+  .breadcrumb {
+    padding-top: 0.625em;
+    font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    line-height: 1.5em;
+  }
+
+  /* line 84, ../sass/parc_foundation.scss */
+  nav a:hover,
+  nav a:active {
+    text-decoration: none;
+  }
+  /* line 88, ../sass/parc_foundation.scss */
   nav a#logo {
     display: inline-block;
     margin: 1.5625em 0.9375em;
   }
-  /* line 75, ../sass/parc_foundation.scss */
+  /* line 92, ../sass/parc_foundation.scss */
   nav li.toggle-topbar.menu-icon {
     right: 5px !important;
     margin-right: 0.9375em;
   }
-  /* line 79, ../sass/parc_foundation.scss */
+  /* line 96, ../sass/parc_foundation.scss */
   nav #block-search-form {
     float: left;
     width: 100%;
     padding: 20px 0.9375em 10px;
     background-color: #333333;
   }
-  /* line 84, ../sass/parc_foundation.scss */
+  /* line 101, ../sass/parc_foundation.scss */
   nav #block-search-form h2 {
     font-size: 0;
   }
-  /* line 87, ../sass/parc_foundation.scss */
+  /* line 104, ../sass/parc_foundation.scss */
   nav #block-search-form input {
     float: left;
     font-size: 0.8125em;
   }
-  /* line 91, ../sass/parc_foundation.scss */
+  /* line 108, ../sass/parc_foundation.scss */
   nav #block-search-form input#edit-search-block-form--2 {
     width: 175px;
   }
-  /* line 94, ../sass/parc_foundation.scss */
+  /* line 111, ../sass/parc_foundation.scss */
   nav #block-search-form input#edit-submit,
   nav #block-search-form input#edit-submit--2 {
     height: 32px;
   }
-  /* line 99, ../sass/parc_foundation.scss */
+  /* line 116, ../sass/parc_foundation.scss */
   nav .top-bar-section ul li > a {
     padding: 12px 0px 12px 16px;
   }
 
-  /* line 104, ../sass/parc_foundation.scss */
+  /* line 121, ../sass/parc_foundation.scss */
   #sub-header .breadcrumb {
-    padding-top: .5em;
-  }
-  /* line 106, ../sass/parc_foundation.scss */
-  #sub-header .breadcrumb a {
-    font-weight: bold;
-    color: #464646;
-  }
-  /* line 111, ../sass/parc_foundation.scss */
-  #sub-header h1 {
-    margin: 0 0 .75em;
-    text-align: center;
-    text-transform: uppercase;
+    padding-bottom: 0;
   }
 
-  /* line 121, ../sass/parc_foundation.scss */
+  /* line 125, ../sass/parc_foundation.scss */
+  .pagination-centered {
+    padding-top: 1em;
+    padding-bottom: 2em;
+    overflow: auto;
+  }
+
+  /* line 130, ../sass/parc_foundation.scss */
+  ul.pagination li {
+    margin: 0 -2px;
+    padding: 10px 20px 30px 20px;
+    background-color: white;
+  }
+
+  /* line 135, ../sass/parc_foundation.scss */
+  ul.pagination li.first {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+  }
+
+  /* line 139, ../sass/parc_foundation.scss */
+  ul.pagination li.pager-current {
+    background: #70547D;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  /* line 144, ../sass/parc_foundation.scss */
+  ul.pagination li.last {
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+  }
+
+  /* line 148, ../sass/parc_foundation.scss */
   footer {
     background: url("../images/footer-image.jpg") no-repeat center center;
     background-size: cover;
     color: white;
     padding: 50px 0 30px;
   }
-  /* line 126, ../sass/parc_foundation.scss */
+  /* line 153, ../sass/parc_foundation.scss */
   footer p {
     font-size: 0.8125em;
   }
-  /* line 129, ../sass/parc_foundation.scss */
+  /* line 156, ../sass/parc_foundation.scss */
   footer a,
   footer a:visited,
   footer a:hover,
@@ -3736,153 +3844,362 @@ table tfoot tr td {
     color: white;
     text-decoration: underline;
   }
-  /* line 136, ../sass/parc_foundation.scss */
+  /* line 163, ../sass/parc_foundation.scss */
   footer #footer-copyright,
   footer #footer-contact {
     text-align: center;
   }
 }
 @media only screen and (min-width: 640px) {
-  /* line 145, ../sass/parc_foundation.scss */
+  /* line 172, ../sass/parc_foundation.scss */
   footer #footer-copyright {
     text-align: left;
   }
-  /* line 148, ../sass/parc_foundation.scss */
+  /* line 175, ../sass/parc_foundation.scss */
   footer #footer-contact {
     text-align: right;
   }
 }
 @media only screen and (min-width: 1025px) {
-  /* line 155, ../sass/parc_foundation.scss */
+  /* line 182, ../sass/parc_foundation.scss */
   .columns {
     padding-left: 1.875em;
     padding-right: 1.875em;
   }
 
-  /* line 159, ../sass/parc_foundation.scss */
+  /* line 186, ../sass/parc_foundation.scss */
   nav.top-bar {
     text-align: center;
   }
 
-  /* line 163, ../sass/parc_foundation.scss */
+  /* line 190, ../sass/parc_foundation.scss */
   nav a#logo {
     display: inline-block;
     margin: 1.5625em 0 1.5625em 1.875em;
   }
-  /* line 167, ../sass/parc_foundation.scss */
+  /* line 194, ../sass/parc_foundation.scss */
   nav #main-menu-section,
   nav #secondary-menu-section {
     display: inline-block;
   }
-  /* line 172, ../sass/parc_foundation.scss */
+  /* line 199, ../sass/parc_foundation.scss */
   nav .top-bar-section ul {
     background-color: #344758;
   }
-  /* line 175, ../sass/parc_foundation.scss */
+  /* line 202, ../sass/parc_foundation.scss */
   nav .top-bar-section li a:not(.button) {
     padding: 0 15px;
   }
-  /* line 178, ../sass/parc_foundation.scss */
+  /* line 205, ../sass/parc_foundation.scss */
   nav .top-bar-section li a:not(.button):hover,
   nav .top-bar-section ul li.active > a {
     background: none repeat scroll 0% 0% #2e3f4e;
   }
-  /* line 183, ../sass/parc_foundation.scss */
+  /* line 210, ../sass/parc_foundation.scss */
   nav #header-icons {
     float: right;
     margin: 1.0625em 1.875em 0 0;
     height: 65px;
   }
-  /* line 187, ../sass/parc_foundation.scss */
+  /* line 214, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon,
   nav #header-icons #profile-icon {
     height: 35px;
   }
-  /* line 191, ../sass/parc_foundation.scss */
+  /* line 218, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon {
     width: 42px;
     margin-right: 5px;
     background: url("../images/search-icon.png") no-repeat 10px;
   }
-  /* line 196, ../sass/parc_foundation.scss */
+  /* line 223, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon:before,
   nav #header-icons #profile-icon:before {
     display: none;
   }
-  /* line 200, ../sass/parc_foundation.scss */
+  /* line 227, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon:hover,
   nav #header-icons #search-icon:focus {
     background: url("../images/search-icon-active.png") no-repeat 10px;
   }
-  /* line 204, ../sass/parc_foundation.scss */
+  /* line 231, ../sass/parc_foundation.scss */
   nav #header-icons #profile-icon {
     width: 71px;
     margin-left: 5px;
     background: url("../images/profile-icon.png") no-repeat 15px 7px, url("../images/down-arrow.png") no-repeat 40px 12px;
   }
-  /* line 211, ../sass/parc_foundation.scss */
+  /* line 238, ../sass/parc_foundation.scss */
   nav #header-icons #profile-icon:hover,
   nav #header-icons #profile-icon:focus {
     background: url("../images/profile-icon-active.png") no-repeat 15px 7px, url("../images/down-arrow-active.png") no-repeat 40px 12px;
   }
-  /* line 217, ../sass/parc_foundation.scss */
+  /* line 244, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon.button,
   nav #header-icons #profile-icon.button {
     background-color: #44596F;
     border-width: 0;
     box-shadow: none;
   }
-  /* line 223, ../sass/parc_foundation.scss */
+  /* line 250, ../sass/parc_foundation.scss */
   nav #header-icons .button:hover,
   nav #header-icons .button:focus {
     background-color: #2e3f4e !important;
   }
-  /* line 227, ../sass/parc_foundation.scss */
+  /* line 254, ../sass/parc_foundation.scss */
   nav #header-icons #search-dropdown,
   nav #header-icons #profile-dropdown {
     position: absolute;
     left: -99999px;
   }
-  /* line 232, ../sass/parc_foundation.scss */
+  /* line 259, ../sass/parc_foundation.scss */
   nav #header-icons #block-search-form {
     padding: 0.3125em 0.9375em 1.25em;
     background-color: white;
     cursor: auto;
   }
-  /* line 236, ../sass/parc_foundation.scss */
+  /* line 263, ../sass/parc_foundation.scss */
   nav #header-icons #block-search-form input {
     margin: -1px 0px 2px -1px;
   }
-  /* line 239, ../sass/parc_foundation.scss */
+  /* line 266, ../sass/parc_foundation.scss */
   nav #header-icons #block-search-form input.form-submit {
     display: none;
   }
-  /* line 244, ../sass/parc_foundation.scss */
+  /* line 271, ../sass/parc_foundation.scss */
   nav .f-dropdown li a {
     font-size: 12px;
   }
 
-  /* line 249, ../sass/parc_foundation.scss */
+  /* line 276, ../sass/parc_foundation.scss */
   footer #footer-contact {
     text-align: center;
   }
-  /* line 252, ../sass/parc_foundation.scss */
+  /* line 279, ../sass/parc_foundation.scss */
   footer #footer-social {
     text-align: right;
   }
 }
 @media only screen and (min-width: 1280px) {
-  /* line 260, ../sass/parc_foundation.scss */
+  /* line 287, ../sass/parc_foundation.scss */
   nav .top-bar-section li a:not(.button) {
     padding: 0 1.75em;
     font-size: 0.875em;
   }
-  /* line 264, ../sass/parc_foundation.scss */
+  /* line 291, ../sass/parc_foundation.scss */
   nav .f-dropdown li a {
     font-size: 0.8125em;
   }
-  /* line 267, ../sass/parc_foundation.scss */
+  /* line 294, ../sass/parc_foundation.scss */
   nav #block-search-form input {
     font-size: 0.875em;
+  }
+}
+@media only screen {
+  /* line 2, ../sass/_digital_library.scss */
+  .view-digital-library-gallery {
+    padding-bottom: 0;
+    background-color: #EEEEEE;
+    font-size: 1em;
+  }
+  /* line 6, ../sass/_digital_library.scss */
+  .view-digital-library-gallery form {
+    margin-top: 1em;
+  }
+  /* line 9, ../sass/_digital_library.scss */
+  .view-digital-library-gallery form,
+  .view-digital-library-gallery .form-item,
+  .view-digital-library-gallery .views-exposed-widgets {
+    margin-bottom: 0;
+  }
+  /* line 14, ../sass/_digital_library.scss */
+  .view-digital-library-gallery .views-exposed-widget .form-submit {
+    margin-top: 1em;
+  }
+
+  /* line 18, ../sass/_digital_library.scss */
+  .gallery-main {
+    background-color: #EEEEEE;
+    border-top: 1px solid #DBDBDB;
+  }
+  /* line 22, ../sass/_digital_library.scss */
+  .gallery-main .view-content .gallery-tiles .columns {
+    border-top: 10px solid #EEEEEE;
+    border-bottom: 10px solid #EEEEEE;
+  }
+  /* line 26, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns {
+    padding-bottom: 1em;
+    border-top: 10px solid #EEEEEE;
+    border-bottom: 10px solid #EEEEEE;
+    background-color: white;
+    font-size: 0.8125em;
+  }
+  /* line 32, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns .field-name-field-thumbnail {
+    margin-left: -0.9375em;
+    margin-right: -0.9375em;
+  }
+  /* line 35, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns .field-name-field-thumbnail img {
+    width: 100%;
+    height: auto;
+  }
+  /* line 40, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns .field-name-title {
+    margin-left: -0.9375em;
+    margin-right: -0.9375em;
+    padding-left: 0.9375em;
+    padding-right: 4.25em;
+    padding-top: 8px;
+    padding-bottom: 1px;
+    background: url("../images/text-icon.png") no-repeat 97% center #70547D;
+  }
+  /* line 48, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns .field-name-title h3 {
+    margin-top: 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
+  /* line 52, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns .field-name-title h3 a {
+    color: white;
+  }
+  /* line 57, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns .media-type-text .field-name-title,
+  .gallery-main .view-content .columns .media-type-image .field-name-title {
+    background: url("../images/attachment-icon.png") no-repeat 97% center #6F7E95;
+  }
+  /* line 61, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns .media-type-audio .field-name-title,
+  .gallery-main .view-content .columns .media-type-video .field-name-title {
+    background: url("../images/video-icon.png") no-repeat 97% center #0035B7;
+  }
+  /* line 65, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns .flagged .field-name-title {
+    background-color: #F66B16;
+  }
+  /* line 68, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns .field-name-post-date {
+    margin: 1.25em 0;
+    color: #6F7E95;
+  }
+  /* line 72, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns .field-name-body {
+    margin-bottom: 1.5em;
+    border-bottom: 1px solid #6F7E95;
+  }
+  /* line 75, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns .field-name-body .field-items {
+    margin-bottom: 1.75em;
+  }
+  /* line 79, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns ul.links {
+    float: left;
+    margin-bottom: 1em;
+    min-width: 35px;
+  }
+  /* line 83, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns ul.links li {
+    padding-left: 0;
+  }
+  /* line 86, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns ul.links .prc_digital_library_add_to_favorites a {
+    padding: 0 10px;
+    background: url("../images/like-icon.png") no-repeat;
+  }
+  /* line 90, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns ul.links .prc_digital_library_add_to_favorites a:hover {
+    background: url("../images/like-icon-hover.png") no-repeat;
+  }
+  /* line 93, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns ul.links .flag-like_content a {
+    margin-right: 5px;
+    padding: 0 0 0 20px;
+    background: url("../images/favorite-icon.png") no-repeat;
+  }
+  /* line 98, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns ul.links .flag-like_content a.unflag-action,
+  .gallery-main .view-content .columns ul.links .flag-like_content a:hover {
+    background: url("../images/favorite-icon-selected.png") no-repeat;
+  }
+  /* line 102, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns ul.links .flag-like_content .flag-message {
+    line-height: 0;
+    font-size: 0;
+    color: transparent;
+  }
+  /* line 108, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns ul.links .prc_digital_library_comment_email,
+  .gallery-main .view-content .columns ul.links .pinit {
+    display: none;
+  }
+  /* line 112, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns .field-name-field-tags {
+    float: left;
+    color: #6F7E95;
+  }
+  /* line 115, ../sass/_digital_library.scss */
+  .gallery-main .view-content .columns .field-name-field-tags .field-label {
+    margin-bottom: 5px;
+  }
+}
+@media only screen and (min-width: 640px) {
+  /* line 125, ../sass/_digital_library.scss */
+  .gallery-main .medium-6 {
+    width: 47%;
+    margin: 1.5%;
+  }
+  /* line 129, ../sass/_digital_library.scss */
+  .gallery-main .view-content .gallery-tiles .columns {
+    border-top: none;
+    border-bottom: none;
+  }
+  /* line 132, ../sass/_digital_library.scss */
+  .gallery-main .view-content .gallery-tiles .columns .field-name-title {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  /* line 136, ../sass/_digital_library.scss */
+  .gallery-main .view-content .gallery-tiles .columns .flagged .field-name-title {
+    background-color: #F66B16;
+  }
+}
+@media only screen and (min-width: 1025px) {
+  /* line 145, ../sass/_digital_library.scss */
+  .gallery-main .view-content .large-4 {
+    width: 30.33333%;
+    margin: 1.5%;
+  }
+  /* line 148, ../sass/_digital_library.scss */
+  .gallery-main .view-content .large-4 .field-name-field-thumbnail {
+    margin-left: -1.875em;
+    margin-right: -1.875em;
+  }
+  /* line 151, ../sass/_digital_library.scss */
+  .gallery-main .view-content .large-4 .field-name-field-thumbnail img {
+    width: 100%;
+    height: auto;
+  }
+  /* line 156, ../sass/_digital_library.scss */
+  .gallery-main .view-content .large-4 .field-name-title {
+    margin-left: -1.875em;
+    margin-right: -1.875em;
+    padding-left: 1.875em;
+    padding-right: 4.25em;
+    background: url("../images/text-icon.png") no-repeat 95% center #70547D;
+  }
+  /* line 163, ../sass/_digital_library.scss */
+  .gallery-main .view-content .large-4 .media-type-text .field-name-title,
+  .gallery-main .view-content .large-4 .media-type-image .field-name-title {
+    background: url("../images/attachment-icon.png") no-repeat 95% center #6F7E95;
+  }
+  /* line 167, ../sass/_digital_library.scss */
+  .gallery-main .view-content .large-4 .media-type-audio .field-name-title,
+  .gallery-main .view-content .large-4 .media-type-video .field-name-title {
+    background: url("../images/video-icon.png") no-repeat 95% center #0035B7;
+  }
+  /* line 171, ../sass/_digital_library.scss */
+  .gallery-main .view-content .large-4 .flagged .field-name-title {
+    background-color: #F66B16;
   }
 }

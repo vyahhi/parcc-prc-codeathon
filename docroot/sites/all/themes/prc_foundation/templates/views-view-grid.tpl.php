@@ -14,6 +14,7 @@
   <h3><?php print $title; ?></h3>
 <?php endif; ?>
 
+<div class="gallery-tiles">
 <?php foreach ($rows as $row_number => $columns): ?>
   <div <?php if ($row_classes[$row_number]) { print 'class="row ' . $row_classes[$row_number] .'"';  } ?>>
   <?php foreach ($columns as $column_number => $item): ?>
@@ -23,3 +24,4 @@
   <?php endforeach; ?>
   </div>
 <?php endforeach; ?>
+</div>
