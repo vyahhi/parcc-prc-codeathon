@@ -58,6 +58,9 @@ function prc_foundation_preprocess_node(&$vars, $hook) {
     $media_type = taxonomy_term_load($vars['field_media_type']['und'][0]['tid']);
     $vars['classes_array'][] = 'media-type-' . strtolower($media_type->name);
   }
+  else {
+    $vars['classes_array'][] = 'media-type-none';
+  }
 }
 
 /**
