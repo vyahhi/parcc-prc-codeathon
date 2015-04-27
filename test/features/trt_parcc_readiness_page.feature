@@ -24,7 +24,6 @@ Feature: PRC-1208 PARCC Readiness
 
   Scenario: Has states
     Given I am logged in as a user with the "PRC Admin" role
-#    And I have no "State" nodes
     And "State" nodes:
       | title    | field_user_state | field_member_state | uid | field_contact_email |
       | Illinois | Illinois         | Illinois           | 1   | x@example.com       |
