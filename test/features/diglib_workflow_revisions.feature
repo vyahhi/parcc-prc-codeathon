@@ -26,7 +26,7 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     # edit the content and save a new draft
     And I click "Edit"
     And I fill in "Body" with "Making a new draft"
-    And I press "Save New Draft"
+    And I press "Save"
     # confirm that the revisions tab shows up
     And I visit "admin-content"
     And I click "My Draft @timestamp"
@@ -53,7 +53,7 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     # edit the content and save a new draft
     And I click "Edit"
     And I fill in "Body" with "Isn't this cool?"
-    And I press "Save New Draft"
+    And I press "Save"
     # visit the revisions tab
     And I click "Revisions"
     And the "ins" element should contain "cool"
@@ -72,7 +72,7 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     And I click "My Draft @timestamp"
     And I click "Edit"
     And I fill in "Body" with "Making a new draft"
-    And I press "Save New Draft"
+    And I press "Save"
     And I visit "admin-content"
     And I click "My Draft @timestamp"
     And I click "Edit"
@@ -122,7 +122,7 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     And I click "My first post @timestamp"
     And I click "Edit"
     And I fill in "Body" with "Here is my clever addition."
-    And I press the "Save New Draft" button
+    And I press the "Save" button
     And I press "Confirm"
     And I click "Edit Revision"
     And I press "Request Approval"
@@ -137,7 +137,7 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     And I click "My first post @timestamp"
     And I click "Edit"
     And I fill in "Body" with "Here is my really clever addition."
-    And I press "Save New Draft"
+    And I press "Save"
     And I press "Confirm"
     And I click "Edit Revision"
     And I press the "Request Approval" button

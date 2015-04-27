@@ -1202,6 +1202,34 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->uuid = '5191f8c4-630f-4d52-a599-a94e80c3cfa6';
     $display->content['new-5191f8c4-630f-4d52-a599-a94e80c3cfa6'] = $pane;
     $display->panels['middle'][3] = 'new-5191f8c4-630f-4d52-a599-a94e80c3cfa6';
+    $pane = new stdClass();
+    $pane->pid = 'new-9e55c978-4606-4d9c-897d-49a30354da25';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Empty Placeholder for Item Preview',
+      'title' => '',
+      'body' => '&nbsp;',
+      'format' => 'filtered_html',
+      'substitute' => 0,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'item-preview-pane',
+    );
+    $pane->extras = array();
+    $pane->position = 4;
+    $pane->locks = array();
+    $pane->uuid = '9e55c978-4606-4d9c-897d-49a30354da25';
+    $display->content['new-9e55c978-4606-4d9c-897d-49a30354da25'] = $pane;
+    $display->panels['middle'][4] = 'new-9e55c978-4606-4d9c-897d-49a30354da25';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-173ef7c8-627c-4ffb-82c7-517f83c7974d';
   $handler->conf['display'] = $display;
@@ -2665,7 +2693,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'filter-panel-toggle',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
@@ -2688,7 +2719,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'filter-panel-toggle',
+    );
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
@@ -2711,7 +2745,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'filter-panel-toggle',
+    );
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
@@ -2734,7 +2771,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'filter-panel-toggle',
+    );
     $pane->extras = array();
     $pane->position = 3;
     $pane->locks = array();
@@ -2757,7 +2797,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'filter-panel-toggle',
+    );
     $pane->extras = array();
     $pane->position = 4;
     $pane->locks = array();

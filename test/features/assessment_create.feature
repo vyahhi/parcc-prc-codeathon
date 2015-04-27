@@ -30,7 +30,7 @@ Feature: PRC-521 Create a New Quiz
     And I should see the text "Subject *"
     And I should see the text "Grade *"
     But I should not see the text "Assessment Type"
-    And I should see a "Save Draft" button
+    And I should see a "Save" button
     And I should see an "Add" link
     Examples:
       | role                            |
@@ -53,7 +53,7 @@ Feature: PRC-521 Create a New Quiz
     And I select "Custom Assessment" from "Assessment Type"
     And I select "PD Exam" from "Assessment Type"
     And I select "PARCC-Released Practice Assessment" from "Assessment Type"
-    And I should see a "Save Draft" button
+    And I should see a "Save" button
     And I should see an "Add" link
 
   Scenario: PRC-1343 Assessment created
@@ -66,12 +66,12 @@ Feature: PRC-521 Create a New Quiz
     And I select "1st Grade" from "Grade Level"
     And I fill in the hidden field "faux_subject" with "Subject"
     And I select "Custom Assessment" from "Assessment Type"
-    And I press "Save Draft"
+    And I press "Save"
     Then I should see the heading "my Title"
     # PRC-1343 Edit goes back to View
     When I click "Edit"
     And I fill in the hidden field "faux_subject" with "Subject"
-    And I press "Save Draft"
+    And I press "Save"
     Then I should see the heading "my Title"
 
   Scenario: Hidden fields!
@@ -100,5 +100,5 @@ Feature: PRC-521 Create a New Quiz
     And I fill in "Objectives" with "PRC-521 @timestamp Objectives"
     And I select "Grade 521" from "Grade Level"
     # Subject is javascript-only. Leave it out of here.
-    And I press "Save Draft"
+    And I press "Save"
     Then I should see the message "Subject field is required."

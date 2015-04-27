@@ -23,7 +23,7 @@ Feature: PRC-1026 Item Bank - Edit Item - Item Edited - Assessment/s Updated
     And I fill in "Objectives" with "Objectives"
     And I select "1st Grade" from "Grade Level"
     And I fill in the hidden field "faux_subject" with "Subject"
-    And I press "Save Draft"
+    And I press "Save"
 
     When I click "Non-interactive Item (text only)"
     And I fill in "Title" with "NII T"

@@ -179,7 +179,7 @@ function prc_question_preview_quiz_questions_form($form, $form_state, $quiz) {
 
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Save Draft'),
+    '#value' => t('Save'),
     '#submit' => array('prc_question_preview_quiz_questions_form_submit'),
   );
   return $form;
@@ -599,7 +599,7 @@ function prc_question_preview_form_quiz_node_form_alter(&$form, &$form_state) {
   $title = str_replace('Quiz', 'Assessment', $title);
   drupal_set_title($title, PASS_THROUGH);
 
-  $form['actions']['submit']['#value'] = t('Save Draft');
+  $form['actions']['submit']['#value'] = t('Save');
 
   $form['taking']['allow_resume']['#default_value'] = 0;
 

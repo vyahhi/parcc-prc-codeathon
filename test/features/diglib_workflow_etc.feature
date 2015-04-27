@@ -77,7 +77,7 @@ Feature: Workflow is functional
     And I should see the text "Revision State: Published"
     And I click "Edit"
     And I fill in "Body" with "Here is my clever addition."
-    And I press the "Save New Draft" button
+    And I press the "Save" button
     And I press "Confirm"
     And I click "Edit Revision"
     When I press "Request Approval"
@@ -108,7 +108,7 @@ Feature: Workflow is functional
     And I should see the text "Revision State: Published"
     And I click "Edit"
     And I fill in "Body" with "Here is my really clever addition."
-    And I press "Save New Draft"
+    And I press "Save"
     #prc-847 : Add tabs for save and view on node revision page
     And I press "Confirm"
     And I click "Edit Revision"
@@ -255,7 +255,7 @@ Feature: Workflow is functional
     And I should not see the button "Request Approval"
     #And I should not see the button "Delete"
     # prc-856
-    And I press the "Save New Draft" button
+    And I press the "Save" button
     And I press the "Confirm" button
     And I click "Edit Revision"
     And I press "Request Approval"
@@ -406,7 +406,7 @@ Feature: Workflow is functional
     Then I press "Request Change"
     Then I should see the text "Message"
 
-  Scenario: PRC-831 node save button says "Save New Draft" instead of "Save Draft"
+  Scenario: PRC-831 node save button says "Save" instead of "Save Draft" or "Save New Draft"
     Given I am logged in as "Joe Contributor"
     And I visit "admin-content"
     And I click "Add content"
@@ -416,7 +416,7 @@ Feature: Workflow is functional
     And I press the "Save" button
     When I follow "Edit"
     And I fill in "Body" with "This is swell"
-    And I press the "Save New Draft" button
+    And I press the "Save" button
     And I should see the text "This is swell"
 
   Scenario: prc-871  access denied when clicking link in email
@@ -451,7 +451,7 @@ Feature: Workflow is functional
     And I should see the text "Revision State: Published"
     And I fill in "Title *" with "My new draft @timestamp"
     When I fill in "Body" with "testing confirmation stage cancel"
-    And I press the "Save New Draft" button
+    And I press the "Save" button
     And I should see an "Confirm" button
     And I click "Cancel"
     # We should now be on the node view page
@@ -460,7 +460,7 @@ Feature: Workflow is functional
     And I click "Edit"
     When I fill in "Body" with "testing confirm button"
     And I fill in "Title *" with "My new draft @timestamp"
-    And I press "Save New Draft"
+    And I press "Save"
     And I press "Confirm"
     # We should now be on teh revision page
     And I should see the text "testing confirm button"

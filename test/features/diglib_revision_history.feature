@@ -29,7 +29,7 @@ Feature: PRC-1269 Content Version History - revisions for all fields
     And I visit the first node created
     And I click "Edit"
     And I fill in "Body" with "New Body Text Here"
-    And I press "Save New Draft"
+    And I press "Save"
     And I click "Revisions"
     Then I should see the text "PRC-1269 DLC"
     And I should see the text "New Body Text Here"
@@ -42,7 +42,7 @@ Feature: PRC-1269 Content Version History - revisions for all fields
     And I visit the first node created
     And I click "Edit"
     And I fill in "edit-title" with "New Title Text Here"
-    And I press "Save New Draft"
+    And I press "Save"
     And I click "Revisions"
     Then I should see the text "PRC-1269 DLC"
     And I should see the text "New Title Text Here"

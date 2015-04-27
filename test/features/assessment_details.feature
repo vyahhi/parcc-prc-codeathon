@@ -79,7 +79,7 @@ Feature: PRC-490 View Test Details
       | title        | field_subject | field_grade_level | field_quiz_type                    | uid |
       | PRC-490 Copy | subj1, subj2  | Grade 490         | PARCC-Released Practice Assessment | 1   |
     When I visit the last node created
-    And I press "Save Draft"
+    And I press "Save"
     And I should see the error message containing "You must be logged in to save an assessment."
 
   Scenario: Save empty PARCC-Released Practice Assessment
@@ -95,7 +95,7 @@ Feature: PRC-490 View Test Details
       | PRC-490 Copy | subj1, subj2  | Grade 490         | PARCC-Released Practice Assessment | 1   |
     And I am logged in as a user with the "Educator" role
     When I visit the last node created
-    And I press "Save Draft"
+    And I press "Save"
     Then I should see the text "PRC-490 Copy - copy"
     And I should not see the error message containing "prc"
 

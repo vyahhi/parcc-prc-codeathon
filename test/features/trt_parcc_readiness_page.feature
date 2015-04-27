@@ -24,7 +24,6 @@ Feature: PRC-1208 PARCC Readiness
 
   Scenario: Has states
     Given I am logged in as a user with the "PRC Admin" role
-    And I have no "State" nodes
     And "State" nodes:
       | title    | field_user_state | field_member_state | uid | field_contact_email |
       | Illinois | Illinois         | Illinois           | 1   | x@example.com       |
@@ -33,6 +32,7 @@ Feature: PRC-1208 PARCC Readiness
       | New Hampshire | New Hampshire    | 1   | y@example.com       |
     And I visit "technology-readiness/parcc"
     Then I should see the heading "PARCC Readiness"
+    And I should see the heading "States"
     And I should see the text "Overview / instructional copy goes here \(admin can navigate to state and export all test results data for state to csv or further navigate to view readiness check results by school\)."
     And I should not see the text "No states have been created"
     But I should see the link "New Hampshire"

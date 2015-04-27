@@ -13,6 +13,154 @@ function prc_custom_modules_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'clone_menu_links';
+  $strongarm->value = '0';
+  $export['clone_menu_links'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_method';
+  $strongarm->value = 'prepopulate';
+  $export['clone_method'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_nodes_without_confirm';
+  $strongarm->value = '0';
+  $export['clone_nodes_without_confirm'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_omitted';
+  $strongarm->value = array(
+    'quiz' => 'quiz',
+    'course' => 'course',
+    'digital_library_content' => 'digital_library_content',
+    'district' => 'district',
+    'favorites_list' => 'favorites_list',
+    'pd_course' => 'pd_course',
+    'pd_module' => 'pd_module',
+    'page' => 'page',
+    'panel' => 'panel',
+    'school' => 'school',
+    'state' => 'state',
+    'quiz_directions' => 0,
+    'multichoice' => 0,
+    'short_answer' => 0,
+  );
+  $export['clone_omitted'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_course';
+  $strongarm->value = 0;
+  $export['clone_reset_course'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_digital_library_content';
+  $strongarm->value = 0;
+  $export['clone_reset_digital_library_content'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_district';
+  $strongarm->value = 0;
+  $export['clone_reset_district'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_favorites_list';
+  $strongarm->value = 0;
+  $export['clone_reset_favorites_list'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_multichoice';
+  $strongarm->value = 0;
+  $export['clone_reset_multichoice'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_page';
+  $strongarm->value = 0;
+  $export['clone_reset_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_panel';
+  $strongarm->value = 0;
+  $export['clone_reset_panel'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_pd_course';
+  $strongarm->value = 0;
+  $export['clone_reset_pd_course'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_pd_module';
+  $strongarm->value = 0;
+  $export['clone_reset_pd_module'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_quiz';
+  $strongarm->value = 0;
+  $export['clone_reset_quiz'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_quiz_directions';
+  $strongarm->value = 0;
+  $export['clone_reset_quiz_directions'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_school';
+  $strongarm->value = 0;
+  $export['clone_reset_school'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_short_answer';
+  $strongarm->value = 0;
+  $export['clone_reset_short_answer'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_reset_state';
+  $strongarm->value = 0;
+  $export['clone_reset_state'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'clone_use_node_type_name';
+  $strongarm->value = 0;
+  $export['clone_use_node_type_name'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'course_content_use_pd_course';
   $strongarm->value = 0;
   $export['course_content_use_pd_course'] = $strongarm;
@@ -110,6 +258,13 @@ function prc_custom_modules_strongarm() {
   $strongarm->name = 'course_use_quiz';
   $strongarm->value = 0;
   $export['course_use_quiz'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'date_format_prc_custom_modules_date_only';
+  $strongarm->value = 'F d, Y';
+  $export['date_format_prc_custom_modules_date_only'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

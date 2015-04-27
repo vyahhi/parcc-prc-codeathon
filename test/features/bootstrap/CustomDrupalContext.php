@@ -1617,6 +1617,13 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     $computed = $this->getSession()->evaluateScript("
       return jQuery( '" . $selector . "' ).css('" . $rule . "');
     ");
+    // Adjust backround image results to use relative paths
+    if ($rule == 'background-image' && !empty($computed)) {
+      // Split out the URL components
+      $relative = explode('/', $computed);
+      $relative = array_slice($relative, 3);
+      $computed = "url('" . implode('/', $relative);
+    }
     // Convert double quotes to single quotes for matching purposes.
     $computed = str_replace('"', "'", $computed);
     if ($value != $computed) {
