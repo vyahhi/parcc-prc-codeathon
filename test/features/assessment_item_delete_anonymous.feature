@@ -45,5 +45,5 @@ Feature: PRC-528 Delete Item in Test Customization for Anonymous Users
     Then I should see the heading "PRC-528 Delete" in the "content" region
     Then I should see the link "PRC-528 Directions 1"
     Then I check the element with xpath selector "//*[starts-with(@id, 'edit-stayers')]"
-    And I press "Save Draft"
+    And I press "Save"
     Then I should see the error message containing "You must be logged in to save an assessment."

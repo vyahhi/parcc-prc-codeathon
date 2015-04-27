@@ -28,7 +28,7 @@ Feature: PRC-1316 Item Bank - Edit Item - Form Validation - PARCC Item unchecked
     And I fill in "Objectives" with "Objectives"
     And I select "1st Grade" from "Grade Level"
     And I fill in the hidden field "faux_subject" with "Subject"
-    And I press "Save Draft"
+    And I press "Save"
 
     When I click "Non-interactive Item (text only)"
     And I fill in "Title" with "NII T"
@@ -58,7 +58,7 @@ Feature: PRC-1316 Item Bank - Edit Item - Form Validation - PARCC Item unchecked
     And I fill in "Objectives" with "Objectives"
     And I select "1st Grade" from "Grade Level"
     And I fill in the hidden field "faux_subject" with "Subject"
-    And I press "Save Draft"
+    And I press "Save"
 
     And I click "Short Answer"
     And I fill in "Title" with "SA 1"
@@ -92,7 +92,7 @@ Feature: PRC-1316 Item Bank - Edit Item - Form Validation - PARCC Item unchecked
     And I fill in "Objectives" with "Objectives"
     And I select "1st Grade" from "Grade Level"
     And I fill in the hidden field "faux_subject" with "Subject"
-    And I press "Save Draft"
+    And I press "Save"
 
     And I click "Interactive Choice"
     And I fill in "Item Title" with "IC 1"

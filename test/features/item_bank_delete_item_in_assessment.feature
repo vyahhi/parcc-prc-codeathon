@@ -25,7 +25,7 @@ Feature: PRC-1041 Item Bank - Delete Item - Item Deleted from Assessments
     And I fill in "Objectives" with "Objectives"
     And I select "1st Grade" from "Grade Level"
     And I fill in the hidden field "faux_subject" with "Subject"
-    And I press "Save Draft"
+    And I press "Save"
 
     When I click "Non-interactive Item (text only)"
     And I fill in "Title" with "NII T"
