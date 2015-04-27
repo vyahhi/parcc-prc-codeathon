@@ -129,9 +129,9 @@
           <?php print render($action_links); ?>
         </ul>
       <?php endif; ?>
+    </div>
 
       <?php print render($page['content']); ?>
-    </div>
 
     <?php if (!empty($page['sidebar_first'])): ?>
       <aside role="complementary" class="large-12 sidebar-first columns sidebar">

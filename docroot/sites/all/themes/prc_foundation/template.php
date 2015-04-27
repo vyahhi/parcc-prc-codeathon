@@ -48,6 +48,10 @@ function prc_foundation_preprocess_page(&$vars, $hook) {
     drupal_add_js('http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML', 'external');
     $vars['scripts'] = drupal_get_js(); // necessary in D7?
   }
+  if (isset($vars['node']->type) && $vars['node']->type == 'digital_library_content' && arg(2) != 'edit') {
+    $vars['theme_hook_suggestions'][] = 'page__ds_2_col';
+    drupal_add_js(path_to_theme() .'/javascripts/custom/digital_library_detail.js');
+  }
 }
 
 /**

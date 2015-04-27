@@ -118,6 +118,17 @@
       }
     }
   }
+  .page-node.node-type-digital-library-content {
+    .panel-flexible.panels-flexible-new {
+      height: 0;
+    }
+    .group-right {
+      overflow: hidden;
+    }
+    .field-name-field-thumbnail {
+      display: none;
+    }
+  }
 }
 
 @media #{$small} {
@@ -171,6 +182,11 @@
       .flagged .field-name-title {
         background-color: $parcc-orange;
       }
+    }
+  }
+  .page-node.node-type-digital-library-content {
+    .field-name-field-thumbnail {
+      display: block;
     }
   }
 }
