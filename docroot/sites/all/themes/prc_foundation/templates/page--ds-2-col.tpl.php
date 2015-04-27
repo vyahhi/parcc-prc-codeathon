@@ -101,7 +101,7 @@
     </section>
   <?php endif; ?>
 
-  <main role="main" class="row">
+  <main role="main" id="content" class="row">
     <div class="large-12 main columns">
       <?php if (!empty($page['highlighted'])): ?>
         <div class="highlight panel callout">

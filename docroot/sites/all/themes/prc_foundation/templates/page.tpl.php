@@ -102,7 +102,7 @@
   <?php endif; ?>
 
   <main role="main" class="row">
-    <div class="large-12 main columns">
+    <div id="content" class="large-12 main columns">
       <?php if (!empty($page['highlighted'])): ?>
         <div class="highlight panel callout">
           <?php print render($page['highlighted']); ?>

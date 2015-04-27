@@ -129,7 +129,7 @@
 
   <div id="main-wrapper" class="gallery-main"> <!-- This probably needs to move up to contain the subheader -->
     <main role="main" class="row">
-        <div class="large-12 main columns">
+        <div id="content" class="large-12 main columns">
           <?php print render($page['content']); ?>
           <?php print $feed_icons; ?>
         </div>
