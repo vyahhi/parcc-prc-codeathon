@@ -516,6 +516,25 @@ You can access the result here !url
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'sharethis_digital_library_content_options';
+  $strongarm->value = array(
+    'full' => 'full',
+    'teaser' => 0,
+    'rss' => 0,
+    'search_index' => 0,
+    'search_result' => 0,
+    'question' => 0,
+    'token' => 0,
+    'detail' => 0,
+    'front_page_item' => 0,
+    'gallery_view' => 0,
+    'revision' => 0,
+  );
+  $export['sharethis_digital_library_content_options'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'sharethis_document_options';
   $strongarm->value = array(
     'full' => 0,
@@ -534,7 +553,7 @@ You can access the result here !url
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'sharethis_location';
-  $strongarm->value = 'content';
+  $strongarm->value = 'links';
   $export['sharethis_location'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -544,14 +563,18 @@ You can access the result here !url
   $strongarm->value = array(
     'digital_library_content' => 'digital_library_content',
     'pd_course' => 'pd_course',
+    'quiz' => 0,
+    'quiz_directions' => 0,
     'course' => 0,
+    'district' => 0,
     'favorites_list' => 0,
     'multichoice' => 0,
     'pd_module' => 0,
+    'page' => 0,
     'panel' => 0,
-    'quiz' => 0,
-    'quiz_directions' => 0,
+    'school' => 0,
     'short_answer' => 0,
+    'state' => 0,
   );
   $export['sharethis_node_types'] = $strongarm;
 
@@ -585,6 +608,25 @@ You can access the result here !url
   $strongarm->name = 'sharethis_option_shorten';
   $strongarm->value = 1;
   $export['sharethis_option_shorten'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'sharethis_pd_course_options';
+  $strongarm->value = array(
+    'full' => 'full',
+    'teaser' => 0,
+    'rss' => 0,
+    'search_index' => 0,
+    'search_result' => 0,
+    'question' => 0,
+    'token' => 0,
+    'detail' => 0,
+    'front_page_item' => 0,
+    'gallery_view' => 0,
+    'revision' => 0,
+  );
+  $export['sharethis_pd_course_options'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
