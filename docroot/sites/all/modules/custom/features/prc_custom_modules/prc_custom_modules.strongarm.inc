@@ -523,6 +523,7 @@ You can access the result here !url
     'rss' => 0,
     'search_index' => 0,
     'search_result' => 0,
+    'diff_standard' => 0,
     'question' => 0,
     'token' => 0,
     'detail' => 0,
@@ -615,10 +616,11 @@ You can access the result here !url
   $strongarm->name = 'sharethis_pd_course_options';
   $strongarm->value = array(
     'full' => 'full',
-    'teaser' => 0,
+    'teaser' => 'teaser',
     'rss' => 0,
     'search_index' => 0,
     'search_result' => 0,
+    'diff_standard' => 0,
     'question' => 0,
     'token' => 0,
     'detail' => 0,
