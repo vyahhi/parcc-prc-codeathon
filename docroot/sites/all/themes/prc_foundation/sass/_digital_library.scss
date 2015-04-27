@@ -185,6 +185,9 @@
     }
   }
   .page-node.node-type-digital-library-content {
+    .pane-content-state {
+      padding-left: $desktop-padding;
+    }
     .field-name-field-thumbnail {
       display: block;
     }

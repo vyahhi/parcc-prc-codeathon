@@ -4218,6 +4218,10 @@ table tfoot tr td {
   }
 
   /* line 188, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .pane-content-state {
+    padding-left: 1.875em;
+  }
+  /* line 191, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .field-name-field-thumbnail {
     display: block;
   }
