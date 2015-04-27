@@ -10,7 +10,7 @@ Feature: View Content (PRC-32)
     Given I am logged in as a user with the "authenticated user" role
     Then I should see the link "Digital Library" in the "header" region
     When I follow "Digital Library"
-    Then I should see the heading "Digital Library" in the "content" region
+    Then I should see the heading "Digital Library"
     And the url should match "digital-library"
 
   Scenario: AC3-5  In this page, the content is listed and sortable by date
@@ -24,16 +24,12 @@ Feature: View Content (PRC-32)
     And I visit "digital-library"
     Then I should see "Title1"
     And I should see "Trimmed Content 1"
-    And I should see "Created"
-    And I should see "by Bob"
     # I should see the thumbnail too, but I don't know how to test it in the context of this script
     Then I should see "Title2"
     And I should see "Trimmed Content 2"
-    And I should see "by Prasdi"
     # I should see the thumbnail too, but I don't know how to test it in the context of this script
     Then I should see "Title3"
     And I should see "Trimmed Content 3"
-    And I should see "by Jimmy"
     # I should see the thumbnail too, but I don't know how to test it in the context of this script
     #  AC3. In this page, the content is listed based on the sort definition. Default by date: the most recent on the top
     #  AC4. The following components are displayed for each content:

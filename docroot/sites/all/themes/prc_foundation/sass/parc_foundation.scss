@@ -41,7 +41,7 @@
 // @import "foundation/components/keystrokes";
 // @import "foundation/components/labels";
 // @import "foundation/components/inline-lists";
-// @import "foundation/components/pagination";
+@import "foundation/components/pagination";
 // @import "foundation/components/panels";
 // @import "foundation/components/pricing-tables";
 // @import "foundation/components/progress-bars";
@@ -64,10 +64,27 @@
   #page {
     background-color: white;
   }
+  a:hover,
+  a:active {
+    text-decoration: underline;
+  }
   .uppercase {
     text-transform: uppercase;
   }
+  .center {
+    text-align: center;
+  }
+  .breadcrumb {
+    padding-top: em-calc(10);
+    font-family: $bold-font-family;
+    font-weight: bold;
+    line-height: em-calc(24);
+  }
   nav {
+    a:hover,
+    a:active {
+      text-decoration: none;
+    }
     a#logo {
       display: inline-block;
       margin: em-calc(25) $default-margin;
@@ -102,21 +119,32 @@
   }
   #sub-header {
     .breadcrumb {
-      padding-top: .5em;
-      a {
-        font-weight: bold;
-        color: #464646;
-      }
-    }
-    h1 {
-      margin: 0 0 .75em;
-      text-align: center;
-      text-transform: uppercase;
+      padding-bottom: 0;
     }
   }
-  #main-wrapper {
-    // Enable for grid alignment debugging
-    // background-color: #EEEEEE;
+  .pagination-centered {
+    padding-top: 1em;
+    padding-bottom: 2em;
+    overflow: auto;
+  }
+  ul.pagination li {
+    margin: 0 -2px;
+    padding: 10px 20px 30px 20px;
+    background-color: white;
+    text-transform: uppercase;
+  }
+  ul.pagination li.first {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+  }
+  ul.pagination li.pager-current {
+    background: #70547D;
+    color: #fff;
+    font-weight: bold;
+  }
+  ul.pagination li.last {
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
   }
   footer {
     background: url('../images/footer-image.jpg') no-repeat center center;
@@ -269,3 +297,5 @@
     }
   }
 }
+
+@import "digital_library";

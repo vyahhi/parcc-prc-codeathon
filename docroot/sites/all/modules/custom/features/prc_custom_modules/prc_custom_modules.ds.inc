@@ -42,18 +42,13 @@ function prc_custom_modules_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'digital_library_content';
   $ds_fieldsetting->view_mode = 'gallery_view';
   $ds_fieldsetting->settings = array(
-    'formatted_author_and_date' => array(
-      'weight' => '2',
-      'label' => 'hidden',
-      'format' => 'default',
-    ),
     'title' => array(
       'weight' => '1',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
         'link' => '1',
-        'wrapper' => 'h2',
+        'wrapper' => 'h3',
         'class' => '',
       ),
     ),
@@ -62,10 +57,10 @@ function prc_custom_modules_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'default',
     ),
-    'node_link' => array(
-      'weight' => '4',
+    'post_date' => array(
+      'weight' => '2',
       'label' => 'hidden',
-      'format' => 'default',
+      'format' => 'ds_post_date_prc_custom_modules_date_only',
     ),
   );
   $export['node|digital_library_content|gallery_view'] = $ds_fieldsetting;
@@ -384,21 +379,19 @@ function prc_custom_modules_ds_layout_settings_info() {
       'ds_content' => array(
         0 => 'field_thumbnail',
         1 => 'title',
-        2 => 'formatted_author_and_date',
+        2 => 'post_date',
         3 => 'body',
-        4 => 'node_link',
-        5 => 'links',
-        6 => 'sharethis',
+        4 => 'links',
+        5 => 'field_tags',
       ),
     ),
     'fields' => array(
       'field_thumbnail' => 'ds_content',
       'title' => 'ds_content',
-      'formatted_author_and_date' => 'ds_content',
+      'post_date' => 'ds_content',
       'body' => 'ds_content',
-      'node_link' => 'ds_content',
       'links' => 'ds_content',
-      'sharethis' => 'ds_content',
+      'field_tags' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(
