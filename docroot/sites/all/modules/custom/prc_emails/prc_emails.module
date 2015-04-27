@@ -35,6 +35,7 @@ function _prc_emails_message_create($message, $node) {
       $w = entity_metadata_wrapper('node', $node);
       $school_email = $w->field_contact_email->value();
       $options['mail'] = $school_email;
+      message_notify_send_message($message, $options);
       break;
 
     default:

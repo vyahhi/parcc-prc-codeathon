@@ -26,8 +26,8 @@ Feature: PRC-819 Request Readiness Checks - Compose Email
 
   Scenario: Send email
     Given I am logged in as a user with the "District Admin" role
-    And I have no "School" nodes
-    And I have no "District" nodes
+#    And I have no "School" nodes
+#    And I have no "District" nodes
     And "District" nodes:
       | title              | uid         |
       | PRC-828 @timestamp | @currentuid |
