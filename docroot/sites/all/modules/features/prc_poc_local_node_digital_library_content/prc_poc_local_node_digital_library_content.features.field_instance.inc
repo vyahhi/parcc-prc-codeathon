@@ -759,12 +759,13 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
+      'course_enrollment' => FALSE,
       'default_image' => 0,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '2 MB',
       'max_resolution' => '',
-      'min_resolution' => '',
+      'min_resolution' => '595x1',
       'title_field' => 1,
       'user_register_form' => FALSE,
     ),
@@ -772,6 +773,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'label_help_description' => '',
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
