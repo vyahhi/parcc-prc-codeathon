@@ -727,7 +727,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'medium',
+          'image_style' => 'gallery_view',
         ),
         'type' => 'image',
         'weight' => 0,

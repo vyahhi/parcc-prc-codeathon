@@ -8,6 +8,7 @@ dependencies[] = strongarm
 features[filter][] = filtered_html
 features[filter][] = full_html
 features[filter][] = plain_text
+features[image][] = gallery_view
 features[image][] = large
 features[image][] = medium
 features[image][] = thumbnail
