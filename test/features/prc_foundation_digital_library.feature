@@ -69,19 +69,19 @@ Feature: Gallery View Responsive behavior – Digital Library (PRC-542)
     Then ".main" should have a "padding-left" css value of "15px"
     And ".main" should have a "padding-right" css value of "15px"
     And ".view-digital-library-gallery div:first-child" should have an "class" attribute value of "view-filters"
-    And ".view-digital-library-gallery .columns" should have a "width" css value of "305.63340000000005px"
+    And ".view-digital-library-gallery .columns" should have a "width" css value of "320.63340000000005px"
     When I am browsing using a "tablet"
     Then ".main" should have a "padding-left" css value of "15px"
     And ".main" should have a "padding-right" css value of "15px"
     And ".view-digital-library-gallery div:first-child" should have an "class" attribute value of "view-filters"
-    And ".view-digital-library-gallery .columns" should have a "width" css value of "315.63340000000005px"
+    And ".view-digital-library-gallery .columns" should have a "width" css value of "322.63340000000005px"
     And ".view-digital-library-gallery .view-content" should have a "position" css value of "static"
     And ".view-digital-library-gallery .columns" should have a "position" css value of "absolute"
     When I am browsing using a "desktop"
     Then ".main" should have a "padding-left" css value of "30px"
     And ".main" should have a "padding-right" css value of "30px"
     And ".view-digital-library-gallery div:first-child" should have an "class" attribute value of "view-filters"
-    And ".view-digital-library-gallery .columns" should have a "width" css value of "317.23339999999996px"
+    And ".view-digital-library-gallery .columns" should have a "width" css value of "321.23339999999996px"
     And ".view-digital-library-gallery .view-content" should have a "position" css value of "static"
     And ".view-digital-library-gallery .columns" should have a "position" css value of "absolute"
 
@@ -216,6 +216,13 @@ Feature: Gallery View Responsive behavior – Digital Library (PRC-542)
     And ".view-content .columns .field-name-title" should have a "margin-right" css value of "-24.3667px"
     And ".view-content .columns .field-name-title" should have a "padding-left" css value of "24.3833px"
     And ".view-content .columns .field-name-title" should have a "padding-right" css value of "55.25px"
+    When I am logged in as a user with the "Content Contributor" role
+    And I am viewing my "Digital Library Content" node with the title "Result Two"
+    And I follow "Edit"
+    Then I attach the file "testfiles/lovelythumbnail.png" to "edit-field-thumbnail-und-0-upload"
+    And I select the radio button "Public"
+    And I press "Save"
+    And I should see the error message containing "The specified file lovelythumbnail.png could not be uploaded. The image is too small; the minimum dimensions are 595x1 pixels."
 
   @javascript
   Scenario: Digital library item detail page responsive behavior matches style guide
@@ -227,7 +234,7 @@ Feature: Gallery View Responsive behavior – Digital Library (PRC-542)
     And I visit the last node created
     When I am browsing using a "phone"
     Then ".group-left" should have a "padding-left" css value of "15px"
-    And ".group-left" should have a "width" css value of "326px"
+    And ".group-left" should have a "width" css value of "341px"
     And ".group-left" should have a "padding-right" css value of "15px"
     And ".group-left .breadcrumb" should be visible
     And ".group-left #page-title" should be visible
@@ -235,7 +242,7 @@ Feature: Gallery View Responsive behavior – Digital Library (PRC-542)
     And ".group-left .field-name-body" should be visible
     And ".group-left li.prc_digital_library_comment_email" should be visible
     Then ".group-right" should have a "padding-left" css value of "15px"
-    And ".group-right" should have a "width" css value of "326px"
+    And ".group-right" should have a "width" css value of "341px"
     And ".group-right" should have a "padding-right" css value of "15px"
     And ".group-right .field-name-field-grade-level" should be visible
     And ".group-right .field-name-field-subject" should be visible
