@@ -22,9 +22,9 @@
       When I click "Edit"
       And I select "None" from "edit-field-standard-und-0-tid-select-1"
       And I press "Publish"
-      And I press "Update state"
       # prc-1386
       Then I should not see the message containing "Illegal string offset"
+      And I press "Update state"
       And I click "My node @timestamp"
       And I click "Revisions"
       # prc-1385
