@@ -1,0 +1,13 @@
+diff --git a/docroot/sites/all/modules/contrib/shs/shs.module b/docroot/sites/all/modules/contrib/shs/shs.module
+index b9f73bc..d1e9853 100644
+--- a/docroot/sites/all/modules/contrib/shs/shs.module
++++ b/docroot/sites/all/modules/contrib/shs/shs.module
+@@ -341,7 +341,7 @@ function shs_field_widget_afterbuild($element, &$form_state) {
+   // Create Javascript settings for the element only if it hasn't been added
+   // before.
+   if (empty($js_added[$element['#name']][$js_hash])) {
+-    $element_value = $element['#default_value']['tid'];
++    $element_value = !empty($element['#default_value']['tid']) ? $element['#default_value']['tid'] : NULL;
+ 
+     if (empty($element_value)) {
+       // Add fake parent for new items.
