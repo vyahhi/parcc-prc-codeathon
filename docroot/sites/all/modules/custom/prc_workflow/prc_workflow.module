@@ -920,19 +920,22 @@ function prc_workflow_body_diff($previous_version, $node_version) {
             $left_val = '';
             $right_val = '';
             foreach ($field_left as $val) {
-              if ($field_info['settings']['allowed_values'][0]['vocabulary'] == 'standard') {
-                $left_val = ' ' . $val->description;
-              }
-              else {
-                $left_val = ' ' . $val->name;
+              if(is_object($val)) {
+                if ($field_info['settings']['allowed_values'][0]['vocabulary'] == 'standard') {
+                  $left_val = ' ' . $val->description;
+                }
+                else {
+                  $left_val = ' ' . $val->name;
+                }
               }
             }
             foreach ($field_right as $val) {
-              if ($field_info['settings']['allowed_values'][0]['vocabulary'] == 'standard') {
-                $right_val = ' ' . $val->description;
-              }
-              else {
-                $right_val = ' ' . $val->name;
+              if(is_object($val)) {
+                if ($field_info['settings']['allowed_values'][0]['vocabulary'] == 'standard') {
+                  $right_val = ' ' . $val->description;
+                } else {
+                  $right_val = ' ' . $val->name;
+                }
               }
             }
           }
