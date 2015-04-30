@@ -29,3 +29,21 @@
       And I click "Revisions"
       # prc-1385
       And I should not see the message containing "Trying to get property of non-object"
+
+    @javascript
+    Scenario: prc-1391 - Need to click save twice when adding a tag
+      Given I am logged in as a user with the "Content Administrator (Curator)" role
+      And I visit "admin-content"
+      And I click "Add content"
+      And I enter "My node @timestamp" for "Title *"
+      When I fill in "Tags" with "Test"
+      And I select the radio button "Public" with the id "edit-field-permissions-und-public"
+      And I press "Save"
+      And I click "Edit"
+      And I press "Publish"
+      And I press "Update state"
+      And I click "My node @timestamp"
+      And I click "Edit"
+      And I press "Save"
+      Then I should see the message containing "Digital Library Content My node"
+
