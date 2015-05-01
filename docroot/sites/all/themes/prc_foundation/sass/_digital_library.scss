@@ -16,7 +16,6 @@
     }
   }
   .gallery-main {
-    // Add #main-wrapper for grid alignment debugging
     background-color: $background-gray;
     border-top: 1px solid #DBDBDB;
     .view-content .gallery-tiles .columns {
@@ -122,11 +121,56 @@
     .panel-flexible.panels-flexible-new {
       height: 0;
     }
+    .group-left {
+      overflow: hidden;
+      ul.tabs.primary {
+        margin-bottom: 1em;
+      }
+      .field-name-post-date {
+        @include paragraph;
+        @include bold;
+      }
+      .field-name-field-author-name {
+        margin-bottom: 0;
+        @include bold;
+      }
+      .prc_digital_library_comment_email {
+        width: 125px;
+        margin: auto;
+        list-style: none;
+      }
+      .prc_digital_library_comment_email a {
+        @include parcc_button;
+        margin-top: 2em;
+        margin-bottom: 2em;
+      }
+    }
     .group-right {
       overflow: hidden;
-    }
-    .field-name-field-thumbnail {
-      display: none;
+      .divider { // Maybe move this to prc_foundation.scss if reused
+        overflow: hidden;
+        white-space: nowrap;
+        line-height: 1.25em;
+      }
+      .divider hr {
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        top: 14px;
+        left: 15px;
+        margin-top: 0;
+        border: solid $icon-gray;
+        border-width: 1px 0 0;
+      }
+      .field-label-above {
+        margin-bottom: 20px;
+      }
+      .field-item {
+        margin: 10px 0;
+      }
+      .field-name-field-thumbnail {
+        display: none;
+      }
     }
   }
 }
@@ -185,11 +229,29 @@
     }
   }
   .page-node.node-type-digital-library-content {
+    #page,
+    #content {
+      background: linear-gradient(90deg, white 66.66667%, #EEEEEE 33.33333%);
+    }
     .pane-content-state {
       padding-left: $desktop-padding;
     }
-    .field-name-field-thumbnail {
-      display: block;
+    .group-right {
+      margin-top: 50px;
+      /*.field-label-above {
+        margin-bottom: 20px;
+      }
+      .field-item {
+        margin: 10px 0;
+      }*/
+      .field-name-field-thumbnail {
+        display: block;
+        margin-bottom: 35px;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
     }
   }
 }

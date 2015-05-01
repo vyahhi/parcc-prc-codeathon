@@ -3718,88 +3718,99 @@ table tfoot tr td {
     background-color: white;
   }
 
-  /* line 67, ../sass/parc_foundation.scss */
+  /* line 68, ../sass/parc_foundation.scss */
+  .field-type-text {
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 1.25em;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* line 71, ../sass/parc_foundation.scss */
   a:hover,
   a:active {
     text-decoration: underline;
   }
 
-  /* line 71, ../sass/parc_foundation.scss */
+  /* line 75, ../sass/parc_foundation.scss */
   .uppercase {
     text-transform: uppercase;
   }
 
-  /* line 74, ../sass/parc_foundation.scss */
+  /* line 78, ../sass/parc_foundation.scss */
   .center {
     text-align: center;
   }
 
-  /* line 77, ../sass/parc_foundation.scss */
+  /* line 81, ../sass/parc_foundation.scss */
   .breadcrumb {
     padding-top: 0.625em;
+    padding-bottom: 0;
     font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     line-height: 1.5em;
   }
 
-  /* line 84, ../sass/parc_foundation.scss */
+  /* line 89, ../sass/parc_foundation.scss */
   nav a:hover,
   nav a:active {
     text-decoration: none;
   }
-  /* line 88, ../sass/parc_foundation.scss */
+  /* line 93, ../sass/parc_foundation.scss */
   nav a#logo {
     display: inline-block;
     margin: 1.5625em 0.9375em;
   }
-  /* line 92, ../sass/parc_foundation.scss */
+  /* line 97, ../sass/parc_foundation.scss */
   nav li.toggle-topbar.menu-icon {
     right: 5px !important;
     margin-right: 0.9375em;
   }
-  /* line 96, ../sass/parc_foundation.scss */
+  /* line 101, ../sass/parc_foundation.scss */
   nav #block-search-form {
     float: left;
     width: 100%;
     padding: 20px 0.9375em 10px;
     background-color: #333333;
   }
-  /* line 101, ../sass/parc_foundation.scss */
+  /* line 106, ../sass/parc_foundation.scss */
   nav #block-search-form h2 {
     font-size: 0;
   }
-  /* line 104, ../sass/parc_foundation.scss */
+  /* line 109, ../sass/parc_foundation.scss */
   nav #block-search-form input {
     float: left;
     font-size: 0.8125em;
   }
-  /* line 108, ../sass/parc_foundation.scss */
+  /* line 113, ../sass/parc_foundation.scss */
   nav #block-search-form input#edit-search-block-form--2 {
     width: 175px;
   }
-  /* line 111, ../sass/parc_foundation.scss */
+  /* line 116, ../sass/parc_foundation.scss */
   nav #block-search-form input#edit-submit,
   nav #block-search-form input#edit-submit--2 {
     height: 32px;
   }
-  /* line 116, ../sass/parc_foundation.scss */
+  /* line 121, ../sass/parc_foundation.scss */
   nav .top-bar-section ul li > a {
     padding: 12px 0px 12px 16px;
   }
 
-  /* line 121, ../sass/parc_foundation.scss */
+  /* line 126, ../sass/parc_foundation.scss */
   #sub-header .breadcrumb {
     padding-bottom: 0;
   }
 
-  /* line 125, ../sass/parc_foundation.scss */
+  /* line 130, ../sass/parc_foundation.scss */
   .pagination-centered {
     padding-top: 1em;
     padding-bottom: 2em;
     overflow: auto;
   }
 
-  /* line 130, ../sass/parc_foundation.scss */
+  /* line 135, ../sass/parc_foundation.scss */
   ul.pagination li {
     margin: 0 -2px;
     padding: 10px 20px 30px 20px;
@@ -3807,37 +3818,37 @@ table tfoot tr td {
     text-transform: uppercase;
   }
 
-  /* line 136, ../sass/parc_foundation.scss */
+  /* line 141, ../sass/parc_foundation.scss */
   ul.pagination li.first {
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
   }
 
-  /* line 140, ../sass/parc_foundation.scss */
+  /* line 145, ../sass/parc_foundation.scss */
   ul.pagination li.pager-current {
     background: #70547D;
     color: #fff;
     font-weight: bold;
   }
 
-  /* line 145, ../sass/parc_foundation.scss */
+  /* line 150, ../sass/parc_foundation.scss */
   ul.pagination li.last {
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
   }
 
-  /* line 149, ../sass/parc_foundation.scss */
+  /* line 154, ../sass/parc_foundation.scss */
   footer {
     background: url("../images/footer-image.jpg") no-repeat center center;
     background-size: cover;
     color: white;
     padding: 50px 0 30px;
   }
-  /* line 154, ../sass/parc_foundation.scss */
+  /* line 159, ../sass/parc_foundation.scss */
   footer p {
     font-size: 0.8125em;
   }
-  /* line 157, ../sass/parc_foundation.scss */
+  /* line 162, ../sass/parc_foundation.scss */
   footer a,
   footer a:visited,
   footer a:hover,
@@ -3845,152 +3856,152 @@ table tfoot tr td {
     color: white;
     text-decoration: underline;
   }
-  /* line 164, ../sass/parc_foundation.scss */
+  /* line 169, ../sass/parc_foundation.scss */
   footer #footer-copyright,
   footer #footer-contact {
     text-align: center;
   }
 }
 @media only screen and (min-width: 640px) {
-  /* line 173, ../sass/parc_foundation.scss */
+  /* line 178, ../sass/parc_foundation.scss */
   footer #footer-copyright {
     text-align: left;
   }
-  /* line 176, ../sass/parc_foundation.scss */
+  /* line 181, ../sass/parc_foundation.scss */
   footer #footer-contact {
     text-align: right;
   }
 }
 @media only screen and (min-width: 1025px) {
-  /* line 183, ../sass/parc_foundation.scss */
+  /* line 188, ../sass/parc_foundation.scss */
   .columns {
     padding-left: 1.875em;
     padding-right: 1.875em;
   }
 
-  /* line 187, ../sass/parc_foundation.scss */
+  /* line 192, ../sass/parc_foundation.scss */
   nav.top-bar {
     text-align: center;
   }
 
-  /* line 191, ../sass/parc_foundation.scss */
+  /* line 196, ../sass/parc_foundation.scss */
   nav a#logo {
     display: inline-block;
     margin: 1.5625em 0 1.5625em 1.875em;
   }
-  /* line 195, ../sass/parc_foundation.scss */
+  /* line 200, ../sass/parc_foundation.scss */
   nav #main-menu-section,
   nav #secondary-menu-section {
     display: inline-block;
   }
-  /* line 200, ../sass/parc_foundation.scss */
+  /* line 205, ../sass/parc_foundation.scss */
   nav .top-bar-section ul {
     background-color: #344758;
   }
-  /* line 203, ../sass/parc_foundation.scss */
+  /* line 208, ../sass/parc_foundation.scss */
   nav .top-bar-section li a:not(.button) {
     padding: 0 15px;
   }
-  /* line 206, ../sass/parc_foundation.scss */
+  /* line 211, ../sass/parc_foundation.scss */
   nav .top-bar-section li a:not(.button):hover,
   nav .top-bar-section ul li.active > a {
     background: none repeat scroll 0% 0% #2e3f4e;
   }
-  /* line 211, ../sass/parc_foundation.scss */
+  /* line 216, ../sass/parc_foundation.scss */
   nav #header-icons {
     float: right;
     margin: 1.0625em 1.875em 0 0;
     height: 65px;
   }
-  /* line 215, ../sass/parc_foundation.scss */
+  /* line 220, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon,
   nav #header-icons #profile-icon {
     height: 35px;
   }
-  /* line 219, ../sass/parc_foundation.scss */
+  /* line 224, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon {
     width: 42px;
     margin-right: 5px;
     background: url("../images/search-icon.png") no-repeat 10px;
   }
-  /* line 224, ../sass/parc_foundation.scss */
+  /* line 229, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon:before,
   nav #header-icons #profile-icon:before {
     display: none;
   }
-  /* line 228, ../sass/parc_foundation.scss */
+  /* line 233, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon:hover,
   nav #header-icons #search-icon:focus {
     background: url("../images/search-icon-active.png") no-repeat 10px;
   }
-  /* line 232, ../sass/parc_foundation.scss */
+  /* line 237, ../sass/parc_foundation.scss */
   nav #header-icons #profile-icon {
     width: 71px;
     margin-left: 5px;
     background: url("../images/profile-icon.png") no-repeat 15px 7px, url("../images/down-arrow.png") no-repeat 40px 12px;
   }
-  /* line 239, ../sass/parc_foundation.scss */
+  /* line 244, ../sass/parc_foundation.scss */
   nav #header-icons #profile-icon:hover,
   nav #header-icons #profile-icon:focus {
     background: url("../images/profile-icon-active.png") no-repeat 15px 7px, url("../images/down-arrow-active.png") no-repeat 40px 12px;
   }
-  /* line 245, ../sass/parc_foundation.scss */
+  /* line 250, ../sass/parc_foundation.scss */
   nav #header-icons #search-icon.button,
   nav #header-icons #profile-icon.button {
     background-color: #44596F;
     border-width: 0;
     box-shadow: none;
   }
-  /* line 251, ../sass/parc_foundation.scss */
+  /* line 256, ../sass/parc_foundation.scss */
   nav #header-icons .button:hover,
   nav #header-icons .button:focus {
     background-color: #2e3f4e !important;
   }
-  /* line 255, ../sass/parc_foundation.scss */
+  /* line 260, ../sass/parc_foundation.scss */
   nav #header-icons #search-dropdown,
   nav #header-icons #profile-dropdown {
     position: absolute;
     left: -99999px;
   }
-  /* line 260, ../sass/parc_foundation.scss */
+  /* line 265, ../sass/parc_foundation.scss */
   nav #header-icons #block-search-form {
     padding: 0.3125em 0.9375em 1.25em;
     background-color: white;
     cursor: auto;
   }
-  /* line 264, ../sass/parc_foundation.scss */
+  /* line 269, ../sass/parc_foundation.scss */
   nav #header-icons #block-search-form input {
     margin: -1px 0px 2px -1px;
   }
-  /* line 267, ../sass/parc_foundation.scss */
+  /* line 272, ../sass/parc_foundation.scss */
   nav #header-icons #block-search-form input.form-submit {
     display: none;
   }
-  /* line 272, ../sass/parc_foundation.scss */
+  /* line 277, ../sass/parc_foundation.scss */
   nav .f-dropdown li a {
     font-size: 12px;
   }
 
-  /* line 277, ../sass/parc_foundation.scss */
+  /* line 282, ../sass/parc_foundation.scss */
   footer #footer-contact {
     text-align: center;
   }
-  /* line 280, ../sass/parc_foundation.scss */
+  /* line 285, ../sass/parc_foundation.scss */
   footer #footer-social {
     text-align: right;
   }
 }
 @media only screen and (min-width: 1280px) {
-  /* line 288, ../sass/parc_foundation.scss */
+  /* line 293, ../sass/parc_foundation.scss */
   nav .top-bar-section li a:not(.button) {
     padding: 0 1.75em;
     font-size: 0.875em;
   }
-  /* line 292, ../sass/parc_foundation.scss */
+  /* line 297, ../sass/parc_foundation.scss */
   nav .f-dropdown li a {
     font-size: 0.8125em;
   }
-  /* line 295, ../sass/parc_foundation.scss */
+  /* line 300, ../sass/parc_foundation.scss */
   nav #block-search-form input {
     font-size: 0.875em;
   }
@@ -4149,52 +4160,144 @@ table tfoot tr td {
     height: 0;
   }
   /* line 125, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-left {
+    overflow: hidden;
+  }
+  /* line 127, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-left ul.tabs.primary {
+    margin-bottom: 1em;
+  }
+  /* line 130, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-left .field-name-post-date {
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 1.25em;
+    text-rendering: optimizeLegibility;
+    font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+  }
+  /* line 134, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-left .field-name-field-author-name {
+    margin-bottom: 0;
+    font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+  }
+  /* line 138, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email {
+    width: 125px;
+    margin: auto;
+    list-style: none;
+  }
+  /* line 143, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a {
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    line-height: normal;
+    margin: 0 0 1.25em;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    padding-top: 0.75em;
+    padding-right: 1.5em;
+    padding-bottom: 0.8125em;
+    padding-left: 1.5em;
+    font-size: 1em;
+    background-color: #70547D;
+    border-color: #55405e;
+    color: #fff;
+    -webkit-border-radius: 1000px;
+    border-radius: 1000px;
+    background-color: white;
+    color: #70547D;
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+  /* line 121, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
+  .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a:hover, .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a:focus {
+    background-color: #55405e;
+  }
+  /* line 132, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
+  .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a:hover, .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a:focus {
+    color: #fff;
+  }
+  /* line 149, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right {
     overflow: hidden;
   }
-  /* line 128, ../sass/_digital_library.scss */
-  .page-node.node-type-digital-library-content .field-name-field-thumbnail {
+  /* line 151, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-right .divider {
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 1.25em;
+  }
+  /* line 156, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-right .divider hr {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    top: 14px;
+    left: 15px;
+    margin-top: 0;
+    border: solid #6F7E95;
+    border-width: 1px 0 0;
+  }
+  /* line 166, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-right .field-label-above {
+    margin-bottom: 20px;
+  }
+  /* line 169, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-right .field-item {
+    margin: 10px 0;
+  }
+  /* line 172, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail {
     display: none;
   }
 }
 @media only screen and (min-width: 640px) {
-  /* line 136, ../sass/_digital_library.scss */
+  /* line 181, ../sass/_digital_library.scss */
   .gallery-main .medium-6 {
     width: 47%;
     margin: 1.5%;
   }
-  /* line 140, ../sass/_digital_library.scss */
+  /* line 185, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns {
     border-top: none;
     border-bottom: none;
   }
-  /* line 143, ../sass/_digital_library.scss */
+  /* line 188, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns .field-name-title {
     padding-top: 0;
     padding-bottom: 0;
   }
-  /* line 147, ../sass/_digital_library.scss */
+  /* line 192, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns .flagged .field-name-title {
     background-color: #F66B16;
   }
 }
 @media only screen and (min-width: 1025px) {
-  /* line 156, ../sass/_digital_library.scss */
+  /* line 201, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 {
     width: 30.33333%;
     margin: 1.5%;
   }
-  /* line 159, ../sass/_digital_library.scss */
+  /* line 204, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .field-name-field-thumbnail {
     margin-left: -1.875em;
     margin-right: -1.875em;
   }
-  /* line 162, ../sass/_digital_library.scss */
+  /* line 207, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .field-name-field-thumbnail img {
     width: 100%;
     height: auto;
   }
-  /* line 167, ../sass/_digital_library.scss */
+  /* line 212, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .field-name-title {
     margin-left: -1.875em;
     margin-right: -1.875em;
@@ -4202,27 +4305,48 @@ table tfoot tr td {
     padding-right: 4.25em;
     background: url("../images/text-icon.png") no-repeat 95% center #70547D;
   }
-  /* line 174, ../sass/_digital_library.scss */
+  /* line 219, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .media-type-text .field-name-title,
   .gallery-main .view-content .large-4 .media-type-image .field-name-title {
     background: url("../images/attachment-icon.png") no-repeat 95% center #6F7E95;
   }
-  /* line 178, ../sass/_digital_library.scss */
+  /* line 223, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .media-type-audio .field-name-title,
   .gallery-main .view-content .large-4 .media-type-video .field-name-title {
     background: url("../images/video-icon.png") no-repeat 95% center #0035B7;
   }
-  /* line 182, ../sass/_digital_library.scss */
+  /* line 227, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .flagged .field-name-title {
     background-color: #F66B16;
   }
 
-  /* line 188, ../sass/_digital_library.scss */
+  /* line 233, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content #page,
+  .page-node.node-type-digital-library-content #content {
+    background: linear-gradient(90deg, white 66.66667%, #EEEEEE 33.33333%);
+  }
+  /* line 237, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .pane-content-state {
     padding-left: 1.875em;
   }
-  /* line 191, ../sass/_digital_library.scss */
-  .page-node.node-type-digital-library-content .field-name-field-thumbnail {
+  /* line 240, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-right {
+    margin-top: 50px;
+    /*.field-label-above {
+      margin-bottom: 20px;
+    }
+    .field-item {
+      margin: 10px 0;
+    }*/
+  }
+  /* line 248, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail {
     display: block;
+    margin-bottom: 35px;
+  }
+  /* line 251, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail img {
+    width: 100%;
+    height: auto;
   }
 }

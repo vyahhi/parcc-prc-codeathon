@@ -9,6 +9,24 @@ $desktop-padding: em-calc(30);
 
 $bold-font-family: 'Open Sans Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
+@mixin paragraph {
+  font-family: inherit;
+  font-weight: normal;
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 1.25em;
+  text-rendering: optimizeLegibility;
+}
+@mixin bold {
+  font-family: $bold-font-family;
+  font-weight: 700;
+}
+@mixin parcc_button {
+  @include button($button-med, $primary-color, 1000px);
+  background-color: white;
+  color: $parcc_purple;
+}
+
 $parcc-purple: #70547D;
 $parcc-blue: #0035B7;
 $parcc-orange: #F66B16;
