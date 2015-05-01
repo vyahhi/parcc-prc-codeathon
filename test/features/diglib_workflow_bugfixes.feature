@@ -1,4 +1,4 @@
-@diglib @workflow @api @prc-1385 @prc-1386
+@diglib @workflow @api @prc-1385 @prc-1386 @prc-1390
   Feature: Various bugfixes associated with workflow and revisions.
     
     @javascript
@@ -23,7 +23,7 @@
       And I select "None" from "edit-field-standard-und-0-tid-select-1"
       And I press "Publish"
       And I press "Update state"
-      # prc-1386
+      # prc-13863
       Then I should not see the message containing "Illegal string offset"
       And I click "My node @timestamp"
       And I click "Revisions"
@@ -44,6 +44,35 @@
       And I press "Update state"
       And I click "My node @timestamp"
       And I click "Edit"
+      And I break
+
       And I press "Save"
+      And I press "Confirm"
       Then I should see the message containing "Digital Library Content My node"
 
+    @javascript
+    Scenario: prc-1390 - Revisions for all fields, only last tag is tracked for revisions.
+      Given I am logged in as a user with the "Content Administrator (Curator)" role
+      And I visit "admin-content"
+      And I click "Add content"
+      And I enter "My node @timestamp" for "Title *"
+      And I select the radio button "Public" with the id "edit-field-permissions-und-public"
+      And I fill in "Tags" with "Test, Assessment"
+      And I press "Save"
+      And I click "Edit"
+      And I fill in "Tags" with "Peanut Butter"
+      And I press "Publish"
+      And I press "Update state"
+      And I click "My node @timestamp"
+      And I click "Edit"
+      And I fill in "Tags" with "Peanut Butter, Crackers, Milk"
+      And I press "Save"
+      And I press "Confirm"
+      Then I visit "admin-content"
+      And I click "My node @timestamp"
+      # we are on the edit page of the revision, click the breadcrumb to get to the main node
+      And I click "My node @timestamp"
+      And I click "Revisions"
+      And I should see the text "Test Assessment"
+      And I should see the text "Peanut Butter"
+      And I should see the text "Peanut Butter Crackers Milk"
