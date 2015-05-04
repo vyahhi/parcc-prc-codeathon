@@ -173,6 +173,15 @@
       }
     }
   }
+  .page-node-add-digital-library-content,
+  .page-node-edit.node-type-digital-library-content {
+    table {
+      width: 100%;
+      tr .form-item {
+        white-space: normal;
+      }
+    }
+  }
 }
 
 @media #{$small} {
@@ -252,6 +261,25 @@
           height: auto;
         }
       }
+    }
+  }
+  .page-node-add-digital-library-content,
+  .page-node-edit.node-type-digital-library-content {
+    input[type="text"] {  // If used elsewhere, move to site wide styles.
+      width: 50%;
+    }
+    .field-name-field-link-to-a-url input[type="text"] {
+      width: 100%;
+    }
+    table#edit-field-document-und-table {
+      width: 50%;
+    }
+    fieldset.collapsible select {
+      width: 23%;
+    }
+    .fieldset-wrapper table select {
+      width: 23%;
+      margin-right: 1.2em;
     }
   }
 }

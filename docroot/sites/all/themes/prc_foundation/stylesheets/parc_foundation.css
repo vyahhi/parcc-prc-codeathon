@@ -4033,12 +4033,12 @@ table tfoot tr td {
     background-color: #EEEEEE;
     border-top: 1px solid #DBDBDB;
   }
-  /* line 22, ../sass/_digital_library.scss */
+  /* line 21, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns {
     border-top: 10px solid #EEEEEE;
     border-bottom: 10px solid #EEEEEE;
   }
-  /* line 26, ../sass/_digital_library.scss */
+  /* line 25, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns {
     padding-bottom: 1em;
     border-top: 10px solid #EEEEEE;
@@ -4046,17 +4046,17 @@ table tfoot tr td {
     background-color: white;
     font-size: 0.8125em;
   }
-  /* line 32, ../sass/_digital_library.scss */
+  /* line 31, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-field-thumbnail {
     margin-left: -0.9375em;
     margin-right: -0.9375em;
   }
-  /* line 35, ../sass/_digital_library.scss */
+  /* line 34, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-field-thumbnail img {
     width: 100%;
     height: auto;
   }
-  /* line 40, ../sass/_digital_library.scss */
+  /* line 39, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-title {
     margin-left: -0.9375em;
     margin-right: -0.9375em;
@@ -4066,108 +4066,108 @@ table tfoot tr td {
     padding-bottom: 1px;
     background: url("../images/text-icon.png") no-repeat 97% center #70547D;
   }
-  /* line 48, ../sass/_digital_library.scss */
+  /* line 47, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-title h3 {
     margin-top: 0;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
   }
-  /* line 52, ../sass/_digital_library.scss */
+  /* line 51, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-title h3 a {
     color: white;
   }
-  /* line 57, ../sass/_digital_library.scss */
+  /* line 56, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .media-type-text .field-name-title,
   .gallery-main .view-content .columns .media-type-image .field-name-title {
     background: url("../images/attachment-icon.png") no-repeat 97% center #6F7E95;
   }
-  /* line 61, ../sass/_digital_library.scss */
+  /* line 60, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .media-type-audio .field-name-title,
   .gallery-main .view-content .columns .media-type-video .field-name-title {
     background: url("../images/video-icon.png") no-repeat 97% center #0035B7;
   }
-  /* line 65, ../sass/_digital_library.scss */
+  /* line 64, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .flagged .field-name-title {
     background-color: #F66B16;
   }
-  /* line 68, ../sass/_digital_library.scss */
+  /* line 67, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-post-date {
     margin: 1.25em 0;
     color: #6F7E95;
   }
-  /* line 72, ../sass/_digital_library.scss */
+  /* line 71, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-body {
     margin-bottom: 1.5em;
     border-bottom: 1px solid #6F7E95;
   }
-  /* line 75, ../sass/_digital_library.scss */
+  /* line 74, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-body .field-items {
     margin-bottom: 1.75em;
   }
-  /* line 79, ../sass/_digital_library.scss */
+  /* line 78, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links {
     float: left;
     margin-bottom: 1em;
     min-width: 35px;
   }
-  /* line 83, ../sass/_digital_library.scss */
+  /* line 82, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links li {
     padding-left: 0;
   }
-  /* line 86, ../sass/_digital_library.scss */
+  /* line 85, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links .prc_digital_library_add_to_favorites a {
     padding: 0 10px;
     background: url("../images/favorite-icon.png") no-repeat;
   }
-  /* line 90, ../sass/_digital_library.scss */
+  /* line 89, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links .prc_digital_library_add_to_favorites a:hover {
     background: url("../images/favorite-icon-selected.png") no-repeat;
   }
-  /* line 93, ../sass/_digital_library.scss */
+  /* line 92, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links .flag-like_content a {
     margin-right: 5px;
     padding: 0 0 0 20px;
     background: url("../images/like-icon.png") no-repeat;
   }
-  /* line 98, ../sass/_digital_library.scss */
+  /* line 97, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links .flag-like_content a.unflag-action,
   .gallery-main .view-content .columns ul.links .flag-like_content a:hover {
     background: url("../images/like-icon-hover.png") no-repeat;
   }
-  /* line 102, ../sass/_digital_library.scss */
+  /* line 101, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links .flag-like_content .flag-message {
     line-height: 0;
     font-size: 0;
     color: transparent;
   }
-  /* line 108, ../sass/_digital_library.scss */
+  /* line 107, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links .prc_digital_library_comment_email,
   .gallery-main .view-content .columns ul.links .pinit {
     display: none;
   }
-  /* line 112, ../sass/_digital_library.scss */
+  /* line 111, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-field-tags {
     float: left;
     color: #6F7E95;
   }
-  /* line 115, ../sass/_digital_library.scss */
+  /* line 114, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-field-tags .field-label {
     margin-bottom: 5px;
   }
 
-  /* line 122, ../sass/_digital_library.scss */
+  /* line 121, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .panel-flexible.panels-flexible-new {
     height: 0;
   }
-  /* line 125, ../sass/_digital_library.scss */
+  /* line 124, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left {
     overflow: hidden;
   }
-  /* line 127, ../sass/_digital_library.scss */
+  /* line 126, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left ul.tabs.primary {
     margin-bottom: 1em;
   }
-  /* line 130, ../sass/_digital_library.scss */
+  /* line 129, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .field-name-post-date {
     font-family: inherit;
     font-weight: normal;
@@ -4178,19 +4178,19 @@ table tfoot tr td {
     font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
   }
-  /* line 134, ../sass/_digital_library.scss */
+  /* line 133, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .field-name-field-author-name {
     margin-bottom: 0;
     font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
   }
-  /* line 138, ../sass/_digital_library.scss */
+  /* line 137, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email {
     width: 125px;
     margin: auto;
     list-style: none;
   }
-  /* line 143, ../sass/_digital_library.scss */
+  /* line 142, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a {
     border-style: solid;
     border-width: 1px;
@@ -4226,17 +4226,17 @@ table tfoot tr td {
   .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a:hover, .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a:focus {
     color: #fff;
   }
-  /* line 149, ../sass/_digital_library.scss */
+  /* line 148, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right {
     overflow: hidden;
   }
-  /* line 151, ../sass/_digital_library.scss */
+  /* line 150, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .divider {
     overflow: hidden;
     white-space: nowrap;
     line-height: 1.25em;
   }
-  /* line 156, ../sass/_digital_library.scss */
+  /* line 155, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .divider hr {
     display: inline-block;
     width: 100%;
@@ -4247,57 +4247,66 @@ table tfoot tr td {
     border: solid #6F7E95;
     border-width: 1px 0 0;
   }
-  /* line 166, ../sass/_digital_library.scss */
+  /* line 165, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-label-above {
     margin-bottom: 20px;
   }
-  /* line 169, ../sass/_digital_library.scss */
+  /* line 168, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-item {
     margin: 10px 0;
   }
-  /* line 172, ../sass/_digital_library.scss */
+  /* line 171, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail {
     display: none;
   }
+
+  /* line 177, ../sass/_digital_library.scss */
+  .page-node-add-digital-library-content table, .page-node-edit.node-type-digital-library-content table {
+    width: 100%;
+  }
+  /* line 179, ../sass/_digital_library.scss */
+  .page-node-add-digital-library-content table tr .form-item, .page-node-edit.node-type-digital-library-content table tr .form-item {
+    white-space: normal;
+  }
 }
 @media only screen and (min-width: 640px) {
-  /* line 181, ../sass/_digital_library.scss */
+  /* line 188, ../sass/_digital_library.scss */
   .gallery-main .medium-6 {
     width: 47%;
     margin: 1.5%;
   }
-  /* line 185, ../sass/_digital_library.scss */
+  /* line 192, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns {
     border-top: none;
     border-bottom: none;
   }
-  /* line 188, ../sass/_digital_library.scss */
+  /* line 195, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns .field-name-title {
     padding-top: 0;
     padding-bottom: 0;
   }
-  /* line 192, ../sass/_digital_library.scss */
+  /* line 199, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns .flagged .field-name-title {
     background-color: #F66B16;
   }
 }
 @media only screen and (min-width: 1025px) {
-  /* line 201, ../sass/_digital_library.scss */
+  /* line 208, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 {
     width: 30.33333%;
     margin: 1.5%;
   }
-  /* line 204, ../sass/_digital_library.scss */
+  /* line 211, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .field-name-field-thumbnail {
     margin-left: -1.875em;
     margin-right: -1.875em;
   }
-  /* line 207, ../sass/_digital_library.scss */
+  /* line 214, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .field-name-field-thumbnail img {
     width: 100%;
     height: auto;
   }
-  /* line 212, ../sass/_digital_library.scss */
+  /* line 219, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .field-name-title {
     margin-left: -1.875em;
     margin-right: -1.875em;
@@ -4305,31 +4314,31 @@ table tfoot tr td {
     padding-right: 4.25em;
     background: url("../images/text-icon.png") no-repeat 95% center #70547D;
   }
-  /* line 219, ../sass/_digital_library.scss */
+  /* line 226, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .media-type-text .field-name-title,
   .gallery-main .view-content .large-4 .media-type-image .field-name-title {
     background: url("../images/attachment-icon.png") no-repeat 95% center #6F7E95;
   }
-  /* line 223, ../sass/_digital_library.scss */
+  /* line 230, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .media-type-audio .field-name-title,
   .gallery-main .view-content .large-4 .media-type-video .field-name-title {
     background: url("../images/video-icon.png") no-repeat 95% center #0035B7;
   }
-  /* line 227, ../sass/_digital_library.scss */
+  /* line 234, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .flagged .field-name-title {
     background-color: #F66B16;
   }
 
-  /* line 233, ../sass/_digital_library.scss */
+  /* line 240, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content #page,
   .page-node.node-type-digital-library-content #content {
     background: linear-gradient(90deg, white 66.66667%, #EEEEEE 33.33333%);
   }
-  /* line 237, ../sass/_digital_library.scss */
+  /* line 244, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .pane-content-state {
     padding-left: 1.875em;
   }
-  /* line 240, ../sass/_digital_library.scss */
+  /* line 247, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right {
     margin-top: 50px;
     /*.field-label-above {
@@ -4339,14 +4348,36 @@ table tfoot tr td {
       margin: 10px 0;
     }*/
   }
-  /* line 248, ../sass/_digital_library.scss */
+  /* line 255, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail {
     display: block;
     margin-bottom: 35px;
   }
-  /* line 251, ../sass/_digital_library.scss */
+  /* line 258, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail img {
     width: 100%;
     height: auto;
+  }
+
+  /* line 266, ../sass/_digital_library.scss */
+  .page-node-add-digital-library-content input[type="text"], .page-node-edit.node-type-digital-library-content input[type="text"] {
+    width: 50%;
+  }
+  /* line 269, ../sass/_digital_library.scss */
+  .page-node-add-digital-library-content .field-name-field-link-to-a-url input[type="text"], .page-node-edit.node-type-digital-library-content .field-name-field-link-to-a-url input[type="text"] {
+    width: 100%;
+  }
+  /* line 272, ../sass/_digital_library.scss */
+  .page-node-add-digital-library-content table#edit-field-document-und-table, .page-node-edit.node-type-digital-library-content table#edit-field-document-und-table {
+    width: 50%;
+  }
+  /* line 275, ../sass/_digital_library.scss */
+  .page-node-add-digital-library-content fieldset.collapsible select, .page-node-edit.node-type-digital-library-content fieldset.collapsible select {
+    width: 23%;
+  }
+  /* line 278, ../sass/_digital_library.scss */
+  .page-node-add-digital-library-content .fieldset-wrapper table select, .page-node-edit.node-type-digital-library-content .fieldset-wrapper table select {
+    width: 23%;
+    margin-right: 1.2em;
   }
 }
