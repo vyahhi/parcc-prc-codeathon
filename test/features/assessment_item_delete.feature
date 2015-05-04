@@ -44,6 +44,7 @@ Feature: PRC-528 Delete Item in Test Customization
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     And I fill in "edit-alternatives-1-answer-value" with "Answer 2"
     And I check the box "edit-alternatives-1-correct"
+    And I select "1st Grade" from "Grade Level"
     And I press "Save"
     Then I click "View"
     Then I should see the heading "PRC-528 Delete" in the "content" region
@@ -81,6 +82,7 @@ Feature: PRC-528 Delete Item in Test Customization
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     And I fill in "edit-alternatives-1-answer-value" with "Answer 2"
     And I check the box "edit-alternatives-1-correct"
+    And I select "1st Grade" from "Grade Level"
     And I press "Save"
     Then I click "View"
     Then I should see the heading "PRC-528 Delete" in the "content" region
@@ -112,6 +114,7 @@ Feature: PRC-528 Delete Item in Test Customization
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     And I fill in "edit-alternatives-1-answer-value" with "Answer 2"
     And I check the box "edit-alternatives-1-correct"
+    And I select "1st Grade" from "Grade Level"
     And I press "Save"
     Then I click "View"
     Then I should see the heading "PRC-528 Delete" in the "content" region

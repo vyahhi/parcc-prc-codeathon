@@ -43,7 +43,7 @@ Feature: Anonymous User Home Page (PRC-51)
     And I am on the homepage
     Then I should see the link "Home"
     And I should see the link "Digital Library"
-    And I should see the link "Assessments"
+    And I should see the link "Assessment"
     And I should see the link "Professional Learning"
     And I should not see the link "Content" in the "main_menu"
     And I should not see the link "Users"
