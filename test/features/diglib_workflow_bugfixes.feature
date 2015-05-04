@@ -44,8 +44,6 @@
       And I press "Update state"
       And I click "My node @timestamp"
       And I click "Edit"
-      And I break
-
       And I press "Save"
       And I press "Confirm"
       Then I should see the message containing "Digital Library Content My node"
@@ -72,7 +70,8 @@
       # we are on the edit page of the revision, click the breadcrumb to get to the main node
       And I click "My node @timestamp"
       And I click "Revisions"
-      And I should see the text "Test Assessment"
+      And I should see the text "Test"
+      And I should see the text "Assessment"
       And I should see the text "Peanut Butter"
       And I should see the text "Peanut Butter Crackers Milk"
 
