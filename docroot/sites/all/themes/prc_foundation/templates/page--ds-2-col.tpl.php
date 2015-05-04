@@ -101,8 +101,8 @@
     </section>
   <?php endif; ?>
 
-  <main role="main" class="row">
-    <div id="content" class="large-12 main columns">
+  <main role="main" id="content" class="row">
+    <div class="large-12 main columns">
       <?php if (!empty($page['highlighted'])): ?>
         <div class="highlight panel callout">
           <?php print render($page['highlighted']); ?>
@@ -129,9 +129,9 @@
           <?php print render($action_links); ?>
         </ul>
       <?php endif; ?>
+    </div>
 
       <?php print render($page['content']); ?>
-    </div>
 
     <?php if (!empty($page['sidebar_first'])): ?>
       <aside role="complementary" class="large-12 sidebar-first columns sidebar">

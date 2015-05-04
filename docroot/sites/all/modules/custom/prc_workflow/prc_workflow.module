@@ -422,7 +422,7 @@ function prc_workflow_pre_submit_handler($form, &$form_state) {
   $state_flow = state_flow_load_state_machine($node);
   //Only require confirmation when published
   if ($state_flow->get_current_state() === 'published') {
-    if ($form_state['triggering_element']['#value'] == 'Save New Draft') {
+    if ($form_state['triggering_element']['#value'] == 'Save') {
       $form_state['display_confirmation'] = TRUE;
       $form_state['saved_values'] = $form_state['values'];
       $form_state['rebuild'] = TRUE;
@@ -920,19 +920,22 @@ function prc_workflow_body_diff($previous_version, $node_version) {
             $left_val = '';
             $right_val = '';
             foreach ($field_left as $val) {
-              if ($field_info['settings']['allowed_values'][0]['vocabulary'] == 'standard') {
-                $left_val = ' ' . $val->description;
-              }
-              else {
-                $left_val = ' ' . $val->name;
+              if(is_object($val)) {
+                if ($field_info['settings']['allowed_values'][0]['vocabulary'] == 'standard') {
+                  $left_val .= ' ' . $val->description;
+                }
+                else {
+                  $left_val .= ' ' . $val->name;
+                }
               }
             }
             foreach ($field_right as $val) {
-              if ($field_info['settings']['allowed_values'][0]['vocabulary'] == 'standard') {
-                $right_val = ' ' . $val->description;
-              }
-              else {
-                $right_val = ' ' . $val->name;
+              if(is_object($val)) {
+                if ($field_info['settings']['allowed_values'][0]['vocabulary'] == 'standard') {
+                  $right_val .= ' ' . $val->description;
+                } else {
+                  $right_val .= ' ' . $val->name;
+                }
               }
             }
           }

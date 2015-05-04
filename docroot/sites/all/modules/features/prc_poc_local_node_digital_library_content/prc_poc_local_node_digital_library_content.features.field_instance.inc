@@ -22,7 +22,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -97,11 +97,11 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'description' => 'Enter the author name as you wish it to be displayed with the content',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -159,7 +159,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -223,7 +223,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -280,7 +280,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -337,7 +337,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -412,7 +412,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -467,10 +467,9 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 12,
+        'type' => 'hidden',
+        'weight' => 22,
       ),
       'gallery_view' => array(
         'label' => 'above',
@@ -524,7 +523,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
           'use_content_language' => TRUE,
         ),
         'type' => 'ds_taxonomy_view_mode',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'gallery_view' => array(
         'label' => 'above',
@@ -582,7 +581,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -647,7 +646,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 2,
+        'weight' => 6,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -711,7 +710,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -728,7 +727,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'medium',
+          'image_style' => 'gallery_view',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -760,12 +759,13 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
+      'course_enrollment' => FALSE,
       'default_image' => 0,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '2 MB',
       'max_resolution' => '',
-      'min_resolution' => '',
+      'min_resolution' => '595x1',
       'title_field' => 1,
       'user_register_form' => FALSE,
     ),
@@ -773,6 +773,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'label_help_description' => '',
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),

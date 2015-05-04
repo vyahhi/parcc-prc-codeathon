@@ -68,8 +68,8 @@ function prc_poc_local_node_digital_library_content_strongarm() {
       'display' => array(
         'sharethis' => array(
           'default' => array(
-            'weight' => '11',
-            'visible' => TRUE,
+            'weight' => '23',
+            'visible' => FALSE,
           ),
           'digital_library_item' => array(
             'weight' => '13',
