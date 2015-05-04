@@ -10,7 +10,7 @@ Feature: Role-Based Top Nav - PRC Admin (PRC-160)
     Then I should see the link "Home"
     And I should see the link "Digital Library"
     And I should see the link "Assessments"
-    And I should see the link "Professional Development"
+    And I should see the link "Professional Learning"
     And I should see the link "Technology Readiness"
     And I should see the link "Admin"
     When I am on "prc/admin"

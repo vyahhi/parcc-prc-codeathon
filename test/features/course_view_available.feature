@@ -14,9 +14,9 @@ Feature: PRC-34 View Available PD Courses
     | PD Course 3 | Obj3                    | public            | 3                     | year              | 0      | 1   |
     And I am logged in as a user with the "Educator" role
     And I am on the homepage
-    When I click "Professional Development"
-    Then I should see the heading "Professional Development" in the "content" region
-    And the url should match "professional-development"
+    When I click "Professional Learning"
+    Then I should see the heading "Professional Learning" in the "content" region
+    And the url should match "professional-learning"
     And I should not see the text "Welcome to PRC Professional Development page. There are no courses available to your account. Please contact your school/district to benefit from PARCC Professional Development courses exported to your district learning management system."
     # AC6 The following components are displayed for each course:
     And I should see the link "PD Course 1"
@@ -41,9 +41,9 @@ Feature: PRC-34 View Available PD Courses
     Given I have no "PD Course" nodes
     And I am logged in as a user with the "Educator" role
     And I am on the homepage
-    When I click "Professional Development"
-    Then I should see the heading "Professional Development" in the "content" region
-    And the url should match "professional-development"
+    When I click "Professional Learning"
+    Then I should see the heading "Professional Learning" in the "content" region
+    And the url should match "professional-learning"
     Then I should see the text "Welcome to PRC Professional Development page. There are no courses available to your account. Please contact your school/district to benefit from PARCC Professional Development courses exported to your district learning management system."
 
   Scenario: PRC-468 View Available PD Courses- Sort terms on PD page not same as Digital Library
@@ -54,7 +54,7 @@ Feature: PRC-34 View Available PD Courses
       | PD Course 3 | Obj3                    | public            | 3                     | year              | 0      | 1   |
     And I am logged in as a user with the "Educator" role
     And I am on the homepage
-    When I click "Professional Development"
+    When I click "Professional Learning"
     And I select "Date" from "Sort by"
     And I select "most recent on top" from "Order"
     And I select "oldest on top" from "Order"
@@ -69,7 +69,7 @@ Feature: PRC-34 View Available PD Courses
     And I fill in "Course Objectives" with "Objectives"
     And I press "Save"
     And I should see the success message containing "PD Course PRC-519 has been updated."
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     And I should not see the text "Add a Thumbnail Image"
     When I click "PRC-519"
     Then I should not see the text "Add a Thumbnail Image"
@@ -84,6 +84,6 @@ Feature: PRC-34 View Available PD Courses
     And I fill in "Course Objectives" with "Objectives"
     And I press "Save"
     And I should see the success message containing "PD Course PRC-519 has been updated."
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     And I should not see the text "Add a Thumbnail Image"
     But I should see an ".field-name-field-thumbnail img" element

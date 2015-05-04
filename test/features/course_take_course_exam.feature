@@ -114,14 +114,14 @@ Feature: PRC-476 Take Course Exam
   Scenario: Course with exam step - Pass
     Given I am logged in as a user with the "Educator" role
     And I am on the homepage
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
     Then I click "Take course"
     And I should see the message containing "Your enrollment in this course has been recorded."
     And I should not see the link "PRC-476 Exam"
     But I should see the text "PRC-476 Exam"
     And I click "PD Module 1"
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
     And I should see the text "Complete"
     And I should not see the text "Not started"
@@ -135,21 +135,21 @@ Feature: PRC-476 Take Course Exam
     Then I press "Finish"
     Then I should see the text "Score: 100."
     And I should see the text "Congratulations! You successfully passed the PRC-476 Exam exam."
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
     And I should not see the link "PRC-476 Exam"
 
   Scenario: Course with exam step - Fail
     Given I am logged in as a user with the "Educator" role
     And I am on the homepage
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
     Then I click "Take course"
     And I should see the message containing "Your enrollment in this course has been recorded."
     And I should not see the link "PRC-476 Exam"
     But I should see the text "PRC-476 Exam"
     And I click "PD Module 1"
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
     And I should see the text "Complete"
     And I should not see the text "Not started"
@@ -164,21 +164,21 @@ Feature: PRC-476 Take Course Exam
     Then I should see the text "Score: 50."
     And I should see the text "Sorry. You did not reach the required score to pass the PRC-476 Exam exam. Please try again later."
     And I should see the text "You may revisit the course modules and retake the course exam when ready."
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
     And I should see the link "PRC-476 Exam"
 
   Scenario: Course with exam step - Leave and Restart
     Given I am logged in as a user with the "Educator" role
     And I am on the homepage
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
     Then I click "Take course"
     And I should see the message containing "Your enrollment in this course has been recorded."
     And I should not see the link "PRC-476 Exam"
     But I should see the text "PRC-476 Exam"
     And I click "PD Module 1"
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
     And I should see the text "Complete"
     And I should not see the text "Not started"
@@ -189,7 +189,7 @@ Feature: PRC-476 Take Course Exam
     Then I press "Next"
     Then I check radio button number "1"
     Then I press "Next"
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
     And I should see the link "PRC-476 Exam"
     When I click "PRC-476 Exam"

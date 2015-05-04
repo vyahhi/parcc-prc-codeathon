@@ -305,6 +305,26 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-digital-library-left-nav_view-all:library
+  $menu_links['menu-digital-library-left-nav_view-all:library'] = array(
+    'menu_name' => 'menu-digital-library-left-nav',
+    'link_path' => 'library',
+    'router_path' => 'library',
+    'link_title' => 'View All',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-digital-library-left-nav_view-all:library',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-invite-users_invite-new-user:invite/add/invite_by_email
   $menu_links['menu-invite-users_invite-new-user:invite/add/invite_by_email'] = array(
     'menu_name' => 'menu-invite-users',
@@ -392,6 +412,26 @@ function prc_menu_links_menu_default_menu_links() {
     'has_children' => 0,
     'expanded' => 0,
     'weight' => -48,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-professional-development-le_all-available-courses:professional-learning
+  $menu_links['menu-professional-development-le_all-available-courses:professional-learning'] = array(
+    'menu_name' => 'menu-professional-development-le',
+    'link_path' => 'professional-learning',
+    'router_path' => 'professional-learning',
+    'link_title' => 'All Available Courses',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-professional-development-le_all-available-courses:professional-learning',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
     'customized' => 1,
   );
   // Exported menu link: menu-trt-district-add_add-district:node/add/district
@@ -785,6 +825,7 @@ function prc_menu_links_menu_default_menu_links() {
   t('Add course');
   t('Admin');
   t('All Available Assessments');
+  t('All Available Courses');
   t('Assessment');
   t('Content');
   t('Course Management');
@@ -808,6 +849,7 @@ function prc_menu_links_menu_default_menu_links() {
   t('Testing Capacity Check');
   t('User account');
   t('Users');
+  t('View All');
   t('run system check');
   t('run testing capacity check');
 

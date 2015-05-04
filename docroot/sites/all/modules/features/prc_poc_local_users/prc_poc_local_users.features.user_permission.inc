@@ -1019,6 +1019,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create speaking_and_listening_resource content'.
+  $permissions['create speaking_and_listening_resource content'] = array(
+    'name' => 'create speaking_and_listening_resource content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create state content'.
   $permissions['create state content'] = array(
     'name' => 'create state content',
@@ -1174,6 +1181,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any speaking_and_listening_resource content'.
+  $permissions['delete any speaking_and_listening_resource content'] = array(
+    'name' => 'delete any speaking_and_listening_resource content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any state content'.
   $permissions['delete any state content'] = array(
     'name' => 'delete any state content',
@@ -1323,6 +1337,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own speaking_and_listening_resource content'.
+  $permissions['delete own speaking_and_listening_resource content'] = array(
+    'name' => 'delete own speaking_and_listening_resource content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own state content'.
   $permissions['delete own state content'] = array(
     'name' => 'delete own state content',
@@ -1401,6 +1422,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete terms in quiz_type'.
   $permissions['delete terms in quiz_type'] = array(
     'name' => 'delete terms in quiz_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'delete terms in resource_type'.
+  $permissions['delete terms in resource_type'] = array(
+    'name' => 'delete terms in resource_type',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -2106,6 +2134,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any speaking_and_listening_resource content'.
+  $permissions['edit any speaking_and_listening_resource content'] = array(
+    'name' => 'edit any speaking_and_listening_resource content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any state content'.
   $permissions['edit any state content'] = array(
     'name' => 'edit any state content',
@@ -2274,6 +2309,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own speaking_and_listening_resource content'.
+  $permissions['edit own speaking_and_listening_resource content'] = array(
+    'name' => 'edit own speaking_and_listening_resource content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own state content'.
   $permissions['edit own state content'] = array(
     'name' => 'edit own state content',
@@ -2353,6 +2395,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit terms in quiz_type'.
   $permissions['edit terms in quiz_type'] = array(
     'name' => 'edit terms in quiz_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in resource_type'.
+  $permissions['edit terms in resource_type'] = array(
+    'name' => 'edit terms in resource_type',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -2726,6 +2775,13 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
     ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search speaking_and_listening_resource content'.
+  $permissions['search speaking_and_listening_resource content'] = array(
+    'name' => 'search speaking_and_listening_resource content',
+    'roles' => array(),
     'module' => 'search_config',
   );
 

@@ -28,6 +28,7 @@ features[field_base][] = field_devices_capacity
 features[field_base][] = field_devices_capacity_results
 features[field_base][] = field_document
 features[field_base][] = field_favorite_content
+features[field_base][] = field_file_single
 features[field_base][] = field_first_name
 features[field_base][] = field_genre
 features[field_base][] = field_grade_level

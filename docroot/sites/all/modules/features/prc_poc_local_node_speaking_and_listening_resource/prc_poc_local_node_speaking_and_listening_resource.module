@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Speaking and Listening Resource feature.
+ */
+
+include_once 'prc_poc_local_node_speaking_and_listening_resource.features.inc';

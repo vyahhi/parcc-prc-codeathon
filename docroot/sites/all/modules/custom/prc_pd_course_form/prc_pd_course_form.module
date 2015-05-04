@@ -580,7 +580,7 @@ function prc_pd_course_form_form_quiz_report_form_alter(&$form, &$form_state) {
     $course_object_ids = array_keys($course_node->course['objects']);
     $last_object_id = array_pop($course_object_ids);
     if ($course_object_id == $last_object_id) {
-      $new_path = 'professional-development';
+      $new_path = 'professional-learning';
     }
     else {
       $new_path = drupal_lookup_path('alias', "node/" . $course_node->nid);

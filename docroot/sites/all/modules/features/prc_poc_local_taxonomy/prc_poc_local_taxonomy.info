@@ -16,6 +16,7 @@ features[taxonomy][] = media_type
 features[taxonomy][] = member_state
 features[taxonomy][] = module_type
 features[taxonomy][] = quiz_type
+features[taxonomy][] = resource_type
 features[taxonomy][] = standard
 features[taxonomy][] = subject
 features[taxonomy][] = tags

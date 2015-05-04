@@ -22,7 +22,7 @@ Feature: PRC-406 PD Custom List
       | PRC-406-1 | 1   | 1      | public            |
       | PRC-406-2 | 1   | 1      | public            |
     And I am on the homepage
-    When I follow "Professional Development"
+    When I follow "Professional Learning"
     Then I should see the link "PRC-406-1"
     And I should see the link "Add to My PD Lists"
     When I click "Add to My PD Lists"
@@ -37,7 +37,7 @@ Feature: PRC-406 PD Custom List
       | title     | uid | status | field_permissions |
       | PRC-406-1 | 1   | 1      | public            |
     And I am on the homepage
-    When I follow "Professional Development"
+    When I follow "Professional Learning"
     Then I should see the link "PRC-406-1"
     And I should see the link "Add to My PD Lists"
     When I click "Add to My PD Lists"
@@ -65,7 +65,7 @@ Feature: PRC-406 PD Custom List
       | PRC-406-1 | 1   | 1      | public            |
       | PRC-406-2 | 1   | 1      | public            |
     And I am on the homepage
-    When I follow "Professional Development"
+    When I follow "Professional Learning"
     Then I should see the link "My PDC List"
     But I should not see the link "My DLC List"
 
@@ -83,11 +83,11 @@ Feature: PRC-406 PD Custom List
       | title     | uid | status | field_permissions |
       | PRC-406-1 | 1   | 1      | public            |
       | PRC-406-2 | 1   | 1      | public            |
-    And I visit "professional-development"
+    And I visit "professional-learning"
     Then I click "Add to My PD Lists"
     And I select "My PDC List b" from "List"
     And I press "Add to List"
-    Then I visit "professional-development"
+    Then I visit "professional-learning"
     Then I should see the link "My PDC List a"
     Then I should see the link "My PDC List b"
     Then I should see the link "My PDC List c"
@@ -100,7 +100,7 @@ Feature: PRC-406 PD Custom List
     And "Favorites List" nodes:
       | title         | uid         | status | field_content_type |
       | My DLC List   | @currentuid | 1      | pd_course          |
-    When I visit "professional-development"
+    When I visit "professional-learning"
     Then I should see the text "My PD Lists"
 
   Scenario: PRC-482 PD Custom List- AC#3 "All Available Courses" link has wrong name.
@@ -108,5 +108,5 @@ Feature: PRC-406 PD Custom List
     And "Favorites List" nodes:
       | title         | uid         | status | field_content_type |
       | My DLC List   | @currentuid | 1      | pd_course          |
-    When I visit "professional-development"
+    When I visit "professional-learning"
     Then I should see the text "All Available Courses"

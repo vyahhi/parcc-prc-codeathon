@@ -23,7 +23,7 @@ Feature: PRC-610 Assessment Custom List
       | PRC-610-1 | subj1         | PARCC-Released Practice Assessment | @currentuid |
       | PRC-610-2 | subj1         | PARCC-Released Practice Assessment | @currentuid |
     And I am on the homepage
-    When I follow "Assessments"
+    When I follow "Assessment"
     Then I should see the link "PRC-610-1"
     And I should see the link "Add to My Quiz Lists"
     When I click "Add to My Quiz Lists"
@@ -42,7 +42,7 @@ Feature: PRC-610 Assessment Custom List
       | title     | field_subject | field_quiz_type                    | author      |
       | PRC-610-1 | subj1         | PARCC-Released Practice Assessment | @currentuid |
     And I am on the homepage
-    When I follow "Assessments"
+    When I follow "Assessment"
     Then I should see the link "PRC-610-1"
     And I should see the link "Add to My Quiz Lists"
     When I click "Add to My Quiz Lists"
@@ -72,7 +72,7 @@ Feature: PRC-610 Assessment Custom List
       | title     | field_subject | field_quiz_type                    | author      |
       | PRC-610-1 | subj1         | PARCC-Released Practice Assessment | @currentuid |
     And I am on the homepage
-    When I follow "Assessments"
+    When I follow "Assessment"
     Then I should see the link "My Quiz 610 List"
     But I should not see the link "My DLC List"
     But I should not see the link "My PDC List"

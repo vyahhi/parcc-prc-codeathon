@@ -10,7 +10,7 @@ Feature: Role-Based Top Nav - Content Contributor (PRC-159)
     Then I should see the link "Home"
     And I should see the link "Digital Library"
     And I should see the link "Assessments"
-    And I should see the link "Professional Development"
+    And I should see the link "Professional Learning"
     And I should see the link "Technology Readiness"
     When I am on "prc/admin"
     Then I should see the link "Content"
