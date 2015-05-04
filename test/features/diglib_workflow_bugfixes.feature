@@ -25,7 +25,6 @@
       And I press "Update state"
       # prc-1386
       Then I should not see the message containing "Illegal string offset"
-      And I press "Update state"
       And I click "My node @timestamp"
       And I click "Revisions"
       # prc-1385
