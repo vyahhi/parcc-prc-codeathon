@@ -2602,7 +2602,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->task = 'page';
   $page->admin_title = 'Digital Library';
   $page->admin_description = 'This is the public view of our digital library content';
-  $page->path = 'digital-library/!nid';
+  $page->path = 'library/!nid';
   $page->access = array(
     'plugins' => array(),
     'logic' => 'and',
@@ -2655,7 +2655,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'path_visibility',
           'settings' => array(
             'visibility_setting' => '1',
-            'paths' => 'digital-library',
+            'paths' => 'library',
           ),
           'context' => 'empty',
           'not' => FALSE,
@@ -2857,7 +2857,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'path_visibility',
           'settings' => array(
             'visibility_setting' => '1',
-            'paths' => 'digital-library/*',
+            'paths' => 'library/*',
           ),
           'context' => 'empty',
           'not' => FALSE,
@@ -3217,6 +3217,60 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['home_page'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
+  $page->name = 'instruction';
+  $page->task = 'page';
+  $page->admin_title = 'Instruction';
+  $page->admin_description = 'Instruction Landing Page';
+  $page->path = 'instruction';
+  $page->access = array();
+  $page->menu = array();
+  $page->arguments = array();
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_instruction__panel_context_35677fc1-9b6a-44c2-95bd-17e7ee23ba89';
+  $handler->task = 'page';
+  $handler->subtask = 'instruction';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = 'a704ef87-e26d-4939-bdb7-4dd6e163c946';
+  $display->content = array();
+  $display->panels = array();
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['instruction'] = $page;
 
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
@@ -3613,23 +3667,23 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->api_version = 1;
   $page->name = 'professional_development';
   $page->task = 'page';
-  $page->admin_title = 'Professional Development';
-  $page->admin_description = 'Professional Development placeholder';
-  $page->path = 'professional-development/!nid';
+  $page->admin_title = 'Professional Learning';
+  $page->admin_description = 'Professional Learning';
+  $page->path = 'professional-learning/!nid';
   $page->access = array(
     'plugins' => array(),
     'logic' => 'and',
   );
   $page->menu = array(
     'type' => 'normal',
-    'title' => 'Professional Development',
-    'weight' => '0',
+    'title' => 'Professional Learning',
     'name' => 'main-menu',
+    'weight' => '0',
     'parent' => array(
       'type' => 'none',
       'title' => '',
-      'weight' => 0,
       'name' => 'navigation',
+      'weight' => '0',
     ),
   );
   $page->arguments = array(
@@ -3653,7 +3707,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $handler->handler = 'panel_context';
   $handler->weight = 0;
   $handler->conf = array(
-    'title' => 'Professional Development',
+    'title' => 'Professional Learning',
     'no_blocks' => 0,
     'pipeline' => 'ipe',
     'body_classes_to_remove' => '',
@@ -3668,7 +3722,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'path_visibility',
           'settings' => array(
             'visibility_setting' => '1',
-            'paths' => 'professional-development',
+            'paths' => 'professional-learning',
           ),
           'context' => 'empty',
           'not' => FALSE,
@@ -3689,7 +3743,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = 'Professional Development';
+  $display->title = 'Professional Learning';
   $display->uuid = '527e0755-07d9-436f-bd38-87d765c2dbfb';
   $display->content = array();
   $display->panels = array();
@@ -3775,7 +3829,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $handler->handler = 'panel_context';
   $handler->weight = 1;
   $handler->conf = array(
-    'title' => 'Professional Development Favorites',
+    'title' => 'Professional Learning Favorites',
     'no_blocks' => 0,
     'pipeline' => 'standard',
     'body_classes_to_remove' => '',
@@ -3790,7 +3844,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'path_visibility',
           'settings' => array(
             'visibility_setting' => '1',
-            'paths' => 'professional-development/*',
+            'paths' => 'professional-learning/*',
           ),
           'context' => 'empty',
           'not' => FALSE,
@@ -3810,7 +3864,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = 'Professional Development Favorites';
+  $display->title = 'Professional Learning Favorites';
   $display->uuid = '16e9b363-4da6-4914-bb34-05186e577184';
   $display->content = array();
   $display->panels = array();
