@@ -20,5 +20,5 @@ Feature: PRC-347 Top Nav Bar for Anonymous Users
       | Public PRC-435 | This is public | public            | 1   | 1      |
     And I am an anonymous user
     And I index search results
-    And I am on "digital-library"
+    And I am on "library"
     Then I should see the link "Public PRC-435"

@@ -22,12 +22,12 @@ Feature: Admin UI: Define Content Metadata (PRC-30)
 
   # AC2 Test grade level options
 
-    Then I select "PreK" from "Grade Level"
+    Then I select "Pre-K" from "Grade Level"
     And I select "Kindergarten" from "Grade Level"
-    And I select "First Grade" from "Grade Level"
-    And I select "Elementary School" from "Grade Level"
-    And I select "Middle School" from "Grade Level"
-    And I select "High School" from "Grade Level"
+    And I select "1st Grade" from "Grade Level"
+    And I select "2nd Grade" from "Grade Level"
+    And I select "8th Grade" from "Grade Level"
+    And I select "12th Grade" from "Grade Level"
 
   # AC3 Test subject options
 

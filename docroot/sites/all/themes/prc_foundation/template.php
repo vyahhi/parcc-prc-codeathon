@@ -25,7 +25,7 @@ function prc_foundation_html_head_alter(&$head_elements) {
  */
 function prc_foundation_preprocess_html(&$variables) {
   drupal_add_css('//fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:700', array('type' => 'external'));
-  if (request_path() == 'digital-library') {
+  if (request_path() == 'library') {
     drupal_add_js(path_to_theme() .'/javascripts/vendor/packery.pkgd.min.js');
     drupal_add_js(path_to_theme() .'/javascripts/custom/gallery_view.js');
   }
@@ -37,7 +37,7 @@ function prc_foundation_preprocess_html(&$variables) {
 function prc_foundation_preprocess_breadcrumb(&$variables) {
   // This is a one off example to support theming, but we should probably
   // solve for breadcrumbs more broadly at some point.
-  if (request_path() == 'digital-library') {
+  if (request_path() == 'library') {
     $variables['breadcrumb'][] = l('Home', '<front>');
     $variables['breadcrumb'][] = drupal_get_title();
   }

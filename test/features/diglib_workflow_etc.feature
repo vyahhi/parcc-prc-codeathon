@@ -43,7 +43,7 @@ Feature: Workflow is functional
     When I press the "Update state" button
     And I visit "user/logout"
     And I index search results
-    And I visit "digital-library"
+    And I visit "library"
     And I click "My first post @timestamp"
     And I should see the text "My first post @timestamp"
     # prc-827 : Digital Library in email is not capitalized
@@ -53,7 +53,7 @@ Feature: Workflow is functional
 
     # Curator updates published content
     Given I am logged in as "Joe Curator"
-    And I visit "digital-library"
+    And I visit "library"
     And I click "My first post @timestamp"
     And I should see the text "Revision State: Published"
     And I click "Edit"
@@ -66,13 +66,13 @@ Feature: Workflow is functional
     Then the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
     And I visit "user/logout"
     And I index search results
-    And I visit "digital-library"
+    And I visit "library"
     And I click "My first post @timestamp"
     And I should see the text "This is what I have to say."
 
     #Contributer requests a new draft be published
     Given I am logged in as "Joe Contributor"
-    And I visit "digital-library"
+    And I visit "library"
     And I click "My first post @timestamp"
     And I should see the text "Revision State: Published"
     And I click "Edit"
@@ -103,7 +103,7 @@ Feature: Workflow is functional
 
     #contributer is denied
     Given I am logged in as "Joe Contributor"
-    And I visit "digital-library"
+    And I visit "library"
     And I click "My first post @timestamp"
     And I should see the text "Revision State: Published"
     And I click "Edit"
@@ -125,7 +125,7 @@ Feature: Workflow is functional
     #PRC-873 : should see a text area for deny
     And I fill in "Message *" with "Do it again, not so clever."
     When I press the "Send Request" button
-    And I visit "digital-library"
+    And I visit "library"
     And I click "My first post @timestamp"
     And I should see the text "Revision State: Published"
     Then the email to "joe_1prc_58cc@example.com" should contain "Do it again, not so clever."
@@ -139,7 +139,7 @@ Feature: Workflow is functional
 
     #Unpublish
     Given I am logged in as "Joe Curator"
-    And I visit "digital-library"
+    And I visit "library"
     And I click "My first post @timestamp"
     And I click "Edit"
     And I press the "Unpublish" button
@@ -185,7 +185,7 @@ Feature: Workflow is functional
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
     And I press the "Update state" button
-    When I visit "digital-library"
+    When I visit "library"
     And I click "My first post @timestamp"
     Then I should see the text "Revision State: Published"
     And the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."
@@ -266,7 +266,7 @@ Feature: Workflow is functional
     And I visit "user/logout"
     And I am an anonymous user
     And I index search results
-    Then I visit "digital-library"
+    Then I visit "library"
     And I click "My first post @timestamp"
     And I should see "Isn't this swell?"
     And I should not see "This is my unpublished addition"
@@ -281,7 +281,7 @@ Feature: Workflow is functional
     And I should not see an "textarea" element
     And I press the "Update state" button
     Then I visit "user/logout"
-    And I visit "digital-library"
+    And I visit "library"
     And I click "My first post @timestamp"
     And I should see the text "This is my unpublished addition"
     And the email to "joe_1prc_58cc@example.com" should contain "The following Digital Library content has been published."

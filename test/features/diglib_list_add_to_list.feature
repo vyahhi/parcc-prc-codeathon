@@ -15,7 +15,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
     And I index search results
     And I am on the homepage
-    Then I click "Digital Library"
+    Then I click "Library"
     Then I should see the link "Add to My Lists"
     Then I click "Add to My Lists"
     Then I should see a "List" field
@@ -31,7 +31,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     And I index search results
     And I am viewing my "favorites_list" node with the title "My Only List"
     And I am on the homepage
-    Then I click "Digital Library"
+    Then I click "Library"
     # AC1
     Then I should see the link "Add to My Lists"
     Then I click "Add to My Lists"
@@ -57,7 +57,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
     And I index search results
     And I am on the homepage
-    Then I click "Digital Library"
+    Then I click "Library"
     # AC1
     Then I should see the link "Add to My Lists"
     Then I click "Add to My Lists"

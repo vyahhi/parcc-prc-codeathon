@@ -112,11 +112,11 @@ Feature: Header/Menu Responsive Behavior (PRC-749)
     When I am browsing using a "tablet"
     And I click on the element with css selector "nav li.toggle-topbar.menu-icon"
     Then "#main-menu" should have a "background-color" css value of "rgb(51, 51, 51)"
-    And I hover over the element "#main-menu-section a[href='/digital-library']"
+    And I hover over the element "#main-menu-section a[href='/library']"
     Then "#main-menu-section li.first a" should have a "color" css value of "rgb(255, 255, 255)"
     And "#main-menu-section li.first a" should have a "background-color" css value of "rgb(43, 43, 43)"
     When I am browsing using a "desktop"
-    And I hover over the element "#main-menu-section a[href='/digital-library']"
+    And I hover over the element "#main-menu-section a[href='/library']"
     Then "#main-menu-section li.first a" should have a "color" css value of "rgb(255, 255, 255)"
     And "#main-menu-section li.first a" should have a "background-color" css value of "rgb(46, 63, 78)"
     When I click on the element with css selector "#search-icon"
@@ -127,7 +127,7 @@ Feature: Header/Menu Responsive Behavior (PRC-749)
   @javascript
   Scenario: Current page is highlighted in menu
     Given I am an anonymous user
-    And I am on "digital-library"
+    And I am on "library"
     When I am browsing using a "tablet"
     And I click on the element with css selector "nav li.toggle-topbar.menu-icon"
     Then "#main-menu-section li.first a" should have a "color" css value of "rgb(255, 255, 255)"

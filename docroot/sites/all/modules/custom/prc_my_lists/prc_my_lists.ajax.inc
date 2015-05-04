@@ -32,7 +32,7 @@ function prc_ajax_show_digital_library_favorites_list($js = FALSE, $node) {
   else {
     // No JS, so redirect to the correct page.
     $type_view_name = array(
-      'digital_library_content' => 'digital-library',
+      'digital_library_content' => 'library',
       'pd_course' => 'professional-development',
       'quiz' => 'assessments',
     );

@@ -14,7 +14,7 @@ Feature: PRC-553 Social Media: PD Content "Like"
       | title      | body           | field_permissions | uid | status |
       | Public     | This is public | public            | 1   | 1      |
     And I am logged in as a user with the "Educator" role
-    And I am on "professional-development"
+    And I am on "professional-learning"
     Then I should see the link "Public"
     And I should see the link "Like (0)"
     And I should not see the text "Undo"
@@ -24,7 +24,7 @@ Feature: PRC-553 Social Media: PD Content "Like"
 
     Then I am an anonymous user
     Then I am logged in as a user with the "Educator" role
-    And I am on "professional-development"
+    And I am on "professional-learning"
     Then I should see the link "Public"
     And I should see the link "Like (1)"
     And I should not see the text "Undo"
@@ -41,7 +41,7 @@ Feature: PRC-553 Social Media: PD Content "Like"
       | title      | body           | field_permissions | uid | status |
       | Public     | This is public | public            | 1   | 1      |
     And I am logged in as a user with the "Educator" role
-    And I am on "professional-development"
+    And I am on "professional-learning"
     And I click "Public"
     And I should see the link "Like (0)"
     And I should not see the text "Undo"

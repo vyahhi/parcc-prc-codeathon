@@ -64,7 +64,7 @@ Feature: Gallery View Responsive behavior – Digital Library (PRC-542)
       | Result Two Nine  | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
       | Result Two Ten   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
     And I index search results
-    And I am on "digital-library"
+    And I am on "library"
     When I am browsing using a "phone"
     Then ".main" should have a "padding-left" css value of "15px"
     And ".main" should have a "padding-right" css value of "15px"
@@ -137,7 +137,7 @@ Feature: Gallery View Responsive behavior – Digital Library (PRC-542)
       | Result Two Nine  | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
       | Result Two Ten   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
     And I index search results
-    And I am on "digital-library"
+    And I am on "library"
     When I am browsing using a "phone"
     Then "#page" should have a "background-color" css value of "rgb(255, 255, 255)"
     And "#sub-header" should have a "background-color" css value of "transparent"
