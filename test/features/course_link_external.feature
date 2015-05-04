@@ -28,7 +28,7 @@ Feature: PRC-1177 LEO Learning module: PARCC Accessibility System
     And I fill in "edit-field-link-to-a-url-und-0-title" with "External Link"
     And I fill in "edit-field-link-to-a-url-und-0-url" with "http://www.google.com"
     And I press "Save"
-    Then I should not see the link "Take course"
+    Then the "Take course" link should point to "http://www.google.com"
 
   Scenario: Anonymous can see link
     Given I am logged in as a user with the "Content Administrator (Curator)" role
@@ -42,4 +42,4 @@ Feature: PRC-1177 LEO Learning module: PARCC Accessibility System
     And I press "Save"
     And I am an anonymous user
     And I visit the first node created
-    Then I should not see the link "Take course"
+    Then the "Take course" link should point to "http://www.google.com"

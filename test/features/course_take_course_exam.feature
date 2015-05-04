@@ -64,6 +64,7 @@ Feature: PRC-476 Take Course Exam
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
+    And I select "1st Grade" from "Grade Level"
     And I check the box "edit-alternatives-1-correct"
     And I press "Save"
 
@@ -75,6 +76,7 @@ Feature: PRC-476 Take Course Exam
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
+    And I select "1st Grade" from "Grade Level"
     And I check the box "edit-alternatives-1-correct"
     And I press "Save"
 

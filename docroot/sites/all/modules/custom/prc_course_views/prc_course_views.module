@@ -22,7 +22,8 @@ function prc_course_views_node_view($node, $view_mode, $langcode) {
     $w = entity_metadata_wrapper('node', $node);
     $link = $w->field_link_to_a_url->value();
     if ($link) {
-      $node->content['course']['#access'] = FALSE;
+      $link = '<div class="course-take-course-link-wrapper">' . l(t('Take course'), $link['url'], array('attributes' => array('class' => array('course-take-course-link')))) . '</div>';
+      $node->content['course']['#markup'] = $link;
     }
   }
 }
