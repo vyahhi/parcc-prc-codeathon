@@ -122,6 +122,7 @@
         overflow: hidden;
         white-space: nowrap;
         line-height: 1.25em;
+        @include bold;
       }
       .divider hr {
         display: inline-block;
@@ -135,15 +136,13 @@
       }
       .field-label-above {
         margin-bottom: 20px;
+        clear: both;
       }
       .field-item {
         margin: 10px 0;
       }
       .field-name-field-thumbnail {
         display: none;
-      }
-      .field-name-field-link-to-a-url {
-        clear: both;
       }
       .field-name-field-tags .field-items {
         .field-item {

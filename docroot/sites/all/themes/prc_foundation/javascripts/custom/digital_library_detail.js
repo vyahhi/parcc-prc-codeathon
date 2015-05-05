@@ -4,7 +4,15 @@ Drupal.behaviors.digitalLibraryDetailBehavior = {
       $('.node-type-digital-library-content').once(function(){
         // Move around fields that can't be easily handled by display suite
         $('.main').children().prependTo('.group-left');
-        $('.pane-node-links').insertAfter('.field-name-field-thumbnail');
+        if ($('.field-name-field-thumbnail').length) {
+          //console.log("Thumbnail");
+          $('.pane-node-links').insertAfter('.field-name-field-thumbnail');
+        }
+        else {
+          //console.log("No Thumbnail");
+          $('.pane-node-links').prependTo('.group-right');
+        }
+        //$('.pane-node-links').insertAfter('.field-name-field-thumbnail');
         $('.prc_digital_library_comment_email').appendTo('.group-left');
         $('.prc_digital_library_comment_email').wrap('<ul></ul>');
         // Add label for share section
