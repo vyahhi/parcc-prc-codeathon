@@ -229,10 +229,10 @@ Feature: Gallery View Responsive behavior – Digital Library (PRC-542)
     When I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Result Two"
     And I follow "Edit"
-    Then I attach the file "testfiles/lovelythumbnail.png" to "edit-field-thumbnail-und-0-upload"
+    Then I attach the file "testfiles/thumb_too_small.png" to "edit-field-thumbnail-und-0-upload"
     And I select the radio button "Public"
     And I press "Save"
-    And I should see the error message containing "The specified file lovelythumbnail.png could not be uploaded. The image is too small; the minimum dimensions are 595x1 pixels."
+    And I should see the error message containing "The specified file thumb_too_small.png could not be uploaded. The image is too small; the minimum dimensions are 595x1 pixels."
 
   ##### Digital Library Item Detail #####
 
@@ -312,7 +312,9 @@ Feature: Gallery View Responsive behavior – Digital Library (PRC-542)
     And ".group-left .prc_digital_library_comment_email a" should have a "border-top-left-radius" css value of "24.75px"
     And ".group-left .prc_digital_library_comment_email a" should have a "margin-top" css value of "32px"
     And ".group-left .prc_digital_library_comment_email a" should have a "margin-bottom" css value of "32px"
-    # Pick up with hover state
+    When I hover over the element ".group-left .prc_digital_library_comment_email a"
+    And ".group-left .prc_digital_library_comment_email a" should have a "background-color" css value of "rgb(85, 64, 94)"
+    And ".group-left .prc_digital_library_comment_email a" should have a "color" css value of "rgb(255, 255, 255)"
     When I am browsing using a "desktop"
     Then ".group-left #page-title" should have a "font-size" css value of "42px"
 
