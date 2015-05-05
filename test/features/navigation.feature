@@ -17,7 +17,6 @@ Feature: PRC-1392 Global Navigation
     When I click "Library"
     Then the url should match "library"
     And I should see the heading "Digital Library"
-    #  Note: The Library is currently listed as the Digital Library.
 
 #  Scenario: 3 Hovering over the Instruction link
 #    Given that I am on any page on the PRC website

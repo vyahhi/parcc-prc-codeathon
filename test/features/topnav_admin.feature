@@ -8,10 +8,10 @@ Feature: Role-Based Top Nav - PRC Admin (PRC-160)
     Given I am logged in as a user with the "PRC Admin" role
     And I am on the homepage
     Then I should see the link "Home"
-    And I should see the link "Digital Library"
+    And I should see the link "Library"
     And I should see the link "Assessment"
     And I should see the link "Professional Learning"
-    And I should see the link "Technology Readiness"
+    And I should not see the link "Technology Readiness"
     And I should see the link "Admin"
     When I am on "prc/admin"
     Then I should see the link "Users"
