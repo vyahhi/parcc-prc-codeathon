@@ -39,7 +39,10 @@ function prc_question_form_permission() {
  */
 function prc_question_form_custom_multichoice($node) {
   $type_name = node_type_get_name($node);
-  drupal_set_title(t('<em>Edit @type</em> @title', array('@type' => $type_name, '@title' => $node->title)), PASS_THROUGH);
+  drupal_set_title(t('<em>Edit @type</em> @title', array(
+    '@type' => $type_name,
+    '@title' => $node->title
+  )), PASS_THROUGH);
   return drupal_get_form('prc_question_form_custom_multichoice_form', $node);
 }
 
@@ -94,7 +97,7 @@ function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state
 
   $choice_count = $form_state['choice_count'];
 
-  for($c = 0; $c < $choice_count; $c++) {
+  for ($c = 0; $c < $choice_count; $c++) {
     if (array_key_exists($c, $form['alternatives'])) {
       $form['alternatives'][$c]['advanced']['#access'] = FALSE;
       $form['alternatives'][$c]['answer']['#required'] = FALSE;
@@ -109,12 +112,24 @@ function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state
   $form['#validate'][] = 'prc_question_form_make_parcc_item_validate';
 }
 
-function prc_question_form_standard_required_validate(&$form, &$form_state) {
-  $tid = $form_state['input']['field_standard']['und'][0]['tid'];
-  // Allow faux_standard for testing purposes
-  if (!$tid && (!array_key_exists('faux_standard', $form_state['values']) || !$form_state['values']['faux_standard'])) {
-    form_set_error('field_standard', t('At least one Item Standard is required.'));
+function prc_question_form_subject_required_validate(&$form, &$form_state) {
+  _prc_question_form_shs_term_required_validate('subject', 'Subject', $form, $form_state);
+}
+
+function _prc_question_form_shs_term_required_validate($term_field, $required_label, &$form, &$form_state) {
+  $tid = $form_state['input']['field_' . $term_field]['und'][0]['tid'];
+  // Allow faux_field for testing purposes
+  if (!$tid && (!array_key_exists('faux_' . $term_field, $form_state['values']) || !$form_state['values']['faux_' . $term_field])) {
+    form_set_error('field_' . $term_field, t('At least one ' . $required_label . ' is required.'));
   }
+}
+
+function prc_question_form_non_item_standard_required_validate(&$form, &$form_state) {
+  _prc_question_form_shs_term_required_validate('standard', 'Standard', $form, $form_state);
+}
+
+function prc_question_form_standard_required_validate(&$form, &$form_state) {
+  _prc_question_form_shs_term_required_validate('standard', 'Item Standard', $form, $form_state);
 }
 
 function prc_question_form_make_parcc_item_validate(&$form, &$form_state) {
@@ -131,7 +146,17 @@ function prc_question_form_make_parcc_item_validate(&$form, &$form_state) {
 
 function prc_question_in_quiz($question_nid) {
   $result = db_select('quiz_node_relationship', 'qnr')
-    ->fields('qnr', array('parent_nid', 'child_nid', 'child_vid', 'question_status', 'weight', 'max_score', 'auto_update_max_score', 'qnr_id', 'qnr_pid'))
+    ->fields('qnr', array(
+      'parent_nid',
+      'child_nid',
+      'child_vid',
+      'question_status',
+      'weight',
+      'max_score',
+      'auto_update_max_score',
+      'qnr_id',
+      'qnr_pid'
+    ))
     ->condition('child_nid', $question_nid)
     ->execute();
 
@@ -191,6 +216,19 @@ function prc_question_form_form_short_answer_node_form_alter(&$form, &$form_stat
     '#type' => 'hidden',
   );
   $form['#validate'][] = 'prc_question_form_make_parcc_item_validate';
-
 }
 
+function prc_question_form_form_speaking_and_listening_resource_node_form_alter(&$form, &$form_state) {
+  $form['field_standard'][LANGUAGE_NONE]['#required'] = TRUE;
+  $form['faux_standard'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['field_subject'][LANGUAGE_NONE]['#required'] = TRUE;
+  $form['faux_subject'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['#validate'][] = 'prc_question_form_subject_required_validate';
+  $form['#validate'][] = 'prc_question_form_non_item_standard_required_validate';
+}

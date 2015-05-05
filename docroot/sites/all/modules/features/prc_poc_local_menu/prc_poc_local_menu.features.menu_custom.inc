@@ -88,6 +88,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Professional Development Left Nav',
     'description' => 'Navigation menu for Professional Development view',
   );
+  // Exported menu: menu-speaking-and-listening-page.
+  $menus['menu-speaking-and-listening-page'] = array(
+    'menu_name' => 'menu-speaking-and-listening-page',
+    'title' => 'Speaking and Listening Page Menu',
+    'description' => 'Menu on the Speaking and Listening page',
+  );
   // Exported menu: menu-trt-district-add.
   $menus['menu-trt-district-add'] = array(
     'menu_name' => 'menu-trt-district-add',
@@ -179,10 +185,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Management');
   t('Menu for Assessments page to let users add quizzes');
   t('Menu items for any enabled features.');
+  t('Menu on the Speaking and Listening page');
   t('Menu to display on Instruction page');
   t('Navigation');
   t('Navigation menu for Professional Development view');
   t('Professional Development Left Nav');
+  t('Speaking and Listening Page Menu');
   t('TRT District Add');
   t('TRT District Export');
   t('TRT Manage Schools');

@@ -4067,6 +4067,29 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->uuid = 'a0e43872-4e07-4c48-a85f-f68f93bac50b';
   $display->content = array();
   $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-d05b9e2f-b374-4354-b0b6-f0720cbf8566';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-speaking-and-listening-page';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'd05b9e2f-b374-4354-b0b6-f0720cbf8566';
+    $display->content['new-d05b9e2f-b374-4354-b0b6-f0720cbf8566'] = $pane;
+    $display->panels['middle'][0] = 'new-d05b9e2f-b374-4354-b0b6-f0720cbf8566';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

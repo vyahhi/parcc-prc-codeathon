@@ -1022,7 +1022,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'create speaking_and_listening_resource content'.
   $permissions['create speaking_and_listening_resource content'] = array(
     'name' => 'create speaking_and_listening_resource content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1184,7 +1187,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any speaking_and_listening_resource content'.
   $permissions['delete any speaking_and_listening_resource content'] = array(
     'name' => 'delete any speaking_and_listening_resource content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1340,7 +1346,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete own speaking_and_listening_resource content'.
   $permissions['delete own speaking_and_listening_resource content'] = array(
     'name' => 'delete own speaking_and_listening_resource content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -2137,7 +2146,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit any speaking_and_listening_resource content'.
   $permissions['edit any speaking_and_listening_resource content'] = array(
     'name' => 'edit any speaking_and_listening_resource content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -2312,7 +2324,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit own speaking_and_listening_resource content'.
   $permissions['edit own speaking_and_listening_resource content'] = array(
     'name' => 'edit own speaking_and_listening_resource content',
-    'roles' => array(),
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
