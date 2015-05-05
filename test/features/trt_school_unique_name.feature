@@ -33,7 +33,7 @@ Feature: PRC-996 Manage Schools - Add/Edit School - Form - Validation - Name can
     And "School" nodes:
       | title                    | field_ref_district          | field_contact_email | uid         |
       | School 996 S1 @timestamp | @nid[PRC-996 D1 @timestamp] | <user_name>         | @currentuid |
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     And I click "PRC-996 D1 @timestamp"
     And I click "Manage Schools"
     And I click "Add School - form"
@@ -67,7 +67,7 @@ Feature: PRC-996 Manage Schools - Add/Edit School - Form - Validation - Name can
     And "School" nodes:
       | title                    | field_ref_district          | field_contact_email | uid         |
       | School 996 S1 @timestamp | @nid[PRC-996 D2 @timestamp] | <user_name>         | @currentuid |
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     And I click "PRC-996 D1 @timestamp"
     And I click "Manage Schools"
     And I click "Add School - form"
@@ -100,7 +100,7 @@ Feature: PRC-996 Manage Schools - Add/Edit School - Form - Validation - Name can
     And "School" nodes:
       | title                    | field_ref_district          | field_contact_email | uid         |
       | School 996 S1 @timestamp | @nid[PRC-996 D1 @timestamp] | <user_name>         | @currentuid |
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     And I click "PRC-996 D1 @timestamp"
     And I click "Manage Schools"
     And I click "School 996 S1 @timestamp"
@@ -136,7 +136,7 @@ Feature: PRC-996 Manage Schools - Add/Edit School - Form - Validation - Name can
     And "School" nodes:
       | title                    | field_ref_district          | field_contact_email | uid         |
       | School 996 S1 @timestamp | @nid[PRC-996 D1 @timestamp] | <user_name>         | @currentuid |
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     And I click "PRC-996 D1 @timestamp"
     And I click "Manage Schools"
     And I click "Add School - form"

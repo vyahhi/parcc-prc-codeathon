@@ -27,7 +27,7 @@ Feature: PRC-1069 Export System Check Data - State Readiness
       | title         | field_ref_district    | field_contact_email            | uid         |
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
     And the school "<school_name>" has run a system check
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     Then I click "<member_state>"
     When I click "Export all system checks data to .csv"
     Then I should see CSV text matching "District"

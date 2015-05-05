@@ -39,7 +39,7 @@ Feature: PRC-1211
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
     And the school "<school_name>" has run a system check
     And I am logged in as a user with the "PRC Admin" role
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     Then I should not see the link "<member_state> Readiness"
     And I should not see the link "<district_name> Readiness"
     And I should not see the link "<school_name> Readiness"

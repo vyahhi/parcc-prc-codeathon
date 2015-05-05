@@ -30,7 +30,7 @@ Feature: PRC-1057 Manage Schools - Delete Schools - Select Schools - Form Valida
       | title         | field_ref_district    | field_contact_email | uid         |
       | <school_name> | @nid[<district_name>] | <user_name>         | @currentuid |
     And the school "<school_name>" has run a capacity check
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     And I click "<district_name>"
     And I click "Manage Schools"
     And I check the box "edit-views-bulk-operations-0"
@@ -61,7 +61,7 @@ Feature: PRC-1057 Manage Schools - Delete Schools - Select Schools - Form Valida
       | title         | field_ref_district    | field_contact_email | uid         |
       | <school_name> | @nid[<district_name>] | <user_name>         | @currentuid |
     And the school "<school_name>" has run a capacity check
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     And I click "<district_name>"
     And I click "Manage Schools"
     When I press "Delete Schools"
@@ -90,7 +90,7 @@ Feature: PRC-1057 Manage Schools - Delete Schools - Select Schools - Form Valida
     And "School" nodes:
       | title         | field_ref_district    | field_contact_email | uid         |
       | <school_name> | @nid[<district_name>] | <user_name>         | @currentuid |
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     And I click "<district_name>"
     And I click "Manage Schools"
     And I check the box "edit-views-bulk-operations-0"

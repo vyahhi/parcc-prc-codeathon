@@ -33,7 +33,7 @@ Feature: PRC-707 State Readiness
       | <district_name> | @currentuid |
     And I am an anonymous user
     And I am logged in as "<user_name>"
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     Then I click "<member_state>"
     Then I should see the heading "<member_state> Readiness"
     And I should see the text "Overview / instructional copy goes here \(admin can export all test results data for state to csv or click district name to view results of technology checks by school\)."
@@ -64,7 +64,7 @@ Feature: PRC-707 State Readiness
       | Other           | @currentuid | @nid[Another State]  |
     And I am an anonymous user
     And I am logged in as "<user_name>"
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     Then I click "<member_state>"
     Then I should see the heading "<member_state> Readiness"
     And I should see the text "Overview / instructional copy goes here \(admin can export all test results data for state to csv or click district name to view results of technology checks by school\)."
@@ -101,7 +101,7 @@ Feature: PRC-707 State Readiness
       | Echo    | @currentuid | @nid[<member_state>] |
     And I am an anonymous user
     And I am logged in as "<state_admin>"
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     Then I click "<member_state>"
     Then I should see the link "Alpha"
     And I should see the link "Echo"

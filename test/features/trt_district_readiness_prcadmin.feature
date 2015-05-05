@@ -32,7 +32,7 @@ Feature: PRC-1210 District Readiness - PRC Admin View
     And "School" nodes:
       | title         | field_ref_district    | field_contact_email            | uid |
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | 1   |
-    When I click "Technology Readiness"
+    When I visit "technology-readiness"
     Then I should not see the link "<member_state> Readiness"
     And I should not see the link "<district_name> Readiness"
     When I click "PARCC Readiness"
