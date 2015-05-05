@@ -64,6 +64,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Digital Library Left Nav',
     'description' => '',
   );
+  // Exported menu: menu-instruction-menu.
+  $menus['menu-instruction-menu'] = array(
+    'menu_name' => 'menu-instruction-menu',
+    'title' => 'Instruction Menu',
+    'description' => 'Menu to display on Instruction page',
+  );
   // Exported menu: menu-invite-users.
   $menus['menu-invite-users'] = array(
     'menu_name' => 'menu-invite-users',
@@ -165,6 +171,7 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Development link');
   t('Digital Library Left Nav');
   t('Features');
+  t('Instruction Menu');
   t('Invite Users');
   t('Item Bank Add Questions');
   t('Links to export system and capacity checks for a district, from the district readiness page');
@@ -172,6 +179,7 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Management');
   t('Menu for Assessments page to let users add quizzes');
   t('Menu items for any enabled features.');
+  t('Menu to display on Instruction page');
   t('Navigation');
   t('Navigation menu for Professional Development view');
   t('Professional Development Left Nav');

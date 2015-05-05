@@ -285,6 +285,26 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-add-quiz_technology-readiness:technology-readiness
+  $menu_links['menu-add-quiz_technology-readiness:technology-readiness'] = array(
+    'menu_name' => 'menu-add-quiz',
+    'link_path' => 'technology-readiness',
+    'router_path' => 'technology-readiness',
+    'link_title' => 'Technology Readiness',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-add-quiz_technology-readiness:technology-readiness',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-assessment-left-nav_all-available-assessments:assessments
   $menu_links['menu-assessment-left-nav_all-available-assessments:assessments'] = array(
     'menu_name' => 'menu-assessment-left-nav',
@@ -316,6 +336,46 @@ function prc_menu_links_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'menu-digital-library-left-nav_view-all:library',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-instruction-menu_formative-instructional-tasks:formative-instructional-tasks
+  $menu_links['menu-instruction-menu_formative-instructional-tasks:formative-instructional-tasks'] = array(
+    'menu_name' => 'menu-instruction-menu',
+    'link_path' => 'formative-instructional-tasks',
+    'router_path' => 'formative-instructional-tasks',
+    'link_title' => 'Formative Instructional Tasks',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-instruction-menu_formative-instructional-tasks:formative-instructional-tasks',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-instruction-menu_speaking-and-listening:speaking-listening
+  $menu_links['menu-instruction-menu_speaking-and-listening:speaking-listening'] = array(
+    'menu_name' => 'menu-instruction-menu',
+    'link_path' => 'speaking-listening',
+    'router_path' => 'speaking-listening',
+    'link_title' => 'Speaking and Listening',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-instruction-menu_speaking-and-listening:speaking-listening',
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -832,6 +892,7 @@ function prc_menu_links_menu_default_menu_links() {
   t('Create New Assessment');
   t('Export all system checks data to .csv');
   t('Export all testing capacity checks data to .csv');
+  t('Formative Instructional Tasks');
   t('Home');
   t('Instruction');
   t('Interactive choice');
@@ -844,6 +905,7 @@ function prc_menu_links_menu_default_menu_links() {
   t('PARCC Readiness');
   t('Professional Learning');
   t('Short answer');
+  t('Speaking and Listening');
   t('System Check');
   t('Technology Readiness');
   t('Testing Capacity Check');
