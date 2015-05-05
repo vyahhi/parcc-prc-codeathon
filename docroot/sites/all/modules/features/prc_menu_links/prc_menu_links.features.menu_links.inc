@@ -494,6 +494,29 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-speaking-and-listening-page_add-resource:node/add/speaking-and-listening-resource
+  $menu_links['menu-speaking-and-listening-page_add-resource:node/add/speaking-and-listening-resource'] = array(
+    'menu_name' => 'menu-speaking-and-listening-page',
+    'link_path' => 'node/add/speaking-and-listening-resource',
+    'router_path' => 'node/add/speaking-and-listening-resource',
+    'link_title' => 'Add Resource',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'query' => array(
+        'destination' => 'speaking-listening',
+      ),
+      'identifier' => 'menu-speaking-and-listening-page_add-resource:node/add/speaking-and-listening-resource',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-trt-district-add_add-district:node/add/district
   $menu_links['menu-trt-district-add_add-district:node/add/district'] = array(
     'menu_name' => 'menu-trt-district-add',
@@ -879,6 +902,7 @@ function prc_menu_links_menu_default_menu_links() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Add District');
+  t('Add Resource');
   t('Add School - form');
   t('Add School(s) - upload csv file');
   t('Add content');
