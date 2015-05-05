@@ -51,6 +51,7 @@ Feature: PRC-527 Preview an item in Assessment Details page
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     And I fill in "edit-alternatives-1-answer-value" with "Answer 2"
     And I check the box "edit-alternatives-1-correct"
+    And I select "1st Grade" from "Grade Level"
     And I press "Save"
     Then I visit the last node created
     And I should see the text "Item Type"
