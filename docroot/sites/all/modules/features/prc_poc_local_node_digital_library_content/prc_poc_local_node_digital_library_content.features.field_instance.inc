@@ -577,9 +577,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'module' => 'ds',
+        'settings' => array(
+          'taxonomy_term_link' => 1,
+          'taxonomy_term_separator' => ', ',
+        ),
+        'type' => 'ds_taxonomy_separator',
         'weight' => 8,
       ),
       'digital_library_item' => array(
@@ -642,9 +645,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'module' => 'ds',
+        'settings' => array(
+          'taxonomy_term_link' => 1,
+          'taxonomy_term_separator' => ' ',
+        ),
+        'type' => 'ds_taxonomy_separator',
         'weight' => 6,
       ),
       'digital_library_item' => array(

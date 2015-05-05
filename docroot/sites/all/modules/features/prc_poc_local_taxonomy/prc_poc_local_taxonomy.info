@@ -22,5 +22,6 @@ features[taxonomy][] = subject
 features[taxonomy][] = tags
 features[taxonomy][] = user_states
 features[variable][] = field_bundle_settings_taxonomy_term__media_type
+features[variable][] = field_bundle_settings_taxonomy_term__standard
 features[variable][] = field_bundle_settings_taxonomy_term__user_states
 features[features_api][] = api:2
