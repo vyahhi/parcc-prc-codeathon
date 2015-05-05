@@ -82,6 +82,16 @@ function prc_foundation_preprocess_field(&$vars, $hook) {
 }
 
 /**
+ * Implements hook_preprocess_taxonomy_term()
+ */
+function prc_foundation_preprocess_taxonomy_term(&$vars, $hook) {
+  if (isset($vars['vocabulary_machine_name']) && $vars['vocabulary_machine_name'] == 'standard') {
+    // Link taxonomy term description.
+    $vars['content']['description']['#markup'] = '<a href ="' . $vars['term_url'] . '">' . $vars['content']['description']['#markup'] . '</a>';
+  }
+}
+
+  /**
  * Implements hook_menu()
  */
 function prc_foundation_menu() {

@@ -7,6 +7,13 @@ $desktop-margin: em-calc(30);
 $default-padding: em-calc(15);
 $desktop-padding: em-calc(30);
 
+$parcc-purple: #70547D;
+$parcc-blue: #0035B7;
+$parcc-orange: #F66B16;
+$icon-button-color: #44596F;
+$icon-gray: #6F7E95;
+$background-gray: #EEEEEE;
+
 $bold-font-family: 'Open Sans Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 @mixin paragraph {
@@ -26,10 +33,8 @@ $bold-font-family: 'Open Sans Condensed', 'Helvetica Neue', Helvetica, Arial, sa
   background-color: white;
   color: $parcc_purple;
 }
-
-$parcc-purple: #70547D;
-$parcc-blue: #0035B7;
-$parcc-orange: #F66B16;
-$icon-button-color: #44596F;
-$icon-gray: #6F7E95;
-$background-gray: #EEEEEE;
+@mixin social-icon($image) {
+  background: url($image) no-repeat !important;
+  width: 26px !important;
+  height: 26px !important;
+}

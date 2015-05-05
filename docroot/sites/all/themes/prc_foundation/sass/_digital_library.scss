@@ -75,35 +75,6 @@
           margin-bottom: 1.75em;
         }
       }
-      ul.links {
-        float: left;
-        margin-bottom: 1em;
-        min-width: 35px;
-        li {
-          padding-left: 0;
-        }
-        .prc_digital_library_add_to_favorites a {
-          padding: 0 10px;
-          background: url('../images/favorite-icon.png') no-repeat;
-        }
-        .prc_digital_library_add_to_favorites a:hover {
-          background: url('../images/favorite-icon-selected.png') no-repeat;
-        }
-        .flag-like_content a {
-          margin-right: 5px;
-          padding: 0 0 0 20px;
-          background: url('../images/like-icon.png') no-repeat;
-        }
-        .flag-like_content a.unflag-action,
-        .flag-like_content a:hover {
-          background: url('../images/like-icon-hover.png') no-repeat;
-        }
-        .flag-like_content .flag-message {
-          line-height: 0;
-          font-size: 0;
-          color: transparent;
-        }
-      }
       ul.links .prc_digital_library_comment_email,
       ul.links .pinit {
         display: none;
@@ -171,8 +142,94 @@
       .field-name-field-thumbnail {
         display: none;
       }
+      .field-name-field-link-to-a-url {
+        clear: both;
+      }
+      .field-name-field-tags .field-items {
+        .field-item {
+          margin-top: 5px;
+        }
+        .field-item a {
+          @include panel(white, 6px);
+          border-radius: 6px;
+          line-height: 40px;
+        }
+        .field-item a:hover {
+          border-color: $parcc-purple;
+          text-decoration: none;
+        }
+      }
+      .field-name-field-standard {
+        .taxonomy-term-description,
+        p {
+          margin-bottom: 0;
+        }
+      }
+      .pane-node-links .divider {
+        margin-bottom: .5em;
+      }
+      ul.links {
+        margin-bottom: 5px !important;
+        li {
+          float: left;
+        }
+        li.pinit a {
+          @include social_icon('../images/pinterest-icon.png');
+        }
+        span.st-email-counter {
+          @include social_icon('../images/email-icon.png');
+          position: relative;
+          top: -11px;
+        }
+        span.st-facebook-counter {
+          @include social_icon('../images/facebook-icon.png');
+          position: relative;
+          top: -11px;
+        }
+        span.st_edmodo_button .stButton_gradient {
+          @include social_icon('../images/edmodo-icon.png');
+          border: 0 !important;
+          .edmodo {
+            display: none !important;
+          }
+        }
+      }
     }
   }
+  // Link section styles for gallery view and full view
+  .page-node.node-type-digital-library-content .group-right,
+  .gallery-main .view-content .columns {
+    ul.links {
+      float: left;
+      margin-bottom: 1em;
+      min-width: 35px;
+      li {
+        padding-left: 0;
+      }
+      .prc_digital_library_add_to_favorites a {
+        padding: 0 10px;
+        background: url('../images/favorite-icon.png') no-repeat;
+      }
+      .prc_digital_library_add_to_favorites a:hover {
+        background: url('../images/favorite-icon-selected.png') no-repeat;
+      }
+      .flag-like_content a {
+        margin-right: 5px;
+        padding: 0 0 0 20px;
+        background: url('../images/like-icon.png') no-repeat;
+      }
+      .flag-like_content a.unflag-action,
+      .flag-like_content a:hover {
+        background: url('../images/like-icon-hover.png') no-repeat;
+      }
+      .flag-like_content .flag-message {
+        line-height: 0;
+        font-size: 0;
+        color: transparent;
+      }
+    }
+  }
+
   .page-node-add-digital-library-content,
   .page-node-edit.node-type-digital-library-content {
     table {
@@ -247,12 +304,6 @@
     }
     .group-right {
       margin-top: 50px;
-      /*.field-label-above {
-        margin-bottom: 20px;
-      }
-      .field-item {
-        margin: 10px 0;
-      }*/
       .field-name-field-thumbnail {
         display: block;
         margin-bottom: 35px;
@@ -262,6 +313,17 @@
         }
       }
     }
+  }
+  .node-type-digital-library-content.page-node-edit,
+  .node-type-digital-library-content.page-node-revisions {
+    #page,
+    #content {
+      background: white;
+    }
+  }
+  .node-type-digital-library-content.page-node-revisions .region-content {
+    padding-left: $desktop-padding;
+    padding-right: $desktop-padding;
   }
   .page-node-add-digital-library-content,
   .page-node-edit.node-type-digital-library-content {
