@@ -104,10 +104,6 @@ Feature: PRC-490 View Test Details
     And "Grade Level" terms:
       | name          |
       | Middle School |
-    And "Subject" terms:
-      | name                   |
-      | Educational Leadership |
-      | Math                   |
     And "Assessment" nodes:
       | title                      | body   | field_grade_level | field_subject                | field_quiz_type                    | uid         |
       | PRC-534 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | PARCC-Released Practice Assessment | @currentuid |
