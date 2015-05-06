@@ -3,7 +3,7 @@ Feature: PRC-954 Anonymous users cannot see System Check or Testing Capacity lin
 
   Scenario: Anon
     Given I am an anonymous user
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     Then I should see the heading "Technology Readiness"
     And I should see the text "Overview / instructional copy goes here. Consider explaining importance of testing prior to assessment to increase chances of successful assessment."
     And I should see the text "Important: If you are a school administrator, please run these checks from your school readiness page. Contact your District Administrator to have the link to that page emailed to you."

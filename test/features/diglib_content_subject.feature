@@ -45,11 +45,11 @@ Feature: PRC-29 Content Categorization - Subject
     And I am viewing my "Digital Library Content" node with the title "PRC-29 Subject"
     Then I click "Edit"
     And I click "Show Add More Information (Content Properties)"
-    Then I select "Educational Leadership" from "edit-field-subject-und-0-tid-select-1"
+    Then I select "English Language Arts" from "edit-field-subject-und-0-tid-select-1"
     Then I wait for AJAX to finish
-    Then I select "Facilities Planning and Management" from "edit-field-subject-und-0-tid-select-2"
+    Then I select "Reading" from "edit-field-subject-und-0-tid-select-2"
     Then I wait for AJAX to finish
-    Then I select "Creating Instructional Environments" from "edit-field-subject-und-0-tid-select-3"
+    Then I select "Informational Reading" from "edit-field-subject-und-0-tid-select-3"
     Then I wait for AJAX to finish
 
   @javascript
@@ -61,13 +61,11 @@ Feature: PRC-29 Content Categorization - Subject
     Then I select "Educational Leadership" from "edit-field-subject-und-0-tid-select-1"
     Then I wait for AJAX to finish
     Then I press "Add another item"
-    Then I select "Math" from "edit-field-subject-und-1-tid-select-1"
+    Then I select "Visual and Performing Arts" from "edit-field-subject-und-1-tid-select-1"
     Then I wait for AJAX to finish
-    Then I select "Algebra" from "edit-field-subject-und-1-tid-select-2"
+    Then I select "Music" from "edit-field-subject-und-1-tid-select-2"
     Then I wait for AJAX to finish
-    Then I select "Equations and Inequalities" from "edit-field-subject-und-1-tid-select-3"
-    Then I wait for AJAX to finish
-    Then I select "Creating Equations" from "edit-field-subject-und-1-tid-select-4"
+    Then I select "Chorus" from "edit-field-subject-und-1-tid-select-3"
     Then I wait for AJAX to finish
 
   @javascript

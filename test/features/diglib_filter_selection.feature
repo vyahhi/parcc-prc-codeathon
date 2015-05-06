@@ -30,7 +30,7 @@ Feature: PRC-968 Search/Filter Bar: Filter the Digital Library Content
       | Result Two | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
     And I am on the homepage
     And I index search results
-    When I am on "digital-library"
+    When I am on "library"
     Then I should see the link "Result One"
     And I should see the link "Result Two"
     When I click "GL One"
@@ -71,7 +71,7 @@ Feature: PRC-968 Search/Filter Bar: Filter the Digital Library Content
       | Result Three | Third Body  | 1      | 1   | Filter Me Two | GL One            | Media Tres       |
     And I am on the homepage
     And I index search results
-    When I am on "digital-library"
+    When I am on "library"
     Then I should see the link "Result One"
     And I should see the link "Result Two"
     And I should see the link "Result Three"
@@ -112,7 +112,7 @@ Feature: PRC-968 Search/Filter Bar: Filter the Digital Library Content
       | Result Three | Third Body  | 1      | 1   | Filter Me Two | GL One            | Media Uno        |
     And I am on the homepage
     And I index search results
-    When I am on "digital-library"
+    When I am on "library"
     Then I should not see the link "Filter Me One"
     And I should not see the link "GL Two"
     And I should not see the link "Media Tres"

@@ -58,7 +58,7 @@ Feature: PRC-981 Search/Filter Bar: Pagination
       | Result Two Ten   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
     And I am on the homepage
     And I index search results
-    When I am on "digital-library"
+    When I am on "library"
     Then I should not see the link "first"
     And I should not see the link "prev"
     But I should see the link "next"
@@ -114,7 +114,7 @@ Feature: PRC-981 Search/Filter Bar: Pagination
       | Result Two One   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
     And I am on the homepage
     And I index search results
-    When I am on "digital-library"
+    When I am on "library"
     Then I should not see the link "first"
     And I should not see the link "prev"
     And I should not see the link "\b1\b"
@@ -127,7 +127,7 @@ Feature: PRC-981 Search/Filter Bar: Pagination
       | title            | body        | status | uid | field_subject | field_grade_level | field_media_type |
       | Result One       | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
     And I index search results
-    When I am on "digital-library"
+    When I am on "library"
     Then I should not see the link "first"
     And I should not see the link "prev"
     But I should see the link "next"

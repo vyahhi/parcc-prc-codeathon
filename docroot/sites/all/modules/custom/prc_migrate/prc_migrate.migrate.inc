@@ -52,6 +52,11 @@ function prc_migrate_migrate_api() {
         'group_name' => 'prc_taxonomy',
         'vocab_name' => 'quiz_type',
       ),
+      'PrcCsvResourceType' => array(
+        'class_name' => 'PrcCsvSimpleTaxonomyMigration',
+        'group_name' => 'prc_taxonomy',
+        'vocab_name' => 'resource_type',
+      ),
       'PrcCsvMemberState' => array(
         'class_name' => 'PrcCsvMemberStateMigration',
         'group_name' => 'prc_taxonomy',

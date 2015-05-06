@@ -28,7 +28,7 @@ Feature: PRC-53 New Custom List Creation (End user)
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
     And I index search results
     And I am on the homepage
-    Then I click "Digital Library"
+    Then I click "Library"
     Then I should see the link "Add to My Lists"
 
   Scenario: AC1a On a content view page, a new link Add to My Lists will be available.

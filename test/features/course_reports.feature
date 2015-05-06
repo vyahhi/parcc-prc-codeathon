@@ -58,7 +58,7 @@ Feature: PRC-353 Admin: PD Course Reports
     Then I click "View"
     And I click "Take course"
     And I click "PD Module PRC-353 No1"
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     And I click "PD Course PRC-353"
     When I click "Reporting"
     Then I should see the link "PD Course PRC-353"

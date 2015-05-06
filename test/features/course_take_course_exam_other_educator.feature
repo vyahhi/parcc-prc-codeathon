@@ -37,6 +37,7 @@ Feature: PRC-476 Take Course Exam
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
     And I check the box "edit-alternatives-1-correct"
+    And I select "1st Grade" from "Grade Level"
     And I press "Save"
     # Add the second question
     Then I click "Create new question"
@@ -47,6 +48,7 @@ Feature: PRC-476 Take Course Exam
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
     And I check the box "edit-alternatives-1-correct"
+    And I select "1st Grade" from "Grade Level"
     And I press "Save"
 
     # TODO: Turn attaching modules to a course into step definitions
@@ -82,14 +84,14 @@ Feature: PRC-476 Take Course Exam
 
     When I am logged in as a user with the "Educator" role
     And I am on the homepage
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
     Then I click "Take course"
     And I should see the message containing "Your enrollment in this course has been recorded."
     And I should not see the link "PRC-476 Exam"
     But I should see the text "PRC-476 Exam"
     And I click "PD Module 1"
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
     And I should see the text "Complete"
     And I should not see the text "Not started"
@@ -103,7 +105,7 @@ Feature: PRC-476 Take Course Exam
     Then I press "Finish"
     Then I should see the text "Score: 100."
     And I should see the text "Congratulations! You successfully passed the PRC-476 Exam exam."
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
     And I should not see the link "PRC-476 Exam"
 
@@ -141,6 +143,7 @@ Feature: PRC-476 Take Course Exam
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
     And I check the box "edit-alternatives-1-correct"
+    And I select "1st Grade" from "Grade Level"
     And I press "Save"
     # Add the second question
     Then I click "Create new question"
@@ -151,6 +154,7 @@ Feature: PRC-476 Take Course Exam
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
     And I check the box "edit-alternatives-1-correct"
+    And I select "1st Grade" from "Grade Level"
     And I press "Save"
 
     # TODO: Turn attaching modules to a course into step definitions

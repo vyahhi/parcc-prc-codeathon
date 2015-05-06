@@ -11,7 +11,7 @@ Feature: PRC-253 - Organize Content: Filter by Custom List
     And I am viewing my "Favorites List" node with the title "List 4"
     And I am viewing my "Favorites List" node with the title "List 3"
     And I am viewing my "Favorites List" node with the title "List 1"
-    And I am on "digital-library"
+    And I am on "library"
     Then I should see the link "View All"
     And I should see the heading "My Lists"
     # AC4 The custom lists that the current user has created so far shall be listed
@@ -28,7 +28,7 @@ Feature: PRC-253 - Organize Content: Filter by Custom List
   Scenario: AC2 A View All option shall be available above (outside of) the list, and is selected by default and does not filter any content
     Given I am logged in as a user with the "Educator" role
     Then I run drush "genc 0 --types=digital_library_content --kill"
-    Then I visit "digital-library"
+    Then I visit "library"
     Then I should see the link "View All"
     # AC3 The My Lists control is not visible when no list created
     And I should not see the heading "My Lists"
@@ -43,7 +43,7 @@ Feature: PRC-253 - Organize Content: Filter by Custom List
     And I select "PRC-253 AC5 List 1" from "List"
     And I press "Add to List"
     And I index search results
-    Then I visit "digital-library"
+    Then I visit "library"
     Then I should see the link "PRC-253 AC5 List 1"
     And I should see the link "PRC-253 AC5 List 2"
     And I should see the link "PRC-253 AC5 Unlisted"

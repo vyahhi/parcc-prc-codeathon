@@ -211,6 +211,7 @@ dependencies[] = prc_poc_local_node_pd_module
 dependencies[] = prc_poc_local_node_quiz
 dependencies[] = prc_poc_local_node_quiz_directions
 dependencies[] = prc_poc_local_node_short_answer
+dependencies[] = prc_poc_local_node_speaking_and_listening_resource
 dependencies[] = prc_poc_local_panels
 dependencies[] = prc_poc_local_node_school
 dependencies[] = prc_poc_local_seo

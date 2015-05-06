@@ -104,16 +104,12 @@ Feature: PRC-490 View Test Details
     And "Grade Level" terms:
       | name          |
       | Middle School |
-    And "Subject" terms:
-      | name                   |
-      | Educational Leadership |
-      | Math                   |
     And "Assessment" nodes:
       | title                      | body   | field_grade_level | field_subject                | field_quiz_type                    | uid         |
       | PRC-534 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | PARCC-Released Practice Assessment | @currentuid |
       | PRC-534 Assessment Title 2 | Body 2 | Middle School     | Educational Leadership, Math | Custom Assessment                  | @currentuid |
       | PRC-534 Assessment Title 3 | Body 3 | Middle School     | Educational Leadership, Math | Custom Assessment                  | @currentuid |
-    And I click "Assessments"
+    And I click "Assessment"
     When I click "PRC-534 Assessment Title 2"
     Then I should see the text "Assessment Type"
     But I should not see the text "Quiz Type"
@@ -133,7 +129,7 @@ Feature: PRC-490 View Test Details
     And "Assessment" nodes:
       | title           | body   | field_grade_level | field_subject                | field_quiz_type                    | uid         |
       | 1353 PARCC Item | Body 1 | Middle School     | Educational Leadership, Math | PARCC-Released Practice Assessment | @currentuid |
-    And I click "Assessments"
+    And I click "Assessment"
     And I click "1353 PARCC Item"
     And I click "Non-interactive Item (text only)"
     And I fill in "My Title" for "Title"

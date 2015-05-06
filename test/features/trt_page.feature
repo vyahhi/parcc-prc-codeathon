@@ -25,7 +25,7 @@ Feature: PRC-836 Technology Readiness
 
   Scenario: Unstructured TRT Page
     Given I am logged in as a user with the "Educator" role
-    When I follow "Technology Readiness"
+    When I visit "technology-readiness"
     Then I should see the heading "Technology Readiness"
     And I should see the text "Overview / instructional copy goes here. Consider explaining importance of testing prior to assessment to increase chances of successful assessment."
     And I should see the text "Important: If you are a school administrator, please run these checks from your school readiness page. Contact your District Administrator to have the link to that page emailed to you."

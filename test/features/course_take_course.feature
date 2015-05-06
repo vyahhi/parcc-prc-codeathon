@@ -33,7 +33,7 @@ Feature: PRC-35 LMS: Take a Course
 
     And I am logged in as a user with the "Educator" role
     And I am on the homepage
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
 
     #AC1 In the Professional Development page, each course title shall be a link.
     Then I click "PRC-35 Take Course"
@@ -62,7 +62,7 @@ Feature: PRC-35 LMS: Take a Course
     And I should see the heading "PD Module 1" in the "content" region
     And I should see the text "Obj1"
 
-    Then I click "Professional Development"
+    Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
     And I should see the text "Complete"
     And I should not see the text "Not started"

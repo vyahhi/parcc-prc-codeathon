@@ -39,7 +39,7 @@ Feature: PRC-965 Search/Filter Bar: Search for Digital Library Content
       | Result Three | Third Body Alpha  | 1      | 1   | Filter Me Two | GL One            | Media Tres       |
     And I am on the homepage
     And I index search results
-    When I am on "digital-library"
+    When I am on "library"
     Then I should see the link "Result One"
     And I should see the link "Result Two"
     And I should see the link "Result Three"
@@ -76,7 +76,7 @@ Feature: PRC-965 Search/Filter Bar: Search for Digital Library Content
       | Result Three | Third Body Alpha  | 1      | 1   | Filter Me Two | GL One            | Media Tres       |
     And I am on the homepage
     And I index search results
-    When I am on "digital-library"
+    When I am on "library"
     Then I should see the link "Result One"
     And I should see the link "Result Two"
     And I should see the link "Result Three"

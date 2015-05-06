@@ -1019,6 +1019,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create speaking_and_listening_resource content'.
+  $permissions['create speaking_and_listening_resource content'] = array(
+    'name' => 'create speaking_and_listening_resource content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create state content'.
   $permissions['create state content'] = array(
     'name' => 'create state content',
@@ -1167,6 +1177,16 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any short_answer content'.
   $permissions['delete any short_answer content'] = array(
     'name' => 'delete any short_answer content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any speaking_and_listening_resource content'.
+  $permissions['delete any speaking_and_listening_resource content'] = array(
+    'name' => 'delete any speaking_and_listening_resource content',
     'roles' => array(
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
@@ -1323,6 +1343,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own speaking_and_listening_resource content'.
+  $permissions['delete own speaking_and_listening_resource content'] = array(
+    'name' => 'delete own speaking_and_listening_resource content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own state content'.
   $permissions['delete own state content'] = array(
     'name' => 'delete own state content',
@@ -1401,6 +1431,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete terms in quiz_type'.
   $permissions['delete terms in quiz_type'] = array(
     'name' => 'delete terms in quiz_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'delete terms in resource_type'.
+  $permissions['delete terms in resource_type'] = array(
+    'name' => 'delete terms in resource_type',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -2106,6 +2143,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any speaking_and_listening_resource content'.
+  $permissions['edit any speaking_and_listening_resource content'] = array(
+    'name' => 'edit any speaking_and_listening_resource content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any state content'.
   $permissions['edit any state content'] = array(
     'name' => 'edit any state content',
@@ -2274,6 +2321,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own speaking_and_listening_resource content'.
+  $permissions['edit own speaking_and_listening_resource content'] = array(
+    'name' => 'edit own speaking_and_listening_resource content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own state content'.
   $permissions['edit own state content'] = array(
     'name' => 'edit own state content',
@@ -2353,6 +2410,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit terms in quiz_type'.
   $permissions['edit terms in quiz_type'] = array(
     'name' => 'edit terms in quiz_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in resource_type'.
+  $permissions['edit terms in resource_type'] = array(
+    'name' => 'edit terms in resource_type',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -2729,6 +2793,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'search_config',
   );
 
+  // Exported permission: 'search speaking_and_listening_resource content'.
+  $permissions['search speaking_and_listening_resource content'] = array(
+    'name' => 'search speaking_and_listening_resource content',
+    'roles' => array(),
+    'module' => 'search_config',
+  );
+
   // Exported permission: 'search state content'.
   $permissions['search state content'] = array(
     'name' => 'search state content',
@@ -3008,6 +3079,19 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'view speaking and listening'.
+  $permissions['view speaking and listening'] = array(
+    'name' => 'view speaking and listening',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'Content Contributor' => 'Content Contributor',
+      'PARCC-Member Educator' => 'PARCC-Member Educator',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'prc_question_form',
   );
 
   // Exported permission: 'view the administration theme'.

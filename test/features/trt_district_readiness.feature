@@ -18,7 +18,7 @@ Feature: PRC-706 District Readiness - District Admin View
     And "School" nodes:
       | title         | field_ref_district          | field_contact_email            | uid         |
       | <school_name> | @nid[PRC-944 S1 @timestamp] | example1@timestamp@example.com | @currentuid |
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     And I click "<district_name>"
     Then I should see the heading "<district_name> Readiness"
     And I should see the text "Overview / instructional copy goes here \(admin can export all test results data for district to csv or click school name to view results of technology checks for school\). Note only schools that have run structured readiness checks display on this page."
@@ -41,7 +41,7 @@ Feature: PRC-706 District Readiness - District Admin View
       | title         | field_ref_district    | field_contact_email            | uid         |
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
     And the school "<school_name>" has run a system check
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     And I click "<district_name>"
     Then I should see the heading "<district_name> Readiness"
     And I should see the text "<school_name>"
@@ -72,7 +72,7 @@ Feature: PRC-706 District Readiness - District Admin View
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
     And the school "<school_name>" has run a system check
     And the school "<school_name>" has run a capacity check
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     And I click "<district_name>"
     Then I should see the heading "<district_name> Readiness"
     And I should see the text "<school_name>"

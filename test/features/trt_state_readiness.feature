@@ -21,7 +21,7 @@ Feature: PRC-941 Technology Readiness - State Admin View
       | <member_state> | <user_state>     | <member_state>     | 1   | <user_name>         |
     And I am an anonymous user
     And I am logged in as "<user_name>"
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     Then I should see the link "<member_state>"
     And I should see the text "Summary of what user can do here: export state readiness check data, view readiness by district, export district readiness checks data view school readiness data."
   Examples:
@@ -49,12 +49,12 @@ Feature: PRC-941 Technology Readiness - State Admin View
       | <user_state>   | <user_state>     | <user_state>       | 1   | <second_user>       |
     And I am an anonymous user
     And I am logged in as "<user_name>"
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     Then I should see the link "<member_state>"
     And I should not see the link "<user_state>"
     And I am an anonymous user
     And I am logged in as "<second_user>"
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     Then I should not see the link "<member_state>"
     And I should see the link "<user_state>"
   Examples:

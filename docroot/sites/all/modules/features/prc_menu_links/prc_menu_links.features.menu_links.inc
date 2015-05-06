@@ -27,24 +27,27 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 1,
     'expanded' => 0,
-    'weight' => -45,
+    'weight' => -44,
     'customized' => 1,
   );
-  // Exported menu link: main-menu_assessments:assessments
-  $menu_links['main-menu_assessments:assessments'] = array(
+  // Exported menu link: main-menu_assessment:assessments
+  $menu_links['main-menu_assessment:assessments'] = array(
     'menu_name' => 'main-menu',
     'link_path' => 'assessments',
     'router_path' => 'assessments',
-    'link_title' => 'Assessments',
+    'link_title' => 'Assessment',
     'options' => array(
-      'identifier' => 'main-menu_assessments:assessments',
+      'identifier' => 'main-menu_assessment:assessments',
+      'attributes' => array(
+        'title' => '',
+      ),
     ),
     'module' => 'system',
     'hidden' => 0,
     'external' => 0,
-    'has_children' => 0,
+    'has_children' => 1,
     'expanded' => 0,
-    'weight' => -48,
+    'weight' => -47,
     'customized' => 1,
   );
   // Exported menu link: main-menu_content:admin-content
@@ -85,29 +88,9 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -48,
-    'customized' => 1,
-    'parent_identifier' => 'main-menu_admin:prc/admin',
-  );
-  // Exported menu link: main-menu_digital-library:digital-library
-  $menu_links['main-menu_digital-library:digital-library'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'digital-library',
-    'router_path' => 'digital-library',
-    'link_title' => 'Digital Library',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'main-menu_digital-library:digital-library',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
     'weight' => -49,
     'customized' => 1,
+    'parent_identifier' => 'main-menu_admin:prc/admin',
   );
   // Exported menu link: main-menu_home:<front>
   $menu_links['main-menu_home:<front>'] = array(
@@ -126,21 +109,61 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => -50,
     'customized' => 1,
   );
-  // Exported menu link: main-menu_professional-development:professional-development
-  $menu_links['main-menu_professional-development:professional-development'] = array(
+  // Exported menu link: main-menu_instruction:instruction
+  $menu_links['main-menu_instruction:instruction'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'professional-development',
-    'router_path' => 'professional-development',
-    'link_title' => 'Professional Development',
+    'link_path' => 'instruction',
+    'router_path' => 'instruction',
+    'link_title' => 'Instruction',
     'options' => array(
-      'identifier' => 'main-menu_professional-development:professional-development',
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'main-menu_instruction:instruction',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -48,
+    'customized' => 1,
+  );
+  // Exported menu link: main-menu_library:library
+  $menu_links['main-menu_library:library'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'library',
+    'router_path' => 'library',
+    'link_title' => 'Library',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'main-menu_library:library',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -49,
+    'customized' => 1,
+  );
+  // Exported menu link: main-menu_professional-learning:professional-learning
+  $menu_links['main-menu_professional-learning:professional-learning'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'professional-learning',
+    'router_path' => 'professional-learning',
+    'link_title' => 'Professional Learning',
+    'options' => array(
+      'identifier' => 'main-menu_professional-learning:professional-learning',
     ),
     'module' => 'system',
     'hidden' => 0,
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -47,
+    'weight' => -46,
     'customized' => 1,
   );
   // Exported menu link: main-menu_technology-readiness:technology-readiness
@@ -160,8 +183,9 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -46,
+    'weight' => -50,
     'customized' => 1,
+    'parent_identifier' => 'main-menu_assessment:assessments',
   );
   // Exported menu link: main-menu_users:admin-users
   $menu_links['main-menu_users:admin-users'] = array(
@@ -177,7 +201,7 @@ function prc_menu_links_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -49,
+    'weight' => -48,
     'customized' => 1,
     'parent_identifier' => 'main-menu_admin:prc/admin',
   );
@@ -261,6 +285,26 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-add-quiz_technology-readiness:technology-readiness
+  $menu_links['menu-add-quiz_technology-readiness:technology-readiness'] = array(
+    'menu_name' => 'menu-add-quiz',
+    'link_path' => 'technology-readiness',
+    'router_path' => 'technology-readiness',
+    'link_title' => 'Technology Readiness',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-add-quiz_technology-readiness:technology-readiness',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-assessment-left-nav_all-available-assessments:assessments
   $menu_links['menu-assessment-left-nav_all-available-assessments:assessments'] = array(
     'menu_name' => 'menu-assessment-left-nav',
@@ -281,17 +325,57 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
-  // Exported menu link: menu-digital-library-left-nav_view-all:digital-library
-  $menu_links['menu-digital-library-left-nav_view-all:digital-library'] = array(
+  // Exported menu link: menu-digital-library-left-nav_view-all:library
+  $menu_links['menu-digital-library-left-nav_view-all:library'] = array(
     'menu_name' => 'menu-digital-library-left-nav',
-    'link_path' => 'digital-library',
-    'router_path' => 'digital-library',
+    'link_path' => 'library',
+    'router_path' => 'library',
     'link_title' => 'View All',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'menu-digital-library-left-nav_view-all:digital-library',
+      'identifier' => 'menu-digital-library-left-nav_view-all:library',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-instruction-menu_formative-instructional-tasks:formative-instructional-tasks
+  $menu_links['menu-instruction-menu_formative-instructional-tasks:formative-instructional-tasks'] = array(
+    'menu_name' => 'menu-instruction-menu',
+    'link_path' => 'formative-instructional-tasks',
+    'router_path' => 'formative-instructional-tasks',
+    'link_title' => 'Formative Instructional Tasks',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-instruction-menu_formative-instructional-tasks:formative-instructional-tasks',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-instruction-menu_speaking-and-listening:speaking-listening
+  $menu_links['menu-instruction-menu_speaking-and-listening:speaking-listening'] = array(
+    'menu_name' => 'menu-instruction-menu',
+    'link_path' => 'speaking-listening',
+    'router_path' => 'speaking-listening',
+    'link_title' => 'Speaking and Listening',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-instruction-menu_speaking-and-listening:speaking-listening',
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -390,17 +474,40 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => -48,
     'customized' => 1,
   );
-  // Exported menu link: menu-professional-development-le_all-available-courses:professional-development
-  $menu_links['menu-professional-development-le_all-available-courses:professional-development'] = array(
+  // Exported menu link: menu-professional-development-le_all-available-courses:professional-learning
+  $menu_links['menu-professional-development-le_all-available-courses:professional-learning'] = array(
     'menu_name' => 'menu-professional-development-le',
-    'link_path' => 'professional-development',
-    'router_path' => 'professional-development',
+    'link_path' => 'professional-learning',
+    'router_path' => 'professional-learning',
     'link_title' => 'All Available Courses',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'menu-professional-development-le_all-available-courses:professional-development',
+      'identifier' => 'menu-professional-development-le_all-available-courses:professional-learning',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-speaking-and-listening-page_add-resource:node/add/speaking-and-listening-resource
+  $menu_links['menu-speaking-and-listening-page_add-resource:node/add/speaking-and-listening-resource'] = array(
+    'menu_name' => 'menu-speaking-and-listening-page',
+    'link_path' => 'node/add/speaking-and-listening-resource',
+    'router_path' => 'node/add/speaking-and-listening-resource',
+    'link_title' => 'Add Resource',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'query' => array(
+        'destination' => 'speaking-listening',
+      ),
+      'identifier' => 'menu-speaking-and-listening-page_add-resource:node/add/speaking-and-listening-resource',
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -795,6 +902,7 @@ function prc_menu_links_menu_default_menu_links() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Add District');
+  t('Add Resource');
   t('Add School - form');
   t('Add School(s) - upload csv file');
   t('Add content');
@@ -802,22 +910,26 @@ function prc_menu_links_menu_default_menu_links() {
   t('Admin');
   t('All Available Assessments');
   t('All Available Courses');
-  t('Assessments');
+  t('Assessment');
   t('Content');
   t('Course Management');
   t('Create New Assessment');
-  t('Digital Library');
   t('Export all system checks data to .csv');
   t('Export all testing capacity checks data to .csv');
+  t('Formative Instructional Tasks');
   t('Home');
+  t('Instruction');
   t('Interactive choice');
   t('Invite New User');
   t('Item Bank');
+  t('Library');
   t('Log out');
   t('Manage Schools');
+  t('Non-interactive (text only)');
   t('PARCC Readiness');
-  t('Professional Development');
+  t('Professional Learning');
   t('Short answer');
+  t('Speaking and Listening');
   t('System Check');
   t('Technology Readiness');
   t('Testing Capacity Check');

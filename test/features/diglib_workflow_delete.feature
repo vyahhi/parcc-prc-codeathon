@@ -91,7 +91,7 @@ Feature: PRC-857 & PRC-859 - Tests concerning delete access for different user r
     And I press "Update state"
     Given I am logged in as "Joe Curator"
     And I index search results
-    And I visit "digital-library"
+    And I visit "library"
     And I click "Delete Me @timestamp"
     And I click "Edit"
     When I press "Unpublish"
@@ -167,7 +167,7 @@ Feature: PRC-857 & PRC-859 - Tests concerning delete access for different user r
     And I press "Update state"
     Given I am logged in as "Joe Curator"
     And I index search results
-    And I visit "digital-library"
+    And I visit "library"
     And I click "Delete Me @timestamp"
     And I click "Edit"
     When I press "Unpublish"

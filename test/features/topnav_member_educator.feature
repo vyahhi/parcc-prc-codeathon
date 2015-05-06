@@ -8,8 +8,8 @@ Feature: PRC-357 Invite User with Additional Role Selection- Need some definitio
     Given I am logged in as a user with the "PARCC-Member Educator" role
     And I am on the homepage
     Then I should see the link "Home"
-    And I should see the link "Digital Library"
-    And I should see the link "Assessments"
-    And I should see the link "Professional Development"
+    And I should see the link "Library"
+    And I should see the link "Assessment"
+    And I should see the link "Professional Learning"
     And I should not see the link "Content" in the "main_menu" region
     And I should not see the link "Users"

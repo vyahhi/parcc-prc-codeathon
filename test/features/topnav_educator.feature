@@ -8,8 +8,8 @@ Feature: Role-Based Top Nav - Educator (PRC-151)
     Given I am logged in as a user with the "Educator" role
     And I am on the homepage
     Then I should see the link "Home"
-    And I should see the link "Digital Library"
-    And I should see the link "Assessments"
-    And I should see the link "Professional Development"
+    And I should see the link "Library"
+    And I should see the link "Assessment"
+    And I should see the link "Professional Learning"
     And I should not see the link "Content" in the "main_menu" region
     And I should not see the link "Users"

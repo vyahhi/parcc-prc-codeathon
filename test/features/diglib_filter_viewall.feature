@@ -35,7 +35,7 @@ Feature: PRC-980 Search/Filter Bar: View All
       | Result Two | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
     And I am on the homepage
     And I index search results
-    When I am on "digital-library"
+    When I am on "library"
     Then I should see the link "Result One"
     And I should see the link "Result Two"
     And I should see the text "View All"
@@ -60,7 +60,7 @@ Feature: PRC-980 Search/Filter Bar: View All
       | Result Two | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
     And I am on the homepage
     And I index search results
-    When I am on "digital-library"
+    When I am on "library"
     And I fill in "edit-search-api-views-fulltext" with "Bravo"
     And I press "Apply"
     Then I should not see the link "Result One"

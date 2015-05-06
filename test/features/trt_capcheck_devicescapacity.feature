@@ -37,7 +37,7 @@ Feature: PRC-1071 School Readiness - Devices capacity number
       | title         | field_ref_district    | field_contact_email            | uid         |
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
     And the school "<school_name>" has run a capacity check
-    And I click "Technology Readiness"
+    And I visit "technology-readiness"
     Then I click "<member_state>"
     And I click "<district_name>"
     And I click "<school_name>"
