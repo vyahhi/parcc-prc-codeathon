@@ -60,7 +60,9 @@ function prc_foundation_preprocess_page(&$vars, $hook) {
 function prc_foundation_preprocess_node(&$vars, $hook) {
   if ($vars['type'] == 'digital_library_content' && isset($vars['field_media_type']['und'][0]['tid'])) {
     $media_type = taxonomy_term_load($vars['field_media_type']['und'][0]['tid']);
-    $vars['classes_array'][] = 'media-type-' . strtolower($media_type->name);
+    if (isset($media_type->name)) {
+      $vars['classes_array'][] = 'media-type-' . strtolower($media_type->name);
+    }
   }
   else {
     $vars['classes_array'][] = 'media-type-none';
@@ -68,6 +70,28 @@ function prc_foundation_preprocess_node(&$vars, $hook) {
 }
 
 /**
+ * Implements hook_preprocess_field()
+ */
+function prc_foundation_preprocess_field(&$vars, $hook) {
+  // Change label for Author Name in digital library full display mode.
+  if (isset($vars['element']['#bundle']) && $vars['element']['#bundle'] == 'digital_library_content') {
+    if (isset($vars['element']['#field_name']) && $vars['element']['#field_name'] == 'field_author_name' && isset($vars['element']['#view_mode']) && $vars['element']['#view_mode'] == 'full') {
+      $vars['label'] = t('By');
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_taxonomy_term()
+ */
+function prc_foundation_preprocess_taxonomy_term(&$vars, $hook) {
+  if (isset($vars['vocabulary_machine_name']) && $vars['vocabulary_machine_name'] == 'standard') {
+    // Link taxonomy term description.
+    $vars['content']['description']['#markup'] = '<a href ="' . $vars['term_url'] . '">' . $vars['content']['description']['#markup'] . '</a>';
+  }
+}
+
+  /**
  * Implements hook_menu()
  */
 function prc_foundation_menu() {
@@ -395,4 +419,53 @@ function prc_foundation_pager($variables) {
       'attributes' => array('class' => array('pagination')),
     )) . '</div>';
   }
+}
+
+/**
+ * Implements theme_field()
+ */
+function prc_foundation_field($variables) {
+  $output = '';
+  $diglib_divider_labels = array("field_link_to_a_url",
+    "field_document",
+    "field_tags",
+    "field_grade_level",
+    "field_subject",
+    "field_genre",
+    "field_standard"
+  );
+
+  if (isset($variables['element']['#bundle']) && $variables['element']['#bundle'] == 'digital_library_content') {
+    if (isset($variables['element']['#field_name']) && in_array($variables['element']['#field_name'], $diglib_divider_labels) && isset($variables['element']['#view_mode']) && $variables['element']['#view_mode'] == 'full') {
+      // Render the label with divider, if it's not hidden.
+      if (!$variables['label_hidden']) {
+        $output .= '<div class="field-label divider"' . $variables['title_attributes'] . '>' . $variables['label'] . '&nbsp;<hr /></div>';
+      }
+    }
+    else {
+      // Render the label, if it's not hidden.
+      if (!$variables['label_hidden']) {
+        $output .= '<div class="field-label"' . $variables['title_attributes'] . '>' . $variables['label'] . ':&nbsp;</div>';
+      }
+    }
+  }
+  else {
+    // Render the label, if it's not hidden.
+    if (!$variables['label_hidden']) {
+      $output .= '<div class="field-label"' . $variables['title_attributes'] . '>' . $variables['label'] . ':&nbsp;</div>';
+    }
+  }
+
+  // Render the items.
+  $output .= '<div class="field-items"' . $variables['content_attributes'] . '>';
+  foreach ($variables['items'] as $delta => $item) {
+    $classes = 'field-item ' . ($delta % 2 ? 'odd' : 'even');
+    $output .= '<div class="' . $classes . '"' . $variables['item_attributes'][$delta] . '>' . drupal_render($item) . '</div>';
+  }
+  $output .= '</div>';
+
+  // Render the top-level DIV.
+  $output = '<div class="' . $variables['classes'] . '"' . $variables['attributes'] . '>' . $output . '</div>';
+
+  return $output;
 }

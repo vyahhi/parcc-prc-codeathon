@@ -42,7 +42,7 @@
 // @import "foundation/components/labels";
 // @import "foundation/components/inline-lists";
 @import "foundation/components/pagination";
-// @import "foundation/components/panels";
+@import "foundation/components/panels";
 // @import "foundation/components/pricing-tables";
 // @import "foundation/components/progress-bars";
 // @import "foundation/components/side-nav";
@@ -64,6 +64,10 @@
   #page {
     background-color: white;
   }
+  // Forces text fields to match paragraph styles by default
+  .field-type-text {
+    @include paragraph;
+  }
   a:hover,
   a:active {
     text-decoration: underline;
@@ -76,6 +80,7 @@
   }
   .breadcrumb {
     padding-top: em-calc(10);
+    padding-bottom: 0;
     font-family: $bold-font-family;
     font-weight: bold;
     line-height: em-calc(24);

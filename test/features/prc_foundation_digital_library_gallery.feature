@@ -1,4 +1,4 @@
-@api @d7 @styleguide @prc-542 @prc-752 @prc-751
+@api @d7 @styleguide @prc-542 @prc-752 @diglib
 Feature: Gallery View Responsive behavior – Digital Library (PRC-542)
   As a user
   I want my view of the Digital Library gallery to be responsive
@@ -7,11 +7,6 @@ Feature: Gallery View Responsive behavior – Digital Library (PRC-542)
   Digital Library - Gallery View Theming (PRC-752)
   As a user
   I want my view of the Digital Library gallery to be responsive
-  so that I can easily view the content on different devices.
-
-  Digital Library - Item Detail Page Responsive Behavior (PRC-751)
-  As a user
-  I want my view of the Digital Library interior pages to be responsive
   so that I can easily view the content on different devices.
 
   ##### Digital Library Gallery View #####
@@ -81,7 +76,7 @@ Feature: Gallery View Responsive behavior – Digital Library (PRC-542)
     Then ".main" should have a "padding-left" css value of "30px"
     And ".main" should have a "padding-right" css value of "30px"
     And ".view-digital-library-gallery div:first-child" should have an "class" attribute value of "view-filters"
-    And ".view-digital-library-gallery .columns" should have a "width" css value of "321.23339999999996px"
+    And ".view-digital-library-gallery .columns" should have a "width" css value of "321.23339999999996pxbinb"
     And ".view-digital-library-gallery .view-content" should have a "position" css value of "static"
     And ".view-digital-library-gallery .columns" should have a "position" css value of "absolute"
 
@@ -219,39 +214,7 @@ Feature: Gallery View Responsive behavior – Digital Library (PRC-542)
     When I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Result Two"
     And I follow "Edit"
-    Then I attach the file "testfiles/lovelythumbnail.png" to "edit-field-thumbnail-und-0-upload"
+    Then I attach the file "testfiles/thumb_too_small.png" to "edit-field-thumbnail-und-0-upload"
     And I select the radio button "Public"
     And I press "Save"
-    And I should see the error message containing "The specified file lovelythumbnail.png could not be uploaded. The image is too small; the minimum dimensions are 595x1 pixels."
-
-  @javascript
-  Scenario: Digital library item detail page responsive behavior matches style guide
-    Given "Digital Library Content" nodes:
-      | title         | body              | status | promote | uid | field_author_name | field_thumbnail          | field_subject | field_grade_level | field_media_type  |
-      | DL Content        | Body Content | 1      | 0       | 1   | Author Name               | lovelythumbnail.png       | Math         | 1st Grade    | Text              |
-    And I index search results
-    And I am logged in as a user with the "authenticated user" role
-    And I visit the last node created
-    When I am browsing using a "phone"
-    Then ".group-left" should have a "padding-left" css value of "15px"
-    And ".group-left" should have a "width" css value of "341px"
-    And ".group-left" should have a "padding-right" css value of "15px"
-    And ".group-left .breadcrumb" should be visible
-    And ".group-left #page-title" should be visible
-    And ".group-left .field-name-field-author-name" should be visible
-    And ".group-left .field-name-body" should be visible
-    And ".group-left li.prc_digital_library_comment_email" should be visible
-    Then ".group-right" should have a "padding-left" css value of "15px"
-    And ".group-right" should have a "width" css value of "341px"
-    And ".group-right" should have a "padding-right" css value of "15px"
-    And ".group-right .field-name-field-grade-level" should be visible
-    And ".group-right .field-name-field-subject" should be visible
-    And ".group-right .field-name-field-media-type" should be visible
-    And ".group-right .sharethis" should be visible
-    When I am browsing using a "desktop"
-    Then ".group-left" should have a "padding-left" css value of "30px"
-    And ".group-left" should have a "width" css value of "785px"
-    And ".group-left" should have a "padding-right" css value of "30px"
-    Then ".group-right" should have a "padding-left" css value of "30px"
-    And ".group-right" should have a "width" css value of "362px"
-    And ".group-right" should have a "padding-right" css value of "30px"
+    And I should see the error message containing "The specified file thumb_too_small.png could not be uploaded. The image is too small; the minimum dimensions are 595x1 pixels."

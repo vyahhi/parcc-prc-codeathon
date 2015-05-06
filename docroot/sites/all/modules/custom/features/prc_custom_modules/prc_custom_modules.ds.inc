@@ -389,8 +389,7 @@ function prc_custom_modules_ds_layout_settings_info() {
         7 => 'field_grade_level',
         8 => 'field_subject',
         9 => 'field_genre',
-        10 => 'field_media_type',
-        11 => 'field_standard',
+        10 => 'field_standard',
       ),
     ),
     'fields' => array(
@@ -404,7 +403,6 @@ function prc_custom_modules_ds_layout_settings_info() {
       'field_grade_level' => 'right',
       'field_subject' => 'right',
       'field_genre' => 'right',
-      'field_media_type' => 'right',
       'field_standard' => 'right',
     ),
     'classes' => array(),
