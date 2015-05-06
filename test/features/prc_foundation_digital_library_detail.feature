@@ -21,7 +21,7 @@ Feature: Digital Library - Item Detail Page Responsive Behavior (PRC-751)
     And I visit the last node created
     When I am browsing using a "phone"
     Then ".group-left" should have a "padding-left" css value of "15px"
-    And ".group-left" should have a "width" css value of "326px"
+    And ".group-left" should have a "width" css value of "341px"
     And ".group-left" should have a "padding-right" css value of "15px"
     And ".group-left .breadcrumb" should be visible
     And ".group-left #page-title" should be visible
@@ -29,7 +29,7 @@ Feature: Digital Library - Item Detail Page Responsive Behavior (PRC-751)
     And ".group-left .field-name-body" should be visible
     And ".group-left li.prc_digital_library_comment_email" should be visible
     Then ".group-right" should have a "padding-left" css value of "15px"
-    And ".group-right" should have a "width" css value of "326px"
+    And ".group-right" should have a "width" css value of "341px"
     And ".group-right" should have a "padding-right" css value of "15px"
     And ".group-right .field-name-field-grade-level" should be visible
     And ".group-right .field-name-field-subject" should be visible
