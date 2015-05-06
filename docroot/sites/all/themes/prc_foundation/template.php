@@ -449,6 +449,12 @@ function prc_foundation_field($variables) {
       }
     }
   }
+  else {
+    // Render the label, if it's not hidden.
+    if (!$variables['label_hidden']) {
+      $output .= '<div class="field-label"' . $variables['title_attributes'] . '>' . $variables['label'] . ':&nbsp;</div>';
+    }
+  }
 
   // Render the items.
   $output .= '<div class="field-items"' . $variables['content_attributes'] . '>';
