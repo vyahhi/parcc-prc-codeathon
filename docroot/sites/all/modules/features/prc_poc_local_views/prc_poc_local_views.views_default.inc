@@ -5363,15 +5363,43 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
+    'field_subject' => 'field_subject',
+    'field_grade_level' => 'field_grade_level',
+    'field_resource_type' => 'field_resource_type',
+    'edit_node' => 'edit_node',
   );
-  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['default'] = 'title';
   $handler->display->display_options['style_options']['info'] = array(
     'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_subject' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_grade_level' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
+    ),
+    'field_resource_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 1,
     ),
   );
   /* Field: Content: Title */
@@ -5397,6 +5425,12 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_resource_type']['table'] = 'field_data_field_resource_type';
   $handler->display->display_options['fields']['field_resource_type']['field'] = 'field_resource_type';
   $handler->display->display_options['fields']['field_resource_type']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = '';
+  $handler->display->display_options['fields']['edit_node']['hide_empty'] = TRUE;
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';

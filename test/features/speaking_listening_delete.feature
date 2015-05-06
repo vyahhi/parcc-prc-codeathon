@@ -54,11 +54,12 @@ Feature: Delete Speaking and Listening Resource
   @prc-1430
   Scenario: Delete - Deleted
     Given I am logged in as a user with the "PRC Admin" role
+    And I have no "Speaking and Listening Resource" nodes
     And "Speaking and Listening Resource" nodes:
       | title               | status | uid         |
       | Resource @timestamp | 1      | @currentuid |
-    And I visit the first node created
-    And I click "Edit"
+    And I am on "speaking-listening"
+    When I click "edit"
     And I select "Listening logs - for students" from "Resource Type"
     And I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-file-single-und-0-upload"
     And I fill in "Resource name" with "Resource @timestamp"
@@ -67,8 +68,8 @@ Feature: Delete Speaking and Listening Resource
     And I select "1st Grade" from "Grade Level"
     And I press "Save"
 # Have to edit it to fill in the terms and fields and everything, then Delete
-    And I visit the first node created
-    And I click "Edit"
+    And I am on "speaking-listening"
+    When I click "edit"
     And I fill in the hidden field "faux_standard" with "Standard"
     And I fill in the hidden field "faux_subject" with "Subject"
     When I press "Delete"
@@ -76,3 +77,4 @@ Feature: Delete Speaking and Listening Resource
     Then I should see the message containing "Speaking and Listening Resource"
     And I should see the message containing "Resource @timestamp"
     And I should see the message containing "has been deleted."
+    And the url should match "speaking-listening"

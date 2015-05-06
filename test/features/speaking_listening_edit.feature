@@ -14,14 +14,15 @@ Feature: PRC-1425 Speaking and Listening - Edit Resource
     And I should see a "Save" button
     And I should see a "Delete" button
 
-  Scenario: Edited
+  @prc-1415
+  Scenario: Edited - click edit from view
     Given I am logged in as a user with the "PRC Admin" role
     And I have no "Speaking and Listening Resource" nodes
     And "Speaking and Listening Resource" nodes:
       | title               | status | uid         |
       | Resource @timestamp | 1      | @currentuid |
     And I am on "speaking-listening"
-    And I click "Edit"
+    When I click "edit"
     And I select "Listening logs - for students" from "Resource Type"
     And I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-file-single-und-0-upload"
     And I fill in "Resource name" with "Resource @timestamp"
@@ -29,3 +30,4 @@ Feature: PRC-1425 Speaking and Listening - Edit Resource
     And I fill in the hidden field "faux_subject" with "Subject"
     And I select "1st Grade" from "Grade Level"
     And I press "Save"
+    Then the url should match "speaking-listening"
