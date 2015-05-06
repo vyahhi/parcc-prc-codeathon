@@ -5,12 +5,27 @@ Feature: PRC-1425 Speaking and Listening - Edit Resource
   Scenario: Edit form
     Given I am logged in as a user with the "PRC Admin" role
     And "Speaking and Listening Resource" nodes:
-      | title               | status | uid         | Grade Level | Subject | Standard                  |
-      | Resource @timestamp | 1      | @currentuid | 1st Grade   | Math    | Common Core Language Arts |
+      | title               | status | uid         |
+      | Resource @timestamp | 1      | @currentuid |
     And I visit the first node created
     And I click "Edit"
-    Then  I take a screenshot
     Then I should see the heading "Resource @timestamp"
     And the "Resource name" field should contain "Resource @timestamp"
     And I should see a "Save" button
     And I should see a "Delete" button
+
+  Scenario: Edited
+    Given I am logged in as a user with the "PRC Admin" role
+    And I have no "Speaking and Listening Resource" nodes
+    And "Speaking and Listening Resource" nodes:
+      | title               | status | uid         |
+      | Resource @timestamp | 1      | @currentuid |
+    And I am on "speaking-listening"
+    And I click "Edit"
+    And I select "Listening logs - for students" from "Resource Type"
+    And I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-file-single-und-0-upload"
+    And I fill in "Resource name" with "Resource @timestamp"
+    And I fill in the hidden field "faux_standard" with "Standard"
+    And I fill in the hidden field "faux_subject" with "Subject"
+    And I select "1st Grade" from "Grade Level"
+    And I press "Save"

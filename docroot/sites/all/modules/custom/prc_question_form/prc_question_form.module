@@ -30,6 +30,10 @@ function prc_question_form_permission() {
       'title' => t('Add PARCC Items'),
       'description' => t('Add PARCC Items'),
     ),
+    'view speaking and listening' => array(
+      'title' => t('View Speaking and Listening Resources'),
+      'description' => t('View Speaking and Listening Resources'),
+    ),
   );
   return $perms;
 }

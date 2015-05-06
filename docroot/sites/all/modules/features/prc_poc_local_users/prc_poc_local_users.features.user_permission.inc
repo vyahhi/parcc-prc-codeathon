@@ -3081,6 +3081,19 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'view speaking and listening'.
+  $permissions['view speaking and listening'] = array(
+    'name' => 'view speaking and listening',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'Content Contributor' => 'Content Contributor',
+      'PARCC-Member Educator' => 'PARCC-Member Educator',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'prc_question_form',
+  );
+
   // Exported permission: 'view the administration theme'.
   $permissions['view the administration theme'] = array(
     'name' => 'view the administration theme',

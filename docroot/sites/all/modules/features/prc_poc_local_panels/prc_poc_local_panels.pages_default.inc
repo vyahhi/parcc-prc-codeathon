@@ -4027,7 +4027,19 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_title = 'Speaking and Listening';
   $page->admin_description = 'Speaking and Listening page';
   $page->path = 'speaking-listening';
-  $page->access = array();
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'perm',
+        'settings' => array(
+          'perm' => 'view speaking and listening',
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+    ),
+    'logic' => 'and',
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(
@@ -4090,6 +4102,50 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->uuid = 'd05b9e2f-b374-4354-b0b6-f0720cbf8566';
     $display->content['new-d05b9e2f-b374-4354-b0b6-f0720cbf8566'] = $pane;
     $display->panels['middle'][0] = 'new-d05b9e2f-b374-4354-b0b6-f0720cbf8566';
+    $pane = new stdClass();
+    $pane->pid = 'new-f36b66e7-8192-4791-b33b-dbab4776b9b4';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Overview Copy',
+      'title' => '',
+      'body' => 'Overview / instructional copy goes here.',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'f36b66e7-8192-4791-b33b-dbab4776b9b4';
+    $display->content['new-f36b66e7-8192-4791-b33b-dbab4776b9b4'] = $pane;
+    $display->panels['middle'][1] = 'new-f36b66e7-8192-4791-b33b-dbab4776b9b4';
+    $pane = new stdClass();
+    $pane->pid = 'new-6c6da0d8-f882-47bd-ae55-6162729f05c3';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'speaking_and_listening-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = '6c6da0d8-f882-47bd-ae55-6162729f05c3';
+    $display->content['new-6c6da0d8-f882-47bd-ae55-6162729f05c3'] = $pane;
+    $display->panels['middle'][2] = 'new-6c6da0d8-f882-47bd-ae55-6162729f05c3';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

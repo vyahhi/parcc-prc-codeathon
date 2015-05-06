@@ -353,6 +353,7 @@ features[user_permission][] = view pane admin links
 features[user_permission][] = view quiz question outside of a quiz
 features[user_permission][] = view results for own quiz
 features[user_permission][] = view revisions
+features[user_permission][] = view speaking and listening
 features[user_permission][] = view the administration theme
 features[user_permission][] = withdraw own accepted invitations
 features[user_permission][] = withdraw own invitations
