@@ -1,19 +1,19 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: jfranks
- * Date: 9/29/14
- * Time: 1:14 PM
+ * @file
+ * Defines \FeatureContext.
  */
 
-
-use Behat\Behat\Context\Step\Then;
 use Behat\Behat\Context\Step\Given;
-use Behat\Mink\Exception\ExpectationException;
-use Drupal\DrupalExtension\Event\EntityEvent;
+use Behat\Behat\Context\Step\Then;
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Exception\ElementHtmlException;
+use Behat\Mink\Exception\ExpectationException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
+use Drupal\DrupalExtension\Context\DrupalContext;
+use Drupal\DrupalExtension\Event\EntityEvent;
 
-class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
+class FeatureContext extends DrupalContext {
   protected $timestamp;
   protected $originalMailSystem;
   protected $customParameters;
@@ -70,6 +70,24 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
       }
     }
     return parent::fixStepArgument($argument);
+  }
+
+  /**
+   * Checks if Driver supports Javascript.
+   *
+   * @return bool
+   *   TRUE if it does, FALSE otherwise.
+   */
+  protected function isJavascriptSupported() {
+    $js = TRUE;
+    $script = 'var foo = 1;';
+    try {
+      $this->getSession()->getDriver()->evaluateScript($script);
+    }
+    catch (UnsupportedDriverActionException $e) {
+      $js = FALSE;
+    }
+    return $js;
   }
 
   /**
@@ -1748,13 +1766,46 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
    * @throws Exception
    */
   public function shouldHaveAnAttributeValueOf($selector, $attribute, $value) {
-    $computed = $this->getSession()->evaluateScript("
+    if ($this->isJavascriptSupported()) {
+      $computed = $this->getSession()->evaluateScript("
       return jQuery( '" . $selector . "' ).attr('" . $attribute . "');
     ");
-    // Convert double quotes to single quotes for matching purposes.
-    $computed = str_replace('"', "'", $computed);
-    if ($value != $computed) {
-      throw new Exception("Element ({$selector}) does not have a ({$attribute}) value of ({$value}).  The actual value is ({$computed})");
+      // Convert double quotes to single quotes for matching purposes.
+      $computed = str_replace('"', "'", $computed);
+      if ($value != $computed) {
+        throw new Exception("Element ({$selector}) does not have a ({$attribute}) value of ({$value}).  The actual value is ({$computed})");
+      }
+    }
+    else {
+      $this->assertSession()
+        ->elementAttributeContains('css', $selector, $attribute, $value);
     }
   }
+
+  /**
+   * @Then /^"([^"]*)" should not have an "([^"]*)" attribute$/
+   */
+  public function shouldNotHaveAnAttribute($selector, $attribute) {
+    $element = $this->assertSession()->elementExists('css', $selector);
+    if ($element->hasAttribute($attribute)) {
+      throw new \Exception(sprintf('The element %s has attribute %s, but it should not.', $selector, $attribute));
+    }
+  }
+
+  /**
+   * @Then /^"([^"]*)" should not have an "([^"]*)" attribute value of "([^"]*)"$/
+   */
+  public function shouldNotHaveAnAttributeValueOf($selector, $attribute, $value) {
+    try {
+      $this->shouldHaveAnAttributeValueOf($selector, $attribute, $value);
+      $return = TRUE;
+    } catch (ElementHtmlException $ehe) {
+      throw $ehe;
+    } catch (Exception $e) {
+      // Eat exception, we're good.
+      return;
+    }
+    throw new \Exception(sprintf('The element %s has an %s value of %s, but it should not.', $selector, $attribute, $value));
+  }
+
 }
