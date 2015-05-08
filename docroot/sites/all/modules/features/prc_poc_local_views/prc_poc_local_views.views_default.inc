@@ -5345,7 +5345,7 @@ message explaining what the check does and the importance of running it.';
   $view = new view();
   $view->name = 'speaking_and_listening';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'PRC';
   $view->base_table = 'node';
   $view->human_name = 'Speaking and Listening';
   $view->core = 7;
@@ -5402,13 +5402,25 @@ message explaining what the check does and the importance of running it.';
       'empty_column' => 1,
     ),
   );
+  /* Field: Content: File */
+  $handler->display->display_options['fields']['field_file_single']['id'] = 'field_file_single';
+  $handler->display->display_options['fields']['field_file_single']['table'] = 'field_data_field_file_single';
+  $handler->display->display_options['fields']['field_file_single']['field'] = 'field_file_single';
+  $handler->display->display_options['fields']['field_file_single']['label'] = '';
+  $handler->display->display_options['fields']['field_file_single']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_file_single']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_file_single']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_file_single']['type'] = 'file_url_plain';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Resource Name';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['path'] = '[field_file_single]';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Subject */
   $handler->display->display_options['fields']['field_subject']['id'] = 'field_subject';
   $handler->display->display_options['fields']['field_subject']['table'] = 'field_data_field_subject';

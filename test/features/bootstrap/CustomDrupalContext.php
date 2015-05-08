@@ -7,11 +7,11 @@
  */
 
 
-use Behat\Behat\Context\Step\Then;
 use Behat\Behat\Context\Step\Given;
+use Behat\Behat\Context\Step\Then;
+use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ExpectationException;
 use Drupal\DrupalExtension\Event\EntityEvent;
-use Behat\Gherkin\Node\TableNode;
 
 class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
   protected $timestamp;
@@ -1756,5 +1756,62 @@ class FeatureContext extends \Drupal\DrupalExtension\Context\DrupalContext {
     if ($value != $computed) {
       throw new Exception("Element ({$selector}) does not have a ({$attribute}) value of ({$value}).  The actual value is ({$computed})");
     }
+  }
+
+  /**
+   * Create speaking-listening content.
+   *
+   * Provide data in following format:
+   * | resource name       | resource type                 | file                          | faux standard | faux subject | grade level |
+   * | Resource @timestamp | Listening logs - for students | testfiles/GreatLakesWater.pdf | Standard      | Subject      | 1st Grade   |
+   *
+   * @Given /^speaking-listening content:$/
+   */
+  public function speakingListeningContent(TableNode $table) {
+    foreach ($table->getHash() as $hash) {
+      // Let's have an administrator go through the motions.
+      $this->assertAuthenticatedByRole("administrator");
+      $this->visit("node/add/speaking-and-listening-resource");
+      $this->fillField('Resource name', $hash['resource name']);
+      $this->selectOption('Resource Type', $hash['resource type']);
+      $this->attachFileToField('edit-field-file-single-und-0-upload', $hash['file']);
+
+      $session_name = $this->getMink()->getDefaultSessionName();
+      if ($session_name && $session_name == "selenium2") {
+        // Fill in hidden fields with javascript, because selenium2 rightfully
+        // does not allow interaction with hidden elements.
+        $script = "document.getElementsByName('faux_standard')[0].setAttribute('value','{$hash['faux standard']}');";
+        $this->getSession()->executeScript($script);
+        $script = "document.getElementsByName('faux_subject')[0].setAttribute('value','{$hash['faux subject']}');";
+        $this->getSession()->executeScript($script);
+      }
+      else {
+        $this->iFillHiddenFieldWith('faux_standard', $hash['faux standard']);
+        $this->iFillHiddenFieldWith('faux_subject', $hash['faux subject']);
+      }
+
+      $this->selectOption('Grade Level', $hash['grade level']);
+      $this->pressButton('Save');
+    }
+
+  }
+
+  /**
+   * @Then /^the response Content-Type should be "([^"]*)"$/
+   */
+  public function theResponseContentTypeShouldBe($value) {
+    $response_headers = $this->getSession()->getResponseHeaders();
+    $found = array();
+    if ($response_headers && array_key_exists('Content-Type', $response_headers)) {
+      foreach ($response_headers['Content-Type'] as $content_type) {
+        if ($content_type == $value) {
+          return;
+        }
+        else {
+          $found[] = $content_type;
+        }
+      }
+    }
+    throw new \Exception(sprintf("Expecting '%s', found '%s'", $value, implode(',', $found)));
   }
 }

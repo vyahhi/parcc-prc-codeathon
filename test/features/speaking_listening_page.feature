@@ -1,20 +1,13 @@
-@api @speaking-listening @prc-1410
+@api @speaking-listening @prc-1410 @prc-1433
 Feature: PRC-1410 Speaking and Listening page - Regulars View
   As a PARCC-member Educator, I want to be able to view Speaking and Listening resources.
 
-  Scenario: Resource View
-    # First create the node, annoying we have to do it this way but it's all files and SHS
-    Given I am logged in as a user with the "PRC Admin" role
-    And I am on "speaking-listening"
-    When I click "Add Resource"
-    And I select "Listening logs - for students" from "Resource Type"
-    And I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-file-single-und-0-upload"
-    And I fill in "Resource name" with "Resource @timestamp"
-    And I fill in the hidden field "faux_standard" with "Standard"
-    And I fill in the hidden field "faux_subject" with "Subject"
-    And I select "1st Grade" from "Grade Level"
-    And I press "Save"
+  Background:
+    Given speaking-listening content:
+      | resource name       | resource type                 | file                          | faux standard | faux subject | grade level |
+      | Resource @timestamp | Listening logs - for students | testfiles/GreatLakesWater.pdf | Standard      | Subject      | 1st Grade   |
 
+  Scenario: Resource View
     Given I am an anonymous user
     And I am logged in as a user with the "PARCC-Member Educator" role
     When I am on "speaking-listening"
@@ -30,3 +23,9 @@ Feature: PRC-1410 Speaking and Listening page - Regulars View
     Given I am logged in as a user with the "Educator" role
     And I am on "instruction"
     Then I should not see the link "Speaking and Listening"
+
+  Scenario: PRC-1433 S&L Resource name link
+    Given I am logged in as a user with the "PARCC-Member Educator" role
+    And I am on "speaking-listening"
+    When I click "Resource @timestamp"
+    Then the response Content-Type should be "application/pdf"
