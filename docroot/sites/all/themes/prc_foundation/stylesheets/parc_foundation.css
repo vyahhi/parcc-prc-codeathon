@@ -4575,3 +4575,7 @@ table tfoot tr td {
     margin-right: 1.2em;
   }
 }
+/* line 2, ../sass/_forms.scss */
+.filter-help a {
+  padding: 0 20px 0 0;
+}
