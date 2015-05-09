@@ -4518,7 +4518,7 @@ table tfoot tr td {
   }
   /* line 304, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right {
-    margin-top: 50px;
+    margin-top: 34px;
   }
   /* line 306, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail {
@@ -4526,6 +4526,9 @@ table tfoot tr td {
     margin-bottom: 35px;
   }
   /* line 309, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail .field-item {
+    margin-top: 0;
+  }
   .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail img {
     width: 100%;
     height: auto;

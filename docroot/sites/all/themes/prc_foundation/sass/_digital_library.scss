@@ -302,10 +302,13 @@
       padding-left: $desktop-padding;
     }
     .group-right {
-      margin-top: 50px;
+      margin-top: 34px;
       .field-name-field-thumbnail {
         display: block;
         margin-bottom: 35px;
+        .field-item {
+          margin-top: 0;
+        }
         img {
           width: 100%;
           height: auto;
