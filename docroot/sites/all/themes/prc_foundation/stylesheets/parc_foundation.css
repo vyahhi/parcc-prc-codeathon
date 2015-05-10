@@ -3792,11 +3792,11 @@ table tfoot tr td {
   }
 
   /* line 68, ../sass/parc_foundation.scss */
-  .field-type-text {
+  p, .field-type-text {
     font-family: inherit;
     font-weight: normal;
     font-size: 1em;
-    line-height: 1.6;
+    line-height: 1.5;
     margin-bottom: 1.25em;
     text-rendering: optimizeLegibility;
   }
@@ -4209,7 +4209,7 @@ table tfoot tr td {
     font-family: inherit;
     font-weight: normal;
     font-size: 1em;
-    line-height: 1.6;
+    line-height: 1.5;
     margin-bottom: 1.25em;
     text-rendering: optimizeLegibility;
     font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -4222,6 +4222,13 @@ table tfoot tr td {
     font-weight: 700;
   }
   /* line 108, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-left .field-name-field-author-name > div {
+    text-decoration: underline;
+  }
+  /* line 110, ../sass/_digital_library.scss */
+  .page-node.node-type-digital-library-content .group-left .field-name-field-author-name .field-items {
+    float: none;
+  }
   .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email {
     width: 125px;
     margin: auto;

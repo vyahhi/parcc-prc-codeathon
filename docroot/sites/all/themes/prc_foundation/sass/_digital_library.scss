@@ -104,6 +104,12 @@
       .field-name-field-author-name {
         margin-bottom: 0;
         @include bold;
+        > div {
+          text-decoration: underline;
+        }
+        .field-items {
+          float: none;
+        }
       }
       .prc_digital_library_comment_email {
         width: 125px;
