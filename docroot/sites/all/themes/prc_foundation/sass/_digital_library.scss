@@ -104,9 +104,6 @@
       .field-name-field-author-name {
         margin-bottom: 0;
         @include bold;
-        > div {
-          text-decoration: underline;
-        }
         .field-items {
           float: none;
         }
