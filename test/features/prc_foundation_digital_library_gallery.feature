@@ -76,7 +76,7 @@ Feature: Gallery View Responsive behavior – Digital Library (PRC-542)
     Then ".main" should have a "padding-left" css value of "30px"
     And ".main" should have a "padding-right" css value of "30px"
     And ".view-digital-library-gallery div:first-child" should have an "class" attribute value of "view-filters"
-    And ".view-digital-library-gallery .columns" should have a "width" css value of "321.23339999999996pxbinb"
+    And ".view-digital-library-gallery .columns" should have a "width" css value of "321.23339999999996px"
     And ".view-digital-library-gallery .view-content" should have a "position" css value of "static"
     And ".view-digital-library-gallery .columns" should have a "position" css value of "absolute"
 
