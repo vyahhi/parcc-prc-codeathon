@@ -2618,6 +2618,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '21';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -2658,21 +2659,21 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['filters']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
   $handler->display->display_options['filters']['search_api_views_fulltext']['exposed'] = TRUE;
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator_id'] = 'search_api_views_fulltext_op';
-  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['label'] = 'Search';
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator'] = 'search_api_views_fulltext_op';
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['identifier'] = 'search_api_views_fulltext';
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
-    11 => 0,
+    12 => 0,
     6 => 0,
-    7 => 0,
+    8 => 0,
     4 => 0,
     3 => 0,
-    8 => 0,
+    7 => 0,
     9 => 0,
-    5 => 0,
     10 => 0,
+    5 => 0,
+    11 => 0,
   );
 
   /* Display: Digital Library Search View */
