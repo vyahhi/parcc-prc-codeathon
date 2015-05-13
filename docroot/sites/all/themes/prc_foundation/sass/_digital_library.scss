@@ -1,4 +1,28 @@
 @media #{$screen} {
+  #filter-panel {
+    width: 446px;
+    margin-left: auto;
+    margin-right: auto;
+    li {
+      float: left;
+    }
+    .views-exposed-form .views-exposed-widget {
+      padding: 0;
+    }
+    .filter-panel-search .view-filters {
+      display: inline-block;
+    }
+    .form-item-sort-by,
+    .views-widget-sort-order,
+    .views-submit-button {
+      display: none;
+      padding: 0;
+    }
+    .filter-panel-toggle-link,
+    .filter-panel-all-link {
+      @include button;
+    }
+  }
   .view-digital-library-gallery {
     padding-bottom: 0;
     background-color: $background-gray;
@@ -10,6 +34,10 @@
     .form-item,
     .views-exposed-widgets {
       margin-bottom: 0;
+      .form-item-sort-by,
+      .views-widget-sort-order {
+        display: none;
+      }
     }
     .views-exposed-widget .form-submit {
       margin-top: 1em;
@@ -18,6 +46,9 @@
   .gallery-main {
     background-color: $background-gray;
     border-top: 1px solid #DBDBDB;
+    .filter-panel-toggle {
+      display: none;
+    }
     .view-content .gallery-tiles .columns {
       border-top: 10px solid $background-gray;
       border-bottom: 10px solid $background-gray;

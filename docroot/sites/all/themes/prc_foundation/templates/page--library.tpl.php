@@ -122,7 +122,12 @@
         </ul>
       <?php endif; ?>
 
-      <p class="center"><a href="#" class="filter-panel-toggle-link">Show/Hide Filter Panel (Temporary Control)</a></p>
+      <div id="filter-panel" class="center">
+        <ul class="inline">
+          <li class="filter-panel-search"></li>
+          <li><a href="#" class="filter-panel-toggle-link">Filters</a></li>
+          <li><a href="library" class="filter-panel-all-link">All</a></li>
+      </div>
 
     </div>
   </section>

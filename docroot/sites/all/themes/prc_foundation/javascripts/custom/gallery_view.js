@@ -2,6 +2,8 @@ Drupal.behaviors.galleryViewBehavior = {
   attach: function (context, settings) {
     (function ($) {
       $('.filter-panel-toggle-link').once(function(){
+        // Move search box to filter panel
+        $('.view-filters').appendTo('.filter-panel-search');
         // Remove extra text from flagged links
         $('.view-content .gallery-tiles .columns').each(function( index ) {
           if ($('.flag-wrapper a', this).hasClass('unflag-action')) {
