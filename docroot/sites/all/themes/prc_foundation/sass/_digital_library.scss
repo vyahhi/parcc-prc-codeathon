@@ -1,16 +1,26 @@
 @media #{$screen} {
   #filter-panel {
-    width: 446px;
+    width: 464px;
     margin-left: auto;
     margin-right: auto;
     li {
       float: left;
+      padding: 0;
     }
     .views-exposed-form .views-exposed-widget {
       padding: 0;
     }
     .filter-panel-search .view-filters {
       display: inline-block;
+      input {
+        height: 45px;
+        padding-left: 25px;
+        padding-right: 40px;
+        border-top-left-radius: 1000px;
+        border-bottom-left-radius: 1000px;
+        border-color: $gray-stroke;
+        background: url('../images/search-filter-icon.png') 95% center no-repeat;
+      }
     }
     .form-item-sort-by,
     .views-widget-sort-order,
@@ -21,6 +31,29 @@
     .filter-panel-toggle-link,
     .filter-panel-all-link {
       @include button;
+      height: 45px;
+      padding-left: 2.5em;
+      padding-top: .85em;
+      border-color: $gray-stroke;
+      color: $body-font-color;
+      font-weight: normal;
+      font-size: .875em;
+    }
+    .filter-panel-toggle-link {
+      background: url('../images/filter-icon.png') 10px center no-repeat $filter-button-color;
+    }
+    .filter-panel-toggle-link:hover,
+    .filter-panel-toggle-link:focus {
+      background: url('../images/filter-icon-selected.png') 10px center no-repeat $parcc-purple;
+    }
+    .filter-panel-all-link {
+      background: url('../images/all-icon.png') 10px center no-repeat $filter-button-color;
+      border-top-right-radius: 1000px;
+      border-bottom-right-radius: 1000px;
+    }
+    .filter-panel-all-link:hover,
+    .filter-panel-all-link:focus {
+      background: url('../images/all-icon-selected.png') 10px center no-repeat $parcc-purple;
     }
   }
   .view-digital-library-gallery {
@@ -45,7 +78,7 @@
   }
   .gallery-main {
     background-color: $background-gray;
-    border-top: 1px solid #DBDBDB;
+    border-top: 1px solid $gray-stroke;
     .filter-panel-toggle {
       display: none;
     }

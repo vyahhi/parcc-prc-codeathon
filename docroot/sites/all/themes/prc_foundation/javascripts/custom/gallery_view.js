@@ -4,6 +4,7 @@ Drupal.behaviors.galleryViewBehavior = {
       $('.filter-panel-toggle-link').once(function(){
         // Move search box to filter panel
         $('.view-filters').appendTo('.filter-panel-search');
+        $('input#edit-search-api-views-fulltext').attr('placeholder', 'Search Library');
         // Remove extra text from flagged links
         $('.view-content .gallery-tiles .columns').each(function( index ) {
           if ($('.flag-wrapper a', this).hasClass('unflag-action')) {

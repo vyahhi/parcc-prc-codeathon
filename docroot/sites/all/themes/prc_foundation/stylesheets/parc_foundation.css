@@ -4082,30 +4082,41 @@ table tfoot tr td {
 @media only screen {
   /* line 2, ../sass/_digital_library.scss */
   #filter-panel {
-    width: 446px;
+    width: 464px;
     margin-left: auto;
     margin-right: auto;
   }
   /* line 6, ../sass/_digital_library.scss */
   #filter-panel li {
     float: left;
+    padding: 0;
   }
-  /* line 9, ../sass/_digital_library.scss */
+  /* line 10, ../sass/_digital_library.scss */
   #filter-panel .views-exposed-form .views-exposed-widget {
     padding: 0;
   }
-  /* line 12, ../sass/_digital_library.scss */
+  /* line 13, ../sass/_digital_library.scss */
   #filter-panel .filter-panel-search .view-filters {
     display: inline-block;
   }
   /* line 15, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-search .view-filters input {
+    height: 45px;
+    padding-left: 25px;
+    padding-right: 40px;
+    border-top-left-radius: 1000px;
+    border-bottom-left-radius: 1000px;
+    border-color: #DBDBDB;
+    background: url("../images/search-filter-icon.png") 95% center no-repeat;
+  }
+  /* line 25, ../sass/_digital_library.scss */
   #filter-panel .form-item-sort-by,
   #filter-panel .views-widget-sort-order,
   #filter-panel .views-submit-button {
     display: none;
     padding: 0;
   }
-  /* line 21, ../sass/_digital_library.scss */
+  /* line 31, ../sass/_digital_library.scss */
   #filter-panel .filter-panel-toggle-link,
   #filter-panel .filter-panel-all-link {
     border-style: solid;
@@ -4127,6 +4138,13 @@ table tfoot tr td {
     background-color: #70547D;
     border-color: #55405e;
     color: #fff;
+    height: 45px;
+    padding-left: 2.5em;
+    padding-top: .85em;
+    border-color: #DBDBDB;
+    color: #464646;
+    font-weight: normal;
+    font-size: .875em;
   }
   /* line 121, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
   #filter-panel .filter-panel-toggle-link:hover, #filter-panel .filter-panel-toggle-link:focus,
@@ -4140,24 +4158,44 @@ table tfoot tr td {
   #filter-panel .filter-panel-all-link:focus {
     color: #fff;
   }
+  /* line 42, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-toggle-link {
+    background: url("../images/filter-icon.png") 10px center no-repeat #f8f8f8;
+  }
+  /* line 45, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-toggle-link:hover,
+  #filter-panel .filter-panel-toggle-link:focus {
+    background: url("../images/filter-icon-selected.png") 10px center no-repeat #70547D;
+  }
+  /* line 49, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-all-link {
+    background: url("../images/all-icon.png") 10px center no-repeat #f8f8f8;
+    border-top-right-radius: 1000px;
+    border-bottom-right-radius: 1000px;
+  }
+  /* line 54, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-all-link:hover,
+  #filter-panel .filter-panel-all-link:focus {
+    background: url("../images/all-icon-selected.png") 10px center no-repeat #70547D;
+  }
 
-  /* line 26, ../sass/_digital_library.scss */
+  /* line 59, ../sass/_digital_library.scss */
   .view-digital-library-gallery {
     padding-bottom: 0;
     background-color: #EEEEEE;
     font-size: 1em;
   }
-  /* line 30, ../sass/_digital_library.scss */
+  /* line 63, ../sass/_digital_library.scss */
   .view-digital-library-gallery form {
     margin-top: 1em;
   }
-  /* line 33, ../sass/_digital_library.scss */
+  /* line 66, ../sass/_digital_library.scss */
   .view-digital-library-gallery form,
   .view-digital-library-gallery .form-item,
   .view-digital-library-gallery .views-exposed-widgets {
     margin-bottom: 0;
   }
-  /* line 37, ../sass/_digital_library.scss */
+  /* line 70, ../sass/_digital_library.scss */
   .view-digital-library-gallery form .form-item-sort-by,
   .view-digital-library-gallery form .views-widget-sort-order,
   .view-digital-library-gallery .form-item .form-item-sort-by,
@@ -4166,26 +4204,26 @@ table tfoot tr td {
   .view-digital-library-gallery .views-exposed-widgets .views-widget-sort-order {
     display: none;
   }
-  /* line 42, ../sass/_digital_library.scss */
+  /* line 75, ../sass/_digital_library.scss */
   .view-digital-library-gallery .views-exposed-widget .form-submit {
     margin-top: 1em;
   }
 
-  /* line 46, ../sass/_digital_library.scss */
+  /* line 79, ../sass/_digital_library.scss */
   .gallery-main {
     background-color: #EEEEEE;
     border-top: 1px solid #DBDBDB;
   }
-  /* line 49, ../sass/_digital_library.scss */
+  /* line 82, ../sass/_digital_library.scss */
   .gallery-main .filter-panel-toggle {
     display: none;
   }
-  /* line 52, ../sass/_digital_library.scss */
+  /* line 85, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns {
     border-top: 10px solid #EEEEEE;
     border-bottom: 10px solid #EEEEEE;
   }
-  /* line 56, ../sass/_digital_library.scss */
+  /* line 89, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns {
     padding-bottom: 1em;
     border-top: 10px solid #EEEEEE;
@@ -4193,17 +4231,17 @@ table tfoot tr td {
     background-color: white;
     font-size: 0.8125em;
   }
-  /* line 62, ../sass/_digital_library.scss */
+  /* line 95, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-field-thumbnail {
     margin-left: -0.9375em;
     margin-right: -0.9375em;
   }
-  /* line 65, ../sass/_digital_library.scss */
+  /* line 98, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-field-thumbnail img {
     width: 100%;
     height: auto;
   }
-  /* line 70, ../sass/_digital_library.scss */
+  /* line 103, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-title {
     margin-left: -0.9375em;
     margin-right: -0.9375em;
@@ -4213,72 +4251,72 @@ table tfoot tr td {
     padding-bottom: 1px;
     background: url("../images/text-icon.png") no-repeat 97% center #70547D;
   }
-  /* line 78, ../sass/_digital_library.scss */
+  /* line 111, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-title h3 {
     margin-top: 0;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
   }
-  /* line 82, ../sass/_digital_library.scss */
+  /* line 115, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-title h3 a {
     color: white;
   }
-  /* line 87, ../sass/_digital_library.scss */
+  /* line 120, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .media-type-text .field-name-title,
   .gallery-main .view-content .columns .media-type-image .field-name-title {
     background: url("../images/attachment-icon.png") no-repeat 97% center #6F7E95;
   }
-  /* line 91, ../sass/_digital_library.scss */
+  /* line 124, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .media-type-audio .field-name-title,
   .gallery-main .view-content .columns .media-type-video .field-name-title {
     background: url("../images/video-icon.png") no-repeat 97% center #0035B7;
   }
-  /* line 95, ../sass/_digital_library.scss */
+  /* line 128, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .flagged .field-name-title {
     background-color: #F66B16;
   }
-  /* line 98, ../sass/_digital_library.scss */
+  /* line 131, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-post-date {
     margin: 1.25em 0;
     color: #6F7E95;
   }
-  /* line 102, ../sass/_digital_library.scss */
+  /* line 135, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-body {
     margin-bottom: 1.5em;
     border-bottom: 1px solid #6F7E95;
   }
-  /* line 105, ../sass/_digital_library.scss */
+  /* line 138, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-body .field-items {
     margin-bottom: 1.75em;
   }
-  /* line 109, ../sass/_digital_library.scss */
+  /* line 142, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links .prc_digital_library_comment_email,
   .gallery-main .view-content .columns ul.links .pinit {
     display: none;
   }
-  /* line 113, ../sass/_digital_library.scss */
+  /* line 146, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-field-tags {
     float: left;
     color: #6F7E95;
   }
-  /* line 116, ../sass/_digital_library.scss */
+  /* line 149, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-field-tags .field-label {
     margin-bottom: 5px;
   }
 
-  /* line 123, ../sass/_digital_library.scss */
+  /* line 156, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .panel-flexible.panels-flexible-new {
     height: 0;
   }
-  /* line 126, ../sass/_digital_library.scss */
+  /* line 159, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left {
     overflow: hidden;
   }
-  /* line 128, ../sass/_digital_library.scss */
+  /* line 161, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left ul.tabs.primary {
     margin-bottom: 1em;
   }
-  /* line 131, ../sass/_digital_library.scss */
+  /* line 164, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .field-name-post-date {
     font-family: inherit;
     font-weight: normal;
@@ -4289,23 +4327,23 @@ table tfoot tr td {
     font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
   }
-  /* line 135, ../sass/_digital_library.scss */
+  /* line 168, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .field-name-field-author-name {
     margin-bottom: 0;
     font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
   }
-  /* line 138, ../sass/_digital_library.scss */
+  /* line 171, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .field-name-field-author-name .field-items {
     float: none;
   }
-  /* line 142, ../sass/_digital_library.scss */
+  /* line 175, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email {
     width: 125px;
     margin: auto;
     list-style: none;
   }
-  /* line 147, ../sass/_digital_library.scss */
+  /* line 180, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a {
     border-style: solid;
     border-width: 1px;
@@ -4341,11 +4379,11 @@ table tfoot tr td {
   .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a:hover, .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a:focus {
     color: #fff;
   }
-  /* line 153, ../sass/_digital_library.scss */
+  /* line 186, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right {
     overflow: hidden;
   }
-  /* line 155, ../sass/_digital_library.scss */
+  /* line 188, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .divider {
     overflow: hidden;
     white-space: nowrap;
@@ -4353,7 +4391,7 @@ table tfoot tr td {
     font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
   }
-  /* line 161, ../sass/_digital_library.scss */
+  /* line 194, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .divider hr {
     display: inline-block;
     width: 100%;
@@ -4364,24 +4402,24 @@ table tfoot tr td {
     border: solid #6F7E95;
     border-width: 1px 0 0;
   }
-  /* line 171, ../sass/_digital_library.scss */
+  /* line 204, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-label-above {
     margin-bottom: 20px;
     clear: both;
   }
-  /* line 175, ../sass/_digital_library.scss */
+  /* line 208, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-item {
     margin: 10px 0;
   }
-  /* line 178, ../sass/_digital_library.scss */
+  /* line 211, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail {
     display: none;
   }
-  /* line 182, ../sass/_digital_library.scss */
+  /* line 215, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item {
     margin-top: 5px;
   }
-  /* line 185, ../sass/_digital_library.scss */
+  /* line 218, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a {
     border-style: solid;
     border-width: 1px;
@@ -4413,35 +4451,35 @@ table tfoot tr td {
   .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a h1.subheader, .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a h2.subheader, .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a h3.subheader, .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a h4.subheader, .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a h5.subheader, .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a h6.subheader {
     line-height: 1.4;
   }
-  /* line 190, ../sass/_digital_library.scss */
+  /* line 223, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a:hover {
     border-color: #70547D;
     text-decoration: none;
   }
-  /* line 196, ../sass/_digital_library.scss */
+  /* line 229, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-standard .taxonomy-term-description,
   .page-node.node-type-digital-library-content .group-right .field-name-field-standard p {
     margin-bottom: 0;
   }
-  /* line 201, ../sass/_digital_library.scss */
+  /* line 234, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .pane-node-links .divider {
     margin-bottom: .5em;
   }
-  /* line 204, ../sass/_digital_library.scss */
+  /* line 237, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links {
     margin-bottom: 5px !important;
   }
-  /* line 206, ../sass/_digital_library.scss */
+  /* line 239, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links li {
     float: left;
   }
-  /* line 209, ../sass/_digital_library.scss */
+  /* line 242, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links li.pinit a {
     background: url("../images/pinterest-icon.png") no-repeat !important;
     width: 26px !important;
     height: 26px !important;
   }
-  /* line 212, ../sass/_digital_library.scss */
+  /* line 245, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links span.st-email-counter {
     background: url("../images/email-icon.png") no-repeat !important;
     width: 26px !important;
@@ -4449,7 +4487,7 @@ table tfoot tr td {
     position: relative;
     top: -11px;
   }
-  /* line 217, ../sass/_digital_library.scss */
+  /* line 250, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links span.st-facebook-counter {
     background: url("../images/facebook-icon.png") no-repeat !important;
     width: 26px !important;
@@ -4457,56 +4495,56 @@ table tfoot tr td {
     position: relative;
     top: -11px;
   }
-  /* line 222, ../sass/_digital_library.scss */
+  /* line 255, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links span.st_edmodo_button .stButton_gradient {
     background: url("../images/edmodo-icon.png") no-repeat !important;
     width: 26px !important;
     height: 26px !important;
     border: 0 !important;
   }
-  /* line 225, ../sass/_digital_library.scss */
+  /* line 258, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links span.st_edmodo_button .stButton_gradient .edmodo {
     display: none !important;
   }
 
-  /* line 235, ../sass/_digital_library.scss */
+  /* line 268, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links,
   .gallery-main .view-content .columns ul.links {
     float: left;
     margin-bottom: 1em;
     min-width: 35px;
   }
-  /* line 239, ../sass/_digital_library.scss */
+  /* line 272, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links li,
   .gallery-main .view-content .columns ul.links li {
     padding-left: 0;
   }
-  /* line 242, ../sass/_digital_library.scss */
+  /* line 275, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links .prc_digital_library_add_to_favorites a,
   .gallery-main .view-content .columns ul.links .prc_digital_library_add_to_favorites a {
     padding: 0 10px;
     background: url("../images/favorite-icon.png") no-repeat;
   }
-  /* line 246, ../sass/_digital_library.scss */
+  /* line 279, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links .prc_digital_library_add_to_favorites a:hover,
   .gallery-main .view-content .columns ul.links .prc_digital_library_add_to_favorites a:hover {
     background: url("../images/favorite-icon-selected.png") no-repeat;
   }
-  /* line 249, ../sass/_digital_library.scss */
+  /* line 282, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links .flag-like_content a,
   .gallery-main .view-content .columns ul.links .flag-like_content a {
     margin-right: 5px;
     padding: 0 0 0 20px;
     background: url("../images/like-icon.png") no-repeat;
   }
-  /* line 254, ../sass/_digital_library.scss */
+  /* line 287, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links .flag-like_content a.unflag-action,
   .page-node.node-type-digital-library-content .group-right ul.links .flag-like_content a:hover,
   .gallery-main .view-content .columns ul.links .flag-like_content a.unflag-action,
   .gallery-main .view-content .columns ul.links .flag-like_content a:hover {
     background: url("../images/like-icon-hover.png") no-repeat;
   }
-  /* line 258, ../sass/_digital_library.scss */
+  /* line 291, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links .flag-like_content .flag-message,
   .gallery-main .view-content .columns ul.links .flag-like_content .flag-message {
     line-height: 0;
@@ -4514,55 +4552,55 @@ table tfoot tr td {
     color: transparent;
   }
 
-  /* line 268, ../sass/_digital_library.scss */
+  /* line 301, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content table,
   .page-node-edit.node-type-digital-library-content table {
     width: 100%;
   }
-  /* line 270, ../sass/_digital_library.scss */
+  /* line 303, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content table tr .form-item,
   .page-node-edit.node-type-digital-library-content table tr .form-item {
     white-space: normal;
   }
 }
 @media only screen and (min-width: 640px) {
-  /* line 279, ../sass/_digital_library.scss */
+  /* line 312, ../sass/_digital_library.scss */
   .gallery-main .medium-6 {
     width: 47%;
     margin: 1.5%;
   }
-  /* line 283, ../sass/_digital_library.scss */
+  /* line 316, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns {
     border-top: none;
     border-bottom: none;
   }
-  /* line 286, ../sass/_digital_library.scss */
+  /* line 319, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns .field-name-title {
     padding-top: 0;
     padding-bottom: 0;
   }
-  /* line 290, ../sass/_digital_library.scss */
+  /* line 323, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns .flagged .field-name-title {
     background-color: #F66B16;
   }
 }
 @media only screen and (min-width: 1025px) {
-  /* line 299, ../sass/_digital_library.scss */
+  /* line 332, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 {
     width: 30.33333%;
     margin: 1.5%;
   }
-  /* line 302, ../sass/_digital_library.scss */
+  /* line 335, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .field-name-field-thumbnail {
     margin-left: -1.875em;
     margin-right: -1.875em;
   }
-  /* line 305, ../sass/_digital_library.scss */
+  /* line 338, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .field-name-field-thumbnail img {
     width: 100%;
     height: auto;
   }
-  /* line 310, ../sass/_digital_library.scss */
+  /* line 343, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .field-name-title {
     margin-left: -1.875em;
     margin-right: -1.875em;
@@ -4570,50 +4608,50 @@ table tfoot tr td {
     padding-right: 4.25em;
     background: url("../images/text-icon.png") no-repeat 95% center #70547D;
   }
-  /* line 317, ../sass/_digital_library.scss */
+  /* line 350, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .media-type-text .field-name-title,
   .gallery-main .view-content .large-4 .media-type-image .field-name-title {
     background: url("../images/attachment-icon.png") no-repeat 95% center #6F7E95;
   }
-  /* line 321, ../sass/_digital_library.scss */
+  /* line 354, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .media-type-audio .field-name-title,
   .gallery-main .view-content .large-4 .media-type-video .field-name-title {
     background: url("../images/video-icon.png") no-repeat 95% center #0035B7;
   }
-  /* line 325, ../sass/_digital_library.scss */
+  /* line 358, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .flagged .field-name-title {
     background-color: #F66B16;
   }
 
-  /* line 331, ../sass/_digital_library.scss */
+  /* line 364, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content #page,
   .page-node.node-type-digital-library-content #content {
     background: linear-gradient(90deg, white 66.66667%, #EEEEEE 33.33333%);
   }
-  /* line 335, ../sass/_digital_library.scss */
+  /* line 368, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .pane-content-state {
     padding-left: 1.875em;
   }
-  /* line 338, ../sass/_digital_library.scss */
+  /* line 371, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right {
     margin-top: 50px;
   }
-  /* line 340, ../sass/_digital_library.scss */
+  /* line 373, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail {
     display: block;
     margin-bottom: 35px;
   }
-  /* line 343, ../sass/_digital_library.scss */
+  /* line 376, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail .field-item {
     margin-top: 0;
   }
-  /* line 346, ../sass/_digital_library.scss */
+  /* line 379, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail img {
     width: 100%;
     height: auto;
   }
 
-  /* line 355, ../sass/_digital_library.scss */
+  /* line 388, ../sass/_digital_library.scss */
   .node-type-digital-library-content.page-node-edit #page,
   .node-type-digital-library-content.page-node-edit #content,
   .node-type-digital-library-content.page-node-revisions #page,
@@ -4621,33 +4659,33 @@ table tfoot tr td {
     background: white;
   }
 
-  /* line 360, ../sass/_digital_library.scss */
+  /* line 393, ../sass/_digital_library.scss */
   .node-type-digital-library-content.page-node-revisions .region-content {
     padding-left: 1.875em;
     padding-right: 1.875em;
   }
 
-  /* line 366, ../sass/_digital_library.scss */
+  /* line 399, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content input[type="text"],
   .page-node-edit.node-type-digital-library-content input[type="text"] {
     width: 50%;
   }
-  /* line 369, ../sass/_digital_library.scss */
+  /* line 402, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content .field-name-field-link-to-a-url input[type="text"],
   .page-node-edit.node-type-digital-library-content .field-name-field-link-to-a-url input[type="text"] {
     width: 100%;
   }
-  /* line 372, ../sass/_digital_library.scss */
+  /* line 405, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content table#edit-field-document-und-table,
   .page-node-edit.node-type-digital-library-content table#edit-field-document-und-table {
     width: 50%;
   }
-  /* line 375, ../sass/_digital_library.scss */
+  /* line 408, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content fieldset.collapsible select,
   .page-node-edit.node-type-digital-library-content fieldset.collapsible select {
     width: 23%;
   }
-  /* line 378, ../sass/_digital_library.scss */
+  /* line 411, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content .fieldset-wrapper table select,
   .page-node-edit.node-type-digital-library-content .fieldset-wrapper table select {
     width: 23%;
