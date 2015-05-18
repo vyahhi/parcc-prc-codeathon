@@ -6,7 +6,8 @@ Feature: PRC-1241 Formative Instructional Tasks - Add Resource - Resource Added
 
   Scenario: Resource Added
     Given I am logged in as a user with the "PRC Admin" role
-    When I am on "node/add/formative-instructional-task"
+    When I am on "formative-instructional-tasks"
+    And I click "Add Resource"
     And I select "Listening logs - for students" from "Resource Type"
     And I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-file-single-und-0-upload"
     And I fill in "Resource name" with "Resource @timestamp"

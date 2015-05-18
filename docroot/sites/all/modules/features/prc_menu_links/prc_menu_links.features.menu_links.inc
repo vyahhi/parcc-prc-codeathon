@@ -356,7 +356,7 @@ function prc_menu_links_menu_default_menu_links() {
         'title' => '',
       ),
       'query' => array(
-        'dest' => 'formative-instructional-tasks',
+        'destination' => 'formative-instructional-tasks',
       ),
       'identifier' => 'menu-formative-instructional-tas_add-resource:node/add/formative-instructional-task',
     ),
