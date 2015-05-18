@@ -50,6 +50,16 @@ function prc_question_form_custom_multichoice($node) {
   return drupal_get_form('prc_question_form_custom_multichoice_form', $node);
 }
 
+/**
+ * Implements hook_clone_node_alter().
+ */
+function prc_question_form_clone_node_alter(&$node, $context) {
+  $has_role = _prc_question_preview_user_has_role(array('PARCC Item Author'));
+  if (!$has_role) {
+    $node->field_parcc_item['und'][0]['value'] = 0;
+  }
+}
+
 function prc_question_form_custom_multichoice_form($form, &$form_state) {
   $node = $form_state['build_info']['args'][0];
 
