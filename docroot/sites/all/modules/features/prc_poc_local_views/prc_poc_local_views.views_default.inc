@@ -5362,6 +5362,7 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
+    'field_file_single' => 'field_file_single',
     'title' => 'title',
     'field_subject' => 'field_subject',
     'field_grade_level' => 'field_grade_level',
@@ -5370,6 +5371,13 @@ message explaining what the check does and the importance of running it.';
   );
   $handler->display->display_options['style_options']['default'] = 'title';
   $handler->display->display_options['style_options']['info'] = array(
+    'field_file_single' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -5390,7 +5398,7 @@ message explaining what the check does and the importance of running it.';
       'empty_column' => 0,
     ),
     'field_resource_type' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
