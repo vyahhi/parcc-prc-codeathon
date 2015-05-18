@@ -1808,4 +1808,39 @@ class FeatureContext extends DrupalContext {
     throw new \Exception(sprintf('The element %s has an %s value of %s, but it should not.', $selector, $attribute, $value));
   }
 
+  /**
+   * Create speaking-listening content.
+   *
+   * Provide data in following format:
+   * | resource name       | resource type                 | file                          | faux standard | faux subject | grade level |
+   * | Resource @timestamp | Listening logs - for students | testfiles/GreatLakesWater.pdf | Standard      | Subject      | 1st Grade   |
+   *
+   * @Given /^speaking-listening content:$/
+   */
+  public function speakingListeningContent(TableNode $table) {
+    foreach ($table->getHash() as $hash) {
+      // Let's have an administrator go through the motions.
+      $this->assertAuthenticatedByRole("administrator");
+      $this->visit("node/add/speaking-and-listening-resource");
+      $this->fillField('Resource name', $hash['resource name']);
+      $this->selectOption('Resource Type', $hash['resource type']);
+      $this->attachFileToField('edit-field-file-single-und-0-upload', $hash['file']);
+
+      if ($this->isJavascriptSupported()) {
+        // Fill in hidden fields with javascript, because selenium2 rightfully
+        // does not allow interaction with hidden elements.
+        $script = "document.getElementsByName('faux_standard')[0].setAttribute('value','{$hash['faux standard']}');";
+        $this->getSession()->executeScript($script);
+        $script = "document.getElementsByName('faux_subject')[0].setAttribute('value','{$hash['faux subject']}');";
+        $this->getSession()->executeScript($script);
+      }
+      else {
+        $this->iFillHiddenFieldWith('faux_standard', $hash['faux standard']);
+        $this->iFillHiddenFieldWith('faux_subject', $hash['faux subject']);
+      }
+
+      $this->selectOption('Grade Level', $hash['grade level']);
+      $this->pressButton('Save');
+    }
+  }
 }
