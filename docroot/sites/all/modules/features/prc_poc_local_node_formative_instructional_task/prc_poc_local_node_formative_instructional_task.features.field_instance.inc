@@ -203,7 +203,7 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
     'entity_type' => 'node',
     'field_name' => 'field_standard',
     'label' => 'Standard',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'course_enrollment' => FALSE,
       'user_register_form' => FALSE,
@@ -250,7 +250,7 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
     'entity_type' => 'node',
     'field_name' => 'field_subject',
     'label' => 'Subject',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'course_enrollment' => FALSE,
       'user_register_form' => FALSE,

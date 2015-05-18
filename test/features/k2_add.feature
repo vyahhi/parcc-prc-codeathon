@@ -4,21 +4,6 @@ Feature: PRC-1229 Formative Instructional Tasks - Add Resource
   I want to be able to add a Formative Instructional Tasks resource
   so that educators can access it and use it in their classrooms.
 
-  Given that I am logged in as a PRC Admin
-  And I am on the Formative Instructional Tasks page
-  When I click the Add Resource link
-  Then I see the Add Resource page that has:
-  Page Headline
-  Add Resource
-  Overview Copy
-  Overview and instructional copy goes here.
-  Copy
-  "* indicates required field"
-  Form fields
-  See Formative Instructional Tasks - Add/Edit/Delete Resource - Master table PRC-1230
-  Button
-  Save [button]
-
   Scenario: Add Form
     Given I am logged in as a user with the "PRC Admin" role
     And I am on "node/add/formative-instructional-task"

@@ -3295,6 +3295,140 @@ function prc_poc_local_views_views_default_views() {
   $export['flag_bookmarks_tab'] = $view;
 
   $view = new view();
+  $view->name = 'formative_instructional_tasks';
+  $view->description = '';
+  $view->tag = 'PRC';
+  $view->base_table = 'node';
+  $view->human_name = 'Formative Instructional Tasks';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_file_single' => 'field_file_single',
+    'title' => 'title',
+    'field_subject' => 'field_subject',
+    'field_grade_level' => 'field_grade_level',
+    'field_resource_type' => 'field_resource_type',
+    'edit_node' => 'edit_node',
+  );
+  $handler->display->display_options['style_options']['default'] = 'title';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_file_single' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_subject' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_grade_level' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_resource_type' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 1,
+    ),
+  );
+  /* Field: Content: File */
+  $handler->display->display_options['fields']['field_file_single']['id'] = 'field_file_single';
+  $handler->display->display_options['fields']['field_file_single']['table'] = 'field_data_field_file_single';
+  $handler->display->display_options['fields']['field_file_single']['field'] = 'field_file_single';
+  $handler->display->display_options['fields']['field_file_single']['label'] = '';
+  $handler->display->display_options['fields']['field_file_single']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_file_single']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_file_single']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_file_single']['type'] = 'file_url_plain';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Resource Name';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['path'] = '[field_file_single]';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Subject */
+  $handler->display->display_options['fields']['field_subject']['id'] = 'field_subject';
+  $handler->display->display_options['fields']['field_subject']['table'] = 'field_data_field_subject';
+  $handler->display->display_options['fields']['field_subject']['field'] = 'field_subject';
+  $handler->display->display_options['fields']['field_subject']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_subject']['delta_offset'] = '0';
+  /* Field: Content: Grade Level */
+  $handler->display->display_options['fields']['field_grade_level']['id'] = 'field_grade_level';
+  $handler->display->display_options['fields']['field_grade_level']['table'] = 'field_data_field_grade_level';
+  $handler->display->display_options['fields']['field_grade_level']['field'] = 'field_grade_level';
+  $handler->display->display_options['fields']['field_grade_level']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Resource Type */
+  $handler->display->display_options['fields']['field_resource_type']['id'] = 'field_resource_type';
+  $handler->display->display_options['fields']['field_resource_type']['table'] = 'field_data_field_resource_type';
+  $handler->display->display_options['fields']['field_resource_type']['field'] = 'field_resource_type';
+  $handler->display->display_options['fields']['field_resource_type']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = '';
+  $handler->display->display_options['fields']['edit_node']['hide_empty'] = TRUE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'formative_instructional_task' => 'formative_instructional_task',
+  );
+
+  /* Display: PRC Formative Instructional Tasks */
+  $handler = $view->new_display('panel_pane', 'PRC Formative Instructional Tasks', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'PRC Instruction';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $export['formative_instructional_tasks'] = $view;
+
+  $view = new view();
   $view->name = 'frontpage';
   $view->description = 'Emulates the default Drupal front page; you may set the default home page path to this view to make it your front page.';
   $view->tag = 'default';

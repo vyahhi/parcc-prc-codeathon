@@ -29,6 +29,7 @@ features[views_view][] = digital_library_view
 features[views_view][] = favorites_list
 features[views_view][] = flag_bookmarks
 features[views_view][] = flag_bookmarks_tab
+features[views_view][] = formative_instructional_tasks
 features[views_view][] = frontpage
 features[views_view][] = glossary
 features[views_view][] = invite
