@@ -80,7 +80,7 @@ class FeatureContext extends DrupalContext {
    */
   protected function isJavascriptSupported() {
     $js = TRUE;
-    $script = 'var foo = 1;';
+    $script = 'foo = 1;';
     try {
       $this->getSession()->getDriver()->evaluateScript($script);
     }
@@ -1842,5 +1842,25 @@ class FeatureContext extends DrupalContext {
       $this->selectOption('Grade Level', $hash['grade level']);
       $this->pressButton('Save');
     }
+
+  }
+
+  /**
+   * @Then /^the response Content-Type should be "([^"]*)"$/
+   */
+  public function theResponseContentTypeShouldBe($value) {
+    $response_headers = $this->getSession()->getResponseHeaders();
+    $found = array();
+    if ($response_headers && array_key_exists('Content-Type', $response_headers)) {
+      foreach ($response_headers['Content-Type'] as $content_type) {
+        if ($content_type == $value) {
+          return;
+        }
+        else {
+          $found[] = $content_type;
+        }
+      }
+    }
+    throw new \Exception(sprintf("Expecting '%s', found '%s'", $value, implode(',', $found)));
   }
 }
