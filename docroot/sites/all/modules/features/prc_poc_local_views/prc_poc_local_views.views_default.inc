@@ -3397,6 +3397,12 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['field_resource_type']['table'] = 'field_data_field_resource_type';
   $handler->display->display_options['fields']['field_resource_type']['field'] = 'field_resource_type';
   $handler->display->display_options['fields']['field_resource_type']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = 'URL for Seraph';
+  $handler->display->display_options['fields']['path']['absolute'] = TRUE;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -3422,8 +3428,62 @@ function prc_poc_local_views_views_default_views() {
     'formative_instructional_task' => 'formative_instructional_task',
   );
 
-  /* Display: PRC Formative Instructional Tasks */
-  $handler = $view->new_display('panel_pane', 'PRC Formative Instructional Tasks', 'panel_pane_1');
+  /* Display: PRC Formative Instructional Tasks Admin View */
+  $handler = $view->new_display('panel_pane', 'PRC Formative Instructional Tasks Admin View', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'PRC Instruction';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+
+  /* Display: PRC Formative Instructional Tasks Regular View */
+  $handler = $view->new_display('panel_pane', 'PRC Formative Instructional Tasks Regular View', 'panel_pane_2');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: File */
+  $handler->display->display_options['fields']['field_file_single']['id'] = 'field_file_single';
+  $handler->display->display_options['fields']['field_file_single']['table'] = 'field_data_field_file_single';
+  $handler->display->display_options['fields']['field_file_single']['field'] = 'field_file_single';
+  $handler->display->display_options['fields']['field_file_single']['label'] = '';
+  $handler->display->display_options['fields']['field_file_single']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_file_single']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_file_single']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_file_single']['type'] = 'file_url_plain';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Resource Name';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['path'] = '[field_file_single]';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Subject */
+  $handler->display->display_options['fields']['field_subject']['id'] = 'field_subject';
+  $handler->display->display_options['fields']['field_subject']['table'] = 'field_data_field_subject';
+  $handler->display->display_options['fields']['field_subject']['field'] = 'field_subject';
+  $handler->display->display_options['fields']['field_subject']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_subject']['delta_offset'] = '0';
+  /* Field: Content: Grade Level */
+  $handler->display->display_options['fields']['field_grade_level']['id'] = 'field_grade_level';
+  $handler->display->display_options['fields']['field_grade_level']['table'] = 'field_data_field_grade_level';
+  $handler->display->display_options['fields']['field_grade_level']['field'] = 'field_grade_level';
+  $handler->display->display_options['fields']['field_grade_level']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Resource Type */
+  $handler->display->display_options['fields']['field_resource_type']['id'] = 'field_resource_type';
+  $handler->display->display_options['fields']['field_resource_type']['table'] = 'field_data_field_resource_type';
+  $handler->display->display_options['fields']['field_resource_type']['field'] = 'field_resource_type';
+  $handler->display->display_options['fields']['field_resource_type']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = 'URL for Seraph';
+  $handler->display->display_options['fields']['path']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['path']['absolute'] = TRUE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = '';
+  $handler->display->display_options['fields']['edit_node']['hide_empty'] = TRUE;
   $handler->display->display_options['pane_category']['name'] = 'PRC Instruction';
   $handler->display->display_options['pane_category']['weight'] = '0';
   $export['formative_instructional_tasks'] = $view;
