@@ -94,6 +94,11 @@ function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state
   $new_title = str_replace(t('Multiple choice question'), t('Interactive Choice Item'), $orig_title);
   drupal_set_title($new_title);
 
+  // Quiz bug - it doesn't set this by itself.
+  if (isset($form_state['build_info']['args'][0]->choice_multi)) {
+    $form['alternatives']['settings']['choice_multi']['#default_value'] = $form_state['build_info']['args'][0]->choice_multi;
+  }
+
   $form['feedback']['#access'] = FALSE;
   $form['title']['#title'] = t('Item Title');
   $form['title']['#required'] = TRUE;

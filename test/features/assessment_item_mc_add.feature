@@ -1,4 +1,4 @@
-@api @assessment @mc
+@api @assessment @mc @prc-547 @prc-1432
 Feature: PRC-547 Add New Item to a Quiz
   As an educator,
   I want to add an item when creating a new to a quiz,
@@ -225,3 +225,43 @@ Feature: PRC-547 Add New Item to a Quiz
     When I fill in "edit-alternatives-1-answer-value" with "Beta"
     Then I press "Save"
     Then I should not see the error message containing "At least two answer choices (distractors) are required."
+
+  Scenario: PRC-1432 - Not retaining multi-choice selection when it's true
+    Then I click "Interactive Choice"
+    And I fill in "Item Title" with "T1"
+    And I fill in "Question" with "Q1"
+    And I fill in the hidden field "faux_standard" with "Standard"
+    When I fill in "edit-alternatives-0-answer-value" with "Alpha"
+    When I fill in "edit-alternatives-1-answer-value" with "Beta"
+    Then I check the box "edit-alternatives-0-correct"
+    Then I check the box "edit-alternatives-1-correct"
+    And I check the box "Multiple correct answers"
+    And I select "1st Grade" from "Grade Level"
+    And I press "Save"
+    And I follow "Edit"
+    Then the "edit-alternatives-0-answer-value" field should contain "Alpha"
+    Then the "edit-alternatives-1-answer-value" field should contain "Beta"
+    Then I should not see a "edit-alternatives-2-answer-value" field
+    Then I should not see a "edit-alternatives-3-answer-value" field
+    Then I should not see a "edit-alternatives-4-answer-value" field
+    And the "Multiple correct answers" checkbox should be checked
+
+  Scenario: PRC-1432 - Not retaining multi-choice selection when it's false
+    Then I click "Interactive Choice"
+    And I fill in "Item Title" with "T1"
+    And I fill in "Question" with "Q1"
+    And I fill in the hidden field "faux_standard" with "Standard"
+    When I fill in "edit-alternatives-0-answer-value" with "Alpha"
+    When I fill in "edit-alternatives-1-answer-value" with "Beta"
+    Then I check the box "edit-alternatives-0-correct"
+    Then I uncheck the box "edit-alternatives-1-correct"
+    And I uncheck the box "Multiple correct answers"
+    And I select "1st Grade" from "Grade Level"
+    And I press "Save"
+    And I follow "Edit"
+    Then the "edit-alternatives-0-answer-value" field should contain "Alpha"
+    Then the "edit-alternatives-1-answer-value" field should contain "Beta"
+    Then I should not see a "edit-alternatives-2-answer-value" field
+    Then I should not see a "edit-alternatives-3-answer-value" field
+    Then I should not see a "edit-alternatives-4-answer-value" field
+    And the "Multiple correct answers" checkbox should not be checked
