@@ -892,6 +892,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create formative_instructional_task content'.
+  $permissions['create formative_instructional_task content'] = array(
+    'name' => 'create formative_instructional_task content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create invite_by_email entity'.
   $permissions['create invite_by_email entity'] = array(
     'name' => 'create invite_by_email entity',
@@ -1082,6 +1092,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any formative_instructional_task content'.
+  $permissions['delete any formative_instructional_task content'] = array(
+    'name' => 'delete any formative_instructional_task content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any multichoice content'.
   $permissions['delete any multichoice content'] = array(
     'name' => 'delete any multichoice content',
@@ -1239,6 +1259,16 @@ function prc_poc_local_users_user_default_permissions() {
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own formative_instructional_task content'.
+  $permissions['delete own formative_instructional_task content'] = array(
+    'name' => 'delete own formative_instructional_task content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -2041,6 +2071,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any formative_instructional_task content'.
+  $permissions['edit any formative_instructional_task content'] = array(
+    'name' => 'edit any formative_instructional_task content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any invite entities'.
   $permissions['edit any invite entities'] = array(
     'name' => 'edit any invite entities',
@@ -2208,6 +2248,16 @@ function prc_poc_local_users_user_default_permissions() {
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own formative_instructional_task content'.
+  $permissions['edit own formative_instructional_task content'] = array(
+    'name' => 'edit own formative_instructional_task content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -2711,6 +2761,13 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
     ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search formative_instructional_task content'.
+  $permissions['search formative_instructional_task content'] = array(
+    'name' => 'search formative_instructional_task content',
+    'roles' => array(),
     'module' => 'search_config',
   );
 

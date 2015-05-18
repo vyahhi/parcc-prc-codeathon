@@ -251,3 +251,18 @@ function prc_question_form_form_speaking_and_listening_resource_node_form_alter(
   $form['#validate'][] = 'prc_question_form_subject_required_validate';
   $form['#validate'][] = 'prc_question_form_non_item_standard_required_validate';
 }
+
+function prc_question_form_form_formative_instructional_task_node_form_alter(&$form, &$form_state) {
+  $form['field_standard'][LANGUAGE_NONE]['#required'] = TRUE;
+  $form['faux_standard'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['field_subject'][LANGUAGE_NONE]['#required'] = TRUE;
+  $form['faux_subject'] = array(
+    '#type' => 'hidden',
+  );
+
+  $form['#validate'][] = 'prc_question_form_subject_required_validate';
+  $form['#validate'][] = 'prc_question_form_non_item_standard_required_validate';
+}

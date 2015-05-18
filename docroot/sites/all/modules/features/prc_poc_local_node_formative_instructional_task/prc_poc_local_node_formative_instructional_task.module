@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Formative Instructional Task feature.
+ */
+
+include_once 'prc_poc_local_node_formative_instructional_task.features.inc';
