@@ -64,6 +64,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Digital Library Left Nav',
     'description' => '',
   );
+  // Exported menu: menu-formative-instructional-tas.
+  $menus['menu-formative-instructional-tas'] = array(
+    'menu_name' => 'menu-formative-instructional-tas',
+    'title' => 'Formative Instructional Tasks Menu',
+    'description' => '',
+  );
   // Exported menu: menu-instruction-menu.
   $menus['menu-instruction-menu'] = array(
     'menu_name' => 'menu-instruction-menu',
@@ -177,6 +183,7 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Development link');
   t('Digital Library Left Nav');
   t('Features');
+  t('Formative Instructional Tasks Menu');
   t('Instruction Menu');
   t('Invite Users');
   t('Item Bank Add Questions');

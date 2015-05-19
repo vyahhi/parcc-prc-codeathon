@@ -1,4 +1,4 @@
-@api @itembank @prc-1036
+@api @itembank @prc-1036 @prc-1038 @prc-1412
 Feature: PRC-1036 Item Bank - Duplicate Short Answer Item - Form
   As a logged in user,
   I want to be able to duplicate a non-PARCC short answer item from the Item Bank
@@ -24,8 +24,9 @@ Feature: PRC-1036 Item Bank - Duplicate Short Answer Item - Form
     And I press "Save"
     Then I should see the link "SA 1"
     And I should see the link "Clone of SA 1"
+    Then I should see the text "No" in the "Clone of SA 1" row
 
-  Scenario: User is a PARCC Item Author
+  Scenario: User is a PARCC Item Author and the Make this a PARCC Item box is checked
     Given I am logged in as a user with the "PARCC Item Author" role
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
@@ -43,9 +44,35 @@ Feature: PRC-1036 Item Bank - Duplicate Short Answer Item - Form
     When I click "Duplicate"
     Then the "Title" field should contain "Clone of SA 1"
     And I fill in the hidden field "faux_standard" with "Standard"
+    And the "Make this a PARCC item" checkbox should be checked
     And I press "Save"
     Then I should see the link "SA 1"
     And I should see the link "Clone of SA 1"
+    Then I should see the text "Yes" in the "Clone of SA 1" row
+
+  Scenario: User is a PARCC Item Author and the Make this a PARCC Item box is not checked
+    Given I am logged in as a user with the "PARCC Item Author" role
+    And I have no "Multiple choice question" nodes
+    And I have no "Short answer question" nodes
+    And I have no "Assessment directions" nodes
+    And I am on "item-bank"
+    And I click "Short answer"
+    And I fill in "Title" with "SA 1"
+    And I fill in "Question" with "Stem 1"
+    And I fill in "Correct answer" with "Correct"
+    And I fill in the hidden field "faux_standard" with "Standard"
+    And I select "1st Grade" from "Grade Level"
+    And I uncheck the box "Make this a PARCC item"
+    Then I press "Save"
+    Then I should see the text "No" in the "SA 1" row
+    When I click "Duplicate"
+    Then the "Title" field should contain "Clone of SA 1"
+    And I fill in the hidden field "faux_standard" with "Standard"
+    And the "Make this a PARCC item" checkbox should not be checked
+    And I press "Save"
+    Then I should see the link "SA 1"
+    And I should see the link "Clone of SA 1"
+    Then I should see the text "No" in the "Clone of SA 1" row
 
 #  Scenario 2: User is a PARCC Item Author
 #    Given I am logged in as a PARCC Item Author

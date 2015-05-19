@@ -23,6 +23,7 @@ features[menu_links][] = menu-add-quiz_item-bank:item-bank
 features[menu_links][] = menu-add-quiz_technology-readiness:technology-readiness
 features[menu_links][] = menu-assessment-left-nav_all-available-assessments:assessments
 features[menu_links][] = menu-digital-library-left-nav_view-all:library
+features[menu_links][] = menu-formative-instructional-tas_add-resource:node/add/formative-instructional-task
 features[menu_links][] = menu-instruction-menu_formative-instructional-tasks:formative-instructional-tasks
 features[menu_links][] = menu-instruction-menu_speaking-and-listening:speaking-listening
 features[menu_links][] = menu-invite-users_invite-new-user:invite/add/invite_by_email

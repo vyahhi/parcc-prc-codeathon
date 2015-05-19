@@ -12,6 +12,7 @@ features[menu_custom][] = menu-add-course
 features[menu_custom][] = menu-add-quiz
 features[menu_custom][] = menu-assessment-left-nav
 features[menu_custom][] = menu-digital-library-left-nav
+features[menu_custom][] = menu-formative-instructional-tas
 features[menu_custom][] = menu-instruction-menu
 features[menu_custom][] = menu-invite-users
 features[menu_custom][] = menu-item-bank-add-questions

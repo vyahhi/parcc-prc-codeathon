@@ -41,5 +41,20 @@ Feature: PRC-1177 LEO Learning module: PARCC Accessibility System
     And I fill in "edit-field-link-to-a-url-und-0-url" with "http://www.google.com"
     And I press "Save"
     And I am an anonymous user
-    And I visit the first node created
+    When I visit the first node created
     Then the "Take course" link should point to "http://www.google.com"
+
+  Scenario: PRC-1477 External Course has link open in new window
+    Given I am logged in as a user with the "Content Administrator (Curator)" role
+    And "PD Course" nodes:
+      | title       | uid         | field_course_objectives | field_permissions | status |
+      | PRC-349 AC2 | @currentuid | objectives              | public            | 1      |
+    When I visit the last node created
+    # Take course link is internal, and does not use target to open in a new window
+    Then "a.course-take-course-link" should not have an "target" attribute
+    When I click "Edit"
+    And I fill in "edit-field-link-to-a-url-und-0-title" with "External Link"
+    And I fill in "edit-field-link-to-a-url-und-0-url" with "http://www.google.com"
+    And I press "Save"
+    # Take course link is external, and uses target=_blank to open in new window
+    Then "a.course-take-course-link" should have an "target" attribute value of "_blank"

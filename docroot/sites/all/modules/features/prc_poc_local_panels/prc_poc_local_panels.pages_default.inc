@@ -2963,7 +2963,23 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_title = 'Formative Instructional Tasks';
   $page->admin_description = 'Formative Instructional Tasks page';
   $page->path = 'formative-instructional-tasks';
-  $page->access = array();
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 12,
+            1 => 8,
+            2 => 9,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+    ),
+    'logic' => 'and',
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(
@@ -3003,6 +3019,114 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->uuid = '29f75a1e-4f95-4f25-bcc0-3e507bccc495';
   $display->content = array();
   $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-9e69a454-d6c6-4a7e-b243-9c3f8f724e94';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-formative-instructional-tas';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '9e69a454-d6c6-4a7e-b243-9c3f8f724e94';
+    $display->content['new-9e69a454-d6c6-4a7e-b243-9c3f8f724e94'] = $pane;
+    $display->panels['middle'][0] = 'new-9e69a454-d6c6-4a7e-b243-9c3f8f724e94';
+    $pane = new stdClass();
+    $pane->pid = 'new-ed6985ec-3f3f-41d7-bd98-9ac30acf6588';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => '',
+      'title' => '',
+      'body' => 'Overview / instructional copy goes here.',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'ed6985ec-3f3f-41d7-bd98-9ac30acf6588';
+    $display->content['new-ed6985ec-3f3f-41d7-bd98-9ac30acf6588'] = $pane;
+    $display->panels['middle'][1] = 'new-ed6985ec-3f3f-41d7-bd98-9ac30acf6588';
+    $pane = new stdClass();
+    $pane->pid = 'new-7496db56-1ab6-438f-b563-4473f5726cd1';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'formative_instructional_tasks-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'perm',
+          'settings' => array(
+            'perm' => 'edit any formative_instructional_task content',
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = '7496db56-1ab6-438f-b563-4473f5726cd1';
+    $display->content['new-7496db56-1ab6-438f-b563-4473f5726cd1'] = $pane;
+    $display->panels['middle'][2] = 'new-7496db56-1ab6-438f-b563-4473f5726cd1';
+    $pane = new stdClass();
+    $pane->pid = 'new-82135d21-55c7-4798-84b7-4175e755d1d9';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'formative_instructional_tasks-panel_pane_2';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'perm',
+          'settings' => array(
+            'perm' => 'edit any formative_instructional_task content',
+          ),
+          'context' => 'logged-in-user',
+          'not' => TRUE,
+        ),
+      ),
+    );
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = '82135d21-55c7-4798-84b7-4175e755d1d9';
+    $display->content['new-82135d21-55c7-4798-84b7-4175e755d1d9'] = $pane;
+    $display->panels['middle'][3] = 'new-82135d21-55c7-4798-84b7-4175e755d1d9';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

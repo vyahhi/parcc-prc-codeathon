@@ -345,6 +345,29 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-formative-instructional-tas_add-resource:node/add/formative-instructional-task
+  $menu_links['menu-formative-instructional-tas_add-resource:node/add/formative-instructional-task'] = array(
+    'menu_name' => 'menu-formative-instructional-tas',
+    'link_path' => 'node/add/formative-instructional-task',
+    'router_path' => 'node/add/formative-instructional-task',
+    'link_title' => 'Add Resource',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'query' => array(
+        'destination' => 'formative-instructional-tasks',
+      ),
+      'identifier' => 'menu-formative-instructional-tas_add-resource:node/add/formative-instructional-task',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-instruction-menu_formative-instructional-tasks:formative-instructional-tasks
   $menu_links['menu-instruction-menu_formative-instructional-tasks:formative-instructional-tasks'] = array(
     'menu_name' => 'menu-instruction-menu',
