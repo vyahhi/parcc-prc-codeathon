@@ -4082,7 +4082,7 @@ table tfoot tr td {
 @media only screen {
   /* line 2, ../sass/_digital_library.scss */
   #filter-panel {
-    width: 464px;
+    width: 286px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -4102,21 +4102,27 @@ table tfoot tr td {
   /* line 15, ../sass/_digital_library.scss */
   #filter-panel .filter-panel-search .view-filters input {
     height: 45px;
+    width: 170px;
+    margin: 0;
     padding-left: 25px;
     padding-right: 40px;
     border-top-left-radius: 1000px;
     border-bottom-left-radius: 1000px;
     border-color: #DBDBDB;
-    background: url("../images/search-filter-icon.png") 95% center no-repeat;
+    background: url("../images/search-filter-icon.png") 92% center no-repeat;
   }
-  /* line 25, ../sass/_digital_library.scss */
+  /* line 26, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-search .view-filters input:focus {
+    box-shadow: none;
+  }
+  /* line 30, ../sass/_digital_library.scss */
   #filter-panel .form-item-sort-by,
   #filter-panel .views-widget-sort-order,
   #filter-panel .views-submit-button {
     display: none;
     padding: 0;
   }
-  /* line 31, ../sass/_digital_library.scss */
+  /* line 36, ../sass/_digital_library.scss */
   #filter-panel .filter-panel-toggle-link,
   #filter-panel .filter-panel-all-link {
     border-style: solid;
@@ -4145,6 +4151,7 @@ table tfoot tr td {
     color: #464646;
     font-weight: normal;
     font-size: .875em;
+    text-indent: -9999px;
   }
   /* line 121, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
   #filter-panel .filter-panel-toggle-link:hover, #filter-panel .filter-panel-toggle-link:focus,
@@ -4158,44 +4165,55 @@ table tfoot tr td {
   #filter-panel .filter-panel-all-link:focus {
     color: #fff;
   }
-  /* line 42, ../sass/_digital_library.scss */
+  /* line 48, ../sass/_digital_library.scss */
   #filter-panel .filter-panel-toggle-link {
-    background: url("../images/filter-icon.png") 10px center no-repeat #f8f8f8;
+    background: url("../images/filter-icon.png") center center no-repeat #f8f8f8;
   }
-  /* line 45, ../sass/_digital_library.scss */
-  #filter-panel .filter-panel-toggle-link:hover,
+  /* line 51, ../sass/_digital_library.scss */
   #filter-panel .filter-panel-toggle-link:focus {
-    background: url("../images/filter-icon-selected.png") 10px center no-repeat #70547D;
+    background: url("../images/filter-icon.png") center center no-repeat #f8f8f8;
+    color: #464646;
   }
-  /* line 49, ../sass/_digital_library.scss */
+  /* line 55, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-toggle-link:hover,
+  #filter-panel .filter-panel-toggle-link.selected {
+    background: url("../images/filter-icon-selected.png") center center no-repeat #70547D;
+    color: white;
+  }
+  /* line 60, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-toggle-link.filters-enabled {
+    background: url("../images/filter-icon-selected.png") center center no-repeat #70547D !important;
+    color: white !important;
+  }
+  /* line 64, ../sass/_digital_library.scss */
   #filter-panel .filter-panel-all-link {
-    background: url("../images/all-icon.png") 10px center no-repeat #f8f8f8;
+    background: url("../images/all-icon.png") center center no-repeat #f8f8f8;
     border-top-right-radius: 1000px;
     border-bottom-right-radius: 1000px;
   }
-  /* line 54, ../sass/_digital_library.scss */
+  /* line 69, ../sass/_digital_library.scss */
   #filter-panel .filter-panel-all-link:hover,
   #filter-panel .filter-panel-all-link:focus {
-    background: url("../images/all-icon-selected.png") 10px center no-repeat #70547D;
+    background: url("../images/all-icon-selected.png") center center no-repeat #70547D;
   }
 
-  /* line 59, ../sass/_digital_library.scss */
+  /* line 74, ../sass/_digital_library.scss */
   .view-digital-library-gallery {
     padding-bottom: 0;
     background-color: #EEEEEE;
     font-size: 1em;
   }
-  /* line 63, ../sass/_digital_library.scss */
+  /* line 78, ../sass/_digital_library.scss */
   .view-digital-library-gallery form {
     margin-top: 1em;
   }
-  /* line 66, ../sass/_digital_library.scss */
+  /* line 81, ../sass/_digital_library.scss */
   .view-digital-library-gallery form,
   .view-digital-library-gallery .form-item,
   .view-digital-library-gallery .views-exposed-widgets {
     margin-bottom: 0;
   }
-  /* line 70, ../sass/_digital_library.scss */
+  /* line 85, ../sass/_digital_library.scss */
   .view-digital-library-gallery form .form-item-sort-by,
   .view-digital-library-gallery form .views-widget-sort-order,
   .view-digital-library-gallery .form-item .form-item-sort-by,
@@ -4204,26 +4222,271 @@ table tfoot tr td {
   .view-digital-library-gallery .views-exposed-widgets .views-widget-sort-order {
     display: none;
   }
-  /* line 75, ../sass/_digital_library.scss */
+  /* line 90, ../sass/_digital_library.scss */
   .view-digital-library-gallery .views-exposed-widget .form-submit {
     margin-top: 1em;
   }
 
-  /* line 79, ../sass/_digital_library.scss */
+  /* line 94, ../sass/_digital_library.scss */
   .gallery-main {
     background-color: #EEEEEE;
     border-top: 1px solid #DBDBDB;
   }
-  /* line 82, ../sass/_digital_library.scss */
+  /* line 97, ../sass/_digital_library.scss */
+  .gallery-main .arrow-box {
+    position: relative;
+    background: #FFFFFF;
+    border: 1px solid #DBDBDB;
+  }
+  /* line 102, ../sass/_digital_library.scss */
+  .gallery-main .arrow-box:after, .gallery-main .arrow-box:before {
+    bottom: 100%;
+    left: 66%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  /* line 112, ../sass/_digital_library.scss */
+  .gallery-main .arrow-box:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #FFFFFF;
+    border-width: 15px;
+    margin-left: -15px;
+  }
+  /* line 118, ../sass/_digital_library.scss */
+  .gallery-main .arrow-box:before {
+    border-color: rgba(219, 219, 219, 0);
+    border-bottom-color: #DBDBDB;
+    border-width: 16px;
+    margin-left: -16px;
+  }
+  /* line 124, ../sass/_digital_library.scss */
+  .gallery-main #filter-panel-filters {
+    display: none;
+    margin: 0;
+    padding: 0.9375em 0.9375em 0 0.9375em;
+    overflow: visible !important;
+    background-color: white;
+  }
+  /* line 130, ../sass/_digital_library.scss */
+  .gallery-main #filter-panel-filters li {
+    margin-left: 0;
+    margin-right: 1em;
+  }
+  /* line 135, ../sass/_digital_library.scss */
   .gallery-main .filter-panel-toggle {
+    margin-bottom: 1.25em;
+    border-bottom: 1px solid #DBDBDB;
+  }
+  /* line 138, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle:last-child {
+    margin-bottom: 1em;
+    border-bottom: none;
+  }
+  /* line 142, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle h5 {
+    color: #464646;
+  }
+  /* line 146, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle.pane-my-lists-panel-pane-1 h5 {
+    padding-left: 25px;
+    background: url("../images/mylist-icon.png") 0px 2px no-repeat;
+  }
+  /* line 150, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle.pane-my-lists-panel-pane-1 li {
+    margin: 0 0 .25em 1.5em;
+  }
+  /* line 154, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle.grade-level h5 {
+    padding-left: 25px;
+    background: url("../images/gradelevel-icon.png") 0px 2px no-repeat;
+  }
+  /* line 158, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle.media-type h5 {
+    padding-left: 25px;
+    background: url("../images/media-icon.png") 0px 2px no-repeat;
+  }
+  /* line 162, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle.subject h5 {
+    padding-left: 25px;
+    background: url("../images/subject-icon.png") 0px 2px no-repeat;
+  }
+  /* line 166, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle.subject a.filter-selected {
+    color: #464646;
+  }
+  /* line 169, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle li {
+    display: inline-block;
+    list-style: none;
+  }
+  /* line 173, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle a.facetapi-checkbox,
+  .gallery-main .filter-panel-toggle a.filter-selected,
+  .gallery-main .filter-panel-toggle .view-my-lists a {
+    font-size: 0.85em;
+    color: #464646;
+    line-height: 35px;
+  }
+  /* line 180, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:hover,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e6e6e6;
+    margin-bottom: 1.25em;
+    padding: 6px;
+    background: white;
+    border-radius: 6px;
+    border-color: #344759;
+    line-height: 35px;
+  }
+  /* line 44, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_panels.scss */
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:hover > :first-child,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover > :first-child {
+    margin-top: 0;
+  }
+  /* line 45, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_panels.scss */
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:hover > :last-child,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover > :last-child {
+    margin-bottom: 0;
+  }
+  /* line 50, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_panels.scss */
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h1, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h2, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h3, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h4, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h5, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h6, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover p,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h1,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h2,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h3,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h4,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h5,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h6,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover p {
+    color: #333;
+  }
+  /* line 54, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_panels.scss */
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h1, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h2, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h3, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h4, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h5, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h6,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h1,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h2,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h3,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h4,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h5,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h6 {
+    line-height: 1;
+    margin-bottom: 0.625em;
+  }
+  /* line 56, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_panels.scss */
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h1.subheader, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h2.subheader, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h3.subheader, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h4.subheader, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h5.subheader, .gallery-main .filter-panel-toggle a.facetapi-inactive:hover h6.subheader,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h1.subheader,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h2.subheader,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h3.subheader,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h4.subheader,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h5.subheader,
+  .gallery-main .filter-panel-toggle .view-my-lists a:hover h6.subheader {
+    line-height: 1.4;
+  }
+  /* line 187, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle a.filter-selected,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #212d39;
+    margin-bottom: 1.25em;
+    padding: 6px;
+    background: #344759;
+    margin-right: 1.5em;
+    border-radius: 6px;
+    font-size: 0.85em;
+    color: white;
+    line-height: 35px;
+  }
+  /* line 44, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_panels.scss */
+  .gallery-main .filter-panel-toggle a.filter-selected > :first-child,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus > :first-child,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus > :first-child {
+    margin-top: 0;
+  }
+  /* line 45, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_panels.scss */
+  .gallery-main .filter-panel-toggle a.filter-selected > :last-child,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus > :last-child,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus > :last-child {
+    margin-bottom: 0;
+  }
+  /* line 51, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_panels.scss */
+  .gallery-main .filter-panel-toggle a.filter-selected h1, .gallery-main .filter-panel-toggle a.filter-selected h2, .gallery-main .filter-panel-toggle a.filter-selected h3, .gallery-main .filter-panel-toggle a.filter-selected h4, .gallery-main .filter-panel-toggle a.filter-selected h5, .gallery-main .filter-panel-toggle a.filter-selected h6, .gallery-main .filter-panel-toggle a.filter-selected p,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h1,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h2,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h3,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h4,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h5,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h6,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus p,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h1,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h2,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h3,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h4,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h5,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h6,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus p {
+    color: #fff;
+  }
+  /* line 54, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_panels.scss */
+  .gallery-main .filter-panel-toggle a.filter-selected h1, .gallery-main .filter-panel-toggle a.filter-selected h2, .gallery-main .filter-panel-toggle a.filter-selected h3, .gallery-main .filter-panel-toggle a.filter-selected h4, .gallery-main .filter-panel-toggle a.filter-selected h5, .gallery-main .filter-panel-toggle a.filter-selected h6,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h1,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h2,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h3,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h4,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h5,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h6,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h1,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h2,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h3,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h4,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h5,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h6 {
+    line-height: 1;
+    margin-bottom: 0.625em;
+  }
+  /* line 56, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_panels.scss */
+  .gallery-main .filter-panel-toggle a.filter-selected h1.subheader, .gallery-main .filter-panel-toggle a.filter-selected h2.subheader, .gallery-main .filter-panel-toggle a.filter-selected h3.subheader, .gallery-main .filter-panel-toggle a.filter-selected h4.subheader, .gallery-main .filter-panel-toggle a.filter-selected h5.subheader, .gallery-main .filter-panel-toggle a.filter-selected h6.subheader,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h1.subheader,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h2.subheader,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h3.subheader,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h4.subheader,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h5.subheader,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus h6.subheader,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h1.subheader,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h2.subheader,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h3.subheader,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h4.subheader,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h5.subheader,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus h6.subheader {
+    line-height: 1.4;
+  }
+  /* line 196, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle a.filter-selected li,
+  .gallery-main .filter-panel-toggle a.facetapi-inactive:focus li,
+  .gallery-main .filter-panel-toggle .view-my-lists a:focus li {
+    margin-right: 0 !important;
+  }
+  /* line 200, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle a.facetapi-inactive,
+  .gallery-main .filter-panel-toggle .view-my-lists a {
+    padding: 7px;
+    text-decoration: none;
+  }
+  /* line 205, ../sass/_digital_library.scss */
+  .gallery-main .filter-panel-toggle input.facetapi-checkbox {
     display: none;
   }
-  /* line 85, ../sass/_digital_library.scss */
+  /* line 209, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns {
     border-top: 10px solid #EEEEEE;
     border-bottom: 10px solid #EEEEEE;
   }
-  /* line 89, ../sass/_digital_library.scss */
+  /* line 213, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns {
     padding-bottom: 1em;
     border-top: 10px solid #EEEEEE;
@@ -4231,17 +4494,17 @@ table tfoot tr td {
     background-color: white;
     font-size: 0.8125em;
   }
-  /* line 95, ../sass/_digital_library.scss */
+  /* line 219, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-field-thumbnail {
     margin-left: -0.9375em;
     margin-right: -0.9375em;
   }
-  /* line 98, ../sass/_digital_library.scss */
+  /* line 222, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-field-thumbnail img {
     width: 100%;
     height: auto;
   }
-  /* line 103, ../sass/_digital_library.scss */
+  /* line 227, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-title {
     margin-left: -0.9375em;
     margin-right: -0.9375em;
@@ -4251,72 +4514,72 @@ table tfoot tr td {
     padding-bottom: 1px;
     background: url("../images/text-icon.png") no-repeat 97% center #70547D;
   }
-  /* line 111, ../sass/_digital_library.scss */
+  /* line 235, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-title h3 {
     margin-top: 0;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
   }
-  /* line 115, ../sass/_digital_library.scss */
+  /* line 239, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-title h3 a {
     color: white;
   }
-  /* line 120, ../sass/_digital_library.scss */
+  /* line 244, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .media-type-text .field-name-title,
   .gallery-main .view-content .columns .media-type-image .field-name-title {
     background: url("../images/attachment-icon.png") no-repeat 97% center #6F7E95;
   }
-  /* line 124, ../sass/_digital_library.scss */
+  /* line 248, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .media-type-audio .field-name-title,
   .gallery-main .view-content .columns .media-type-video .field-name-title {
     background: url("../images/video-icon.png") no-repeat 97% center #0035B7;
   }
-  /* line 128, ../sass/_digital_library.scss */
+  /* line 252, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .flagged .field-name-title {
     background-color: #F66B16;
   }
-  /* line 131, ../sass/_digital_library.scss */
+  /* line 255, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-post-date {
     margin: 1.25em 0;
     color: #6F7E95;
   }
-  /* line 135, ../sass/_digital_library.scss */
+  /* line 259, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-body {
     margin-bottom: 1.5em;
     border-bottom: 1px solid #6F7E95;
   }
-  /* line 138, ../sass/_digital_library.scss */
+  /* line 262, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-body .field-items {
     margin-bottom: 1.75em;
   }
-  /* line 142, ../sass/_digital_library.scss */
+  /* line 266, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns ul.links .prc_digital_library_comment_email,
   .gallery-main .view-content .columns ul.links .pinit {
     display: none;
   }
-  /* line 146, ../sass/_digital_library.scss */
+  /* line 270, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-field-tags {
     float: left;
     color: #6F7E95;
   }
-  /* line 149, ../sass/_digital_library.scss */
+  /* line 273, ../sass/_digital_library.scss */
   .gallery-main .view-content .columns .field-name-field-tags .field-label {
     margin-bottom: 5px;
   }
 
-  /* line 156, ../sass/_digital_library.scss */
+  /* line 280, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .panel-flexible.panels-flexible-new {
     height: 0;
   }
-  /* line 159, ../sass/_digital_library.scss */
+  /* line 283, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left {
     overflow: hidden;
   }
-  /* line 161, ../sass/_digital_library.scss */
+  /* line 285, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left ul.tabs.primary {
     margin-bottom: 1em;
   }
-  /* line 164, ../sass/_digital_library.scss */
+  /* line 288, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .field-name-post-date {
     font-family: inherit;
     font-weight: normal;
@@ -4327,23 +4590,23 @@ table tfoot tr td {
     font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
   }
-  /* line 168, ../sass/_digital_library.scss */
+  /* line 292, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .field-name-field-author-name {
     margin-bottom: 0;
     font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
   }
-  /* line 171, ../sass/_digital_library.scss */
+  /* line 295, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .field-name-field-author-name .field-items {
     float: none;
   }
-  /* line 175, ../sass/_digital_library.scss */
+  /* line 299, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email {
     width: 125px;
     margin: auto;
     list-style: none;
   }
-  /* line 180, ../sass/_digital_library.scss */
+  /* line 304, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a {
     border-style: solid;
     border-width: 1px;
@@ -4379,11 +4642,11 @@ table tfoot tr td {
   .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a:hover, .page-node.node-type-digital-library-content .group-left .prc_digital_library_comment_email a:focus {
     color: #fff;
   }
-  /* line 186, ../sass/_digital_library.scss */
+  /* line 310, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right {
     overflow: hidden;
   }
-  /* line 188, ../sass/_digital_library.scss */
+  /* line 312, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .divider {
     overflow: hidden;
     white-space: nowrap;
@@ -4391,7 +4654,7 @@ table tfoot tr td {
     font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
   }
-  /* line 194, ../sass/_digital_library.scss */
+  /* line 318, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .divider hr {
     display: inline-block;
     width: 100%;
@@ -4402,24 +4665,24 @@ table tfoot tr td {
     border: solid #6F7E95;
     border-width: 1px 0 0;
   }
-  /* line 204, ../sass/_digital_library.scss */
+  /* line 328, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-label-above {
     margin-bottom: 20px;
     clear: both;
   }
-  /* line 208, ../sass/_digital_library.scss */
+  /* line 332, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-item {
     margin: 10px 0;
   }
-  /* line 211, ../sass/_digital_library.scss */
+  /* line 335, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail {
     display: none;
   }
-  /* line 215, ../sass/_digital_library.scss */
+  /* line 339, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item {
     margin-top: 5px;
   }
-  /* line 218, ../sass/_digital_library.scss */
+  /* line 342, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a {
     border-style: solid;
     border-width: 1px;
@@ -4451,35 +4714,35 @@ table tfoot tr td {
   .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a h1.subheader, .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a h2.subheader, .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a h3.subheader, .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a h4.subheader, .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a h5.subheader, .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a h6.subheader {
     line-height: 1.4;
   }
-  /* line 223, ../sass/_digital_library.scss */
+  /* line 347, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-tags .field-items .field-item a:hover {
     border-color: #70547D;
     text-decoration: none;
   }
-  /* line 229, ../sass/_digital_library.scss */
+  /* line 353, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-standard .taxonomy-term-description,
   .page-node.node-type-digital-library-content .group-right .field-name-field-standard p {
     margin-bottom: 0;
   }
-  /* line 234, ../sass/_digital_library.scss */
+  /* line 358, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .pane-node-links .divider {
     margin-bottom: .5em;
   }
-  /* line 237, ../sass/_digital_library.scss */
+  /* line 361, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links {
     margin-bottom: 5px !important;
   }
-  /* line 239, ../sass/_digital_library.scss */
+  /* line 363, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links li {
     float: left;
   }
-  /* line 242, ../sass/_digital_library.scss */
+  /* line 366, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links li.pinit a {
     background: url("../images/pinterest-icon.png") no-repeat !important;
     width: 26px !important;
     height: 26px !important;
   }
-  /* line 245, ../sass/_digital_library.scss */
+  /* line 369, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links span.st-email-counter {
     background: url("../images/email-icon.png") no-repeat !important;
     width: 26px !important;
@@ -4487,7 +4750,7 @@ table tfoot tr td {
     position: relative;
     top: -11px;
   }
-  /* line 250, ../sass/_digital_library.scss */
+  /* line 374, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links span.st-facebook-counter {
     background: url("../images/facebook-icon.png") no-repeat !important;
     width: 26px !important;
@@ -4495,56 +4758,56 @@ table tfoot tr td {
     position: relative;
     top: -11px;
   }
-  /* line 255, ../sass/_digital_library.scss */
+  /* line 379, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links span.st_edmodo_button .stButton_gradient {
     background: url("../images/edmodo-icon.png") no-repeat !important;
     width: 26px !important;
     height: 26px !important;
     border: 0 !important;
   }
-  /* line 258, ../sass/_digital_library.scss */
+  /* line 382, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links span.st_edmodo_button .stButton_gradient .edmodo {
     display: none !important;
   }
 
-  /* line 268, ../sass/_digital_library.scss */
+  /* line 392, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links,
   .gallery-main .view-content .columns ul.links {
     float: left;
     margin-bottom: 1em;
     min-width: 35px;
   }
-  /* line 272, ../sass/_digital_library.scss */
+  /* line 396, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links li,
   .gallery-main .view-content .columns ul.links li {
     padding-left: 0;
   }
-  /* line 275, ../sass/_digital_library.scss */
+  /* line 399, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links .prc_digital_library_add_to_favorites a,
   .gallery-main .view-content .columns ul.links .prc_digital_library_add_to_favorites a {
     padding: 0 10px;
     background: url("../images/favorite-icon.png") no-repeat;
   }
-  /* line 279, ../sass/_digital_library.scss */
+  /* line 403, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links .prc_digital_library_add_to_favorites a:hover,
   .gallery-main .view-content .columns ul.links .prc_digital_library_add_to_favorites a:hover {
     background: url("../images/favorite-icon-selected.png") no-repeat;
   }
-  /* line 282, ../sass/_digital_library.scss */
+  /* line 406, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links .flag-like_content a,
   .gallery-main .view-content .columns ul.links .flag-like_content a {
     margin-right: 5px;
     padding: 0 0 0 20px;
     background: url("../images/like-icon.png") no-repeat;
   }
-  /* line 287, ../sass/_digital_library.scss */
+  /* line 411, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links .flag-like_content a.unflag-action,
   .page-node.node-type-digital-library-content .group-right ul.links .flag-like_content a:hover,
   .gallery-main .view-content .columns ul.links .flag-like_content a.unflag-action,
   .gallery-main .view-content .columns ul.links .flag-like_content a:hover {
     background: url("../images/like-icon-hover.png") no-repeat;
   }
-  /* line 291, ../sass/_digital_library.scss */
+  /* line 415, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right ul.links .flag-like_content .flag-message,
   .gallery-main .view-content .columns ul.links .flag-like_content .flag-message {
     line-height: 0;
@@ -4552,55 +4815,120 @@ table tfoot tr td {
     color: transparent;
   }
 
-  /* line 301, ../sass/_digital_library.scss */
+  /* line 425, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content table,
   .page-node-edit.node-type-digital-library-content table {
     width: 100%;
   }
-  /* line 303, ../sass/_digital_library.scss */
+  /* line 427, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content table tr .form-item,
   .page-node-edit.node-type-digital-library-content table tr .form-item {
     white-space: normal;
   }
 }
 @media only screen and (min-width: 640px) {
-  /* line 312, ../sass/_digital_library.scss */
+  /* line 435, ../sass/_digital_library.scss */
+  #filter-panel {
+    width: 464px;
+  }
+  /* line 437, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-search .view-filters input {
+    width: auto;
+    margin: 0 0 1em 0;
+    background: url("../images/search-filter-icon.png") 95% center no-repeat;
+  }
+  /* line 442, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-toggle-link,
+  #filter-panel .filter-panel-all-link {
+    text-indent: 0;
+  }
+  /* line 446, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-toggle-link {
+    background: url("../images/filter-icon.png") 10px center no-repeat #f8f8f8;
+  }
+  /* line 449, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-toggle-link:focus {
+    background: url("../images/filter-icon.png") 10px center no-repeat #f8f8f8;
+    color: #464646;
+  }
+  /* line 453, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-toggle-link:hover,
+  #filter-panel .filter-panel-toggle-link.selected {
+    background: url("../images/filter-icon-selected.png") 10px center no-repeat #70547D;
+    color: white;
+  }
+  /* line 458, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-toggle-link.filters-enabled {
+    background: url("../images/filter-icon-selected.png") 10px center no-repeat #70547D !important;
+    color: white !important;
+  }
+  /* line 462, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-all-link {
+    background: url("../images/all-icon.png") 10px center no-repeat #f8f8f8;
+    border-top-right-radius: 1000px;
+    border-bottom-right-radius: 1000px;
+  }
+  /* line 467, ../sass/_digital_library.scss */
+  #filter-panel .filter-panel-all-link:hover,
+  #filter-panel .filter-panel-all-link:focus {
+    background: url("../images/all-icon-selected.png") 10px center no-repeat #70547D;
+  }
+
+  /* line 473, ../sass/_digital_library.scss */
   .gallery-main .medium-6 {
     width: 47%;
     margin: 1.5%;
   }
-  /* line 316, ../sass/_digital_library.scss */
+  /* line 477, ../sass/_digital_library.scss */
+  .gallery-main #filter-panel-filters {
+    margin: 0 0.9375em;
+    padding: 0.9375em 0.9375em 0 0.9375em;
+  }
+  /* line 481, ../sass/_digital_library.scss */
+  .gallery-main .arrow-box:after, .gallery-main .arrow-box:before {
+    left: 61%;
+  }
+  /* line 484, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns {
     border-top: none;
     border-bottom: none;
   }
-  /* line 319, ../sass/_digital_library.scss */
+  /* line 487, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns .field-name-title {
     padding-top: 0;
     padding-bottom: 0;
   }
-  /* line 323, ../sass/_digital_library.scss */
+  /* line 491, ../sass/_digital_library.scss */
   .gallery-main .view-content .gallery-tiles .columns .flagged .field-name-title {
     background-color: #F66B16;
   }
 }
 @media only screen and (min-width: 1025px) {
-  /* line 332, ../sass/_digital_library.scss */
+  /* line 500, ../sass/_digital_library.scss */
+  .gallery-main .arrow-box:after, .gallery-main .arrow-box:before {
+    left: 60%;
+  }
+  /* line 503, ../sass/_digital_library.scss */
+  .gallery-main #filter-panel-filters {
+    margin: 0 0.9375em;
+    padding: 0.9375em 1.875em 0 1.875em;
+  }
+  /* line 507, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 {
     width: 30.33333%;
     margin: 1.5%;
   }
-  /* line 335, ../sass/_digital_library.scss */
+  /* line 510, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .field-name-field-thumbnail {
     margin-left: -1.875em;
     margin-right: -1.875em;
   }
-  /* line 338, ../sass/_digital_library.scss */
+  /* line 513, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .field-name-field-thumbnail img {
     width: 100%;
     height: auto;
   }
-  /* line 343, ../sass/_digital_library.scss */
+  /* line 518, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .field-name-title {
     margin-left: -1.875em;
     margin-right: -1.875em;
@@ -4608,50 +4936,50 @@ table tfoot tr td {
     padding-right: 4.25em;
     background: url("../images/text-icon.png") no-repeat 95% center #70547D;
   }
-  /* line 350, ../sass/_digital_library.scss */
+  /* line 525, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .media-type-text .field-name-title,
   .gallery-main .view-content .large-4 .media-type-image .field-name-title {
     background: url("../images/attachment-icon.png") no-repeat 95% center #6F7E95;
   }
-  /* line 354, ../sass/_digital_library.scss */
+  /* line 529, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .media-type-audio .field-name-title,
   .gallery-main .view-content .large-4 .media-type-video .field-name-title {
     background: url("../images/video-icon.png") no-repeat 95% center #0035B7;
   }
-  /* line 358, ../sass/_digital_library.scss */
+  /* line 533, ../sass/_digital_library.scss */
   .gallery-main .view-content .large-4 .flagged .field-name-title {
     background-color: #F66B16;
   }
 
-  /* line 364, ../sass/_digital_library.scss */
+  /* line 539, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content #page,
   .page-node.node-type-digital-library-content #content {
     background: linear-gradient(90deg, white 66.66667%, #EEEEEE 33.33333%);
   }
-  /* line 368, ../sass/_digital_library.scss */
+  /* line 543, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .pane-content-state {
     padding-left: 1.875em;
   }
-  /* line 371, ../sass/_digital_library.scss */
+  /* line 546, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right {
     margin-top: 50px;
   }
-  /* line 373, ../sass/_digital_library.scss */
+  /* line 548, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail {
     display: block;
     margin-bottom: 35px;
   }
-  /* line 376, ../sass/_digital_library.scss */
+  /* line 551, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail .field-item {
     margin-top: 0;
   }
-  /* line 379, ../sass/_digital_library.scss */
+  /* line 554, ../sass/_digital_library.scss */
   .page-node.node-type-digital-library-content .group-right .field-name-field-thumbnail img {
     width: 100%;
     height: auto;
   }
 
-  /* line 388, ../sass/_digital_library.scss */
+  /* line 563, ../sass/_digital_library.scss */
   .node-type-digital-library-content.page-node-edit #page,
   .node-type-digital-library-content.page-node-edit #content,
   .node-type-digital-library-content.page-node-revisions #page,
@@ -4659,37 +4987,43 @@ table tfoot tr td {
     background: white;
   }
 
-  /* line 393, ../sass/_digital_library.scss */
+  /* line 568, ../sass/_digital_library.scss */
   .node-type-digital-library-content.page-node-revisions .region-content {
     padding-left: 1.875em;
     padding-right: 1.875em;
   }
 
-  /* line 399, ../sass/_digital_library.scss */
+  /* line 574, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content input[type="text"],
   .page-node-edit.node-type-digital-library-content input[type="text"] {
     width: 50%;
   }
-  /* line 402, ../sass/_digital_library.scss */
+  /* line 577, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content .field-name-field-link-to-a-url input[type="text"],
   .page-node-edit.node-type-digital-library-content .field-name-field-link-to-a-url input[type="text"] {
     width: 100%;
   }
-  /* line 405, ../sass/_digital_library.scss */
+  /* line 580, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content table#edit-field-document-und-table,
   .page-node-edit.node-type-digital-library-content table#edit-field-document-und-table {
     width: 50%;
   }
-  /* line 408, ../sass/_digital_library.scss */
+  /* line 583, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content fieldset.collapsible select,
   .page-node-edit.node-type-digital-library-content fieldset.collapsible select {
     width: 23%;
   }
-  /* line 411, ../sass/_digital_library.scss */
+  /* line 586, ../sass/_digital_library.scss */
   .page-node-add-digital-library-content .fieldset-wrapper table select,
   .page-node-edit.node-type-digital-library-content .fieldset-wrapper table select {
     width: 23%;
     margin-right: 1.2em;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  /* line 595, ../sass/_digital_library.scss */
+  .gallery-main .arrow-box:after, .gallery-main .arrow-box:before {
+    left: 58%;
   }
 }
 /* line 2, ../sass/_forms.scss */

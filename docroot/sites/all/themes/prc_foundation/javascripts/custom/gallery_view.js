@@ -20,8 +20,25 @@ Drupal.behaviors.galleryViewBehavior = {
         });
         // Make filter panel expandable and collapsable
         $( ".filter-panel-toggle-link" ).click(function() {
-          // TODO - adjust this to toggle the parent so the animation can be smoother.
-          $('.filter-panel-toggle').toggle("slow");
+          $('#filter-panel-filters').slideToggle("slow");
+          $(this).toggleClass("selected");
+        });
+        // Wrap the toggleable area of the filter panel for styling
+        $('.filter-panel-toggle').wrapAll('<div id="filter-panel-filters" class="arrow-box">');
+        // Check to see if the filter panel should be expanded upon load
+        if(document.location.search.length) {
+          // TODO - for completeness, it would also be nice to confirm that the query parameter is f[]
+          $('#filter-panel-filters').show();
+          $(".filter-panel-toggle-link").toggleClass('filters-enabled');
+        }
+        // Turn selected filters into links
+        $('input[checked]').parent().wrap('<a>');
+        $('input[checked]').parents('a').addClass('filter-selected');
+        $('.filter-selected').click(function() {
+          Drupal.facetapi.disableFacet($(this).parents('ul.facetapi-facetapi-checkbox-links'));
+          href = $(this).find('a').attr('href'),
+            redirect = new Drupal.facetapi.Redirect(href);
+          redirect.gotoHref();
         });
       });
       // Remove extra flag link text on ajax calls

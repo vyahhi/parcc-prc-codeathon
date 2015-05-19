@@ -1,6 +1,6 @@
 @media #{$screen} {
   #filter-panel {
-    width: 464px;
+    width: 286px;
     margin-left: auto;
     margin-right: auto;
     li {
@@ -14,12 +14,17 @@
       display: inline-block;
       input {
         height: 45px;
+        width: 170px;
+        margin: 0;
         padding-left: 25px;
         padding-right: 40px;
         border-top-left-radius: 1000px;
         border-bottom-left-radius: 1000px;
         border-color: $gray-stroke;
-        background: url('../images/search-filter-icon.png') 95% center no-repeat;
+        background: url('../images/search-filter-icon.png') 92% center no-repeat;
+      }
+      input:focus {
+        box-shadow: none;
       }
     }
     .form-item-sort-by,
@@ -38,22 +43,32 @@
       color: $body-font-color;
       font-weight: normal;
       font-size: .875em;
+      text-indent: -9999px;
     }
     .filter-panel-toggle-link {
-      background: url('../images/filter-icon.png') 10px center no-repeat $filter-button-color;
+      background: url('../images/filter-icon.png') center center no-repeat $filter-button-color;
+    }
+    .filter-panel-toggle-link:focus {
+      background: url('../images/filter-icon.png') center center no-repeat $filter-button-color;
+      color: $body-font-color;
     }
     .filter-panel-toggle-link:hover,
-    .filter-panel-toggle-link:focus {
-      background: url('../images/filter-icon-selected.png') 10px center no-repeat $parcc-purple;
+    .filter-panel-toggle-link.selected {
+      background: url('../images/filter-icon-selected.png') center center no-repeat $parcc-purple;
+      color: white;
+    }
+    .filter-panel-toggle-link.filters-enabled {
+      background: url('../images/filter-icon-selected.png') center center no-repeat $parcc-purple !important;
+      color: white !important;
     }
     .filter-panel-all-link {
-      background: url('../images/all-icon.png') 10px center no-repeat $filter-button-color;
+      background: url('../images/all-icon.png') center center no-repeat $filter-button-color;
       border-top-right-radius: 1000px;
       border-bottom-right-radius: 1000px;
     }
     .filter-panel-all-link:hover,
     .filter-panel-all-link:focus {
-      background: url('../images/all-icon-selected.png') 10px center no-repeat $parcc-purple;
+      background: url('../images/all-icon-selected.png') center center no-repeat $parcc-purple;
     }
   }
   .view-digital-library-gallery {
@@ -79,8 +94,117 @@
   .gallery-main {
     background-color: $background-gray;
     border-top: 1px solid $gray-stroke;
-    .filter-panel-toggle {
+    .arrow-box {
+      position: relative;
+      background: #FFFFFF;
+      border: 1px solid #DBDBDB;
+    }
+    .arrow-box:after, .arrow-box:before {
+      bottom: 100%;
+      left: 66%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+    .arrow-box:after {
+      border-color: rgba(255, 255, 255, 0);
+      border-bottom-color: #FFFFFF;
+      border-width: 15px;
+      margin-left: -15px;
+    }
+    .arrow-box:before {
+      border-color: rgba(219, 219, 219, 0);
+      border-bottom-color: #DBDBDB;
+      border-width: 16px;
+      margin-left: -16px;
+    }
+    #filter-panel-filters {
       display: none;
+      margin: 0;
+      padding: $default-padding $default-padding 0 $default-padding;
+      overflow: visible !important;
+      background-color: white;
+      li {
+        margin-left: 0;
+        margin-right: 1em;
+      }
+    }
+    .filter-panel-toggle {
+      margin-bottom: 1.25em;
+      border-bottom: 1px solid $gray-stroke;
+      &:last-child {
+        margin-bottom: 1em;
+        border-bottom: none;
+      }
+      h5 {
+        color: $body-font-color;
+      }
+      &.pane-my-lists-panel-pane-1 {
+        h5 {
+          padding-left: 25px;
+          background: url('../images/mylist-icon.png') 0px 2px no-repeat;
+        }
+        li {
+          margin: 0 0 .25em 1.5em;
+        }
+      }
+      &.grade-level h5 {
+        padding-left: 25px;
+        background: url('../images/gradelevel-icon.png') 0px 2px no-repeat;
+      }
+      &.media-type h5 {
+        padding-left: 25px;
+        background: url('../images/media-icon.png') 0px 2px no-repeat;
+      }
+      &.subject h5 {
+        padding-left: 25px;
+        background: url('../images/subject-icon.png') 0px 2px no-repeat;
+      }
+      &.subject a.filter-selected { // This can be removed once subjects only allow top level filters.
+        color: $body-font-color;
+      }
+      li {
+        display: inline-block;
+        list-style: none;
+      }
+      a.facetapi-checkbox,
+      a.filter-selected,
+      .view-my-lists a {
+        font-size: 0.85em;
+        color: $body-font-color;
+        line-height: 35px;
+       }
+      a.facetapi-inactive:hover,
+      .view-my-lists a:hover {
+        @include panel(white, 6px);
+        border-radius: 6px;
+        border-color: $selected-filter-color;
+        line-height: 35px;
+      }
+      a.filter-selected,
+      a.facetapi-inactive:focus,
+      .view-my-lists a:focus {
+        @include panel($selected-filter-color, 6px);
+        margin-right: 1.5em;
+        border-radius: 6px;
+        font-size: 0.85em;
+        color: white;
+        line-height: 35px;
+        li {
+          margin-right: 0 !important;
+        }
+      }
+      a.facetapi-inactive,
+      .view-my-lists a {
+        padding: 7px;
+        text-decoration: none;
+      }
+      input.facetapi-checkbox {
+        display: none;
+      }
     }
     .view-content .gallery-tiles .columns {
       border-top: 10px solid $background-gray;
@@ -308,10 +432,54 @@
 }
 
 @media #{$small} {
+  #filter-panel {
+    width: 464px;
+    .filter-panel-search .view-filters input {
+      width: auto;
+      margin: 0 0 1em 0;
+      background: url('../images/search-filter-icon.png') 95% center no-repeat;
+    }
+    .filter-panel-toggle-link,
+    .filter-panel-all-link {
+      text-indent: 0;
+    }
+    .filter-panel-toggle-link {
+      background: url('../images/filter-icon.png') 10px center no-repeat $filter-button-color;
+    }
+    .filter-panel-toggle-link:focus {
+      background: url('../images/filter-icon.png') 10px center no-repeat $filter-button-color;
+      color: $body-font-color;
+    }
+    .filter-panel-toggle-link:hover,
+    .filter-panel-toggle-link.selected {
+      background: url('../images/filter-icon-selected.png') 10px center no-repeat $parcc-purple;
+      color: white;
+    }
+    .filter-panel-toggle-link.filters-enabled {
+      background: url('../images/filter-icon-selected.png') 10px center no-repeat $parcc-purple !important;
+      color: white !important;
+    }
+    .filter-panel-all-link {
+      background: url('../images/all-icon.png') 10px center no-repeat $filter-button-color;
+      border-top-right-radius: 1000px;
+      border-bottom-right-radius: 1000px;
+    }
+    .filter-panel-all-link:hover,
+    .filter-panel-all-link:focus {
+      background: url('../images/all-icon-selected.png') 10px center no-repeat $parcc-purple;
+    }
+  }
   .gallery-main {
     .medium-6 {
       width: 47%;
       margin: 1.5%;
+    }
+    #filter-panel-filters {
+      margin: 0 $default-margin;
+      padding: $default-padding $default-padding 0 $default-padding;
+    }
+    .arrow-box:after, .arrow-box:before {
+      left: 61%;
     }
     .view-content .gallery-tiles .columns {
       border-top: none;
@@ -329,6 +497,13 @@
 
 @media #{$medium} {
   .gallery-main {
+    .arrow-box:after, .arrow-box:before {
+      left: 60%;
+    }
+    #filter-panel-filters {
+      margin: 0 $default-margin;
+      padding: $default-padding $desktop-padding 0 $desktop-padding;
+    }
     .view-content .large-4 {
       width: 30.33333%;
       margin: 1.5%;
@@ -411,6 +586,14 @@
     .fieldset-wrapper table select {
       width: 23%;
       margin-right: 1.2em;
+    }
+  }
+}
+
+@media #{$large} {
+  .gallery-main {
+    .arrow-box:after, .arrow-box:before {
+      left: 58%;
     }
   }
 }
