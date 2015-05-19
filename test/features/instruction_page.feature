@@ -19,6 +19,5 @@ Feature: PRC-1400 Instruction Page - Create Landing Page
     And I am on the homepage
     When I click "Instruction"
     Then the url should match "instruction"
-    And I should see the link "Formative Instructional Tasks"
+    And I should not see the link "Formative Instructional Tasks"
     But I should not see the link "Speaking and Listening"
-    And the "Formative Instructional Tasks" link should point to "formative-instructional-tasks"
