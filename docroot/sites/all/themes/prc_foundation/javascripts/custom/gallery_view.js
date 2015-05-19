@@ -20,6 +20,7 @@ Drupal.behaviors.galleryViewBehavior = {
         });
         // Make filter panel expandable and collapsable
         $( ".filter-panel-toggle-link" ).click(function() {
+          $('.filter-panel-toggle').show();
           $('#filter-panel-filters').slideToggle("slow");
           $(this).toggleClass("selected");
         });
@@ -28,6 +29,7 @@ Drupal.behaviors.galleryViewBehavior = {
         // Check to see if the filter panel should be expanded upon load
         if(document.location.search.length) {
           // TODO - for completeness, it would also be nice to confirm that the query parameter is f[]
+          $('.filter-panel-toggle').show();
           $('#filter-panel-filters').show();
           $(".filter-panel-toggle-link").toggleClass('filters-enabled');
         }

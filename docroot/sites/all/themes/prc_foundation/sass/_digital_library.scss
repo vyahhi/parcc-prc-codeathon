@@ -133,6 +133,7 @@
       }
     }
     .filter-panel-toggle {
+      display: none;
       margin-bottom: 1.25em;
       border-bottom: 1px solid $gray-stroke;
       &:last-child {
