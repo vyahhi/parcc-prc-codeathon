@@ -43,7 +43,7 @@ Feature: Delete Formative Instructional Task Resource
     When I press "Delete"
     And I click "Cancel"
     Then I should see the heading "Resource @timestamp"
-  
+
   @prc-1249
   Scenario: Delete - Deleted
     Given I am logged in as a user with the "PRC Admin" role
