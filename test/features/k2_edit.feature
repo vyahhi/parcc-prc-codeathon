@@ -1,4 +1,4 @@
-@api @k2 @prc-1244
+@api @k2 @fit @prc-1244
 Feature: PRC-1244 Formative Instructional Task - Edit Resource
   As a PRC Admin, I want to be able to edit a Formative Instructional Tasks resource so that educators can access the edited resource and use it in their classrooms.
 

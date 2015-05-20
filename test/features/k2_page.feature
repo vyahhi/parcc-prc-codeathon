@@ -1,4 +1,4 @@
-@api @speaking-listening @prc-1226 @prc-1433 @prc-1434
+@api @k2 @fit @prc-1226 @prc-1433 @prc-1434
 Feature: PRC-1410 Speaking and Listening page - Regulars View
   As a PARCC-member Educator, I want to be able to view Formative Instructional Tasks resources.
 

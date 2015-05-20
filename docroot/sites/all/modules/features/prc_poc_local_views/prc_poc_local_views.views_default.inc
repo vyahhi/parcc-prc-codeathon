@@ -3388,10 +3388,10 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['field_subject']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_subject']['delta_offset'] = '0';
   /* Field: Content: Grade Level */
-  $handler->display->display_options['fields']['field_grade_level']['id'] = 'field_grade_level';
-  $handler->display->display_options['fields']['field_grade_level']['table'] = 'field_data_field_grade_level';
-  $handler->display->display_options['fields']['field_grade_level']['field'] = 'field_grade_level';
-  $handler->display->display_options['fields']['field_grade_level']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['id'] = 'field_grade_level_unlimited';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['table'] = 'field_data_field_grade_level_unlimited';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['field'] = 'field_grade_level_unlimited';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['delta_offset'] = '0';
   /* Field: Content: Resource Type */
   $handler->display->display_options['fields']['field_resource_type']['id'] = 'field_resource_type';
   $handler->display->display_options['fields']['field_resource_type']['table'] = 'field_data_field_resource_type';
@@ -3972,15 +3972,19 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
-    'views_bulk_operations' => 'views_bulk_operations',
+    'nid' => 'nid',
     'title' => 'title',
     'type' => 'type',
     'changed' => 'changed',
     'field_parcc_item' => 'field_parcc_item',
+    'edit_node' => 'edit_node',
+    'clone_node' => 'clone_node',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
-    'views_bulk_operations' => array(
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -3993,7 +3997,7 @@ function prc_poc_local_views_views_default_views() {
       'empty_column' => 0,
     ),
     'type' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -4009,6 +4013,16 @@ function prc_poc_local_views_views_default_views() {
     'field_parcc_item' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'clone_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,

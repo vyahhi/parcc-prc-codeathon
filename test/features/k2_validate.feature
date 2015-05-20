@@ -1,4 +1,4 @@
-@api @k2 @prc-1239
+@api @k2 @fit @prc-1239
 Feature: PRC-1239 Formative Instructional Task - Add/Edit Resource - Form Validation
   As a PRC Admin,
   I want to get feedback about any errors that occur when I add or edit a Formative Instructional Tasks resource

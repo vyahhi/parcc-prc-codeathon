@@ -1,4 +1,4 @@
-@api @k2 @prc-1241
+@api @k2 @fit @prc-1241
 Feature: PRC-1241 Formative Instructional Tasks - Add Resource - Resource Added
   As a PRC Admin,
   I want to get feedback that I have successfully added a Formative Instructional Tasks resource

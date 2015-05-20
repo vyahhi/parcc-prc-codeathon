@@ -74,7 +74,7 @@ Feature: Digital Library - Item Detail Page Responsive Behavior (PRC-751)
     And ".group-left .field-name-body" should have a "font-family" css value of "'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif"
     And ".group-left .field-name-body p" should have a "font-size" css value of "16px"
     And ".group-left .field-name-body p" should have a "font-weight" css value of "400"
-    And ".group-left .field-name-body p" should have a "line-height" css value of "25.6px"
+    And ".group-left .field-name-body p" should have a "line-height" css value of "24px"
     And ".group-left .field-name-body p" should have a "margin-bottom" css value of "20px"
     And ".group-left .field-name-body p" should have a "color" css value of "rgb(70, 70, 70)"
     And ".group-left .prc_digital_library_comment_email" should have a "width" css value of "125px"

@@ -54,8 +54,8 @@ function prc_poc_local_node_speaking_and_listening_resource_field_default_field_
     ),
   );
 
-  // Exported field_instance: 'node-speaking_and_listening_resource-field_grade_level'
-  $field_instances['node-speaking_and_listening_resource-field_grade_level'] = array(
+  // Exported field_instance: 'node-speaking_and_listening_resource-field_grade_level_unlimited'
+  $field_instances['node-speaking_and_listening_resource-field_grade_level_unlimited'] = array(
     'bundle' => 'speaking_and_listening_resource',
     'default_value' => NULL,
     'deleted' => 0,
@@ -66,7 +66,7 @@ function prc_poc_local_node_speaking_and_listening_resource_field_default_field_
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -76,7 +76,7 @@ function prc_poc_local_node_speaking_and_listening_resource_field_default_field_
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_grade_level',
+    'field_name' => 'field_grade_level_unlimited',
     'label' => 'Grade Level',
     'required' => 1,
     'settings' => array(
@@ -87,11 +87,10 @@ function prc_poc_local_node_speaking_and_listening_resource_field_default_field_
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'apply_chosen' => '',
         'label_help_description' => '',
       ),
-      'type' => 'options_select',
-      'weight' => 6,
+      'type' => 'options_buttons',
+      'weight' => 8,
     ),
   );
 

@@ -206,6 +206,8 @@ function prc_question_form_form_quiz_directions_node_form_alter(&$form, &$form_s
   $new_title = str_replace(t('Assessment directions'), t('Non-interactive Item (text only)'), $orig_title);
   drupal_set_title($new_title);
 
+  $form['title']['#required'] = TRUE;
+
   $form['feedback']['#access'] = FALSE;
   $form['field_parcc_item']['#access'] = user_access('add parcc items');
   $form['#validate'][] = 'prc_question_form_make_parcc_item_validate';
@@ -218,6 +220,8 @@ function prc_question_form_form_short_answer_node_form_alter(&$form, &$form_stat
   $orig_title = drupal_get_title();
   $new_title = str_replace(t('Short answer question'), t('Short Answer Item'), $orig_title);
   drupal_set_title($new_title);
+
+  $form['title']['#required'] = TRUE;
 
   $form['feedback']['#access'] = FALSE;
   unset($form['answer']['#description']);

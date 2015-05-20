@@ -65,7 +65,7 @@
     background-color: white;
   }
   // Forces text fields to match paragraph styles by default
-  .field-type-text {
+  p, .field-type-text {
     @include paragraph;
   }
   a:hover,
@@ -304,3 +304,4 @@
 }
 
 @import "digital_library";
+@import "forms";
