@@ -1,4 +1,4 @@
-@api @itembank @prc-1027
+@api @itembank @shortanswer @prc-1027
 Feature: PRC-1027 Item Bank - Edit Short Answer Item - Form
   As a logged in user,
   I want to be able to edit a non-PARCC short answer item from the Item Bank

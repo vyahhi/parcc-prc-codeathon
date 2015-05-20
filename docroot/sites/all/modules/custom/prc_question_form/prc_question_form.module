@@ -221,6 +221,8 @@ function prc_question_form_form_short_answer_node_form_alter(&$form, &$form_stat
   $new_title = str_replace(t('Short answer question'), t('Short Answer Item'), $orig_title);
   drupal_set_title($new_title);
 
+  $form['title']['#required'] = TRUE;
+
   $form['feedback']['#access'] = FALSE;
   unset($form['answer']['#description']);
   $form['answer']['correct_answer_evaluation']['#access'] = FALSE;

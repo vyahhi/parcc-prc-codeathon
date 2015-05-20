@@ -1,4 +1,4 @@
-@api @itembank @prc-1036 @prc-1038 @prc-1412
+@api @itembank @shortanswer @prc-1036 @prc-1038 @prc-1412
 Feature: PRC-1036 Item Bank - Duplicate Short Answer Item - Form
   As a logged in user,
   I want to be able to duplicate a non-PARCC short answer item from the Item Bank

@@ -1,4 +1,4 @@
-@api @itembank @shortanswer @validation @prc-1022
+@api @itembank @shortanswer @validation @prc-1022 @prc-1407 @prc-1408
 Feature: PRC-1022 Item Bank - Create / Edit / Duplicate Non-PARCC Short Answer Item - Form Validation
   As a logged in user,
   I want to get feedback about any errors that occur when I create, edit or duplicate a non-PARCC short answer item
@@ -11,3 +11,5 @@ Feature: PRC-1022 Item Bank - Create / Edit / Duplicate Non-PARCC Short Answer I
     When I press "Save"
     Then I should see the error message containing "Grade Level field is required."
     Then I should see the error message containing "At least one Item Standard is required."
+    And I should see the error message containing "Question field is required."
+    And I should see the error message containing "Title field is required."
