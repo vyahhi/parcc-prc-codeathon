@@ -124,7 +124,12 @@
 
       <div id="filter-panel" class="center">
         <ul class="inline">
-          <li class="filter-panel-search"></li>
+          <li class="filter-panel-search">
+            <?php
+            $block = module_invoke('views', 'block_view', '-exp-digital_library_gallery-panel_pane_1');
+            print render($block['content']);
+            ?>
+          </li>
           <li><a href="#" class="filter-panel-toggle-link">Filters</a></li>
           <li><a href="library" class="filter-panel-all-link">All</a></li>
       </div>
