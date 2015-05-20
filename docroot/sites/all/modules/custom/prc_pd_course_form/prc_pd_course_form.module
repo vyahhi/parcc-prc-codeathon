@@ -610,7 +610,7 @@ function prc_pd_course_form_form_quiz_report_form_alter(&$form, &$form_state) {
 }
 
 /**
- * Implements hook_update_N().
+ * Removes the single grade level field instance from Speaking and Listening Resource node type.
  */
 function prc_pd_course_form_update_0001(&$sandbox) {
   if ($instance = field_info_instance('node', 'field_grade_level', 'speaking_and_listening_resource')) {
