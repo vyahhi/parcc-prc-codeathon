@@ -1,0 +1,15 @@
+diff --git a/docroot/sites/all/modules/contrib/shs/shs.module b/docroot/sites/all/modules/contrib/shs/shs.module
+index d1e9853..7e38501 100644
+--- a/docroot/sites/all/modules/contrib/shs/shs.module
++++ b/docroot/sites/all/modules/contrib/shs/shs.module
+@@ -33,7 +33,9 @@ function shs_js() {
+       'callback' => 'shs_json',
+       'access callback'  => 'user_access',
+       'access arguments' => array('access content'),
+-      'dependencies' => array('taxonomy'),
++      'dependencies' => array('taxonomy', 'prc_shs_term_handler'),
++      'skip_hook_init' => TRUE,
++      'bootstrap' => DRUPAL_BOOTSTRAP_FULL,
+     ),
+   );
+ }
