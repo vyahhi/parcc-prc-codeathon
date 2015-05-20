@@ -608,3 +608,12 @@ function prc_pd_course_form_form_quiz_report_form_alter(&$form, &$form_state) {
     '#value' => $passing_grade,
   );
 }
+
+/**
+ * Implements hook_update_N().
+ */
+function prc_pd_course_form_update_0001(&$sandbox) {
+  if ($instance = field_info_instance('node', 'field_grade_level', 'speaking_and_listening_resource')) {
+    field_delete_instance($instance);
+  }
+}

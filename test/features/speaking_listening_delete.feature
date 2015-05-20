@@ -14,7 +14,7 @@ Feature: Delete Speaking and Listening Resource
     And I fill in "Resource name" with "Resource @timestamp"
     And I fill in the hidden field "faux_standard" with "Standard"
     And I fill in the hidden field "faux_subject" with "Subject"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I press "Save"
     # Have to edit it to fill in the terms and fields and everything, then Delete
     And I visit the first node created
@@ -40,7 +40,7 @@ Feature: Delete Speaking and Listening Resource
     And I fill in "Resource name" with "Resource @timestamp"
     And I fill in the hidden field "faux_standard" with "Standard"
     And I fill in the hidden field "faux_subject" with "Subject"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I press "Save"
     # Have to edit it to fill in the terms and fields and everything, then Delete
     And I visit the first node created
@@ -65,7 +65,7 @@ Feature: Delete Speaking and Listening Resource
     And I fill in "Resource name" with "Resource @timestamp"
     And I fill in the hidden field "faux_standard" with "Standard"
     And I fill in the hidden field "faux_subject" with "Subject"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I press "Save"
 # Have to edit it to fill in the terms and fields and everything, then Delete
     And I am on "speaking-listening"

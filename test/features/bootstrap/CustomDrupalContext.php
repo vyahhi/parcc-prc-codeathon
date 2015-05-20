@@ -1839,7 +1839,7 @@ class FeatureContext extends DrupalContext {
         $this->iFillHiddenFieldWith('faux_subject', $hash['faux subject']);
       }
 
-      $this->selectOption('Grade Level', $hash['grade level']);
+      $this->checkOption($hash['grade level']);
       $this->pressButton('Save');
     }
 

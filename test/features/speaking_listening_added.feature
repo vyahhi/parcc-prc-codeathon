@@ -11,7 +11,7 @@ Feature: PRC-1420 Speaking and Listening - Add Resource - Resource Added
     And I fill in "Resource name" with "Resource @timestamp"
     And I fill in the hidden field "faux_standard" with "Standard"
     And I fill in the hidden field "faux_subject" with "Subject"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I press "Save"
     Then I should see the message containing "Speaking and Listening Resource Resource @timestamp has been created."
     And the url should match "speaking-listening"
