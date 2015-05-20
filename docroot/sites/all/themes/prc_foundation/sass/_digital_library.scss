@@ -10,6 +10,10 @@
     .views-exposed-form .views-exposed-widget {
       padding: 0;
     }
+    .filter-panel-search {
+      width: 170px;
+      height: 70px;
+    }
     .filter-panel-search .view-filters {
       display: inline-block;
       input {
@@ -206,6 +210,9 @@
       input.facetapi-checkbox {
         display: none;
       }
+    }
+    .view-filters {
+      display: none;
     }
     .view-content .gallery-tiles .columns {
       border-top: 10px solid $background-gray;
@@ -435,8 +442,12 @@
 @media #{$small} {
   #filter-panel {
     width: 464px;
+    .filter-panel-search {
+      width: 285px;
+      height: 84px;
+    }
     .filter-panel-search .view-filters input {
-      width: auto;
+      width: 285px;
       margin: 0 0 1em 0;
       background: url('../images/search-filter-icon.png') 95% center no-repeat;
     }
