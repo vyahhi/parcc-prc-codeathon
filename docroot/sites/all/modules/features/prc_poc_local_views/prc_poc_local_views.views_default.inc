@@ -2678,6 +2678,7 @@ function prc_poc_local_views_views_default_views() {
 
   /* Display: Digital Library Search View */
   $handler = $view->new_display('panel_pane', 'Digital Library Search View', 'panel_pane_1');
+  $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['pane_category']['name'] = 'PRC Digital Library';
   $handler->display->display_options['pane_category']['weight'] = '0';
   $handler->display->display_options['inherit_panels_path'] = '1';
