@@ -8,3 +8,4 @@ Feature: PRC-1393 Create Non-interactive Item (text only) - Form - Required Fiel
     When I click "Non-interactive (text only)"
     And I press "Save"
     Then I should see the error message containing "Question field is required."
+    And I should see the error message containing "Title field is required."
