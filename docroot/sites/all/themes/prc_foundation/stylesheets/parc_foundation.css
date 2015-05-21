@@ -3783,6 +3783,9 @@ table tfoot tr td {
     content: "▲";
     padding-left: 5px;
   }
+  .gallery-main .view-empty {
+    text-align: center;
+  }
   .gallery-main .view-content .gallery-tiles .columns {
     border-top: 10px solid #EEEEEE;
     border-bottom: 10px solid #EEEEEE;
