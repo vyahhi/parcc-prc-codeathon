@@ -12,7 +12,7 @@ Feature: PRC-253 - Organize Content: Filter by Custom List
     And I am viewing my "Favorites List" node with the title "List 3"
     And I am viewing my "Favorites List" node with the title "List 1"
     And I am on "library"
-    Then I should see the link "View All"
+    Then I should see the link "All"
     And I should see the heading "My Lists"
     # AC4 The custom lists that the current user has created so far shall be listed
     And I should see the link "List 1"
@@ -29,7 +29,7 @@ Feature: PRC-253 - Organize Content: Filter by Custom List
     Given I am logged in as a user with the "Educator" role
     Then I run drush "genc 0 --types=digital_library_content --kill"
     Then I visit "library"
-    Then I should see the link "View All"
+    Then I should see the link "All"
     # AC3 The My Lists control is not visible when no list created
     And I should not see the heading "My Lists"
 
