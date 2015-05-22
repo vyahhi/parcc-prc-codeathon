@@ -5646,10 +5646,11 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_subject']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_subject']['delta_offset'] = '0';
   /* Field: Content: Grade Level */
-  $handler->display->display_options['fields']['field_grade_level']['id'] = 'field_grade_level';
-  $handler->display->display_options['fields']['field_grade_level']['table'] = 'field_data_field_grade_level';
-  $handler->display->display_options['fields']['field_grade_level']['field'] = 'field_grade_level';
-  $handler->display->display_options['fields']['field_grade_level']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['id'] = 'field_grade_level_unlimited';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['table'] = 'field_data_field_grade_level_unlimited';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['field'] = 'field_grade_level_unlimited';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['delta_offset'] = '0';
   /* Field: Content: Resource Type */
   $handler->display->display_options['fields']['field_resource_type']['id'] = 'field_resource_type';
   $handler->display->display_options['fields']['field_resource_type']['table'] = 'field_data_field_resource_type';
