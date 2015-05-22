@@ -38,7 +38,7 @@ Feature: PRC-980 Search/Filter Bar: View All
     When I am on "library"
     Then I should see the link "Result One"
     And I should see the link "Result Two"
-    And I should see the text "View All"
+    And I should see the text "All"
 
   Scenario: View all from active filter
     Given I have no "Digital Library Content" nodes
@@ -65,9 +65,9 @@ Feature: PRC-980 Search/Filter Bar: View All
     And I press "Apply"
     Then I should not see the link "Result One"
     And I should not see the link "Result Two"
-    And I should see the text "View All"
-    When I click "View All"
+    And I should see the text "All"
+    When I click "All"
     Then I should see the link "Result One"
     And I should see the link "Result Two"
-    And I should see the text "View All"
+    And I should see the text "All"
     And the "edit-search-api-views-fulltext" field should contain ""
