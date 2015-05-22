@@ -2618,6 +2618,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '21';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -2658,25 +2659,26 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['filters']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
   $handler->display->display_options['filters']['search_api_views_fulltext']['exposed'] = TRUE;
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator_id'] = 'search_api_views_fulltext_op';
-  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['label'] = 'Search';
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator'] = 'search_api_views_fulltext_op';
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['identifier'] = 'search_api_views_fulltext';
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
-    11 => 0,
+    12 => 0,
     6 => 0,
-    7 => 0,
+    8 => 0,
     4 => 0,
     3 => 0,
-    8 => 0,
+    7 => 0,
     9 => 0,
-    5 => 0,
     10 => 0,
+    5 => 0,
+    11 => 0,
   );
 
   /* Display: Digital Library Search View */
   $handler = $view->new_display('panel_pane', 'Digital Library Search View', 'panel_pane_1');
+  $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['pane_category']['name'] = 'PRC Digital Library';
   $handler->display->display_options['pane_category']['weight'] = '0';
   $handler->display->display_options['inherit_panels_path'] = '1';
@@ -3391,6 +3393,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['field_grade_level_unlimited']['id'] = 'field_grade_level_unlimited';
   $handler->display->display_options['fields']['field_grade_level_unlimited']['table'] = 'field_data_field_grade_level_unlimited';
   $handler->display->display_options['fields']['field_grade_level_unlimited']['field'] = 'field_grade_level_unlimited';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_grade_level_unlimited']['delta_offset'] = '0';
   /* Field: Content: Resource Type */
   $handler->display->display_options['fields']['field_resource_type']['id'] = 'field_resource_type';
@@ -3462,10 +3465,11 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['field_subject']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_subject']['delta_offset'] = '0';
   /* Field: Content: Grade Level */
-  $handler->display->display_options['fields']['field_grade_level']['id'] = 'field_grade_level';
-  $handler->display->display_options['fields']['field_grade_level']['table'] = 'field_data_field_grade_level';
-  $handler->display->display_options['fields']['field_grade_level']['field'] = 'field_grade_level';
-  $handler->display->display_options['fields']['field_grade_level']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['id'] = 'field_grade_level_unlimited';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['table'] = 'field_data_field_grade_level_unlimited';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['field'] = 'field_grade_level_unlimited';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['delta_offset'] = '0';
   /* Field: Content: Resource Type */
   $handler->display->display_options['fields']['field_resource_type']['id'] = 'field_resource_type';
   $handler->display->display_options['fields']['field_resource_type']['table'] = 'field_data_field_resource_type';
@@ -3857,7 +3861,7 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -5644,10 +5648,11 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['field_subject']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_subject']['delta_offset'] = '0';
   /* Field: Content: Grade Level */
-  $handler->display->display_options['fields']['field_grade_level']['id'] = 'field_grade_level';
-  $handler->display->display_options['fields']['field_grade_level']['table'] = 'field_data_field_grade_level';
-  $handler->display->display_options['fields']['field_grade_level']['field'] = 'field_grade_level';
-  $handler->display->display_options['fields']['field_grade_level']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['id'] = 'field_grade_level_unlimited';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['table'] = 'field_data_field_grade_level_unlimited';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['field'] = 'field_grade_level_unlimited';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_grade_level_unlimited']['delta_offset'] = '0';
   /* Field: Content: Resource Type */
   $handler->display->display_options['fields']['field_resource_type']['id'] = 'field_resource_type';
   $handler->display->display_options['fields']['field_resource_type']['table'] = 'field_data_field_resource_type';

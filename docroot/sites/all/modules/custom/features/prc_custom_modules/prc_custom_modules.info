@@ -58,6 +58,7 @@ dependencies[] = user_edit_protection
 features[ctools][] = ds:ds:1
 features[ctools][] = strongarm:strongarm:1
 features[ds_field_settings][] = node|assessment|teaser
+features[ds_field_settings][] = node|digital_library_content|default
 features[ds_field_settings][] = node|digital_library_content|gallery_view
 features[ds_field_settings][] = node|digital_library_content|search_index
 features[ds_field_settings][] = node|digital_library_content|search_result
