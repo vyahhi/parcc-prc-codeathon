@@ -33,6 +33,7 @@ features[views_view][] = formative_instructional_tasks
 features[views_view][] = frontpage
 features[views_view][] = glossary
 features[views_view][] = invite
+features[views_view][] = lesson_plan_gallery
 features[views_view][] = message
 features[views_view][] = my_lists
 features[views_view][] = prc_item_bank

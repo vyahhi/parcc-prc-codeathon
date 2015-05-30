@@ -31,6 +31,7 @@ features[page_manager_pages][] = formative_instructional_tasks
 features[page_manager_pages][] = home_page
 features[page_manager_pages][] = instruction
 features[page_manager_pages][] = item_bank
+features[page_manager_pages][] = lesson_plans
 features[page_manager_pages][] = parcc_readiness
 features[page_manager_pages][] = prc_quiz_question_bank
 features[page_manager_pages][] = professional_development

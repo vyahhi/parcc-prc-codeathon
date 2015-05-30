@@ -325,6 +325,26 @@ function prc_menu_links_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
+  // Exported menu link: menu-digital-library-content_contribute:node/add/digital-library-content
+  $menu_links['menu-digital-library-content_contribute:node/add/digital-library-content'] = array(
+    'menu_name' => 'menu-digital-library-content',
+    'link_path' => 'node/add/digital-library-content',
+    'router_path' => 'node/add/digital-library-content',
+    'link_title' => 'Contribute',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-digital-library-content_contribute:node/add/digital-library-content',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
   // Exported menu link: menu-digital-library-left-nav_view-all:library
   $menu_links['menu-digital-library-left-nav_view-all:library'] = array(
     'menu_name' => 'menu-digital-library-left-nav',
@@ -399,6 +419,26 @@ function prc_menu_links_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'menu-instruction-menu_speaking-and-listening:speaking-listening',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-instruction-menu_user-contributed-lesson-plans:lesson-plans
+  $menu_links['menu-instruction-menu_user-contributed-lesson-plans:lesson-plans'] = array(
+    'menu_name' => 'menu-instruction-menu',
+    'link_path' => 'lesson-plans',
+    'router_path' => 'lesson-plans',
+    'link_title' => 'User Contributed Lesson Plans',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-instruction-menu_user-contributed-lesson-plans:lesson-plans',
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -935,6 +975,7 @@ function prc_menu_links_menu_default_menu_links() {
   t('All Available Courses');
   t('Assessment');
   t('Content');
+  t('Contribute');
   t('Course Management');
   t('Create New Assessment');
   t('Export all system checks data to .csv');
@@ -956,6 +997,7 @@ function prc_menu_links_menu_default_menu_links() {
   t('System Check');
   t('Technology Readiness');
   t('Testing Capacity Check');
+  t('User Contributed Lesson Plans');
   t('User account');
   t('Users');
   t('View All');
