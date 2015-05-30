@@ -58,6 +58,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Assessment Left Nav',
     'description' => '',
   );
+  // Exported menu: menu-digital-library-content.
+  $menus['menu-digital-library-content'] = array(
+    'menu_name' => 'menu-digital-library-content',
+    'title' => 'Digital Library Content',
+    'description' => 'Add menu for Digital Library page',
+  );
   // Exported menu: menu-digital-library-left-nav.
   $menus['menu-digital-library-left-nav'] = array(
     'menu_name' => 'menu-digital-library-left-nav',
@@ -177,10 +183,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Add Course');
   t('Add Quiz');
   t('Add content');
+  t('Add menu for Digital Library page');
   t('Add question types menu for use in the item bank');
   t('Assessment Left Nav');
   t('Development');
   t('Development link');
+  t('Digital Library Content');
   t('Digital Library Left Nav');
   t('Features');
   t('Formative Instructional Tasks Menu');

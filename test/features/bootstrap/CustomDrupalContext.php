@@ -64,8 +64,7 @@ class FeatureContext extends DrupalContext {
       if ($this->user) {
         $current_uid = $this->user->uid;
         $argument = str_replace('@currentuid', $current_uid, $argument);
-      }
-      else {
+      } else {
         throw new Exception("Must be logged in as a user");
       }
     }
@@ -83,12 +82,90 @@ class FeatureContext extends DrupalContext {
     $script = 'foo = 1;';
     try {
       $this->getSession()->getDriver()->evaluateScript($script);
-    }
-    catch (UnsupportedDriverActionException $e) {
+    } catch (UnsupportedDriverActionException $e) {
       $js = FALSE;
     }
     return $js;
   }
+
+  public function findByTitle($title) {
+    $item = NULL;
+
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', 'node')
+      ->propertyCondition('title', $title)
+      ->addMetaData('account', user_load(1)); // Run the query as user 1.
+
+    $result = $query->execute();
+
+    if (isset($result['node'])) {
+      $nids = array_keys($result['node']);
+      $items = entity_load('node', $nids);
+      $item = reset($items);
+    }
+    return $item;
+  }
+
+  /**
+   * @Then /^the node titled "([^"]*)" should have the fields:$/
+   */
+  public function theNodeTitledShouldHaveTheFields($title, TableNode $table) {
+    $title = $this->fixStepArgument($title);
+    $node = $this->findByTitle($title);
+    if (!$node) {
+      throw new Exception(sprintf('"Unable to locate node with title "%s"', $title));
+    }
+    $w = entity_metadata_wrapper('node', $node);
+    foreach ($table->getHash() as $row) {
+      foreach ($row as $field => $value) {
+        $value = $this->fixStepArgument($value);
+        $field_info = field_info_field($field);
+        $node_field = $w->{$field}->value();
+        $node_value = '';
+
+        switch ($field_info['type']) {
+          case 'text_with_summary':
+            $node_value = $node_field['safe_value'];
+            break;
+          case NULL:
+          case 'text':
+          case 'list_text':
+            $node_value = $node_field;
+            break;
+          case 'image':
+            $node_value = $node_field['filename'];
+            break;
+          case 'file':
+            $node_value = count($node_field) ? $node_field[0]['filename'] : '';
+            break;
+          case 'taxonomy_term_reference':
+            if (is_array($node_field)) {
+              $node_value = '';
+              foreach ($node_field as $val) {
+                if (is_object($val)) {
+                  if ($field_info['settings']['allowed_values'][0]['vocabulary'] == 'standard') {
+                    $node_value .= ' ' . $val->description;
+                  } else {
+                    $node_value .= ' ' . $val->name;
+                  }
+                }
+              }
+            } else {
+              $node_value = $node_field ? $node_field->name : '';
+            }
+            break;
+          case 'link_field':
+            $node_value = $node_field['title'] . ' ' . $node_field['url'];
+            break;
+        }
+        if ($node_value !== $value) {
+          throw new Exception(sprintf('Node with notation "%s" does not have "%s" as "%s". Instead, it has "%s".', $title, $value, $field, $node_value));
+        }
+      }
+    }
+  }
+
 
   /**
    * The default assertRegionHeading() doesn't do a fixStepArgument()
@@ -160,8 +237,7 @@ class FeatureContext extends DrupalContext {
     $el = $this->getSession()->getPage()->find('css', $selector);
     if (empty($el)) {
       throw new Exception("Element ({$selector}) not found");
-    }
-    elseif (!$el->isVisible()) {
+    } elseif (!$el->isVisible()) {
       throw new Exception("Element ({$selector}) is not visible");
     }
   }
@@ -173,8 +249,7 @@ class FeatureContext extends DrupalContext {
     $el = $this->getSession()->getPage()->find('css', $selector);
     if (empty($el)) {
       throw new Exception("Element ({$selector}) not found");
-    }
-    elseif ($el->isVisible()) {
+    } elseif ($el->isVisible()) {
       throw new Exception("Element ({$selector}) is visible");
     }
   }
@@ -511,8 +586,7 @@ class FeatureContext extends DrupalContext {
           $key = array_search($role_name, $curr_user->roles);
           if (isset($user->role)) {
             $user->role .= ', ' . $role_name;
-          }
-          else {
+          } else {
             $user->role = $role_name;
           }
           if ($key == FALSE) {
@@ -537,8 +611,7 @@ class FeatureContext extends DrupalContext {
     if (substr($element, 0, 2) == '//') {
       // This is xpath
       $this->assertSession()->elementsCount('xpath', $element, intval($num));
-    }
-    else {
+    } else {
       // This is CSS
       parent::assertNumElements($num, $element);
     }
@@ -880,8 +953,7 @@ class FeatureContext extends DrupalContext {
       if (!$item->status) {
         throw new \Exception(sprintf('The node with the title "%s" was not published', $title));
       }
-    }
-    else {
+    } else {
       throw new \Exception(sprintf('The node with the title "%s" was not found', $title));
     }
   }
@@ -916,8 +988,7 @@ class FeatureContext extends DrupalContext {
       if ($item->status) {
         throw new \Exception(sprintf('The node with the title "%s" was published', $title));
       }
-    }
-    else {
+    } else {
       throw new \Exception(sprintf('The node with the title "%s" was not found', $title));
     }
   }
@@ -1048,8 +1119,7 @@ class FeatureContext extends DrupalContext {
     }
     if (isset($message_found)) {
       throw new \Exception('Did not find expected content in message body or subject.');
-    }
-    else {
+    } else {
       throw new \Exception(sprintf('Did not find expected message to %s', $mail_to));
     }
   }
@@ -1412,14 +1482,12 @@ class FeatureContext extends DrupalContext {
     $event_class = get_class($event);
     if (strpos($event_class, 'OutlineExampleEvent') !== FALSE) {
       $scenario = $event->getOutline();
-    }
-    elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
+    } elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
       $scenario = $event->getScenario();
     }
     if ($scenario) {
       $feature_file_full = $scenario->getFeature()->getFile();
-    }
-    else {
+    } else {
       $feature_file_full = 'failure';
     }
 
@@ -1452,8 +1520,7 @@ class FeatureContext extends DrupalContext {
     $event_class = get_class($event);
     if (strpos($event_class, 'OutlineExampleEvent') !== FALSE) {
       $scenario = $event->getOutline();
-    }
-    elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
+    } elseif (strpos($event_class, 'ScenarioEvent') !== FALSE) {
       $scenario = $event->getScenario();
     }
     if ($scenario) {
@@ -1775,8 +1842,7 @@ class FeatureContext extends DrupalContext {
       if ($value != $computed) {
         throw new Exception("Element ({$selector}) does not have a ({$attribute}) value of ({$value}).  The actual value is ({$computed})");
       }
-    }
-    else {
+    } else {
       $this->assertSession()
         ->elementAttributeContains('css', $selector, $attribute, $value);
     }
@@ -1833,8 +1899,7 @@ class FeatureContext extends DrupalContext {
         $this->getSession()->executeScript($script);
         $script = "document.getElementsByName('faux_subject')[0].setAttribute('value','{$hash['faux subject']}');";
         $this->getSession()->executeScript($script);
-      }
-      else {
+      } else {
         $this->iFillHiddenFieldWith('faux_standard', $hash['faux standard']);
         $this->iFillHiddenFieldWith('faux_subject', $hash['faux subject']);
       }
@@ -1870,8 +1935,7 @@ class FeatureContext extends DrupalContext {
         $this->getSession()->executeScript($script);
         $script = "document.getElementsByName('faux_subject')[0].setAttribute('value','{$hash['faux subject']}');";
         $this->getSession()->executeScript($script);
-      }
-      else {
+      } else {
         $this->iFillHiddenFieldWith('faux_standard', $hash['faux standard']);
         $this->iFillHiddenFieldWith('faux_subject', $hash['faux subject']);
       }
@@ -1891,8 +1955,7 @@ class FeatureContext extends DrupalContext {
       foreach ($response_headers['Content-Type'] as $content_type) {
         if ($content_type == $value) {
           return;
-        }
-        else {
+        } else {
           $found[] = $content_type;
         }
       }

@@ -40,6 +40,7 @@ function prc_poc_local_search_api_default_search_api_index() {
         "body:value" : { "type" : "text" },
         "changed" : { "type" : "date" },
         "field_author_name" : { "type" : "string" },
+        "field_contribution_type" : { "type" : "string" },
         "field_course_objectives" : { "type" : "text" },
         "field_document:file" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "file" },
         "field_genre" : { "type" : "integer", "entity_type" : "taxonomy_term" },
@@ -156,6 +157,7 @@ function prc_poc_local_search_api_default_search_api_index() {
         "body:summary" : { "type" : "text" },
         "body:value" : { "type" : "text" },
         "changed" : { "type" : "date" },
+        "field_contribution_type" : { "type" : "string" },
         "field_grade_level" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_media_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_subject" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
@@ -380,6 +382,12 @@ function prc_poc_local_search_api_default_search_api_server() {
             "table" : "search_api_db_digital_library_content_index_text",
             "type" : "text",
             "boost" : "1.0"
+          },
+          "field_contribution_type" : {
+            "table" : "search_api_db_digital_library_content_index",
+            "column" : "field_contribution_type",
+            "type" : "string",
+            "boost" : "1.0"
           }
         },
         "digital_library_only" : {
@@ -458,6 +466,12 @@ function prc_poc_local_search_api_default_search_api_server() {
             "table" : "search_api_db_digital_library_only",
             "column" : "flag_like_content_count",
             "type" : "integer",
+            "boost" : "1.0"
+          },
+          "field_contribution_type" : {
+            "table" : "search_api_db_digital_library_only",
+            "column" : "field_contribution_type",
+            "type" : "string",
             "boost" : "1.0"
           }
         }

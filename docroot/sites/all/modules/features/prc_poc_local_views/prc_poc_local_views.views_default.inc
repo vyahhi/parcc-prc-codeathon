@@ -2675,6 +2675,13 @@ function prc_poc_local_views_views_default_views() {
     5 => 0,
     11 => 0,
   );
+  /* Filter criterion: Indexed Node: Contribution Type */
+  $handler->display->display_options['filters']['field_contribution_type']['id'] = 'field_contribution_type';
+  $handler->display->display_options['filters']['field_contribution_type']['table'] = 'search_api_index_digital_library_only';
+  $handler->display->display_options['filters']['field_contribution_type']['field'] = 'field_contribution_type';
+  $handler->display->display_options['filters']['field_contribution_type']['value'] = array(
+    'story' => 'story',
+  );
 
   /* Display: Digital Library Search View */
   $handler = $view->new_display('panel_pane', 'Digital Library Search View', 'panel_pane_1');

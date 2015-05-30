@@ -85,7 +85,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -144,7 +144,59 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-digital_library_content-field_contribution_type'
+  $field_instances['node-digital_library_content-field_contribution_type'] = array(
+    'bundle' => 'digital_library_content',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 23,
+      ),
+      'gallery_view' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_contribution_type',
+    'label' => 'Contribution Type',
+    'required' => 1,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'label_help_description' => '',
+      ),
+      'type' => 'options_buttons',
+      'weight' => 0,
     ),
   );
 
@@ -503,7 +555,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'label_help_description' => 'This content shall be available to:',
       ),
       'type' => 'options_buttons',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -697,7 +749,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -793,6 +845,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
   t('Attach a File');
   t('Author Name');
   t('Body');
+  t('Contribution Type');
   t('Enter a comma-separated list of words to describe your content.');
   t('Enter the author name as you wish it to be displayed with the content');
   t('Genre');

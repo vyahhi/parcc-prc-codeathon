@@ -21,7 +21,7 @@ function prc_poc_local_node_digital_library_content_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Add a Thumbnail',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
       0 => 'field_thumbnail',
     ),
@@ -49,7 +49,7 @@ function prc_poc_local_node_digital_library_content_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Attach a File',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_document',
     ),
@@ -77,7 +77,7 @@ function prc_poc_local_node_digital_library_content_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Link to URL',
-    'weight' => '6',
+    'weight' => '7',
     'children' => array(
       0 => 'field_link_to_a_url',
     ),
@@ -105,13 +105,13 @@ function prc_poc_local_node_digital_library_content_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Add More Information (Content Properties)',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'field_genre',
       1 => 'field_grade_level',
       2 => 'field_media_type',
-      3 => 'field_subject',
-      4 => 'field_standard',
+      3 => 'field_standard',
+      4 => 'field_subject',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

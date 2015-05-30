@@ -8,9 +8,26 @@
  */
 function prc_digital_library_form_form_digital_library_content_node_form_alter(&$form, &$form_state) {
 
+  global $user;
+  $educator_roles = array('Educator', 'PARCC-Member Educator');
+  if (array_intersect($educator_roles, $user->roles)) {
+    // If the user is Educator or PARCC-Member Educator we hide the permission field
+    // And we put their name into Author
+    $form['field_permissions']['#access'] = FALSE;
+    $form['field_permissions'][LANGUAGE_NONE]['#default_value'] = 'public';
+
+    $user_wrapper = entity_metadata_wrapper('user', $user);
+    $first = $user_wrapper->field_first_name->value();
+    $last = $user_wrapper->field_last_name->value();
+
+    $author_name = $first . ' ' . $last;
+    $form['field_author_name'][LANGUAGE_NONE][0]['value']['#default_value'] = $author_name;
+    $form['field_author_name']['#access'] = FALSE;
+  }
+
+
   // Expand fieldsets with existing content
   $w = entity_metadata_wrapper('node', $form_state['node']);
-
   $expand = array();
 
   $expand['group_attach_a_file'] = ($w->field_document->value()) ? 'collapsible': 'collapsed';
