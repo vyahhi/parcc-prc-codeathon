@@ -3383,13 +3383,13 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Subject */
+  /* Field: Field: Subject */
   $handler->display->display_options['fields']['field_subject']['id'] = 'field_subject';
   $handler->display->display_options['fields']['field_subject']['table'] = 'field_data_field_subject';
   $handler->display->display_options['fields']['field_subject']['field'] = 'field_subject';
   $handler->display->display_options['fields']['field_subject']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_subject']['delta_offset'] = '0';
-  /* Field: Content: Grade Level */
+  /* Field: Field: Grade Level */
   $handler->display->display_options['fields']['field_grade_level_unlimited']['id'] = 'field_grade_level_unlimited';
   $handler->display->display_options['fields']['field_grade_level_unlimited']['table'] = 'field_data_field_grade_level_unlimited';
   $handler->display->display_options['fields']['field_grade_level_unlimited']['field'] = 'field_grade_level_unlimited';
@@ -3458,13 +3458,13 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Subject */
+  /* Field: Field: Subject */
   $handler->display->display_options['fields']['field_subject']['id'] = 'field_subject';
   $handler->display->display_options['fields']['field_subject']['table'] = 'field_data_field_subject';
   $handler->display->display_options['fields']['field_subject']['field'] = 'field_subject';
   $handler->display->display_options['fields']['field_subject']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_subject']['delta_offset'] = '0';
-  /* Field: Content: Grade Level */
+  /* Field: Field: Grade Level */
   $handler->display->display_options['fields']['field_grade_level_unlimited']['id'] = 'field_grade_level_unlimited';
   $handler->display->display_options['fields']['field_grade_level_unlimited']['table'] = 'field_data_field_grade_level_unlimited';
   $handler->display->display_options['fields']['field_grade_level_unlimited']['field'] = 'field_grade_level_unlimited';
@@ -5641,13 +5641,13 @@ message explaining what the check does and the importance of running it.';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Subject */
+  /* Field: Field: Subject */
   $handler->display->display_options['fields']['field_subject']['id'] = 'field_subject';
   $handler->display->display_options['fields']['field_subject']['table'] = 'field_data_field_subject';
   $handler->display->display_options['fields']['field_subject']['field'] = 'field_subject';
   $handler->display->display_options['fields']['field_subject']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_subject']['delta_offset'] = '0';
-  /* Field: Content: Grade Level */
+  /* Field: Field: Grade Level */
   $handler->display->display_options['fields']['field_grade_level_unlimited']['id'] = 'field_grade_level_unlimited';
   $handler->display->display_options['fields']['field_grade_level_unlimited']['table'] = 'field_data_field_grade_level_unlimited';
   $handler->display->display_options['fields']['field_grade_level_unlimited']['field'] = 'field_grade_level_unlimited';

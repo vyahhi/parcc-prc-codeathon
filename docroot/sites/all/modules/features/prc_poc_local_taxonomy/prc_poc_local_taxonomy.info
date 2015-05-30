@@ -12,6 +12,7 @@ features[taxonomy][] = ccss_grade
 features[taxonomy][] = genre
 features[taxonomy][] = grade_level
 features[taxonomy][] = hierarchy
+features[taxonomy][] = interests
 features[taxonomy][] = media_type
 features[taxonomy][] = member_state
 features[taxonomy][] = module_type

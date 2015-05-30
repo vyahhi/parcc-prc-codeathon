@@ -26,13 +26,13 @@ function prc_poc_local_users_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'account' => array(
-          'weight' => '-10',
+          'weight' => '0',
         ),
         'timezone' => array(
-          'weight' => '6',
+          'weight' => '2',
         ),
         'picture' => array(
-          'weight' => '5',
+          'weight' => '1',
         ),
       ),
       'display' => array(),

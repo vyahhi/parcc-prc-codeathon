@@ -1437,6 +1437,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'delete terms in interests'.
+  $permissions['delete terms in interests'] = array(
+    'name' => 'delete terms in interests',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'delete terms in media_type'.
   $permissions['delete terms in media_type'] = array(
     'name' => 'delete terms in media_type',
@@ -2432,6 +2439,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit terms in hierarchy'.
   $permissions['edit terms in hierarchy'] = array(
     'name' => 'edit terms in hierarchy',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in interests'.
+  $permissions['edit terms in interests'] = array(
+    'name' => 'edit terms in interests',
     'roles' => array(),
     'module' => 'taxonomy',
   );
