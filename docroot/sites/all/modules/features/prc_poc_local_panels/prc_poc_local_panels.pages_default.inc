@@ -1793,32 +1793,6 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $display->content['new-7bd1f780-586d-40d9-a029-d9d5906e7b2f'] = $pane;
     $display->panels['left'][0] = 'new-7bd1f780-586d-40d9-a029-d9d5906e7b2f';
     $pane = new stdClass();
-    $pane->pid = 'new-e356a921-33b6-4fa8-b104-282c8f1af5dc';
-    $pane->panel = 'right';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'count_by_content_type-panel_pane_1';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'arguments' => array(
-        'type' => 'quiz',
-      ),
-      'override_title' => 1,
-      'override_title_text' => 'My Assessments',
-      'override_title_heading' => 'h2',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = 'e356a921-33b6-4fa8-b104-282c8f1af5dc';
-    $display->content['new-e356a921-33b6-4fa8-b104-282c8f1af5dc'] = $pane;
-    $display->panels['right'][0] = 'new-e356a921-33b6-4fa8-b104-282c8f1af5dc';
-    $pane = new stdClass();
     $pane->pid = 'new-79aca2aa-0408-4837-9e00-4c918ac9664e';
     $pane->panel = 'right';
     $pane->type = 'views_panes';
@@ -1839,11 +1813,37 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 0;
     $pane->locks = array();
     $pane->uuid = '79aca2aa-0408-4837-9e00-4c918ac9664e';
     $display->content['new-79aca2aa-0408-4837-9e00-4c918ac9664e'] = $pane;
-    $display->panels['right'][1] = 'new-79aca2aa-0408-4837-9e00-4c918ac9664e';
+    $display->panels['right'][0] = 'new-79aca2aa-0408-4837-9e00-4c918ac9664e';
+    $pane = new stdClass();
+    $pane->pid = 'new-e356a921-33b6-4fa8-b104-282c8f1af5dc';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'count_by_content_type-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'type' => 'quiz',
+      ),
+      'override_title' => 1,
+      'override_title_text' => 'My Assessments',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'e356a921-33b6-4fa8-b104-282c8f1af5dc';
+    $display->content['new-e356a921-33b6-4fa8-b104-282c8f1af5dc'] = $pane;
+    $display->panels['right'][1] = 'new-e356a921-33b6-4fa8-b104-282c8f1af5dc';
     $pane = new stdClass();
     $pane->pid = 'new-81299f8f-15cd-47cd-a177-d7009ed5ae44';
     $pane->panel = 'right';
@@ -1853,7 +1853,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
-      'override_title_text' => 'My Assessment Items',
+      'override_title_text' => 'My Individual Assessment Items',
       'override_title_heading' => 'h2',
     );
     $pane->cache = array();
@@ -1876,7 +1876,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
-      'override_title_text' => 'Items Others Have "Liked"',
+      'override_title_text' => 'Items Others Have Liked',
       'override_title_heading' => 'h2',
     );
     $pane->cache = array();
