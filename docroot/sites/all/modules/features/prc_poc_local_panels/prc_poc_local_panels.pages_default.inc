@@ -1732,6 +1732,192 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $handler->conf['display'] = $display;
   $export['site_template_panel_context_basic'] = $handler;
 
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'user_view__user_profile';
+  $handler->task = 'user_view';
+  $handler->subtask = '';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'User Profile',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => 'user_profile',
+  );
+  $display = new panels_display();
+  $display->layout = 'twocol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'left' => NULL,
+      'right' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = '5be89710-5a97-4b7c-9ba1-f5a703e108c4';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-7bd1f780-586d-40d9-a029-d9d5906e7b2f';
+    $pane->panel = 'left';
+    $pane->type = 'user_profile';
+    $pane->subtype = 'user_profile';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'view_mode' => 'full',
+      'context' => 'argument_entity_id:user_1',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '7bd1f780-586d-40d9-a029-d9d5906e7b2f';
+    $display->content['new-7bd1f780-586d-40d9-a029-d9d5906e7b2f'] = $pane;
+    $display->panels['left'][0] = 'new-7bd1f780-586d-40d9-a029-d9d5906e7b2f';
+    $pane = new stdClass();
+    $pane->pid = 'new-e356a921-33b6-4fa8-b104-282c8f1af5dc';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'count_by_content_type-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'type' => 'quiz',
+      ),
+      'override_title' => 1,
+      'override_title_text' => 'My Assessments',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'e356a921-33b6-4fa8-b104-282c8f1af5dc';
+    $display->content['new-e356a921-33b6-4fa8-b104-282c8f1af5dc'] = $pane;
+    $display->panels['right'][0] = 'new-e356a921-33b6-4fa8-b104-282c8f1af5dc';
+    $pane = new stdClass();
+    $pane->pid = 'new-79aca2aa-0408-4837-9e00-4c918ac9664e';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'count_by_content_type-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'type' => 'digital_library_content',
+      ),
+      'override_title' => 1,
+      'override_title_text' => 'My Library Contributions',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '79aca2aa-0408-4837-9e00-4c918ac9664e';
+    $display->content['new-79aca2aa-0408-4837-9e00-4c918ac9664e'] = $pane;
+    $display->panels['right'][1] = 'new-79aca2aa-0408-4837-9e00-4c918ac9664e';
+    $pane = new stdClass();
+    $pane->pid = 'new-81299f8f-15cd-47cd-a177-d7009ed5ae44';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'count_by_content_type-panel_pane_2';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => 'My Assessment Items',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = '81299f8f-15cd-47cd-a177-d7009ed5ae44';
+    $display->content['new-81299f8f-15cd-47cd-a177-d7009ed5ae44'] = $pane;
+    $display->panels['right'][2] = 'new-81299f8f-15cd-47cd-a177-d7009ed5ae44';
+    $pane = new stdClass();
+    $pane->pid = 'new-0f077c09-b775-44b4-8a6f-fcba4bcdbef4';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'my_flag_count-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => 'Items Others Have "Liked"',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = '0f077c09-b775-44b4-8a6f-fcba4bcdbef4';
+    $display->content['new-0f077c09-b775-44b4-8a6f-fcba4bcdbef4'] = $pane;
+    $display->panels['right'][3] = 'new-0f077c09-b775-44b4-8a6f-fcba4bcdbef4';
+    $pane = new stdClass();
+    $pane->pid = 'new-77641fe7-4d6e-403b-9ed4-43f3a53b3cb2';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'my_bookmark_count-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => 'Items Others Have Bookmarked',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 4;
+    $pane->locks = array();
+    $pane->uuid = '77641fe7-4d6e-403b-9ed4-43f3a53b3cb2';
+    $display->content['new-77641fe7-4d6e-403b-9ed4-43f3a53b3cb2'] = $pane;
+    $display->panels['right'][4] = 'new-77641fe7-4d6e-403b-9ed4-43f3a53b3cb2';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $export['user_view__user_profile'] = $handler;
+
   return $export;
 }
 

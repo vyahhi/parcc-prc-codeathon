@@ -862,6 +862,8 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
+      'Educator' => 'Educator',
+      'PARCC-Member Educator' => 'PARCC-Member Educator',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
@@ -1234,6 +1236,8 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
+      'Educator' => 'Educator',
+      'PARCC-Member Educator' => 'PARCC-Member Educator',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),
@@ -2222,6 +2226,8 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
+      'Educator' => 'Educator',
+      'PARCC-Member Educator' => 'PARCC-Member Educator',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
     ),

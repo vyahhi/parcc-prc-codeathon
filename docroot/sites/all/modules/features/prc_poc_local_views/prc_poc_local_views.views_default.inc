@@ -1326,6 +1326,130 @@ function prc_poc_local_views_views_default_views() {
   $export['comments_recent'] = $view;
 
   $view = new view();
+  $view->name = 'count_by_content_type';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Count by Content Type';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: COUNT(Content: Type) */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['group_type'] = 'count';
+  $handler->display->display_options['fields']['type']['label'] = '';
+  $handler->display->display_options['fields']['type']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
+  /* Contextual filter: Content: Type */
+  $handler->display->display_options['arguments']['type']['id'] = 'type';
+  $handler->display->display_options['arguments']['type']['table'] = 'node';
+  $handler->display->display_options['arguments']['type']['field'] = 'type';
+  $handler->display->display_options['arguments']['type']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['type']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['type']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['type']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['type']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['type']['limit'] = '0';
+  /* Contextual filter: Content: Author uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'node';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+
+  /* Display: Node Count by Type */
+  $handler = $view->new_display('panel_pane', 'Node Count by Type', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'Node Count';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['allow']['use_pager'] = 0;
+  $handler->display->display_options['allow']['items_per_page'] = 0;
+  $handler->display->display_options['allow']['offset'] = 0;
+  $handler->display->display_options['allow']['link_to_view'] = 0;
+  $handler->display->display_options['allow']['more_link'] = 0;
+  $handler->display->display_options['allow']['path_override'] = 0;
+  $handler->display->display_options['allow']['title_override'] = 'title_override';
+  $handler->display->display_options['allow']['exposed_form'] = 0;
+  $handler->display->display_options['allow']['fields_override'] = 0;
+  $handler->display->display_options['argument_input'] = array(
+    'type' => array(
+      'type' => 'user',
+      'context' => 'entity:comment.author',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Content: Type',
+    ),
+  );
+  $handler->display->display_options['inherit_panels_path'] = '1';
+
+  /* Display: Count Assessment Items */
+  $handler = $view->new_display('panel_pane', 'Count Assessment Items', 'panel_pane_2');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Author uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'node';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'quiz_directions' => 'quiz_directions',
+    'multichoice' => 'multichoice',
+    'short_answer' => 'short_answer',
+  );
+  $handler->display->display_options['pane_category']['name'] = 'Node Count';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['allow']['use_pager'] = 0;
+  $handler->display->display_options['allow']['items_per_page'] = 0;
+  $handler->display->display_options['allow']['offset'] = 0;
+  $handler->display->display_options['allow']['link_to_view'] = 0;
+  $handler->display->display_options['allow']['more_link'] = 0;
+  $handler->display->display_options['allow']['path_override'] = 0;
+  $handler->display->display_options['allow']['title_override'] = 'title_override';
+  $handler->display->display_options['allow']['exposed_form'] = 0;
+  $handler->display->display_options['allow']['fields_override'] = 0;
+  $export['count_by_content_type'] = $view;
+
+  $view = new view();
   $view->name = 'course_enrollment_search_add';
   $view->description = '';
   $view->tag = '';
@@ -3841,6 +3965,146 @@ function prc_poc_local_views_views_default_views() {
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $export['message'] = $view;
+
+  $view = new view();
+  $view->name = 'my_bookmark_count';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'My Bookmark Count';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: Entity Reference: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_favorite_content_node']['id'] = 'reverse_field_favorite_content_node';
+  $handler->display->display_options['relationships']['reverse_field_favorite_content_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_favorite_content_node']['field'] = 'reverse_field_favorite_content_node';
+  $handler->display->display_options['relationships']['reverse_field_favorite_content_node']['required'] = TRUE;
+  /* Field: COUNT(Content: Author uid) */
+  $handler->display->display_options['fields']['uid']['id'] = 'uid';
+  $handler->display->display_options['fields']['uid']['table'] = 'node';
+  $handler->display->display_options['fields']['uid']['field'] = 'uid';
+  $handler->display->display_options['fields']['uid']['group_type'] = 'count';
+  $handler->display->display_options['fields']['uid']['label'] = '';
+  $handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
+  /* Contextual filter: Content: Author uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'node';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+
+  /* Display: My Bookmarked Items Count */
+  $handler = $view->new_display('panel_pane', 'My Bookmarked Items Count', 'panel_pane_1');
+  $handler->display->display_options['display_description'] = 'Count of the user\'s items that have been bookmarked by other users';
+  $handler->display->display_options['allow']['use_pager'] = 0;
+  $handler->display->display_options['allow']['items_per_page'] = 0;
+  $handler->display->display_options['allow']['offset'] = 0;
+  $handler->display->display_options['allow']['link_to_view'] = 0;
+  $handler->display->display_options['allow']['more_link'] = 0;
+  $handler->display->display_options['allow']['path_override'] = 0;
+  $handler->display->display_options['allow']['title_override'] = 'title_override';
+  $handler->display->display_options['allow']['exposed_form'] = 0;
+  $handler->display->display_options['allow']['fields_override'] = 0;
+  $export['my_bookmark_count'] = $view;
+
+  $view = new view();
+  $view->name = 'my_flag_count';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'My Flag Count';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '0';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Relationship: Flags: like_content */
+  $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['label'] = 'like flag';
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'like_content';
+  $handler->display->display_options['relationships']['flag_content_rel']['user_scope'] = 'any';
+  /* Field: COUNT(Content: Author uid) */
+  $handler->display->display_options['fields']['uid']['id'] = 'uid';
+  $handler->display->display_options['fields']['uid']['table'] = 'node';
+  $handler->display->display_options['fields']['uid']['field'] = 'uid';
+  $handler->display->display_options['fields']['uid']['group_type'] = 'count';
+  $handler->display->display_options['fields']['uid']['label'] = '';
+  $handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['uid']['separator'] = '';
+  /* Contextual filter: Content: Author uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'node';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+
+  /* Display: Total of user's nodes with Like flag */
+  $handler = $view->new_display('panel_pane', 'Total of user\'s nodes with Like flag', 'panel_pane_1');
+  $handler->display->display_options['pane_category']['name'] = 'Flag Counts';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['allow']['use_pager'] = 0;
+  $handler->display->display_options['allow']['items_per_page'] = 0;
+  $handler->display->display_options['allow']['offset'] = 0;
+  $handler->display->display_options['allow']['link_to_view'] = 0;
+  $handler->display->display_options['allow']['more_link'] = 0;
+  $handler->display->display_options['allow']['path_override'] = 0;
+  $handler->display->display_options['allow']['title_override'] = 'title_override';
+  $handler->display->display_options['allow']['exposed_form'] = 0;
+  $handler->display->display_options['allow']['fields_override'] = 0;
+  $export['my_flag_count'] = $view;
 
   $view = new view();
   $view->name = 'my_lists';

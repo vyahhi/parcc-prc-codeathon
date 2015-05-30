@@ -22,6 +22,7 @@ features[field_base][] = field_browser_version
 features[field_base][] = field_comment
 features[field_base][] = field_contact_email
 features[field_base][] = field_content_type
+features[field_base][] = field_contribution_type
 features[field_base][] = field_course_objectives
 features[field_base][] = field_device_type
 features[field_base][] = field_devices_capacity
