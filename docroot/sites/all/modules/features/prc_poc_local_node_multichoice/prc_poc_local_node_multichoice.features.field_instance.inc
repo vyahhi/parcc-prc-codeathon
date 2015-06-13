@@ -195,12 +195,54 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-multichoice-field_subclaim_unlimited'
+  $field_instances['node-multichoice-field_subclaim_unlimited'] = array(
+    'bundle' => 'multichoice',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_subclaim_unlimited',
+    'label' => 'Subclaim',
+    'required' => 0,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+        'label_help_description' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 7,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Grade Level');
   t('Make this a PARCC item');
   t('Question (Item Stem)');
   t('Standard');
+  t('Subclaim');
 
   return $field_instances;
 }

@@ -242,6 +242,93 @@ function prc_poc_local_search_api_default_search_api_index() {
     "read_only" : "0",
     "rdf_mapping" : []
   }');
+  $items['standards_flipbook'] = entity_import('search_api_index', '{
+    "name" : "Standards Flipbook",
+    "machine_name" : "standards_flipbook",
+    "description" : "Index used for the Standards Flipbook.",
+    "server" : "database_server",
+    "item_type" : "node",
+    "options" : {
+      "index_directly" : 1,
+      "cron_limit" : "50",
+      "fields" : {
+        "field_grade_level_unlimited" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_standard" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_subclaim_unlimited" : { "type" : "integer", "entity_type" : "taxonomy_term" },
+        "field_subject" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_tags" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "search_api_language" : { "type" : "string" }
+      },
+      "data_alter_callbacks" : {
+        "search_api_alter_bundle_filter" : {
+          "status" : 0,
+          "weight" : "-10",
+          "settings" : { "default" : "1", "bundles" : [] }
+        },
+        "search_api_alter_node_status" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_attachments_alter_settings" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : { "excluded_extensions" : "aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv" }
+        },
+        "search_api_alter_node_access" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } },
+        "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_hierarchy" : {
+          "status" : 1,
+          "weight" : "0",
+          "settings" : { "fields" : {
+              "field_subject:parent" : "field_subject:parent",
+              "field_standard:parent" : "field_standard:parent"
+            }
+          }
+        }
+      },
+      "processors" : {
+        "search_api_case_ignore" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } },
+        "search_api_html_filter" : {
+          "status" : 0,
+          "weight" : "10",
+          "settings" : {
+            "fields" : [],
+            "title" : 0,
+            "alt" : 1,
+            "tags" : "h1 = 5\\r\\nh2 = 3\\r\\nh3 = 2\\r\\nstrong = 2\\r\\nb = 2\\r\\nem = 1.5\\r\\nu = 1.5"
+          }
+        },
+        "search_api_tokenizer" : {
+          "status" : 0,
+          "weight" : "20",
+          "settings" : { "fields" : [], "spaces" : "[^[:alnum:]]", "ignorable" : "[\\u0027]" }
+        },
+        "search_api_stopwords" : {
+          "status" : 0,
+          "weight" : "30",
+          "settings" : {
+            "fields" : [],
+            "file" : "",
+            "stopwords" : "but\\r\\ndid\\r\\nthe this that those\\r\\netc"
+          }
+        },
+        "search_api_highlighting" : {
+          "status" : 0,
+          "weight" : "35",
+          "settings" : {
+            "prefix" : "\\u003Cstrong\\u003E",
+            "suffix" : "\\u003C\\/strong\\u003E",
+            "excerpt" : 1,
+            "excerpt_length" : "256",
+            "exclude_fields" : [],
+            "highlight" : "always"
+          }
+        }
+      }
+    },
+    "enabled" : "1",
+    "read_only" : "0",
+    "rdf_mapping" : []
+  }');
   return $items;
 }
 
@@ -457,6 +544,44 @@ function prc_poc_local_search_api_default_search_api_server() {
           "flag_like_content_count" : {
             "table" : "search_api_db_digital_library_only",
             "column" : "flag_like_content_count",
+            "type" : "integer",
+            "boost" : "1.0"
+          }
+        },
+        "standards_flipbook" : {
+          "field_subject" : {
+            "table" : "search_api_db_standards_flipbook_field_subject",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_standard" : {
+            "table" : "search_api_db_standards_flipbook_field_standard",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_tags" : {
+            "table" : "search_api_db_standards_flipbook_field_tags",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_grade_level_unlimited" : {
+            "table" : "search_api_db_standards_flipbook_field_grade_level_unlimited",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "search_api_language" : {
+            "table" : "search_api_db_standards_flipbook",
+            "column" : "search_api_language",
+            "type" : "string",
+            "boost" : "1.0"
+          },
+          "field_subclaim_unlimited" : {
+            "table" : "search_api_db_standards_flipbook",
+            "column" : "field_subclaim_unlimited",
             "type" : "integer",
             "boost" : "1.0"
           }

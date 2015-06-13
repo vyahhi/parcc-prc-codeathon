@@ -13,6 +13,7 @@ features[field_instance][] = node-multichoice-body
 features[field_instance][] = node-multichoice-field_grade_level
 features[field_instance][] = node-multichoice-field_parcc_item
 features[field_instance][] = node-multichoice-field_standard
+features[field_instance][] = node-multichoice-field_subclaim_unlimited
 features[node][] = multichoice
 features[variable][] = menu_options_multichoice
 features[variable][] = menu_parent_multichoice

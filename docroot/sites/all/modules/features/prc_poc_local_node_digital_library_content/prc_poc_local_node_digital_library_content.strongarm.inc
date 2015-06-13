@@ -59,10 +59,10 @@ function prc_poc_local_node_digital_library_content_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '10',
         ),
       ),
       'display' => array(

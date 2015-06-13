@@ -1479,6 +1479,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'delete terms in subclaim'.
+  $permissions['delete terms in subclaim'] = array(
+    'name' => 'delete terms in subclaim',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'delete terms in subject'.
   $permissions['delete terms in subject'] = array(
     'name' => 'delete terms in subject',
@@ -2474,6 +2481,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit terms in standard'.
   $permissions['edit terms in standard'] = array(
     'name' => 'edit terms in standard',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in subclaim'.
+  $permissions['edit terms in subclaim'] = array(
+    'name' => 'edit terms in subclaim',
     'roles' => array(),
     'module' => 'taxonomy',
   );

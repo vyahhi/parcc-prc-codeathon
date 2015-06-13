@@ -27,6 +27,13 @@ function prc_poc_local_search_api_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'facetapi:block_cache:search_api@standards_flipbook';
+  $strongarm->value = -1;
+  $export['facetapi:block_cache:search_api@standards_flipbook'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'search_api_attachments_extracting_servlet_path';
   $strongarm->value = 'update/extract';
   $export['search_api_attachments_extracting_servlet_path'] = $strongarm;
@@ -67,6 +74,13 @@ function prc_poc_local_search_api_strongarm() {
     'digital_library_only' => array(
       'search_api_views:digital_library_gallery:default' => 'search_api_views:digital_library_gallery:default',
       'search_api_views:digital_library_gallery:panel_pane_1' => 'search_api_views:digital_library_gallery:panel_pane_1',
+      'search_api_views:lesson_plan_gallery:panel_pane_1' => 'search_api_views:lesson_plan_gallery:panel_pane_1',
+    ),
+    'standards_flipbook' => array(
+      'search_api_views:standards_flipbook_results:default' => 'search_api_views:standards_flipbook_results:default',
+      'search_api_views:standards_flipbook_results:panel_pane_1' => 'search_api_views:standards_flipbook_results:panel_pane_1',
+      'search_api_views:standards_flipbook_standard_detail:default' => 'search_api_views:standards_flipbook_standard_detail:default',
+      'search_api_views:standards_flipbook_standard_detail:panel_pane_1' => 'search_api_views:standards_flipbook_standard_detail:panel_pane_1',
     ),
   );
   $export['search_api_facets_search_ids'] = $strongarm;
