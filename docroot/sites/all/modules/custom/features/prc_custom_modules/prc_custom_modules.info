@@ -55,6 +55,7 @@ dependencies[] = short_answer
 dependencies[] = shs
 dependencies[] = strongarm
 dependencies[] = user_edit_protection
+dependencies[] = views_accordion
 features[ctools][] = ds:ds:1
 features[ctools][] = strongarm:strongarm:1
 features[ds_field_settings][] = node|assessment|teaser
