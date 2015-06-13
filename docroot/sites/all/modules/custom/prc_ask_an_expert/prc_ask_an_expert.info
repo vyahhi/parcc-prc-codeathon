@@ -1,0 +1,4 @@
+name = PRC Ask An Expert
+description = Customization in support of Ask an Expert and FAQ content
+package = PRC
+core = 7.x

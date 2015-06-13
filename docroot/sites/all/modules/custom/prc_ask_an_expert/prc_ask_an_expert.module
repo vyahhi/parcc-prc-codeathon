@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Token to include content author and byline
+ */
+
+/**
+ * Implements hook_form_FORM_alter().
+ */
+function prc_ask_an_expert_form_ask_expert_node_form_alter(&$form, &$form_state) {
+  if (!_prc_question_preview_user_has_role(array("Content Administrator (Curator)"))) {
+    $form['field_answer']['#access'] = FALSE;
+    $form['field_show_on_faq']['#access'] = FALSE;
+  }
+}
