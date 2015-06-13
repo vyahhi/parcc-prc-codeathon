@@ -77,3 +77,4 @@ function prc_search_form_search_form_validate(&$form, &$form_state) {
     drupal_goto($new_search_url);
   }
 }
+
