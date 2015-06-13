@@ -100,6 +100,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Speaking and Listening Page Menu',
     'description' => 'Menu on the Speaking and Listening page',
   );
+  // Exported menu: menu-submit-a-question.
+  $menus['menu-submit-a-question'] = array(
+    'menu_name' => 'menu-submit-a-question',
+    'title' => 'Submit a Question',
+    'description' => 'Propose a question for inclusion in the FAQ.',
+  );
   // Exported menu: menu-trt-district-add.
   $menus['menu-trt-district-add'] = array(
     'menu_name' => 'menu-trt-district-add',
@@ -197,7 +203,9 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Navigation');
   t('Navigation menu for Professional Development view');
   t('Professional Development Left Nav');
+  t('Propose a question for inclusion in the FAQ.');
   t('Speaking and Listening Page Menu');
+  t('Submit a Question');
   t('TRT District Add');
   t('TRT District Export');
   t('TRT Manage Schools');

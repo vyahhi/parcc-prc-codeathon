@@ -852,7 +852,9 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'create ask_expert content'.
   $permissions['create ask_expert content'] = array(
     'name' => 'create ask_expert content',
-    'roles' => array(),
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'node',
   );
 
@@ -1065,7 +1067,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any ask_expert content'.
   $permissions['delete any ask_expert content'] = array(
     'name' => 'delete any ask_expert content',
-    'roles' => array(),
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+    ),
     'module' => 'node',
   );
 
@@ -1238,7 +1243,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete own ask_expert content'.
   $permissions['delete own ask_expert content'] = array(
     'name' => 'delete own ask_expert content',
-    'roles' => array(),
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+    ),
     'module' => 'node',
   );
 
@@ -2064,7 +2072,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit any ask_expert content'.
   $permissions['edit any ask_expert content'] = array(
     'name' => 'edit any ask_expert content',
-    'roles' => array(),
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+    ),
     'module' => 'node',
   );
 
@@ -2238,7 +2249,10 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit own ask_expert content'.
   $permissions['edit own ask_expert content'] = array(
     'name' => 'edit own ask_expert content',
-    'roles' => array(),
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+    ),
     'module' => 'node',
   );
 

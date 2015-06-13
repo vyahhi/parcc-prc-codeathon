@@ -18,6 +18,7 @@ features[menu_custom][] = menu-invite-users
 features[menu_custom][] = menu-item-bank-add-questions
 features[menu_custom][] = menu-professional-development-le
 features[menu_custom][] = menu-speaking-and-listening-page
+features[menu_custom][] = menu-submit-a-question
 features[menu_custom][] = menu-trt-district-add
 features[menu_custom][] = menu-trt-district-export
 features[menu_custom][] = menu-trt-manage-schools
