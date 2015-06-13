@@ -4238,3 +4238,29 @@ table tfoot tr td {
 .filter-help a {
   padding: 0 20px 0 0;
 }
+
+@media only screen {
+  .view-faq {
+    margin-bottom: 1em;
+  }
+  .view-faq .views-accordion-faq-page-header {
+    margin-top: 1em;
+  }
+  .view-faq .views-row {
+    margin-bottom: 1.5em;
+  }
+  .view-faq .views-row h5 {
+    position: relative;
+    top: 2px;
+  }
+  .view-faq .views-row p:last-child {
+    margin-bottom: .5em;
+  }
+  .view-faq .ui-widget {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1em;
+  }
+  .view-faq .ui-state-default, .view-faq .ui-widget-content .ui-state-default, .view-faq .ui-widget-header .ui-state-default {
+    background: white;
+  }
+}
