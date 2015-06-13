@@ -199,6 +199,7 @@ dependencies[] = prc_poc_local_message_request_changes
 dependencies[] = prc_poc_local_message_request_readiness_check
 dependencies[] = prc_poc_local_message_rescind_review_request
 dependencies[] = prc_poc_local_message_unpublished_notice
+dependencies[] = prc_poc_local_node_ask_expert
 dependencies[] = prc_poc_local_node_course
 dependencies[] = prc_poc_local_node_digital_library_content
 dependencies[] = prc_poc_local_node_district
