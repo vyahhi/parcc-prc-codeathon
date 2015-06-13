@@ -66,7 +66,7 @@ function prc_poc_local_taxonomy_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -190,7 +190,7 @@ function prc_poc_local_taxonomy_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -226,7 +226,7 @@ function prc_poc_local_taxonomy_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'course_enrollment' => FALSE,
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(

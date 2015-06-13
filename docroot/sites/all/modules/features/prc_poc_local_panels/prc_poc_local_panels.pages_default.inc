@@ -1735,6 +1735,144 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
+  $handler->name = 'user_view__curator_dashboard';
+  $handler->task = 'user_view';
+  $handler->subtask = '';
+  $handler->handler = 'panel_context';
+  $handler->weight = 1;
+  $handler->conf = array(
+    'title' => 'Curator Dashboard',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => 'curator_dashboard',
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 3,
+            ),
+          ),
+          'context' => 'argument_entity_id:user_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'twocol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'center' => NULL,
+      'left' => NULL,
+      'right' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = 'dc16cc7d-8e6a-42d6-a836-fcb78a6b1e1f';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-5e1e3c81-98c2-4601-99dd-95d8fe0a3f24';
+    $pane->panel = 'left';
+    $pane->type = 'user_profile';
+    $pane->subtype = 'user_profile';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'view_mode' => 'full',
+      'context' => 'argument_entity_id:user_1',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '5e1e3c81-98c2-4601-99dd-95d8fe0a3f24';
+    $display->content['new-5e1e3c81-98c2-4601-99dd-95d8fe0a3f24'] = $pane;
+    $display->panels['left'][0] = 'new-5e1e3c81-98c2-4601-99dd-95d8fe0a3f24';
+    $pane = new stdClass();
+    $pane->pid = 'new-3d40bf9a-b872-4857-83d3-201ef552b8a9';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'item_count_draft-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '3d40bf9a-b872-4857-83d3-201ef552b8a9';
+    $display->content['new-3d40bf9a-b872-4857-83d3-201ef552b8a9'] = $pane;
+    $display->panels['right'][0] = 'new-3d40bf9a-b872-4857-83d3-201ef552b8a9';
+    $pane = new stdClass();
+    $pane->pid = 'new-301bb068-8b30-4be2-929d-44c237d64d2a';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'item_count_published-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '301bb068-8b30-4be2-929d-44c237d64d2a';
+    $display->content['new-301bb068-8b30-4be2-929d-44c237d64d2a'] = $pane;
+    $display->panels['right'][1] = 'new-301bb068-8b30-4be2-929d-44c237d64d2a';
+    $pane = new stdClass();
+    $pane->pid = 'new-91bb3ebf-bcfe-41bc-8136-b89096fe58bb';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'item_count_needs_review-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = '91bb3ebf-bcfe-41bc-8136-b89096fe58bb';
+    $display->content['new-91bb3ebf-bcfe-41bc-8136-b89096fe58bb'] = $pane;
+    $display->panels['right'][2] = 'new-91bb3ebf-bcfe-41bc-8136-b89096fe58bb';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $export['user_view__curator_dashboard'] = $handler;
+
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
   $handler->name = 'user_view__user_profile';
   $handler->task = 'user_view';
   $handler->subtask = '';
@@ -1751,6 +1889,28 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     'contexts' => array(),
     'relationships' => array(),
     'name' => 'user_profile',
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 6,
+              1 => 8,
+              2 => 4,
+              3 => 7,
+              4 => 9,
+              5 => 10,
+              6 => 5,
+              7 => 11,
+            ),
+          ),
+          'context' => 'argument_entity_id:user_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
   );
   $display = new panels_display();
   $display->layout = 'twocol';
@@ -1792,6 +1952,25 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->uuid = '7bd1f780-586d-40d9-a029-d9d5906e7b2f';
     $display->content['new-7bd1f780-586d-40d9-a029-d9d5906e7b2f'] = $pane;
     $display->panels['left'][0] = 'new-7bd1f780-586d-40d9-a029-d9d5906e7b2f';
+    $pane = new stdClass();
+    $pane->pid = 'new-fedd9cf8-1d5e-42df-8679-a2b1e1b067d0';
+    $pane->panel = 'left';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'review_status-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'fedd9cf8-1d5e-42df-8679-a2b1e1b067d0';
+    $display->content['new-fedd9cf8-1d5e-42df-8679-a2b1e1b067d0'] = $pane;
+    $display->panels['left'][1] = 'new-fedd9cf8-1d5e-42df-8679-a2b1e1b067d0';
     $pane = new stdClass();
     $pane->pid = 'new-79aca2aa-0408-4837-9e00-4c918ac9664e';
     $pane->panel = 'right';
