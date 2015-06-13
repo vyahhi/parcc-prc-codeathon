@@ -9,6 +9,7 @@ dependencies[] = taxonomy
 features[field_instance][] = taxonomy_term-member_state-field_state_code
 features[field_instance][] = taxonomy_term-user_states-field_state_abbreviation
 features[taxonomy][] = ccss_grade
+features[taxonomy][] = faq_topics
 features[taxonomy][] = genre
 features[taxonomy][] = grade_level
 features[taxonomy][] = hierarchy

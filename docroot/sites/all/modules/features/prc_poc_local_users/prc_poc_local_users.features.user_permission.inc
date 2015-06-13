@@ -849,6 +849,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'invite',
   );
 
+  // Exported permission: 'create ask_expert content'.
+  $permissions['create ask_expert content'] = array(
+    'name' => 'create ask_expert content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create course content'.
   $permissions['create course content'] = array(
     'name' => 'create course content',
@@ -1055,6 +1062,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'path',
   );
 
+  // Exported permission: 'delete any ask_expert content'.
+  $permissions['delete any ask_expert content'] = array(
+    'name' => 'delete any ask_expert content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any course content'.
   $permissions['delete any course content'] = array(
     'name' => 'delete any course content',
@@ -1217,6 +1231,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete any state content'.
   $permissions['delete any state content'] = array(
     'name' => 'delete any state content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own ask_expert content'.
+  $permissions['delete own ask_expert content'] = array(
+    'name' => 'delete own ask_expert content',
     'roles' => array(),
     'module' => 'node',
   );
@@ -1412,6 +1433,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete terms in ccss_grade'.
   $permissions['delete terms in ccss_grade'] = array(
     'name' => 'delete terms in ccss_grade',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'delete terms in faq_topics'.
+  $permissions['delete terms in faq_topics'] = array(
+    'name' => 'delete terms in faq_topics',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -2033,6 +2061,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'edit any ask_expert content'.
+  $permissions['edit any ask_expert content'] = array(
+    'name' => 'edit any ask_expert content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any course content'.
   $permissions['edit any course content'] = array(
     'name' => 'edit any course content',
@@ -2196,6 +2231,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit any state content'.
   $permissions['edit any state content'] = array(
     'name' => 'edit any state content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own ask_expert content'.
+  $permissions['edit own ask_expert content'] = array(
+    'name' => 'edit own ask_expert content',
     'roles' => array(),
     'module' => 'node',
   );
@@ -2411,6 +2453,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit terms in ccss_grade'.
   $permissions['edit terms in ccss_grade'] = array(
     'name' => 'edit terms in ccss_grade',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in faq_topics'.
+  $permissions['edit terms in faq_topics'] = array(
+    'name' => 'edit terms in faq_topics',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -2714,6 +2763,13 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
     ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search ask_expert content'.
+  $permissions['search ask_expert content'] = array(
+    'name' => 'search ask_expert content',
+    'roles' => array(),
     'module' => 'search_config',
   );
 
