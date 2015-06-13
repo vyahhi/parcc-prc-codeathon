@@ -4240,27 +4240,72 @@ table tfoot tr td {
 }
 
 @media only screen {
-  .view-faq {
+  .page-faq .pane-menu-menu-submit-a-question .pane-title {
+    display: inline;
+    float: left;
+    position: relative;
+    top: 13px;
+    color: #464646;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+  }
+  .page-faq .pane-menu-menu-submit-a-question li {
+    list-style: none;
+  }
+  .page-faq .pane-menu-menu-submit-a-question li a {
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    line-height: normal;
+    margin: 0 0 1.25em;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    padding-top: 0.75em;
+    padding-right: 1.5em;
+    padding-bottom: 0.8125em;
+    padding-left: 1.5em;
+    font-size: 1em;
+    background-color: #70547D;
+    border-color: #55405e;
+    color: #fff;
+    -webkit-border-radius: 1000px;
+    border-radius: 1000px;
+    background-color: white;
+    color: #70547D;
+    margin-left: 1em;
+    margin-bottom: 0;
+  }
+  .page-faq .pane-menu-menu-submit-a-question li a:hover, .page-faq .pane-menu-menu-submit-a-question li a:focus {
+    background-color: #55405e;
+  }
+  .page-faq .pane-menu-menu-submit-a-question li a:hover, .page-faq .pane-menu-menu-submit-a-question li a:focus {
+    color: #fff;
+  }
+  .page-faq .view-faq {
     margin-bottom: 1em;
   }
-  .view-faq .views-accordion-faq-page-header {
+  .page-faq .view-faq .views-accordion-faq-page-header {
     margin-top: 1em;
   }
-  .view-faq .views-row {
+  .page-faq .view-faq .views-row {
     margin-bottom: 1.5em;
   }
-  .view-faq .views-row h5 {
+  .page-faq .view-faq .views-row h5 {
     position: relative;
     top: 2px;
   }
-  .view-faq .views-row p:last-child {
+  .page-faq .view-faq .views-row p:last-child {
     margin-bottom: .5em;
   }
-  .view-faq .ui-widget {
+  .page-faq .view-faq .ui-widget {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1em;
   }
-  .view-faq .ui-state-default, .view-faq .ui-widget-content .ui-state-default, .view-faq .ui-widget-header .ui-state-default {
+  .page-faq .view-faq .ui-state-default, .page-faq .view-faq .ui-widget-content .ui-state-default, .page-faq .view-faq .ui-widget-header .ui-state-default {
     background: white;
   }
 }
