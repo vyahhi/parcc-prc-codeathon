@@ -262,13 +262,6 @@ function prc_custom_modules_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'date_format_prc_custom_modules_date_only';
-  $strongarm->value = 'F d, Y';
-  $export['date_format_prc_custom_modules_date_only'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'file_private_path';
   $strongarm->value = '../private_files';
   $export['file_private_path'] = $strongarm;
@@ -286,34 +279,6 @@ function prc_custom_modules_strongarm() {
   $strongarm->name = 'file_temporary_path';
   $strongarm->value = '/tmp';
   $export['file_temporary_path'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'jquery_update_compression_type';
-  $strongarm->value = 'min';
-  $export['jquery_update_compression_type'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'jquery_update_jquery_admin_version';
-  $strongarm->value = '';
-  $export['jquery_update_jquery_admin_version'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'jquery_update_jquery_cdn';
-  $strongarm->value = 'none';
-  $export['jquery_update_jquery_cdn'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'jquery_update_jquery_version';
-  $strongarm->value = '1.7';
-  $export['jquery_update_jquery_version'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -523,7 +488,6 @@ You can access the result here !url
     'rss' => 0,
     'search_index' => 0,
     'search_result' => 0,
-    'diff_standard' => 0,
     'question' => 0,
     'token' => 0,
     'detail' => 0,
@@ -569,12 +533,15 @@ You can access the result here !url
     'course' => 0,
     'district' => 0,
     'favorites_list' => 0,
+    'formative_instructional_task' => 0,
+    'homepage_band' => 0,
     'multichoice' => 0,
     'pd_module' => 0,
     'page' => 0,
     'panel' => 0,
     'school' => 0,
     'short_answer' => 0,
+    'speaking_and_listening_resource' => 0,
     'state' => 0,
   );
   $export['sharethis_node_types'] = $strongarm;
@@ -616,11 +583,10 @@ You can access the result here !url
   $strongarm->name = 'sharethis_pd_course_options';
   $strongarm->value = array(
     'full' => 'full',
-    'teaser' => 'teaser',
+    'teaser' => 0,
     'rss' => 0,
     'search_index' => 0,
     'search_result' => 0,
-    'diff_standard' => 0,
     'question' => 0,
     'token' => 0,
     'detail' => 0,

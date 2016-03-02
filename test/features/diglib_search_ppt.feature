@@ -1,4 +1,4 @@
-@api @d7 @diglib @search
+@api @d7 @diglib @search @prc-650 @tika
 Feature: PRC-650 Deep Search: PPT and PPTX Documents
   As an educator,
   I want to search for a keyword through PPT and PPTX documents,
@@ -31,7 +31,6 @@ Feature: PRC-650 Deep Search: PPT and PPTX Documents
     When I fill in "sodium" for "Search" in the "header" region
     And I press "Search" in the "header" region
     Then I should see the text "Search-text-o-rama"
-    And I should see the link "therapeutics.ppt"
     When I fill in "Not in the file" for "Search" in the "header" region
     And I press "Search" in the "header" region
     Then I should not see the text "Search-text-o-rama"

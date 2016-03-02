@@ -21,7 +21,7 @@ function prc_poc_local_node_pd_course_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Course Length',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
       0 => 'field_length_quantity',
       1 => 'field_length_unit',

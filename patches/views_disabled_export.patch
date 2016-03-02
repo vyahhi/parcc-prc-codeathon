@@ -1,0 +1,18 @@
+diff --git a/docroot/sites/all/modules/contrib/views/includes/view.inc b/docroot/sites/all/modules/contrib/views/includes/view.inc
+index d082a0b..cb742ce 100644
+--- a/docroot/sites/all/modules/contrib/views/includes/view.inc
++++ b/docroot/sites/all/modules/contrib/views/includes/view.inc
+@@ -1899,7 +1899,12 @@ class view extends views_db_object {
+     $output .= $this->export_row('view', $indent);
+     // Set the API version
+     $output .= $indent . '$view->api_version = \'' . views_api_version() . "';\n";
+-    $output .= $indent . '$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */' . "\n";
++
++    if ($this->disabled) {
++      $output .= $indent . '$view->disabled = TRUE; /* Edit this to false to make a default view enabled initially */' . "\n";
++    } else {
++      $output .= $indent . '$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */' . "\n";
++    }
+ 
+     foreach ($this->display as $id => $display) {
+       $output .= "\n" . $indent . "/* Display: $display->display_title */\n";

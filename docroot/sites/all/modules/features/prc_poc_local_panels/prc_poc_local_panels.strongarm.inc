@@ -25,6 +25,8 @@ function prc_poc_local_panels_strongarm() {
   $strongarm->name = 'default_page_manager_pages';
   $strongarm->value = array(
     'trt_manage_schools_upload' => TRUE,
+    'parcc_readiness' => FALSE,
+    'trt_district_manage_schools' => FALSE,
   );
   $export['default_page_manager_pages'] = $strongarm;
 

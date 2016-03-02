@@ -1,37 +1,34 @@
 // Global Foundation Settings
 @import "settings";
-
 // Comment out this import if you don't want to use normalize
 @import "normalize";
-
 // Comment out this import if you are customizing you imports below
 //@import "foundation";
-
 // Import specific parts of Foundation by commenting the import "foundation"
 // and uncommenting what you want below. You must uncomment the following if customizing
-
-@import "foundation/components/global"; // *always required
+@import "foundation/components/global";
+// *always required
 //@import "foundation/components/grid";
-
 //
 // Use this grid if you want to start using the new Foundation 5 grid early.
 // It will change breakpoints to min-width: 640px and 1024px.
 //
 @import "foundation/components/grid-5";
 //
-
 @import "foundation/components/visibility";
 // @import "foundation/components/block-grid";
 @import "foundation/components/type";
 @import "foundation/components/buttons";
-@import "foundation/components/forms"; // *requires components/buttons
+// @import "foundation/components/forms"; // *requires components/buttons
 // @import "foundation/components/custom-forms"; // *requires components/buttons, components/forms
 // @import "foundation/components/button-groups"; // *requires components/buttons
-@import "foundation/components/dropdown-buttons"; // *requires components/buttons
+@import "foundation/components/dropdown-buttons";
+// *requires components/buttons
 // @import "foundation/components/split-buttons"; // *requires components/buttons
 // @import "foundation/components/flex-video";
 // @import "foundation/components/section";
-@import "foundation/components/top-bar";  // *requires components/grid
+@import "foundation/components/top-bar";
+// *requires components/grid
 // @import "foundation/components/orbit";
 // @import "foundation/components/reveal";
 // @import "foundation/components/joyride";
@@ -49,11 +46,10 @@
 // @import "foundation/components/sub-nav";
 // @import "foundation/components/switch";
 // @import "foundation/components/magellan";
-@import "foundation/components/tables";
+// @import "foundation/components/tables";
 // @import "foundation/components/thumbs";
 // @import "foundation/components/tooltips";
 @import "foundation/components/dropdown";
-
 // PRC Custom Variables
 @import "prc-variables";
 
@@ -61,12 +57,55 @@
   body {
     background-color: $parcc-purple;
   }
+
+  ul li, ol li {
+    margin-left: 1.5em;
+  }
+  #filter-panel ul li, ul.dropdown li, ul.tabs li, ul#library-sort li,  nav.top-bar ul#secondary-menu li{
+    margin-left: 0em;
+  }
+  .pane-content, .content {
+    ul.menu li.leaf {
+      margin-left: 1.3em;
+    }
+  }
+
   #page {
     background-color: white;
   }
+  .gallery-main,
+  .page-node-edit main,
+  .page-node-view main,
+  .page-item-bank main,
+  .page-admin-content main,
+  .page-assessments-practice-assessments main {
+    background-color: $background-gray;
+    border-top: 1px solid $gray-stroke;
+  }
+
+  .page-assessments-practice-assessments #page-title,
+  .page-item-bank #page-title,
+  .page-admin-content #page-title,
+  .page-node-edit #page-title,
+  .page-node-add #page-title,
+  .node-type-quiz #page-title {
+    text-align: center;
+  }
+  .paragraph {
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 1.25em;
+    text-rendering: optimizeLegibility;
+  }
   // Forces text fields to match paragraph styles by default
   p, .field-type-text {
-    @include paragraph;
+    @include paragraph; /* Todo - use @extend rather than including a mixin */
+  }
+  .bold {
+    font-family: $bold-font-family;
+    font-weight: 700;
   }
   a:hover,
   a:active {
@@ -77,6 +116,18 @@
   }
   .center {
     text-align: center;
+  }
+  .parcc-button {
+    @include button($button-med, $primary-color, 1000px);
+    background-color: white;
+    color: $parcc_purple;
+  }
+  .parcc-button:hover {
+    background-color: $parcc-purple-light;
+    text-decoration: none;
+  }
+  .parcc-button:focus, .parcc-button:active {
+    background-color: $parcc-purple;
   }
   .breadcrumb {
     padding-top: em-calc(10);
@@ -118,8 +169,55 @@
         height: 32px;
       }
     }
-    .top-bar-section ul li > a {
-      padding: 12px 0px 12px 16px;
+    .top-bar-section {
+      ul li > a {
+        padding: 12px 0px 12px 16px;
+      }
+      ul li > a.active {
+        color: white;
+        background: none repeat scroll 0% 0% darken($topbar-dropdown-bg, 3%);
+      }
+    }
+  }
+  .ribbon-menu {
+    text-align: center;
+    ul.menu {
+      display: inline-block;
+      margin: 0;
+      li.leaf {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        list-style-image: none;
+        display: block;
+        float: left;
+        background-color: $lightest-gray;
+        border-top: 1px solid $light-gray;
+        border-bottom: 1px solid $light-gray;
+        border-left: 1px solid $light-gray;
+        font-size: 0.8175em;
+        color: $text-gray;
+        &.first {
+          border-top-left-radius: $button-border-radius;
+          border-bottom-left-radius: $button-border-radius;
+          a {
+            padding-left: 2em;
+          }
+        }
+        &.last {
+          border-right: 1px solid $light-gray;
+          border-top-right-radius: $button-border-radius;
+          border-bottom-right-radius: $button-border-radius;
+          a {
+            padding-right: 2em;
+          }
+        }
+        a {
+          display: block;
+          padding: 0.8em 1em;
+          color: $text-gray;
+        }
+      }
     }
   }
   #sub-header {
@@ -137,12 +235,15 @@
     padding: 10px 20px 30px 20px;
     background-color: white;
     text-transform: uppercase;
+    border: 1px solid $gray-stroke;
   }
   ul.pagination li.first {
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
   }
   ul.pagination li.pager-current {
+    position: relative;
+    top: -1px;
     background: #70547D;
     color: #fff;
     font-weight: bold;
@@ -150,6 +251,149 @@
   ul.pagination li.last {
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
+  }
+  table {
+    margin: 1em 0;
+    width: 100%;
+    font-size: 0.8125em;
+    thead {
+      tr {
+        background: $icon-gray;
+        border-left: solid 1px $icon-gray;
+        border-right: solid 1px $icon-gray;
+      }
+      th {
+        @include paragraph;
+        border: none;
+        text-align: center;
+        font-weight: bold;
+        color: $white;
+        a {
+          color: $white;
+          &.active img {
+            margin-left: .75em;
+            margin-right: .75em;
+          }
+        }
+      }
+    }
+    tbody {
+      border: solid 1px $light-gray;
+      tr {
+        background: none;
+        border-bottom: solid 1px $light-gray;
+        padding: 0;
+        &.odd {
+          background: $white;
+        }
+        &.even {
+          background: $background-gray;
+        }
+        &.last {
+          border-bottom: none;
+        }
+        &.active {
+          background: $parcc-purple;
+          color: $white;
+          a {
+            color: $white;
+          }
+        }
+      }
+    }
+    th, td {
+      @include paragraph;
+      padding: 1em;
+    }
+    td.active {
+      background: #DDD;
+      border: solid 1px $light-gray;
+    }
+  }
+  .prc-tabs {
+    overflow: hidden;
+  }
+  .tabs.primary {
+    border-bottom: none;
+    display: inline-block;
+    float: right;
+
+    li {
+      float: left;
+      padding-left: $default-padding;
+      padding-bottom: $default-padding;
+    }
+    a {
+      @include parcc_button;
+      -webkit-appearance: none;
+      min-width: 10em;
+      border: solid 1px $parcc-purple;
+      border-radius: $button-border-radius;
+      background: $white;
+      margin: 0;
+      padding: 0.4em 0.8em;
+      text-align: center;
+      color: $text-gray;
+      @include bold;
+      &:hover {
+        color: $white;
+        background: $parcc-purple-light;
+      }
+      &.active {
+        color: $white;
+        background: $parcc-purple;
+      }
+    }
+  }
+  //@todo: we may need to get more specific
+  .views-table td {
+    text-align: center;
+  }
+
+  button,
+  input[type="submit"] {
+    -webkit-appearance: none;
+    min-width: 10em;
+    border: solid 1px $parcc-purple;
+    border-radius: $button-border-radius;
+    background: $white;
+    margin: 0;
+    padding: 0.4em 0.8em;
+    text-align: center;
+    color: $text-gray;
+    @include bold;
+    &:hover {
+      color: $white;
+      background: $parcc-purple-light;
+    }
+    &:active {
+      color: $white;
+      background: $parcc-purple;
+    }
+  }
+  label {
+    font-weight: 700;
+  }
+  // Override social icons
+  li.pinit a {
+    @include social_icon('pinterest-icon');
+  }
+  span.st-email-counter {
+    @include social_icon('email-icon');
+    position: relative;
+    top: -11px;
+  }
+  span.st-facebook-counter {
+    @include social_icon('facebook-icon');
+    position: relative;
+    top: -11px;
+  }
+  span.st_edmodo_button .stButton_gradient {
+    @include social_icon('edmodo-icon');
+    border: 0 !important;
+    .edmodo {
+      display: none !important;
+    }
   }
   footer {
     background: url('../images/footer-image.jpg') no-repeat center center;
@@ -174,8 +418,17 @@
 }
 
 @media #{$small} {
+  .top-bar-section {
+    ul li > a.active {
+      color: white;
+      background: none repeat scroll 0% 0% darken($topbar-dropdown-bg, 3%);
+    }
+    .dropdown li a {
+      padding: 12px 0px 12px 16px;
+    }
+  }
   footer {
-    #footer-copyright{
+    #footer-copyright {
       text-align: left;
     }
     #footer-contact {
@@ -201,17 +454,44 @@
     #secondary-menu-section {
       display: inline-block;
     }
+    .left {
+      li.expanded,
+      li.collapsed,
+      li.leaf {
+        list-style-image: none;
+        list-style-type: none;
+        padding: 0;
+      }
+    }
     .top-bar-section {
       ul {
         background-color: $topbar-bg-color;
       }
-      li a:not(.button) {
+      .left li a {
         padding: 0 15px;
       }
+      .dropdown li.dropdown-item a:not(.button) {
+        padding: 15px;
+        margin: 0px;
+        text-align: left;
+      }
+      ul li:hover > a {
+        background-color: inherit;
+      }
       li a:not(.button):hover,
-      ul li.active > a {
+      ul li > a.active {
         background: none repeat scroll 0% 0% darken($topbar-bg-color, 3%);
       }
+      li.has-dropdown {
+        a {
+          padding-left: 15px;
+          padding-right: 38.33333px !important;
+        }
+        a:after {
+          margin-right: 15px;
+        }
+      }
+
     }
     #header-icons {
       float: right;
@@ -224,7 +504,7 @@
       #search-icon {
         width: 42px;
         margin-right: 5px;
-        background: url('../images/search-icon.png') no-repeat 10px;
+        background: sprite($main-sprites, search-icon, 10, 7) no-repeat;
       }
       #search-icon:before,
       #profile-icon:before {
@@ -232,20 +512,18 @@
       }
       #search-icon:hover,
       #search-icon:focus {
-        background: url('../images/search-icon-active.png') no-repeat 10px;
+        background: sprite($main-sprites, search-icon-active, 10, 7) no-repeat;
       }
       #profile-icon {
         width: 71px;
         margin-left: 5px;
-        background:
-          url('../images/profile-icon.png') no-repeat 15px 7px,
-          url('../images/down-arrow.png') no-repeat 40px 12px;
+        background: sprite($main-sprites, profile-icon, 15, 7) no-repeat,
+        sprite($main-sprites, down-arrow, 40, 12) no-repeat;
       }
       #profile-icon:hover,
       #profile-icon:focus {
-        background:
-          url('../images/profile-icon-active.png') no-repeat 15px 7px,
-          url('../images/down-arrow-active.png') no-repeat 40px 12px;
+        background: sprite($main-sprites, profile-icon-active, 15, 7) no-repeat,
+        sprite($main-sprites, down-arrow-active, 40, 12) no-repeat;
       }
       #search-icon.button,
       #profile-icon.button {
@@ -284,6 +562,17 @@
     }
     #footer-social {
       text-align: right;
+      a {
+        display: inline-block;
+        text-align: left;
+        text-indent: -9999px;
+      }
+      .facebook {
+        @include social_icon('facebook-icon');
+      }
+      .twitter {
+        @include social_icon('twitter-icon');
+      }
     }
   }
 }
@@ -303,5 +592,72 @@
   }
 }
 
+/*******
+* Tab menus
+*/
+@media #{$screen} {
+  .tabs.primary {
+    border-bottom: none;
+    float: right;
+    padding-right: $default-padding;
+    padding-top: $default-padding;
+    a {
+      @include parcc_button;
+      -webkit-appearance: none;
+      min-width: 10em;
+      border: solid 1px $parcc-purple;
+      border-radius: $button-border-radius;
+      background: $white;
+      margin: 0;
+      padding: 0.4em 0.8em;
+      text-align: center;
+      color: $text-gray;
+      @include bold;
+      &:hover {
+        color: $white;
+        background: $parcc-purple-light;
+      }
+      &.active {
+        color: $white;
+        background: $parcc-purple;
+      }
+    }
+  }
+  .view-id-speaking_and_listening,
+  .view-id-formative_instructional_tasks {
+    padding-bottom: 3em;
+  }
+  .pane-menu-menu-formative-instructional-tas .pane-content ul li.leaf,
+  .pane-menu-menu-speaking-and-listening-page .pane-content ul li.leaf {
+    margin-left: 0;
+    list-style-type: none;
+    a {
+      @include parcc_button;
+    }
+  }
+}
+
+@media #{$medium} {
+  .tabs.primary {
+    padding-right: $desktop-padding;
+    padding-top: $desktop-padding;
+  }
+}
+
+
+@import "gallery_view";
+@import "assessment";
 @import "digital_library";
+@import "professional_learning";
 @import "forms";
+@import "node-edit";
+@import "homepage";
+@import "modal";
+@import "prc-admin";
+@import "search_taxonomy";
+@import "search_taxonomy";
+@import "filter_panel";
+@import "parcc_released_items";
+@import "instructional_tools";
+@import "trt";
+

@@ -3,14 +3,22 @@ Feature: PRC-954 Anonymous users cannot see System Check or Testing Capacity lin
 
   Scenario: Anon
     Given I am an anonymous user
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     Then I should see the heading "Technology Readiness"
-    And I should see the text "Overview / instructional copy goes here. Consider explaining importance of testing prior to assessment to increase chances of successful assessment."
-    And I should see the text "Important: If you are a school administrator, please run these checks from your school readiness page. Contact your District Administrator to have the link to that page emailed to you."
+    And I should see the text "In order to have a successful computer based assessment experience for you, your school, your district, and most importantly the students in your school\(s\), PARCC recommends that the appropriate school, district, and state staff and administrators register to use this Technology Readiness Tool \(TRT\). District and State TRT Administrators contact PARCC Inc. support at"
+    And I should see the link "prc-questions@parcconline.org"
+    And I should see the text "for assistance. This tool will help you gauge the overall readiness of the platform\(s\) and network for the number of students and number of testing sessions."
+    And I should see the text "PARCC recommends that the appropriate school, district, and state staff and administrators register to use this Technology Readiness Tool"
+    And I should see the text "NOTE: From this page, you can use this tool to perform \“ad hoc\” system and capacity checks. When running an \“ad hoc\” check the TRT does not record the results. To record your school’s results, please make sure you are logged into the PRC and have a school, district, or state TRT role authorized to record technology checks and view reports."
+    And I should see the text "For more information on the technology requirements used to evaluate platforms and networks please download the"
+    And I should see the link "PARCC minimum technology"
     And I should see the link "System Check"
-    And I should see the text "Description of test and importance of running it: The system check assesses whether a device or similar configuration of devices meets the PARCC minimum technology requirements."
+    And I should see the text "Run this check to determine if the platform you are using is ready to deliver PARCC assessments."
+    And I should see the text "NOTE: Run this check from your school page to record your results with the school, district, and state. If a school is assigned to you, the link will appear on this page and you can run the check from there. Some data will require research and hand entry."
     And I should see the link "Testing Capacity Check"
-    And I should see the text "Description of test and importance of running it: The testing capacity check assesses whether your school has sufficient bandwidth and a sufficient number of devices that meet PARCC minimum requirement in order to run a successful assessment."
+    And I should see the text "Run this check to determine your network’s capacity to deliver PARCC assessments"
+    And I should see the text "NOTE: Run this check from your school page to record your results with the school, district, and state. If a school is assigned to you, the link will appear on this page and you can run the check from there. Some data will require research hand entry."
+    And I should see the text "For more information on the TRT, please refer to the online tutorial found in the professional learning section of this site."
 
   Scenario Outline: Complete a Capacity Check
     Given I am an anonymous user

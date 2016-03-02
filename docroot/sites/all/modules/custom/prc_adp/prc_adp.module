@@ -1,0 +1,160 @@
+<?php
+
+require_once('vendor/autoload.php');
+
+define('TEST_LAUNCH_PATH', 'assessment');
+
+/**
+ * Implements hook_init()
+ */
+function prc_adp_init(){
+  // Account for environments that do not automatically handle this
+  // Skip if CLI
+  if(function_exists('apache_request_headers')) {
+    $headers = apache_request_headers();
+    if ($headers && !isset($_SERVER['HTTP_X_CSRF_TOKEN']) && isset($headers['X_CSRF_TOKEN'])) {
+      // Make the token available to the restws module
+      $_SERVER['HTTP_X_CSRF_TOKEN'] = $headers['X_CSRF_TOKEN'];
+    }
+  }
+}
+
+/**
+ * Implements hook_menu()
+ *
+ * @return array
+ */
+function prc_adp_menu(){
+  $items = array();
+
+  $items['practice-tests/%node'] = array(
+    'title' => t('Launch Practice Test'),
+    'page callback' => 'prc_adp_test_launch',
+    'page arguments' => array(1),
+    'access callback' => true,
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Launch an ADP test
+ *
+ * @param $node
+ * @return array|mixed|void
+ */
+function prc_adp_test_launch($node){
+  if(prc_adp_is_adp_test($node)){
+    $data = array(
+      'node' => $node,
+    );
+
+    return theme('test_launch_form', $data);
+
+  }else{
+    drupal_not_found();
+  }
+}
+
+/**
+ * Determine if the node has the properties relevant to this module
+ *
+ * @param $node
+ * @return bool
+ */
+function prc_adp_is_adp_test($node){
+  $w = entity_metadata_wrapper('node', $node);
+  return $node->type === 'parcc_released_item' &&
+  (!empty($w->field_practice_test->value() || !empty($w->field_test_key->value()))
+    && $node->status == 1);
+}
+
+/**
+ * Implements hook_restws_request_alter()
+ *
+ * Fix the request so that ADP doesn't need to supply a bundle
+ *
+ * @param array $request
+ */
+function prc_adp_restws_request_alter(array &$request){
+  if($request['format']->getName() === 'json' &&
+    $request['op'] === 'create' &&
+    $request['resource']->resource() === 'practice_test'){
+
+    $payload = drupal_json_decode($request['payload']);
+
+    if(!isset($payload['type']) && $payload['type'] !== 'practice_test'){
+      $payload['type'] = 'practice_test';
+      $request['payload'] = drupal_json_encode($payload);
+    }
+
+  }
+}
+
+/**
+ * Implements hook_theme
+ */
+function prc_adp_theme($existing, $type, $theme, $path){
+  return array(
+    'test_launch_form' => array(
+      'template' => 'prc_adp.test_launch',
+    ),
+    'test_launch_form_link' => array(
+      'template' => 'prc_adp.test_launch_link'
+    )
+  );
+}
+
+/**
+ * Preprocess function for the test launch template
+ *
+ * @param $data
+ */
+function template_preprocess_test_launch_form(&$data){
+  global $conf;
+  $url = $conf['prc_adp_url'];
+  $node = $data['node'];
+
+  $w = entity_metadata_wrapper('node', $node);
+
+  if(!empty($w->field_practice_test->value())){
+    $practice_test = $w->field_practice_test->value();
+    $test_key = $practice_test->test_key;
+  }else{
+    $test_key = $w->field_test_key->value();
+  }
+
+  $data += array(
+    'full_path' => $url . '/' . TEST_LAUNCH_PATH,
+    'test_key' => $test_key
+  );
+}
+
+function template_preprocess_test_launch_form_link(&$data){
+  template_preprocess_test_launch_form($data);
+}
+
+/**
+ * Implements hook_views_api()
+ * @return array
+ */
+function prc_adp_views_api(){
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'prc_adp').'/views',
+  );
+}
+
+/**
+ * Implements hook_preprocess_views_view()
+ *
+ * @param $vars
+ */
+function prc_adp_preprocess_views_view(&$vars){
+  $view = $vars['view'];
+
+  if($view->name == 'parcc_released_items'){
+    drupal_add_js(drupal_get_path('module', 'prc_adp').'/prc_adp_form_link.js');
+  }
+}

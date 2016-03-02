@@ -17,9 +17,11 @@ Feature: PRC-1208 PARCC Readiness
   Scenario: PARCC Readiness Page, no states
     Given I am logged in as a user with the "PRC Admin" role
     And I have no "State" nodes
-    And I visit "technology-readiness/parcc"
+    And I visit "assessments/technology-readiness/parcc"
     Then I should see the heading "PARCC Readiness"
-    And I should see the text "Overview / instructional copy goes here \(admin can navigate to state and export all test results data for state to csv or further navigate to view readiness check results by school\)."
+    And I should see the text "Click the links to access state reports."
+    And I should see the text "For more information on the technology requirements used to evaluate platforms and networks please download the"
+    And I should see the link "PARCC minimum technology requirements"
     And I should see the text "No states have been created"
 
   Scenario: Has states
@@ -30,10 +32,12 @@ Feature: PRC-1208 PARCC Readiness
     And "State" nodes:
       | title         | field_user_state | uid | field_contact_email |
       | New Hampshire | New Hampshire    | 1   | y@example.com       |
-    And I visit "technology-readiness/parcc"
+    And I visit "assessments/technology-readiness/parcc"
     Then I should see the heading "PARCC Readiness"
     And I should see the heading "States"
-    And I should see the text "Overview / instructional copy goes here \(admin can navigate to state and export all test results data for state to csv or further navigate to view readiness check results by school\)."
+    And I should see the text "Click the links to access state reports."
+    And I should see the text "For more information on the technology requirements used to evaluate platforms and networks please download the"
+    And I should see the link "PARCC minimum technology requirements"
     And I should not see the text "No states have been created"
     But I should see the link "New Hampshire"
     And I should see the link "Illinois - PARCC Member"
@@ -41,5 +45,5 @@ Feature: PRC-1208 PARCC Readiness
   Scenario: PRC-1382 PRC Admin should not display "No states have been created"
     Given I am logged in as a user with the "PRC Admin" role
     And I have no "State" nodes
-    And I am on "technology-readiness"
+    And I am on "assessments/technology-readiness"
     Then I should not see the text "No states have been created"

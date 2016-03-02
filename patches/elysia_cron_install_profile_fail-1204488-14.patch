@@ -1,0 +1,13 @@
+diff --git a/elysia_cron.module b/elysia_cron.module
+index 5393a3bba69c869f1c9d8342b1fa630c8011ab27..682f2c7050db02b225a445798d69d2bf0f3a51a4 100644
+--- a/elysia_cron.module
++++ b/elysia_cron.module
+@@ -138,7 +138,7 @@ function elysia_cron_init() {
+  */
+ function elysia_cron_cron() {
+   // First cron run is executed in standard drupal way. This is to enable the use of install profiles
+-  if (variable_get('cron_last', 0) == 0) {
++  if (variable_get('cron_last', 0) <= variable_get('install_time', 0)) {
+     return;
+   }
+   // If the path is 'admin/*' this is a manual cron run (probably by admin/logs/status)

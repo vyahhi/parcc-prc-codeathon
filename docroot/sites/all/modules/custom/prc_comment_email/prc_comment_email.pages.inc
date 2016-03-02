@@ -47,6 +47,9 @@ function modal_comment_email($type, $js = NULL, $node = NULL) {
     $output = array();
     $output[] = ctools_ajax_command_reload();
   }
+
+  $output[] = array('command' => 'prcResizeModal');
+
   print ajax_render($output);
   drupal_exit();
 }
@@ -80,6 +83,8 @@ function prc_comment_email_form($form, &$form_state) {
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Submit'),
+    '#prefix' => '<div class="prc-modal-submit-wrapper">',
+    '#suffix' => '</div>'
   );
 
   $form['#submit'] = array(
@@ -96,6 +101,7 @@ function prc_comment_email_form_submit(&$form, &$form_state) {
     $node = $form_state['node'];
     $nid = $node->nid;
     if ($comment) {
+      drupal_set_message(t('Comment has been submitted.'));
       _prc_comment_email_message_create($user, $comment, $node);
       $next_href = "node/$nid";
     }

@@ -95,5 +95,8 @@ Feature: PRC-864 Manage Schools - Upload School - No Schools Exist - School(s) A
     And I visit the last node created
     And I click "Manage Schools"
     When I click "Add School(s) - upload csv file"
-    # PRC-854 changed this text
-    And I should see the text "Overview / instructional copy. Consider explaining that for each school, there must be two columns: one for school name and one for school contact email address; the first row is treated as a header and its contents are ignored; and that file must be .csv."
+    # PRC-854 changed this text // #PRC-1851 Updates this text
+    And I should see the text "Use this upload tool to bulk enter school information."
+    And I should see the text "To upload multiple schools, use Excel or another spreadsheet program and create a two-column .csv file. There must be two columns: the first for the school name and the second for the school contact email address; the first row of the spreadsheet is treated as a header and its contents are ignored. Make sure to save the file as a .csv. Lastly, upload your schools using this interface."
+    And I should see the text "You also might be able to have your school’s student information system generate the .csv file for you and save even more time."
+    And I should see the text "Note: School names must be unique within a district, and once submitted, a school with data cannot be deleted. The data will be checked by the TRT before being accepted."

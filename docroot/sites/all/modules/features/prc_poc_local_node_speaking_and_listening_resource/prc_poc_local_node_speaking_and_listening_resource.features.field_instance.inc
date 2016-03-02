@@ -38,7 +38,7 @@ function prc_poc_local_node_speaking_and_listening_resource_field_default_field_
       'course_enrollment' => FALSE,
       'description_field' => 0,
       'file_directory' => '',
-      'file_extensions' => 'doc docx mp4 pdf xls xlsx',
+      'file_extensions' => 'brf doc docx mp4 pdf xls xlsx',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),

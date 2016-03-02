@@ -32,14 +32,14 @@ function prc_poc_local_message_request_readiness_check_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "Subject goes here. For example: [message:field-node:title]: Please run readiness checks.",
+          "value" : "PARCC Assessments Technology Readiness Tool",
           "format" : "filtered_html",
-          "safe_value" : "\\u003Cp\\u003ESubject goes here. For example: [message:field-node:title]: Please run readiness checks.\\u003C\\/p\\u003E\\n"
+          "safe_value" : "\\u003Cp\\u003EPARCC Assessments Technology Readiness Tool\\u003C\\/p\\u003E\\n"
         },
         {
-          "value" : "Message goes here explaining importance of running checks and how to run them, emphasizing that it is important that admins run the checks from the provided link or results won\\u0027t be saved or reported to District.\\r\\n[message:field-comment]\\r\\n[message:field-node:url]",
+          "value" : "Your PRC district admin has requested that you run system and\\/or testing capacity checks for your school. Please login to the PRC and run new or update your school testing capacity and\\/or system checks for this school year. \\r\\n\\r\\nThank you.\\r\\n[message:field-comment]\\r\\n[message:field-node:url]",
           "format" : "filtered_html",
-          "safe_value" : "\\u003Cp\\u003EMessage goes here explaining importance of running checks and how to run them, emphasizing that it is important that admins run the checks from the provided link or results won\\u0027t be saved or reported to District.\\u003Cbr \\/\\u003E\\n[message:field-comment]\\u003Cbr \\/\\u003E\\n[message:field-node:url]\\u003C\\/p\\u003E\\n"
+          "safe_value" : "\\u003Cp\\u003EYour PRC district admin has requested that you run system and\\/or testing capacity checks for your school. Please login to the PRC and run new or update your school testing capacity and\\/or system checks for this school year. \\u003C\\/p\\u003E\\n\\u003Cp\\u003EThank you.\\u003Cbr \\/\\u003E\\n[message:field-comment]\\u003Cbr \\/\\u003E\\n[message:field-node:url]\\u003C\\/p\\u003E\\n"
         }
       ]
     },

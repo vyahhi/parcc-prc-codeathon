@@ -21,11 +21,16 @@ function prc_mail_settings_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'invite_default_mail_body';
-  $strongarm->value = '[invite:inviter:name] has invited you to join [site:name] at [site:url] with a role of "[invite:role-name]."
+  $strongarm->value = 'Congratulations! Parcc Inc. invites you to register and then log into the Partnership Resource Center. In this website, you will find learning and assessment resources, professional learning opportunities and other tools to facilitate the implementation of quality assessments in your classroom, school district, or state.
+ 
+Your invitation is for the following: [invite:role-name]
 
 To become a member of [site:name], click the link below or paste it into the address bar of your browser.
 
-[invite:invite-accept-link]';
+[invite:invite-accept-link]
+
+Welcome to the Parcc community,
+The Parcc Inc. Staff';
   $export['invite_default_mail_body'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -104,21 +109,21 @@ To become a member of [site:name], click the link below or paste it into the add
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'smtp_from';
-  $strongarm->value = 'noreply@breaktech.org';
+  $strongarm->value = 'noreply@parcconline.org';
   $export['smtp_from'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'smtp_fromname';
-  $strongarm->value = 'PARCC PRC';
+  $strongarm->value = '';
   $export['smtp_fromname'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'smtp_host';
-  $strongarm->value = 'atlas.development.local';
+  $strongarm->value = 'email-smtp.us-east-1.amazonaws.com';
   $export['smtp_host'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -132,7 +137,7 @@ To become a member of [site:name], click the link below or paste it into the add
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'smtp_library';
-  $strongarm->value = 'sites/all/modules/smtp/smtp.module';
+  $strongarm->value = 'sites/all/modules/contrib/smtp/smtp.module';
   $export['smtp_library'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -146,28 +151,28 @@ To become a member of [site:name], click the link below or paste it into the add
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'smtp_password';
-  $strongarm->value = '';
+  $strongarm->value = 'AotjnoCDr0s+6vtU04sRJ3OTZZc6cTM7Zav06n4uI4wD';
   $export['smtp_password'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'smtp_port';
-  $strongarm->value = '25';
+  $strongarm->value = '587';
   $export['smtp_port'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'smtp_protocol';
-  $strongarm->value = 'standard';
+  $strongarm->value = 'tls';
   $export['smtp_protocol'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'smtp_username';
-  $strongarm->value = '';
+  $strongarm->value = 'AKIAJDLXQHDDOP55FZBQ';
   $export['smtp_username'] = $strongarm;
 
   return $export;

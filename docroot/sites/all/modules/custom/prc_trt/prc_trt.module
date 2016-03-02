@@ -17,7 +17,7 @@ function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form,
 
   $form['instructions_text'] = array(
     '#type' => 'item',
-    '#markup' => t('Instructions go here. For example: To determine if your school has the appropriate number of test-ready devices to run a successful assessment, enter information requested below.'),
+    '#markup' => '<p>' . t('To prepare school for a successful assessment implementation, a TRT School admin can run a testing capacity check to make sure the device or devices meets ') . '<a href="http://www.parcconline.org/files/72/Technology Guidelines for PARCC Assessments/389/TechnologyGuidelinesPARCCAssessments-v5_0-August2015.pdf" target="_blank">PARCC minimum technology requirements</a>' . t('. Click the link to access the latest requirements document. This check is for testing through 2015 and does not as of this time support testing for EOY 2016 testing.') . '</p><p>' . t('If you are a school administrator, please run this check from your school readiness page to record the results. Navigate back the TRT homepage and look for a link to your school or request that your District TRT admin resend you the link via email.') . '</p><p>' . t('NOTE Run system checks on all representative devices in your school network that may be used for testing first to determine the number and locations of ready devices. Once you have done this, then proceed with this capacity check.') . '</p><p>' . t('Please look at the data you are required to enter. If you do not know the values for entry, come back to this page after you have collected the data.') . '</p>',
     '#weight' => -12,
   );
 
@@ -32,11 +32,15 @@ function prc_trt_form_eck__entity__form_add_prc_trt_capacity_check_alter(&$form,
     }
   }
   else {
-    $form['important_school_message_text'] = array(
+    /*
+     * Disabling for stripped down TRT launch
+     *
+     * $form['important_school_message_text'] = array(
       '#type' => 'item',
       '#markup' => t('Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.'),
       '#weight' => -11,
     );
+    */
   }
 
   $form['required_message'] = array(
@@ -90,11 +94,15 @@ function _prc_trt_alter_system_check_form(&$form, &$form_state) {
     $form['field_name'][LANGUAGE_NONE][0]['value']['#required'] = TRUE;
   }
   else {
-    $form['important_school_message_text'] = array(
+    /*
+     * Disabling for stripped down TRT launch
+     *
+     $form['important_school_message_text'] = array(
       '#type' => 'item',
       '#markup' => t('Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.'),
       '#weight' => -11,
     );
+    */
   }
 
   $form['required_message'] = array(
@@ -796,6 +804,14 @@ function prc_trt_form_district_node_form_alter(&$form, &$form_state) {
   else {
     drupal_set_title(t('Add District'));
   }
+  //Populate options with the titles of the states rather than restricted access
+  foreach($form['field_ref_trt_state']['und']['#options'] as $nid => &$option){
+    if(is_numeric($nid)){
+      $node = node_load($nid);
+      $option = $node->title;
+    }
+  }
+
   $form['actions']['submit']['#value'] = t('Submit');
 
   $form['instructions_text'] = array(
@@ -829,7 +845,7 @@ function prc_trt_form_school_node_form_alter(&$form, &$form_state) {
 
   $form['instructions_text'] = array(
     '#type' => 'markup',
-    '#markup' => t('Overview / instructional copy goes here, if any.'),
+    '#markup' => '<p>' . t('To add a single school, enter the information below.') . '</p><p>' . t('Note: School names within a district must be unique, and once submitted, a school with data cannot be deleted. The data will be checked by the TRT before being accepted.') . '</p>',
     '#weight' => -12,
   );
 
@@ -951,6 +967,7 @@ function prc_trt_action_info() {
       'configurable' => TRUE,
       'vbo_configurable' => FALSE,
       'triggers' => array('any'),
+      'behavior' => array('views_property'),
     ),
     'prc_trt_delete_schools' => array(
       'type' => 'node',
@@ -958,6 +975,7 @@ function prc_trt_action_info() {
       'configurable' => FALSE,
       'vbo_configurable' => FALSE,
       'triggers' => array('any'),
+      'behavior' => array('deletes_property'),
     ),
   );
 }
@@ -1051,7 +1069,12 @@ function prc_trt_preprocess_breadcrumb(&$variables) {
 
   switch ($item['path']) {
     case 'node/%':
-      $node = $item['page_arguments'][0];
+      foreach($item['page_arguments'] as $arg){
+        if(is_object($arg) && !empty($arg->type)){
+          $node = $arg;
+        }
+      }
+
       switch ($node->type) {
         case 'state':
           $breadcrumbs = array();

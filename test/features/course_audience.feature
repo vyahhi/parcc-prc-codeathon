@@ -71,7 +71,7 @@ Feature: PRC-346 Admin: Course Audience
     #  Select a state (default- keeps (or resets value to: NULL)
     And I should see 1 "#edit-by-state" elements
     And I select "- Select a state -" from "edit-by-state"
-    And I select "Arkansas" from "edit-by-state"
+    And I select "Colorado" from "edit-by-state"
     And I select "Colorado" from "edit-by-state"
     And I select "District of Columbia" from "edit-by-state"
     And I select "Illinois" from "edit-by-state"
@@ -170,7 +170,8 @@ Feature: PRC-346 Admin: Course Audience
     Then I should see the message containing "course audience updated."
     And the "PARCC members ONLY" radio button should be selected
     And the "Select By State" radio button should be selected
-    And "Illinois" in "edit-by-state" should be selected
+    # @todo: following line fails for no apparent reason
+    And "Illinois" in "by-state" should be selected
 
   Scenario: Rostering saves
     Given I am logged in as a user with the "Content Administrator (Curator)" role
@@ -272,21 +273,21 @@ Feature: PRC-346 Admin: Course Audience
     Given users:
       | name         | mail                                | pass   | field_first_name | field_last_name | status |
       | Joe Illinois | joe_prc_346il@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
-      | Joe Arkansas | joe_prc_346ar@timestamp@example.com | xyz123 | Joe              | Arkansas        | 1      |
+      | Joe Colorado | joe_prc_346ar@timestamp@example.com | xyz123 | Joe              | Colorado        | 1      |
     And I am logged in as a user with the "PRC Admin" role
-    And I am on "admin-users"
+    And I am on "prc/admin/admin-users"
     Then I click "User ID"
     Then I click on the edit link for the user "Joe Illinois"
     Then I check the box "PARCC-Member Educator"
     Then I select "Illinois" from "Member State"
     And I select "Illinois" from "State Where I Teach"
     Then I press "Save"
-    And I am on "admin-users"
+    And I am on "prc/admin/admin-users"
     Then I click "User ID"
-    Then I click on the edit link for the user "Joe Arkansas"
+    Then I click on the edit link for the user "Joe Colorado"
     Then I check the box "PARCC-Member Educator"
-    Then I select "Arkansas" from "Member State"
-    And I select "Arkansas" from "State Where I Teach"
+    Then I select "Colorado" from "Member State"
+    And I select "Colorado" from "State Where I Teach"
     Then I press "Save"
     Then I visit the last node created
     When I click "Course Audience"
@@ -296,6 +297,7 @@ Feature: PRC-346 Admin: Course Audience
     And I press "Save audience"
     Then I click "Log out"
     Then the url should match "/"
+    Then I follow "Log in"
     Then I fill in "E-mail *" with "joe_prc_346il@timestamp@example.com"
     Then I fill in "Password *" with "xyz123"
     And I press "Log in"
@@ -303,6 +305,7 @@ Feature: PRC-346 Admin: Course Audience
     Then I should see the link "Illinois Only"
     Then I click "Log out"
     Then the url should match "/"
+    Then I follow "Log in"
     Then I fill in "E-mail *" with "joe_prc_346ar@timestamp@example.com"
     Then I fill in "Password *" with "xyz123"
     And I press "Log in"
@@ -316,19 +319,19 @@ Feature: PRC-346 Admin: Course Audience
     Given users:
       | name         | mail                                | pass   | field_first_name | field_last_name | status |
       | Joe Illinois | joe_prc_346il@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
-      | Joe Arkansas | joe_prc_346ar@timestamp@example.com | xyz123 | Joe              | Arkansas        | 1      |
+      | Joe Colorado | joe_prc_346ar@timestamp@example.com | xyz123 | Joe              | Colorado        | 1      |
     And I am logged in as a user with the "PRC Admin" role
-    And I am on "admin-users"
+    And I am on "prc/admin/admin-users"
     Then I click "User ID"
     Then I click on the edit link for the user "Joe Illinois"
     Then I check the box "PARCC-Member Educator"
     Then I select "Illinois" from "Member State"
     Then I press "Save"
-    And I am on "admin-users"
+    And I am on "prc/admin/admin-users"
     Then I click "User ID"
-    Then I click on the edit link for the user "Joe Arkansas"
+    Then I click on the edit link for the user "Joe Colorado"
     Then I check the box "PARCC-Member Educator"
-    Then I select "Arkansas" from "Member State"
+    Then I select "Colorado" from "Member State"
     Then I press "Save"
     Then I visit the last node created
     When I click "Course Audience"
@@ -338,6 +341,7 @@ Feature: PRC-346 Admin: Course Audience
     When I press "Save audience"
     Then I click "Log out"
     Then the url should match "/"
+    Then I follow "Log in"
     Then I fill in "E-mail *" with "joe_prc_346il@timestamp@example.com"
     Then I fill in "Password *" with "xyz123"
     And I press "Log in"
@@ -345,6 +349,7 @@ Feature: PRC-346 Admin: Course Audience
     Then I should see the link "Illinois Only"
     Then I click "Log out"
     Then the url should match "/"
+    Then I follow "Log in"
     Then I fill in "E-mail *" with "joe_prc_346ar@timestamp@example.com"
     Then I fill in "Password *" with "xyz123"
     And I press "Log in"
@@ -381,22 +386,22 @@ Feature: PRC-346 Admin: Course Audience
     Given users:
       | name         | mail                                | pass   | field_first_name | field_last_name | status |
       | Joe Illinois | joe_prc_346il@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
-      | Joe Arkansas | joe_prc_346ar@timestamp@example.com | xyz123 | Joe              | Arkansas        | 1      |
+      | Joe Colorado | joe_prc_346ar@timestamp@example.com | xyz123 | Joe              | Colorado        | 1      |
       | Joe Rhode    | joe_prc_346ri@timestamp@example.com | xyz123 | Joe              | Rhode           | 1      |
     And I am logged in as a user with the "PRC Admin" role
-    And I am on "admin-users"
+    And I am on "prc/admin/admin-users"
     Then I click "User ID"
     Then I click on the edit link for the user "Joe Illinois"
     Then I check the box "PARCC-Member Educator"
     Then I select "Illinois" from "Member State"
     Then I press "Save"
-    And I am on "admin-users"
+    And I am on "prc/admin/admin-users"
     Then I click "User ID"
-    Then I click on the edit link for the user "Joe Arkansas"
+    Then I click on the edit link for the user "Joe Colorado"
     Then I check the box "PARCC-Member Educator"
-    Then I select "Arkansas" from "Member State"
+    Then I select "Colorado" from "Member State"
     Then I press "Save"
-    And I am on "admin-users"
+    And I am on "prc/admin/admin-users"
     Then I click "User ID"
     Then I click on the edit link for the user "Joe Rhode"
     Then I check the box "PARCC-Member Educator"
@@ -410,6 +415,7 @@ Feature: PRC-346 Admin: Course Audience
     When I press "Save audience"
     Then I click "Log out"
     Then the url should match "/"
+    Then I follow "Log in"
     Then I fill in "E-mail *" with "joe_prc_346il@timestamp@example.com"
     Then I fill in "Password *" with "xyz123"
     And I press "Log in"
@@ -417,6 +423,7 @@ Feature: PRC-346 Admin: Course Audience
     Then I should see the link "Two Emails @timestamp"
     Then I click "Log out"
     Then the url should match "/"
+    Then I follow "Log in"
     Then I fill in "E-mail *" with "joe_prc_346ar@timestamp@example.com"
     Then I fill in "Password *" with "xyz123"
     And I press "Log in"
@@ -424,6 +431,7 @@ Feature: PRC-346 Admin: Course Audience
     Then I should see the link "Two Emails @timestamp"
     Then I click "Log out"
     Then the url should match "/"
+    Then I follow "Log in"
     Then I fill in "E-mail *" with "joe_prc_346ri@timestamp@example.com"
     Then I fill in "Password *" with "xyz123"
     And I press "Log in"
@@ -437,21 +445,21 @@ Feature: PRC-346 Admin: Course Audience
     Given users:
       | name         | mail                                | pass   | field_first_name | field_last_name | status |
       | Joe Illinois | joe_prc_346il@timestamp@example.com | xyz123 | Joe              | Illinois        | 1      |
-      | Joe Arkansas | joe_prc_346ar@timestamp@example.com | xyz123 | Joe              | Arkansas        | 1      |
+      | Joe Colorado | joe_prc_346ar@timestamp@example.com | xyz123 | Joe              | Colorado        | 1      |
     And I am logged in as a user with the "PRC Admin" role
-    And I am on "admin-users"
+    And I am on "prc/admin/admin-users"
     Then I click "User ID"
     Then I click on the edit link for the user "Joe Illinois"
     Then I check the box "PARCC-Member Educator"
     Then I select "Illinois" from "Member State"
     And I select "Illinois" from "State Where I Teach"
     Then I press "Save"
-    And I am on "admin-users"
+    And I am on "prc/admin/admin-users"
     Then I click "User ID"
-    Then I click on the edit link for the user "Joe Arkansas"
+    Then I click on the edit link for the user "Joe Colorado"
     Then I check the box "PARCC-Member Educator"
-    Then I select "Arkansas" from "Member State"
-    And I select "Arkansas" from "State Where I Teach"
+    Then I select "Colorado" from "Member State"
+    And I select "Colorado" from "State Where I Teach"
     Then I press "Save"
     Then I visit the last node created
     When I click "Course Audience"
@@ -460,6 +468,7 @@ Feature: PRC-346 Admin: Course Audience
     When I press "Save audience"
     Then I click "Log out"
     Then the url should match "/"
+    Then I follow "Log in"
     Then I fill in "E-mail *" with "joe_prc_346il@timestamp@example.com"
     Then I fill in "Password *" with "xyz123"
     And I press "Log in"
@@ -467,6 +476,7 @@ Feature: PRC-346 Admin: Course Audience
     Then I should see the link "Illinois Only"
     Then I click "Log out"
     Then the url should match "/"
+    Then I follow "Log in"
     Then I fill in "E-mail *" with "joe_prc_346ar@timestamp@example.com"
     Then I fill in "Password *" with "xyz123"
     And I press "Log in"

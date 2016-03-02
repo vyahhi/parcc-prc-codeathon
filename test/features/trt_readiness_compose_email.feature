@@ -45,9 +45,10 @@ Feature: PRC-819 Request Readiness Checks - Compose Email
     Then I should see the text "To:"
     And I should see the text "School 828-1 @timestamp, School 828-2 @timestamp, School 828-3 @timestamp"
     And I should see the text "Subject:"
-    And I should see the text "Subject goes here. For example: <School Name>: Please run readiness checks."
+    And I should see the text "PARCC Assessments Technology Readiness Tool"
     And I should see the text "Message:"
-    And I should see the text "Message goes here explaining importance of running checks and how to run them, emphasizing that it is important that admins run the checks from the provided link or results won't be saved or reported to District."
+    And I should see the text "Your PRC district admin has requested that you run system and/or testing capacity checks for your school. Please login to the PRC and run new or update your school testing capacity and/or system checks for this school year."
+    And I should see the text "Thank you."
     And I should not see the text "\[message:field-comment\]"
     # PRC-1068 site:url token includes the trailing / so that replace was incorrect
     And I should not see the text "\[message"
@@ -65,14 +66,14 @@ Feature: PRC-819 Request Readiness Checks - Compose Email
     And I should see a "Cancel" link
     When I press "Confirm"
     And I follow meta refresh
-    Then the email to "e1@timestamp@example.com" should contain "Subject goes here. For example: School 828-1 @timestamp: Please run readiness checks"
-    And the email should contain "Message goes here explaining importance of running checks and how to run them, emphasizing that it is important that admins run the checks from the provided link or results won't be saved or reported to District."
+    Then the email to "e1@timestamp@example.com" should contain "PARCC Assessments Technology Readiness Tool"
+    And the email should contain "Your PRC district admin has requested that you run system and/or testing capacity checks for your school. Please login to the PRC and run new or update your school testing capacity and/or system checks for this school year."
     And the email should contain "Something @timestamp For Testing"
-    Then the email to "e2@timestamp@example.com" should contain "Subject goes here. For example: School 828-2 @timestamp: Please run readiness checks."
-    And the email should contain "Message goes here explaining importance of running checks and how to run them, emphasizing that it is important that admins run the checks from the provided link or results won't be saved or reported to District."
+    Then the email to "e2@timestamp@example.com" should contain "PARCC Assessments Technology Readiness Tool"
+    And the email should contain "Your PRC district admin has requested that you run system and/or testing capacity checks for your school. Please login to the PRC and run new or update your school testing capacity and/or system checks for this school year."
     And the email should contain "Something @timestamp For Testing"
-    Then the email to "e3@timestamp@example.com" should contain "Subject goes here. For example: School 828-3 @timestamp: Please run readiness checks."
-    And the email should contain "Message goes here explaining importance of running checks and how to run them, emphasizing that it is important that admins run the checks from the provided link or results won't be saved or reported to District."
+    Then the email to "e3@timestamp@example.com" should contain "PARCC Assessments Technology Readiness Tool"
+    And the email should contain "Your PRC district admin has requested that you run system and/or testing capacity checks for your school. Please login to the PRC and run new or update your school testing capacity and/or system checks for this school year."
     And the email should contain "Something @timestamp For Testing"
     And I should see the text "Performed Request Readiness Checks on 3 items."
     When I follow the link in the email

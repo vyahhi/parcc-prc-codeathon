@@ -1,0 +1,68 @@
+diff --git a/includes/bootstrap.inc b/includes/bootstrap.inc
+index 0b81dc0..cc6d4c3 100644
+--- a/includes/bootstrap.inc
++++ b/includes/bootstrap.inc
+@@ -718,7 +718,28 @@ function drupal_settings_initialize() {
+   }
+   $is_https = isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on';
+ 
++  // If Drupal is behind a reverse proxy or load balancer that is communicating
++  // with the end-user over https but with Drupal over http we will generate a
++  // broken $base_url unless we check if $_SERVER['HTTP_X_FORWARDED_PROTO'] is
++  // set to 'https'.
++  // Trusting these headers is a potential security risk so we only do so if
++  // $conf['reverse_proxy'] has been set.
++  $scheme_rewrite = FALSE;
++  if (variable_get('reverse_proxy', 0)) {
++    $reverse_proxy_proto_header = variable_get('reverse_proxy_proto_header', 'HTTP_X_FORWARDED_PROTO');
++    if (isset($_SERVER[$reverse_proxy_proto_header]) && strtolower($_SERVER[$reverse_proxy_proto_header]) == 'https') {
++      $is_https = TRUE;
++      // To ensure that third-party code continues working.
++      // They should however implement support for X-Forwarded-Proto themselves.
++      $_SERVER['HTTPS'] = 'on';
++      $scheme_rewrite = (boolean) variable_get('reverse_proxy_proto_change', FALSE);
++    }
++  }
++
+   if (isset($base_url)) {
++    if ($scheme_rewrite) {
++      $base_url = $is_https ? str_replace('http://', 'https://', $base_url) : str_replace('https://', 'http://', $base_url);
++    }
+     // Parse fixed base URL from settings.php.
+     $parts = parse_url($base_url);
+     if (!isset($parts['path'])) {
+diff --git a/sites/default/default.settings.php b/sites/default/default.settings.php
+index 580cc38..b7c2c3c 100644
+--- a/sites/default/default.settings.php
++++ b/sites/default/default.settings.php
+@@ -384,6 +384,10 @@ ini_set('session.cookie_lifetime', 2000000);
+  * $_SERVER['REMOTE_ADDR'] variable directly in settings.php.
+  * Be aware, however, that it is likely that this would allow IP
+  * address spoofing unless more advanced precautions are taken.
++ *
++ * Enable this setting to get Drupal to determine the scheme to use for
++ * generated URLs using the value of the X-Forwarded-Proto header (or
++ * $conf['reverse_proxy_proto_header'] if set).
+  */
+ # $conf['reverse_proxy'] = TRUE;
+ 
+@@ -400,6 +404,19 @@ ini_set('session.cookie_lifetime', 2000000);
+ # $conf['reverse_proxy_header'] = 'HTTP_X_CLUSTER_CLIENT_IP';
+ 
+ /**
++ * Set this value if your proxy server sends the client protocol in a header
++ * other than X-Forwarded-Proto.
++ */
++# $conf['reverse_proxy_proto_header'] = 'HTTP_X_FORWARDED_PROTO';
++
++/**
++ * Set this value if you want Drupal to modify the scheme of the $base_url
++ * based on the value of the X-Forwarded-Proto header (or
++ * $conf['reverse_proxy_proto_header'] if set).
++ */
++# $conf['reverse_proxy_proto_change'] = TRUE;
++
++/**
+  * Page caching:
+  *
+  * By default, Drupal sends a "Vary: Cookie" HTTP header for anonymous page

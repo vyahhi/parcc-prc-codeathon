@@ -54,6 +54,12 @@ function prc_comment_email_node_view($node, $view_mode, $langcode) {
 function _prc_comment_email_add_link($node, $link_title, $link_id) {
   ctools_include('modal');
   ctools_modal_add_js();
+
+  //If available, settings defined in prc_foundation theme
+  if(function_exists('modal_js_settings')) {
+    modal_js_settings();
+  }
+
   $nid = $node->nid;
 
   $links[$link_id] = array(
@@ -61,7 +67,7 @@ function _prc_comment_email_add_link($node, $link_title, $link_id) {
     'href' => "node/$nid/nojs/comment-email",
     'attributes' => array(
       'title' => t($link_title),
-      'class' => array('ctools-use-modal'),
+      'class' => array('ctools-use-modal','ctools-modal-zurb-modal-style'),
     ),
   );
 

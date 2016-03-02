@@ -1,0 +1,60 @@
+
+@media #{$screen}{
+  // PRC Website Users table
+  .view-admin-user-view {
+    .view-content{
+      overflow: hidden;
+    }
+    .views-table {
+      .views-field-field-first-name,
+      .views-field-field-last-name,
+      .views-field-mail {
+        max-width: 70px;
+        word-wrap: break-word ;
+      }
+
+      .views-field-uid,
+      .views-field-uid.active {
+        width: 1%;
+      }
+
+
+      .views-field-field-member-state,
+      .views-field-rid,
+      .views-field-field-profession,
+      .views-field-status,
+      .views-field-login-1,
+      .views-field-created-1 {
+        display: none;
+      }
+    }
+
+  }
+}
+
+@media #{$small}{
+  .view-admin-user-view {
+    .views-table {
+      .views-field-field-first-name,
+      .views-field-field-last-name,
+      .views-field-mail {
+        max-width: 100%;
+      }
+
+      .views-field-field-member-state,
+      .views-field-rid {
+        display: table-cell;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+@media #{$medium}{
+  // PRC Website Users table
+  .view-admin-user-view {
+    .views-table {
+       width: initial;
+    }
+  }
+}

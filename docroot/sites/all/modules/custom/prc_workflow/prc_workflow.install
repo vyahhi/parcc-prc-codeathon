@@ -19,6 +19,57 @@ function prc_workflow_update_7000(){
 }
 
 /**
+ * Kill old Menu linkss\.
+ */
+function prc_workflow_update_7001() {
+  module_load_include('inc', 'prc_workflow', 'prc_workflow.util');
+
+  // remove old main-menu items from the main-menu, so that restructured items can be made.
+  prc_workflow_kill_menu_item('main-menu', 'Formative Instructional Tasks', 'formative-instructional-tasks');
+  prc_workflow_kill_menu_item('main-menu', 'Speaking and Listening', 'speaking-listening');
+  prc_workflow_kill_menu_item('main-menu', 'Item Bank', 'item-bank');
+  prc_workflow_kill_menu_item('main-menu', 'Technology Readiness', 'technology-readiness');
+  prc_workflow_kill_menu_item('main-menu', 'Content', 'admin-content');
+  prc_workflow_kill_menu_item('main-menu', 'Course Management', 'admin-course');
+  prc_workflow_kill_menu_item('main-menu', 'Users', 'admin-users');
+  prc_workflow_kill_menu_item('main-menu', 'Instruction', 'instruction');
+  prc_workflow_kill_menu_item('main-menu', 'Library', 'library');
+
+  // remove old Formative Instructional Tasks menu item for restructuring.
+  prc_workflow_kill_menu_item('menu-formative-instructional-tas', 'Add Resource', 'node/add/formative-instructional-task?destination=formative-instructional-tasks');
+
+  // remove old Speaking and Listening menu item for restructuring.
+  prc_workflow_kill_menu_item('menu-speaking-and-listening-page', 'Add Resource', 'node/add/speaking-and-listening-resource?destination=speaking-listening');
+
+  // remove old Instruction menu items for restructuring.
+  prc_workflow_kill_menu_item('menu-instruction-menu', 'Formative Instructional Tasks', 'formative-instructional-tasks');
+  prc_workflow_kill_menu_item('menu-instruction-menu', 'Speaking and Listening', 'speaking-listening');
+
+  // remove old Item Bank Add Questions menu items for restructuring.
+  prc_workflow_kill_menu_item('menu-item-bank-add-questions', 'Non-interactive (text only)', 'node/add/quiz-directions?destination=item-bank');
+  prc_workflow_kill_menu_item('menu-item-bank-add-questions', 'Interactive choice', 'node/add/multichoice?destination=item-bank');
+  prc_workflow_kill_menu_item('menu-item-bank-add-questions', 'Short answer', 'node/add/short-answer?destination=item-bank');
+
+  // remove old Add Quiz menu items for restructuring.
+  prc_workflow_kill_menu_item('menu-add-quiz', 'Item Bank', 'item-bank');
+  prc_workflow_kill_menu_item('menu-add-quiz', 'Technology Readiness', 'technology-readiness');
+}
+
+/**
+ * Kill old Menu linkss\.
+ */
+function prc_workflow_update_7002() {
+  module_load_include('inc', 'prc_workflow', 'prc_workflow.util');
+  prc_workflow_kill_menu_item('main-menu', 'Assessment', 'assessments');
+  prc_workflow_kill_menu_item('main-menu', 'Diagnostics', 'assessments/diagnostics');
+  prc_workflow_kill_menu_item('main-menu', 'Item Bank', 'assessments/item-bank');
+  prc_workflow_kill_menu_item('main-menu', 'PARCC Released Items', 'assessments/parcc-released-items');
+  prc_workflow_kill_menu_item('main-menu', 'Technology Readiness', 'assessments/technology-readiness');
+
+  prc_workflow_kill_menu_item('menu-assessment-left-nav', 'All Available Assessments', 'assessments');
+}
+
+/**
  * Implements hook_schema_alter()
  *
  * @param $schema
@@ -33,3 +84,4 @@ function prc_workflow_schema_alter(&$schema){
   );
 
 }
+

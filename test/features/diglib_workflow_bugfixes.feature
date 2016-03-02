@@ -5,7 +5,7 @@
     Scenario: prc-1385 & prc : Setting a standard, and removing the standard in a separate draft causes
     errors.
       Given I am logged in as a user with the "Content Administrator (Curator)" role
-      And I visit "admin-content"
+      And I visit "prc/admin/admin-content"
       And I click "Add content"
       And I enter "My node @timestamp" for "Title *"
       And I click "Show Add More Information (Content Properties)"
@@ -33,7 +33,7 @@
     @javascript
     Scenario: prc-1391 - Need to click save twice when adding a tag
       Given I am logged in as a user with the "Content Administrator (Curator)" role
-      And I visit "admin-content"
+      And I visit "prc/admin/admin-content"
       And I click "Add content"
       And I enter "My node @timestamp" for "Title *"
       When I fill in "Tags" with "Test"
@@ -50,7 +50,7 @@
 
     Scenario: prc-1390 - Revisions for all fields, only last tag is tracked for revisions.
       Given I am logged in as a user with the "Content Administrator (Curator)" role
-      And I visit "admin-content"
+      And I visit "prc/admin/admin-content"
       And I click "Add content"
       And I enter "My node @timestamp" for "Title *"
       And I select the radio button "Public" with the id "edit-field-permissions-und-public"
@@ -65,7 +65,7 @@
       And I fill in "Tags" with "Peanut Butter, Crackers, Milk"
       And I press "Save"
       And I press "Confirm"
-      Then I visit "admin-content"
+      Then I visit "prc/admin/admin-content"
       And I click "My node @timestamp"
       # we are on the edit page of the revision, click the breadcrumb to get to the main node
       And I click "My node @timestamp"
@@ -73,12 +73,12 @@
       And I should see the text "Test"
       And I should see the text "Assessment"
       And I should see the text "Peanut Butter"
-      And I should see the text "Peanut Butter Crackers Milk"
+      And I should see the text "Peanut Butter, Crackers, Milk"
 
     @javascript
     Scenario: prc-1387 - Make sure standards are tracked correctly.
       Given I am logged in as a user with the "Content Administrator (Curator)" role
-      And I visit "admin-content"
+      And I visit "prc/admin/admin-content"
       And I click "Add content"
       And I enter "My node @timestamp" for "Title *"
       And I select the radio button "Public" with the id "edit-field-permissions-und-public"
@@ -101,7 +101,7 @@
       And I select "- None -" from "edit-field-subject-und-0-tid-select-1"
       And I press "Save"
       And I press "Confirm"
-      Then I visit "admin-content"
+      Then I visit "prc/admin/admin-content"
       And I click "My node @timestamp"
       # we are on the edit page of the revision, click the breadcrumb to get to the main node
       And I click "My node @timestamp"

@@ -8,6 +8,7 @@ dependencies[] = features
 dependencies[] = message
 dependencies[] = number
 dependencies[] = options
+dependencies[] = prc_poc_local_fields
 dependencies[] = strongarm
 features[field_instance][] = message-published_notice-field_message_rendered_body
 features[field_instance][] = message-published_notice-field_message_rendered_subject

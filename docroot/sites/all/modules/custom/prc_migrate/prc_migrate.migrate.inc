@@ -57,6 +57,16 @@ function prc_migrate_migrate_api() {
         'group_name' => 'prc_taxonomy',
         'vocab_name' => 'resource_type',
       ),
+      'PrcCsvFormativeInstructionalTaskResourceType' => array(
+        'class_name' => 'PrcCsvSimpleTaxonomyMigration',
+        'group_name' => 'prc_taxonomy',
+        'vocab_name' => 'formative_instructional_task_resource_type',
+      ),
+      'PrcCsvParccReleasedItemResourceType' => array(
+        'class_name' => 'PrcCsvSimpleTaxonomyMigration',
+        'group_name' => 'prc_taxonomy',
+        'vocab_name' => 'parcc_released_item_resource_type',
+      ),
       'PrcCsvMemberState' => array(
         'class_name' => 'PrcCsvMemberStateMigration',
         'group_name' => 'prc_taxonomy',
@@ -77,9 +87,14 @@ function prc_migrate_migrate_api() {
         'class_name' => 'PrcCsvPdCourseMigration',
         'group_name' => 'prc_content',
       ),
+      'PrcToPrcRole' => $common_arguments + array(
+        'description' => t('Migration of roles from another PRC'),
+        'class_name' => 'PrcToPrcRoleMigration',
+      ),
       'PrcToPrcUser' => $common_arguments + array(
-          'description' => t('Migration of users from another PRC'),
-          'class_name' => 'DrupalUser7Migration',
+        'description' => t('Migration of users from another PRC'),
+        'class_name' => 'PrcToPrcUserMigration',
+        'role_migration' => 'PrcToPrcRole',
       ),
     ),
 

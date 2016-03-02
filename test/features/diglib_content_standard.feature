@@ -69,13 +69,13 @@ Feature: PRC-219 Content Categorization - Standard
     Then I select "Ask and answer questions about unknown words in a text." from "edit-field-standard-und-0-tid-select-4"
     Then I wait for AJAX to finish
     Then I press "edit-field-standard-und-add-more"
-    Then I select "Common Core English Language Arts" from "edit-field-standard-und-1-tid-select-1"
+    Then I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid--2-select-1"
     Then I wait for AJAX to finish
-    Then I select "College and Career Readiness Anchor Standards for Reading" from "edit-field-standard-und-1-tid-select-2"
+    Then I select "College and Career Readiness Anchor Standards for Reading" from "edit-field-standard-und-0-tid--2-select-2"
     Then I wait for AJAX to finish
-    Then I select "Key Ideas and Details" from "edit-field-standard-und-1-tid-select-3"
+    Then I select "Key Ideas and Details" from "edit-field-standard-und-0-tid--2-select-3"
     Then I wait for AJAX to finish
-    Then I select "Read closely to determine what the text says explicitly and to make logical inferences from it; cite specific textual evidence when writing or speaking to support conclusions drawn from the text." from "edit-field-standard-und-1-tid-select-4"
+    Then I select "Read closely to determine what the text says explicitly and to make logical inferences from it; cite specific textual evidence when writing or speaking to support conclusions drawn from the text." from "edit-field-standard-und-0-tid--2-select-4"
     Then I wait for AJAX to finish
 
   @javascript
@@ -89,3 +89,39 @@ Feature: PRC-219 Content Categorization - Standard
     Then I wait for AJAX to finish
     Then I press "Save"
     Then I should see the text "Common Core English Language Arts"
+
+  @javascript
+  Scenario: PRC-1485 select and save terms with SHS without ajax failures
+    Given I am logged in as a user with the "Content Contributor" role
+    And I visit "prc/admin/admin-content"
+    And I click "Add content"
+    And I fill in "Title *" with "My Content @timestamp"
+    When I click "Edit"
+    And I click "Show Add More Information (Content Properties)"
+    And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
+    And I wait for AJAX to finish
+    And I select "Reading Standards for Literature" from "edit-field-standard-und-0-tid-select-2"
+    And I wait for AJAX to finish
+    And I select "Craft and Structure" from "edit-field-standard-und-0-tid-select-3"
+    And I wait for AJAX to finish
+    And I select "Ask and answer questions about unknown words in a text." from "edit-field-standard-und-0-tid-select-4"
+    And I wait for AJAX to finish
+    And I press "edit-field-standard-und-add-more"
+    And I wait for AJAX to finish
+    And I select "Common Core English Language Arts" from "edit-field-standard-und-1-tid-select-1"
+    And I wait for AJAX to finish
+    And I select "College and Career Readiness Anchor Standards for Reading" from "edit-field-standard-und-1-tid-select-2"
+    And I wait for AJAX to finish
+    And I select "Key Ideas and Details" from "edit-field-standard-und-1-tid-select-3"
+    And I wait for AJAX to finish
+    And I select "Read closely to determine what the text says explicitly and to make logical inferences from it; cite specific textual evidence when writing or speaking to support conclusions drawn from the text." from "edit-field-standard-und-1-tid-select-4"
+    And I wait for AJAX to finish
+    And I select the radio button "Public"
+    And I press the "Save" button
+    Then I click "Edit"
+    And I wait for AJAX to finish
+    And I press the "Save" button
+    And I should see the text "Read closely to determine what the text says explicitly and to make logical inferences from it; cite specific textual evidence when writing or speaking to support conclusions drawn from the text."
+    And I should see the text "Ask and answer questions about unknown words in a text."
+
+

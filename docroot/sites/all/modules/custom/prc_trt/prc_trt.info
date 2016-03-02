@@ -13,3 +13,4 @@ dependencies[] = pm_existing_pages
 dependencies[] = entityreference_prepopulate
 dependencies[] = views
 dependencies[] = views_bulk_operations
+dependencies[] = prc_trt_access

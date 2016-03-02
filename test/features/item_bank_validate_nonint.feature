@@ -4,7 +4,7 @@ Feature: PRC-1393 Create Non-interactive Item (text only) - Form - Required Fiel
 
   Scenario: Validation
     Given I am logged in as a user with the "Educator" role
-    And I am on "item-bank"
+    And I am on "assessments/item-bank"
     When I click "Non-interactive (text only)"
     And I press "Save"
     Then I should see the error message containing "Question field is required."

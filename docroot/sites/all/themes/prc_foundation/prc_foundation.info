@@ -4,6 +4,9 @@ core = 7.x
 engine = phptemplate
 
 stylesheets[all][] = stylesheets/parc_foundation.css
+;override system menu stylesheet
+stylesheets[all][] = stylesheets/system.menus.css
+
 
 ; Modernizr acts as a shim for HTML5 elements for older browsers
 ; as well as detection for mobile devices.
@@ -12,6 +15,7 @@ scripts[] = javascripts/vendor/custom.modernizr.js
 scripts[] = javascripts/foundation/foundation.js
 scripts[] = javascripts/foundation/foundation.topbar.js
 scripts[] = javascripts/foundation/foundation.dropdown.js
+scripts[] = javascripts/custom/pf_modal.js
 
 regions[header] = Header
 regions[help] = Help
@@ -35,3 +39,6 @@ regions[footer_fourthcolumn] = Footer fourth column
 regions[footer] = Footer
 
 settings[shortcut_module_link] = 0
+
+; Panels layouts. You can place multiple layouts under the "layouts" folder.
+plugins[panels][layouts] = layouts

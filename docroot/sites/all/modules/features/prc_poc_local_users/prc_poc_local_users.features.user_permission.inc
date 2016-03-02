@@ -48,13 +48,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'views',
   );
 
-  // Exported permission: 'access comments'.
-  $permissions['access comments'] = array(
-    'name' => 'access comments',
-    'roles' => array(),
-    'module' => 'comment',
-  );
-
   // Exported permission: 'access content'.
   $permissions['access content'] = array(
     'name' => 'access content',
@@ -102,15 +95,6 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'course',
-  );
-
-  // Exported permission: 'access dashboard'.
-  $permissions['access dashboard'] = array(
-    'name' => 'access dashboard',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'dashboard',
   );
 
   // Exported permission: 'access devel information'.
@@ -179,6 +163,16 @@ function prc_poc_local_users_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'quiz',
+  );
+
+  // Exported permission: 'access resource practice_test'.
+  $permissions['access resource practice_test'] = array(
+    'name' => 'access resource practice_test',
+    'roles' => array(
+      'Practice Test Service Role' => 'Practice Test Service Role',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
   );
 
   // Exported permission: 'access site in maintenance mode'.
@@ -308,20 +302,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'browserclass',
   );
 
-  // Exported permission: 'administer comments'.
-  $permissions['administer comments'] = array(
-    'name' => 'administer comments',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'comment',
-  );
-
   // Exported permission: 'administer content revisions'.
   $permissions['administer content revisions'] = array(
     'name' => 'administer content revisions',
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'state_flow',
   );
@@ -353,6 +340,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'course',
+  );
+
+  // Exported permission: 'administer custom breadcrumbs'.
+  $permissions['administer custom breadcrumbs'] = array(
+    'name' => 'administer custom breadcrumbs',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'custom_breadcrumbs',
   );
 
   // Exported permission: 'administer elysia_cron'.
@@ -418,6 +414,20 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'flag',
   );
 
+  // Exported permission: 'administer google analytics'.
+  $permissions['administer google analytics'] = array(
+    'name' => 'administer google analytics',
+    'roles' => array(),
+    'module' => 'googleanalytics',
+  );
+
+  // Exported permission: 'administer honeypot'.
+  $permissions['administer honeypot'] = array(
+    'name' => 'administer honeypot',
+    'roles' => array(),
+    'module' => 'honeypot',
+  );
+
   // Exported permission: 'administer image styles'.
   $permissions['administer image styles'] = array(
     'name' => 'administer image styles',
@@ -443,15 +453,6 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'invite',
-  );
-
-  // Exported permission: 'administer js'.
-  $permissions['administer js'] = array(
-    'name' => 'administer js',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'js',
   );
 
   // Exported permission: 'administer lti_tool_provider module'.
@@ -747,15 +748,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'views',
   );
 
-  // Exported permission: 'administer voting api'.
-  $permissions['administer voting api'] = array(
-    'name' => 'administer voting api',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'votingapi',
-  );
-
   // Exported permission: 'advanced migration information'.
   $permissions['advanced migration information'] = array(
     'name' => 'advanced migration information',
@@ -770,8 +762,30 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'approve prc content',
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'prc_workflow',
+  );
+
+  // Exported permission: 'assign node weight'.
+  $permissions['assign node weight'] = array(
+    'name' => 'assign node weight',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'weight',
+  );
+
+  // Exported permission: 'attach file to pd module'.
+  $permissions['attach file to pd module'] = array(
+    'name' => 'attach file to pd module',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'prc_pd_course_form',
   );
 
   // Exported permission: 'block IP addresses'.
@@ -781,6 +795,22 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'system',
+  );
+
+  // Exported permission: 'bypass advanced aggregation'.
+  $permissions['bypass advanced aggregation'] = array(
+    'name' => 'bypass advanced aggregation',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'advagg',
+  );
+
+  // Exported permission: 'bypass honeypot protection'.
+  $permissions['bypass honeypot protection'] = array(
+    'name' => 'bypass honeypot protection',
+    'roles' => array(),
+    'module' => 'honeypot',
   );
 
   // Exported permission: 'bypass node access'.
@@ -902,6 +932,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create homepage_band content'.
+  $permissions['create homepage_band content'] = array(
+    'name' => 'create homepage_band content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create invite_by_email entity'.
   $permissions['create invite_by_email entity'] = array(
     'name' => 'create invite_by_email entity',
@@ -961,6 +1001,17 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'panels_node',
+  );
+
+  // Exported permission: 'create parcc_released_item content'.
+  $permissions['create parcc_released_item content'] = array(
+    'name' => 'create parcc_released_item content',
+    'roles' => array(
+      'PARCC Item Author' => 'PARCC Item Author',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'create pd_course content'.
@@ -1102,6 +1153,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any homepage_band content'.
+  $permissions['delete any homepage_band content'] = array(
+    'name' => 'delete any homepage_band content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any multichoice content'.
   $permissions['delete any multichoice content'] = array(
     'name' => 'delete any multichoice content',
@@ -1133,6 +1194,17 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'panels_node',
+  );
+
+  // Exported permission: 'delete any parcc_released_item content'.
+  $permissions['delete any parcc_released_item content'] = array(
+    'name' => 'delete any parcc_released_item content',
+    'roles' => array(
+      'PARCC Item Author' => 'PARCC Item Author',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'delete any pd_course content'.
@@ -1273,6 +1345,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own homepage_band content'.
+  $permissions['delete own homepage_band content'] = array(
+    'name' => 'delete own homepage_band content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own multichoice content'.
   $permissions['delete own multichoice content'] = array(
     'name' => 'delete own multichoice content',
@@ -1305,6 +1387,17 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'panels_node',
+  );
+
+  // Exported permission: 'delete own parcc_released_item content'.
+  $permissions['delete own parcc_released_item content'] = array(
+    'name' => 'delete own parcc_released_item content',
+    'roles' => array(
+      'PARCC Item Author' => 'PARCC Item Author',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'delete own pd_course content'.
@@ -1416,6 +1509,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'delete terms in formative_instructional_task_resource_type'.
+  $permissions['delete terms in formative_instructional_task_resource_type'] = array(
+    'name' => 'delete terms in formative_instructional_task_resource_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'delete terms in genre'.
   $permissions['delete terms in genre'] = array(
     'name' => 'delete terms in genre',
@@ -1454,6 +1554,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'delete terms in module_type'.
   $permissions['delete terms in module_type'] = array(
     'name' => 'delete terms in module_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'delete terms in parcc_released_item_resource_type'.
+  $permissions['delete terms in parcc_released_item_resource_type'] = array(
+    'name' => 'delete terms in parcc_released_item_resource_type',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -1509,6 +1616,8 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'deny prc content',
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'prc_workflow',
   );
@@ -1570,6 +1679,7 @@ function prc_poc_local_users_user_default_permissions() {
   $permissions['eck add entities'] = array(
     'name' => 'eck add entities',
     'roles' => array(
+      'Practice Test Service Role' => 'Practice Test Service Role',
       'administrator' => 'administrator',
     ),
     'module' => 'eck',
@@ -1580,6 +1690,24 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'eck add entity types',
     'roles' => array(
       'administrator' => 'administrator',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck add practice_test bundles'.
+  $permissions['eck add practice_test bundles'] = array(
+    'name' => 'eck add practice_test bundles',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck add practice_test practice_test entities'.
+  $permissions['eck add practice_test practice_test entities'] = array(
+    'name' => 'eck add practice_test practice_test entities',
+    'roles' => array(
+      'Practice Test Service Role' => 'Practice Test Service Role',
     ),
     'module' => 'eck',
   );
@@ -2005,6 +2133,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'eck view practice_test practice_test entities'.
+  $permissions['eck view practice_test practice_test entities'] = array(
+    'name' => 'eck view practice_test practice_test entities',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'eck',
+  );
+
   // Exported permission: 'eck view prc_trt bundles'.
   $permissions['eck view prc_trt bundles'] = array(
     'name' => 'eck view prc_trt bundles',
@@ -2081,6 +2219,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any homepage_band content'.
+  $permissions['edit any homepage_band content'] = array(
+    'name' => 'edit any homepage_band content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any invite entities'.
   $permissions['edit any invite entities'] = array(
     'name' => 'edit any invite entities',
@@ -2121,6 +2269,17 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'panels_node',
+  );
+
+  // Exported permission: 'edit any parcc_released_item content'.
+  $permissions['edit any parcc_released_item content'] = array(
+    'name' => 'edit any parcc_released_item content',
+    'roles' => array(
+      'PARCC Item Author' => 'PARCC Item Author',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'edit any pd_course content'.
@@ -2200,15 +2359,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit own comments'.
-  $permissions['edit own comments'] = array(
-    'name' => 'edit own comments',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'comment',
-  );
-
   // Exported permission: 'edit own course content'.
   $permissions['edit own course content'] = array(
     'name' => 'edit own course content',
@@ -2262,6 +2412,16 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own homepage_band content'.
+  $permissions['edit own homepage_band content'] = array(
+    'name' => 'edit own homepage_band content',
+    'roles' => array(
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own invite entities'.
   $permissions['edit own invite entities'] = array(
     'name' => 'edit own invite entities',
@@ -2303,6 +2463,17 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'panels_node',
+  );
+
+  // Exported permission: 'edit own parcc_released_item content'.
+  $permissions['edit own parcc_released_item content'] = array(
+    'name' => 'edit own parcc_released_item content',
+    'roles' => array(
+      'PARCC Item Author' => 'PARCC Item Author',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'edit own pd_course content'.
@@ -2415,6 +2586,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'edit terms in formative_instructional_task_resource_type'.
+  $permissions['edit terms in formative_instructional_task_resource_type'] = array(
+    'name' => 'edit terms in formative_instructional_task_resource_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'edit terms in genre'.
   $permissions['edit terms in genre'] = array(
     'name' => 'edit terms in genre',
@@ -2453,6 +2631,13 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'edit terms in module_type'.
   $permissions['edit terms in module_type'] = array(
     'name' => 'edit terms in module_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in parcc_released_item_resource_type'.
+  $permissions['edit terms in parcc_released_item_resource_type'] = array(
+    'name' => 'edit terms in parcc_released_item_resource_type',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -2586,6 +2771,8 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'state_flow',
   );
@@ -2633,11 +2820,11 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'pathauto',
   );
 
-  // Exported permission: 'post comments'.
-  $permissions['post comments'] = array(
-    'name' => 'post comments',
+  // Exported permission: 'opt-in or out of tracking'.
+  $permissions['opt-in or out of tracking'] = array(
+    'name' => 'opt-in or out of tracking',
     'roles' => array(),
-    'module' => 'comment',
+    'module' => 'googleanalytics',
   );
 
   // Exported permission: 'rename features'.
@@ -2654,6 +2841,8 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'request approval of prc content',
     'roles' => array(
       'Content Contributor' => 'Content Contributor',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'prc_workflow',
   );
@@ -2771,6 +2960,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'search_config',
   );
 
+  // Exported permission: 'search homepage_band content'.
+  $permissions['search homepage_band content'] = array(
+    'name' => 'search homepage_band content',
+    'roles' => array(),
+    'module' => 'search_config',
+  );
+
   // Exported permission: 'search multichoice content'.
   $permissions['search multichoice content'] = array(
     'name' => 'search multichoice content',
@@ -2793,6 +2989,13 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
     ),
+    'module' => 'search_config',
+  );
+
+  // Exported permission: 'search parcc_released_item content'.
+  $permissions['search parcc_released_item content'] = array(
+    'name' => 'search parcc_released_item content',
+    'roles' => array(),
     'module' => 'search_config',
   );
 
@@ -2873,13 +3076,6 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'user',
   );
 
-  // Exported permission: 'skip comment approval'.
-  $permissions['skip comment approval'] = array(
-    'name' => 'skip comment approval',
-    'roles' => array(),
-    'module' => 'comment',
-  );
-
   // Exported permission: 'switch users'.
   $permissions['switch users'] = array(
     'name' => 'switch users',
@@ -2919,8 +3115,17 @@ function prc_poc_local_users_user_default_permissions() {
     'name' => 'unpublish prc content',
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'prc_workflow',
+  );
+
+  // Exported permission: 'use PHP for tracking visibility'.
+  $permissions['use PHP for tracking visibility'] = array(
+    'name' => 'use PHP for tracking visibility',
+    'roles' => array(),
+    'module' => 'googleanalytics',
   );
 
   // Exported permission: 'use advanced search'.
@@ -3004,6 +3209,13 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'panels',
   );
 
+  // Exported permission: 'use php in custom breadcrumbs'.
+  $permissions['use php in custom breadcrumbs'] = array(
+    'name' => 'use php in custom breadcrumbs',
+    'roles' => array(),
+    'module' => 'custom_breadcrumbs',
+  );
+
   // Exported permission: 'use regex for short answer'.
   $permissions['use regex for short answer'] = array(
     'name' => 'use regex for short answer',
@@ -3011,6 +3223,19 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'short_answer',
+  );
+
+  // Exported permission: 'use seraph link'.
+  $permissions['use seraph link'] = array(
+    'name' => 'use seraph link',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'Content Contributor' => 'Content Contributor',
+      'PARCC-Member Educator' => 'PARCC-Member Educator',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'prc_registration',
   );
 
   // Exported permission: 'use text format filtered_html'.
@@ -3061,6 +3286,21 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'quiz',
+  );
+
+  // Exported permission: 'view formative instructional tasks'.
+  $permissions['view formative instructional tasks'] = array(
+    'name' => 'view formative instructional tasks',
+    'roles' => array(
+      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
+      'Content Contributor' => 'Content Contributor',
+      'Educator' => 'Educator',
+      'PARCC-Member Educator' => 'PARCC-Member Educator',
+      'PRC Admin' => 'PRC Admin',
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'prc_question_form',
   );
 
   // Exported permission: 'view lti info'.
@@ -3144,9 +3384,11 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'Content Administrator (Curator)' => 'Content Administrator (Curator)',
       'Content Contributor' => 'Content Contributor',
+      'Educator' => 'Educator',
       'PARCC-Member Educator' => 'PARCC-Member Educator',
       'PRC Admin' => 'PRC Admin',
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'prc_question_form',
   );

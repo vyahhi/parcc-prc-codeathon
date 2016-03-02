@@ -8,18 +8,18 @@ Feature: PRC-1001 Item Bank
 
   Scenario: Item Bank Page
     Given I am logged in as a user with the "Educator" role
-    When I am on "item-bank"
+    When I am on "assessments/item-bank"
     Then I should see the heading "Item Bank"
-    And I should see the text "Overview / instructional copy goes here. Consider explaining importance of testing prior to assessment to increase chances of successful assessment."
+    And I should see the text "From here\, you can view available items. After registering and logging in, you can create your own items for inclusion in your own assessments. Coming soon - PARCC Released Items."
 
   Scenario: No items
     Given I am logged in as a user with the "Educator" role
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Assessment directions" nodes
-    When I am on "item-bank"
+    When I am on "assessments/item-bank"
     Then I should see the text "No items found."
-    But I should not see the text "Scoring note: All interactive choice and short answer questions are machine scored."
+    But I should not see the text "NOTE: At this time, all items are machine scored."
 
   Scenario: Has items
     Given I am logged in as a user with the "Educator" role
@@ -32,9 +32,9 @@ Feature: PRC-1001 Item Bank
     And I fill in "Question" with "QD"
     And I press "Save"
 
-    When I am on "item-bank"
+    When I am on "assessments/item-bank"
     Then I should not see the text "No items found."
-    And I should see the text "Scoring note: All interactive choice and short answer questions are machine scored."
+    And I should see the text "NOTE: At this time, all items are machine scored."
     And I should see the text "Assessment directions" in the "QD" row
     And I should see the text "Title"
     And I should see the text "Type"

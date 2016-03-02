@@ -4,9 +4,11 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
   I want to navigate backwards through the structured pages
   so that I can quickly run to a higher-level page.
 
-
   Scenario Outline: State Admin on District Readiness page
-    Given I am logged in as a user with the "State Admin" role
+    Given users:
+      | name                   | mail                   | pass   | field_first_name | field_last_name | status | roles                 |
+      | stateadmin@example.com | stateadmin@example.com | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
+    And I am logged in as "stateadmin@example.com"
     And "User States" terms:
       | name         |
       | <user_state> |
@@ -14,8 +16,8 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
       | name           | field_state_code |
       | <member_state> | SOIL1            |
     And "State" nodes:
-      | title          | field_user_state | field_member_state | uid         |
-      | <member_state> | <user_state>     | <member_state>     | @currentuid |
+      | title          | field_user_state | field_member_state | uid         | field_contact_email    |
+      | <member_state> | <user_state>     | <member_state>     | @currentuid | stateadmin@example.com |
     And "District" nodes:
       | title           | uid         | field_ref_trt_state  |
       | <district_name> | @currentuid | @nid[<member_state>] |
@@ -34,7 +36,10 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
     | West Colorado | South Illinois | District @timestamp |
 
   Scenario Outline: State Admin on School Readiness page
-    Given I am logged in as a user with the "State Admin" role
+    Given users:
+      | name                   | mail                   | pass   | field_first_name | field_last_name | status | roles                 |
+      | stateadmin@example.com | stateadmin@example.com | xyz123 | Joe              | Educator        | 1      | Educator, State Admin |
+    And I am logged in as "stateadmin@example.com"
     And "User States" terms:
       | name         |
       | <user_state> |
@@ -42,8 +47,8 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
       | name           | field_state_code |
       | <member_state> | SOIL1            |
     And "State" nodes:
-      | title          | field_user_state | field_member_state | uid         |
-      | <member_state> | <user_state>     | <member_state>     | @currentuid |
+      | title          | field_user_state | field_member_state | uid         | field_contact_email    |
+      | <member_state> | <user_state>     | <member_state>     | @currentuid | stateadmin@example.com |
     And "District" nodes:
       | title           | uid         | field_ref_trt_state  |
       | <district_name> | @currentuid | @nid[<member_state>] |
@@ -249,7 +254,10 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
 #  <District Name> Readiness (links to District Readiness (PRC-706))
 #  Manage Schools (links to Manage Schools (PRC-828))
   Scenario Outline: District Admin on Request Readiness Checks
-    Given I am logged in as a user with the "District Admin" role
+    Given users:
+      | name                      | mail                      | pass   | field_first_name | field_last_name | status | roles                 |
+      | districtadmin@example.com | districtadmin@example.com | xyz123 | Joe              | Educator        | 1      | Educator, District Admin |
+    And I am logged in as "districtadmin@example.com"
     And "User States" terms:
       | name         |
       | <user_state> |
@@ -265,7 +273,7 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
     And "School" nodes:
       | title         | field_ref_district    | field_contact_email            | uid         |
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
-    And I visit the first node created
+    And I visit "assessments/technology-readiness"
     And I click "<district_name> Readiness"
     And I click "Manage Schools"
     When I check the box "edit-views-bulk-operations-0"
@@ -305,7 +313,10 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
     | West Colorado | South Illinois | District @timestamp | School @timestamp |
 
   Scenario Outline: School Admin on System Check - Structured - Form and View Results Page
-    Given I am logged in as a user with the "School Admin" role
+    Given users:
+      | name                   | mail                   | pass   | field_first_name | field_last_name | status | roles                    |
+      | schooladmin@example.com | schooladmin@example.com | xyz123 | Joe              | Educator        | 1      | Educator, School Admin |
+    And I am logged in as "schooladmin@example.com"
     And "User States" terms:
       | name         |
       | <user_state> |
@@ -319,14 +330,13 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
       | title           | uid         | field_ref_trt_state  |
       | <district_name> | @currentuid | @nid[<member_state>] |
     And "School" nodes:
-      | title         | field_ref_district    | field_contact_email            | uid         |
-      | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
+      | title         | field_ref_district    | field_contact_email     | uid         |
+      | <school_name> | @nid[<district_name>] | schooladmin@example.com | @currentuid |
     And I visit the last node created
     And I click "run system check"
     Then I should not see the link "<member_state> Readiness"
     And I should not see the link "<district_name> Readiness"
     But I should see the link "<school_name> Readiness"
-
     And I fill in "System check name" with "Check 2"
     And I fill in "Number of devices" with "23"
     And I select "Desktop" from "Device type"
@@ -343,7 +353,6 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
     And I fill in the hidden field "faux_screen_resolution_width" with "1024"
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
-
     Then I should not see the link "<member_state> Readiness"
     And I should not see the link "<district_name> Readiness"
     But I should see the link "<school_name> Readiness"
@@ -352,7 +361,10 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
     | West Colorado | South Illinois | District @timestamp | School @timestamp |
 
   Scenario Outline: School Admin on Testing Capacity Check - Structured - Form and View Results Page
-    Given I am logged in as a user with the "School Admin" role
+    Given users:
+      | name                   | mail                   | pass   | field_first_name | field_last_name | status | roles                    |
+      | schooladmin@example.com | schooladmin@example.com | xyz123 | Joe              | Educator        | 1      | Educator, School Admin |
+    And I am logged in as "schooladmin@example.com"
     And "User States" terms:
       | name         |
       | <user_state> |
@@ -367,7 +379,7 @@ Feature: PRC-815 Navigation - Breadcrumbs - Structured User
       | <district_name> | @currentuid | @nid[<member_state>] |
     And "School" nodes:
       | title         | field_ref_district    | field_contact_email            | uid         |
-      | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
+      | <school_name> | @nid[<district_name>] | schooladmin@example.com | @currentuid |
     And I visit the last node created
     And I click "run testing capacity check"
     Then I should not see the link "<member_state> Readiness"

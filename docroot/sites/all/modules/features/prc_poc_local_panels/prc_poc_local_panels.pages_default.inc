@@ -157,7 +157,7 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-29e82e9c-3e03-4cbf-8264-0c32d5a6f549';
+    $pane->pid = 'new-f614a5e2-51cf-4ad7-b77c-948b3f2e4782';
     $pane->panel = 'center';
     $pane->type = 'content_state';
     $pane->subtype = 'content_state';
@@ -183,16 +183,13 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array(
-      'css_id' => '',
-      'css_class' => 'column',
-    );
+    $pane->css = array();
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '29e82e9c-3e03-4cbf-8264-0c32d5a6f549';
-    $display->content['new-29e82e9c-3e03-4cbf-8264-0c32d5a6f549'] = $pane;
-    $display->panels['center'][0] = 'new-29e82e9c-3e03-4cbf-8264-0c32d5a6f549';
+    $pane->uuid = 'f614a5e2-51cf-4ad7-b77c-948b3f2e4782';
+    $display->content['new-f614a5e2-51cf-4ad7-b77c-948b3f2e4782'] = $pane;
+    $display->panels['center'][0] = 'new-f614a5e2-51cf-4ad7-b77c-948b3f2e4782';
     $pane = new stdClass();
     $pane->pid = 'new-5df9dfc2-b0f4-4599-8f53-02c1dc60cccc';
     $pane->panel = 'center';
@@ -343,7 +340,14 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->configuration = array(
       'admin_title' => 'District Readiness Overview',
       'title' => '',
-      'body' => 'Overview / instructional copy goes here (admin can export all test results data for district to csv or click school name to view results of technology checks for school). Note only schools that have run structured readiness checks display on this page.',
+      'body' => 'Click the links on this page to access, manage, and download school data and readiness reports from your district.
+
+To add a school, click “Manage Schools” and then either add one school at a time with the form or upload via .csv file.
+
+For more information on the TRT, please refer to the online tutorial found in the professional learning section of this site.
+
+For more information on the technology requirements used to evaluate platforms and networks please download the <a href="http://www.parcconline.org/files/72/Technology Guidelines for PARCC Assessments/389/TechnologyGuidelinesPARCCAssessments-v5_0-August2015.pdf" target="_blank">PARCC minimum technology requirements</a> document.
+',
       'format' => 'filtered_html',
       'substitute' => 1,
     );
@@ -747,6 +751,14 @@ function prc_poc_local_panels_default_page_manager_handlers() {
           'context' => 'logged-in-user',
           'not' => FALSE,
         ),
+        1 => array(
+          'name' => 'php',
+          'settings' => array(
+            'description' => 'prc_trt_access_structured_links',
+            'php' => 'return prc_trt_access_structured_links($contexts);',
+          ),
+          'not' => FALSE,
+        ),
       ),
     );
     $pane->configuration = array(
@@ -782,6 +794,14 @@ function prc_poc_local_panels_default_page_manager_handlers() {
             ),
           ),
           'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+        1 => array(
+          'name' => 'php',
+          'settings' => array(
+            'description' => 'prc_trt_access_structured_links',
+            'php' => 'return prc_trt_access_structured_links($contexts);',
+          ),
           'not' => FALSE,
         ),
       ),
@@ -889,7 +909,9 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->configuration = array(
       'admin_title' => 'State Readiness Overview Copy',
       'title' => '',
-      'body' => 'Overview / instructional copy goes here (admin can export all test results data for state to csv or click district name to view results of technology checks by school).',
+      'body' => 'Click the links on this page to access and download district and school data and readiness reports.
+
+For more information on the technology requirements used to evaluate platforms and networks please download the <a href="http://www.parcconline.org/files/72/Technology Guidelines for PARCC Assessments/389/TechnologyGuidelinesPARCCAssessments-v5_0-August2015.pdf" target="_blank">PARCC minimum technology requirements</a> document.',
       'format' => 'filtered_html',
       'substitute' => 1,
     );
@@ -1009,6 +1031,76 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
+    $pane->pid = 'new-2eef8c92-18d3-490b-a663-3b306adaa308';
+    $pane->panel = 'left';
+    $pane->type = 'page_breadcrumb';
+    $pane->subtype = 'page_breadcrumb';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '2eef8c92-18d3-490b-a663-3b306adaa308';
+    $display->content['new-2eef8c92-18d3-490b-a663-3b306adaa308'] = $pane;
+    $display->panels['left'][0] = 'new-2eef8c92-18d3-490b-a663-3b306adaa308';
+    $pane = new stdClass();
+    $pane->pid = 'new-5541c6f4-2f41-49a7-8e48-c4f4053b0fc0';
+    $pane->panel = 'left';
+    $pane->type = 'page_title';
+    $pane->subtype = 'page_title';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'markup' => 'h1',
+      'class' => '',
+      'id' => '',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '5541c6f4-2f41-49a7-8e48-c4f4053b0fc0';
+    $display->content['new-5541c6f4-2f41-49a7-8e48-c4f4053b0fc0'] = $pane;
+    $display->panels['left'][1] = 'new-5541c6f4-2f41-49a7-8e48-c4f4053b0fc0';
+    $pane = new stdClass();
+    $pane->pid = 'new-73730233-850f-45b8-8cbd-f60eca015a76';
+    $pane->panel = 'left';
+    $pane->type = 'page_tabs';
+    $pane->subtype = 'page_tabs';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'type' => 'both',
+      'id' => 'tabs',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = '73730233-850f-45b8-8cbd-f60eca015a76';
+    $display->content['new-73730233-850f-45b8-8cbd-f60eca015a76'] = $pane;
+    $display->panels['left'][2] = 'new-73730233-850f-45b8-8cbd-f60eca015a76';
+    $pane = new stdClass();
     $pane->pid = 'new-eaefe678-6bd2-4bd7-bdd0-12ed5c6db557';
     $pane->panel = 'left';
     $pane->type = 'entity_view';
@@ -1027,11 +1119,11 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 3;
     $pane->locks = array();
     $pane->uuid = 'eaefe678-6bd2-4bd7-bdd0-12ed5c6db557';
     $display->content['new-eaefe678-6bd2-4bd7-bdd0-12ed5c6db557'] = $pane;
-    $display->panels['left'][0] = 'new-eaefe678-6bd2-4bd7-bdd0-12ed5c6db557';
+    $display->panels['left'][3] = 'new-eaefe678-6bd2-4bd7-bdd0-12ed5c6db557';
     $pane = new stdClass();
     $pane->pid = 'new-b1bfb32b-1b18-4ffe-bc6e-a36d885d3a2d';
     $pane->panel = 'left';
@@ -1049,12 +1141,72 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 4;
     $pane->locks = array();
     $pane->uuid = 'b1bfb32b-1b18-4ffe-bc6e-a36d885d3a2d';
     $display->content['new-b1bfb32b-1b18-4ffe-bc6e-a36d885d3a2d'] = $pane;
-    $display->panels['left'][1] = 'new-b1bfb32b-1b18-4ffe-bc6e-a36d885d3a2d';
-  $display->hide_title = PANELS_TITLE_PANE;
+    $display->panels['left'][4] = 'new-b1bfb32b-1b18-4ffe-bc6e-a36d885d3a2d';
+    $pane = new stdClass();
+    $pane->pid = 'new-8f99e396-f943-4b67-b034-3a51dde5fc6d';
+    $pane->panel = 'right';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'node:field_thumbnail';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'label' => 'hidden',
+      'formatter' => 'image',
+      'delta_limit' => 0,
+      'delta_offset' => '0',
+      'delta_reversed' => FALSE,
+      'formatter_settings' => array(
+        'image_style' => 'gallery_view',
+        'image_link' => '',
+      ),
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '8f99e396-f943-4b67-b034-3a51dde5fc6d';
+    $display->content['new-8f99e396-f943-4b67-b034-3a51dde5fc6d'] = $pane;
+    $display->panels['right'][0] = 'new-8f99e396-f943-4b67-b034-3a51dde5fc6d';
+    $pane = new stdClass();
+    $pane->pid = 'new-fca74cb6-24f1-42c3-8f19-d45a96c08e75';
+    $pane->panel = 'right';
+    $pane->type = 'node_links';
+    $pane->subtype = 'node_links';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => 'Share <hr>',
+      'build_mode' => 'full',
+      'identifier' => '',
+      'link' => 0,
+      'context' => 'argument_entity_id:node_1',
+      'override_title_heading' => 'div',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'fca74cb6-24f1-42c3-8f19-d45a96c08e75';
+    $display->content['new-fca74cb6-24f1-42c3-8f19-d45a96c08e75'] = $pane;
+    $display->panels['right'][1] = 'new-fca74cb6-24f1-42c3-8f19-d45a96c08e75';
+  $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $export['node_view_panel_context'] = $handler;
@@ -1108,22 +1260,21 @@ function prc_poc_local_panels_default_page_manager_handlers() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-173ef7c8-627c-4ffb-82c7-517f83c7974d';
+    $pane->pid = 'new-b4da9147-35b7-4720-9a29-7016dd894f4a';
     $pane->panel = 'middle';
-    $pane->type = 'node_content';
-    $pane->subtype = 'node_content';
+    $pane->type = 'node_title';
+    $pane->subtype = 'node_title';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'links' => 1,
-      'no_extras' => 1,
-      'override_title' => 0,
-      'override_title_text' => '',
-      'identifier' => '',
       'link' => 0,
-      'leave_node_title' => 0,
-      'build_mode' => 'full',
+      'markup' => 'h1',
+      'id' => '',
+      'class' => '',
       'context' => 'argument_entity_id:node_1',
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'span',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -1133,9 +1284,64 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
+    $pane->uuid = 'b4da9147-35b7-4720-9a29-7016dd894f4a';
+    $display->content['new-b4da9147-35b7-4720-9a29-7016dd894f4a'] = $pane;
+    $display->panels['middle'][0] = 'new-b4da9147-35b7-4720-9a29-7016dd894f4a';
+    $pane = new stdClass();
+    $pane->pid = 'new-6251b6b3-6913-4c8b-81fc-247537ef0e86';
+    $pane->panel = 'middle';
+    $pane->type = 'page_tabs';
+    $pane->subtype = 'page_tabs';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'type' => 'both',
+      'id' => 'tabs',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '6251b6b3-6913-4c8b-81fc-247537ef0e86';
+    $display->content['new-6251b6b3-6913-4c8b-81fc-247537ef0e86'] = $pane;
+    $display->panels['middle'][1] = 'new-6251b6b3-6913-4c8b-81fc-247537ef0e86';
+    $pane = new stdClass();
+    $pane->pid = 'new-173ef7c8-627c-4ffb-82c7-517f83c7974d';
+    $pane->panel = 'middle';
+    $pane->type = 'node_content';
+    $pane->subtype = 'node_content';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'links' => 1,
+      'no_extras' => 1,
+      'override_title' => 1,
+      'override_title_text' => '',
+      'identifier' => '',
+      'link' => 0,
+      'leave_node_title' => 0,
+      'build_mode' => 'full',
+      'context' => 'argument_entity_id:node_1',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
     $pane->uuid = '173ef7c8-627c-4ffb-82c7-517f83c7974d';
     $display->content['new-173ef7c8-627c-4ffb-82c7-517f83c7974d'] = $pane;
-    $display->panels['middle'][0] = 'new-173ef7c8-627c-4ffb-82c7-517f83c7974d';
+    $display->panels['middle'][2] = 'new-173ef7c8-627c-4ffb-82c7-517f83c7974d';
     $pane = new stdClass();
     $pane->pid = 'new-a388be83-6d77-470c-adf3-d79ecc3563d7';
     $pane->panel = 'middle';
@@ -1158,11 +1364,11 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 3;
     $pane->locks = array();
     $pane->uuid = 'a388be83-6d77-470c-adf3-d79ecc3563d7';
     $display->content['new-a388be83-6d77-470c-adf3-d79ecc3563d7'] = $pane;
-    $display->panels['middle'][1] = 'new-a388be83-6d77-470c-adf3-d79ecc3563d7';
+    $display->panels['middle'][3] = 'new-a388be83-6d77-470c-adf3-d79ecc3563d7';
     $pane = new stdClass();
     $pane->pid = 'new-e10bdac5-cc69-4cb5-abb9-98443716479a';
     $pane->panel = 'middle';
@@ -1181,11 +1387,11 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 2;
+    $pane->position = 4;
     $pane->locks = array();
     $pane->uuid = 'e10bdac5-cc69-4cb5-abb9-98443716479a';
     $display->content['new-e10bdac5-cc69-4cb5-abb9-98443716479a'] = $pane;
-    $display->panels['middle'][2] = 'new-e10bdac5-cc69-4cb5-abb9-98443716479a';
+    $display->panels['middle'][4] = 'new-e10bdac5-cc69-4cb5-abb9-98443716479a';
     $pane = new stdClass();
     $pane->pid = 'new-5191f8c4-630f-4d52-a599-a94e80c3cfa6';
     $pane->panel = 'middle';
@@ -1200,39 +1406,11 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 3;
+    $pane->position = 5;
     $pane->locks = array();
     $pane->uuid = '5191f8c4-630f-4d52-a599-a94e80c3cfa6';
     $display->content['new-5191f8c4-630f-4d52-a599-a94e80c3cfa6'] = $pane;
-    $display->panels['middle'][3] = 'new-5191f8c4-630f-4d52-a599-a94e80c3cfa6';
-    $pane = new stdClass();
-    $pane->pid = 'new-9e55c978-4606-4d9c-897d-49a30354da25';
-    $pane->panel = 'middle';
-    $pane->type = 'custom';
-    $pane->subtype = 'custom';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'admin_title' => 'Empty Placeholder for Item Preview',
-      'title' => '',
-      'body' => '&nbsp;',
-      'format' => 'filtered_html',
-      'substitute' => 0,
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array(
-      'css_id' => '',
-      'css_class' => 'item-preview-pane',
-    );
-    $pane->extras = array();
-    $pane->position = 4;
-    $pane->locks = array();
-    $pane->uuid = '9e55c978-4606-4d9c-897d-49a30354da25';
-    $display->content['new-9e55c978-4606-4d9c-897d-49a30354da25'] = $pane;
-    $display->panels['middle'][4] = 'new-9e55c978-4606-4d9c-897d-49a30354da25';
+    $display->panels['middle'][5] = 'new-5191f8c4-630f-4d52-a599-a94e80c3cfa6';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-173ef7c8-627c-4ffb-82c7-517f83c7974d';
   $handler->conf['display'] = $display;
@@ -1280,9 +1458,13 @@ function prc_poc_local_panels_default_page_manager_handlers() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'admin_title' => '',
-      'title' => 'Overview/ Instructional copy:',
-      'body' => 'Overview and instructional copy goes here. Consider explaining importance of running system check and how to do it: To prepare school for successful assessment, user can run system check to make sure device or devices meet <a href="http://www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf" target="_blank">PARCC minimum technology requirements</a>. Include instructions that user can run test for on single device and apply the results to multiple devices with same configuration.',
+      'admin_title' => 'System Check Text',
+      'title' => '',
+      'body' => 'To prepare each school for a successful assessment implementation, a TRT School admin  can run system checks on all of the devices in a school to make sure  the device or devices meets <a href="http://www.parcconline.org/files/72/Technology Guidelines for PARCC Assessments/389/TechnologyGuidelinesPARCCAssessments-v5_0-August2015.pdf" target="_blank">PARCC minimum technology requirements</a>. Click the link to access the latest requirements document. This check is for testing through 2015 and does not as of this time support testing for EOY 2016 testing. Running an Ad Hoc system check will not be saved.
+
+If you are a school administrator, please run this check from your school readiness page. Navigate back the TRT homepage and look for a link to your school or request that your District TRT admin resend you the link via email.
+
+This test checks one system but, by indicating the number of machines this profile applies to, allows for better testing administration.',
       'format' => 'filtered_html',
       'substitute' => TRUE,
     );
@@ -1747,7 +1929,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_title = 'Access Denied';
   $page->admin_description = '';
   $page->path = 'access-denied';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(
@@ -1783,7 +1968,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = 'Access Denied';
+  $display->title = '';
   $display->uuid = '4ca9815d-5bbc-41c9-abf9-b004b15fd18e';
   $display->content = array();
   $display->panels = array();
@@ -1809,8 +1994,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
     );
     $pane->configuration = array(
       'admin_title' => 'Anonymous Users Access Denied',
-      'title' => '',
-      'body' => 'If you have a site account, <a href="/user">log in</a> and try to access the page again.',
+      'title' => 'Access Denied - Please Log In',
+      'body' => 'Your session within PRC may have expired.
+
+If you would like to login to PRC, please click <a href="/user/login">here</a>.',
       'format' => 'full_html',
       'substitute' => TRUE,
     );
@@ -1847,8 +2034,12 @@ function prc_poc_local_panels_default_page_manager_pages() {
     );
     $pane->configuration = array(
       'admin_title' => 'Authenticated Access Denied',
-      'title' => '',
-      'body' => 'You are not allowed to view this content.',
+      'title' => 'Access Denied - Insufficient Permissions',
+      'body' => 'It appears that you have tried to access a resource that you do not have permission to view.
+
+Click <a href=\'/\'>here</a> to return to the homepage.
+
+',
       'format' => 'filtered_html',
       'substitute' => TRUE,
     );
@@ -1863,7 +2054,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->uuid = 'e1d6b045-870d-4635-8735-ca37bee5be68';
     $display->content['new-e1d6b045-870d-4635-8735-ca37bee5be68'] = $pane;
     $display->panels['center'][1] = 'new-e1d6b045-870d-4635-8735-ca37bee5be68';
-  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = 'new-d4b0d67d-80f7-4b1b-a80d-a3ed34d4f278';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
@@ -1877,7 +2068,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_title = 'Assessment Detail';
   $page->admin_description = '';
   $page->path = 'assessment/%node';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array(
     'node' => array(
@@ -2000,35 +2194,119 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
+  $page->name = 'assessment_landing_page';
+  $page->task = 'page';
+  $page->admin_title = 'Assessment Landing Page';
+  $page->admin_description = 'Page listing links to assessment sub-sections.';
+  $page->path = 'assessments';
+  $page->access = array();
+  $page->menu = array(
+    'type' => 'normal',
+    'title' => 'Assessment',
+    'name' => 'main-menu',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
+  $page->arguments = array();
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_assessment_landing_page__panel';
+  $handler->task = 'page';
+  $handler->subtask = 'assessment_landing_page';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => 'assessment-landing-page',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => 'panel',
+  );
+  $display = new panels_display();
+  $display->layout = 'flexible';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'center' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = 'cfa2d5c7-6050-4a60-a5c6-9d7838901577';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-11ac44c2-aa79-4099-97f8-3d08deacb6dc';
+    $pane->panel = 'center';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-assessment';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '11ac44c2-aa79-4099-97f8-3d08deacb6dc';
+    $display->content['new-11ac44c2-aa79-4099-97f8-3d08deacb6dc'] = $pane;
+    $display->panels['center'][0] = 'new-11ac44c2-aa79-4099-97f8-3d08deacb6dc';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['assessment_landing_page'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
   $page->name = 'assessments';
   $page->task = 'page';
   $page->admin_title = 'Assessments';
   $page->admin_description = '';
-  $page->path = 'assessments/!nid';
+  $page->path = 'assessments/practice-assessments';
   $page->access = array(
     'plugins' => array(),
     'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
   );
   $page->menu = array(
     'type' => 'normal',
     'title' => 'Assessments',
-    'weight' => '0',
     'name' => 'main-menu',
+    'weight' => '0',
     'parent' => array(
       'type' => 'none',
       'title' => '',
-      'weight' => 0,
       'name' => 'navigation',
+      'weight' => '0',
     ),
   );
-  $page->arguments = array(
-    'nid' => array(
-      'id' => 1,
-      'identifier' => 'Node: ID',
-      'name' => 'entity_id:node',
-      'settings' => array(),
-    ),
-  );
+  $page->arguments = array();
   $page->conf = array(
     'admin_paths' => FALSE,
   );
@@ -2058,7 +2336,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'path_visibility',
           'settings' => array(
             'visibility_setting' => '1',
-            'paths' => 'assessments',
+            'paths' => 'assessments/practice-assessments',
           ),
           'context' => 'empty',
           'not' => FALSE,
@@ -2068,7 +2346,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'twocol_stacked';
+  $display->layout = 'onecol';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -2077,6 +2355,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
       'right' => NULL,
       'top' => NULL,
       'bottom' => NULL,
+      'middle' => NULL,
     ),
   );
   $display->cache = array();
@@ -2085,16 +2364,19 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-a544d903-fcca-45fb-80e3-d3d66fdee207';
-    $pane->panel = 'left';
-    $pane->type = 'block';
-    $pane->subtype = 'menu-menu-assessment-left-nav';
+    $pane->pid = 'new-8b012f72-2368-4456-83f7-bab2f2461543';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 0,
-      'override_title_text' => '',
-      'override_title_heading' => 'h2',
+      'admin_title' => 'Assessments Copy',
+      'title' => '',
+      'body' => 'From here, you can view available assessments. After registering and logging in, you can create your own assessments from your own items. 
+Coming soon - PARCC Assessments built from PARCC released items.',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
     );
     $pane->cache = array();
     $pane->style = array(
@@ -2104,12 +2386,61 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
+    $pane->uuid = '8b012f72-2368-4456-83f7-bab2f2461543';
+    $display->content['new-8b012f72-2368-4456-83f7-bab2f2461543'] = $pane;
+    $display->panels['middle'][0] = 'new-8b012f72-2368-4456-83f7-bab2f2461543';
+    $pane = new stdClass();
+    $pane->pid = 'new-1718c304-c930-4da3-b981-ee976bebef32';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-add-quiz';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array(
+      'method' => '0',
+      'settings' => array(),
+    );
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '1718c304-c930-4da3-b981-ee976bebef32';
+    $display->content['new-1718c304-c930-4da3-b981-ee976bebef32'] = $pane;
+    $display->panels['middle'][1] = 'new-1718c304-c930-4da3-b981-ee976bebef32';
+    $pane = new stdClass();
+    $pane->pid = 'new-a544d903-fcca-45fb-80e3-d3d66fdee207';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-assessment-left-nav';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
     $pane->uuid = 'a544d903-fcca-45fb-80e3-d3d66fdee207';
     $display->content['new-a544d903-fcca-45fb-80e3-d3d66fdee207'] = $pane;
-    $display->panels['left'][0] = 'new-a544d903-fcca-45fb-80e3-d3d66fdee207';
+    $display->panels['middle'][2] = 'new-a544d903-fcca-45fb-80e3-d3d66fdee207';
     $pane = new stdClass();
     $pane->pid = 'new-40b1d071-1a00-4d88-87dd-140bbe28eda6';
-    $pane->panel = 'left';
+    $pane->panel = 'middle';
     $pane->type = 'views_panes';
     $pane->subtype = 'my_lists-panel_pane_1';
     $pane->shown = TRUE;
@@ -2128,14 +2459,14 @@ function prc_poc_local_panels_default_page_manager_pages() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 3;
     $pane->locks = array();
     $pane->uuid = '40b1d071-1a00-4d88-87dd-140bbe28eda6';
     $display->content['new-40b1d071-1a00-4d88-87dd-140bbe28eda6'] = $pane;
-    $display->panels['left'][1] = 'new-40b1d071-1a00-4d88-87dd-140bbe28eda6';
+    $display->panels['middle'][3] = 'new-40b1d071-1a00-4d88-87dd-140bbe28eda6';
     $pane = new stdClass();
     $pane->pid = 'new-5ca788a1-d895-445f-ba1a-7ce3619d6d96';
-    $pane->panel = 'right';
+    $pane->panel = 'middle';
     $pane->type = 'views_panes';
     $pane->subtype = 'assessments-panel_pane_1';
     $pane->shown = TRUE;
@@ -2150,34 +2481,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
       'css_class' => 'digital-library-content-pane',
     );
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 4;
     $pane->locks = array();
     $pane->uuid = '5ca788a1-d895-445f-ba1a-7ce3619d6d96';
     $display->content['new-5ca788a1-d895-445f-ba1a-7ce3619d6d96'] = $pane;
-    $display->panels['right'][0] = 'new-5ca788a1-d895-445f-ba1a-7ce3619d6d96';
-    $pane = new stdClass();
-    $pane->pid = 'new-1718c304-c930-4da3-b981-ee976bebef32';
-    $pane->panel = 'top';
-    $pane->type = 'block';
-    $pane->subtype = 'menu-menu-add-quiz';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'override_title' => 1,
-      'override_title_text' => '',
-      'override_title_heading' => 'h2',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = '1718c304-c930-4da3-b981-ee976bebef32';
-    $display->content['new-1718c304-c930-4da3-b981-ee976bebef32'] = $pane;
-    $display->panels['top'][0] = 'new-1718c304-c930-4da3-b981-ee976bebef32';
+    $display->panels['middle'][4] = 'new-5ca788a1-d895-445f-ba1a-7ce3619d6d96';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-5ca788a1-d895-445f-ba1a-7ce3619d6d96';
   $handler->conf['display'] = $display;
@@ -2206,7 +2514,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
           'name' => 'path_visibility',
           'settings' => array(
             'visibility_setting' => '1',
-            'paths' => 'assessments/*',
+            'paths' => 'assessments/practice-assessments/*',
           ),
           'context' => 'empty',
           'not' => FALSE,
@@ -2315,7 +2623,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->task = 'page';
   $page->admin_title = 'Content Administration Page';
   $page->admin_description = 'PRC Content administration page';
-  $page->path = 'admin-content';
+  $page->path = 'prc/admin/admin-content';
   $page->access = array(
     'plugins' => array(
       1 => array(
@@ -2328,8 +2636,21 @@ function prc_poc_local_panels_default_page_manager_pages() {
       ),
     ),
     'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
   );
-  $page->menu = array();
+  $page->menu = array(
+    'type' => 'normal',
+    'title' => 'Content',
+    'name' => 'main-menu',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
   $page->arguments = array();
   $page->conf = array(
     'admin_paths' => FALSE,
@@ -2495,7 +2816,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->task = 'page';
   $page->admin_title = 'Course Management';
   $page->admin_description = 'List of courses for course managers. Not for end-users.';
-  $page->path = 'admin-course';
+  $page->path = 'prc/admin/admin-course';
   $page->access = array(
     'plugins' => array(
       0 => array(
@@ -2508,8 +2829,21 @@ function prc_poc_local_panels_default_page_manager_pages() {
       ),
     ),
     'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
   );
-  $page->menu = array();
+  $page->menu = array(
+    'type' => 'normal',
+    'title' => 'Course Management',
+    'name' => 'main-menu',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
   $page->arguments = array();
   $page->conf = array(
     'admin_paths' => FALSE,
@@ -2598,6 +2932,190 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
+  $page->name = 'diagnostics';
+  $page->task = 'page';
+  $page->admin_title = 'Diagnostics';
+  $page->admin_description = 'The Assessment >>> Diagnostics page.';
+  $page->path = 'assessments/diagnostics';
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 12,
+            1 => 8,
+            2 => 4,
+            3 => 3,
+            4 => 7,
+            5 => 9,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+    ),
+    'logic' => 'and',
+  );
+  $page->menu = array(
+    'type' => 'normal',
+    'title' => 'Diagnostics',
+    'name' => 'main-menu',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
+  $page->arguments = array();
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_diagnostics__panel';
+  $handler->task = 'page';
+  $handler->subtask = 'diagnostics';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'ipe',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => 'panel',
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = 'Diagnostic Tools';
+  $display->uuid = '5f094a57-0279-4b5a-9696-6f15eef56bcc';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-6141a73b-e250-45d8-b2d7-80ccb56376fc';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => '',
+      'title' => '',
+      'body' => '<strong><a href="https://teach.parcconline.org">Launch ADS Teach if you are ready to assign diagnostic assessments for your students.</a></strong>
+
+The PARCC Diagnostic Tools are listed in the table below. The purpose of the assessments is to provide educators with instructionally useful information related to how students demonstrate strengths and needs with each grade’s Common Core State Standards. The assessments have been designed to maximize instructional time and minimize testing time. Educators will receive immediate feedback after administering an assessment, which can then be used to make daily instructional choices. The assessments are meant to be flexible, such that teachers choose the assessment and time to administer them based on their needs and the needs of their students. Teachers can also choose to administer an assessment to one student, a group of students, or their entire class.
+
+At this time, the Diagnostic Tools are available to districts via the <strong><a href="http://www.parcconline.org/instructional-tools/diagnostics/early-adopter-program">Diagnostics Early Adopter Program</a></strong> for free through the end of June 2016. To learn more about the Early Adopter Program and gain access to the tools, please read more and sign up for the program at <strong><a href="http://www.parcconline.org/instructional-tools/diagnostics/early-adopter-program">http://www.parcconline.org/instructional-tools/diagnostics/early-adopter-program</a></strong>.
+
+<strong>Note: The Reading Fluency is instantly available to users via the link below.</stroing>
+
+<table style="width:100%">
+<thead><tr><th>Diagnostic Assessments</th><th>Grade Levels</th><th>Sub-Test Guide</th></tr></thead>
+<tbody>
+<tr><td><div align="center"><strong>Reading Comprehension</strong></div></td><td><div align="center">2 – 9</div></td><td><div align="center"><strong><a href="https://prc.parcconline.org/library/parcc-diagnostic-reading-comprehension">Sub-Test Guide</a></strong></div></td></tr>
+<tr><td><div align="center"><strong>Reading Vocabulary</strong></div></td><td><div align="center">2 – 8</div></td><td><div align="center"><strong><a href="https://prc.parcconline.org/library/parcc-diagnostic-vocabulary">Sub-Test Guide</a></strong></div></td></tr>
+<tr><td><div align="center"><strong><a href="https://prc.parcconline.org/instructional-tools/reading-fluency">Reading Fluency</a></strong></div></td><td><div align="center">2 – 8</div></td><td><div align="center"><strong><a href="https://prc.parcconline.org/library/teaching-and-assessing-reading-fluency">Sub-Test Guide</a></strong></div></td></tr>
+<tr><td><div align="center"><strong>Decoding</strong></div></td><td><div align="center">any</div></td><td><div align="center"><strong><a href="https://prc.parcconline.org/library/parcc-diagnostic-decoding">Sub-Test Guide</a></strong></div></td></tr>
+<tr><td><div align="center"><strong>Reader Motivation Survey</strong></div></td><td><div align="center">2 – 12</div></td><td><div align="center"><strong><a href="https://prc.parcconline.org/library/parccs-reader-motivation-surveys">Sub-Test Guide</a></strong></div></td></tr>
+<tr><td><div align="center"><strong>Mathematics Comprehension</strong></div></td><td><div align="center">2 – 8 </div></td><td><div align="center"><strong><a href="https://prc.parcconline.org/library/parcc-diagnostic-math-comprehension">Sub-Test Guide</a></strong></div></td></tr>
+<tr><td><div align="center"><strong>Mathematics Fluency</strong></div></td><td><div align="center">2 – 6 </div></td><td><div align="center"><strong><a href="https://prc.parcconline.org/library/parcc-diagnostic-math-fluency">Sub-Test Guide</a></strong></div></td></tr>
+</tbody>
+</table>
+</br>
+</br>
+
+<table style="width:100%">
+<thead><tr><th>User Guides</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><div align="center"><strong><a href="https://prc.parcconline.org/system/files/DIA_ADS%20Teach%20-%20Test%20Admin_12-11-15_0.pdf">ADS Teach – Test Administrators</a></strong></div></td><td><div align="center"><strong>This guide is designed to provide the information necessary for educators to successfully navigate the ADS Teach section of the PARCC Assessment Delivery System platform and to understand how to set students up to take tests and to review and use reports.</strong></div></td></tr>
+<tr><td><div align="center"><strong><a href="https://prc.parcconline.org/system/files/DIA_ADS%20Teach%20-%20Dist_School%20Admin_12-11-15.pdf">ADS Teach – Roster and Set-up for District/School Administrators</a></strong></div></td><td><div align="center"><strong>This guide is designed to provide the information necessary for both District and School Administrators.</strong></div></td></tr>
+<tr><td><div align="center"><strong><a href="https://prc.parcconline.org/system/files/DIA_ADS%20Learn%20-%20Teacher_12-11-15.pdf">ADS Learn – Teachers</a></strong></div></td><td><div align="center"><strong>This guide is designed to provide the information necessary for educators to successfully navigate the ADS Learn section of the PARCC Assessment Delivery System platform and to understand how students will log in, take, and submit tests.</strong></div></td></tr>
+<tr><td><div align="center"><strong><a href="https://prc.parcconline.org/system/files/DIA_ADS%20Learn%20-%20Students%20_12-14-15.pdf">ADS Learn – Students</a></strong></div></td><td><div align="center"><strong>This guide will assist students with logging in, taking, and submitting tests to their teachers.</strong></div></td></tr>
+<tr><td><div align="center"><strong><a href="https://prc.parcconline.org/system/files/DIA_Teacher%27s%20Guide%20to%20Understanding%20the%20PARCC%20Diagnostic%20Tools%20v2.pdf">Understanding the PARCC Diagnostic Tools</a></strong></div></td><td><div align="center"><strong>PARCC has developed a set of Diagnostic tools to support instructional decision-making in both English Language Arts and in Mathematics.</strong></div></td></tr>
+</tbody>
+</table>
+</br>
+</br>
+
+
+
+
+<ul>
+<li><strong><a href="/professional-learning/introduction-parcc-diagnostic-tools">Interactive learning module regarding the diagnostic assessments</a></strong> </li>
+<li><strong><a href="/library/diagnostic-assessments-user%E2%80%99s-guide-faqs-and-more">Learn more information about the diagnostic tools including the Diagnostic Assessment User’s Guide, Assessment Overviews, and FAQs.</a></strong></li>
+</ul>
+
+',
+      'format' => 'full_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '6141a73b-e250-45d8-b2d7-80ccb56376fc';
+    $display->content['new-6141a73b-e250-45d8-b2d7-80ccb56376fc'] = $pane;
+    $display->panels['middle'][0] = 'new-6141a73b-e250-45d8-b2d7-80ccb56376fc';
+    $pane = new stdClass();
+    $pane->pid = 'new-d3b890b0-3df7-4110-85fa-d20a56f1ca43';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => '',
+      'title' => '',
+      'body' => '<ul>
+<li><strong><a href="https://teach.parcconline.org">Launch ADS Teach if you are ready to assign diagnostic assessments for your students.</a></strong></li>
+</ul>',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'fake-last-list-item',
+    );
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'd3b890b0-3df7-4110-85fa-d20a56f1ca43';
+    $display->content['new-d3b890b0-3df7-4110-85fa-d20a56f1ca43'] = $pane;
+    $display->panels['middle'][1] = 'new-d3b890b0-3df7-4110-85fa-d20a56f1ca43';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-6141a73b-e250-45d8-b2d7-80ccb56376fc';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['diagnostics'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
   $page->name = 'digital_library';
   $page->task = 'page';
   $page->admin_title = 'Digital Library';
@@ -2606,11 +3124,13 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->access = array(
     'plugins' => array(),
     'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
   );
   $page->menu = array(
-    'type' => 'none',
-    'title' => 'Digital Library',
-    'name' => 'navigation',
+    'type' => 'normal',
+    'title' => 'Library',
+    'name' => 'main-menu',
     'weight' => '0',
     'parent' => array(
       'type' => 'none',
@@ -2677,21 +3197,18 @@ function prc_poc_local_panels_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = 'Digital Library';
+  $display->title = 'Library';
   $display->uuid = 'be6de706-bbff-4426-b19e-ffa4338520c8';
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-a5f8bc52-9761-4119-b636-2c90f803f7c3';
+    $pane->pid = 'new-80c4cb37-424b-4d23-8e44-fe26cdb69598';
     $pane->panel = 'middle';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'my_lists-panel_pane_1';
+    $pane->type = 'block';
+    $pane->subtype = 'facetapi-NibunqMh0rOvyMlrpODHYYJp1APdifmu';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'arguments' => array(
-        'field_content_type_value' => 'digital_library_content',
-      ),
       'override_title' => 1,
       'override_title_text' => 'My Lists',
       'override_title_heading' => 'h5',
@@ -2702,19 +3219,19 @@ function prc_poc_local_panels_default_page_manager_pages() {
     );
     $pane->css = array(
       'css_id' => '',
-      'css_class' => 'filter-panel-toggle',
+      'css_class' => 'filter-panel-toggle my-lists',
     );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = 'a5f8bc52-9761-4119-b636-2c90f803f7c3';
-    $display->content['new-a5f8bc52-9761-4119-b636-2c90f803f7c3'] = $pane;
-    $display->panels['middle'][0] = 'new-a5f8bc52-9761-4119-b636-2c90f803f7c3';
+    $pane->uuid = '80c4cb37-424b-4d23-8e44-fe26cdb69598';
+    $display->content['new-80c4cb37-424b-4d23-8e44-fe26cdb69598'] = $pane;
+    $display->panels['middle'][0] = 'new-80c4cb37-424b-4d23-8e44-fe26cdb69598';
     $pane = new stdClass();
-    $pane->pid = 'new-7cdf0ace-6505-4d93-ae18-168d199f67e3';
+    $pane->pid = 'new-e870f48f-1d55-4eb6-af34-ea8dc5d0d105';
     $pane->panel = 'middle';
     $pane->type = 'block';
-    $pane->subtype = 'facetapi-SR0G081Mavqde5IQsYt76d7K0MHqGPpR';
+    $pane->subtype = 'facetapi-911F1xeAtGAmTJ8gm7Mbx3yjSttaGAeP';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -2722,7 +3239,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
       'override_title_text' => 'Grade Level',
       'override_title_heading' => 'h5',
     );
-    $pane->cache = array();
+    $pane->cache = array(
+      'method' => '0',
+      'settings' => array(),
+    );
     $pane->style = array(
       'settings' => NULL,
     );
@@ -2733,9 +3253,9 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $pane->uuid = '7cdf0ace-6505-4d93-ae18-168d199f67e3';
-    $display->content['new-7cdf0ace-6505-4d93-ae18-168d199f67e3'] = $pane;
-    $display->panels['middle'][1] = 'new-7cdf0ace-6505-4d93-ae18-168d199f67e3';
+    $pane->uuid = 'e870f48f-1d55-4eb6-af34-ea8dc5d0d105';
+    $display->content['new-e870f48f-1d55-4eb6-af34-ea8dc5d0d105'] = $pane;
+    $display->panels['middle'][1] = 'new-e870f48f-1d55-4eb6-af34-ea8dc5d0d105';
     $pane = new stdClass();
     $pane->pid = 'new-79e3c8ae-4fa1-492e-8c14-2d3977ce6c56';
     $pane->panel = 'middle';
@@ -2968,25 +3488,34 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->task = 'page';
   $page->admin_title = 'Formative Instructional Tasks';
   $page->admin_description = 'Formative Instructional Tasks page';
-  $page->path = 'formative-instructional-tasks';
+  $page->path = 'instructional-tools/formative-instructional-tasks';
   $page->access = array(
     'plugins' => array(
       0 => array(
-        'name' => 'role',
+        'name' => 'perm',
         'settings' => array(
-          'rids' => array(
-            0 => 12,
-            1 => 8,
-            2 => 9,
-          ),
+          'perm' => 'view formative instructional tasks',
         ),
         'context' => 'logged-in-user',
         'not' => FALSE,
       ),
     ),
     'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
   );
-  $page->menu = array();
+  $page->menu = array(
+    'type' => 'normal',
+    'title' => 'Formative Instructional Tasks',
+    'name' => 'main-menu',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
   $page->arguments = array();
   $page->conf = array(
     'admin_paths' => FALSE,
@@ -3058,7 +3587,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => '',
       'title' => '',
-      'body' => 'Overview / instructional copy goes here.',
+      'body' => 'There are 16 ELA and 16 Math performance tasks (Kindergarten – Gr.2) which can be accessed in the table below. The tasks are designed to engage students in learning while you observe how students demonstrate proficiencies with respect to the standards embedded in the tasks. Your observations can be easily recorded using the formative tools (e.g., checklists) which can then be used to inform instructional decisions. In the table below, there are three files for each ELA task; one that provides access to the actual performance task, one that provides the copyrighted text, and one that provides resources that accompany the task. You will need all 3 ELA files in order to do the task with your students. There are also three files for each math task; one that provides access to the full task, one that contains additional checklists besides the one already embedded in the full task file, and one that provides resources that accompany the task. Note that the resources for math are embedded in the full task files; therefore, you may choose to only access the full task files when doing math tasks with your students. This provides access to an <strong><a href=" https://prc.parcconline.org/library/k-2-formative-instructional-tasks-information-and-faqs" target="_blank">overview </a></strong>of the tasks and this <strong><a href="https://prc.parcconline.org/library/k-2-formative-instructional-tasks-faqs" target="_blank"> link </a></strong>to other important information about the tasks including frequently asked questions (FAQs).',
       'format' => 'filtered_html',
       'substitute' => TRUE,
     );
@@ -3147,7 +3676,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_title = 'Home Page';
   $page->admin_description = 'Home Page';
   $page->path = 'front';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array(
     'type' => 'none',
     'title' => '',
@@ -3192,7 +3724,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display();
-  $display->layout = 'threecol_25_50_25_stacked';
+  $display->layout = 'onecol';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -3205,129 +3737,50 @@ function prc_poc_local_panels_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = 'No Title';
+  $display->title = 'Partnership Resource Center';
   $display->uuid = '7ddd0fc5-7ade-4b16-b936-828e5483547f';
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-c12ea823-5c49-4670-b44a-05c7807d75a5';
-    $pane->panel = 'left';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'digital_library_tree_view-panel_pane_1';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array();
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = 'c12ea823-5c49-4670-b44a-05c7807d75a5';
-    $display->content['new-c12ea823-5c49-4670-b44a-05c7807d75a5'] = $pane;
-    $display->panels['left'][0] = 'new-c12ea823-5c49-4670-b44a-05c7807d75a5';
-    $pane = new stdClass();
-    $pane->pid = 'new-3d1f3aec-75cc-4127-a8ac-a4042d5fba3c';
+    $pane->pid = 'new-e2fe8155-43d9-40ce-8f77-c33e1d1dff18';
     $pane->panel = 'middle';
-    $pane->type = 'panels_mini';
-    $pane->subtype = 'welcome_anonymous';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 0,
-      'override_title_text' => '',
+      'admin_title' => 'Title and Summary',
+      'title' => 'Partnership Resource Center',
+      'body' => 'Welcome to the Partnership Resource Center. Our community of educators, parents, and others committed to quality assessment leading to student success invite you to register, browse, learn, and implement to enhance your knowledge of assessments within the classroom.',
+      'format' => 'filtered_html',
+      'substitute' => 0,
     );
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'large-8 large-centered columns',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '3d1f3aec-75cc-4127-a8ac-a4042d5fba3c';
-    $display->content['new-3d1f3aec-75cc-4127-a8ac-a4042d5fba3c'] = $pane;
-    $display->panels['middle'][0] = 'new-3d1f3aec-75cc-4127-a8ac-a4042d5fba3c';
+    $pane->uuid = 'e2fe8155-43d9-40ce-8f77-c33e1d1dff18';
+    $display->content['new-e2fe8155-43d9-40ce-8f77-c33e1d1dff18'] = $pane;
+    $display->panels['middle'][0] = 'new-e2fe8155-43d9-40ce-8f77-c33e1d1dff18';
     $pane = new stdClass();
-    $pane->pid = 'new-90507084-c070-42e6-bd8a-6903054c7b6a';
+    $pane->pid = 'new-c301d702-0f77-4ec8-8d71-2f32ae628c6a';
     $pane->panel = 'middle';
-    $pane->type = 'panels_mini';
-    $pane->subtype = 'slideshow_placeholder';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'override_title' => 0,
-      'override_title_text' => '',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 1;
-    $pane->locks = array();
-    $pane->uuid = '90507084-c070-42e6-bd8a-6903054c7b6a';
-    $display->content['new-90507084-c070-42e6-bd8a-6903054c7b6a'] = $pane;
-    $display->panels['middle'][1] = 'new-90507084-c070-42e6-bd8a-6903054c7b6a';
-    $pane = new stdClass();
-    $pane->pid = 'new-a38223fb-bd9e-4ab5-8e4e-38b154d803de';
-    $pane->panel = 'right';
     $pane->type = 'block';
-    $pane->subtype = 'user-login';
+    $pane->subtype = 'menu-menu-homepage-menu';
     $pane->shown = TRUE;
-    $pane->access = array(
-      'plugins' => array(
-        0 => array(
-          'name' => 'role',
-          'settings' => array(
-            'rids' => array(
-              0 => 1,
-            ),
-          ),
-          'context' => 'logged-in-user',
-          'not' => FALSE,
-        ),
-      ),
-    );
+    $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 0,
+      'override_title' => 1,
       'override_title_text' => '',
+      'override_title_heading' => 'h2',
     );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = 'a38223fb-bd9e-4ab5-8e4e-38b154d803de';
-    $display->content['new-a38223fb-bd9e-4ab5-8e4e-38b154d803de'] = $pane;
-    $display->panels['right'][0] = 'new-a38223fb-bd9e-4ab5-8e4e-38b154d803de';
-    $pane = new stdClass();
-    $pane->pid = 'new-85c92d40-7f61-4212-9faa-03f70e133487';
-    $pane->panel = 'right';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'favorites_list-panel_pane_1';
-    $pane->shown = TRUE;
-    $pane->access = array(
-      'plugins' => array(
-        0 => array(
-          'name' => 'role',
-          'settings' => array(
-            'rids' => array(
-              0 => 1,
-            ),
-          ),
-          'context' => 'logged-in-user',
-          'not' => TRUE,
-        ),
-      ),
-    );
-    $pane->configuration = array();
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
@@ -3336,17 +3789,33 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $pane->uuid = '85c92d40-7f61-4212-9faa-03f70e133487';
-    $display->content['new-85c92d40-7f61-4212-9faa-03f70e133487'] = $pane;
-    $display->panels['right'][1] = 'new-85c92d40-7f61-4212-9faa-03f70e133487';
+    $pane->uuid = 'c301d702-0f77-4ec8-8d71-2f32ae628c6a';
+    $display->content['new-c301d702-0f77-4ec8-8d71-2f32ae628c6a'] = $pane;
+    $display->panels['middle'][1] = 'new-c301d702-0f77-4ec8-8d71-2f32ae628c6a';
     $pane = new stdClass();
-    $pane->pid = 'new-2dcda7cb-6604-4301-a7f1-e263104c4691';
-    $pane->panel = 'right';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'sample_article-panel_pane_1';
+    $pane->pid = 'new-902de99d-7ec5-4172-97de-10fdc95a9582';
+    $pane->panel = 'middle';
+    $pane->type = 'views';
+    $pane->subtype = 'homepage_bands';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 1,
+      'nodes_per_page' => '0',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'default',
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
@@ -3355,49 +3824,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
-    $pane->uuid = '2dcda7cb-6604-4301-a7f1-e263104c4691';
-    $display->content['new-2dcda7cb-6604-4301-a7f1-e263104c4691'] = $pane;
-    $display->panels['right'][2] = 'new-2dcda7cb-6604-4301-a7f1-e263104c4691';
-    $pane = new stdClass();
-    $pane->pid = 'new-26ff073d-72f5-436b-a9e1-9f0413618ae8';
-    $pane->panel = 'top';
-    $pane->type = 'panels_mini';
-    $pane->subtype = 'user_welcome_message';
-    $pane->shown = TRUE;
-    $pane->access = array(
-      'plugins' => array(
-        0 => array(
-          'name' => 'role',
-          'settings' => array(
-            'rids' => array(
-              0 => 1,
-            ),
-          ),
-          'context' => 'context_user_1',
-          'not' => TRUE,
-        ),
-      ),
-    );
-    $pane->configuration = array(
-      'context' => array(
-        0 => 'context_user_1',
-      ),
-      'override_title' => 0,
-      'override_title_text' => '',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = '26ff073d-72f5-436b-a9e1-9f0413618ae8';
-    $display->content['new-26ff073d-72f5-436b-a9e1-9f0413618ae8'] = $pane;
-    $display->panels['top'][0] = 'new-26ff073d-72f5-436b-a9e1-9f0413618ae8';
+    $pane->uuid = '902de99d-7ec5-4172-97de-10fdc95a9582';
+    $display->content['new-902de99d-7ec5-4172-97de-10fdc95a9582'] = $pane;
+    $display->panels['middle'][2] = 'new-902de99d-7ec5-4172-97de-10fdc95a9582';
   $display->hide_title = PANELS_TITLE_NONE;
-  $display->title_pane = 'new-a38223fb-bd9e-4ab5-8e4e-38b154d803de';
+  $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['home_page'] = $page;
@@ -3407,11 +3838,47 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->api_version = 1;
   $page->name = 'instruction';
   $page->task = 'page';
-  $page->admin_title = 'Instruction';
-  $page->admin_description = 'Instruction Landing Page';
-  $page->path = 'instruction';
-  $page->access = array();
-  $page->menu = array();
+  $page->admin_title = 'Instructional Tools';
+  $page->admin_description = 'Instructional Tools Landing Page';
+  $page->path = 'instructional-tools';
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 8,
+            1 => 4,
+            2 => 3,
+            3 => 7,
+            4 => 9,
+            5 => 10,
+            6 => 5,
+            7 => 11,
+            8 => 13,
+            9 => 12,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+    ),
+    'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
+  );
+  $page->menu = array(
+    'type' => 'normal',
+    'title' => 'Instructional Tools',
+    'name' => 'main-menu',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
   $page->arguments = array();
   $page->conf = array(
     'admin_paths' => FALSE,
@@ -3451,10 +3918,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-bc433f44-46c7-46ee-92f7-d2047d5de77d';
+    $pane->pid = 'new-5c819f04-c07a-4b61-9bde-98e3325afc18';
     $pane->panel = 'middle';
     $pane->type = 'block';
-    $pane->subtype = 'menu-menu-instruction-menu';
+    $pane->subtype = 'menu-menu-instructional-formative';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -3470,9 +3937,261 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = 'bc433f44-46c7-46ee-92f7-d2047d5de77d';
-    $display->content['new-bc433f44-46c7-46ee-92f7-d2047d5de77d'] = $pane;
-    $display->panels['middle'][0] = 'new-bc433f44-46c7-46ee-92f7-d2047d5de77d';
+    $pane->uuid = '5c819f04-c07a-4b61-9bde-98e3325afc18';
+    $display->content['new-5c819f04-c07a-4b61-9bde-98e3325afc18'] = $pane;
+    $display->panels['middle'][0] = 'new-5c819f04-c07a-4b61-9bde-98e3325afc18';
+    $pane = new stdClass();
+    $pane->pid = 'new-759b1f28-ecf6-4c32-aa96-0506e54326ef';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 12,
+              1 => 8,
+              2 => 4,
+              3 => 3,
+              4 => 9,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'admin_title' => 'FIT Description',
+      'title' => '',
+      'body' => 'This link provides access to the K-2 ELA and Math Formative Tasks.',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '759b1f28-ecf6-4c32-aa96-0506e54326ef';
+    $display->content['new-759b1f28-ecf6-4c32-aa96-0506e54326ef'] = $pane;
+    $display->panels['middle'][1] = 'new-759b1f28-ecf6-4c32-aa96-0506e54326ef';
+    $pane = new stdClass();
+    $pane->pid = 'new-f96e15e8-6600-4893-915c-d84910b37961';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-fit-technology-enhanced-men';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'perm',
+          'settings' => array(
+            'perm' => 'use seraph link',
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = 'f96e15e8-6600-4893-915c-d84910b37961';
+    $display->content['new-f96e15e8-6600-4893-915c-d84910b37961'] = $pane;
+    $display->panels['middle'][2] = 'new-f96e15e8-6600-4893-915c-d84910b37961';
+    $pane = new stdClass();
+    $pane->pid = 'new-f2d16936-c4a2-4890-8c45-d0801953aec7';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'perm',
+          'settings' => array(
+            'perm' => 'use seraph link',
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'admin_title' => 'FIT (Technology Enhanced) Description',
+      'title' => '',
+      'body' => 'This link provides access to the high tech version of the K-2 ELA and Math Formative Tasks. The high tech version is for teachers who plan to facilitate the task and make observations using a tablet rather than paper and pencil.',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = 'f2d16936-c4a2-4890-8c45-d0801953aec7';
+    $display->content['new-f2d16936-c4a2-4890-8c45-d0801953aec7'] = $pane;
+    $display->panels['middle'][3] = 'new-f2d16936-c4a2-4890-8c45-d0801953aec7';
+    $pane = new stdClass();
+    $pane->pid = 'new-6b323830-29f2-4acd-a75d-26b0d064645d';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-instructional-tools-reading';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 4;
+    $pane->locks = array();
+    $pane->uuid = '6b323830-29f2-4acd-a75d-26b0d064645d';
+    $display->content['new-6b323830-29f2-4acd-a75d-26b0d064645d'] = $pane;
+    $display->panels['middle'][4] = 'new-6b323830-29f2-4acd-a75d-26b0d064645d';
+    $pane = new stdClass();
+    $pane->pid = 'new-38da4ac0-5293-4ec9-8674-a1508dc0cd67';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 8,
+              1 => 4,
+              2 => 3,
+              3 => 7,
+              4 => 9,
+              5 => 10,
+              6 => 5,
+              7 => 11,
+              8 => 13,
+              9 => 12,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'admin_title' => 'Reading Fluency ',
+      'title' => '',
+      'body' => 'PARCC has developed resources for the assessment of reading fluency in grades 2-8. The purpose of the reading fluency assessments is to provide educators with instructionally useful information related to how students demonstrate strengths and needs with reading fluency. ',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 5;
+    $pane->locks = array();
+    $pane->uuid = '38da4ac0-5293-4ec9-8674-a1508dc0cd67';
+    $display->content['new-38da4ac0-5293-4ec9-8674-a1508dc0cd67'] = $pane;
+    $display->panels['middle'][5] = 'new-38da4ac0-5293-4ec9-8674-a1508dc0cd67';
+    $pane = new stdClass();
+    $pane->pid = 'new-4bde2347-fe8a-443b-b3b9-f1708a4203fb';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-instructional-speaking';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 6;
+    $pane->locks = array();
+    $pane->uuid = '4bde2347-fe8a-443b-b3b9-f1708a4203fb';
+    $display->content['new-4bde2347-fe8a-443b-b3b9-f1708a4203fb'] = $pane;
+    $display->panels['middle'][6] = 'new-4bde2347-fe8a-443b-b3b9-f1708a4203fb';
+    $pane = new stdClass();
+    $pane->pid = 'new-cb532ad9-53aa-4414-8b14-e71d6715a18c';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 8,
+              1 => 4,
+              2 => 3,
+              3 => 7,
+              4 => 9,
+              5 => 10,
+              6 => 5,
+              7 => 11,
+              8 => 13,
+              9 => 12,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'admin_title' => 'Speaking and Listening Description',
+      'title' => '',
+      'body' => 'This link provides access to all of the Speaking & Listening materials.',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 7;
+    $pane->locks = array();
+    $pane->uuid = 'cb532ad9-53aa-4414-8b14-e71d6715a18c';
+    $display->content['new-cb532ad9-53aa-4414-8b14-e71d6715a18c'] = $pane;
+    $display->panels['middle'][7] = 'new-cb532ad9-53aa-4414-8b14-e71d6715a18c';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -3486,9 +4205,23 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->task = 'page';
   $page->admin_title = 'Item Bank';
   $page->admin_description = '';
-  $page->path = 'item-bank';
-  $page->access = array();
-  $page->menu = array();
+  $page->path = 'assessments/item-bank';
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
+  $page->menu = array(
+    'type' => 'normal',
+    'title' => 'Item Bank',
+    'name' => 'main-menu',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
   $page->arguments = array();
   $page->conf = array(
     'admin_paths' => FALSE,
@@ -3523,7 +4256,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = '';
+  $display->title = 'Item Bank';
   $display->uuid = '4f65bdd0-3001-41e5-881a-695b53fe425e';
   $display->content = array();
   $display->panels = array();
@@ -3537,7 +4270,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => 'Overview Copy',
       'title' => '',
-      'body' => 'Overview / instructional copy goes here. Consider explaining importance of testing prior to assessment to increase chances of successful assessment.',
+      'body' => 'From here, you can view available items. After registering and logging in, you can create your own items for inclusion in your own assessments. 
+Coming soon - PARCC Released Items.',
       'format' => 'filtered_html',
       'substitute' => TRUE,
     );
@@ -3639,7 +4373,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->task = 'page';
   $page->admin_title = 'PARCC Readiness';
   $page->admin_description = 'TRT Page for all states';
-  $page->path = 'technology-readiness/parcc';
+  $page->path = 'assessments/technology-readiness/parcc';
   $page->access = array(
     'plugins' => array(
       0 => array(
@@ -3655,6 +4389,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
       ),
     ),
     'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
   );
   $page->menu = array();
   $page->arguments = array();
@@ -3709,7 +4445,9 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => 'PARCC Readiness Overview Copy',
       'title' => '',
-      'body' => 'Overview / instructional copy goes here (admin can navigate to state and export all test results data for state to csv or further navigate to view readiness check results by school).
+      'body' => 'Click the links to access state reports.
+
+For more information on the technology requirements used to evaluate platforms and networks please download the <a href="http://www.parcconline.org/files/72/Technology Guidelines for PARCC Assessments/389/TechnologyGuidelinesPARCCAssessments-v5_0-August2015.pdf" target="_blank">PARCC minimum technology requirements</a> document.
 ',
       'format' => 'filtered_html',
       'substitute' => TRUE,
@@ -3753,6 +4491,144 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
+  $page->name = 'parcc_released_items';
+  $page->task = 'page';
+  $page->admin_title = 'PARCC Released Items';
+  $page->admin_description = 'Formative Instructional Tasks page';
+  $page->path = 'assessments/parcc-released-items';
+  $page->access = array(
+    'plugins' => array(),
+    'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
+  );
+  $page->menu = array();
+  $page->arguments = array();
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_parcc_released_items__panel_context_b943835c-32e6-49de-bb72-fce02e3ac390';
+  $handler->task = 'page';
+  $handler->subtask = 'parcc_released_items';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = 'PARCC Released Items';
+  $display->uuid = '29f75a1e-4f95-4f25-bcc0-3e507bccc495';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-e134c44a-0e9b-4866-9108-1741af56f39d';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'menu-menu-parcc-released-items-menu';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'e134c44a-0e9b-4866-9108-1741af56f39d';
+    $display->content['new-e134c44a-0e9b-4866-9108-1741af56f39d'] = $pane;
+    $display->panels['middle'][0] = 'new-e134c44a-0e9b-4866-9108-1741af56f39d';
+    $pane = new stdClass();
+    $pane->pid = 'new-59a64945-eb25-41d1-8eef-abb140e7eb18';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Released Items Overview',
+      'title' => '',
+      'body' => 'The states that make up the PARCC consortium are taking the exceptional step of releasing test items from this year’s PARCC assessment to give teachers a powerful tool to inform and improve classroom teaching and learning. The test items were built with robust mathematics problems and authentic reading passages selected and reviewed extensively by dozens of educators from PARCC states. <strong><a href=" https://prc.parcconline.org/library/using-released-items-instructional-tools">Learn more about the first release of PARCC test items.</a></strong>
+
+<strong>How to use the PARCC Released Items</strong>
+
+The catalog below includes scoring rubrics and guides to the scoring, as well as released item sets, answer keys, standards alignment, and sample student responses – scored and annotated. <strong><a href=" https://prc.parcconline.org/library/guide-parcc-2015-released-items">Learn more about how to use the catalog of released items.</a> </strong>
+
+NOTE: Some of the passages you will see are in a very small font. This is due to the process of rendering an online item into a PDF format. Please zoom in for better viewing.
+
+<strong>Guides to Understanding the Scoring</strong>
+<ul>
+<li><a href="https://prc.parcconline.org/system/files/ELA_Released_Items_Scorer_Training_Final_Approved.pdf">Guide to Understanding Scoring: English Language Arts/Literacy Released Items</a>
+<li><a href="https://prc.parcconline.org/system/files/Math_Released_Items_Scorer_Training_Final_Approved.pdf">Guide to Understanding Scoring: Mathematics Released Items</a>
+</ul>',
+      'format' => 'filtered_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '59a64945-eb25-41d1-8eef-abb140e7eb18';
+    $display->content['new-59a64945-eb25-41d1-8eef-abb140e7eb18'] = $pane;
+    $display->panels['middle'][1] = 'new-59a64945-eb25-41d1-8eef-abb140e7eb18';
+    $pane = new stdClass();
+    $pane->pid = 'new-b9ad37d8-be56-4e98-97de-a433ceac8eb2';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'parcc_released_items-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = 'b9ad37d8-be56-4e98-97de-a433ceac8eb2';
+    $display->content['new-b9ad37d8-be56-4e98-97de-a433ceac8eb2'] = $pane;
+    $display->panels['middle'][2] = 'new-b9ad37d8-be56-4e98-97de-a433ceac8eb2';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['parcc_released_items'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
   $page->name = 'prc_quiz_question_bank';
   $page->task = 'page';
   $page->admin_title = 'PRC Quiz Question Bank';
@@ -3772,6 +4648,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
       ),
     ),
     'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
   );
   $page->menu = array();
   $page->arguments = array(
@@ -3872,6 +4750,95 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
+  $page->name = 'prc_sso_user_query';
+  $page->task = 'page';
+  $page->admin_title = 'PRC SSO User Query';
+  $page->admin_description = '';
+  $page->path = 'prc_ldap_users';
+  $page->access = array(
+    'logic' => 'and',
+    'plugins' => array(
+      0 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 12,
+            1 => 9,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+    ),
+  );
+  $page->menu = array();
+  $page->arguments = array();
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_prc_sso_user_query__panel';
+  $handler->task = 'page';
+  $handler->subtask = 'prc_sso_user_query';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => 'panel',
+  );
+  $display = new panels_display();
+  $display->layout = 'flexible';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'center' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = '17ac27d3-78cf-4077-ae5c-3290eebd3581';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-f8917c01-6109-4ef4-bbda-e9eea9fd6e44';
+    $pane->panel = 'center';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'prc_ldap_query_view-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'f8917c01-6109-4ef4-bbda-e9eea9fd6e44';
+    $display->content['new-f8917c01-6109-4ef4-bbda-e9eea9fd6e44'] = $pane;
+    $display->panels['center'][0] = 'new-f8917c01-6109-4ef4-bbda-e9eea9fd6e44';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['prc_sso_user_query'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
   $page->name = 'professional_development';
   $page->task = 'page';
   $page->admin_title = 'Professional Learning';
@@ -3880,6 +4847,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->access = array(
     'plugins' => array(),
     'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
   );
   $page->menu = array(
     'type' => 'normal',
@@ -3939,7 +4908,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'twocol';
+  $display->layout = 'onecol';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -3947,6 +4916,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
       'center' => NULL,
       'left' => NULL,
       'right' => NULL,
+      'middle' => NULL,
     ),
   );
   $display->cache = array();
@@ -3956,7 +4926,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-1c34a962-b726-4457-a670-21564e8399e3';
-    $pane->panel = 'left';
+    $pane->panel = 'middle';
     $pane->type = 'block';
     $pane->subtype = 'menu-menu-professional-development-le';
     $pane->shown = TRUE;
@@ -3975,10 +4945,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->locks = array();
     $pane->uuid = '1c34a962-b726-4457-a670-21564e8399e3';
     $display->content['new-1c34a962-b726-4457-a670-21564e8399e3'] = $pane;
-    $display->panels['left'][0] = 'new-1c34a962-b726-4457-a670-21564e8399e3';
+    $display->panels['middle'][0] = 'new-1c34a962-b726-4457-a670-21564e8399e3';
     $pane = new stdClass();
     $pane->pid = 'new-29252795-aee5-41ca-a70f-a7b137977ba6';
-    $pane->panel = 'left';
+    $pane->panel = 'middle';
     $pane->type = 'views_panes';
     $pane->subtype = 'my_lists-panel_pane_1';
     $pane->shown = TRUE;
@@ -4000,10 +4970,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->locks = array();
     $pane->uuid = '29252795-aee5-41ca-a70f-a7b137977ba6';
     $display->content['new-29252795-aee5-41ca-a70f-a7b137977ba6'] = $pane;
-    $display->panels['left'][1] = 'new-29252795-aee5-41ca-a70f-a7b137977ba6';
+    $display->panels['middle'][1] = 'new-29252795-aee5-41ca-a70f-a7b137977ba6';
     $pane = new stdClass();
     $pane->pid = 'new-45f1600e-7e23-47e8-bf89-dbf7817fa882';
-    $pane->panel = 'right';
+    $pane->panel = 'middle';
     $pane->type = 'views_panes';
     $pane->subtype = 'professional_development_view-panel_pane_1';
     $pane->shown = TRUE;
@@ -4018,11 +4988,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
       'css_class' => 'digital-library-content-pane',
     );
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 2;
     $pane->locks = array();
     $pane->uuid = '45f1600e-7e23-47e8-bf89-dbf7817fa882';
     $display->content['new-45f1600e-7e23-47e8-bf89-dbf7817fa882'] = $pane;
-    $display->panels['right'][0] = 'new-45f1600e-7e23-47e8-bf89-dbf7817fa882';
+    $display->panels['middle'][2] = 'new-45f1600e-7e23-47e8-bf89-dbf7817fa882';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -4156,7 +5126,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->task = 'page';
   $page->admin_title = 'Speaking and Listening';
   $page->admin_description = 'Speaking and Listening page';
-  $page->path = 'speaking-listening';
+  $page->path = 'instructional-tools/speaking-listening';
   $page->access = array(
     'plugins' => array(
       0 => array(
@@ -4169,8 +5139,21 @@ function prc_poc_local_panels_default_page_manager_pages() {
       ),
     ),
     'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
   );
-  $page->menu = array();
+  $page->menu = array(
+    'type' => 'normal',
+    'title' => 'Speaking and Listening',
+    'name' => 'main-menu',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
   $page->arguments = array();
   $page->conf = array(
     'admin_paths' => FALSE,
@@ -4242,7 +5225,17 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => 'Overview Copy',
       'title' => '',
-      'body' => 'Overview / instructional copy goes here.',
+      'body' => '<p>The Speaking and Listening Tools focus on the student\'s ability to engage in collaborative discussion, determine main ideas and supporting ideas from texts presented in a variety of multi-media formats, and to effectively present complex information and ideas to others. These skills are integral to all grade levels and content areas.</p>
+<p>To help teachers better understand how to implement the Speaking and Listening standards in the classroom, and to gather ideas for feedback needed to shape student learning, PARCC has developed a system of flexible, instructional tools.  These tools include:</p>
+<ul><li>Mode 1 Listening Comprehension tools include performance tasks in which students listen to a text and build their understandings through note-taking and discussion.</li>
+<li>Mode 2 Research and Presentation tools include performance tasks in which students conduct research on a topic and present their findings and conclusions to their classmates.</li>
+<li>K-2 tools include performance tasks include a framework for classroom discussion and a simple presentation task.</li>
+<li>Task models for K-2, Mode 1 and Mode 2 performance tasks, to help teachers develop their own performance tasks using the same structures as the PARCC sample tasks.</li>
+<li>Classroom Discussion tools provide a framework for conducting authentic classroom discussions in a meaningful, structured way.</li></ul>
+<p>All of the tools are designed to be seamlessly incorporated into a teacher\'s ongoing  instructional programming.  It is important to note that these tools are designed to be used in a way that remains true to the standards while allowing teachers to meet the unique needs of all of their students.  With this in mind, teachers may modify the materials as needed, thereby allowing for the tools to be accessible and useful for a broad range of student populations.</p>
+
+Click this<strong><a href="https://prc.parcconline.org/professional-learning" target="_blank"> link </a></strong>to access professional learning courses that demonstrate how to use the Speaking and Listening tools as well as Sample Responses.
+',
       'format' => 'filtered_html',
       'substitute' => TRUE,
     );
@@ -4289,9 +5282,23 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->task = 'page';
   $page->admin_title = 'Technology Readiness Tool';
   $page->admin_description = '';
-  $page->path = 'technology-readiness';
-  $page->access = array();
-  $page->menu = array();
+  $page->path = 'assessments/technology-readiness';
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
+  $page->menu = array(
+    'type' => 'normal',
+    'title' => 'Technology Readiness',
+    'name' => 'main-menu',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
   $page->arguments = array();
   $page->conf = array(
     'admin_paths' => FALSE,
@@ -4349,9 +5356,13 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => 'TRT Overview',
       'title' => '',
-      'body' => 'Overview / instructional copy goes here. Consider explaining importance of testing prior to assessment to increase chances of successful assessment.',
+      'body' => 'In order to have a successful computer based assessment experience for you, your school, your district, and most importantly the students in your school(s), PARCC recommends that the appropriate school, district, and state staff and administrators register to use this Technology Readiness Tool (TRT). District and State TRT Administrators contact PARCC Inc. support at <a href="mailto:prc-questions@parcconline.org" target="_top">prc-questions@parcconline.org</a> for assistance. This tool will help you gauge the overall readiness of the platform(s) and network for the number of students and number of testing sessions.
+
+NOTE: From this page, you can use this tool to perform “ad hoc” system and capacity checks. When running an “ad hoc” check the TRT does not record the results. To record your school’s results, please make sure you are logged into the PRC and have a school, district, or state TRT role authorized to record technology checks and view reports.
+
+For more information on the technology requirements used to evaluate platforms and networks please download the <a href="http://www.parcconline.org/files/72/Technology Guidelines for PARCC Assessments/389/TechnologyGuidelinesPARCCAssessments-v5_0-August2015.pdf" target="_blank">PARCC minimum technology requirements</a> document.',
       'format' => 'filtered_html',
-      'substitute' => TRUE,
+      'substitute' => 1,
     );
     $pane->cache = array();
     $pane->style = array(
@@ -4411,7 +5422,9 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => 'PARCC Readiness Summary',
       'title' => '',
-      'body' => 'Summary of what user can do here, for example: view readiness data by state, export state readiness check data, view readiness by district, export district readiness checks data, view school readiness data.',
+      'body' => 'Click the link above to access the TRT reports available to you.
+
+NOTE: Users will have access to reports only for their authorized level of access. Check your account settings to see your authorization. If there is a discrepancy in your account authorization, school based staff should contact the designated PRC admin for your district while district and state staff should contact the PARCC Inc. through the <a href="mailto:prc-questions@parcconline.org" target="_top">PRC helpdesk</a>. ',
       'format' => 'filtered_html',
       'substitute' => 1,
     );
@@ -4426,54 +5439,6 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->uuid = '39f2057f-a108-4404-b48b-a40a220012c9';
     $display->content['new-39f2057f-a108-4404-b48b-a40a220012c9'] = $pane;
     $display->panels['middle'][2] = 'new-39f2057f-a108-4404-b48b-a40a220012c9';
-    $pane = new stdClass();
-    $pane->pid = 'new-6290ccc4-0d21-41b0-863c-6be058d16720';
-    $pane->panel = 'middle';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'schools-panel_pane_1';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'arguments' => array(
-        'field_contact_email_value' => '%user:mail',
-      ),
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 3;
-    $pane->locks = array();
-    $pane->uuid = '6290ccc4-0d21-41b0-863c-6be058d16720';
-    $display->content['new-6290ccc4-0d21-41b0-863c-6be058d16720'] = $pane;
-    $display->panels['middle'][3] = 'new-6290ccc4-0d21-41b0-863c-6be058d16720';
-    $pane = new stdClass();
-    $pane->pid = 'new-11d0e2fe-0a95-46a8-a465-d09687a7a2ec';
-    $pane->panel = 'middle';
-    $pane->type = 'custom';
-    $pane->subtype = 'custom';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'admin_title' => '',
-      'title' => '',
-      'body' => 'Important: If you are a school administrator, please run these checks from your school readiness page. Contact your District Administrator to have the link to that page emailed to you.',
-      'format' => 'filtered_html',
-      'substitute' => TRUE,
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 4;
-    $pane->locks = array();
-    $pane->uuid = '11d0e2fe-0a95-46a8-a465-d09687a7a2ec';
-    $display->content['new-11d0e2fe-0a95-46a8-a465-d09687a7a2ec'] = $pane;
-    $display->panels['middle'][4] = 'new-11d0e2fe-0a95-46a8-a465-d09687a7a2ec';
     $pane = new stdClass();
     $pane->pid = 'new-d56b281a-9e13-428d-851e-44cae81b83fa';
     $pane->panel = 'middle';
@@ -4492,11 +5457,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 5;
+    $pane->position = 3;
     $pane->locks = array();
     $pane->uuid = 'd56b281a-9e13-428d-851e-44cae81b83fa';
     $display->content['new-d56b281a-9e13-428d-851e-44cae81b83fa'] = $pane;
-    $display->panels['middle'][5] = 'new-d56b281a-9e13-428d-851e-44cae81b83fa';
+    $display->panels['middle'][3] = 'new-d56b281a-9e13-428d-851e-44cae81b83fa';
     $pane = new stdClass();
     $pane->pid = 'new-28e21aeb-70fe-4bd0-8053-410e0a2cb71f';
     $pane->panel = 'middle';
@@ -4507,7 +5472,9 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => 'TRT Page System Check section',
       'title' => '',
-      'body' => 'Description of test and importance of running it: The system check assesses whether a device or similar configuration of devices meets the <a href="http://www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf" target="_blank">PARCC minimum technology requirements</a>.',
+      'body' => 'Run this check to determine if the platform you are using is ready to deliver PARCC assessments.
+
+NOTE: Run this check from your school page to record your results with the school, district,  and state. If a school is assigned to you, the link will appear on this page and you can run the check from there.  Some data will require research and hand entry. ',
       'format' => 'filtered_html',
       'substitute' => 1,
     );
@@ -4517,11 +5484,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 6;
+    $pane->position = 4;
     $pane->locks = array();
     $pane->uuid = '28e21aeb-70fe-4bd0-8053-410e0a2cb71f';
     $display->content['new-28e21aeb-70fe-4bd0-8053-410e0a2cb71f'] = $pane;
-    $display->panels['middle'][6] = 'new-28e21aeb-70fe-4bd0-8053-410e0a2cb71f';
+    $display->panels['middle'][4] = 'new-28e21aeb-70fe-4bd0-8053-410e0a2cb71f';
     $pane = new stdClass();
     $pane->pid = 'new-f5dbc452-0fe3-47b0-9755-d74d578ee08b';
     $pane->panel = 'middle';
@@ -4540,11 +5507,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 7;
+    $pane->position = 5;
     $pane->locks = array();
     $pane->uuid = 'f5dbc452-0fe3-47b0-9755-d74d578ee08b';
     $display->content['new-f5dbc452-0fe3-47b0-9755-d74d578ee08b'] = $pane;
-    $display->panels['middle'][7] = 'new-f5dbc452-0fe3-47b0-9755-d74d578ee08b';
+    $display->panels['middle'][5] = 'new-f5dbc452-0fe3-47b0-9755-d74d578ee08b';
     $pane = new stdClass();
     $pane->pid = 'new-528f3dd8-81b2-4af6-a5c5-df57a5b4e82c';
     $pane->panel = 'middle';
@@ -4555,9 +5522,79 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => 'TRT Page Capacity Check',
       'title' => '',
-      'body' => 'Description of test and importance of running it: The testing capacity check assesses whether your school has sufficient bandwidth and a sufficient number of devices that meet PARCC minimum requirement in order to run a successful assessment.',
+      'body' => 'Run this check to determine your network’s capacity to deliver PARCC assessments.
+
+NOTE: Run this check from your school page to record your results with the school, district, and state. If a school is assigned to you, the link will appear on this page and you can run the check from there.  Some data will require research hand entry.
+
+For more information on the TRT, please refer to the online tutorial found in the professional learning section of this site.
+',
       'format' => 'filtered_html',
-      'substitute' => TRUE,
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 6;
+    $pane->locks = array();
+    $pane->uuid = '528f3dd8-81b2-4af6-a5c5-df57a5b4e82c';
+    $display->content['new-528f3dd8-81b2-4af6-a5c5-df57a5b4e82c'] = $pane;
+    $display->panels['middle'][6] = 'new-528f3dd8-81b2-4af6-a5c5-df57a5b4e82c';
+    $pane = new stdClass();
+    $pane->pid = 'new-6290ccc4-0d21-41b0-863c-6be058d16720';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'schools-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_contact_email_value' => '%user:mail',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 7;
+    $pane->locks = array();
+    $pane->uuid = '6290ccc4-0d21-41b0-863c-6be058d16720';
+    $display->content['new-6290ccc4-0d21-41b0-863c-6be058d16720'] = $pane;
+    $display->panels['middle'][7] = 'new-6290ccc4-0d21-41b0-863c-6be058d16720';
+    $pane = new stdClass();
+    $pane->pid = 'new-11d0e2fe-0a95-46a8-a465-d09687a7a2ec';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = FALSE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 10,
+            ),
+          ),
+          'context' => 'context_user_1',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'admin_title' => 'School Name Readiness Text',
+      'title' => '',
+      'body' => 'Click the link above to access and manage school data and readiness reports. Also run testing capacity and system checks for this school.
+
+For more information on the TRT, please refer to the online tutorial found in the professional learning section of this site.
+
+<strong>Each year, after July 31, but before August 15, the checks and reports in this system will be retired and not accessible to users. Please download your reports for your archives before July 31 of each year.</strong>',
+      'format' => 'filtered_html',
+      'substitute' => 1,
     );
     $pane->cache = array();
     $pane->style = array(
@@ -4567,9 +5604,9 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 8;
     $pane->locks = array();
-    $pane->uuid = '528f3dd8-81b2-4af6-a5c5-df57a5b4e82c';
-    $display->content['new-528f3dd8-81b2-4af6-a5c5-df57a5b4e82c'] = $pane;
-    $display->panels['middle'][8] = 'new-528f3dd8-81b2-4af6-a5c5-df57a5b4e82c';
+    $pane->uuid = '11d0e2fe-0a95-46a8-a465-d09687a7a2ec';
+    $display->content['new-11d0e2fe-0a95-46a8-a465-d09687a7a2ec'] = $pane;
+    $display->panels['middle'][8] = 'new-11d0e2fe-0a95-46a8-a465-d09687a7a2ec';
     $pane = new stdClass();
     $pane->pid = 'new-fbfa2a96-5352-4251-a9a9-c5ec64b3b763';
     $pane->panel = 'middle';
@@ -4627,6 +5664,47 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $display->content['new-2639295c-be52-4569-a027-c64a045a7a1e'] = $pane;
     $display->panels['middle'][10] = 'new-2639295c-be52-4569-a027-c64a045a7a1e';
     $pane = new stdClass();
+    $pane->pid = 'new-9a7515a3-41d5-4ee5-b860-267be7b91417';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = FALSE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 5,
+            ),
+          ),
+          'context' => 'context_user_1',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'admin_title' => 'District Name Readiness Text',
+      'title' => '',
+      'body' => '
+For more information on the TRT, please refer to the online tutorial found in the professional learning section of this site.
+
+<strong>Each year, after July 31, but before August 15, the checks and reports in this system will be retired and not accessible to users. Please download your reports for your archives before July 31 of each year.</strong>',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 11;
+    $pane->locks = array();
+    $pane->uuid = '9a7515a3-41d5-4ee5-b860-267be7b91417';
+    $display->content['new-9a7515a3-41d5-4ee5-b860-267be7b91417'] = $pane;
+    $display->panels['middle'][11] = 'new-9a7515a3-41d5-4ee5-b860-267be7b91417';
+    $pane = new stdClass();
     $pane->pid = 'new-e9c22381-16b2-4fbc-91a5-2adcd2a58b2b';
     $pane->panel = 'middle';
     $pane->type = 'views_panes';
@@ -4658,11 +5736,51 @@ function prc_poc_local_panels_default_page_manager_pages() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 11;
+    $pane->position = 12;
     $pane->locks = array();
     $pane->uuid = 'e9c22381-16b2-4fbc-91a5-2adcd2a58b2b';
     $display->content['new-e9c22381-16b2-4fbc-91a5-2adcd2a58b2b'] = $pane;
-    $display->panels['middle'][11] = 'new-e9c22381-16b2-4fbc-91a5-2adcd2a58b2b';
+    $display->panels['middle'][12] = 'new-e9c22381-16b2-4fbc-91a5-2adcd2a58b2b';
+    $pane = new stdClass();
+    $pane->pid = 'new-a2e566c8-ea9e-408a-b694-e3cf720d2511';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = FALSE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 11,
+            ),
+          ),
+          'context' => 'context_user_1',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'admin_title' => 'State Name Readiness Text',
+      'title' => '',
+      'body' => 'For more information on the TRT, please refer to the online tutorial found in the professional learning section of this site.
+
+<strong>Each year, after July 31, but before August 15, the checks and reports in this system will be retired and not accessible to users. Please download your reports for your archives before July 31 of each year.</strong>',
+      'format' => 'filtered_html',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 13;
+    $pane->locks = array();
+    $pane->uuid = 'a2e566c8-ea9e-408a-b694-e3cf720d2511';
+    $display->content['new-a2e566c8-ea9e-408a-b694-e3cf720d2511'] = $pane;
+    $display->panels['middle'][13] = 'new-a2e566c8-ea9e-408a-b694-e3cf720d2511';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -4677,7 +5795,10 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->admin_title = 'PRC Search';
   $page->admin_description = '';
   $page->path = 'search-content';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(
@@ -4704,7 +5825,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display();
-  $display->layout = 'twocol';
+  $display->layout = 'search_twocol_33_66';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -4719,18 +5840,17 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-8fbd3cbf-b5a6-4ee2-ba15-1e61fd355222';
+    $pane->pid = 'new-6f6d4c4f-dd66-4094-babd-78405b4c82bd';
     $pane->panel = 'left';
-    $pane->type = 'custom';
-    $pane->subtype = 'custom';
-    $pane->shown = TRUE;
+    $pane->type = 'block';
+    $pane->subtype = 'views-cfea0c79cc23338cc62aef0536b9c103';
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
-      'admin_title' => 'Filters section title',
-      'title' => 'Filters',
-      'body' => '&nbsp;',
-      'format' => 'filtered_html',
-      'substitute' => TRUE,
+      'inherit_path' => 1,
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -4740,15 +5860,40 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
+    $pane->uuid = '6f6d4c4f-dd66-4094-babd-78405b4c82bd';
+    $display->content['new-6f6d4c4f-dd66-4094-babd-78405b4c82bd'] = $pane;
+    $display->panels['left'][0] = 'new-6f6d4c4f-dd66-4094-babd-78405b4c82bd';
+    $pane = new stdClass();
+    $pane->pid = 'new-8fbd3cbf-b5a6-4ee2-ba15-1e61fd355222';
+    $pane->panel = 'left';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = FALSE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Filters section title',
+      'title' => 'Filters',
+      'body' => '<span></span>',
+      'format' => 'full_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
     $pane->uuid = '8fbd3cbf-b5a6-4ee2-ba15-1e61fd355222';
     $display->content['new-8fbd3cbf-b5a6-4ee2-ba15-1e61fd355222'] = $pane;
-    $display->panels['left'][0] = 'new-8fbd3cbf-b5a6-4ee2-ba15-1e61fd355222';
+    $display->panels['left'][1] = 'new-8fbd3cbf-b5a6-4ee2-ba15-1e61fd355222';
     $pane = new stdClass();
     $pane->pid = 'new-17342757-dda5-4c9e-954b-a2f4e53fa5b3';
     $pane->panel = 'left';
     $pane->type = 'block';
     $pane->subtype = 'current_search-digital_library_content_index_cu';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 0,
@@ -4760,11 +5905,11 @@ function prc_poc_local_panels_default_page_manager_pages() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 2;
     $pane->locks = array();
     $pane->uuid = '17342757-dda5-4c9e-954b-a2f4e53fa5b3';
     $display->content['new-17342757-dda5-4c9e-954b-a2f4e53fa5b3'] = $pane;
-    $display->panels['left'][1] = 'new-17342757-dda5-4c9e-954b-a2f4e53fa5b3';
+    $display->panels['left'][2] = 'new-17342757-dda5-4c9e-954b-a2f4e53fa5b3';
     $pane = new stdClass();
     $pane->pid = 'new-79a95d1a-c69f-4374-9c2d-d9416423d811';
     $pane->panel = 'left';
@@ -4774,29 +5919,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
-      'override_title_text' => 'By Content Type',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 2;
-    $pane->locks = array();
-    $pane->uuid = '79a95d1a-c69f-4374-9c2d-d9416423d811';
-    $display->content['new-79a95d1a-c69f-4374-9c2d-d9416423d811'] = $pane;
-    $display->panels['left'][2] = 'new-79a95d1a-c69f-4374-9c2d-d9416423d811';
-    $pane = new stdClass();
-    $pane->pid = 'new-204f7688-9bb4-4866-99ca-e1d027cba677';
-    $pane->panel = 'left';
-    $pane->type = 'block';
-    $pane->subtype = 'facetapi-8YD0ORXnf15RmHjc1kuMcDzadV4UCNUv';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'override_title' => 1,
-      'override_title_text' => 'By Author',
+      'override_title_text' => 'Content Type',
+      'override_title_heading' => 'h5',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -4806,19 +5930,20 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 3;
     $pane->locks = array();
-    $pane->uuid = '204f7688-9bb4-4866-99ca-e1d027cba677';
-    $display->content['new-204f7688-9bb4-4866-99ca-e1d027cba677'] = $pane;
-    $display->panels['left'][3] = 'new-204f7688-9bb4-4866-99ca-e1d027cba677';
+    $pane->uuid = '79a95d1a-c69f-4374-9c2d-d9416423d811';
+    $display->content['new-79a95d1a-c69f-4374-9c2d-d9416423d811'] = $pane;
+    $display->panels['left'][3] = 'new-79a95d1a-c69f-4374-9c2d-d9416423d811';
     $pane = new stdClass();
-    $pane->pid = 'new-6d11915b-1b1b-46d0-ad04-f5b9e769ad9d';
+    $pane->pid = 'new-204f7688-9bb4-4866-99ca-e1d027cba677';
     $pane->panel = 'left';
     $pane->type = 'block';
-    $pane->subtype = 'facetapi-pWAc1pbg0SoUyiffCBHQqBEHqxhbPVrr';
+    $pane->subtype = 'facetapi-8YD0ORXnf15RmHjc1kuMcDzadV4UCNUv';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
-      'override_title_text' => 'By Media Type',
+      'override_title_text' => 'Author',
+      'override_title_heading' => 'h5',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -4828,19 +5953,20 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 4;
     $pane->locks = array();
-    $pane->uuid = '6d11915b-1b1b-46d0-ad04-f5b9e769ad9d';
-    $display->content['new-6d11915b-1b1b-46d0-ad04-f5b9e769ad9d'] = $pane;
-    $display->panels['left'][4] = 'new-6d11915b-1b1b-46d0-ad04-f5b9e769ad9d';
+    $pane->uuid = '204f7688-9bb4-4866-99ca-e1d027cba677';
+    $display->content['new-204f7688-9bb4-4866-99ca-e1d027cba677'] = $pane;
+    $display->panels['left'][4] = 'new-204f7688-9bb4-4866-99ca-e1d027cba677';
     $pane = new stdClass();
-    $pane->pid = 'new-c06a32e0-0f7d-4f70-be63-114448113865';
+    $pane->pid = 'new-6d11915b-1b1b-46d0-ad04-f5b9e769ad9d';
     $pane->panel = 'left';
     $pane->type = 'block';
-    $pane->subtype = 'facetapi-splzrEBHlMTSpO0ED8EA2VdZ1nxq9IVW';
+    $pane->subtype = 'facetapi-pWAc1pbg0SoUyiffCBHQqBEHqxhbPVrr';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
-      'override_title_text' => 'By Subject',
+      'override_title_text' => 'Media Type',
+      'override_title_heading' => 'h5',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -4850,19 +5976,20 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 5;
     $pane->locks = array();
-    $pane->uuid = 'c06a32e0-0f7d-4f70-be63-114448113865';
-    $display->content['new-c06a32e0-0f7d-4f70-be63-114448113865'] = $pane;
-    $display->panels['left'][5] = 'new-c06a32e0-0f7d-4f70-be63-114448113865';
+    $pane->uuid = '6d11915b-1b1b-46d0-ad04-f5b9e769ad9d';
+    $display->content['new-6d11915b-1b1b-46d0-ad04-f5b9e769ad9d'] = $pane;
+    $display->panels['left'][5] = 'new-6d11915b-1b1b-46d0-ad04-f5b9e769ad9d';
     $pane = new stdClass();
-    $pane->pid = 'new-704c8214-55a3-48c8-9627-388e7d0d2fd0';
+    $pane->pid = 'new-c06a32e0-0f7d-4f70-be63-114448113865';
     $pane->panel = 'left';
     $pane->type = 'block';
-    $pane->subtype = 'facetapi-8ufqk1w5dk6qQWaOPPhG7ofNMvx1f8po';
+    $pane->subtype = 'facetapi-splzrEBHlMTSpO0ED8EA2VdZ1nxq9IVW';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
-      'override_title_text' => 'By Standard',
+      'override_title_text' => 'Subject',
+      'override_title_heading' => 'h5',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -4872,9 +5999,104 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 6;
     $pane->locks = array();
+    $pane->uuid = 'c06a32e0-0f7d-4f70-be63-114448113865';
+    $display->content['new-c06a32e0-0f7d-4f70-be63-114448113865'] = $pane;
+    $display->panels['left'][6] = 'new-c06a32e0-0f7d-4f70-be63-114448113865';
+    $pane = new stdClass();
+    $pane->pid = 'new-704c8214-55a3-48c8-9627-388e7d0d2fd0';
+    $pane->panel = 'left';
+    $pane->type = 'block';
+    $pane->subtype = 'facetapi-8ufqk1w5dk6qQWaOPPhG7ofNMvx1f8po';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => 'Standard',
+      'override_title_heading' => 'h5',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 7;
+    $pane->locks = array();
     $pane->uuid = '704c8214-55a3-48c8-9627-388e7d0d2fd0';
     $display->content['new-704c8214-55a3-48c8-9627-388e7d0d2fd0'] = $pane;
-    $display->panels['left'][6] = 'new-704c8214-55a3-48c8-9627-388e7d0d2fd0';
+    $display->panels['left'][7] = 'new-704c8214-55a3-48c8-9627-388e7d0d2fd0';
+    $pane = new stdClass();
+    $pane->pid = 'new-c6b6d51e-ade9-4c92-9335-57310e914f95';
+    $pane->panel = 'right';
+    $pane->type = 'page_breadcrumb';
+    $pane->subtype = 'page_breadcrumb';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'c6b6d51e-ade9-4c92-9335-57310e914f95';
+    $display->content['new-c6b6d51e-ade9-4c92-9335-57310e914f95'] = $pane;
+    $display->panels['right'][0] = 'new-c6b6d51e-ade9-4c92-9335-57310e914f95';
+    $pane = new stdClass();
+    $pane->pid = 'new-8f887a39-0cac-4e91-b780-c5a3689c686c';
+    $pane->panel = 'right';
+    $pane->type = 'page_title';
+    $pane->subtype = 'page_title';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'markup' => 'h1',
+      'class' => '',
+      'id' => '',
+      'override_title' => 1,
+      'override_title_text' => 'Search Results',
+      'override_title_heading' => 'h1',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '8f887a39-0cac-4e91-b780-c5a3689c686c';
+    $display->content['new-8f887a39-0cac-4e91-b780-c5a3689c686c'] = $pane;
+    $display->panels['right'][1] = 'new-8f887a39-0cac-4e91-b780-c5a3689c686c';
+    $pane = new stdClass();
+    $pane->pid = 'new-561e9fa9-d5f3-4f44-ac6f-95b66b42879c';
+    $pane->panel = 'right';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Search Result Sort',
+      'title' => '',
+      'body' => '<ul id="search-sort" class="inline">
+  <li id="search-date-sort" class="active desc">Date</li>
+</ul>',
+      'format' => 'full_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = '561e9fa9-d5f3-4f44-ac6f-95b66b42879c';
+    $display->content['new-561e9fa9-d5f3-4f44-ac6f-95b66b42879c'] = $pane;
+    $display->panels['right'][2] = 'new-561e9fa9-d5f3-4f44-ac6f-95b66b42879c';
     $pane = new stdClass();
     $pane->pid = 'new-7ba89190-8c89-4efb-a73d-0fda4fc0d5b7';
     $pane->panel = 'right';
@@ -4889,12 +6111,12 @@ function prc_poc_local_panels_default_page_manager_pages() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 3;
     $pane->locks = array();
     $pane->uuid = '7ba89190-8c89-4efb-a73d-0fda4fc0d5b7';
     $display->content['new-7ba89190-8c89-4efb-a73d-0fda4fc0d5b7'] = $pane;
-    $display->panels['right'][0] = 'new-7ba89190-8c89-4efb-a73d-0fda4fc0d5b7';
-  $display->hide_title = PANELS_TITLE_FIXED;
+    $display->panels['right'][3] = 'new-7ba89190-8c89-4efb-a73d-0fda4fc0d5b7';
+  $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
@@ -4928,6 +6150,8 @@ function prc_poc_local_panels_default_page_manager_pages() {
       ),
     ),
     'logic' => 'or',
+    'type' => 'none',
+    'settings' => NULL,
   );
   $page->menu = array();
   $page->arguments = array(
@@ -5008,7 +6232,17 @@ function prc_poc_local_panels_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => 'Manage Schools Overview',
       'title' => '',
-      'body' => 'Overview / instructional copy goes here: user can add/edit school information and request readiness checks. Consider describing information needed for each school (school name and email address of person responsible for running readiness checks at each school).',
+      'body' => 'To add a single school, click “Add School-form”
+
+or
+
+If you have a large number of schools, to save some time, you can upload your entire district roster via a .csv file.  To add a school(s) using a .csv file, click “Add School(s)-upload csv file”
+
+Note: School names cannot be replicated and once submitted a school with check data cannot be deleted from this TRT during the data year.
+
+Schools in the district can be edited from the table that appears on this page by clicking on the school name. Additionally, readiness check requests can be sent from this table.
+Sort and filter schools based on checks run or not as well as school name. You can also request checks be run from all or select schools.
+',
       'format' => 'filtered_html',
       'substitute' => 1,
     );
@@ -5248,7 +6482,7 @@ function prc_poc_local_panels_default_page_manager_pages() {
   $page->task = 'page';
   $page->admin_title = 'Users Administration Page';
   $page->admin_description = 'PRC Admin user administration page';
-  $page->path = 'admin-users';
+  $page->path = 'prc/admin/admin-users';
   $page->access = array(
     'plugins' => array(
       0 => array(
@@ -5261,8 +6495,21 @@ function prc_poc_local_panels_default_page_manager_pages() {
       ),
     ),
     'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
   );
-  $page->menu = array();
+  $page->menu = array(
+    'type' => 'normal',
+    'title' => 'Users',
+    'name' => 'main-menu',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
   $page->arguments = array();
   $page->conf = array(
     'admin_paths' => FALSE,

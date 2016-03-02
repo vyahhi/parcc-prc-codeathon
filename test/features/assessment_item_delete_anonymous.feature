@@ -25,15 +25,13 @@ Feature: PRC-528 Delete Item in Test Customization for Anonymous Users
     And "Assessment" nodes:
       | title          | field_subject | field_quiz_type                    | author      |
       | PRC-528 Delete | subj1, subj2  | PARCC-Released Practice Assessment | @currentuid |
-    And I am on "assessments"
+    And I am on "assessments/practice-assessments"
     Then I click "PRC-528 Delete"
-    And I click "Quiz"
-    Then I click "Manage questions"
-    Then I click "Assessment directions"
+    Then I click "Non-interactive Item (text only)"
     And I fill in "edit-body-und-0-value" with "PRC-528 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-528 Directions 1"
     And I press "Save"
-    Then I click "Multiple choice question"
+    Then I click "Interactive Choice"
     And I fill in "edit-body-und-0-value" with "PRC-528 Multi Multi Question Question"
     And I fill in "Title" with "PRC-528 Multi"
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
@@ -42,7 +40,7 @@ Feature: PRC-528 Delete Item in Test Customization for Anonymous Users
     And I press "Save"
     Then I am an anonymous user
     And I visit the last node created
-    Then I should see the heading "PRC-528 Delete" in the "content" region
+    Then I should see the heading "PRC-528 Delete" in the "sub_header" region
     Then I should see the link "PRC-528 Directions 1"
     Then I check the element with xpath selector "//*[starts-with(@id, 'edit-stayers')]"
     And I press "Save"

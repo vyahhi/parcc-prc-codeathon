@@ -18,10 +18,12 @@ Feature: PRC-1209 State Readiness - PRC Admin View
     And "State" nodes:
       | title    | field_user_state | field_member_state | uid | field_contact_email |
       | Illinois | Illinois         | Illinois           | 1   | x@example.com       |
-    And I visit "technology-readiness/parcc"
-    And I click "Illinois - PARCC Member"
+    And I visit "assessments/technology-readiness/parcc"
+    And I click "Illinois"
     Then I should see the heading "Illinois Readiness"
-    And I should see the text "Overview / instructional copy goes here \(admin can export all test results data for state to csv or click district name to view results of technology checks by school\)."
+    And I should see the text "Click the links on this page to access and download district and school data and readiness reports."
+    And I should see the text "For more information on the technology requirements used to evaluate platforms and networks please download the"
+    And I should see the link "PARCC minimum technology requirements"
     And I should see the text "No districts in your state have been created"
     And I should see the heading "Districts"
 
@@ -34,10 +36,12 @@ Feature: PRC-1209 State Readiness - PRC Admin View
     And "District" nodes:
       | title               | uid         | field_ref_trt_state |
       | District @timestamp | @currentuid | @nid[Illinois]      |
-    And I visit "technology-readiness/parcc"
+    And I visit "assessments/technology-readiness/parcc"
     And I click "Illinois - PARCC Member"
     Then I should see the heading "Illinois Readiness"
-    And I should see the text "Overview / instructional copy goes here \(admin can export all test results data for state to csv or click district name to view results of technology checks by school\)."
+    And I should see the text "Click the links on this page to access and download district and school data and readiness reports."
+    And I should see the text "For more information on the technology requirements used to evaluate platforms and networks please download the"
+    And I should see the link "PARCC minimum technology requirements"
     But I should not see the text "No districts in your state have been created"
     And I should see the heading "Districts"
     And I should see the link "District @timestamp"

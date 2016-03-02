@@ -1,0 +1,37 @@
+@prc-1766 @prc @navigation
+Feature: PRC-1766: Enable and configure Fast_404
+
+
+  Scenario: Entering a Url that doesn't exist
+    Given I am on the homepage
+    When I am on "bacon"
+    Then I should see "URL not Found"
+    And I should see "The requested URL does not exist"
+    And I should not see "The requested page '/bacon' was not found on this server."
+    And I am on "bacon/good"
+    Then I should see "URL not Found"
+    And I should see "The requested URL does not exist"
+    And I should not see "The requested page /bacon/good was not found on this server."
+
+  Scenario: Entering a file in the url that doesn't exist
+    Given I am on the homepage
+    When I am on "bacon.txt"
+    Then I should see "URL not Found"
+    And I should see "The requested URL does not exist"
+    And I should not see " was not found on this server."
+    And I am on "bacon.png"
+    Then I should see "URL not Found"
+    And I should see "The requested URL does not exist"
+    And I should not see " was not found on this server."
+    And I am on "bacon.pdf"
+    Then I should see "URL not Found"
+    And I should see "The requested URL does not exist"
+    And I should not see " was not found on this server."
+    And I am on "bacon.gif"
+    Then I should see "URL not Found"
+    And I should see "The requested URL does not exist"
+    And I should not see " was not found on this server."
+    And I am on "bacon.mp3"
+    Then I should see "URL not Found"
+    And I should see "The requested URL does not exist"
+    And I should not see " was not found on this server."

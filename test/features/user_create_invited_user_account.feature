@@ -13,18 +13,18 @@ Feature: Create User Account Following an Invite (PRC-73)
     And I select "Wyoming" from "State where the invitee teaches"
     And I press "Send Invitation"
     Then the email to "example1@timestamp@example.com" should contain "has sent you an invite!"
-    And the email should contain "has invited you to join Partnership Resource Center at"
+    And the email should contain "Congratulations! Parcc Inc. invites you to register and then log into the Partnership Resource Center."
     And the email should contain "4321MESSAGE1234"
     And I click "Log out"
-    Then I follow link "1" in the email
+    Then I follow link "0" in the email
 
   Scenario: AC1 - When a potential user receives an invitation E-mail, the potential user may click the temporary URL that redirects the user to a Create User Account page.
-    Then I should see the heading "Create User Account to Join Partnership Resource Center" in the "content" region
+    Then I should see the heading "Create User Account to Join Partnership Resource Center" in the "sub_header" region
     And the url should match "user/register"
     And I should see "example1@timestamp@example.com" in the "E-mail" field
 
   Scenario: AC2 - The Create User Account page provides the following fields:
-    Then I should see the heading "Create User Account to Join Partnership Resource Center" in the "content" region
+    Then I should see the heading "Create User Account to Join Partnership Resource Center" in the "sub_header" region
     And the url should match "user/register"
     And I should see a "First Name *" field
     And I should see a "Last Name *" field
@@ -50,7 +50,7 @@ Feature: Create User Account Following an Invite (PRC-73)
     Then I should see the error message "The specified passwords do not match."
 
   Scenario: AC5 - A Create New Account button is provided at the end. At click, the system shall:
-    Then I should see the heading "Create User Account to Join Partnership Resource Center" in the "content" region
+    Then I should see the heading "Create User Account to Join Partnership Resource Center" in the "sub_header" region
     And the url should match "user/register"
     And I should see "example1@timestamp@example.com" in the "E-mail" field
     And I fill in "Password" with "abc123"

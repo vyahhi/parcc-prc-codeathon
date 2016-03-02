@@ -1,0 +1,207 @@
+// Styles for search and taxonomy results pages
+
+@media #{$screen} {
+  .page-taxonomy-term,
+  .page-search-content {
+    .views-row {
+      border-top: 1px solid $gray-stroke;
+      padding: 1em 0 .25em 0;
+      margin-bottom: .5em;
+      .more-link {
+        @include parcc_button;
+        display: table;
+        margin-top: 1.25em;
+        text-align: left;
+      }
+    }
+    .views-row-last {
+      border-bottom: 1px solid $gray-stroke;
+      padding-bottom: .75em;
+      margin-bottom: 1.25em;
+    }
+  }
+  .page-taxonomy-term {
+    #content {
+      padding-bottom: 1em;
+    }
+  }
+  .page-search-content {
+    section.messages.row {
+      background-color: $background-gray;
+    }
+    .panel-col-first {
+      .form-item-sort-by,
+      .views-widget-sort-order {
+        display: none;
+      }
+      #filter-panel {
+        overflow: hidden;
+        margin-top: 20px;
+      }
+      #filters {
+        border-top: 1px solid $gray-stroke;
+        border-bottom: 1px solid $gray-stroke;
+        padding-top: 20px;
+        padding-bottom: 5px;
+        margin-bottom: 25px;
+      }
+      h5 {
+        color: $body-font-color;
+      }
+      .facetapi-facetapi-links li {
+        display: block;
+        margin-left: 0;
+        margin-bottom: 10px;
+        list-style: none;
+      }
+      // Todo - ideally move shared components from this and :hover to a more general location and eliminate duplication between this and similar rules for library
+      .facetapi-facetapi-links a {
+        display: table-cell;
+        padding: 7px;
+        margin-bottom: 10px;
+        font-size: 0.85em;
+        color: $body-font-color;
+        line-height: 20px;
+        text-decoration: none;
+      }
+      .facetapi-facetapi-links a:hover {
+        @include panel(white, 6px);
+        border-radius: 6px;
+        border-color: $selected-filter-color;
+        margin-bottom: 10px;
+        line-height: 20px;
+      }
+      // Hide (-) filter links from display
+      a.facetapi-active {
+        display: none;
+      }
+      // Todo - ideally move shared components from this to a more general location and eliminate duplication between this and similar rules for library
+      a.filter-selected,
+      a.facetapi-inactive:focus,
+      .facetapi-facetapi-links a.filter-selected:hover {
+        @include panel($selected-filter-color, 6px);
+        display: table;
+        margin-right: 1.5em;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        font-size: 0.85em;
+        color: white;
+        line-height: 20px;
+      }
+      .facetapi-limit-link {
+        @include parcc_button;
+        font-size: .875em;
+      }
+    }
+    .panel-col-last {
+      padding-bottom: 1em;
+      background-color: white;
+      // Todo - generalize this for sort control styles and move to more general location.
+      ul#search-sort {
+        display: inline-block;
+        li {
+          display: inline-block;
+          width: 75px;
+          padding: 0;
+          margin: 0;
+          cursor: pointer;
+        }
+      }
+      #search-date-sort.active.desc:after {
+        @include down-arrow(14px, 8px);
+      }
+      #search-date-sort.active.asc:after {
+        @include up-arrow(-13px, 8px);
+      }
+    }
+    // Remove redundant breadcrumb used on desktop breakpoint.
+    .pane-page-breadcrumb {
+      display: none;
+    }
+  }
+}
+
+@media #{$small} {
+  .page-search-content {
+    #filter-panel .filter-panel-search {
+      height: 70px;
+    }
+    .views-exposed-widgets
+    {
+      text-align: left;
+    }
+  }
+}
+
+@media #{$medium} {
+  .page-search-content {
+    #page {
+      background: linear-gradient(90deg, $background-gray 50%, white 50%);
+    }
+    // Hide breadcrumb for mobile breakpoints
+    #sub-header .breadcrumb {
+      display: none;
+    }
+    // Todo - re-use this to correct similar column alignment issues and move to more general location
+    .row .row {
+      margin-left: -$desktop-margin;
+      margin-right: -$desktop-margin;
+    }
+    .panel-twocol-33-66 .row {
+      display: box;
+      display: flexbox;
+      display: flex;
+    }
+    #filter-panel {
+      width: 286px;
+      .filter-panel-search {
+        width: 170px;
+        height: 70px;
+      }
+      .filter-panel-search .views-exposed-form {
+        input {
+          height: 45px;
+          width: 170px;
+          margin: 0;
+          background: sprite($main-sprites, search-filter-icon, 138, 13) no-repeat white;
+          font-size: 14px;
+        }
+      }
+      .filter-panel-toggle-link,
+      .filter-panel-all-link {
+        text-indent: -9999px;
+      }
+      .filter-panel-toggle-link {
+        background: sprite($main-sprites, filter-icon, 19, 13) no-repeat $filter-button-color;
+      }
+      .filter-panel-toggle-link:focus {
+        background: sprite($main-sprites, filter-icon, 19, 13) no-repeat $filter-button-color;
+        color: $body-font-color;
+      }
+      .filter-panel-toggle-link:hover,
+      .filter-panel-toggle-link.selected {
+        background: sprite($main-sprites, filter-icon-selected, 19, 13) no-repeat $parcc-purple;
+        color: white;
+      }
+      .filter-panel-toggle-link.filters-enabled {
+        background: sprite($main-sprites, filter-icon-selected, 19, 13) no-repeat $parcc-purple !important;
+        color: white !important;
+      }
+      .filter-panel-all-link {
+        background: sprite($main-sprites, all-icon, 19, 13) no-repeat $filter-button-color;
+        border-top-right-radius: 1000px;
+        border-bottom-right-radius: 1000px;
+      }
+      .filter-panel-all-link:hover,
+      .filter-panel-all-link:focus {
+        background: sprite($main-sprites, all-icon-selected, 19, 13) no-repeat $parcc-purple;
+      }
+    }
+    // Display breadcrumb for desktop breakpoint.
+    .pane-page-breadcrumb {
+      display: block;
+      // Shift breadcrumb to align better with filter panel.
+      margin-top: .5em;
+    }
+  }
+}

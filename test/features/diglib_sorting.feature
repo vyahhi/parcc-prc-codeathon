@@ -18,7 +18,7 @@
 #      | Media Uno  |
 #      | Media Deux |
 #    And "Digital Library Content" nodes:
-#      | title            | body        | status | uid | field_subject | field_grade_level | field_media_type | created    | changed                                |
+#      | title            | body        | status | uid | field_subject | field_grade_level_unlimited | field_media_type | created    | changed                                |
 #      | Result One One   | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        | 1418362114 | 1418362114
 #      | Result One Two   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       | 1418362214 | 1418362214
 #      | Result One Three | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        | 1418362314 | 1418362314

@@ -11,9 +11,9 @@ Feature: PRC-35 LMS: Take a Course
     And I am logged in as a user with the "Content Administrator (Curator)" role
 
     # TODO: Turn attaching modules to a course into step definitions
-    And I am on "admin-course"
+    And I am on "prc/admin/admin-course"
     When I click "Add course"
-    Then I should see the heading "Create Course" in the "content" region
+    Then I should see the heading "Create Course" in the "sub_header" region
     And I fill in "Course Title *" with "PRC-35 Take Course"
     And I fill in "Course Objectives *" with "Take a Course"
     And I select the radio button "Public"
@@ -59,8 +59,13 @@ Feature: PRC-35 LMS: Take a Course
 
     #AC5 Selecting the Take Course action button will launch the actual module (future story after PRC-107)
     And I click "PD Module 1"
-    And I should see the heading "PD Module 1" in the "content" region
+
+    And I should see the heading "PD Module 1" in the "sub_header" region
     And I should see the text "Obj1"
+
+    # prc-2032 : Link to course outline
+    And I click "Return to Course Outline"
+    And I should see the heading "PRC-35 Take Course"
 
     Then I click "Professional Learning"
     Then I click "PRC-35 Take Course"
@@ -76,9 +81,9 @@ Feature: PRC-35 LMS: Take a Course
     And I am logged in as a user with the "Content Administrator (Curator)" role
 
     # TODO: Turn attaching modules to a course into step definitions
-    And I am on "admin-course"
+    And I am on "prc/admin/admin-course"
     When I click "Add course"
-    Then I should see the heading "Create Course" in the "content" region
+    Then I should see the heading "Create Course" in the "sub_header" region
     And I fill in "Course Title *" with "PRC-35 Take Course"
     And I fill in "Course Objectives *" with "Take a Course"
     And I select the radio button "Public"

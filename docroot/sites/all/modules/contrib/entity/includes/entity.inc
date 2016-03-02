@@ -31,6 +31,7 @@ class Entity {
   protected $entityInfo;
   protected $idKey, $nameKey, $statusKey;
   protected $defaultLabel = FALSE;
+  protected $wrapper;
 
   /**
    * Creates a new entity.
@@ -54,7 +55,7 @@ class Entity {
    */
   protected function setUp() {
     if (!function_exists ( 'entity_get_info' )) {
-      return;
+          return;
     }
     $this->entityInfo = entity_get_info($this->entityType);
     $this->idKey = $this->entityInfo['entity keys']['id'];
@@ -112,6 +113,23 @@ class Entity {
    */
   public function bundle() {
     return !empty($this->entityInfo['entity keys']['bundle']) ? $this->{$this->entityInfo['entity keys']['bundle']} : $this->entityType;
+  }
+
+  /**
+   * Returns the EntityMetadataWrapper of the entity.
+   *
+   * @return EntityDrupalWrapper
+   *   An EntityMetadataWrapper containing the entity.
+   */
+  public function wrapper() {
+    if (empty($this->wrapper)) {
+      $this->wrapper = entity_metadata_wrapper($this->entityType, $this);
+    }
+    elseif ($this->wrapper->value() !== $this) {
+      // Wrapper has been modified outside, so let's better create a new one.
+      $this->wrapper = entity_metadata_wrapper($this->entityType, $this);
+    }
+    return $this->wrapper;
   }
 
   /**
@@ -303,9 +321,9 @@ class Entity {
     unset($vars['entityInfo'], $vars['idKey'], $vars['nameKey'], $vars['statusKey']);
     // Also key the returned array with the variable names so the method may
     // be easily overridden and customized.
-    if (!function_exists ( 'drupal_map_assoc' )) {
-      return;
-    }
+      if (!function_exists ( 'drupal_map_assoc' )) {
+          return;
+      }
     return drupal_map_assoc(array_keys($vars));
   }
 

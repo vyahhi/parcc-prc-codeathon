@@ -22,7 +22,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'external_course' => array(
         'label' => 'above',
@@ -73,8 +73,8 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pd_course-field_grade_level'
-  $field_instances['node-pd_course-field_grade_level'] = array(
+  // Exported field_instance: 'node-pd_course-field_grade_level_unlimited'
+  $field_instances['node-pd_course-field_grade_level_unlimited'] = array(
     'bundle' => 'pd_course',
     'default_value' => NULL,
     'deleted' => 0,
@@ -84,49 +84,43 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 21,
-      ),
-      'external_course' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 21,
+        'weight' => 23,
       ),
       'search_index' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 0,
       ),
       'search_result' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 21,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_grade_level',
+    'field_name' => 'field_grade_level_unlimited',
     'label' => 'Grade Level',
     'required' => 0,
     'settings' => array(
+      'course_enrollment' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'apply_chosen' => '',
         'label_help_description' => '',
       ),
-      'type' => 'options_select',
-      'weight' => 3,
+      'type' => 'options_buttons',
+      'weight' => 4,
     ),
   );
 
@@ -141,7 +135,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 16,
       ),
       'external_course' => array(
         'label' => 'above',
@@ -165,7 +159,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 17,
       ),
     ),
     'entity_type' => 'node',
@@ -198,7 +192,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 15,
       ),
       'external_course' => array(
         'label' => 'above',
@@ -222,7 +216,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 16,
       ),
     ),
     'entity_type' => 'node',
@@ -253,10 +247,9 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'link',
         'settings' => array(),
-        'type' => 'link_default',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 14,
       ),
       'external_course' => array(
         'label' => 'hidden',
@@ -281,7 +274,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 15,
       ),
     ),
     'entity_type' => 'node',
@@ -319,7 +312,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'link_field',
-      'weight' => 44,
+      'weight' => 13,
     ),
   );
 
@@ -334,7 +327,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 23,
+        'weight' => 21,
       ),
       'external_course' => array(
         'label' => 'above',
@@ -358,7 +351,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 14,
       ),
     ),
     'entity_type' => 'node',
@@ -375,7 +368,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -390,7 +383,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 18,
       ),
       'external_course' => array(
         'label' => 'above',
@@ -414,7 +407,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 19,
       ),
     ),
     'entity_type' => 'node',
@@ -431,7 +424,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -446,7 +439,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 20,
       ),
       'external_course' => array(
         'label' => 'above',
@@ -470,7 +463,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 22,
       ),
     ),
     'entity_type' => 'node',
@@ -494,7 +487,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         ),
       ),
       'type' => 'taxonomy_shs',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -509,7 +502,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 19,
       ),
       'external_course' => array(
         'label' => 'above',
@@ -533,7 +526,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 20,
       ),
     ),
     'entity_type' => 'node',
@@ -564,13 +557,9 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 1,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
       ),
       'external_course' => array(
         'label' => 'hidden',
@@ -607,10 +596,10 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'thumbnail',
+          'image_style' => 'gallery_view',
         ),
         'type' => 'image',
-        'weight' => 2,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
@@ -637,7 +626,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -652,7 +641,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 24,
+        'weight' => 22,
       ),
       'external_course' => array(
         'label' => 'above',
@@ -676,7 +665,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 13,
       ),
     ),
     'entity_type' => 'node',
@@ -696,7 +685,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 

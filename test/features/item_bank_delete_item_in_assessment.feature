@@ -19,11 +19,11 @@ Feature: PRC-1041 Item Bank - Delete Item - Item Deleted from Assessments
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Assessment directions" nodes
-    And I am on "assessments"
+    And I am on "assessments/practice-assessments"
     And I click "Create New Assessment"
     And I fill in "Title" with "Quiz Title"
     And I fill in "Objectives" with "Objectives"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I fill in the hidden field "faux_subject" with "Subject"
     And I press "Save"
 
@@ -33,10 +33,10 @@ Feature: PRC-1041 Item Bank - Delete Item - Item Deleted from Assessments
     And I check "Make this a PARCC item"
     And I press "Save"
 
-    Then I am on "item-bank"
+    Then I am on "assessments/item-bank"
     When I click "Edit"
     And I press "Delete"
     And I press "Delete"
-    Then I am on "assessments"
+    Then I am on "assessments/practice-assessments"
     And I click "Quiz Title"
     Then I should not see the link "NII T"

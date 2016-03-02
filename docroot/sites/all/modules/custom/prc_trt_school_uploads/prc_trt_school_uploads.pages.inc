@@ -36,11 +36,11 @@ function prc_trt_school_uploads_upload_form($form, &$form_state, $type, $distric
 
   $form['overview'] = array(
     '#type' => 'item',
-    '#markup' => t('Overview / instructional copy. Consider explaining that for each school, there must be two columns: one for school name and one for school contact email address; the first row is treated as a header and its contents are ignored; and that file must be .csv.'),
+    '#markup' => '<p>' . t('Use this upload tool to bulk enter school information.') . '</p><br>',
   );
   $form['note'] = array(
     '#type' => 'item',
-    '#markup' => 'Note that user will be allowed only one upload per school.',
+    '#markup' => '<p>' . t('To upload multiple schools, use Excel or another spreadsheet program and create a two-column .csv file. There must be two columns: the first for the school name and the second for the school contact email address; the first row of the spreadsheet is treated as a header and its contents are ignored. Make sure to save the file as a .csv. Lastly, upload your schools using this interface.') . '</p><p>' . t('You also might be able to have your school’s student information system generate the .csv file for you and save even more time.') . '</p><p>' . t('Note: School names must be unique within a district, and once submitted, a school with data cannot be deleted. The data will be checked by the TRT before being accepted.')  . '</p>',
   );
   $form['required_message'] = array(
     '#type' => 'item',

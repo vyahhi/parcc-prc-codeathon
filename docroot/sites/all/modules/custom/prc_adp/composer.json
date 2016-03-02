@@ -1,0 +1,12 @@
+{
+    "name": "root/prc_adp",
+    "require": {
+        "guzzlehttp/guzzle": "^6.1"
+    },
+    "authors": [
+        {
+            "name": "Trevor Schara",
+            "email": "trevor.schara@breaktech.com"
+        }
+    ]
+}

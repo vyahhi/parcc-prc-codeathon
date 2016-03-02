@@ -15,7 +15,7 @@ function prc_digital_library_form_form_digital_library_content_node_form_alter(&
 
   $expand['group_attach_a_file'] = ($w->field_document->value()) ? 'collapsible': 'collapsed';
   $expand['group_link_to_url'] = ($w->field_link_to_a_url->value()) ? 'collapsible' : 'collapsed';
-  if ($w->field_grade_level->value() ||
+  if ($w->field_grade_level_unlimited->value() ||
     $w->field_subject->value() ||
     $w->field_standard->value() ||
     $w->field_media_type->value() ||

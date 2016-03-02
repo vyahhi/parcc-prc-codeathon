@@ -2926,7 +2926,7 @@ label.error {
 .section-container.horizontal-nav > .section.active > .title,
 .section-container.accordion > section.active > .title,
 .section-container.accordion > .section.active > .title {
-  background: #d5d5d5;
+  background: #d6d6d6;
 }
 .section-container.auto > section.active > .title a, .section-container.auto > .section.active > .title a,
 .section-container.vertical-tabs > section.active > .title a,
@@ -3198,7 +3198,7 @@ label.error {
     padding-bottom: 0;
   }
   .section-container.vertical-tabs > section.active > .title, .section-container.vertical-tabs > .section.active > .title {
-    background: #d5d5d5;
+    background: #d6d6d6;
   }
   .section-container.vertical-tabs > section.active > .title a, .section-container.vertical-tabs > .section.active > .title a {
     color: #333;
@@ -3210,7 +3210,7 @@ label.error {
     padding-left: 12.4375em;
   }
   .section-container.vertical-tabs > section.active > .title, .section-container.vertical-tabs > .section.active > .title {
-    background-color: #d5d5d5;
+    background-color: #d6d6d6;
   }
 
   [data-section='vertical-nav'], .section-container.vertical-nav {
@@ -3300,7 +3300,7 @@ label.error {
     padding-bottom: 0;
   }
   .section-container.vertical-nav > section.active > .title, .section-container.vertical-nav > .section.active > .title {
-    background: #d5d5d5;
+    background: #d6d6d6;
   }
   .section-container.vertical-nav > section.active > .title a, .section-container.vertical-nav > .section.active > .title a {
     color: #333;
@@ -3398,7 +3398,7 @@ label.error {
     padding-bottom: 0;
   }
   .section-container.horizontal-nav > section.active > .title, .section-container.horizontal-nav > .section.active > .title {
-    background: #d5d5d5;
+    background: #d6d6d6;
   }
   .section-container.horizontal-nav > section.active > .title a, .section-container.horizontal-nav > .section.active > .title a {
     color: #333;
@@ -3478,7 +3478,7 @@ label.error {
   padding-bottom: 0;
 }
 .no-js .section-container > section.active > .title, .no-js .section-container > .section.active > .title {
-  background: #d5d5d5;
+  background: #d6d6d6;
 }
 .no-js .section-container > section.active > .title a, .no-js .section-container > .section.active > .title a {
   color: #333;

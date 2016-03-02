@@ -631,7 +631,7 @@ Feature: TRT Pagination
     And the school "School 150" has run a system check
     And I am an anonymous user
     And I am logged in as "state_paginator@example.com"
-    When I visit "technology-readiness"
+    When I visit "assessments/technology-readiness"
     And I click "West State Readiness"
     Then I should not see the link "\b1\b"
     And I should see the link "2"

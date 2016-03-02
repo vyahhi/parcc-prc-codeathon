@@ -33,10 +33,10 @@ Feature: PRC-965 Search/Filter Bar: Search for Digital Library Content
       | Media Deux |
       | Media Tres |
     And "Digital Library Content" nodes:
-      | title        | body              | status | uid | field_subject | field_grade_level | field_media_type |
-      | Result One   | First Body Alpha  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Two   | Second Body Bravo | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Three | Third Body Alpha  | 1      | 1   | Filter Me Two | GL One            | Media Tres       |
+      | title        | body              | status | uid | field_subject | field_grade_level_unlimited | field_media_type |
+      | Result One   | First Body Alpha  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Two   | Second Body Bravo | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Three | Third Body Alpha  | 1      | 1   | Filter Me Two | GL One                      | Media Tres       |
     And I am on the homepage
     And I index search results
     When I am on "library"
@@ -70,10 +70,10 @@ Feature: PRC-965 Search/Filter Bar: Search for Digital Library Content
       | Media Deux |
       | Media Tres |
     And "Digital Library Content" nodes:
-      | title        | body              | status | uid | field_subject | field_grade_level | field_media_type |
-      | Result One   | First Body Alpha  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Two   | Second Body Bravo | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Three | Third Body Alpha  | 1      | 1   | Filter Me Two | GL One            | Media Tres       |
+      | title        | body              | status | uid | field_subject | field_grade_level_unlimited | field_media_type |
+      | Result One   | First Body Alpha  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Two   | Second Body Bravo | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Three | Third Body Alpha  | 1      | 1   | Filter Me Two | GL One                      | Media Tres       |
     And I am on the homepage
     And I index search results
     When I am on "library"

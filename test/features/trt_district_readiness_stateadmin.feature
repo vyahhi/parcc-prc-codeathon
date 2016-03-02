@@ -36,7 +36,7 @@ Feature: PRC-874 District Readiness - State Admin View
     And "School" nodes:
       | title         | field_ref_district    | field_contact_email            | uid         |
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     And I click "<member_state>"
     And I click "<district_name>"
     Then I should see the heading "<district_name> Readiness"

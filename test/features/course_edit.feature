@@ -16,9 +16,9 @@ Feature: PRC-349 Admin: Edit Course
     And "PD Course" nodes:
       | title       | uid         |
       | PRC-349 AC2 | @currentuid |
-    And I am on "admin-course"
+    And I am on "prc/admin/admin-course"
     When I click "Edit"
-    Then I should see the heading "PRC-349 AC2" in the "content" region
+    Then I should see the heading "PRC-349 AC2" in the "sub_header" region
 
   Scenario: AC2 Create course fields
     And I should see a "Course Title *" field
@@ -26,7 +26,19 @@ Feature: PRC-349 Admin: Edit Course
     And I should not see a "Body" field
     And I should see a "Tags" field
     And I should see the text "Enter a comma-separated list of words to describe your content."
-    And I should see a "Grade Level" field
+    And I check the box "Pre-K"
+    And I check the box "1st Grade"
+    And I check the box "2nd Grade"
+    And I check the box "3rd Grade"
+    And I check the box "4th Grade"
+    And I check the box "5th Grade"
+    And I check the box "6th Grade"
+    And I check the box "7th Grade"
+    And I check the box "8th Grade"
+    And I check the box "9th Grade"
+    And I check the box "10th Grade"
+    And I check the box "11th Grade"
+    And I check the box "12th Grade"
     And I should see the text "Subject"
 
     And I should see the text "Course Length"
@@ -74,7 +86,7 @@ Feature: PRC-349 Admin: Edit Course
 
 #  Scenario: AC4. Validations: If a required field is NOT entered after the Save button is selected, The system will display the following feedback on the top of the form:
 #    Given I am logged in as a user with the "Content Administrator (Curator)" role
-#    And I am on "admin-course"
+#    And I am on "prc/admin/admin-course"
 #    When I click "Add course"
 #    And I press "Save"
 #    Then I should see the error message containing "Course Title field is required."

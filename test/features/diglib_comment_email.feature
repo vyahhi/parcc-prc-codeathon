@@ -58,6 +58,7 @@ Feature: PRC-58 End User Comments to Content
     And I am viewing a "Digital Library Content" node with the title "No Anonymous!"
     Then I should not see the link "Comment"
 
+  @prc-947
   Scenario: Comment form
     Given users:
       | name                       | mail                                | pass   | field_first_name | field_last_name | status | roles                           |
@@ -86,3 +87,5 @@ Feature: PRC-58 End User Comments to Content
 
     Then the email to "joe_1prc_58ca@timestamp@example.com" should contain "Comment: 'PRC-58 @timestamp'"
     Then the email to "joe_1prc_58ad@timestamp@example.com" should contain "Comment: 'PRC-58 @timestamp'"
+
+    And I should see the message containing "Comment has been submitted."

@@ -33,12 +33,12 @@ Feature: PRC-348 Admin: View Courses List
     Given I am logged in as a user with the "Content Administrator (Curator)" role
     And I am on "prc/admin"
     When I click "Course Management"
-    Then I should be on "admin-course"
-    And I should see the heading "PRC Courses" in the "content" region
+    Then I should be on "prc/admin/admin-course"
+    And I should see the heading "PRC Courses" in the "sub_header" region
 
   Scenario: AC3 This page contains:
     Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
+    And I am on "prc/admin/admin-course"
     Then I should see the link "Add course" in the "content" region
 
   Scenario: AC4 The table contains the following fields:
@@ -82,7 +82,7 @@ Feature: PRC-348 Admin: View Courses List
   Scenario: AC6 Pagination: 100 per page -use the default pagination: e.g. first previous 1 2 3 4 .... 26 next last
     Given I have no "PD Course" nodes
     And I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
+    And I am on "prc/admin/admin-course"
     And I should not see the link "first"
     And I should not see the link "previous"
     And I should not see the link "next"
@@ -119,7 +119,7 @@ Feature: PRC-348 Admin: View Courses List
       | Two       | Two@timestamp   | @currentuid | 1410000200 | 1      |
       | Three     | Three@timestamp | @currentuid | 1410000300 | 1      |
       | Fifty One | Four@timestamp  | @currentuid | 1410000400 | 1      |
-    Then I visit "admin-course"
+    Then I visit "prc/admin/admin-course"
     Then I should see the text "One"
     And I should see the text "Fifty One"
     And I should see the text "Two"
@@ -140,7 +140,7 @@ Feature: PRC-348 Admin: View Courses List
     And "PD Course" nodes:
       | title     | body            | uid         | created    | status |
       | One       | One@timestamp   | @currentuid | 1410000100 | 1      |
-    Then I visit "admin-course"
+    Then I visit "prc/admin/admin-course"
     Then I should see the text "One"
     And I should not see the text "Saturday, September 6, 2014"
     And I should see the text "09/06/2014 - 05:41"

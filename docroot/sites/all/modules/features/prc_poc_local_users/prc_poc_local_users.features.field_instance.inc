@@ -10,7 +10,7 @@
 function prc_poc_local_users_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'user-user-field_first_name'
+  // Exported field_instance: 'user-user-field_first_name'.
   $field_instances['user-user-field_first_name'] = array(
     'bundle' => 'user',
     'default_value' => NULL,
@@ -44,7 +44,7 @@ function prc_poc_local_users_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'user-user-field_last_name'
+  // Exported field_instance: 'user-user-field_last_name'.
   $field_instances['user-user-field_last_name'] = array(
     'bundle' => 'user',
     'default_value' => NULL,
@@ -78,7 +78,7 @@ function prc_poc_local_users_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'user-user-field_member_state'
+  // Exported field_instance: 'user-user-field_member_state'.
   $field_instances['user-user-field_member_state'] = array(
     'bundle' => 'user',
     'default_value' => NULL,
@@ -112,7 +112,7 @@ function prc_poc_local_users_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'user-user-field_profession'
+  // Exported field_instance: 'user-user-field_profession'.
   $field_instances['user-user-field_profession'] = array(
     'bundle' => 'user',
     'default_value' => NULL,
@@ -146,7 +146,7 @@ function prc_poc_local_users_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'user-user-field_user_state'
+  // Exported field_instance: 'user-user-field_user_state'.
   $field_instances['user-user-field_user_state'] = array(
     'bundle' => 'user',
     'default_value' => NULL,

@@ -25,9 +25,9 @@ Feature: PRC-968 Search/Filter Bar: Filter the Digital Library Content
       | Media Uno  |
       | Media Deux |
     And "Digital Library Content" nodes:
-      | title      | body        | status | uid | field_subject | field_grade_level | field_media_type |
-      | Result One | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Two | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
+      | title      | body        | status | uid | field_subject | field_grade_level_unlimited | field_media_type |
+      | Result One | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Two | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
     And I am on the homepage
     And I index search results
     When I am on "library"
@@ -65,10 +65,10 @@ Feature: PRC-968 Search/Filter Bar: Filter the Digital Library Content
       | Media Deux |
       | Media Tres |
     And "Digital Library Content" nodes:
-      | title        | body        | status | uid | field_subject | field_grade_level | field_media_type |
-      | Result One   | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Two   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Three | Third Body  | 1      | 1   | Filter Me Two | GL One            | Media Tres       |
+      | title        | body        | status | uid | field_subject | field_grade_level_unlimited | field_media_type |
+      | Result One   | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Two   | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Three | Third Body  | 1      | 1   | Filter Me Two | GL One                      | Media Tres       |
     And I am on the homepage
     And I index search results
     When I am on "library"
@@ -106,10 +106,10 @@ Feature: PRC-968 Search/Filter Bar: Filter the Digital Library Content
       | Media Deux |
       | Media Tres |
     And "Digital Library Content" nodes:
-      | title        | body        | status | uid | field_subject | field_grade_level | field_media_type |
-      | Result One   | First Body  | 1      | 1   | Filter Me Two | GL One            | Media Uno        |
-      | Result Two   | Second Body | 1      | 1   | Filter Me Two | GL One            | Media Deux       |
-      | Result Three | Third Body  | 1      | 1   | Filter Me Two | GL One            | Media Uno        |
+      | title        | body        | status | uid | field_subject | field_grade_level_unlimited | field_media_type |
+      | Result One   | First Body  | 1      | 1   | Filter Me Two | GL One                      | Media Uno        |
+      | Result Two   | Second Body | 1      | 1   | Filter Me Two | GL One                      | Media Deux       |
+      | Result Three | Third Body  | 1      | 1   | Filter Me Two | GL One                      | Media Uno        |
     And I am on the homepage
     And I index search results
     When I am on "library"

@@ -17,11 +17,11 @@ Feature: PRC-1026 Item Bank - Edit Item - Item Edited - Assessment/s Updated
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Assessment directions" nodes
-    And I am on "assessments"
+    And I am on "assessments/practice-assessments"
     And I click "Create New Assessment"
     And I fill in "Title" with "Quiz Title"
     And I fill in "Objectives" with "Objectives"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I fill in the hidden field "faux_subject" with "Subject"
     And I press "Save"
 

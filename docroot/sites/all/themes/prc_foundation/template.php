@@ -25,32 +25,115 @@ function prc_foundation_html_head_alter(&$head_elements) {
  */
 function prc_foundation_preprocess_html(&$variables) {
   drupal_add_css('//fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:700', array('type' => 'external'));
-  if (request_path() == 'library') {
+  $gallery_view_paths = array(
+    'library',
+    'assessments',
+    'professional-learning'
+  );
+  if (in_array(request_path(), $gallery_view_paths)) {
     drupal_add_js(path_to_theme() .'/javascripts/vendor/packery.pkgd.min.js');
     drupal_add_js(path_to_theme() .'/javascripts/custom/gallery_view.js');
+  }
+  if (request_path() == 'library') {
+    drupal_add_js(path_to_theme() .'/javascripts/custom/library_gallery_view.js');
+    drupal_add_js(path_to_theme() .'/javascripts/custom/prc_utilities.js');
+  }
+  if (arg(0) == 'search-content') {
+    drupal_add_js(path_to_theme() .'/javascripts/custom/search_content.js');
+    drupal_add_js(path_to_theme() .'/javascripts/custom/prc_utilities.js');
+  }
+  $resource_table_paths = array(
+    'instructional-tools/formative-instructional-tasks',
+    'instructional-tools/speaking-listening',
+    'assessments/parcc-released-items'
+  );
+  if (in_array(request_path(), $resource_table_paths)) {
+    drupal_add_js(path_to_theme() .'/javascripts/custom/resource_table.js');
+  }
+  //Add the .page-node-edit class to the revision edit pages
+  if(in_array('page-node-revisions-edit', $variables['classes_array'])){
+    $variables['classes_array'][] = 'page-node-edit';
   }
 }
 
 /**
- * Implements hook_preprocess_breadcrumb()
+ * Implements hook_preprocess_menu_tree()
  */
-function prc_foundation_preprocess_breadcrumb(&$variables) {
-  // This is a one off example to support theming, but we should probably
-  // solve for breadcrumbs more broadly at some point.
-  if (request_path() == 'library') {
-    $variables['breadcrumb'][] = l('Home', '<front>');
-    $variables['breadcrumb'][] = drupal_get_title();
+function prc_foundation_preprocess_menu_tree(&$variables, $hook) {
+  // If we are only showing four links, adjust column widths accordingly
+  if (substr_count($variables['tree'], 'large-3') == 3) {
+    $variables['tree'] = str_replace('small-12 medium-6 large-3', 'small-12 medium-4', $variables['tree']);
   }
 }
 
 function prc_foundation_preprocess_page(&$vars, $hook) {
-  if (true) {
-    drupal_add_js('http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML', 'external');
-    $vars['scripts'] = drupal_get_js(); // necessary in D7?
-  }
-  if (isset($vars['node']->type) && $vars['node']->type == 'digital_library_content' && arg(2) != 'edit' && arg(4) != 'edit') {
+  // We know I hate leaving commented code in here...
+  // But soon enough we'll need to put an equation editor in, and we'll need this.
+  //  if (true) {
+  //    drupal_add_js('http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML', 'external');
+  //    $vars['scripts'] = drupal_get_js(); // necessary in D7?
+  //  }
+  if (isset($vars['node']->type) && $vars['node']->type == 'digital_library_content' && arg(2) != 'edit' && arg(4) != 'edit' && arg(2) != 'prc_revisions' ){
     $vars['theme_hook_suggestions'][] = 'page__ds_2_col';
     drupal_add_js(path_to_theme() .'/javascripts/custom/digital_library_detail.js');
+  }
+
+  if (isset($vars['node']->type) && $vars['node']->type == 'pd_course' && arg(2) != 'edit' ){
+    drupal_add_js(path_to_theme() .'/javascripts/custom/pd_course_detail.js');
+  }
+
+  //Add a class to node pages to indicate whether we are viewing or editing
+  if(isset($vars['node']) && arg(2) != 'edit'){
+    $vars['classes_array'][] = 'node-view';
+
+    //don't display tabs on assessment view page
+    if($vars['node']->type == 'quiz'){
+      unset($vars['tabs']);
+      if(arg(2) != 'edit'){
+        drupal_add_js(path_to_theme().'/javascripts/custom/assessment_detail.js');
+      }
+    }
+  }
+  //pages in the assessment path that should not get the page--assessments gallery template
+  $not_gallery = array('assessments', 'assessments/diagnostics');
+  $path = request_path();
+  if(in_array($path, $not_gallery)){
+    foreach($vars['theme_hook_suggestions'] as $key => $suggestion){
+      if($suggestion === 'page__assessments'){
+        unset($vars['theme_hook_suggestions'][$key]);
+      }
+    }
+  }
+
+  //allow for overriding the page template depending on the node content type
+  if (isset($vars['node']->type) && arg(2) != 'edit') {
+    $nodetype = $vars['node']->type;
+    $vars['theme_hook_suggestions'][] = 'page__node__' . $nodetype;
+  }
+}
+
+function prc_foundation_menu_local_tasks_alter(&$data, $router_item, $root_path){
+  if(isset($router_item['page_arguments'][0])){
+    $node = $router_item['page_arguments'][0];
+
+    if(isset($node->type) && $node->type === 'quiz'){
+      foreach($data['tabs'][0]['output'] as $key => &$tab){
+        $link_title = $tab['#link']['title'];
+        // tabs hidden on all pages
+        $hide = array('Quiz', 'Take', 'My results');
+        //If we are viewing then hide view as well.
+        if($root_path == 'node/%') {
+          $hide[] = 'View';
+          if(in_array($link_title, $hide)){
+            unset($data['tabs'][0]['output'][$key]);
+          }
+        }else{
+          if(in_array($link_title, $hide)){
+            unset($data['tabs'][0]['output'][$key]);
+          }
+        }
+      }
+    }
   }
 }
 
@@ -58,6 +141,7 @@ function prc_foundation_preprocess_page(&$vars, $hook) {
  * Implements hook_preprocess_node()
  */
 function prc_foundation_preprocess_node(&$vars, $hook) {
+  // Add classes for library gallery tiles
   if ($vars['type'] == 'digital_library_content' && isset($vars['field_media_type']['und'][0]['tid'])) {
     $media_type = taxonomy_term_load($vars['field_media_type']['und'][0]['tid']);
     if (isset($media_type->name)) {
@@ -67,6 +151,22 @@ function prc_foundation_preprocess_node(&$vars, $hook) {
   else {
     $vars['classes_array'][] = 'media-type-none';
   }
+  // Change 'read more' link and add classes for assessment gallery tiles
+  if ($vars['type'] == 'quiz' && isset($vars['field_quiz_type']['und'][0]['tid']) && $vars['view_mode'] == 'teaser') {
+    $vars['content']['links']['node']['#links']['node-readmore']['title'] = str_replace('Read more', 'View/Modify', $vars['content']['links']['node']['#links']['node-readmore']['title']);
+    $quiz_type = taxonomy_term_load($vars['field_quiz_type']['und'][0]['tid']);
+    if (isset($quiz_type->name) && $quiz_type->name == 'PARCC-Released Practice Assessment') {
+      $vars['classes_array'][] = 'parcc-assessment';
+    }
+  }
+  if($vars['type'] == 'quiz'){
+    $prc_date = format_date($vars['node']->created, 'prc_custom_modules_date_only');
+    $vars['submitted'] = "<div class='prc-publish-date'>$prc_date</div>";
+  }
+}
+
+function prc_foundation_process_node(&$vars, $hook){
+  $x = 1;
 }
 
 /**
@@ -104,6 +204,82 @@ function prc_foundation_menu() {
 
   return $items;
 }
+
+
+function prc_foundation_menu_tree__menu_assessment($variables){
+  return '<div class="menu">' . $variables['tree'] . '</div>';
+}
+
+/**
+ * Implements theme_links() targeting the assessment menu
+ * Formats links for Top Bar http://foundation.zurb.com/docs/components/top-bar.html
+ */
+function prc_foundation_menu_link__menu_assessment($variables){
+  $element = $variables['element'];
+  $sub_menu = '';
+
+  if ($element['#below']) {
+    $sub_menu = drupal_render($element['#below']);
+  }
+  $description = $element['#localized_options']['attributes']['title'];
+  unset($element['#localized_options']['attributes']['title']);
+
+  $output = '<ul class="menu">';
+  $link= l($element['#title'], $element['#href'], $element['#localized_options']);
+  $output .= '<li' . drupal_attributes($element['#attributes']) . '>' . $link . $sub_menu . "</li>\n";
+  $output .= '</ul>';
+
+  return $output . '<p class="menu-item-description">'.$description.'</p>';
+}
+
+/**
+ * Implements theme_links() targeting the main menu specifically.
+ * Formats links for Top Bar http://foundation.zurb.com/docs/components/top-bar.html
+ */
+
+function prc_foundation_links__system_main_menu($links)
+{
+  // Get all the main menu links
+  $menu_links = menu_tree_output(menu_tree_all_data('main-menu'));
+
+  // Initialize some variables to prevent errors
+  $output = '';
+  $sub_menu = '';
+
+  foreach ($menu_links as $key => $link) {
+
+    // Add special class needed for Foundation dropdown menu to work
+    !empty($link['#below']) ? $link['#attributes']['class'][] = 'has-dropdown' : '';
+
+    // Render top level and make sure we have an actual link
+    if (!empty($link['#href'])) {
+      $output .= '<li' . drupal_attributes($link['#attributes']) . '>' . l($link['#title'], $link['#href']);
+      // Get sub navigation links if they exist
+      foreach ($link['#below'] as $key => $sub_link) {
+        $external_link = FALSE;
+        if (!empty($sub_link['#href'])) {
+          //prc-1763  link to seraph should open in a new tab
+          if($sub_link ['#href'] === 'formative-external'){
+             $external_link = true;
+          }
+          //PRC-1763 : link to seraph should open in a new tab
+          $options = $external_link ? array('attributes' => array('target' => '_blank')) : array();
+
+          $sub_menu .= '<li class="dropdown-item">' . l($sub_link['#title'], $sub_link['#href'], $options) . '</li>';
+        }
+      }
+      $output .= !empty($link['#below']) ? '<ul class="dropdown">' . $sub_menu . '</ul>' : '';
+
+      // Reset dropdown to prevent duplicates
+      unset($sub_menu);
+      $sub_menu = '';
+
+      $output .= '</li>';
+    }
+  }
+  return $output;
+}
+
 
 function prc_foundation_ds_search_page($build) {
   if (isset($build['theme_hook_original'])) {
@@ -148,7 +324,6 @@ function prc_foundation_course_outline_item($variables) {
     }
   }
 
-
   return $output;
 }
 
@@ -179,7 +354,10 @@ function prc_foundation_question_selection_table($variables) {
       $form['weights'][$id]['#attributes']['class'] = array('question-list-weight');
       $form['qnr_ids'][$id]['#attributes']['class'] = array('qnr-id');
       $form['qnr_pids'][$id]['#attributes']['class'] = array('qnr-pid');
-      $rows[] = _prc_question_preview_quiz_get_question_row($form, $id);
+      $row =  _prc_question_preview_quiz_get_question_row($form, $id);
+      $ids = explode('-', $id);
+      $row['class'][] = 'quiz-item-'.$ids[0];
+      $rows[] = $row;
     }
     // Make sure the same fields aren't rendered twice
     unset($form['types'], $form['view_links'], $form['remove_links'], $form['stayers']);
@@ -310,6 +488,45 @@ function prc_foundation_preprocess_entity(&$variables) {
 }
 
 /**
+ * Implements theme_menu_tree() for homepage_menu
+ */
+function prc_foundation_menu_tree__menu_homepage_menu($variables) {
+  return '<ul class="homepage-menu">' . $variables ['tree'] . '</ul>';
+}
+
+/**
+ * Implements theme_menu_link()
+ */
+function prc_foundation_menu_link(array $variables) {
+  $element = $variables ['element'];
+  $sub_menu = '';
+
+  if ($element ['#below']) {
+    $sub_menu = drupal_render($element ['#below']);
+  }
+  // Add foundation classes for homepage menu
+  if ($element['#theme'] == 'menu_link__menu_homepage_menu') {
+    $element['#attributes']['class'][] = 'columns';
+    $element['#attributes']['class'][] = 'small-12';
+    $element['#attributes']['class'][] = 'medium-6';
+    $element['#attributes']['class'][] = 'large-3';
+  }
+
+  $external = false;
+
+  //prc-1763  link to seraph should open in a new tab
+  if($element['#href'] === 'http://formative.parcconline.org/dashboard'){
+    $external = true;
+  }
+  $options = $external ? array('attributes' => array('target' => '_blank')) : array();
+
+  $options += $element ['#localized_options'];
+
+  $output = l($element ['#title'], $element ['#href'], $options);
+  return '<li' . drupal_attributes($element ['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
+}
+
+/**
  * Implements theme_pager()
  */
 function prc_foundation_pager($variables) {
@@ -429,7 +646,7 @@ function prc_foundation_field($variables) {
   $diglib_divider_labels = array("field_link_to_a_url",
     "field_document",
     "field_tags",
-    "field_grade_level",
+    "field_grade_level_unlimited",
     "field_subject",
     "field_genre",
     "field_standard"
@@ -468,4 +685,61 @@ function prc_foundation_field($variables) {
   $output = '<div class="' . $variables['classes'] . '"' . $variables['attributes'] . '>' . $output . '</div>';
 
   return $output;
+}
+
+/**
+ * Override theme_checkbox() so that we can use foundation checkbox stylings
+ */
+function prc_foundation_checkbox($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'checkbox';
+  element_set_attributes($element, array('id', 'name', '#return_value' => 'value'));
+
+  // Unchecked checkbox has #value of integer 0.
+  if (!empty($element['#checked'])) {
+    $element['#attributes']['checked'] = 'checked';
+  }
+  _form_set_class($element, array('form-checkbox'));
+
+  $custom_box = '<span class="prc-checkbox"></span>';
+
+  return '<input' . drupal_attributes($element['#attributes']) . ' />'.$custom_box;
+}
+
+function modal_js_settings(){
+  drupal_add_js(array(
+    'zurb-modal-style' => array(
+      // Set modalSize to scale. Not sure if the modal resizes with the window change yet?
+      'modalSize' => array(
+        'type' => 'scale',
+        'width' => 0.7,
+        'contentRight' => 0,
+        'height' => 'auto',
+      ),
+      'modalOptions' => array('opacity' => .55, 'background' => '#333'),
+      'animation' => 'fadeIn',
+      'animationSpeed' => 'slow',
+    ),
+  ), 'setting');
+}
+
+/**
+ * Implements hook_process_hook()
+ *
+ * @param $vars
+ */
+function prc_foundation_process_flag(&$vars){
+  if($vars['flag']->name == 'like_content'){
+    $vars['link_text'] = str_replace('Like', '', $vars['link_text']);
+    $vars['link_text'] = str_replace('Undo', '', $vars['link_text']);
+  }
+}
+
+function prc_foundation_theme($existing, $type, $theme, $path){
+  return array(
+    'foundation_dropdown_menu' => array(
+      'path' => drupal_get_path('theme', 'prc_foundation').'/templates/',
+      'template' => 'foundation-dropdown-menu'
+    )
+  );
 }

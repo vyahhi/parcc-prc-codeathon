@@ -64,8 +64,8 @@ function prc_poc_local_node_short_answer_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-short_answer-field_grade_level'
-  $field_instances['node-short_answer-field_grade_level'] = array(
+  // Exported field_instance: 'node-short_answer-field_grade_level_unlimited'
+  $field_instances['node-short_answer-field_grade_level_unlimited'] = array(
     'bundle' => 'short_answer',
     'default_value' => NULL,
     'deleted' => 0,
@@ -76,7 +76,7 @@ function prc_poc_local_node_short_answer_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 2,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -86,7 +86,7 @@ function prc_poc_local_node_short_answer_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_grade_level',
+    'field_name' => 'field_grade_level_unlimited',
     'label' => 'Grade Level',
     'required' => 1,
     'settings' => array(
@@ -97,11 +97,10 @@ function prc_poc_local_node_short_answer_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'apply_chosen' => '',
         'label_help_description' => '',
       ),
-      'type' => 'options_select',
-      'weight' => 4,
+      'type' => 'options_buttons',
+      'weight' => 5,
     ),
   );
 
@@ -146,7 +145,7 @@ function prc_poc_local_node_short_answer_field_default_field_instances() {
         'label_help_description' => '',
       ),
       'type' => 'options_onoff',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -193,7 +192,7 @@ function prc_poc_local_node_short_answer_field_default_field_instances() {
         ),
       ),
       'type' => 'taxonomy_shs',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 

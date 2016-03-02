@@ -7,9 +7,7 @@ Feature: Log Out (PRC-147)
   Scenario: AC1 - When a logged in user selects the "Log Out" link in the top right section of the PRC website.
     Given I am logged in as a user with the "Educator" role
     When I click "Log out"
-    Then I should see a "E-mail" field
-    And I should see an "Password" field
-    And I should see an "Log in" button
+    Then I should see "Log in"
 
   Scenario: AC2 - The anonymous user view of the PRC Homepage will display once the logged in user has successfully logged out.
     Given I am logged in as a user with the "Educator" role

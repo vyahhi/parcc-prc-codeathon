@@ -68,7 +68,7 @@ Feature: PRC-217  Invite User with Additional Role Selection
     Then I check the box "Content Contributor"
     And I fill in "Message" with "MESSAGE1234"
     And I fill in "E-mail" with "example@example.com"
-    And I select "Ohio - PARCC Member" from "State where the invitee teaches"
+    And I select "Ohio" from "State where the invitee teaches"
     Then I check the box "Educator"
     And I uncheck the box "Content Contributor"
     And I select "Wyoming" from "State where the invitee teaches"

@@ -52,6 +52,12 @@ function prc_poc_local_users_user_default_roles() {
     'weight' => 8,
   );
 
+  // Exported role: Practice Test Service Role.
+  $roles['Practice Test Service Role'] = array(
+    'name' => 'Practice Test Service Role',
+    'weight' => 12,
+  );
+
   // Exported role: School Admin.
   $roles['School Admin'] = array(
     'name' => 'School Admin',

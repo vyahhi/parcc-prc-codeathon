@@ -12,14 +12,14 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
   Scenario: Tab should only show up when there is a new revision
     # create content
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "My Draft @timestamp"
     And I fill in "Body" with "Isn't this swell?"
     And I select the radio button "Public" with the id "edit-field-permissions-und-public"
     And I press "Save"
     # navigate to the content
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My Draft @timestamp"
     # make sure the tab doesn't show
     And I should not see the link "Revisions"
@@ -28,7 +28,7 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     And I fill in "Body" with "Making a new draft"
     And I press "Save"
     # confirm that the revisions tab shows up
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My Draft @timestamp"
     And I click "Revisions"
     # check that we can access correct drafts by clicking on the links
@@ -41,14 +41,14 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
   Scenario: Tab shows a diff between the drafts
     #create content
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "My Draft @timestamp"
     And I fill in "Body" with "Isn't this swell?"
     And I select the radio button "Public" with the id "edit-field-permissions-und-public"
     And I press "Save"
     # navigate to the content
-    When I visit "admin-content"
+    When I visit "prc/admin/admin-content"
     And I click "My Draft @timestamp"
     # edit the content and save a new draft
     And I click "Edit"
@@ -62,40 +62,40 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
   Scenario: Contributor's comments show on history table
     # create content and walk it through past request changes
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "My Draft @timestamp"
     And I fill in "Body" with "Isn't this swell?"
     And I select the radio button "Public" with the id "edit-field-permissions-und-public"
     And I press "Save"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My Draft @timestamp"
     And I click "Edit"
     And I fill in "Body" with "Making a new draft"
     And I press "Save"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My Draft @timestamp"
     And I click "Edit"
     And I press "Request Approval"
     And I press "Update state"
     # make sure the comments from the contributor show up on the revisions tab
     When I am logged in as "Joe Curator"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My Draft @timestamp"
     And I press the "Request Change" button
     And I fill in "Message *" with "Please elaborate on this and that."
     And I press the "Send Request" button
     Then I am logged in as "Joe Contributor"
-    And I visit "admin-content"
-    And I click "My Draft @timestamp"
-    And I click "My Draft @timestamp"
+    And I visit "prc/admin/admin-content"
+    And I click "edit" in the "My Draft @timestamp" row
+    And I click on the element with css selector ".breadcrumb a:nth-child(4)"
     And I click "Revisions"
     And I should see the text "Please elaborate on this and that."
 
   Scenario: The revisions page displays correctly
     # Walk content through to published to populate the table
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "My first post @timestamp"
     And I fill in "Body" with "Isn't this swell?"
@@ -104,21 +104,21 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     And I click "Edit"
     And I press the "Request Approval" button
     And press the "Update state" button
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I am logged in as "Joe Curator"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I press the "Publish" button
     And I press the "Update state" button
     And I am logged in as "Joe Curator"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I fill in "Body" with "This is what I have to say."
     And I press "Publish"
     And I press the "Update state" button
     And I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I click "Edit"
     And I fill in "Body" with "Here is my clever addition."
@@ -128,12 +128,12 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     And I press "Request Approval"
     And I press the "Update state" button
     And I am logged in as "Joe Curator"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I press the "Publish" button
     And I press the "Update state" button
     And I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I click "Edit"
     And I fill in "Body" with "Here is my really clever addition."
@@ -144,42 +144,42 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     And I should not see an "textarea" element
     And I press the "Update state" button
     And I am logged in as "Joe Curator"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I press the "Request Change" button
     And I fill in "Message *" with "Do it again, not so clever."
     And I press the "Send Request" button
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I am logged in as "Joe Curator"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     # click the breadcrumb to return to the node view
     And I click "My first post @timestamp"
     And I click "Edit"
     And I press the "Unpublish" button
     And I press the "Update state" button
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I should see the text "Revision State: Draft"
     And I click "Edit"
     And I press the "Request Approval" button
     And press the "Update state" button
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I click "Rescind Request"
     And I press the "Update state" button
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I am logged in as "Joe Curator"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I press the "Publish" button
     And I press the "Update state" button
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     # check that the current revision info is displayed correctly
     When I click "My first post @timestamp"
     And I click "Revisions"
@@ -193,4 +193,33 @@ Feature: As a Content Contributor, I want the system to keep track of the previo
     And I click "Joe Curator"
     And I should not see "Access Denied"
 
-
+  @prc-1795
+  Scenario: prc-1795 only published content visible in diglib gallery
+    # Walk content through to published to populate the table
+    Given I am logged in as "Joe Contributor"
+    And I visit "prc/admin/admin-content"
+    And I click "Add content"
+    And I fill in "edit-title" with "My first post @timestamp"
+    And I fill in "Body" with "Isn't this swell?"
+    And I select the radio button "Public" with the id "edit-field-permissions-und-public"
+    And I press the "Save" button
+    And I click "Edit"
+    And I press the "Request Approval" button
+    And press the "Update state" button
+    And I visit "prc/admin/admin-content"
+    And I click "My first post @timestamp"
+    And I am logged in as "Joe Curator"
+    And I visit "prc/admin/admin-content"
+    And I click "My first post @timestamp"
+    And I press the "Publish" button
+    And I press the "Update state" button
+    And I index search results
+    When I visit "library"
+    And I should see the link "My first post @timestamp"
+    And I click "My first post @timestamp"
+    # click the breadcrumb to return to the node view
+    And I click "Edit"
+    And I press the "Unpublish" button
+    And I press the "Update state" button
+    Then I visit "library"
+    And I should not see the link "My first post @timestamp"

@@ -9,7 +9,7 @@
  */
 function prc_menu_links_menu() {
   $items['prc/admin'] = array(
-    'title' => 'PRC Admin',
+    'title' => 'Admin',
     'page callback' => 'prc_menu_links_prc_admin',
     'access callback' => 'prc_menu_links_is_prc_admin',
   );

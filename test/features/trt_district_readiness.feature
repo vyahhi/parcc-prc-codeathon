@@ -18,10 +18,14 @@ Feature: PRC-706 District Readiness - District Admin View
     And "School" nodes:
       | title         | field_ref_district          | field_contact_email            | uid         |
       | <school_name> | @nid[PRC-944 S1 @timestamp] | example1@timestamp@example.com | @currentuid |
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     And I click "<district_name>"
     Then I should see the heading "<district_name> Readiness"
-    And I should see the text "Overview / instructional copy goes here \(admin can export all test results data for district to csv or click school name to view results of technology checks for school\). Note only schools that have run structured readiness checks display on this page."
+    And I should see the text "Click the links on this page to access, manage, and download school data and readiness reports from your district."
+    And I should see the text "To add a school, click \“Manage Schools\” and then either add one school at a time with the form or upload via .csv file."
+    And I should see the text "For more information on the TRT, please refer to the online tutorial found in the professional learning section of this site."
+    And I should see the text "For more information on the technology requirements used to evaluate platforms and networks please download the"
+    And I should see the link "PARCC minimum technology requirements"
     And I should see the link "Edit district name"
     And I should see the link "Manage Schools"
     And I should see the text "add schools and request readiness checks"
@@ -41,7 +45,7 @@ Feature: PRC-706 District Readiness - District Admin View
       | title         | field_ref_district    | field_contact_email            | uid         |
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
     And the school "<school_name>" has run a system check
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     And I click "<district_name>"
     Then I should see the heading "<district_name> Readiness"
     And I should see the text "<school_name>"
@@ -58,6 +62,28 @@ Feature: PRC-706 District Readiness - District Admin View
     | joe_prc_706a@timestamp@example.com | PRC-706 S1 @timestamp | School 706 S1 @timestamp |
 
 
+  @prc-1526
+  Scenario Outline: PRC-1526 District readiness view scale
+    Given users:
+      | name        | mail        | pass   | field_first_name | field_last_name | status | roles                    |
+      | <user_name> | <user_name> | xyz123 | Joe              | Educator        | 1      | Educator, District Admin |
+    And I am logged in as "<user_name>"
+    And "District" nodes:
+      | title           | uid         |
+      | <district_name> | @currentuid |
+    And "School" nodes:
+      | title         | field_ref_district    | field_contact_email            | uid         |
+      | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
+    And the school "<school_name>" has run a system check
+    And the school "<school_name>" has run a capacity check to three digits
+    And I visit "assessments/technology-readiness"
+    And I click "<district_name>"
+    Then I should see the heading "<district_name> Readiness"
+    And I should see the text "<school_name>"
+    And I should see the text "0.004" in the "<school_name>" row
+  Examples:
+    | user_name                           | district_name          | school_name               |
+    | joe_prc_1526a@timestamp@example.com | PRC-1526 S1 @timestamp | School 1526 S1 @timestamp |
 
   Scenario Outline: 4 - At least one school in my district has run structured testing capacity check
     Given users:
@@ -72,7 +98,7 @@ Feature: PRC-706 District Readiness - District Admin View
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
     And the school "<school_name>" has run a system check
     And the school "<school_name>" has run a capacity check
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     And I click "<district_name>"
     Then I should see the heading "<district_name> Readiness"
     And I should see the text "<school_name>"

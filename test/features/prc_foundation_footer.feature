@@ -14,38 +14,38 @@ Feature: Footer Responsive Behavior (PRC-750)
   @javascript
   Scenario: Footer responsive behavior matches style guide
     Given I am an anonymous user
-    And I am on "assessments"
+    And I am on "assessments/practice-assessments"
     When I am browsing using a "phone"
     Then "footer #footer-copyright" should have a "text-align" css value of "center"
     And "footer #footer-contact" should have a "text-align" css value of "center"
     And "#footer-wrapper div:first-child" should have an "id" attribute value of "footer-copyright"
-    And "footer #footer-copyright" should have a "width" css value of "345px"
-    And "footer #footer-contact" should have a "width" css value of "345px"
+    And "footer #footer-copyright" should be "92%" of the width of "#page" within a margin of "1%"
+    And "footer #footer-contact" should be "92%" of the width of "#page" within a margin of "1%"
     And "#footer-social" should not be visible
     When I am browsing using a "tablet"
     Then "footer #footer-copyright" should have a "text-align" css value of "left"
     And "footer #footer-copyright" should have a "padding-left" css value of "15px"
-    And "footer #footer-copyright" should have a "width" css value of "354px"
+    And "footer #footer-copyright" should be "46%" of the width of "#page" within a margin of "2%"
     And "footer #footer-contact" should have a "text-align" css value of "right"
     And "footer #footer-contact" should have a "padding-right" css value of "15px"
-    And "footer #footer-contact" should have a "width" css value of "354px"
+    And "footer #footer-contact" should be "46%" of the width of "#page" within a margin of "2%"
     And "#footer-wrapper div:first-child" should have an "id" attribute value of "footer-copyright"
     And "#footer-social" should not be visible
     When I am browsing using a "desktop"
     Then "footer #footer-copyright" should have a "text-align" css value of "left"
     And "footer #footer-copyright" should have a "padding-left" css value of "30px"
-    And "footer #footer-copyright" should have a "width" css value of "367px"
+    And "footer #footer-copyright" should be "29%" of the width of "#page" within a margin of "2%"
     And "footer #footer-contact" should have a "text-align" css value of "center"
-    And "footer #footer-contact" should have a "width" css value of "367px"
+    And "footer #footer-contact" should be "29%" of the width of "#page" within a margin of "2%"
     And "footer #footer-social" should have a "text-align" css value of "right"
     And "footer #footer-social" should have a "padding-right" css value of "30px"
-    And "footer #footer-social" should have a "width" css value of "367px"
+    And "footer #footer-social" should be "29%" of the width of "#page" within a margin of "2%"
     And "#footer-wrapper div:first-child" should have an "id" attribute value of "footer-copyright"
 
   @javascript
   Scenario: Footer style matches style guide
     Given I am an anonymous user
-    And I am on "assessments"
+    And I am on "assessments/practice-assessments"
     When I am browsing using a "phone"
     Then "body" should have a "background-color" css value of "rgb(112, 84, 125)"
     And "#page" should have a "background-color" css value of "rgb(255, 255, 255)"
@@ -64,5 +64,10 @@ Feature: Footer Responsive Behavior (PRC-750)
     And "footer p a" should have a "font-family" css value of "'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif"
     And I hover over the element "#footer-copyright p a"
     And "#footer-copyright p a" should have a "color" css value of "rgb(255, 255, 255)"
-    And "#footer-social a:first-child img" should have an "src" attribute value of "/sites/all/themes/prc_foundation/images/facebook-icon.png"
-    And "#footer-social a:last-child img" should have an "src" attribute value of "/sites/all/themes/prc_foundation/images/twitter-icon.png"
+    # TODO -  update css value step to handle relative paths starting with '../'
+    # And "#footer-social a:first-child" should have a "background-image" css value of "/sites/all/themes/prc_foundation/images/facebook-icon.png"
+    # And "#footer-social a:last-child" should have a "background-image" css value of "/sites/all/themes/prc_foundation/images/twitter-icon.png"
+    # prc-1920
+    And I should see the text "Comments, questions, help, call us at 1-866-845-2110 or email us at prc-questions@parcconline.org."
+    And I should see the link "1-866-845-2110"
+    And I should see the link "prc-questions@parcconline.org"

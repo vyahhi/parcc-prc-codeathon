@@ -13,38 +13,38 @@ Feature: PRC-608 Self-registration- State Attribute
   Additional Considerations
   No change to the rest of attributes in self-registration page.
 
-  Scenario: State where I teach - Members have - PARCC Member
+  Scenario: State where I teach - Members used to have - PARCC Member, prc-1973 asks that we remove it.
     Given I am an anonymous user
-    And I click "Join now!"
-    And I should see the text "State where you teach"
-    And I select "Arizona" from "State where you teach"
-    And I select "Arkansas - PARCC Member" from "State where you teach"
-    And I select "Colorado - PARCC Member" from "State where you teach"
-    And I select "District of Columbia - PARCC Member" from "State where you teach"
-    And I select "Illinois - PARCC Member" from "State where you teach"
-    And I select "Louisiana - PARCC Member" from "State where you teach"
-    And I select "Maryland - PARCC Member" from "State where you teach"
-    And I select "Massachusetts - PARCC Member" from "State where you teach"
-    And I select "Mississippi - PARCC Member" from "State where you teach"
-    And I select "New Jersey - PARCC Member" from "State where you teach"
-    And I select "New Mexico - PARCC Member" from "State where you teach"
-    And I select "New York - PARCC Member" from "State where you teach"
-    And I select "Ohio - PARCC Member" from "State where you teach"
-    And I select "Rhode Island - PARCC Member" from "State where you teach"
+    And I click "Create account"
+    And I should see the text "Where you teach"
+    And I select "Arizona" from "Where you teach"
+    And I select "Arkansas" from "Where you teach"
+    And I select "Colorado" from "Where you teach"
+    And I select "District of Columbia" from "Where you teach"
+    And I select "Illinois" from "Where you teach"
+    And I select "Louisiana" from "Where you teach"
+    And I select "Maryland" from "Where you teach"
+    And I select "Massachusetts" from "Where you teach"
+    And I select "Mississippi" from "Where you teach"
+    And I select "New Jersey" from "Where you teach"
+    And I select "New Mexico" from "Where you teach"
+    And I select "New York" from "Where you teach"
+    And I select "Ohio" from "Where you teach"
+    And I select "Rhode Island" from "Where you teach"
 
   # TODO: chosen.js needs some work on custom steps to be able to test it
 
   Scenario: PRC-1018 State where I teach - Required
     Given I am an anonymous user
-    And I click "Join now!"
+    And I click "Create account"
     When I press "Create new account"
-    Then I should see the error message containing "State where you teach field is required."
+    Then I should see the error message containing "Where you teach field is required."
 
   Scenario: PRC-1250 State code has to match selected state
     Given I am an anonymous user
-    And I click "Join now!"
-    And I should see the text "State where you teach"
-    And I select "Arkansas - PARCC Member" from "State where you teach"
-    And I fill in "State Account #" with "ILLI1"
+    And I click "Create account"
+    And I should see the text "Where you teach"
+    And I select "Arkansas" from "Where you teach"
+    And I fill in "PARCC Member code" with "IL1818"
     And I press "Create new account"
-    Then I should see the error message containing "State Account # is incorrect. Leave this blank if you do not have one."
+    Then I should see the error message containing "PARCC Member code is incorrect. Leave this blank if you do not have one."

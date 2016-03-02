@@ -8,6 +8,7 @@ dependencies[] = features
 dependencies[] = list
 dependencies[] = number
 dependencies[] = options
+dependencies[] = prc_poc_local_fields
 dependencies[] = strongarm
 features[eck_bundle][] = prc_trt_capacity_check
 features[eck_bundle][] = prc_trt_system_check

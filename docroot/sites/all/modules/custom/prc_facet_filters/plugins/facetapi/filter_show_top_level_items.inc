@@ -13,21 +13,18 @@ class FacetapiFilterShowTopLevelItems extends FacetapiFilter {
    */
   public function execute(array $build) {
     $this->build = array();
-
-    $this->collectOnlyParents($build);
-
-    return $this->build;
-  }
-
-  /**
-   * Collect only items that do not have parents.
-   */
-  protected function collectOnlyParents($items) {
-    foreach ($items as $key => $item) {
-      // Run recursively on all children.
-      if (empty($item['#item_parents'])) {
-        $this->build[] = $item;
+    $new_build = array();
+    foreach ($build as $key => $item) {
+      // If this item has children, remove them.
+      if (count($item['#item_children'])) {
+        $new_item = $item;
+        $new_item['#item_children'] = array();
+        $new_build[$key] = $new_item;
+      } else {
+        $new_build[$key] = $item;
       }
     }
+
+    return $new_build;
   }
 }

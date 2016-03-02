@@ -33,10 +33,12 @@ Feature: PRC-707 State Readiness
       | <district_name> | @currentuid |
     And I am an anonymous user
     And I am logged in as "<user_name>"
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     Then I click "<member_state>"
     Then I should see the heading "<member_state> Readiness"
-    And I should see the text "Overview / instructional copy goes here \(admin can export all test results data for state to csv or click district name to view results of technology checks by school\)."
+    And I should see the text "Click the links on this page to access and download district and school data and readiness reports."
+    And I should see the text "For more information on the technology requirements used to evaluate platforms and networks please download the"
+    And I should see the link "PARCC minimum technology requirements"
     And I should see the text "No districts in your state have been created"
     And I should see the heading "Districts"
   Examples:
@@ -64,10 +66,12 @@ Feature: PRC-707 State Readiness
       | Other           | @currentuid | @nid[Another State]  |
     And I am an anonymous user
     And I am logged in as "<user_name>"
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     Then I click "<member_state>"
     Then I should see the heading "<member_state> Readiness"
-    And I should see the text "Overview / instructional copy goes here \(admin can export all test results data for state to csv or click district name to view results of technology checks by school\)."
+    And I should see the text "Click the links on this page to access and download district and school data and readiness reports."
+    And I should see the text "For more information on the technology requirements used to evaluate platforms and networks please download the"
+    And I should see the link "PARCC minimum technology requirements"
     But I should not see the text "No districts in your state have been created"
     And I should see the heading "Districts"
     And I should see the link "<district_name>"
@@ -101,7 +105,7 @@ Feature: PRC-707 State Readiness
       | Echo    | @currentuid | @nid[<member_state>] |
     And I am an anonymous user
     And I am logged in as "<state_admin>"
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     Then I click "<member_state>"
     Then I should see the link "Alpha"
     And I should see the link "Echo"

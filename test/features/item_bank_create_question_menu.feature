@@ -5,7 +5,7 @@ Feature: PRC-1010 Item Bank - Create New Item menu
 
   Scenario: Add new item menu
     Given I am logged in as a user with the "educator" role
-    And I am on "item-bank"
+    And I am on "assessments/item-bank"
     Then I should see the link "Non-interactive (text only)"
     And I should see the link "Interactive choice"
     And I should see the link "Short answer"

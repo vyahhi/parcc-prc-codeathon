@@ -30,31 +30,29 @@ Feature: PRC-527 Preview an item in Assessment Details page
       | name      |
       | Grade 527 |
     And "Assessment" nodes:
-      | title        | field_subject | field_grade_level | field_quiz_type                    | uid         |
-      | PRC-527 View | subj1, subj2  | Grade 527         | PARCC-Released Practice Assessment | @currentuid |
+      | title        | field_subject | field_grade_level_unlimited | field_quiz_type                    | uid         |
+      | PRC-527 View | subj1, subj2  | Grade 527                   | PARCC-Released Practice Assessment | @currentuid |
   # That standard already exists, and I hate it, but I am getting an error
   # creating a Standard term is giving me an error.
   # We're cheating and using one that exists already.
     When I visit the last node created
-    And I click "Quiz"
-    Then I click "Manage questions"
-    Then I click "Create new question"
-    Then I click "Assessment directions"
+    And I press "Add Item"
+    Then I click "Non-interactive Item (text only)"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-527 Directions 1"
     And I press "Save"
-    Then I click "Create new question"
-    Then I click "Multiple choice question"
+    And I press "Add Item"
+    Then I click "Interactive Choice"
     And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
     And I fill in "Title" with "PRC-527 Multi"
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     And I fill in "edit-alternatives-1-answer-value" with "Answer 2"
     And I check the box "edit-alternatives-1-correct"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I press "Save"
     Then I visit the last node created
-    And I should see the text "Item Type"
+    And I should not see the text "Question Type"
 
     And I should not see the text "Body Body Directions Directions"
     But I should see the link "PRC-527 Directions 1"
@@ -63,14 +61,15 @@ Feature: PRC-527 Preview an item in Assessment Details page
 
     When I follow "PRC-527 Directions 1"
     Then I should see the text "Body Body Directions Directions"
-    Then I move backward one page
+    And I should see the text "Question Type"
 
     When I follow "PRC-527 Multi"
     Then I should see the text "Multi Multi Question Question"
+    And I should see the text "Question Type"
 
     When I am an anonymous user
     And I visit the last node created
-    And I should see the text "Item Type"
+    And I should not see the text "Question Type"
 
     And I should not see the text "Body Body Directions Directions"
     But I should see the link "PRC-527 Directions 1"
@@ -79,10 +78,11 @@ Feature: PRC-527 Preview an item in Assessment Details page
 
     When I follow "PRC-527 Directions 1"
     Then I should see the text "Body Body Directions Directions"
-    And I should see the text "Item Title"
+    And I should see the text "Question Type"
 
-    And I visit the last node created
     When I follow "PRC-527 Multi"
     Then I should see the text "Multi Multi Question Question"
-    And I should see the text "Item Title"
+    And I should see the text "Question Type"
     And I should not see the text "<p>"
+    # prc-1692 : active state on the question row
+    And "tr.active" should have a "background-color" css value of "rgb(112, 84, 125)"

@@ -25,37 +25,37 @@ Feature: PRC-981 Search/Filter Bar: Pagination
       | Media Uno  |
       | Media Deux |
     And "Digital Library Content" nodes:
-      | title            | body        | status | uid | field_subject | field_grade_level | field_media_type |
-      | Result One       | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Two       | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Three     | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Four      | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Five      | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Six       | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Seven     | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Eight     | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Nine      | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Ten       | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result One One   | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result One Two   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result One Three | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result One Four  | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result One Five  | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result One Six   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result One Seven | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result One Eight | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result One Nine  | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result One Ten   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Two One   | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Two Two   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Two Three | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Two Four  | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Two Five  | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Two Six   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Two Seven | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Two Eight | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Two Nine  | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Two Ten   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
+      | title            | body        | status | uid | field_subject | field_grade_level_unlimited | field_media_type |
+      | Result One       | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Two       | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Three     | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Four      | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Five      | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Six       | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Seven     | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Eight     | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Nine      | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Ten       | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result One One   | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result One Two   | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result One Three | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result One Four  | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result One Five  | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result One Six   | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result One Seven | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result One Eight | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result One Nine  | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result One Ten   | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Two One   | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Two Two   | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Two Three | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Two Four  | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Two Five  | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Two Six   | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Two Seven | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Two Eight | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Two Nine  | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Two Ten   | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
     And I am on the homepage
     And I index search results
     When I am on "library"
@@ -90,28 +90,28 @@ Feature: PRC-981 Search/Filter Bar: Pagination
       | Media Uno  |
       | Media Deux |
     And "Digital Library Content" nodes:
-      | title            | body        | status | uid | field_subject | field_grade_level | field_media_type |
-      | Result One       | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Two       | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Three     | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Four      | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Five      | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Six       | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Seven     | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Eight     | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Nine      | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Ten       | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result One One   | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result One Two   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result One Three | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result One Four  | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result One Five  | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result One Six   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result One Seven | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result One Eight | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result One Nine  | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result One Ten   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
-      | Result Two One   | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
+      | title            | body        | status | uid | field_subject | field_grade_level_unlimited | field_media_type |
+      | Result One       | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Two       | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Three     | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Four      | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Five      | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Six       | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Seven     | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Eight     | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Nine      | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Ten       | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result One One   | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result One Two   | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result One Three | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result One Four  | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result One Five  | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result One Six   | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result One Seven | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result One Eight | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result One Nine  | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result One Ten   | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
+      | Result Two One   | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
     And I am on the homepage
     And I index search results
     When I am on "library"
@@ -124,8 +124,8 @@ Feature: PRC-981 Search/Filter Bar: Pagination
     And I should not see the link "last"
     # Add one more to tip over the page max
     And "Digital Library Content" nodes:
-      | title            | body        | status | uid | field_subject | field_grade_level | field_media_type |
-      | Result One       | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
+      | title      | body       | status | uid | field_subject | field_grade_level_unlimited | field_media_type |
+      | Result One | First Body | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
     And I index search results
     When I am on "library"
     Then I should not see the link "first"

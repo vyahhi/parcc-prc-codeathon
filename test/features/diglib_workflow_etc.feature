@@ -11,7 +11,7 @@ Feature: Workflow is functional
 
   Scenario: From draft to publish, editor makes changes and publishes, contributor publishes
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "My first post @timestamp"
     And I fill in "Body" with "Isn't this swell?"
@@ -23,18 +23,17 @@ Feature: Workflow is functional
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
     Then press the "Update state" button
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I should see the text "Approval Requested"
     And the email to "joe_1prc_58ca@example.com" should contain "The following content is awaiting approval"
     And I visit "user/logout"
     And I follow the link in the email
     And I should see the text "Access Denied"
-    And I should see the text "If you have a site account, log in and try to access the page again."
 
     # Curator approves review
     Given I am logged in as "Joe Curator"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     # prc-826 : Publish button is not correct
     And I press the "Publish" button
@@ -88,8 +87,10 @@ Feature: Workflow is functional
 
     #Curator approves new draft
     Given I am logged in as "Joe Curator"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
+    # PRC-1830
+    And I should not see the button "Preview"
     And I press the "Publish" button
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
@@ -117,7 +118,7 @@ Feature: Workflow is functional
     And I should not see an "textarea" element
     Then I press the "Update state" button
     And I am logged in as "Joe Curator"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     # Clear out old messages
     And the test email system is enabled
@@ -144,7 +145,7 @@ Feature: Workflow is functional
     And I click "Edit"
     And I press the "Unpublish" button
     And I press the "Update state" button
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     # prc-872 : Change "private draft" to just draft
     And I should see the text "Revision State: Draft"
@@ -155,17 +156,16 @@ Feature: Workflow is functional
     And I follow the link in the email
     And I should not see the text "Isn't this swell"
     And I should see the text "Access Denied"
-    And I should see the text "If you have a site account, log in and try to access the page again."
 
     #Requesting review and cancelling after it has been published once
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I should see the text "Revision State: Draft"
     And I click "Edit"
     And I press the "Request Approval" button
     When press the "Update state" button
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I should see the text "Approval Requested"
     And I click "Rescind Request"
@@ -173,13 +173,13 @@ Feature: Workflow is functional
     And I should not see an "textarea" element
     Then I press the "Update state" button
     And the email to "joe_1prc_58ca@example.com" should contain "The following content has been withdrawn from review."
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I should see the text "Revision State: Draft"
 
     #Curator publishes without needing approval
     Given I am logged in as "Joe Curator"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I press the "Publish" button
     #PRC-873 : should not see text area for request approval
@@ -194,7 +194,7 @@ Feature: Workflow is functional
 
   # Cancelling a request before it was ever published
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "My second post @timestamp"
     And I fill in "Body" with "Isn't this swell?"
@@ -206,7 +206,7 @@ Feature: Workflow is functional
     #PRC-873 : should not see text area for request approval
     And I should not see an "textarea" element
     And press the "Update state" button
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My second post @timestamp"
     And I should see the text "Approval Requested"
     And the email to "joe_1prc_58ca@example.com" should contain "The following content is awaiting approval"
@@ -214,18 +214,18 @@ Feature: Workflow is functional
     And I click "Rescind Request"
     And I should not see an "textarea" element
     Then I press the "Update state" button
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My second post @timestamp"
     # PRC-813
     And I should see the text "Revision State: Draft"
     # PRC-853
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I should see the text "Draft" in the "My second post @timestamp" row
 
   Scenario: Content is published, but changes don't show up until after it has been approved
     And the test email system is enabled
     And I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "My first post @timestamp"
     And I fill in "Body" with "Isn't this swell?"
@@ -238,7 +238,7 @@ Feature: Workflow is functional
     And I should not see an "textarea" element
     Then press the "Update state" button
     And I am logged in as "Joe Curator"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I press the "Publish" button
     #PRC-873 : should not see text area for publish
@@ -247,7 +247,7 @@ Feature: Workflow is functional
 
     # Content is in published state the request approval button should not be visible
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "My first post @timestamp"
     And I click "Edit"
     And I fill in "Body" with "This is my unpublished addition"
@@ -260,7 +260,7 @@ Feature: Workflow is functional
     And I click "Edit Revision"
     And I press "Request Approval"
     And I press "Update state"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     # prc-844
     And I should see the text "Approval Requested" in the "My first post @timestamp" row
     And I visit "user/logout"
@@ -273,9 +273,8 @@ Feature: Workflow is functional
 
     #Content is updated after approval
     Given I am logged in as "Joe Curator"
-    And the test email system is enabled
-    And I visit "admin-content"
-    And I click "edit"
+    And I visit "prc/admin/admin-content"
+    And I click "My first post @timestamp"
     And I press the "Publish" button
     # PRC-873 : should not see text area for publish
     And I should not see an "textarea" element
@@ -303,7 +302,7 @@ Feature: Workflow is functional
     #  2. Should be able to view content that I am trying to approve.
     #  NOTE: When they click on "edit" link in Actions column, it works fine.
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "My first post @timestamp"
     And I fill in "Body" with "Isn't this swell?"
@@ -324,7 +323,7 @@ Feature: Workflow is functional
 
   Scenario: PRC-829 Not Approving Content - Items are not in specified order
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "My first post @timestamp"
     And I fill in "Body" with "Isn't this swell?"
@@ -345,7 +344,7 @@ Feature: Workflow is functional
 
   Scenario: PRC-830 Content Curation: Not Approving Content- Form Title not as specified in AC
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "PRC-592 @timestamp"
     And I fill in "Body" with "Isn't this swell?"
@@ -366,7 +365,7 @@ Feature: Workflow is functional
 
   Scenario: PRC-832 Content Curation: Not Approving Content- Send Request button not as specified
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "PRC-592 @timestamp"
     And I fill in "Body" with "Isn't this swell?"
@@ -387,7 +386,7 @@ Feature: Workflow is functional
 
   Scenario: PRC-833 Content Curation: Not Approving Content- Text Field Label is not correct
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "PRC-592 @timestamp"
     And I fill in "Body" with "Isn't this swell?"
@@ -408,7 +407,7 @@ Feature: Workflow is functional
 
   Scenario: PRC-831 node save button says "Save" instead of "Save Draft" or "Save New Draft"
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "PRC-592 @timestamp"
     And I fill in "Body" with "Isn't this swell?"
@@ -421,7 +420,7 @@ Feature: Workflow is functional
 
   Scenario: prc-871  access denied when clicking link in email
     Given I am logged in as "Joe Contributor"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I click "Add content"
     And I fill in "edit-title" with "PRC-592 @timestamp"
     And I fill in "Body" with "Isn't this swell?"
@@ -445,7 +444,7 @@ Feature: Workflow is functional
     And I press "Update state"
     And I am logged in as "Joe Contributor"
     #prc-845 Confirmation prompt on save new draft
-    Given I visit "admin-content"
+    Given I visit "prc/admin/admin-content"
     And I click "PRC-592 @timestamp"
     And I click "Edit"
     And I should see the text "Revision State: Published"
@@ -464,3 +463,38 @@ Feature: Workflow is functional
     And I press "Confirm"
     # We should now be on teh revision page
     And I should see the text "testing confirm button"
+
+  Scenario: prc-1718  link in email leads directly to content awaiting to be approved
+    Given I am logged in as "Joe Contributor"
+    And I visit "prc/admin/admin-content"
+    And I click "Add content"
+    And I fill in "edit-title" with "PRC-592 @timestamp"
+    And I fill in "Body" with "Isn't this swell?"
+    And I select the radio button "Public" with the id "edit-field-permissions-und-public"
+    And I press the "Save" button
+    When I follow "Edit"
+    And I press the "Request Approval" button
+    And I press the "Update state" button
+    And I am logged in as "Joe Curator"
+    And the email to "joe_1prc_58ca@example.com" should contain "The following content is awaiting approval"
+    And I follow the link in the email
+    Then I should not see the text "Access Denied"
+    And I should see the text "PRC-592 @timestamp"
+    And I press the "Publish" button
+    And I press the "Update state" button
+    And I am logged in as "Joe Contributor"
+    And I visit "prc/admin/admin-content"
+    And I click "PRC-592 @timestamp"
+    And I click "Edit"
+    And I fill in "Body" with "Isn't this swell? My new draft"
+    And I press "Save"
+    And I press "Confirm"
+    And I click "Edit Revision"
+    And I press "Request Approval"
+    And I press "Update state"
+    And I am logged in as "Joe Curator"
+    And the email should contain "PRC-592 @timestamp has an Approval Request"
+    And I follow the link in the email
+    And I should see the text "Revision State: Approval Requested"
+    And I should see a "Publish" button
+    And the "Body" field should contain "Isn't this swell? My new draft"

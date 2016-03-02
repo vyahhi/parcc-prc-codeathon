@@ -4,7 +4,13 @@ default:
   extensions:
     Behat\MinkExtension\Extension:
       selenium2: ~
-      goutte: ~
+      goutte:
+        guzzle_parameters:
+          curl.options:
+            CURLOPT_SSL_VERIFYPEER: false
+            CURLOPT_CERTINFO: false
+            CURLOPT_TIMEOUT: 120
+          ssl.certificate_authority: false
       # Change the base_url in your copy of behat.yml
       base_url: http://127.0.0.1/
     Drupal\DrupalExtension\Extension:
@@ -26,6 +32,7 @@ default:
         header: '#header'
         footer_copyright: '#footer-copyright'
         main_menu: '#main-menu-section'
+        sub-header: '#sub-header'
   context:
     class: FeatureContext
     parameters:

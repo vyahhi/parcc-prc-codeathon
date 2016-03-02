@@ -132,3 +132,14 @@ function _prc_login_form_add_role_to_user($user, $role_name) {
   }
 }
 
+
+/**
+ * PRC-2017
+ *
+ * Implements hook_form_FORM_ID_alter().
+ */
+function prc_login_form_form_user_login_alter(&$form, &$form_state) {
+  $form['name']['#title'] = t('E-mail');
+  $form['name']['#description'] = t('Enter your e-mail address.');
+  $form['pass']['#description'] = t('Enter the password that accompanies your e-mail.');
+}

@@ -24,10 +24,10 @@ Feature: PRC-490 View Test Details
       | name      |
       | Grade 490 |
     And "Assessment" nodes:
-      | title        | field_subject        | field_grade_level | field_quiz_type                    | uid |
-      | PRC-490 View | subj490-1, subj490-2 | Grade 490         | PARCC-Released Practice Assessment | 1   |
+      | title        | field_subject        | field_grade_level_unlimited | field_quiz_type                    | uid |
+      | PRC-490 View | subj490-1, subj490-2 | Grade 490                   | PARCC-Released Practice Assessment | 1   |
     When I visit the last node created
-    Then I should see the heading "PRC-490 View" in the "content" region
+    Then I should see the heading "PRC-490 View" in the "sub_header" region
     And I should see the link "subj490-1"
     And I should see the link "subj490-2"
     And I should see the text "subj490-1, subj490-2"
@@ -42,20 +42,18 @@ Feature: PRC-490 View Test Details
       | name      |
       | Grade 490 |
     And "Assessment" nodes:
-      | title        | field_subject | field_grade_level | field_quiz_type                    |
-      | PRC-490 View | subj1, subj2  | Grade 490         | PARCC-Released Practice Assessment |
+      | title        | field_subject | field_grade_level_unlimited | field_quiz_type                    |
+      | PRC-490 View | subj1, subj2  | Grade 490                   | PARCC-Released Practice Assessment |
     # That standard already exists, and I hate it, but I am getting an error
     # creating a Standard term is giving me an error.
     # We're cheating and using one that exists already.
     And I am logged in as a user with the "PRC Admin" role
     When I visit the last node created
-    And I click "Quiz"
-    Then I click "Manage questions"
-    Then I click "Assessment directions"
+    And I click "Non-interactive Item (text only)"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 1"
     And I fill in "Title" with "PRC-490 Directions 1"
     And I press "Save"
-    Then I click "Multiple choice question"
+    Then I click "Interactive Choice"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 2"
     And I fill in "Title" with "PRC-490 Directions 2"
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
@@ -76,8 +74,8 @@ Feature: PRC-490 View Test Details
       | name      |
       | Grade 490 |
     And "Assessment" nodes:
-      | title        | field_subject | field_grade_level | field_quiz_type                    | uid |
-      | PRC-490 Copy | subj1, subj2  | Grade 490         | PARCC-Released Practice Assessment | 1   |
+      | title        | field_subject | field_grade_level_unlimited | field_quiz_type                    | uid |
+      | PRC-490 Copy | subj1, subj2  | Grade 490                   | PARCC-Released Practice Assessment | 1   |
     When I visit the last node created
     And I press "Save"
     And I should see the error message containing "You must be logged in to save an assessment."
@@ -91,8 +89,8 @@ Feature: PRC-490 View Test Details
       | name      |
       | Grade 490 |
     And "Assessment" nodes:
-      | title        | field_subject | field_grade_level | field_quiz_type                    | uid |
-      | PRC-490 Copy | subj1, subj2  | Grade 490         | PARCC-Released Practice Assessment | 1   |
+      | title        | field_subject | field_grade_level_unlimited | field_quiz_type                    | uid |
+      | PRC-490 Copy | subj1, subj2  | Grade 490                   | PARCC-Released Practice Assessment | 1   |
     And I am logged in as a user with the "Educator" role
     When I visit the last node created
     And I press "Save"
@@ -105,36 +103,36 @@ Feature: PRC-490 View Test Details
       | name          |
       | Middle School |
     And "Assessment" nodes:
-      | title                      | body   | field_grade_level | field_subject                | field_quiz_type                    | uid         |
-      | PRC-534 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | PARCC-Released Practice Assessment | @currentuid |
-      | PRC-534 Assessment Title 2 | Body 2 | Middle School     | Educational Leadership, Math | Custom Assessment                  | @currentuid |
-      | PRC-534 Assessment Title 3 | Body 3 | Middle School     | Educational Leadership, Math | Custom Assessment                  | @currentuid |
-    And I click "Assessment"
+      | title                      | body   | field_grade_level_unlimited | field_subject                | field_quiz_type                    | uid         |
+      | PRC-534 Assessment Title 1 | Body 1 | Middle School               | Educational Leadership, Math | PARCC-Released Practice Assessment | @currentuid |
+      | PRC-534 Assessment Title 2 | Body 2 | Middle School               | Educational Leadership, Math | Custom Assessment                  | @currentuid |
+      | PRC-534 Assessment Title 3 | Body 3 | Middle School               | Educational Leadership, Math | Custom Assessment                  | @currentuid |
+    And I visit "assessments/practice-assessments"
     When I click "PRC-534 Assessment Title 2"
     Then I should see the text "Assessment Type"
     But I should not see the text "Quiz Type"
-    And I should see the text "Create New Item"
-    But I should not see the text "Add Item"
-    And I should see the link "Add Existing Item"
 
+  @javascript
   Scenario: PRC-1353 PARCC item?
     Given I am logged in as a user with the "PARCC Item Author" role
     And "Grade Level" terms:
       | name          |
       | Middle School |
-    And "Subject" terms:
-      | name                   |
-      | Educational Leadership |
-      | Math                   |
+    # Use Subject terms that already exist - set up in the setup script
     And "Assessment" nodes:
-      | title           | body   | field_grade_level | field_subject                | field_quiz_type                    | uid         |
-      | 1353 PARCC Item | Body 1 | Middle School     | Educational Leadership, Math | PARCC-Released Practice Assessment | @currentuid |
-    And I click "Assessment"
+      | title           | body   | field_grade_level_unlimited | field_subject                | field_quiz_type                    | uid         |
+      | 1353 PARCC Item | Body 1 | Middle School               | Educational Leadership, Math | PARCC-Released Practice Assessment | @currentuid |
+    And I visit "assessments"
+    # If the next line fails it might be because a change in taxonomy is causing problems see the readme
+    And I visit "assessments/practice-assessments"
     And I click "1353 PARCC Item"
+    And I press "Add Item"
     And I click "Non-interactive Item (text only)"
     And I fill in "My Title" for "Title"
     And I fill in "My Question" for "Question"
     And I check the box "Make this a PARCC item"
     And I press "Save"
-    Then I should see the text "Yes" in the "My Title" row
+    When I click on the element with css selector "a.use-ajax"
+    Then I should see the text "Yes"
     And I should see the text "PARCC Item?"
+    And I should see the text "Question Type"

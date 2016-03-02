@@ -1,0 +1,33 @@
+<?php
+/**
+ * @file
+ * Enhancements to core file widget.
+ */
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function prc_managed_file_field_element_info_alter(&$type) {
+  $type['managed_file']['#process'][] = 'prc_file_managed_file_process';
+  $type['managed_file']['#attached']['js'][] = drupal_get_path('module', 'prc_managed_file_field') . '/js/prc_file.js';
+}
+
+/**
+ * Process callback for managed file fields.
+ *
+ * @param array $element
+ *   File element.
+ *
+ * @param array $form_state
+ *   Drupal $form_state array.
+ *
+ * @param array $form
+ *   Drupal $form array.
+ *
+ * @return array
+ *   File element.
+ */
+function prc_file_managed_file_process(&$element, &$form_state, $form) {
+  $element['upload']['#attributes']['class'][] = 'prc-file-managed';
+  return $element;
+}

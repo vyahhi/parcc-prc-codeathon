@@ -1,0 +1,260 @@
+@media #{$screen} {
+  .page-professional-learning .gallery-main {
+    .view-filters {
+      text-align: left !important;
+    }
+    .field-name-title {
+      background: url('../images/gallery-icons/parcc-icon.png') no-repeat 97% center $parcc-purple;
+    }
+    .field-name-field-thumbnail {
+      margin-left: -0.9375em;
+      margin-right: -0.9375em;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .field-name-formatted-course-length {
+      @extend .bold;
+      margin: em-calc(20) 0;
+    }
+    .field-name-field-course-objectives {
+      margin-bottom: 1.5em;
+      border-bottom: 1px solid $icon-gray;
+      .field-label,
+      .field-item {
+        @extend .paragraph;
+      }
+      .field-label {
+        @extend .bold;
+        margin-bottom: 0;
+      }
+    }
+    ul.links .comment-add,
+    ul.links .sharethis,
+    ul.links .pinit {
+      display: none;
+    }
+    .links {
+      display: block;
+      width: 100%;
+      margin-bottom: .5em !important;
+      .node-readmore a {
+        float: right;
+        @include parcc_button;
+        margin: 0;
+        color: black;
+      }
+    }
+  }
+  // PD Course Node Full View
+  .node-type-pd-course {
+    .title {
+      text-align: center;
+    }
+    .panel-2col .panel-col-first,
+    .panel-2col .panel-col-last {
+      width: 100%;
+      .panel-separator {
+        margin: 0;
+      }
+    }
+    .course-take-course-link {
+      @include parcc_button;
+    }
+    .field-name-formatted-course-length {
+      @extend .bold;
+    }
+    .field-name-field-course-objectives {
+      .field-label,
+      .field-item {
+        @extend .paragraph;
+        margin-bottom: 0;
+      }
+      .field-label {
+        @extend .bold;
+        line-height: 1.2em;
+        font-size: 2.25em;
+        color: #70547D;
+        text-rendering: optimizelegibility;
+        margin-top: 0.2em;
+        margin-bottom: 0.5em;
+      }
+    }
+    .field-name-field-thumbnail {
+      display: none;
+    }
+    ul.links {
+      margin-bottom: 5px !important;
+      li {
+        float: left;
+      }
+      .sharethis {
+        padding: 0;
+      }
+    }
+    &.page-node-edit{
+      .form-item-faux-published{
+        label{
+          padding-left: 0;
+        }
+        span.prc-checkbox{
+          position: relative;
+          right: 20px;
+          &:after{
+            left: 4.5px;
+          }
+        }
+        input[type='checkbox']{
+          left: 0;
+        }
+      }
+    }
+  }
+  .node-type-pd-course #page.node-view{
+    main{
+      background-color: white;
+    }
+
+    ul.inline {
+      li {
+        padding: .5em 0.5em 0 0;
+        margin: 0;
+      }
+    }
+  }
+  .node-type-pd-course .node-view{
+    .prc_pd_course_add_to_favorites a {
+      padding: 0 10px;
+      background: sprite($auth-sprites, favorite-icon) no-repeat;
+    }
+    .prc_pd_course_add_to_favorites a:hover {
+      background: sprite($auth-sprites, favorite-icon-selected) no-repeat;
+    }
+    .flag-like_content a {
+      margin-right: 5px;
+      padding: 0 0 0 20px;
+      background: sprite($auth-sprites, like-icon) no-repeat;
+    }
+    .flag-like_content a.unflag-action,
+    .flag-like_content a:hover {
+      background: sprite($auth-sprites, like-icon-hover) no-repeat;
+    }
+    .flag-like_content .flag-message {
+      line-height: 0;
+      font-size: 0;
+      color: transparent;
+    }
+    a.course-take-course-link{
+      float:right;
+      margin-right: 15px;
+    }
+
+    .pane-page-tabs{
+      width: 100%;
+      margin-left: -15px;
+    }
+    #content{
+      padding: 0;
+      background-color: transparent;
+      .panel-col-first{
+        background-color: $white;
+      }
+    }
+    #sub-header .breadcrumb{
+      background-color: $white;
+    }
+    .panel-col-last{
+      .inside{
+        margin: 0;
+      }
+      .pane-title{
+        line-height: 1.25em;
+        overflow: hidden;
+        white-space: nowrap;
+        @include bold;
+        hr {
+          display: inline-block;
+          width: 100%;
+          position: relative;
+          top: 14px;
+          left: 15px;
+          margin-top: 0;
+          border: solid $icon-gray;
+          border-width: 1px 0 0;
+        }
+      }
+    }
+  }
+}
+
+@media #{$small} {
+  .node-type-pd-course {
+    .panel-2col .panel-col-first .inside {
+      margin: 0;
+    }
+  }
+}
+
+@media #{$medium} {
+  // PD Course Node Full View
+  .node-type-pd-course {
+    .panel-2col .panel-col-first {
+      width: 65%;
+    }
+    .panel-2col .panel-col-last {
+      width: 34%;
+    }
+    .field-name-field-thumbnail {
+      display: block;
+      padding-bottom: 1em;
+    }
+
+  }
+  .page-professional-learning .gallery-main {
+    .field-name-field-thumbnail {
+      margin-left: -1.875em;
+      margin-right: -1.875em;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  .node-type-pd-course #page.node-view {
+    main {
+      background-color: transparent;
+    }
+    background: linear-gradient(90deg, white 50%, #EEEEEE 50%);
+    .panel-col-last{
+      background-color: transparent;
+    }
+  }
+  .node-type-pd-course .node-view{
+    .panel-2col{
+      background: linear-gradient(90deg, white 65.5%, #EEEEEE 34.5%);
+    }
+    .panel-col-last {
+      padding-top: 60px;
+      padding-left: $desktop-padding / 2;
+      background-color: $white;
+    }
+  }
+  .node-type-pd-module{
+    .field{
+      margin-bottom: 1em;
+    }
+    .field-name-return-to-course-outline{
+      margin-top: -3.5em;
+    }
+  }
+  .node-type-quiz .field-name-return-to-course-outline{
+    position: relative;
+    top: -3.5em;
+    margin-bottom: 0em;
+  }
+
+  .node-type-quiz .field-name-return-to-course-outline-bottom {
+    margin-top: 1em;
+  }
+}

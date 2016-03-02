@@ -13,6 +13,7 @@ class SiteFeaturesBuilder extends FeaturesBuilderBase {
     'default_nodes_main',
     'error_level',
     'features_builder_base_dir',
+    'features_builder_ignore',
     'features_builder_prefix_label',
     'features_builder_prefix_name',
     'node_admin_theme',
@@ -46,6 +47,8 @@ class SiteFeaturesBuilder extends FeaturesBuilderBase {
   protected function setComponents() {
     $this->setNamedComponents('variable', $this->variables);
     $this->setRegexComponents('variable', '/^theme_[a-z0-9_]*_settings$/');
+    $this->setRegexComponents('variable', '/^date_format_[a-z0-9_]*$/');
+    $this->setRegexComponents('variable', '/^date_views_[a-z0-9_]*$/');
 
     if (module_exists('admin_menu')) {
       $this->setNamedComponents('dependencies', array('admin_menu'));
@@ -65,6 +68,11 @@ class SiteFeaturesBuilder extends FeaturesBuilderBase {
     if (module_exists('honeypot')) {
       $this->setNamedComponents('dependencies', array('honeypot'));
       $this->setRegexComponents('variable', '/^honeypot_/');
+    }
+
+    if (module_exists('jquery_update')) {
+      $this->setNamedComponents('dependencies', array('jquery_update'));
+      $this->setRegexComponents('variable', '/^jquery_update_/');
     }
 
     if (module_exists('module_filter')) {
@@ -89,6 +97,11 @@ class SiteFeaturesBuilder extends FeaturesBuilderBase {
         'search_default_module',
       );
       $this->setNamedComponents('variable', $variables);
+    }
+
+    if (module_exists('simplify')) {
+      $this->setNamedComponents('dependencies', array('simplify'));
+      $this->setRegexComponents('variable', '/^simplify_/');
     }
 
     if (module_exists('transliteration')) {

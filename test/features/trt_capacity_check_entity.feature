@@ -44,8 +44,11 @@ Feature: PRC-761 Testing Capacity Check - Unstructured - Form
     When I am on "admin/structure/entity-type/prc_trt/capacity_check/add"
     # PRC-952
     Then I should see the heading "Testing Capacity Check"
-    Then I should see the text "Instructions go here. For example: To determine if your school has the appropriate number of test-ready devices to run a successful assessment, enter information requested below."
-    Then I should see the text "Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you."
+    Then I should see the text "To prepare school for a successful assessment implementation, a TRT School admin can run a testing capacity check to make sure the device or devices meets"
+    And I should see the link "PARCC minimum technology requirements"
+    And I should see the text "Click the link to access the latest requirements document. This check is for testing through 2015 and does not as of this time support testing for EOY 2016 testing."
+    Then I should see the text "NOTE Run system checks on all representative devices in your school network that may be used for testing first to determine the number and locations of ready devices. Once you have done this, then proceed with this capacity check"
+    And I should see the text "Please look at the data you are required to enter. If you do not know the values for entry, come back to this page after you have collected the data."
     And I should see the text "\* indicates required field"
     Then I should see the text "Number of students"
     And I should see the text "Enter the number of test-eligible students at your school."

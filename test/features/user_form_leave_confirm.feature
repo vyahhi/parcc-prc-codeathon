@@ -9,9 +9,12 @@ Feature: Edit User - Leaving Page Without Saving Changes (PRC-213)
     And users:
       | name         | mail                    | pass     | field_first_name | field_last_name | status |
       | PRC-213 User | joe_prc_213@example.com | xyz123   | Joe              | User            | 1      |
+    When I am browsing using a "desktop"
     And I am on "prc/admin"
+    And I hover over the element "#main-menu-section a[href='/prc/admin']"
+    Then I hover over the element "#main-menu-section .dropdown a[href='/prc/admin/admin-content']"
     Then I click "Users"
-    Then the url should match "admin-users"
+    Then the url should match "prc/admin/admin-users"
     # Now sort by User ID descending so that the new user we created is up top
     Then I click "User ID"
     Then I click on the edit link for the user "PRC-213 User"

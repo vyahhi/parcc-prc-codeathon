@@ -1,0 +1,5 @@
+name = PRC Cache Manager
+description = Manages PRC's caches
+package = PRC
+core = 7.x
+

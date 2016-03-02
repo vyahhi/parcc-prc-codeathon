@@ -1,0 +1,6 @@
+name = PRC PARCC Released Item Forms
+description = Changes to PARCC Released Item Form
+package = PRC
+core = 7.x
+
+dependencies[] = prc_question_form

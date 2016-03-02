@@ -1,0 +1,235 @@
+<?php
+
+/**
+ * Implements hook_menu_alter()
+ * @param $items
+ */
+function prc_trt_access_menu_alter(&$items){
+
+  //View pages for exports
+  $items['trt/system-check-export']['access callback'] = 'prc_trt_access_parcc';
+
+  $items['trt/capacity-check/export/district/%']['access callback'] = 'prc_trt_access_district';
+  $items['trt/capacity-check/export/district/%']['access arguments'] = array(4);
+
+  $items['trt/capacity-check/export/state/%']['access callback'] = 'prc_trt_access_state';
+  $items['trt/capacity-check/export/state/%']['access arguments'] = array(4);
+
+  $items['trt/system-check/export/district/%']['access callback'] = 'prc_trt_access_district';
+  $items['trt/system-check/export/district/%']['access arguments'] = array(4);
+
+  $items['trt/system-check/export/state/%']['access callback'] = 'prc_trt_access_state';
+  $items['trt/system-check/export/state/%']['access arguments'] = array(4);
+
+  $items['trt/system-check/export/school/%']['access callback'] = 'prc_trt_access_school';
+  $items['trt/system-check/export/school/%']['access arguments'] = array(4);
+
+  // check entities
+  $items['admin/structure/entity-type/prc_trt/capacity_check/add']['access callback'] = 'prc_trt_access_entity';
+  $items['prc_trt/capacity_check/%eckentity']['access callback'] = 'prc_trt_access_entity';
+  $items['prc_trt/capacity_check/%eckentity/edit']['access callback'] = 'prc_trt_access_entity';
+  $items['prc_trt/capacity_check/%eckentity/delete']['access callback'] = 'prc_trt_access_entity';
+
+  $items['admin/structure/entity-type/prc_trt/system_check/add']['access callback'] = 'prc_trt_access_entity';
+  $items['prc_trt/system_check/%eckentity']['access callback'] = 'prc_trt_access_entity';
+  $items['prc_trt/system_check/%eckentity/edit']['access callback'] = 'prc_trt_access_entity';
+  $items['prc_trt/system_check/%eckentity/delete']['access callback'] = 'prc_trt_access_entity';
+
+}
+
+/**
+ * Additional access control for the system/cap test entities
+ *
+ * @param $action
+ * @param $entity_type_name
+ * @param $bundle_name
+ * @param null $entity_id
+ * @return bool
+ */
+function prc_trt_access_entity($action, $entity_type_name, $bundle_name, $entity_id = NULL){
+  //Allow the original access check to run
+  if(!eck__entity_menu_access($action, $entity_type_name, $bundle_name, $entity_id)){
+    return FALSE;
+  }
+  if($action ==='view'){
+    if(is_numeric($entity_id)) {
+      $entity = entity_load($entity_type_name, $entity_id);
+    }elseif(is_object($entity_id)){
+      $entity = $entity_id;
+    }
+    if(!empty($entity->field_ref_school)){
+      return prc_trt_access_school($entity->field_ref_school['und'][0]['target_id']);
+    }else{
+      //Unstructured
+      return TRUE;
+    }
+  }
+
+  //Prevent creation of structured tests for users who are not the school admin
+  if($action === 'add' && $entity_type_name === 'prc_trt'){
+    if(empty($_GET['field_ref_school'])) {
+      return TRUE;
+    }elseif(is_numeric($_GET['field_ref_school'])){
+      global $user;
+      $school = node_load($_GET['field_ref_school']);
+      if($school && !empty($user->mail)  && $school->type === 'school'){
+        if($user->mail === $school->field_contact_email['und'][0]['value']){
+          return TRUE;
+        }
+      }
+      return FALSE;
+    }
+  }
+}
+
+function prc_trt_access_structured_links($context){
+  $school = isset($context['argument_entity_id:node_1']) ? $context['argument_entity_id:node_1']->data : new stdClass();
+  $account = isset($context['logged-in-user']) ? $context['logged-in-user']->data : $GLOBALS['user'];
+  if(!empty($account->mail)  && !empty($school->type)  && $school->type === 'school'){
+    if($account->mail === $school->field_contact_email['und'][0]['value']){
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_node_access()
+ *
+ * @param $node
+ * @param $op
+ * @param $account
+ * @return bool
+ */
+function prc_trt_access_node_access($node, $op, $account) {
+  if(is_object($node)) {
+    if ($node->type === 'school') {
+      $result = prc_trt_access_school($node->nid, $account);
+    }
+    if ($node->type === 'district') {
+      $result = prc_trt_access_district($node->nid, $account);
+    }
+    if ($node->type === 'state') {
+      $result = prc_trt_access_state($node->nid, $account);
+    }
+    if(isset($result)  && $result !== NULL){
+      return $result ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+    }
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter()
+ * @param $implementations
+ * @param $hook
+ */
+function prc_trt_access_module_implements_alter(&$implementations, $hook){
+
+  if($hook === 'menu_alter'){
+    //move the entry for this module to the end
+    $i = $implementations['prc_trt_access'];
+    unset($implementations['prc_trt_access']);
+    $implementations['prc_trt_access'] = $i;
+  }
+}
+
+/**
+ * Access callback for school content
+ */
+function prc_trt_access_school($school_nid, $user = null){
+  if($user === null){
+    global $user;
+  }
+  if(!is_numeric($school_nid)){
+    return false;
+  }
+
+  $node = node_load($school_nid);
+  $school_admin = user_role_load_by_name('school admin');
+
+  if(user_has_role($school_admin->rid, $user) && !empty($node->type) && $node->type == 'school'){
+    // user belongs to the school
+    if($node->field_contact_email['und'][0]['value'] === $user->mail){
+      return TRUE;
+    }
+  }
+
+  //get the nid of the district and pass it up
+  $district_nid = $node->field_ref_district['und'][0]['target_id'];
+
+  return prc_trt_access_district($district_nid, $user);
+}
+
+/**
+ * Access callback for district content
+ */
+function prc_trt_access_district($district_nid, $user = null){
+  if($user === null){
+    global $user;
+  }
+
+  if(!is_numeric($district_nid)){
+    return false;
+  }
+
+  $node = node_load($district_nid);
+  //District admin, and content belongs to the district
+  $district_admin = user_role_load_by_name('district admin');
+  if(user_has_role($district_admin->rid, $user) && !empty($node->type) && $node->type == 'district'){
+    //content belongs to the user
+    if($node->uid === $user->uid){
+      return TRUE;
+    }
+  }
+
+  if(!empty($node->field_ref_trt_state['und'][0]['target_id'])) {
+    $state_nid = $node->field_ref_trt_state['und'][0]['target_id'];
+  }else{
+    return;
+  }
+  return prc_trt_access_state($state_nid, $user);
+
+}
+
+/**
+ * Access callback for state content
+ */
+function prc_trt_access_state($state_nid, $user = null){
+  if($user === null){
+    global $user;
+  }
+
+  if(!is_numeric($state_nid)){
+    return false;
+  }
+
+  $node = node_load($state_nid);
+  // state admin
+  $state_admin = user_role_load_by_name('state admin');
+
+  if(user_has_role($state_admin->rid, $user) && !empty($node->type) && $node->type == 'state'){
+      // content belongs to the users state
+    if($node->field_contact_email['und'][0]['value'] === $user->mail){
+      return TRUE;
+    }
+  }
+
+  return prc_trt_access_parcc($user);
+}
+
+/**
+ * Access callback for all content
+ */
+function prc_trt_access_parcc($user = null){
+  if($user === null){
+    global $user;
+  }
+
+  //prc admin or admin
+  $prc_admin = user_role_load_by_name('prc admin');
+  $admin = user_role_load_by_name('administrator');
+  if(user_has_role($prc_admin->rid, $user) || user_has_role($admin->rid, $user)){
+    return TRUE;
+  }
+  return FALSE;
+}

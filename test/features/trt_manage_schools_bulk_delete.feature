@@ -31,7 +31,7 @@ Feature: PRC-997 Manage Schools - Delete Schools - Select Schools
     And "School" nodes:
       | title         | field_ref_district    | field_contact_email | uid         |
       | <school_name> | @nid[<district_name>] | <user_name>         | @currentuid |
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     And I click "<district_name>"
     When I click "Manage Schools"
     Then I should see a "Delete Schools" button

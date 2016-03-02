@@ -1,4 +1,4 @@
-@api @search @prc-106 @prc-560 @prc-559 @prc-1272 @prc-1354
+@api @search @prc-106 @prc-560 @prc-559 @prc-1272 @prc-1354 @prc-1716
 Feature: PRC-106 Search Content- Advanced
   As an educator,
   I want to narrow down my search results by entering advanced filtering criteria,
@@ -30,11 +30,11 @@ Feature: PRC-106 Search Content- Advanced
     Then I should see the link "Africa"
     And I should see the link "Europe"
     When I click "Subj one (1)"
-    Then I should see the link "Clear All"
+    Then I should see an ".filter-panel-all-link" element
     And I should see the link "Africa"
     But I should not see the link "Europe"
     And I should not see the text "Subj two"
-    When I click "Clear All"
+    When I click on the element with css selector ".filter-panel-all-link"
     Then I should see the link "Subj one (1)"
     And I should see the link "Subj two (1)"
     Then I should see the link "Africa"
@@ -53,7 +53,7 @@ Feature: PRC-106 Search Content- Advanced
     And I run drush "sapi-i"
     When I visit "search-content"
     Then I should not see the text "Subj one"
-    And I fill in "Enter your keywords" with "Africa"
+    And I fill in "edit-search-api-views-fulltext" with "Africa"
     And I press "Apply"
     Then I should see the link "Africa DLC"
     And I should see the link "Africa PDC"
@@ -71,7 +71,7 @@ Feature: PRC-106 Search Content- Advanced
       | Africa PDM | Nope PDM | 1      | 0       | 1   | und      |
     And I run drush "sapi-i"
     When I visit "search-content"
-    And I fill in "Enter your keywords" with "Body"
+    And I fill in "edit-search-api-views-fulltext" with "Body"
     And I press "Apply"
     Then I should see the link "Africa DLC"
     And I should see the link "Africa PDC"
@@ -93,11 +93,33 @@ Feature: PRC-106 Search Content- Advanced
       | Africa PDM | Continent | 1      | 0       | 1   | und      | prc593     |
     And I run drush "sapi-i"
     When I visit "search-content"
-    And I fill in "Enter your keywords" with "prc597"
+    And I fill in "edit-search-api-views-fulltext" with "prc597"
     And I press "Apply"
     Then I should see the link "Africa DLC"
     And I should see the link "Africa PDC"
     But I should not see the link "Africa PDM"
+
+  @javascript
+  Scenario: Searches through tags
+    Given "Tags" terms:
+      | name   |
+      | prc597 |
+      | prc593 |
+    Given "Digital Library Content" nodes:
+      | title      | body      | status | promote | uid | language | field_tags |
+      | English    | Ribs      | 1      | 0       | 1   | und      | prc597     |
+      | American   | Bacon     | 1      | 0       | 1   | und      | prc597     |
+      | African    | Ham       | 1      | 0       | 1   | und      | prc593     |
+    And I run drush "sapi-i"
+    When I visit "/library"
+    And I should see the text "English"
+    And I should see the text "American"
+    And I should see the text "African"
+    And I fill in "edit-search-api-views-fulltext" with "prc597"
+    And I wait 1 seconds
+    Then I should see the text "English"
+    And I should see the text "American"
+    But I should not see the text "Ham"
 
   Scenario: AC3 The system shall provide each the following filters:
     Given "Media Type" terms:
@@ -117,14 +139,14 @@ Feature: PRC-106 Search Content- Advanced
       | Africa PDM | Continent | 1      | 0       | 1   | und      |
     And I run drush "sapi-i"
     When I visit "search-content"
-    Then I should see the text "By Content Type"
-    Then I should see the text "By Author"
-    Then I should see the text "By Media Type"
-    Then I should see the text "By Subject"
-    Then I should see the text "By Standard"
-    And "By Content Type" should precede "By Author" for the query ".pane-title"
-    And "By Media Type" should precede "By Subject" for the query ".pane-title"
-    And "By Subject" should precede "By Standard" for the query ".pane-title"
+    Then I should see the text "Content Type"
+    Then I should see the text "Author"
+    Then I should see the text "Media Type"
+    Then I should see the text "Subject"
+    Then I should see the text "Standard"
+    And "By Content Type" should precede "Author" for the query ".pane-title"
+    And "By Media Type" should precede "Subject" for the query ".pane-title"
+    And "By Subject" should precede "Standard" for the query ".pane-title"
 
   Scenario: AC4 Each of the above filters are followed by their available values, along with the results count in the parentheses. See example below:
     Given "Subject" terms:
@@ -152,7 +174,7 @@ Feature: PRC-106 Search Content- Advanced
     And I run drush "sapi-i"
     When I visit "search-content"
     Then I should not see the text "Subj one"
-    And I fill in "Enter your keywords" with "Africa"
+    And I fill in "edit-search-api-views-fulltext" with "Africa"
     And I press "Apply"
     Then I should not see the text "By Standard"
 

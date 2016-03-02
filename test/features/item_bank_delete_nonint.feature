@@ -22,7 +22,7 @@ Feature: PRC-1039 Item Bank - Delete Item - Are you sure?
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Assessment directions" nodes
-    And I am on "item-bank"
+    And I am on "assessments/item-bank"
     When I click "Non-interactive (text only)"
     And I fill in "Title" with "NII T"
     And I fill in "Question" with "NII Question"
@@ -37,7 +37,7 @@ Feature: PRC-1039 Item Bank - Delete Item - Are you sure?
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Assessment directions" nodes
-    And I am on "item-bank"
+    And I am on "assessments/item-bank"
     When I click "Non-interactive (text only)"
     And I fill in "Title" with "NII T"
     And I fill in "Question" with "NII Question"
@@ -45,14 +45,14 @@ Feature: PRC-1039 Item Bank - Delete Item - Are you sure?
     And I click "Edit"
     Then I press "Delete"
     When I click "Cancel"
-    Then I am on "item-bank"
+    Then I am on "assessments/item-bank"
 
   Scenario: PRC-1040 - Item deleted
     Given I am logged in as a user with the "Educator" role
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Assessment directions" nodes
-    And I am on "item-bank"
+    And I am on "assessments/item-bank"
     When I click "Non-interactive (text only)"
     And I fill in "Title" with "NII T"
     And I fill in "Question" with "NII Question"
@@ -61,5 +61,5 @@ Feature: PRC-1039 Item Bank - Delete Item - Are you sure?
     And I click "Edit"
     Then I press "Delete"
     Then I press "Delete"
-    Then I am on "item-bank"
+    Then I am on "assessments/item-bank"
     And I should not see the link "NII T"

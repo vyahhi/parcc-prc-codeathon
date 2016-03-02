@@ -37,7 +37,7 @@ Feature: PRC-1056 Manage Schools - Filter
       | <school_name> | @nid[<district_name>] | <user_name>         | @currentuid |
       | School Two    | @nid[<district_name>] | <user_name>         | @currentuid |
     And the school "<school_name>" has run a capacity check
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     And I click "<district_name>"
     And I click "Manage Schools"
 

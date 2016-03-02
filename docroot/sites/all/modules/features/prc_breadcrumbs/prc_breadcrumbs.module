@@ -1,0 +1,203 @@
+<?php
+/**
+ * @file
+ * Code for the prc breadcrumbs feature.
+ */
+
+include_once 'prc_breadcrumbs.features.inc';
+
+/**
+ * Implements hook_preprocess_breadcrumb()
+ */
+function prc_foundation_preprocess_breadcrumb(&$variables) {
+  // This is a one off example to support theming, but we should probably
+  // solve for breadcrumbs more broadly at some point.
+
+  if ($node = menu_get_object()) {
+    // Get the nid
+    $nid = $node->nid;
+    $title = $node->title;
+    $type = $node->type;
+    $vid = $node->vid;
+
+    $pages_with_breadcrumbs = array(
+      'node/' . $nid . '/edit'
+    );
+    $prc_revisions = array(
+      'node/' . $nid . '/prc_revisions'
+    );
+    $revision_view = array(
+      'node/' . $nid . '/revisions/' . $vid . '/view'
+    );
+
+    if (in_array(request_path(), $pages_with_breadcrumbs) && $type == $type) {
+      switch ($type) {
+        case 'digital_library_content':
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/library/">Library</a>',
+            2 => $title . ' Edit',
+          );
+          break;
+
+        case 'formative_instructional_task':
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/instructional-tools/">Instructional Tools</a>',
+            2 => '<a href="/instructional-tools/formative-instructional-tasks/">Formative Instructional Tasks</a>',
+            3 => $title . ' Edit',
+          );
+          break;
+
+        case 'speaking_and_listening_resource':
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/instructional-tools/">Instructional Tools</a>',
+            2 => '<a href="/instructional-tools/speaking-listening/">Speaking and Listening</a>',
+            3 => $title . ' Edit',
+          );
+          break;
+
+        case 'parcc_released_item':
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/assessments/">Assessment</a>',
+            2 => '<a href="/assessments/parcc-released-items/">PARCC Released Items</a>',
+            3 => $title . ' Edit',
+          );
+          break;
+
+        case 'quiz':
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/assessments/">Assessment</a>',
+            2 => $title . ' Edit',
+          );
+          break;
+
+        case 'short_answer':
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/assessments/">Assessment</a>',
+            2 => '<a href="/assessments/item-bank/">Item Bank</a>',
+            3 => $title . ' Edit',
+          );
+          break;
+
+        case 'quiz_directions':
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/assessments/">Assessment</a>',
+            2 => '<a href="/assessments/item-bank/">Item Bank</a>',
+            3 => $title . ' Edit',
+          );
+          break;
+
+        case 'multichoice':
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/assessments/">Assessment</a>',
+            2 => '<a href="/assessments/item-bank/">Item Bank</a>',
+            3 => $title . ' Edit',
+          );
+          break;
+
+        case 'pd_course':
+          if (isset($_GET['destination']) && $_GET['destination'] == 'prc/admin/admin-course') {
+            $variables['breadcrumb'] = array(
+              0 => '<a href="/">PRC</a>',
+              1 => '<a href="/prc/admin/">Admin</a>',
+              2 => '<a href="/prc/admin/admin-course">PRC Courses</a>',
+              3 => $title . ' Edit',
+            );
+          }
+          else {
+            $variables['breadcrumb'] = array(
+              0 => '<a href="/">PRC</a>',
+              1 => '<a href="/professional-learning/">Professional Learning</a>',
+              2 => $title . ' Edit',
+            );
+          }
+          break;
+      }
+    }
+
+    if (in_array(request_path(), $revision_view)) {
+      $variables['breadcrumb'] = array(
+        0 => '<a href="/">PRC</a>',
+        1 => '<a href="/prc/admin/">Admin</a>',
+        2 => '<a href="/prc/admin/admin-content">PRC Website Content</a>',
+        3 => $title,
+      );
+    }
+
+    if (in_array(request_path(), $prc_revisions) && $type == 'digital_library_content') {
+      $variables['breadcrumb'] = array(
+        0 => '<a href="/">PRC</a>',
+        1 => '<a href="/library">Library</a>',
+        2 => 'Revisions for ' . $title,
+      );
+    }
+  }
+
+
+  if ($node == NULL) {
+    $page = menu_get_item();
+    $path = $page['path'];
+    if ($path == $path) {
+      $title = menu_get_active_title();
+      switch ($path) {
+        case 'node/%/course-enrollments':
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/professional-learning/">Professional Learning</a>',
+            2 => $title,
+          );
+          break;
+
+        case 'node/%/itembank':
+          $nid = $page['original_map'][1];
+          $node = node_load($nid);
+          $name = $node->title;
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/assessments/">Assessment</a>',
+            2 => $name,
+          );
+          break;
+
+        case 'node/%/quiz':
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/assessments/">Assessment</a>',
+            2 => $title,
+          );
+          break;
+
+        case 'node/%/quiz-results':
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/assessments/">Assessment</a>',
+            2 => $title,
+          );
+          break;
+
+        case 'node/%/quiz/questions':
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/assessments/">Assessment</a>',
+            2 => $title,
+          );
+          break;
+
+        case 'node/%/take':
+          $variables['breadcrumb'] = array(
+            0 => '<a href="/">PRC</a>',
+            1 => '<a href="/assessments/">Assessment</a>',
+            2 => $title,
+          );
+          break;
+      }
+    }
+  }
+}

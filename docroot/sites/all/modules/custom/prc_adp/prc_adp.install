@@ -1,0 +1,43 @@
+<?php
+
+
+/**
+ * Implements hook_install()
+ *
+ * Create a default user
+ *
+ * @throws Exception
+ */
+function prc_adp_install(){
+  global $conf;
+  $rest_user = 'restws_adp';
+
+  $pass = isset($conf['adp_user_default_pass']) ? $conf['adp_user_default_pass'] : user_password(8);
+
+  if(!user_load_by_name($rest_user)){
+    $user = new stdClass();
+
+    $user->name = $rest_user;
+
+    //@todo: broken, need to read up on hos it is supposed to work
+    $user->pass = user_password(8);
+
+    $user->mail = 'prc_adp_user@breaktech.org';
+
+    $user->status = 1;
+
+    user_save($user);
+
+    // Default password
+    $user = user_load_by_name($rest_user);
+    $edit = array();
+
+    $edit['pass'] = $pass;
+
+    $role = user_role_load_by_name('Practice Test Service Role');
+
+    $edit['roles'] = $user->roles + array($role->rid => $role->name);
+
+    user_save($user, $edit);
+  }
+}

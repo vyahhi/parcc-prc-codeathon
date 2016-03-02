@@ -1,0 +1,322 @@
+@media #{$screen} {
+  .add-questions {
+    // Override broken background image from quiz module
+    background-image: none;
+  }
+  .page-assessments .gallery-main {
+    .view-filters {
+      text-align: left !important;
+    }
+    .field-name-title {
+      background: url('../images/gallery-icons/user-icon.png') no-repeat 97% center $parcc-orange;
+    }
+    .parcc-assessment .field-name-title {
+      background: url('../images/gallery-icons/parcc-icon.png') no-repeat 97% center $parcc-purple;
+    }
+    .field-name-field-subject, .field-name-field-grade-level-unlimited {
+      @extend .paragraph;
+      .field-label {
+        @extend .bold;
+      }
+    }
+    .field-name-body {
+      .more-link {
+        margin-left: 5px;
+      }
+    }
+    .field-name-changed-date {
+      color: $icon-gray;
+      margin-bottom: 1.5em;
+      border-bottom: 1px solid $icon-gray;
+      .field-items {
+        margin-bottom: 1.75em;
+      }
+    }
+    .links {
+      display: block;
+      width: 100%;
+      margin-bottom: .5em !important;
+      li {
+        padding: 0;
+        &.flag-like_content {
+          position: relative;
+          top: .5em;
+        }
+      }
+      .node-readmore a {
+        float: right;
+        @include parcc_button;
+        margin: 0;
+        color: black;
+      }
+    }
+  }
+  //Hide the columns in the question table "Item Type", "Item Standard" and "PARCC Item?"
+  #prc-question-preview-quiz-questions-form {
+    #question-list {
+      td:nth-child(3), td:nth-child(6){
+        text-align: center;
+      }
+
+      th:nth-child(2), th:nth-child(4), th:nth-child(5),
+      td:nth-child(2), td:nth-child(4), td:nth-child(5) {
+        display: None;
+      }
+      // Hide edit and add the edit icon
+      .handle-changes {
+        background: sprite($auth-sprites, edit-icon, 5, 0) no-repeat;
+        color: transparent;
+        &:hover{
+          background: sprite($auth-sprites, edit-icon-hover, 5, 0) no-repeat;
+        }
+      }
+      tr.active .handle-changes{
+        background: sprite($auth-sprites, edit-purple-bg, 0, 0) no-repeat;
+      }
+      .form-type-checkbox{
+        width: 18px;
+        height: 18px;
+        margin: 0 auto;
+      }
+      input[type='checkbox'].q-staying{
+        margin-right: 0px;
+        left: 0;
+      }
+      input[type='checkbox'] + span.prc-checkbox{
+        right: 18px;
+        position: relative;
+      }
+
+      input[type='checkbox'] + span.prc-checkbox:after{
+        top: -2px;
+        left: 4px;
+      }
+    }
+  }
+  .node-type-quiz{
+    a.tabledrag-toggle-weight{
+      display: none;
+    }
+    .field-name-body .field-item p:last-child{
+      margin-bottom: 0;
+    }
+    .pane-node-links{
+      padding-top: 1em;
+    }
+    ul.links.inline li{
+      padding-left: 0;
+      margin-left: 0;
+    }
+    .prc_assessment_add_to_favorites a {
+      padding: 0 10px;
+      background: sprite($auth-sprites, favorite-icon) no-repeat;
+    }
+
+    .flag-like_content a {
+      margin-right: 5px;
+      padding: 0 0 0 20px;
+      background: sprite($auth-sprites, like-icon) no-repeat;
+    }
+    .flag-like_content a.unflag-action,
+    .flag-like_content a:hover {
+      background: sprite($auth-sprites, like-icon-hover) no-repeat;
+    }
+    .flag-like_content .flag-message {
+      line-height: 0;
+      font-size: 0;
+      color: transparent;
+    }
+    .node-view .tabs.primary{
+      padding-right: 0;
+    }
+    .preview-select-question{
+      text-align: center;
+      min-height: 336px;
+      border: dashed 2px $preview-border;
+      padding: 146px 0;
+    }
+    .add-questions{
+      padding: 15px 15px 15px 0;
+      display: inline-block;
+      float: left;
+      a {
+        @include parcc_button();
+        -webkit-appearance: none;
+        min-width: 10em;
+        border: solid 1px $parcc-purple;
+        border-radius: $button-border-radius;
+        background: $white;
+        margin: 0;
+        padding: 0.4em 0.8em;
+        text-align: center;
+        color: $text-gray;
+        @include bold;
+        &:hover {
+          color: $white;
+          background: $parcc-purple-light;
+        }
+        &.active {
+          color: $white;
+          background: $parcc-purple;
+        }
+      }
+    }
+
+    .pane-quiz-questions-pane{
+      .columns{
+        padding-left: .937em;
+        padding-right: .937em;
+      }
+    }
+    .assessment-divider{
+      border-top: 1px solid $icon-gray;
+      margin-left: -15px;
+      margin-right: -15px;
+      padding-bottom: 1em;
+      margin-top: 1em;
+    }
+    .node-view h1#page-title{
+      display: none;
+    }
+    .pane-node-content{
+      width: 100%;
+      clear: both;
+    }
+    #sub-header .breadcrumb{
+      padding-bottom: 1em;
+    }
+  }
+  .pane-node-title{
+    width: 100%;
+  }
+
+  .pane-page-tabs{
+    width: 100%;
+  }
+
+  /********
+ * Item bank stylings
+ */
+  .page-assessments-item-bank {
+    .pane-custom.pane-1 p {
+      margin-top: 1.25em;
+    }
+  }
+  .view-prc-item-bank {
+    td.views-field-edit-node a, td.views-field-clone-node a {
+      color: transparent;
+      background-repeat: no-repeat;
+      height: 25px;
+      width: 25px;
+      background-position: center center;
+      display: inline-block;
+    }
+    td.views-field-edit-node a {
+      background: sprite($auth-sprites, edit-icon, 4, 4) no-repeat;
+      &:hover{
+        background: sprite($auth-sprites, edit-icon-hover, 4, 4) no-repeat;
+      }
+    }
+    td.views-field-clone-node a {
+      background: sprite($auth-sprites, duplicate-icon, 4, 4) no-repeat;
+      &:hover{
+        background: sprite($auth-sprites, duplicate-icon-hover, 4, 4) no-repeat;
+      }
+    }
+    tr.active td.views-field-edit-node a {
+      background: sprite($auth-sprites, edit-purple-bg, 0, 4) no-repeat;
+    }
+    tr.active td.views-field-clone-node a {
+      background: sprite($auth-sprites, duplicate-purple-bg) no-repeat;
+    }
+  }
+  .page-assessments-parcc-released-items {
+    #page-title {
+      text-align: left;
+    }
+    .pane-menu-menu-parcc-released-items-menu ul.menu {
+      li {
+        margin-left: 0;
+        list-style: none;
+      }
+      a {
+        @include parcc_button;
+        margin-bottom: .5em;
+      }
+    }
+    main,
+    .gallery-main {
+      background-color: white;
+      border-top: none;
+    }
+    table {
+      margin-bottom: 2em;
+    }
+    // Hide edit and add the edit icon
+    .views-field-edit-node a {
+      background: sprite($auth-sprites, edit-icon, 5, 0) no-repeat;
+      color: transparent;
+      &:hover{
+        background: sprite($auth-sprites, edit-icon-hover, 5, 0) no-repeat;
+      }
+    }
+  }
+  .page-assessments .pane-menu-menu-assessment ul.menu{
+    margin-bottom: .5em;
+  }
+  //Styles for the diagnostic page
+  .page-assessments-diagnostics{
+    main {
+      table{
+        width: auto;
+        margin: 1em auto;
+      }
+      table td, table th{
+        text-align: center;
+      }
+    }
+    .fake-last-list-item{
+      margin-top: -20px;
+    }
+  }
+}
+
+// Todo - move into screen declaration
+.node-type-quiz{
+  .field-label {
+    @extend %h4;
+    padding-bottom: .3em;
+    padding-top: .7em;
+  }
+  #quiz-question-answering-form .field-label{
+    padding-top: 0;
+  }
+  .prc-publish-date{
+    @extend %h4;
+  }
+  .preview-select-question{
+    @extend %h4;
+  }
+}
+
+@media #{$medium} {
+  .page-assessments .gallery-main {
+    .field-name-title {
+      background: url('../images/gallery-icons/user-icon.png') no-repeat 95% center $parcc-orange;
+    }
+    .parcc-assessment .field-name-title {
+      background: url('../images/gallery-icons/parcc-icon.png') no-repeat 95% center $parcc-purple;
+    }
+  }
+  .node-type-quiz {
+    .assessment-divider {
+      margin-left: -30px;
+      margin-right: -30px;
+      padding-bottom: 3em;
+    }
+  }
+
+  .question-preview-wrapper{
+    padding-top: 15px;
+  }
+}

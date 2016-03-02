@@ -9,13 +9,16 @@ Feature: PRC-1027 Item Bank - Edit Short Answer Item - Form
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Assessment directions" nodes
-    And I am on "item-bank"
+    And I am on "assessments/item-bank"
     And I click "Short answer"
     And I fill in "Title" with "SA 1"
     And I fill in "Question" with "Stem 1"
     And I fill in "Correct answer" with "Correct"
     And I fill in the hidden field "faux_standard" with "Standard"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "Pre-K"
+    And I check the box "1st Grade"
+    And I check the box "2nd Grade"
+    And I check the box "3rd Grade"
     Then I press "Save"
     Then I should see the text "No" in the "SA 1" row
     When I click "Edit"
@@ -31,13 +34,17 @@ Feature: PRC-1027 Item Bank - Edit Short Answer Item - Form
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Assessment directions" nodes
-    And I am on "item-bank"
+    And I am on "assessments/item-bank"
     And I click "Short answer"
     And I fill in "Title" with "SA 1"
     And I fill in "Question" with "Stem 1"
     And I fill in "Correct answer" with "Correct"
     And I fill in the hidden field "faux_standard" with "Standard"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "Pre-K"
+    And I check the box "1st Grade"
+    And I check the box "2nd Grade"
+    And I check the box "3rd Grade"
+    And I check the box "4th Grade"
     And I check the box "Make this a PARCC item"
     Then I press "Save"
     Then I should see the text "Yes" in the "SA 1" row

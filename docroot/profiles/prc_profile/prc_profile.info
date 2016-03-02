@@ -15,10 +15,10 @@ dependencies[] = page_manager
 dependencies[] = views_content
 ; Core
 dependencies[] = block
-dependencies[] = color
-dependencies[] = comment
+;dependencies[] = color
+;dependencies[] = comment
 dependencies[] = contextual
-dependencies[] = dashboard
+;dependencies[] = dashboard
 dependencies[] = dblog
 dependencies[] = field
 dependencies[] = field_sql_storage
@@ -64,7 +64,7 @@ dependencies[] = field_group
 dependencies[] = link
 ; Flags
 dependencies[] = flag
-dependencies[] = flag_bookmark
+;dependencies[] = flag_bookmark
 ; Invite
 dependencies[] = invite
 dependencies[] = invite_by_email
@@ -83,7 +83,9 @@ dependencies[] = migrate
 dependencies[] = migrate_d2d
 dependencies[] = migrate_ui
 ; Other
+dependencies[] = advagg
 dependencies[] = browserclass
+dependencies[] = date
 ;dependencies[] = diff
 dependencies[] = elysia_cron
 dependencies[] = email_registration
@@ -91,6 +93,8 @@ dependencies[] = entity
 dependencies[] = entity_token
 dependencies[] = environment_indicator
 dependencies[] = extrafield_views_integration
+dependencies[] = facetapi_taxonomy_sort
+; dependencies[] = fast_404
 dependencies[] = label_help
 dependencies[] = libraries
 dependencies[] = menu_token
@@ -103,6 +107,7 @@ dependencies[] = strongarm
 dependencies[] = token
 dependencies[] = user_edit_protection
 ; PRC
+dependencies[] = prc_cache_manager
 dependencies[] = prc_comment_email
 dependencies[] = prc_content_author_token
 dependencies[] = prc_course_views
@@ -113,7 +118,9 @@ dependencies[] = prc_invite_form
 dependencies[] = prc_login_form
 dependencies[] = prc_lti_register
 dependencies[] = prc_migrate
+dependencies[] = prc_managed_file_field
 dependencies[] = prc_my_lists
+dependencies[] = prc_parcc_released_item_form
 dependencies[] = prc_pd_course_form
 dependencies[] = prc_pd_token
 dependencies[] = prc_question_form
@@ -135,8 +142,6 @@ dependencies[] = panels_ipe
 dependencies[] = panels_mini
 dependencies[] = panels_node
 dependencies[] = pm_existing_pages
-; Performance
-dependencies[] = js
 ; Quiz Core
 dependencies[] = quiz
 dependencies[] = quiz_question
@@ -154,8 +159,14 @@ dependencies[] = search_config
 dependencies[] = current_search
 dependencies[] = facetapi
 dependencies[] = facetapi_bonus
+dependencies[] = facetapi_taxonomy_sort
 ; Sharing
 dependencies[] = sharethis
+; SSO Related
+dependencies[] = ldap_servers
+dependencies[] = ldap_user
+; Statistics
+dependencies[] = googleanalytics
 ; Taxonomy
 dependencies[] = taxonomy_csv
 ; UUID
@@ -170,14 +181,14 @@ dependencies[] = views_bulk_operations
 dependencies[] = views_conditional
 dependencies[] = views_data_export
 dependencies[] = views_ui
-; Voting
-dependencies[] = votingapi
+;; Voting
+;dependencies[] = votingapi
 ; Features
 dependencies[] = features
 dependencies[] = features_builder
 dependencies[] = features_builder_default
 dependencies[] = features_builder_search_api
-dependencies[] = features_builder_message
+dependencies[] = prc_breadcrumbs
 dependencies[] = prc_cron
 dependencies[] = prc_custom_modules
 dependencies[] = prc_invite
@@ -204,9 +215,11 @@ dependencies[] = prc_poc_local_node_digital_library_content
 dependencies[] = prc_poc_local_node_district
 dependencies[] = prc_poc_local_node_favorites_list
 dependencies[] = prc_poc_local_node_formative_instructional_task
+dependencies[] = prc_poc_local_node_homepage_band
 dependencies[] = prc_poc_local_node_multichoice
 dependencies[] = prc_poc_local_node_page
 dependencies[] = prc_poc_local_node_panel
+dependencies[] = prc_poc_local_node_parcc_released_item
 dependencies[] = prc_poc_local_node_pd_course
 dependencies[] = prc_poc_local_node_pd_module
 dependencies[] = prc_poc_local_node_quiz

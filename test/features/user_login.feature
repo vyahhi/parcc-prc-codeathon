@@ -13,11 +13,11 @@ Feature: PRC Administrators (PRC-61)
       | name                             | mail                             | pass   | field_first_name | field_last_name | status |
       | joe_prc_61@timestamp@example.com | joe_prc_61@timestamp@example.com | xyz123 | Joe              | User            | 1      |
     And I am on the homepage
+    And I follow "Log in"
     When I fill in "E-mail" with "joe_prc_61@timestamp@example.com"
     And I fill in "Password" with "xyz123"
     And I press "Log in"
     Then I should see the link "Log out"
-    And I should see "Welcome, Joe User"
 
   Scenario: AC2 - Once logged in, the Login block will not display
     Given I am logged in as a user with the "Educator" role
@@ -28,6 +28,7 @@ Feature: PRC Administrators (PRC-61)
   Scenario: AC3 - If any of the credentials are missing, the following messages appear (email and password)
     Given I am an anonymous user
     And I am on the homepage
+    And I follow "Log in"
     When I press "Log in"
     Then I should see the error message containing "E-mail field is required."
     And I should see the error message containing "Password field is required."
@@ -35,6 +36,7 @@ Feature: PRC Administrators (PRC-61)
   Scenario: AC3 - If any of the credentials are missing, the following messages appear (email)
     Given I am an anonymous user
     And I am on the homepage
+    And I follow "Log in"
     When I fill in "E-mail" with "joe_prc_61@example.com"
     And I press "Log in"
     Then I should not see the error message containing "E-mail field is required."
@@ -43,6 +45,7 @@ Feature: PRC Administrators (PRC-61)
   Scenario: AC3 - If any of the credentials are missing, the following messages appear (password)
     Given I am an anonymous user
     And I am on the homepage
+    And I follow "Log in"
     When I fill in "Password" with "joe"
     And I press "Log in"
     Then I should see the error message containing "E-mail field is required."
@@ -53,6 +56,7 @@ Feature: PRC Administrators (PRC-61)
       | name                               | mail                               | pass   | field_first_name | field_last_name | status |
       | joe_prc_61_4@timestamp@example.com | joe_prc_61_4@timestamp@example.com | xyz123 | Joe              | User            | 1      |
     And I am on the homepage
+    And I follow "Log in"
     When I fill in "E-mail" with "joe_prc_61_4@example.com"
     And I fill in "Password" with "wrong"
     And I press "Log in"
@@ -62,6 +66,7 @@ Feature: PRC Administrators (PRC-61)
 
   Scenario: AC4 - If any of the credentials are wrong, the following message appears (wrong username)
     Given I am on the homepage
+    And I follow "Log in"
     When I fill in "E-mail" with "User that does not exist"
     And I press "Log in"
     # Quotes apparently screw it up, so we'll just leave out the link
@@ -70,6 +75,7 @@ Feature: PRC Administrators (PRC-61)
 
   Scenario: AC4 - If any of the credentials are wrong, the following message appears (wrong username and password)
     Given I am on the homepage
+    And I follow "Log in"
     When I fill in "E-mail" with "User that does not exist"
     And I fill in "Password" with "Wrong password too"
     And I press "Log in"
@@ -86,6 +92,7 @@ Feature: PRC Administrators (PRC-61)
       | joe_prc_368@example.com | joe_prc_368@example.com | xyz123 | Joe        | User      | 1      | Second York         |
     And I am an anonymous user
     And I am on the homepage
+    And I follow "Log in"
     # Fail login 5 times
     When I fill in "E-mail" with "joe_prc_368@example.com"
     And I fill in "Password" with "wrong"
@@ -129,8 +136,8 @@ Feature: PRC Administrators (PRC-61)
     Then I should see the message containing "The changes have been saved."
     Then I click "Log out"
     Then the url should match "/"
+    Then I follow "Log in"
     Then I fill in "E-mail" with "joe_prc_368@example.com"
     And I fill in "Password" with "password1"
     And I press "Log in"
     Then I should see the link "Log out"
-    And I should see "Welcome, Firsty Lasty"

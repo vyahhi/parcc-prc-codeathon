@@ -26,6 +26,7 @@ function prc_ajax_show_digital_library_favorites_list($js = FALSE, $node) {
     ctools_include('ajax');
     $commands = array();
     $commands[] = ajax_command_replace('.digital-library-content-pane > *', $list_output);
+
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   }

@@ -1,0 +1,26 @@
+From 7883b1a8d5f60a806077cb7f7966c7884fd50bc1 Mon Sep 17 00:00:00 2001
+From: tanmayk <tanmay.khedekar01@gmail.com>
+Date: Tue, 21 Jan 2014 19:00:15 +0530
+Subject: [PATCH] Fixed strict warning for custom breadcrumbs paths module.
+
+---
+ .../custom_breadcrumbs_paths.module                |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+
+diff --git a/custom_breadcrumbs_paths/custom_breadcrumbs_paths.module b/custom_breadcrumbs_paths/custom_breadcrumbs_paths.module
+index 209f543..bf57363 100644
+--- a/custom_breadcrumbs_paths/custom_breadcrumbs_paths.module
++++ b/custom_breadcrumbs_paths/custom_breadcrumbs_paths.module
+@@ -269,7 +269,8 @@ function custom_breadcrumbs_paths_form($form, &$form_state, $type) {
+   $breadcrumb = NULL;
+   if (isset($bid)) {
+     drupal_set_title(t('Edit Custom Breadcrumb for Path'));
+-    $breadcrumb = array_pop(custom_breadcrumbs_load_breadcrumbs('custom_breadcrumbs_paths', NULL, array('bid' => $bid)));
++    $path_breadcrumbs = custom_breadcrumbs_load_breadcrumbs('custom_breadcrumbs_paths', NULL, array('bid' => $bid));
++    $breadcrumb = array_pop($path_breadcrumbs);
+   }
+   else {
+     drupal_set_title(t('Add Custom Breadcrumb for Path'));
+-- 
+1.7.5.4
+

@@ -13,13 +13,15 @@ Feature: Invite User (PRC-92)
     And I am on "prc/admin"
     Then I follow "Users"
     Then I should see the link "Invite New User"
+    # prc-1979 - user export link is available
+    And I should see the link "Export all users to .csv"
     Then I follow "Invite New User"
     And I should be on "invite/add/invite_by_email"
 
   Scenario: AC3 - The header for this Admin page shall be: Invite New PRC Website User +
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
-    Then I should see the heading "Invite New PRC Website User" in the "content" region
+    Then I should see the heading "Invite New PRC Website User" in the "sub_header" region
 
   Scenario: AC4 - Keep the top nav bar as a link for the user to come back to users page from here
     Given I am logged in as a user with the "PRC Admin" role
@@ -92,7 +94,7 @@ Feature: Invite User (PRC-92)
     And I select "Wyoming" from "State where the invitee teaches"
     And I press "Send Invitation"
     Then the email to "example@example.com" should contain "has sent you an invite!"
-    And the email should contain "has invited you to join Partnership Resource Center at"
+    And the email should contain "Congratulations! Parcc Inc. invites you to register and then log into the Partnership Resource Center."
     And the email should contain "Content Contributor"
     And the email should contain "MESSAGE1234"
 
@@ -105,10 +107,10 @@ Feature: Invite User (PRC-92)
     And I select "Wyoming" from "State where the invitee teaches"
     And I press "Send Invitation"
     Then the email to "example1@example.com" should contain "has sent you an invite!"
-    And the email should contain "has invited you to join Partnership Resource Center at"
+    And the email should contain "Congratulations! Parcc Inc. invites you to register and then log into the Partnership Resource Center."
     And the email should contain "4321MESSAGE1234"
     Then the email to "example2@example.com" should contain "has sent you an invite!"
-    And the email should contain "has invited you to join Partnership Resource Center at"
+    And the email should contain "Congratulations! Parcc Inc. invites you to register and then log into the Partnership Resource Center."
     And the email should contain "4321MESSAGE1234"
     And the email should contain "Educator"
 
@@ -133,6 +135,7 @@ Feature: Invite User (PRC-92)
     And I visit "invite/add/invite_by_email"
     Then the "Message" field should contain "I'd like to invite you to the PARCC Partnership Resource Center."
 
+  @prc-948
   Scenario: PRC-948 Roles field required
     Given I am logged in as a user with the "PRC Admin" role
     And I visit "invite/add/invite_by_email"
@@ -140,3 +143,17 @@ Feature: Invite User (PRC-92)
     And I fill in "E-mail" with "example1@example.com,example2@example.com"
     And I press "Send Invitation"
     Then I should see the error message containing "Role field is required."
+
+  @prc-1801
+  Scenario: PRC-1801 Site Copy- Invited user doesn't get all roles in email
+    Given I am logged in as a user with the "PRC Admin" role
+    And I visit "invite/add/invite_by_email"
+    Then I check the box "Educator"
+    Then I check the box "PRC Admin"
+    Then I check the box "Content Contributor"
+    And I fill in "Message" with "4321MESSAGE1234"
+    And I fill in "E-mail" with "example1@example.com,example2@example.com"
+    And I select "Wyoming" from "State where the invitee teaches"
+    And I press "Send Invitation"
+    Then the email to "example1@example.com" should contain "has sent you an invite!"
+    And the email should contain "Your invitation is for the following: Educator, Content Contributor, PRC Admin"

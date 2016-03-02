@@ -24,39 +24,41 @@ Feature: Admin UI: View User Accounts (PRC-37)
     Given I am logged in as a user with the "PRC Admin" role
     And I am on "prc/admin"
     And I follow "Users"
-    Then I should be on "/admin-users"
+    Then I should be on "/prc/admin/admin-users"
 
   Scenario: AC2 - Page title
     Given I am logged in as a user with the "PRC Admin" role
-    And I visit "/admin-users"
+    And I visit "/prc/admin/admin-users"
     Then I should see "PRC Website Users"
 
   Scenario: AC3 - Page contains table that only contains Educator and PRC Admin users
     Given I am logged in as a user with the "PRC Admin" role
-    And I visit "/admin-users"
+    And I visit "/prc/admin/admin-users"
     Then I should not see the text "administrator"
     And I should not see any empty "Roles" cells
 
   Scenario: AC3 - Page contains user fields
     Given I am logged in as a user with the "PRC Admin" role
-    And I visit "/admin-users"
+    And I visit "/prc/admin/admin-users"
     Then I should see the text "User ID"
     Then I should see the text "First Name"
     Then I should see the text "Last Name"
-    Then I should see the text "E-mail Address"
-    Then I should see the text "State"
+    Then I should see the text "E-mail"
+    Then I should see the text "Member Organization"
+    Then I should see the text "Where User Teaches"
     Then I should see the text "Role(s)"
     Then I should see the text "Profession"
     Then I should see the text "Active"
 
   Scenario: AC4 - All fields are sortableexcept Role(s)
     Given I am logged in as a user with the "PRC Admin" role
-    And I visit "/admin-users"
+    And I visit "/prc/admin/admin-users"
     Then I should see the link "User ID"
     Then I should see the link "Last Name"
     Then I should see the link "First Name"
     Then I should see the link "E-mail"
-    And I should see the link "State"
+    Then I should see the text "Member Organization"
+    Then I should see the text "Where User Teaches"
     # Multivalue fields are not sortable
     Then I should not see the link "Role(s)"
     Then I should see the link "Profession"
@@ -66,7 +68,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
   Scenario: AC6 - Filter searches all data and not just the current page
     Given I have a total of 150 users with the "Educator" role
     And I am logged in as a user with the "PRC Admin" role
-    And I visit "/admin-users"
+    And I visit "/prc/admin/admin-users"
     Then I click "next"
     # We are on page 2. We should see 125 but not see 25.
     Then I should see the link "userbehat125@example.com"
@@ -81,7 +83,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
     # Create 99 users because the PRC Admin we will be logged in as makes 100
     Given I have a total of 98 users with the "Educator" role
     And I am logged in as a user with the "PRC Admin" role
-    And I visit "/admin-users"
+    And I visit "/prc/admin/admin-users"
     And I should not see the link "next"
     And I should not see the link "last"
 
@@ -89,7 +91,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
     # Our PRC Admin makes user 100
     Given I have a total of 100 users with the "Educator" role
     And I am logged in as a user with the "PRC Admin" role
-    And I visit "/admin-users"
+    And I visit "/prc/admin/admin-users"
     And I should see the link "next"
     And I should see the link "last"
 
@@ -100,7 +102,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
     And I am logged in as a user with the "PRC Admin" role
     Then I run drush "user-add-role" "'Educator' joe_prc_286@timestamp@example.com"
     Then I run drush "user-add-role" "'PRC Admin' joe_prc_286@timestamp@example.com"
-    And I am at "admin-users"
+    And I am at "prc/admin/admin-users"
     Then I click "User ID"
     Then I should see 1 "//a[text()='@uname[Joe User]']" elements
 
@@ -113,7 +115,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
       | Joe Admin       | joe_prc_286d@timestamp@example.com | xyz123 | Joe              | Admin           | 1      | PRC Admin                                           |
       | Joe Curator     | joe_prc_286e@timestamp@example.com | xyz123 | Joe              | Curator         | 1      | Content Administrator (Curator), State Admin        |
     And I am logged in as a user with the "PRC Admin" role
-    And I am at "admin-users"
+    And I am at "prc/admin/admin-users"
     Then I click "User ID"
     # Then here add in the xpath to grab a link for each of the users we created above
     Then I should see 1 "//a[text()='@uname[Joe Educator]']" elements
@@ -129,7 +131,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
     And I am logged in as a user with the "PRC Admin" role
     Then I run drush "user-add-role" "'PARCC-Member Educator' joe_prc_436@timestamp@example.com"
     Then I run drush "user-remove-role" "'Educator' joe_prc_436@timestamp@example.com"
-    And I am at "admin-users"
+    And I am at "prc/admin/admin-users"
     Then I should not see the text "Illinois"
     Then I click "User ID"
       # Then here add in the xpath to grab a link for each of the users we created above
@@ -144,7 +146,7 @@ Feature: Admin UI: View User Accounts (PRC-37)
       | Joe Blocked | joe_prc_367a@timestamp@example.com | xyz123 | Joe              | Blocked         | 0      |
       | Joe Active  | joe_prc_367b@timestamp@example.com | xyz123 | Joe              | Active          | 1      |
     And I am logged in as a user with the "PRC Admin" role
-    And I am at "admin-users"
+    And I am at "prc/admin/admin-users"
     Then I click "User ID"
       # Then here add in the xpath to grab a link for each of the users we created above
     Then I should see 1 "//a[text()='@uname[Joe Blocked]']" elements

@@ -131,7 +131,8 @@
             ?>
           </li>
           <li><a href="#" class="filter-panel-toggle-link">Filters</a></li>
-          <li><a href="library" class="filter-panel-all-link">All</a></li>
+          <li><a href="library" class="filter-panel-all-link">Reset</a></li>
+        </ul>
       </div>
 
     </div>

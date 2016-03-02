@@ -35,7 +35,7 @@ Feature: PRC-1055 Manage Schools - Indicate if readiness checks run
       | School Two Checks | @nid[<district_name>] | <user_name>         | @currentuid |
     And the school "School Two Checks" has run a capacity check
     And the school "School Two Checks" has run a system check
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     And I click "<district_name>"
     And I click "Manage Schools"
     Then I should see the text "Readiness Checks Run?"

@@ -1,4 +1,4 @@
-@api
+@api @prc-401 @curator @invite
 Feature: PRC-401 Content Admin Role (Curator)
   As a Content Admin (Curator),
   I want to receive an invite from the PRC Admin,
@@ -16,7 +16,7 @@ Feature: PRC-401 Content Admin Role (Curator)
     And I should see the link "Library"
     And I should see the link "Assessment"
     And I should see the link "Professional Learning"
-    And I should not see the link "Technology Readiness"
+    And I should see the link "Technology Readiness"
     When I am on "prc/admin"
     Then I should see the link "Content"
     And I should see the link "Course Management"

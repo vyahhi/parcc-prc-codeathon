@@ -21,7 +21,7 @@ Feature: PRC-1425 Speaking and Listening - Edit Resource
     And "Speaking and Listening Resource" nodes:
       | title               | status | uid         |
       | Resource @timestamp | 1      | @currentuid |
-    And I am on "speaking-listening"
+    And I am on "instructional-tools/speaking-listening"
     When I click "edit"
     And I select "Listening logs - for students" from "Resource Type"
     And I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-file-single-und-0-upload"
@@ -30,7 +30,7 @@ Feature: PRC-1425 Speaking and Listening - Edit Resource
     And I fill in the hidden field "faux_subject" with "Subject"
     And I check the box "1st Grade"
     And I press "Save"
-    Then the url should match "speaking-listening"
+    Then the url should match "instructional-tools/speaking-listening"
 
     @prc-1416
     Scenario: Sorting
@@ -39,6 +39,6 @@ Feature: PRC-1425 Speaking and Listening - Edit Resource
       And "Speaking and Listening Resource" nodes:
         | title               | status | uid         |
         | Resource @timestamp | 1      | @currentuid |
-      When I am on "speaking-listening"
+      When I am on "instructional-tools/speaking-listening"
       Then I should see the link "Resource Name"
       And I should see the link "Resource Type"

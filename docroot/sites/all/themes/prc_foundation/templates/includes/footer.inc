@@ -16,15 +16,13 @@
       </div>
     <?php endif; ?>
     <div id="footer-contact" class="medium-6 large-4 columns">
-      <p>1747 Pennsylvania Avenue NW<br>
-        6th Floor<br>
-        Washington, DC 20006<br>
-        Phone: 202-748-8100<br>
-        Email: <a href="mailtp:questions@parcconline.org">questions@parcconline.org</a></p>
+      <p>Comments, questions, help, call us at <a href="tel:18668452110">1-866-845-2110</a><br />
+        or email us at
+        <a href="mailto:prc-questions@parcconline.org">prc-questions@parcconline.org</a>.</p>
     </div>
     <div id="footer-social" class="hide-for-medium-down large-4 columns">
-      <a href = "https://www.facebook.com/PARCC" title="PARCC Facebook"><img src="/<?php print path_to_theme(); ?>/images/facebook-icon.png" alt="Facebook"></a>
-      <a href = "https://twitter.com/parccplace" title="PARCC Twitter"><img src="/<?php print path_to_theme(); ?>/images/twitter-icon.png" alt="Twitter"></a>
+      <a href = "https://www.facebook.com/PARCC" class="facebook" title="PARCC Facebook">Facebook</a>
+      <a href = "https://twitter.com/parccplace" class="twitter" title="PARCC Twitter">Twitter</a>
     </div>
   </div>
 </footer>

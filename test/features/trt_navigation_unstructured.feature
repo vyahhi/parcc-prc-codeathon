@@ -24,7 +24,7 @@ Feature: PRC-816 Navigation - Readiness Check Pages - Unstructured
 
   Scenario: Sys Check to Cap check
     Given I am an anonymous user
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     When I click "System Check"
     Then I should see the text "System Check"
     And I should see the link "Testing Capacity Checks"

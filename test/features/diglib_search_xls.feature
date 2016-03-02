@@ -1,4 +1,4 @@
-@api @d7 @diglib @search
+@api @d7 @diglib @search @prc-649 @tika
 Feature: PRC-649 Deep Search: XLS, XLSX Documents
   As an educator,
   I want to search for a keyword through XLS and XLSX documents,
@@ -31,7 +31,6 @@ Feature: PRC-649 Deep Search: XLS, XLSX Documents
     When I fill in "Ogilvy" for "Search" in the "header" region
     And I press "Search" in the "header" region
     Then I should see the text "Search-text-o-rama"
-    And I should see the link "FilleratiHGWells.xlsx"
     When I fill in "Not in the file" for "Search" in the "header" region
     And I press "Search" in the "header" region
     Then I should not see the text "Search-text-o-rama"

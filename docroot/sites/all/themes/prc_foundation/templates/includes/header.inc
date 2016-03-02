@@ -1,7 +1,7 @@
 <header role="banner" id="header">
 
   <div class="contain-to-grid">
-    <nav class="top-bar">
+    <nav class="top-bar" data-options="mobile_show_parent_link: true">
       <ul class="title-area">
         <li class="name">
           <?php if ($logo): ?>
@@ -15,7 +15,9 @@
 
       <?php if ($main_menu): ?>
         <section id="main-menu-section" class="top-bar-section">
+          <ul id="main-menu" class="left">
           <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('id' => 'main-menu', 'class' => 'left'))); ?>
+            </ul>
         </section>
       <?php endif; ?>
 

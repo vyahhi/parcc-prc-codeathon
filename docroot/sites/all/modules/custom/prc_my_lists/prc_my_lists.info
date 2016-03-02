@@ -4,3 +4,6 @@ package = PRC
 core = 7.x
 
 dependencies[] = ctools
+
+files[] = PRCFacetapiFilterExcludeByNodeAccess.inc
+files[] = PRCFacetapiFilterExcludeByNodeUID.inc

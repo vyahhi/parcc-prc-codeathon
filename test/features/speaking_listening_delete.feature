@@ -58,7 +58,7 @@ Feature: Delete Speaking and Listening Resource
     And "Speaking and Listening Resource" nodes:
       | title               | status | uid         |
       | Resource @timestamp | 1      | @currentuid |
-    And I am on "speaking-listening"
+    And I am on "instructional-tools/speaking-listening"
     When I click "edit"
     And I select "Listening logs - for students" from "Resource Type"
     And I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-file-single-und-0-upload"
@@ -68,7 +68,7 @@ Feature: Delete Speaking and Listening Resource
     And I check the box "1st Grade"
     And I press "Save"
 # Have to edit it to fill in the terms and fields and everything, then Delete
-    And I am on "speaking-listening"
+    And I am on "instructional-tools/speaking-listening"
     When I click "edit"
     And I fill in the hidden field "faux_standard" with "Standard"
     And I fill in the hidden field "faux_subject" with "Subject"
@@ -77,4 +77,4 @@ Feature: Delete Speaking and Listening Resource
     Then I should see the message containing "Speaking and Listening Resource"
     And I should see the message containing "Resource @timestamp"
     And I should see the message containing "has been deleted."
-    And the url should match "speaking-listening"
+    And the url should match "instructional-tools/speaking-listening"

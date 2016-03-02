@@ -10,7 +10,7 @@ Feature: View Content (PRC-32)
     Given I am logged in as a user with the "authenticated user" role
     Then I should see the link "Library" in the "header" region
     When I follow "Library"
-    Then I should see the heading "Digital Library"
+    Then I should see the heading "Library"
     And the url should match "library"
 
   Scenario: AC3-5  In this page, the content is listed and sortable by date

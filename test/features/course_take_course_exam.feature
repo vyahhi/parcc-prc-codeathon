@@ -30,7 +30,9 @@ Feature: PRC-476 Take Course Exam
   The Take Course page if there are other objects after this exam.
 
   Background: Set up the course and quiz
-    Given I am logged in as a user with the "administrator" role
+    Given I am logged in as a user with the "PRC Admin" role
+      #Specifing desktop for headless testing (oz's default is tablet)
+    And I am browsing using a "desktop"
     Given I have no "PD Module" nodes
     And I have no "PD Course" nodes
     And I have no "Assessment" nodes
@@ -40,61 +42,56 @@ Feature: PRC-476 Take Course Exam
     And "Subject" terms:
       | name  |
       | Subj1 |
-    And "Grade Level" terms:
-      | name    |
-      | Grade 1 |
     And "Assessment" nodes:
-      | title        | field_subject | field_quiz_type | author      | field_grade_level |
-      | PRC-476 Exam | Subj1         | PD Exam         | @currentuid | Grade 1           |
+      | title        | field_subject | field_quiz_type | author      | field_grade_level_unlimited |
+      | PRC-476 Exam | Subj1         | PD Exam         | @currentuid | 1st Grade                   |
     And I visit the last node created
 
-    And I click "Quiz"
-    Then I click "Manage questions"
-    Then I click "Create new question"
-    Then I click "Assessment directions"
+    And I press "Add Item"
+    Then I click "Non-interactive Item (text only)"
     And I fill in "edit-body-und-0-value" with "PRC-490 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-527 Directions 1"
     And I press "Save"
 
     # Add the first question
-    Then I click "Create new question"
-    Then I click "Multiple choice question"
+    And I press "Add Item"
+    Then I click "Interactive Choice"
     And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
     And I fill in "Title" with "PRC-527 Multi"
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I check the box "edit-alternatives-1-correct"
     And I press "Save"
 
     # Add the second question
-    Then I click "Create new question"
-    Then I click "Multiple choice question"
+    And I press "Add Item"
+    Then I click "Interactive Choice"
     And I fill in "edit-body-und-0-value" with "PRC-527 Multi Multi Question Question<p>Paragraph</p>"
     And I fill in "Title" with "PRC-527 Two"
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer Wrong"
     And I fill in "edit-alternatives-1-answer-value" with "Answer Correct"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I check the box "edit-alternatives-1-correct"
     And I press "Save"
 
     # TODO: Turn attaching modules to a course into step definitions
-    And I am on "admin-course"
+    And I am on "prc/admin/admin-course"
     When I click "Add course"
-    Then I should see the heading "Create Course" in the "content" region
+    Then I should see the heading "Create Course" in the "sub_header" region
     And I fill in "Course Title *" with "PRC-35 Take Course"
     And I fill in "Course Objectives *" with "Take a Course"
-    And I select the radio button "Public"
-    And I check the box "Published"
+    And I select the radio button "Public" with the id "edit-field-permissions-und-public"
+    And I check "Published"
     And I press "Save"
 
     And I follow "Course outline"
     Then I select "Module" from "edit-more-object-type"
     And I press "Add object"
     And I click "Edit Settings"
-    And I select "PD Module 1" from "Existing node"
+    And I select "PD Module 1" from the "Existing node" Chosen widget
     And I check the box "Use existing content's title"
     And I press "Update"
     Then I should see the text "PD Module 1"

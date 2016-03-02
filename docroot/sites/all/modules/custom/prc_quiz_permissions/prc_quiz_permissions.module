@@ -19,23 +19,37 @@ function prc_quiz_permissions_node_grants($account, $op) {
  *  Implements hook_node_access_records().
  */
 function prc_quiz_permissions_node_access_records($node) {
-  if ($node->type == 'quiz') {
+  $item_node_types = array(
+    'quiz_directions',
+    'multichoice',
+    'short_answer',
+  );
+  $is_custom = FALSE;
+  if (array_search($node->type, $item_node_types) !== FALSE) {
+    $w = entity_metadata_wrapper('node', $node);
+    $is_custom = !$w->field_parcc_item->value();
+    // Quiz itself sets a permission for view question outside of quiz, but we
+    // are overriding that. They use 2, since OG uses 1. Thusly, we use 3.
+    $priority = 3;
+  } elseif ($node->type == 'quiz') {
     $w = entity_metadata_wrapper('node', $node);
     $is_custom = $w->field_quiz_type->value()->name == 'Custom Assessment';
+    $priority = 0;
+  }
+
+  if ($is_custom) {
     $grants = array();
-
-    if ($is_custom) {
-      $grants = array();
-      $grants[] = array(
-        'realm' => 'prc_quiz_permissions_author',
-        'gid' => $node->uid ? $node->uid : 1, // If the content is anonymous we'll make admin the gatekeeper. Samantha Franks (age 8) found this defect.
-        'grant_view' => 1,
-        'grant_update' => 1,
-        'grant_delete' => 1,
-        'priority' => 0,
-      );
-    }
-
+    $grants[] = array(
+      'realm' => 'prc_quiz_permissions_author',
+      'gid' => $node->uid ? $node->uid : 1,
+      // If the content is anonymous we'll make admin the gatekeeper. Samantha Franks (age 8) found this defect.
+      'grant_view' => 1,
+      'grant_update' => 1,
+      'grant_delete' => 1,
+      'priority' => $priority,
+    );
     return $grants;
   }
+
+
 }

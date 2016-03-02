@@ -52,6 +52,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Add Quiz',
     'description' => 'Menu for Assessments page to let users add quizzes',
   );
+  // Exported menu: menu-assessment.
+  $menus['menu-assessment'] = array(
+    'menu_name' => 'menu-assessment',
+    'title' => 'Assessment',
+    'description' => '',
+  );
   // Exported menu: menu-assessment-left-nav.
   $menus['menu-assessment-left-nav'] = array(
     'menu_name' => 'menu-assessment-left-nav',
@@ -64,17 +70,35 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'title' => 'Digital Library Left Nav',
     'description' => '',
   );
+  // Exported menu: menu-fit-technology-enhanced-men.
+  $menus['menu-fit-technology-enhanced-men'] = array(
+    'menu_name' => 'menu-fit-technology-enhanced-men',
+    'title' => 'FIT (Technology Enhanced) Menu',
+    'description' => '',
+  );
   // Exported menu: menu-formative-instructional-tas.
   $menus['menu-formative-instructional-tas'] = array(
     'menu_name' => 'menu-formative-instructional-tas',
     'title' => 'Formative Instructional Tasks Menu',
     'description' => '',
   );
-  // Exported menu: menu-instruction-menu.
-  $menus['menu-instruction-menu'] = array(
-    'menu_name' => 'menu-instruction-menu',
-    'title' => 'Instruction Menu',
-    'description' => 'Menu to display on Instruction page',
+  // Exported menu: menu-homepage-menu.
+  $menus['menu-homepage-menu'] = array(
+    'menu_name' => 'menu-homepage-menu',
+    'title' => 'Homepage Menu',
+    'description' => 'Menu shown below the title and introduction text on the homepage.',
+  );
+  // Exported menu: menu-instructional-formative.
+  $menus['menu-instructional-formative'] = array(
+    'menu_name' => 'menu-instructional-formative',
+    'title' => 'Instructional Tools Formative Instructional Tasks',
+    'description' => '',
+  );
+  // Exported menu: menu-instructional-speaking.
+  $menus['menu-instructional-speaking'] = array(
+    'menu_name' => 'menu-instructional-speaking',
+    'title' => 'Instructional Tools Speaking and Listening',
+    'description' => '',
   );
   // Exported menu: menu-invite-users.
   $menus['menu-invite-users'] = array(
@@ -87,6 +111,12 @@ function prc_poc_local_menu_menu_default_menu_custom() {
     'menu_name' => 'menu-item-bank-add-questions',
     'title' => 'Item Bank Add Questions',
     'description' => 'Add question types menu for use in the item bank',
+  );
+  // Exported menu: menu-parcc-released-items-menu.
+  $menus['menu-parcc-released-items-menu'] = array(
+    'menu_name' => 'menu-parcc-released-items-menu',
+    'title' => 'PARCC Released Items Menu',
+    'description' => '',
   );
   // Exported menu: menu-professional-development-le.
   $menus['menu-professional-development-le'] = array(
@@ -178,13 +208,17 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Add Quiz');
   t('Add content');
   t('Add question types menu for use in the item bank');
+  t('Assessment');
   t('Assessment Left Nav');
   t('Development');
   t('Development link');
   t('Digital Library Left Nav');
+  t('FIT (Technology Enhanced) Menu');
   t('Features');
   t('Formative Instructional Tasks Menu');
-  t('Instruction Menu');
+  t('Homepage Menu');
+  t('Instructional Tools Formative Instructional Tasks');
+  t('Instructional Tools Speaking and Listening');
   t('Invite Users');
   t('Item Bank Add Questions');
   t('Links to export system and capacity checks for a district, from the district readiness page');
@@ -193,9 +227,10 @@ function prc_poc_local_menu_menu_default_menu_custom() {
   t('Menu for Assessments page to let users add quizzes');
   t('Menu items for any enabled features.');
   t('Menu on the Speaking and Listening page');
-  t('Menu to display on Instruction page');
+  t('Menu shown below the title and introduction text on the homepage.');
   t('Navigation');
   t('Navigation menu for Professional Development view');
+  t('PARCC Released Items Menu');
   t('Professional Development Left Nav');
   t('Speaking and Listening Page Menu');
   t('TRT District Add');

@@ -1,0 +1,30 @@
+diff --git a/docroot/sites/all/modules/contrib/ctools/js/modal.js b/docroot/sites/all/modules/contrib/ctools/js/modal.js
+index 37908cf..cbc29ae 100644
+--- a/docroot/sites/all/modules/contrib/ctools/js/modal.js
++++ b/docroot/sites/all/modules/contrib/ctools/js/modal.js
+@@ -97,7 +97,8 @@
+     resize();
+ 
+     $('span.modal-title', Drupal.CTools.Modal.modal).html(Drupal.CTools.Modal.currentSettings.loadingText);
+-    Drupal.CTools.Modal.modalContent(Drupal.CTools.Modal.modal, settings.modalOptions, settings.animation, settings.animationSpeed);
++    //prc-1671 : moved animation to display modal to modal_display
++
+     $('#modalContent .modal-content').html(Drupal.theme(settings.throbberTheme));
+ 
+     // Position autocomplete results based on the scroll position of the modal.
+@@ -287,9 +288,12 @@
+    * AJAX responder command to place HTML within the modal.
+    */
+   Drupal.CTools.Modal.modal_display = function(ajax, response, status) {
+-    if ($('#modalContent').length == 0) {
+-      Drupal.CTools.Modal.show(Drupal.CTools.Modal.getSettings(ajax.element));
+-    }
++
++    settings = Drupal.CTools.Modal.currentSettings;
++
++    //Animate display of modal here instead of in show so that the modal doesn't jump when the content is inserted
++    Drupal.CTools.Modal.modalContent(Drupal.CTools.Modal.modal, settings.modalOptions, settings.animation, settings.animationSpeed);
++
+     $('#modal-title').html(response.title);
+     // Simulate an actual page load by scrolling to the top after adding the
+     // content. This is helpful for allowing users to see error messages at the

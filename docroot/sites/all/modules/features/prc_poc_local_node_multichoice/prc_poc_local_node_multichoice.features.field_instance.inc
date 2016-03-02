@@ -63,8 +63,8 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-multichoice-field_grade_level'
-  $field_instances['node-multichoice-field_grade_level'] = array(
+  // Exported field_instance: 'node-multichoice-field_grade_level_unlimited'
+  $field_instances['node-multichoice-field_grade_level_unlimited'] = array(
     'bundle' => 'multichoice',
     'default_value' => NULL,
     'deleted' => 0,
@@ -85,7 +85,7 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_grade_level',
+    'field_name' => 'field_grade_level_unlimited',
     'label' => 'Grade Level',
     'required' => 1,
     'settings' => array(
@@ -96,11 +96,10 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'apply_chosen' => '',
         'label_help_description' => '',
       ),
-      'type' => 'options_select',
-      'weight' => 5,
+      'type' => 'options_buttons',
+      'weight' => 3,
     ),
   );
 

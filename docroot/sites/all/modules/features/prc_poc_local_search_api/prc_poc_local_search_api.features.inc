@@ -39,11 +39,11 @@ function prc_poc_local_search_api_default_search_api_index() {
         "body:summary" : { "type" : "text" },
         "body:value" : { "type" : "text" },
         "changed" : { "type" : "date" },
+        "favored_by" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "user" },
         "field_author_name" : { "type" : "string" },
         "field_course_objectives" : { "type" : "text" },
         "field_document:file" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "file" },
         "field_genre" : { "type" : "integer", "entity_type" : "taxonomy_term" },
-        "field_grade_level" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_media_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_permissions" : { "type" : "string" },
         "field_standard" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
@@ -87,7 +87,7 @@ function prc_poc_local_search_api_default_search_api_index() {
           "weight" : "0",
           "settings" : { "fields" : {
               "title" : true,
-              "field_grade_level" : true,
+              "field_grade_level_unlimited" : true,
               "field_subject" : true,
               "field_author_name" : true,
               "field_genre" : true,
@@ -156,10 +156,13 @@ function prc_poc_local_search_api_default_search_api_index() {
         "body:summary" : { "type" : "text" },
         "body:value" : { "type" : "text" },
         "changed" : { "type" : "date" },
-        "field_grade_level" : { "type" : "integer", "entity_type" : "taxonomy_term" },
+        "favored_by" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "user" },
+        "field_grade_level_unlimited" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_media_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_subject" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_tags:name" : { "type" : "list\\u003Ctext\\u003E" },
         "flag_like_content_count" : { "type" : "integer" },
+        "prc_favorites_listings" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "node" },
         "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
         "search_api_language" : { "type" : "string" },
         "status" : { "type" : "boolean" },
@@ -264,12 +267,6 @@ function prc_poc_local_search_api_default_search_api_server() {
           "title" : {
             "table" : "search_api_db_digital_library_content_index_text",
             "type" : "text",
-            "boost" : "1.0"
-          },
-          "field_grade_level" : {
-            "table" : "search_api_db_digital_library_content_index",
-            "column" : "field_grade_level",
-            "type" : "integer",
             "boost" : "1.0"
           },
           "field_subject" : {
@@ -380,6 +377,12 @@ function prc_poc_local_search_api_default_search_api_server() {
             "table" : "search_api_db_digital_library_content_index_text",
             "type" : "text",
             "boost" : "1.0"
+          },
+          "favored_by" : {
+            "table" : "search_api_db_digital_library_content_index_favored_by",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
           }
         },
         "digital_library_only" : {
@@ -431,12 +434,6 @@ function prc_poc_local_search_api_default_search_api_server() {
             "boost" : "1.0",
             "column" : "attachments_field_document"
           },
-          "field_grade_level" : {
-            "table" : "search_api_db_digital_library_only",
-            "column" : "field_grade_level",
-            "type" : "integer",
-            "boost" : "1.0"
-          },
           "field_subject" : {
             "table" : "search_api_db_digital_library_only_field_subject",
             "column" : "value",
@@ -458,6 +455,29 @@ function prc_poc_local_search_api_default_search_api_server() {
             "table" : "search_api_db_digital_library_only",
             "column" : "flag_like_content_count",
             "type" : "integer",
+            "boost" : "1.0"
+          },
+          "field_grade_level_unlimited" : {
+            "table" : "search_api_db_digital_library_only_field_grade_level_unlimited",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_tags:name" : {
+            "table" : "search_api_db_digital_library_only_text",
+            "type" : "list\\u003Ctext\\u003E",
+            "boost" : "1.0"
+          },
+          "prc_favorites_listings" : {
+            "table" : "search_api_db_digital_library_only_prc_favorites_listings",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "favored_by" : {
+            "table" : "search_api_db_digital_library_only_favored_by",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
             "boost" : "1.0"
           }
         }

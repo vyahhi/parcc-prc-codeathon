@@ -41,6 +41,9 @@ function prc_digital_library_permissions_node_grants($account, $op) {
   if (user_access('create pd_course content', $account)) {
     $grants['prc_pd_course_permissions_editor'] = array(1);
   }
+  if (user_is_logged_in()) {
+    $grants['authenticated'] = array(1);
+  }
   return $grants;
 
 }
@@ -54,6 +57,7 @@ function prc_digital_library_permissions_node_access_records($node) {
   $check_types = array(
     'digital_library_content',
     'pd_course',
+    'formative_instructional_task',
   );
 
   if (array_search($node->type, $check_types) !== FALSE) {
@@ -61,11 +65,22 @@ function prc_digital_library_permissions_node_access_records($node) {
     $is_members_only = $w->field_permissions->value() == 'members';
     $grants = array();
 
+    // If it's a formative_instructional_task and it's public, we need to disallow anonymous
+    if ($node->type == 'formative_instructional_task' && !$is_members_only) {
+      $grants[] = array(
+        'realm' => 'authenticated',
+        'gid' => 1,
+        'grant_view' => 1,
+        'grant_update' => 0,
+        'grant_delete' => 0,
+        'priority' => 0,
+      );
+    }
+
     if ($is_members_only) {
-      $grants = array();
       // Only published DLC nodes should be viewable to all users. If we allow access
       // blindly here, then all users could view an unpublished node.
-      if ($node->type == 'digital_library_content' && $node->status) {
+      if (($node->type == 'digital_library_content' || $node->type == 'formative_instructional_task') && $node->status) {
         $grants[] = array(
           'realm' => "prc_digital_library_permissions",
           'gid' => 1,
@@ -81,7 +96,8 @@ function prc_digital_library_permissions_node_access_records($node) {
       // have status unpublished.
       $grants[] = array(
         'realm' => 'prc_digital_library_permissions_author',
-        'gid' => $node->uid ? $node->uid : 1, // If the content is anonymous we'll make admin the gatekeeper. Samantha Franks (age 8) found this defect.
+        'gid' => $node->uid ? $node->uid : 1,
+        // If the content is anonymous we'll make admin the gatekeeper. Samantha Franks (age 8) found this defect.
         'grant_view' => 1,
         'grant_update' => 1,
         'grant_delete' => 1,
@@ -102,10 +118,10 @@ function prc_digital_library_permissions_node_access_records($node) {
           );
         }
 
-        foreach($states as $state) {
+        foreach ($states as $state) {
           $tid = $state->tid;
           $found = FALSE;
-          foreach($grants as $grant) {
+          foreach ($grants as $grant) {
             if ($grant['realm'] == 'prc_state_audience' && $grant['gid'] = $tid) {
               $found = TRUE;
               break;
@@ -122,10 +138,10 @@ function prc_digital_library_permissions_node_access_records($node) {
             );
           }
         }
-        foreach($users as $u) {
+        foreach ($users as $u) {
           $uid = $u->uid;
           $found = FALSE;
-          foreach($grants as $grant) {
+          foreach ($grants as $grant) {
             if ($grant['realm'] == 'prc_user_audience' && $grant['gid'] == $uid) {
               $found = TRUE;
               break;

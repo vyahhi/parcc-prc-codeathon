@@ -11,6 +11,6 @@ Feature: PRC-882 Technology Readiness - PARCC Minimum Technology Requirements li
 
   Scenario: Show link on TRT page
     Given I am an anonymous user
-    When I visit "technology-readiness"
+    When I visit "assessments/technology-readiness"
     Then I should see the link "PARCC minimum technology requirements"
-    And the "PARCC minimum technology requirements" link should point to "www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf"
+    And the "PARCC minimum technology requirements" link should point to "http://www.parcconline.org/files/72/Technology Guidelines for PARCC Assessments/389/TechnologyGuidelinesPARCCAssessments-v5_0-August2015.pdf"

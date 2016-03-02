@@ -50,16 +50,17 @@ Feature: PRC-547 Add New Item to a Quiz
     And I am logged in as a user with the "Educator" role
     When I visit the last node created
 
+  @javascript
   Scenario: Links are present and in the right order
-    Then I should see the text "Create New Item"
-    And I should see the link "Non-interactive Item (text only)"
+    And I press "Add Item"
+    Then I should see the link "Non-interactive Item (text only)"
     And I should see the link "Interactive Choice"
     And I should see the link "Short Answer"
-    And "Non-interactive Item (text only)" should precede "Interactive Choice" for the query ".add-questions"
-    And "Interactive Choice" should precede "Short Answer" for the query ".add-questions"
+    And "Non-interactive Item (text only)" should precede "Interactive Choice" for the query ".f-dropdown li"
+    And "Interactive Choice" should precede "Short Answer" for the query ".f-dropdown li"
 
   Scenario: Adding a multiple choice item to a test
-    When I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     Then I should see the text "Create Interactive Choice"
     And I should see the text "Item Title *"
     And I should see the text "Item Standard *"
@@ -69,25 +70,25 @@ Feature: PRC-547 Add New Item to a Quiz
     And I should see the text "(Distractor)"
 
   Scenario: AC5 A Multiple correct answers checkbox appears above Answer Choice (Distractor) section and is unchecked by default.
-    When I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     Then I should see the checkbox "Multiple correct answers"
     And the "Multiple correct answers" checkbox should not be checked
 
   Scenario: If the user clicks Save Draft button, Multiple correct answers is not checked, and all Correct check boxes are unchecked, a validation error message is displayed, saying "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
-    When I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     And the "Multiple correct answers" checkbox should not be checked
     When I press "Save"
     Then I should see the error message containing "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
 
   Scenario: AC5 When Multiple correct answers is checked, no message on 0 selected.
-    When I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     And the "Multiple correct answers" checkbox should not be checked
     And I check "Multiple correct answers"
     When I press "Save"
     Then I should not see the error message containing "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
 
   Scenario: If the user clicks Save Draft button, Multiple correct answers is not checked, and the Correct check box is selected for more than one distractor, a validation error message is displayed, saying "One correct answer must be selected. To select multiple correct answers, check the Multiple correct answers box."
-    When I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     And the "Multiple correct answers" checkbox should not be checked
     And I check the box "edit-alternatives-0-correct"
     And I check the box "edit-alternatives-1-correct"
@@ -95,7 +96,7 @@ Feature: PRC-547 Add New Item to a Quiz
     Then I should see the error message containing "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
 
   Scenario: AC7 A Remove button shall allow a user to remove a distractor
-    Then I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     Then I should see a "Remove" button
     When I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     When I fill in "edit-alternatives-1-answer-value" with "Answer 2"
@@ -106,7 +107,7 @@ Feature: PRC-547 Add New Item to a Quiz
     And I should see an "edit-alternatives-1-answer-value" field
 
   Scenario: AC6 An ADD button/link shall allow a user to add more distractor. At click, it displays an additional distractor container. When displayed, it is required.
-    Then I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     When I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     When I fill in "edit-alternatives-1-answer-value" with "Answer 2"
     Then I should see an "edit-alternatives-0-answer-value" field
@@ -118,7 +119,7 @@ Feature: PRC-547 Add New Item to a Quiz
     And I should see an "edit-alternatives-2-answer-value" field
 
   Scenario: Field validation
-    Then I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     When I press "Save"
     Then I should see the error message containing "Item Title field is required."
     Then I should see the error message containing "Question (Item Stem) field is required."
@@ -126,7 +127,7 @@ Feature: PRC-547 Add New Item to a Quiz
     Then I should see the error message containing "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
 
   Scenario: Remove a field, then add a field, removed field should not reappear
-    Then I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     Then I should see a "Remove" button
     When I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     When I fill in "edit-alternatives-1-answer-value" with "Answer 2"
@@ -140,17 +141,18 @@ Feature: PRC-547 Add New Item to a Quiz
     And I should not see an "edit-alternatives-1-answer-value" field
     And I should see an "edit-alternatives-2-answer-value" field
 
-  @javascript
+    @javascript
   Scenario: Full cycle - save, check, change, remove, add
-    When I click "Create New Item"
-    Then I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     And I fill in "Item Title" with "T1"
     And I fill in "Question" with "Q1"
+    # Not sure why, but Selenium seems to need a quick breather here now.
+    And I wait for AJAX to finish
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     When I fill in "edit-alternatives-0-answer-value" with "Alpha"
     When I fill in "edit-alternatives-1-answer-value" with "Beta"
     And I check the box "edit-alternatives-1-correct"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     Then I press "Save"
     And I follow "Edit"
     Then the "edit-alternatives-0-answer-value" field should contain "Alpha"
@@ -176,10 +178,11 @@ Feature: PRC-547 Add New Item to a Quiz
 
   @javascript
   Scenario: If the user clicks Save button, and the form contains any blank distractors (with both Correct checkbox unchecked and no data in answer field) that do not precede any non-blank distractors (with Correct checkbox unchecked and/or data in answer field), the form is submitted blank distractors are ignored and do not appear in the saved draft.
-    When I click "Create New Item"
-    Then I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     And I fill in "Item Title" with "T1"
     And I fill in "Question" with "Q1"
+    # Not sure why, but Selenium seems to need a quick breather here now.
+    And I wait for AJAX to finish
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     When I fill in "edit-alternatives-0-answer-value" with "Alpha"
     When I fill in "edit-alternatives-1-answer-value" with "Beta"
@@ -190,7 +193,7 @@ Feature: PRC-547 Add New Item to a Quiz
     Then I should see a "edit-alternatives-2-answer-value--3" field
     Then I should see a "edit-alternatives-3-answer-value--2" field
     Then I should see a "edit-alternatives-4-answer-value" field
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I press "Save"
     And I follow "Edit"
     Then the "edit-alternatives-0-answer-value" field should contain "Alpha"
@@ -199,8 +202,9 @@ Feature: PRC-547 Add New Item to a Quiz
     Then I should not see a "edit-alternatives-3-answer-value" field
     Then I should not see a "edit-alternatives-4-answer-value" field
 
+  @javascript
   Scenario: If the user clicks Submit button, and the form contains any blank distractors (with Correct checkbox unchecked and no data in answer field) that precede any non-blank distractors (with Correct checkbox unchecked and/or data in answer field), a validation error message is displayed saying, "All answer choices (distractors) require an Answer. Please enter an Answer or click the Remove button to remove the answer choice (distractor)."
-    Then I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     And I fill in "Item Title" with "T1"
     And I fill in "Question" with "Q1"
     # Skip alternatives-0
@@ -211,12 +215,12 @@ Feature: PRC-547 Add New Item to a Quiz
     When I press "ADD"
     When I fill in "edit-alternatives-3-answer-value" with "Gamma"
     When I press "ADD"
-    When I fill in "edit-alternatives-3-answer-value" with "Delta"
+    When I fill in "edit-alternatives-3-answer-value--2" with "Delta"
     And I press "Save"
     Then I should see the error message containing "All answer choices (distractors) require an Answer. Please enter an Answer or click the Remove button to remove the answer choice (distractor)."
 
   Scenario: If the user clicks Submit button, and fewer than two distractors are complete, a validation error message is displayed saying, "At least two answer choices (distractors) are required."
-    Then I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     Then I press "Save"
     Then I should see the error message containing "At least two answer choices (distractors) are required."
     When I fill in "edit-alternatives-0-answer-value" with "Alpha"
@@ -227,7 +231,7 @@ Feature: PRC-547 Add New Item to a Quiz
     Then I should not see the error message containing "At least two answer choices (distractors) are required."
 
   Scenario: PRC-1432 - Not retaining multi-choice selection when it's true
-    Then I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     And I fill in "Item Title" with "T1"
     And I fill in "Question" with "Q1"
     And I fill in the hidden field "faux_standard" with "Standard"
@@ -236,7 +240,7 @@ Feature: PRC-547 Add New Item to a Quiz
     Then I check the box "edit-alternatives-0-correct"
     Then I check the box "edit-alternatives-1-correct"
     And I check the box "Multiple correct answers"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I press "Save"
     And I follow "Edit"
     Then the "edit-alternatives-0-answer-value" field should contain "Alpha"
@@ -247,7 +251,7 @@ Feature: PRC-547 Add New Item to a Quiz
     And the "Multiple correct answers" checkbox should be checked
 
   Scenario: PRC-1432 - Not retaining multi-choice selection when it's false
-    Then I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     And I fill in "Item Title" with "T1"
     And I fill in "Question" with "Q1"
     And I fill in the hidden field "faux_standard" with "Standard"
@@ -256,7 +260,7 @@ Feature: PRC-547 Add New Item to a Quiz
     Then I check the box "edit-alternatives-0-correct"
     Then I uncheck the box "edit-alternatives-1-correct"
     And I uncheck the box "Multiple correct answers"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I press "Save"
     And I follow "Edit"
     Then the "edit-alternatives-0-answer-value" field should contain "Alpha"
@@ -268,10 +272,11 @@ Feature: PRC-547 Add New Item to a Quiz
 
   @javascript
   Scenario: PRC-1499 - Distractors disappear during validation
-    When I click "Create New Item"
-    Then I click "Interactive Choice"
+    And I visit "node/add/multichoice"
     And I fill in "Item Title" with "T1"
     And I fill in "Question" with "Q1"
+    # Not sure why, but Selenium seems to need a quick breather here now.
+    And I wait for AJAX to finish
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     When I fill in "edit-alternatives-0-answer-value" with "Alpha"
     When I fill in "edit-alternatives-1-answer-value" with "Beta"
@@ -281,7 +286,7 @@ Feature: PRC-547 Add New Item to a Quiz
     Then I should see a "edit-alternatives-3-answer-value" field
     When I fill in "edit-alternatives-2-answer-value--2" with "Zed"
     When I fill in "edit-alternatives-3-answer-value" with "Garbanzo"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I press "Save"
     Then I should see the error message containing "One correct answer must be selected. If all answer choices (distractors) are incorrect, check the Multiple correct answers box."
     And the "edit-alternatives-0-answer-value" field should contain "Alpha"

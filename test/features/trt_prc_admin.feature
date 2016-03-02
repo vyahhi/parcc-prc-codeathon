@@ -15,9 +15,11 @@ Feature: PRC-1207 Technology Readiness - PRC Admin View
 
   Scenario Outline: PRC Admin TRT Page
     Given I am logged in as a user with the "<role>" role
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     Then I should see the link "PARCC Readiness"
-    And I should see the text "Summary of what user can do here, for example: view readiness data by state, export state readiness check data, view readiness by district, export district readiness checks data, view school readiness data."
+    And I should see the text "Click the link above to access the TRT reports available to you."
+    And I should see the text "NOTE: Users will have access to reports only for their authorized level of access. Check your account settings to see your authorization. If there is a discrepancy in your account authorization, school based staff should contact the designated PRC admin for your district while district and state staff should contact the PARCC Inc. through the"
+    And I should see the link "PRC helpdesk"
   Examples:
     | role          |
     | administrator |
@@ -25,9 +27,11 @@ Feature: PRC-1207 Technology Readiness - PRC Admin View
 
   Scenario Outline: Other users don't have it
     Given I am logged in as a user with the "<role>" role
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     Then I should not see the link "PARCC Readiness"
-    And I should not see the text "Summary of what user can do here, for example: view readiness data by state, export state readiness check data, view readiness by district, export district readiness checks data, view school readiness data."
+    And I should not see the text "Click the link above to access the TRT reports available to you."
+    And I should not see the text "NOTE: Users will have access to reports only for their authorized level of access. Check your account settings to see your authorization. If there is a discrepancy in your account authorization, school based staff should contact the designated PRC admin for your district while district and state staff should contact the PARCC Inc. through the"
+    And I should not see the link "PRC helpdesk"
   Examples:
     | role                            |
     | State Admin                     |

@@ -37,7 +37,7 @@ Feature: PRC-814 School Readiness - District and State Admins View
       | title         | field_ref_district    | field_contact_email            | uid         |
       | <school_name> | @nid[<district_name>] | example1@timestamp@example.com | @currentuid |
     And the school "<school_name>" has run a system check
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     Then I click "<member_state>"
     And I click "<district_name>"
     And I click "<school_name>"

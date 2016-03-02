@@ -83,11 +83,13 @@
  * webserver.  For most other drivers, you must specify a
  * username, password, host, and database name.
  *
- * Some database engines support transactions.  In order to enable
- * transaction support for a given database, set the 'transactions' key
- * to TRUE.  To disable it, set it to FALSE.  Note that the default value
- * varies by driver.  For MySQL, the default is FALSE since MyISAM tables
- * do not support transactions.
+ * Transaction support is enabled by default for all drivers that support it,
+ * including MySQL. To explicitly disable it, set the 'transactions' key to
+ * FALSE.
+ * Note that some configurations of MySQL, such as the MyISAM engine, don't
+ * support it and will proceed silently even if enabled. If you experience
+ * transaction related crashes with such configuration, set the 'transactions'
+ * key to FALSE.
  *
  * For each database, you may optionally specify multiple "target" databases.
  * A target database allows Drupal to try to send certain queries to a
@@ -384,6 +386,10 @@ ini_set('session.cookie_lifetime', 2000000);
  * $_SERVER['REMOTE_ADDR'] variable directly in settings.php.
  * Be aware, however, that it is likely that this would allow IP
  * address spoofing unless more advanced precautions are taken.
+ *
+ * Enable this setting to get Drupal to determine the scheme to use for
+ * generated URLs using the value of the X-Forwarded-Proto header (or
+ * $conf['reverse_proxy_proto_header'] if set).
  */
 # $conf['reverse_proxy'] = TRUE;
 
@@ -398,6 +404,19 @@ ini_set('session.cookie_lifetime', 2000000);
  * other than X-Forwarded-For.
  */
 # $conf['reverse_proxy_header'] = 'HTTP_X_CLUSTER_CLIENT_IP';
+
+/**
+ * Set this value if your proxy server sends the client protocol in a header
+ * other than X-Forwarded-Proto.
+ */
+# $conf['reverse_proxy_proto_header'] = 'HTTP_X_FORWARDED_PROTO';
+
+/**
+ * Set this value if you want Drupal to modify the scheme of the $base_url
+ * based on the value of the X-Forwarded-Proto header (or
+ * $conf['reverse_proxy_proto_header'] if set).
+ */
+# $conf['reverse_proxy_proto_change'] = TRUE;
 
 /**
  * Page caching:
@@ -431,6 +450,18 @@ ini_set('session.cookie_lifetime', 2000000);
  */
 # $conf['css_gzip_compression'] = FALSE;
 # $conf['js_gzip_compression'] = FALSE;
+
+/**
+ * Block caching:
+ *
+ * Block caching may not be compatible with node access modules depending on
+ * how the original block cache policy is defined by the module that provides
+ * the block. By default, Drupal therefore disables block caching when one or
+ * more modules implement hook_node_grants(). If you consider block caching to
+ * be safe on your site and want to bypass this restriction, uncomment the line
+ * below.
+ */
+# $conf['block_cache_bypass_node_grants'] = TRUE;
 
 /**
  * String overrides:
@@ -503,10 +534,10 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
  * server response time when loading 404 error pages and prevents the 404 error
  * from being logged in the Drupal system log. In order to prevent valid pages
  * such as image styles and other generated content that may match the
- * '404_fast_html' regular expression from returning 404 errors, it is necessary
- * to add them to the '404_fast_paths_exclude' regular expression above. Make
- * sure that you understand the effects of this feature before uncommenting the
- * line below.
+ * '404_fast_paths' regular expression from returning 404 errors, it is
+ * necessary to add them to the '404_fast_paths_exclude' regular expression
+ * above. Make sure that you understand the effects of this feature before
+ * uncommenting the line below.
  */
 # drupal_fast_404();
 
@@ -551,3 +582,15 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
  * Remove the leading hash signs to disable.
  */
 # $conf['allow_authorize_operations'] = FALSE;
+
+
+#include DRUPAL_ROOT . ('/sites/default/ettings.php');
+
+/**
+ * Enable environment specific intergrations settings file
+ */
+$config_file = DRUPAL_ROOT . '/../config/settings_local.inc';
+
+if (file_exists($config_file)) {
+  require_once($config_file);
+}

@@ -108,10 +108,11 @@ function prc_poc_local_node_digital_library_content_field_group_info() {
     'weight' => '7',
     'children' => array(
       0 => 'field_genre',
-      1 => 'field_grade_level',
+      1 => 'field_grade_level_unlimited',
       2 => 'field_media_type',
-      3 => 'field_subject',
-      4 => 'field_standard',
+      3 => 'field_standard',
+      4 => 'field_subject',
+      5 => 'field_grade_level_unlimited',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

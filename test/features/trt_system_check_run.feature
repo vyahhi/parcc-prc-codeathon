@@ -433,7 +433,7 @@ Feature: PRC-791 System Check - Unstructured - View Results Page
     And I fill in the hidden field "faux_screen_resolution_height" with "768"
     When I press "Submit"
     Then I should see the text "Fail" in the "RAM" row
-    And I should see the text "Instructions or next steps go here. Consider linking to PARCC minimum technology requirements."
+    And I should see "Instructions or next steps go here. Consider linking to PARCC minimum technology requirements."
     Then I should see the link "PARCC minimum technology requirements"
     And the "PARCC minimum technology requirements" link should point to "www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf"
 

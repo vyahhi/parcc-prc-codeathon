@@ -2,3 +2,5 @@ name = PRC User Edit Form
 description = Changes to user edit form
 package = PRC
 core = 7.x
+
+dependencies[] = prc_invite_form

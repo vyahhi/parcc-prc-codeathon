@@ -27,43 +27,32 @@ function quiz_questions_pane_render($subtype, $conf, $args, $contexts) {
     }
   }
 
-  $form['additional_questions']['#title'] = t('Add Item');
+  unset($form['question_list']['#type']);
+  unset($form['question_list']['#collapsible']);
+  unset($form['question_list']['#collapsed']);
+  unset($form['question_list']['#theme_wrappers']);
 
-  $form['additional_questions']['multichoice']['#markup'] = str_replace(t('Multiple choice question'), t('Interactive Choice'), $form['additional_questions']['multichoice']['#markup']);
-  $form['additional_questions']['quiz_directions']['#markup'] = str_replace(t('Assessment directions'), t('Non-interactive Item (text only)'), $form['additional_questions']['quiz_directions']['#markup']);
-  $form['additional_questions']['short_answer']['#markup'] = str_replace(t('Short answer question'), t('Short Answer'), $form['additional_questions']['short_answer']['#markup']);
-
-  // Ugly ugly ugly, but it doesn't respond to #weight, so we have to re-order the array.
-  $form['additional_questions']['quiz_directions']['#weight'] = 0;
-  $form['additional_questions']['multichoice']['#weight'] = 1;
-  $form['additional_questions']['short_answer']['#weight'] = 2;
-
-  $form['additional_questions']['fake_quiz_directions'] = $form['additional_questions']['quiz_directions'];
-  $form['additional_questions']['fake_multichoice'] = $form['additional_questions']['multichoice'];
-  $form['additional_questions']['fake_short_answer'] = $form['additional_questions']['short_answer'];
-
-  unset($form['additional_questions']['quiz_directions']);
-  unset($form['additional_questions']['multichoice']);
-  unset($form['additional_questions']['short_answer']);
-
-  $form['additional_questions']['quiz_directions'] = $form['additional_questions']['fake_quiz_directions'];
-  $form['additional_questions']['multichoice'] = $form['additional_questions']['fake_multichoice'];
-  $form['additional_questions']['short_answer'] = $form['additional_questions']['fake_short_answer'];
-
-  $form['additional_questions']['#title'] = t('Create New Item');
-
-  unset($form['additional_questions']['fake_quiz_directions']);
-  unset($form['additional_questions']['fake_multichoice']);
-  unset($form['additional_questions']['fake_short_answer']);
-
-  $form['add_existing_item'] = array(
-    '#type' => 'markup',
-    '#markup' => l(t('Add Existing Item'), 'node/' . $node->nid . '/itembank'),
+  $links = array();
+  $query_string['query'] = array(
+    'destination' => 'node/' . $node->nid,
+    'quiz_nid' => $node->nid,
+    'quiz_vid' => $node->vid,
   );
+
+  $links['dropdown_text'] = t('Add Item');
+
+  $links['items'][] = l(t('Add Existing Item'), 'node/' . $node->nid . '/itembank');
+  $links['items'][] = l(t('Non-interactive Item (text only)'), 'node/add/quiz-directions', $query_string);
+  $links['items'][] = l(t('Interactive Choice'), 'node/add/multichoice', $query_string);
+  $links['items'][] = l(t('Short Answer'), 'node/add/short-answer', $query_string);
+
+  unset($form['additional_questions']);
+  $new_links = theme('foundation_dropdown_menu', $links);
 
   $block = new stdClass();
   $block->title = '';
-  $block->content = drupal_render($form);
+  $block->content['form'] = $form;
+  $block->content['create_links'] = $new_links;
 
   // The item list has AJAXy links so we need ajax!
   drupal_add_library('system', 'drupal.ajax');

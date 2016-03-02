@@ -9,7 +9,7 @@ Feature: PRC ??? - User edits own account
       | name     | mail                | pass     | field_first_name | field_last_name | status |
       | Joe User | joe_000@example.com | xyz123   | Joe              | User            | 1      |
     And I am an anonymous user
-    And I am on the homepage
+    And I am on "user/login"
     # Log in
 #    Then the user "joe_@uname[Joe User]" should have a role of "Educator"
     Then the user "joe_000@example.com" should have a role of "Educator"
@@ -17,7 +17,6 @@ Feature: PRC ??? - User edits own account
     And I fill in "Password" with "xyz123"
     And I press "Log in"
     Then I should see the link "Log out"
-    And I should see "Welcome, Joe User"
     # Edit my account
     Then I follow "My account"
     Then I follow "Edit"
@@ -30,8 +29,8 @@ Feature: PRC ??? - User edits own account
     Then the user "joe_000@example.com" should have a role of "Educator"
     Then I click "Log out"
     Then the url should match "/"
+    Then I follow "Log in"
     Then I fill in "E-mail" with "joe_000@example.com"
     And I fill in "Password" with "password1"
     And I press "Log in"
     Then I should see the link "Log out"
-    And I should see "Welcome, Joe User"

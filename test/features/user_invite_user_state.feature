@@ -26,7 +26,7 @@ Feature: PRC-1020 Registration from Invite - State
   Scenario: PRC-1032 - Member state appended to member states
     Given I am logged in as a user with the "PRC Admin" role
     When I visit "invite/add/invite_by_email"
-    Then I select "Illinois - PARCC Member" from "State where the invitee teaches"
+    Then I select "Illinois" from "State where the invitee teaches"
 
   Scenario: PRC-1032 - State where invitee teaches saved on invitation
     Given I am logged in as a user with the "PRC Admin" role
@@ -36,6 +36,6 @@ Feature: PRC-1020 Registration from Invite - State
     And I fill in "E-mail" with "example@timestamp@example.com"
     Given I am logged in as a user with the "PRC Admin" role
     When I visit "invite/add/invite_by_email"
-    Then I select "Illinois - PARCC Member" from "State where the invitee teaches"
+    Then I select "Illinois" from "State where the invitee teaches"
     And I press "Send Invitation"
     Then I should see the text "Illinois"

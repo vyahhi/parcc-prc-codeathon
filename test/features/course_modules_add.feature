@@ -22,10 +22,10 @@ Feature: PRC-360 Admin: Add Object to a Course
     # The type dropdown has no label...
     And I should see an "edit-more-object-type" field
     And I select "Module" from "edit-more-object-type"
-      And I select "Exam" from "edit-more-object-type"
-    
+    And I select "Exam" from "edit-more-object-type"
+
     And "Module" should precede "Exam" for the query "#edit-more-object-type option"
-    
+
     # AC5 Once an option has been selected from the drop-down menu, selecting the Add object button will add another Object to the Course Outline page and display it within the list of objects on the page.(defined in PRC-350) .
     Then I should see an "Add object" button
     # AC6 A Save outline button shall be available at all time
@@ -60,3 +60,27 @@ Feature: PRC-360 Admin: Add Object to a Course
     And I press "Add object"
     Then I click "Edit Settings"
     Then the "Use existing content's title" checkbox should not be checked
+
+  @prc-1531
+  Scenario Outline: Admins see file upload field
+    Given I am logged in as a user with the "<role>" role
+    When I am on "node/add/pd-module"
+    Then I should see the text "File"
+    And I should see an "#edit-field-file-single-und-0-upload" element
+  Examples:
+    | role                            |
+    | PRC Admin                       |
+    | administrator                   |
+
+  @prc-1531
+  Scenario Outline: Non-Admins do not see file upload field
+    Given I am logged in as a user with the "<role>" role
+    When I am on "node/add/pd-module"
+    Then I should not see the text "File"
+    And I should not see an "#edit-field-file-single-und-0-upload" element
+  Examples:
+    | role                            |
+    | Educator                        |
+    | Content Contributor             |
+    | Content Administrator (Curator) |
+    | authenticated user              |

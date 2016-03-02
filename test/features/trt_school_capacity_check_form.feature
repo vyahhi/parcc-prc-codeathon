@@ -14,27 +14,35 @@ Feature: PRC-805 Testing Capacity Check - Structured - Form
 #  Number of students text field is prepopulated if a previous testing capacity check has been successfully run for school
 
   Scenario: Important message does not display
-    Given I am logged in as a user with the "School Admin" role
+    Given users:
+      | name                    | mail                   | pass    | field_first_name | field_last_name | status | roles                  |
+      | schooladmin@example.com | schooladmin@example.com | xyz123 | Joe              | Educator        | 1      | Educator, School Admin |
+    And I am logged in as "schooladmin@example.com"
     And I have no "School" nodes
     And I have no entities of type "prc_trt" and bundle "system_check"
     And "School" nodes:
-      | title                 |
-      | School One @timestamp |
+      | title                 | field_contact_email     |
+      | School One @timestamp | schooladmin@example.com |
     And I visit the last node created
     And I click "run system check"
     And I should not see the text "Important"
 
+    @javascript
   Scenario Outline: Number of students is pre-populated
-    Given I am logged in as a user with the "School Admin" role
+    Given users:
+      | name                    | mail                   | pass    | field_first_name | field_last_name | status | roles                  |
+      | schooladmin@example.com | schooladmin@example.com | xyz123 | Joe              | Educator        | 1      | Educator, School Admin |
+    And I am logged in as "schooladmin@example.com"
     And I have no "School" nodes
     And I have no entities of type "prc_trt" and bundle "system_check"
     And "School" nodes:
-      | title                 | field_number_of_students |
-      | School One @timestamp | <students>               |
+      | title                 | field_number_of_students | field_contact_email     |
+      | School One @timestamp | <students>               | schooladmin@example.com |
     And I visit the last node created
     And I click "run testing capacity check"
     # PRC-953
-    Then I should see the text "Instructions go here. For example: To determine if your school has the appropriate number of test-ready devices to run a successful assessment, enter information requested below."
+    Then I should see the text "To prepare school for a successful assessment implementation, a TRT School admin can run a testing capacity check to make sure the device or devices meets"
+    And I should see the link "PARCC minimum technology requirements"
     Then I should not see the text "Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you."
     And I should see the text "\* indicates required field"
     Then the "Number of students" field should contain "<students>"

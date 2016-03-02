@@ -36,6 +36,20 @@ You'll need:
 - PHP 5.5
 - drush
 
+Server Permissions for Tika Execution
+=====================================
+
+To ensure that Apache can execute Tika, run the following:
+setsebool -P httpd_execmem 1
+setsebool -P allow_httpd_mod_auth_pam 1
+
+grant sudo access to sys_ptrace
+grant sudo access to netlink_audit_s
+
+Server Permissions for Sending Email
+====================================
+setsebool –P httpd_can_sendmail 1
+
 When Terms Change
 =================
 
@@ -50,3 +64,19 @@ When taxnomy terms change, check the following:
       Custom Assessment
       PARCC-Released Practice Assessment
 
+SSO Local Config
+====================
+
+Get a PRC instance running locally at http://parcc-prc.dd:8083 (annoying, I know - more info in the comments in config/settings_local.inc)
+
+Copy the 'Enable environment specific integrations settings file' block from default.settings.php and add to your local settings.php
+
+With SSO enabled, you can bypass SSO login using the following path: /user/local-login
+
+SSO Link URL Changes
+====================
+
+In the file:
+/var/www/simplesamlphp/modules/themeparcc/themes/parcc/core/loginuserpass.php
+
+Change lines 65 and 66 to point the hrefs to the right base PRC url.

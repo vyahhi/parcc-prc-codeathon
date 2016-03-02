@@ -16,7 +16,7 @@ Feature: PRC-838 District Name - Edit Form
   Scenario: Add new district - District Admin
     Given I am logged in as a user with the "District Admin" role
     And I have no "District" nodes
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     When I click "Add District"
     And I fill in "District Name" with "PRC-838 @timestamp"
     And I press "Submit"
@@ -32,14 +32,14 @@ Feature: PRC-838 District Name - Edit Form
   Scenario: PRC-1034 - Edit other
     Given I am logged in as a user with the "District Admin" role
     And I have no "District" nodes
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     When I click "Add District"
     And I fill in "District Name" with "PRC-1034 @timestamp"
     And I press "Submit"
     Then I should see the text "PRC-1034 @timestamp Readiness"
     Then I am an anonymous user
     And I am logged in as a user with the "District Admin" role
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     Then I should not see the link "PRC-1034 @timestamp"
 
   Scenario Outline: PRC-995 - District name must be unique in state
@@ -64,7 +64,7 @@ Feature: PRC-838 District Name - Edit Form
       | PRC-996 D2 @timestamp | @currentuid | @nid[2 <member_state>] |
     # PRC-940 changed District Admins. Now only allowed to have one district, so this link is hidden for the user who owns those other districts.
     And I am logged in as "<user_name>"
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     And I click "Add District"
     And I fill in "District Name" with "PRC-996 D1 @timestamp"
     And I select "1 <member_state>" from "State"

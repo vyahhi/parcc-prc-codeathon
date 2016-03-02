@@ -1,0 +1,4 @@
+name = PRC Professional Development Outline Link
+description = Link from course objects back to the outline
+package = PRC
+core = 7.x

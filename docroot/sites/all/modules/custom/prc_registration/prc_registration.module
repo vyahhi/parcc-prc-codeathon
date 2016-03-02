@@ -19,38 +19,12 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
   $invite = invite_load_from_session();
   $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
 
-  $form['field_user_state']['und']['#title'] = t('State where you teach');
-
-  $p_states = _prc_member_states();
-  $state_field = ':input[name="field_user_state[und]"]';
-
-  $member_tids = _prc_add_member_state_text($form, $p_states);
-
+  $form['field_user_state']['und']['#title'] = t('Where you teach');
   $profession_weight = $form['field_user_state']['#weight'];
 
   // We don't want to display any of this stuff if the user is coming from an invite
   if (!$invite) {
-
-    foreach ($member_tids as $index => $member_tid) {
-      if ($index) {
-        // We don't need or for the first item, but for every item after.
-        $account_number_states[] = 'or';
-      }
-      $account_number_states[] = array($state_field => array('value' => "$member_tid"));
-    }
-
-    $form['state_account_number'] = array(
-      '#type' => 'textfield',
-      '#title' => t('State Account #'),
-      '#weight' => $profession_weight + 2,
-      '#states' => array(
-        'visible' => array(
-          array(
-            $account_number_states,
-          ),
-        ),
-      ),
-    );
+    _prc_registration_state_account_number_fields($form, $profession_weight);
   }
   else {
     $form['field_user_state']['#required'] = FALSE;
@@ -90,6 +64,38 @@ function prc_registration_form_user_register_form_alter(&$form, &$form_state) {
   );
 
   $form['#validate'][] = 'prc_registration_form_user_register_form_validate';
+}
+
+/**
+ * @param $form
+ * @param $profession_weight
+ * @return mixed
+ */
+function _prc_registration_state_account_number_fields(&$form, $next_weight) {
+  $account_number_states = array();
+  $p_states = _prc_member_states();
+  $member_tids = _prc_member_state_tids($form, $p_states);
+  $state_field = ':input[name="field_user_state[und]"]';
+  foreach ($member_tids as $index => $member_tid) {
+    if ($index) {
+      // We don't need or for the first item, but for every item after.
+      $account_number_states[] = 'or';
+    }
+    $account_number_states[] = array($state_field => array('value' => "$member_tid"));
+  }
+
+  $form['state_account_number'] = array(
+    '#type' => 'textfield',
+    '#title' => t('PARCC Member code'),
+    '#weight' => $next_weight + 2,
+    '#states' => array(
+      'visible' => array(
+        array(
+          $account_number_states,
+        ),
+      ),
+    ),
+  );
 }
 
 /**
@@ -138,6 +144,14 @@ function prc_registration_form_user_register_form_validate(&$form, &$form_state)
     }
   }
 
+  _prc_registration_state_account_number_submit($form_state);
+}
+
+/**
+ * @param $form_state
+ * @return mixed
+ */
+function _prc_registration_state_account_number_submit(&$form_state) {
   if (array_key_exists('state_account_number', $form_state['values']) && $account_number = $form_state['values']['state_account_number']) {
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'taxonomy_term')
@@ -153,14 +167,15 @@ function prc_registration_form_user_register_form_validate(&$form, &$form_state)
       $member_state_term = taxonomy_term_load($tid);
 
       if ($user_state_term->name !== $member_state_term->name) {
-        form_set_error('state_account_number', t('State Account # is incorrect. Leave this blank if you do not have one.'));
-      }
-      else {
+        form_set_error('state_account_number', t('PARCC Member code is incorrect. Leave this blank if you do not have one.'));
+        return FALSE;
+      } else {
         $form_state['values']['field_member_state'][LANGUAGE_NONE][0]['tid'] = $tid;
+        return TRUE;
       }
-    }
-    else {
-      form_set_error('state_account_number', t('State Account # is incorrect. Leave this blank if you do not have one.'));
+    } else {
+      form_set_error('state_account_number', t('PARCC Member code is incorrect. Leave this blank if you do not have one.'));
+      return FALSE;
     }
   }
 }

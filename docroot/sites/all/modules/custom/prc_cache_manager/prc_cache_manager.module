@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * Manages caches on certain actions.
+ */
+
+/**
+ * Implements hook_entity_delete().
+ */
+function prc_cache_manager_entity_delete($entity, $type) {
+  _prc_cache_manager_manage_caches($entity, $type);
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function prc_cache_manager_entity_insert($entity, $type) {
+  _prc_cache_manager_manage_caches($entity, $type);
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function prc_cache_manager_entity_update($entity, $type) {
+  _prc_cache_manager_manage_caches($entity, $type);
+}
+
+/**
+ * Implements hook_flag_flag().
+ */
+function prc_cache_manager_flag_flag($flag, $entity_id, $account, $flagging) {
+  _prc_cache_manager_manage_caches($flag, 'flag');
+}
+
+/**
+ * Implements hook_flag_unflag().
+ */
+function prc_cache_manager_flag_unflag($flag, $entity_id, $account, $flagging) {
+  _prc_cache_manager_manage_caches($flag, 'flag');
+}
+
+function _prc_cache_manager_manage_caches($entity, $type) {
+  if ($entity && ($type == 'node' || $type == 'flag')) {
+    // Clear the views data and page caches so they are all up to date.
+    cache_clear_all('*', 'cache_views_data', TRUE);
+    cache_clear_all('*', 'cache_page', TRUE);
+  }
+}

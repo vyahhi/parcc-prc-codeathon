@@ -32,6 +32,29 @@ function prc_poc_local_taxonomy_taxonomy_default_vocabularies() {
         ),
       ),
     ),
+    'formative_instructional_task_resource_type' => array(
+      'name' => 'Formative Instructional Task Resource Type',
+      'machine_name' => 'formative_instructional_task_resource_type',
+      'description' => 'Resource Type for Formative Instructional Tasks',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
     'genre' => array(
       'name' => 'Genre',
       'machine_name' => 'genre',
@@ -151,6 +174,29 @@ function prc_poc_local_taxonomy_taxonomy_default_vocabularies() {
       'name' => 'Module Type',
       'machine_name' => 'module_type',
       'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
+    'parcc_released_item_resource_type' => array(
+      'name' => 'PARCC Released Item Resource Type',
+      'machine_name' => 'parcc_released_item_resource_type',
+      'description' => 'Resource Type for PARCC Released Items',
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 0,

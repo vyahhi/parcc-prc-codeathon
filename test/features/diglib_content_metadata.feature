@@ -10,7 +10,10 @@ Feature: Admin UI: Define Content Metadata (PRC-30)
     And "Grade Level" terms:
       | name          |
       | Middle School |
+    When I am browsing using a "desktop"
     And I am on "prc/admin"
+    And I hover over the element "#main-menu-section a[href='/prc/admin']"
+    And I hover over the element "#main-menu-section .dropdown a[href='/prc/admin/admin-content']"
     When I follow "Content"
     Then I click "Add content"
     Then I should see the text "Add More Information (Content Properties)" in the "content" region
@@ -22,12 +25,12 @@ Feature: Admin UI: Define Content Metadata (PRC-30)
 
   # AC2 Test grade level options
 
-    Then I select "Pre-K" from "Grade Level"
-    And I select "Kindergarten" from "Grade Level"
-    And I select "1st Grade" from "Grade Level"
-    And I select "2nd Grade" from "Grade Level"
-    And I select "8th Grade" from "Grade Level"
-    And I select "12th Grade" from "Grade Level"
+    Then I check the box "Pre-K"
+    And I check the box "Kindergarten"
+    And I check the box "1st Grade"
+    And I check the box "2nd Grade"
+    And I check the box "8th Grade"
+    And I check the box "12th Grade"
 
   # AC3 Test subject options
 

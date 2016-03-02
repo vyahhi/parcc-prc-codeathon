@@ -13,22 +13,28 @@ files[] = includes/FeaturesBuilderBase.inc
 files[] = includes/ContextFeaturesBuilder.inc
 files[] = includes/EckFeaturesBuilder.inc
 files[] = includes/EntityFeaturesBuilder.inc
+files[] = includes/EntityqueueFeaturesBuilder.inc
 files[] = includes/FieldFeaturesBuilder.inc
+files[] = includes/FieldCollectionFeaturesBuilder.inc
 files[] = includes/FlagFeaturesBuilder.inc
 files[] = includes/MediaFeaturesBuilder.inc
 files[] = includes/MenuFeaturesBuilder.inc
+files[] = includes/MessageFeaturesBuilder.inc
 files[] = includes/NodeFeaturesBuilder.inc
+files[] = includes/OgFeaturesBuilder.inc
 files[] = includes/PanelsFeaturesBuilder.inc
+files[] = includes/ParagraphsFeaturesBuilder.inc
 files[] = includes/Profile2FeaturesBuilder.inc
+files[] = includes/SearchApiBuilder.inc
 files[] = includes/SeoFeaturesBuilder.inc
 files[] = includes/SiteFeaturesBuilder.inc
 files[] = includes/TaxonomyFeaturesBuilder.inc
 files[] = includes/UserFeaturesBuilder.inc
 files[] = includes/ViewsFeaturesBuilder.inc
 
-; Information added by Drupal.org packaging script on 2014-12-16
-version = "7.x-1.x-dev"
+; Information added by Drupal.org packaging script on 2015-10-05
+version = "7.x-1.0-alpha2"
 core = "7.x"
 project = "features_builder"
-datestamp = "1418761688"
+datestamp = "1444083757"
 

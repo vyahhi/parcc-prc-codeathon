@@ -27,7 +27,19 @@ function prc_user_edit_form_form_user_profile_form_alter(&$form, &$form_state) {
 
   _prc_user_edit_form_title($form);
 
+  $profession_weight = $form['field_user_state']['#weight'];
+
+  $account_wrapper = entity_metadata_wrapper('user', $form_state['build_info']['args'][0]);
+
+  $my_uid = $user->uid;
+  $edit_uid = $form_state['build_info']['args'][0]->uid;
+
+  if ($my_uid == $edit_uid && !$account_wrapper->field_member_state->value()) {
+    _prc_registration_state_account_number_fields($form, $profession_weight);
+  }
+
   $form['#validate'][] = 'prc_user_edit_form_form_user_profile_form_validate';
+  $form['#validate'][] = 'prc_user_edit_form_form_user_profile_form_submit';
 
 }
 
@@ -46,4 +58,20 @@ function _prc_user_edit_form_title(&$form) {
 function prc_user_edit_form_form_user_profile_form_validate(&$form, &$form_state) {
   # If validation fails, the form_alter won't change the title again. Set it here.
   _prc_user_edit_form_title($form);
+
+  $role_field = 'roles';
+  $rids = $form_state['values'][$role_field];
+  _prc_invite_form_validate_trt_roles($rids, $role_field);
+
+}
+
+function prc_user_edit_form_form_user_profile_form_submit(&$form, &$form_state) {
+  if (_prc_registration_state_account_number_submit($form_state)) {
+    $roles = user_roles(TRUE);
+    $educator_role_name = 'PARCC-Member Educator';
+    $new_rid = array_search($educator_role_name, $roles);
+    $form_state['values']['roles'][$new_rid] = $new_rid;
+
+    drupal_set_message(t('You have successfully entered a valid PARCC member state code.'));
+  };
 }

@@ -20,7 +20,7 @@ Feature: PRC-368 Admin: Register LTI Course
       | title        | field_course_objectives | field_permissions  | uid | status |
       | Members Only | This is private         | members            | 1   | 1      |
     And I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
+    And I am on "prc/admin/admin-course"
 
   Scenario:  Access the LTI Registration Form and generate the Display of LTI information
     Then I should not see the link "Export"

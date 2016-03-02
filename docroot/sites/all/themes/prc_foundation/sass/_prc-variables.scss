@@ -2,24 +2,46 @@
 // PRC Custom Variables
 //
 
+// Breakpoint that can be used to target anything above max width
+$max: "only screen and (min-width: #{$row-width})";
+
 $default-margin: em-calc(15);
 $desktop-margin: em-calc(30);
 $default-padding: em-calc(15);
 $desktop-padding: em-calc(30);
 
+// Sprites
+$main-sprites: sprite-map("main/*.png", $spacing: 25px);
+$auth-sprites: sprite-map("authenticated/*.png", $spacing: 25px);
+
+$white: #FFFFFF;
 $parcc-purple: #70547D;
+$parcc-purple-light: #9777A2;
 $parcc-blue: #0035B7;
 $parcc-orange: #F66B16;
 $icon-button-color: #44596F;
 $icon-gray: #6F7E95;
+$lightest-gray: #F5F5F5;
 $background-gray: #EEEEEE;
+$preview-border: #BEBEBE;
+
+$modal-border: #E3E3E3;
+$modal-stroke: #D9D9D9;
+
 $gray-stroke: #DBDBDB;
 $filter-button-color: #f8f8f8;
 $selected-filter-color: #344759;
 
+$input-border-stroke: #6f7e95;
+
+$light-gray: #D1D1D1;
+$text-gray: #464646;
+
 $bold-font-family: 'Open Sans Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-@mixin paragraph {
+$button-border-radius: 40px;
+
+@mixin paragraph { /* Todo - remove this in favor of @extend */
   font-family: inherit;
   font-weight: normal;
   font-size: 1em;
@@ -27,17 +49,55 @@ $bold-font-family: 'Open Sans Condensed', 'Helvetica Neue', Helvetica, Arial, sa
   margin-bottom: 1.25em;
   text-rendering: optimizeLegibility;
 }
-@mixin bold {
+@mixin bold { /* Todo - remove this in favor of @extend */
   font-family: $bold-font-family;
   font-weight: 700;
 }
-@mixin parcc_button {
+@mixin parcc_button { /* Todo - remove this in favor of @extend if possible */
   @include button($button-med, $primary-color, 1000px);
   background-color: white;
   color: $parcc_purple;
 }
 @mixin social-icon($image) {
-  background: url($image) no-repeat !important;
+  background: sprite($main-sprites, $image) no-repeat !important;
   width: 26px !important;
   height: 26px !important;
+}
+
+@mixin down-arrow($top: 0px, $left: 0px, $color: black, $size: 6px) {
+  content: "";
+  position: relative;
+  top: $top;
+  left: $left;
+  width: 0;
+  height: 0;
+  border: inset $size;
+  border-top-style: solid;
+  border-color: $color transparent transparent transparent;
+}
+
+@mixin up-arrow($top: 0px, $left: 0px, $color: black, $size: 6px) {
+  content: "";
+  position: relative;
+  top: $top;
+  left: $left;
+  width: 0;
+  height: 0;
+  border: inset $size;
+  border-top-style: solid;
+  border-color: transparent transparent $color transparent;
+}
+
+%h3{
+  font-size: 21px;
+  font-weight: bold;
+  font-family: $bold-font-family;
+  padding-bottom: .7em;
+}
+
+%h4{
+  font-size: 1.125em;
+  font-weight: bold;
+  font-family: $bold-font-family;
+  padding-bottom: .7em;
 }

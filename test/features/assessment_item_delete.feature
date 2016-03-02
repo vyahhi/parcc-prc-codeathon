@@ -27,33 +27,30 @@ Feature: PRC-528 Delete Item in Test Customization
     And "Assessment" nodes:
       | title          | field_subject | field_quiz_type   | uid         |
       | PRC-528 Delete | subj1, subj2  | Custom Assessment | @currentuid |
-    And I am on "assessments"
+    And I am on "assessments/practice-assessments"
     Then I click "PRC-528 Delete"
-    And I click "Quiz"
-    Then I click "Manage questions"
-    Then I click "Create new question"
-    Then I click "Assessment directions"
+    And I press "Add Item"
+    Then I click "Non-interactive Item (text only)"
     And I fill in "edit-body-und-0-value" with "PRC-528 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-528 Directions 1"
     And I press "Save"
-    Then I click "Create new question"
-    Then I click "Multiple choice question"
+    And I press "Add Item"
+    Then I click "Interactive Choice"
     And I fill in "edit-body-und-0-value" with "PRC-528 Multi Multi Question Question"
     And I fill in "Title" with "PRC-528 Multi"
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     And I fill in "edit-alternatives-1-answer-value" with "Answer 2"
     And I check the box "edit-alternatives-1-correct"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I press "Save"
-    Then I click "View"
-    Then I should see the heading "PRC-528 Delete" in the "content" region
+    Then I should see the heading "PRC-528 Delete"
     Then I should see the link "PRC-528 Directions 1"
     Then I check the element with xpath selector "//*[starts-with(@id, 'edit-stayers')]"
     And I press "Save"
     Then I should not see the link "PRC-528 Directions 1"
     Then I should not see the text "PRC-528 Delete - copy"
-    But I should see the heading "PRC-528 Delete" in the "content" region
+    But I should see the heading "PRC-528 Delete"
 
   @javascript
   Scenario: Delete an item in a PRC Assessment, copy
@@ -65,32 +62,29 @@ Feature: PRC-528 Delete Item in Test Customization
     And "Assessment" nodes:
       | title          | field_subject | field_quiz_type                    | author      |
       | PRC-528 Delete | subj1, subj2  | PARCC-Released Practice Assessment | @currentuid |
-    And I am on "assessments"
+    And I am on "assessments/practice-assessments"
     Then I click "PRC-528 Delete"
-    And I click "Quiz"
-    Then I click "Manage questions"
-    Then I click "Create new question"
-    Then I click "Assessment directions"
+    And I press "Add Item"
+    Then I click "Non-interactive Item (text only)"
     And I fill in "edit-body-und-0-value" with "PRC-528 Directions 1 And these are the Body Body Directions Directions"
     And I fill in "Title" with "PRC-528 Directions 1"
     And I press "Save"
-    Then I click "Create new question"
-    Then I click "Multiple choice question"
+    And I press "Add Item"
+    Then I click "Interactive Choice"
     And I fill in "edit-body-und-0-value" with "PRC-528 Multi Multi Question Question"
     And I fill in "Title" with "PRC-528 Multi"
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     And I fill in "edit-alternatives-1-answer-value" with "Answer 2"
     And I check the box "edit-alternatives-1-correct"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I press "Save"
-    Then I click "View"
-    Then I should see the heading "PRC-528 Delete" in the "content" region
+    Then I should see the heading "PRC-528 Delete"
     Then I should see the link "PRC-528 Directions 1"
     Then I check the element with xpath selector "//*[starts-with(@id, 'edit-stayers')]"
     And I press "Save"
     Then I should not see the link "PRC-528 Directions 1"
-    But I should see the heading "PRC-528 Delete - copy" in the "content" region
+    But I should see the heading "PRC-528 Delete - copy"
 
   @javascript
   Scenario: User can't delete all questions
@@ -102,22 +96,55 @@ Feature: PRC-528 Delete Item in Test Customization
     And "Assessment" nodes:
       | title          | field_subject | field_quiz_type                    | author      |
       | PRC-528 Delete | subj1, subj2  | PARCC-Released Practice Assessment | @currentuid |
-    And I am on "assessments"
+    And I am on "assessments/practice-assessments"
     Then I click "PRC-528 Delete"
-    And I click "Quiz"
-    Then I click "Manage questions"
-    Then I click "Create new question"
-    Then I click "Multiple choice question"
+    And I press "Add Item"
+    Then I click "Interactive Choice"
     And I fill in "edit-body-und-0-value" with "PRC-528 Multi Multi Question Question"
     And I fill in "Title" with "PRC-528 Multi"
     And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
     And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
     And I fill in "edit-alternatives-1-answer-value" with "Answer 2"
     And I check the box "edit-alternatives-1-correct"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I press "Save"
-    Then I click "View"
-    Then I should see the heading "PRC-528 Delete" in the "content" region
+    Then I should see the heading "PRC-528 Delete"
     Then I check the element with xpath selector "//*[starts-with(@id, 'edit-stayers')]"
     And I press "Save"
     Then I should see the error message containing "You may not delete every question in your quiz."
+
+  @javascript
+  Scenario: prc-1828 Error when saving parcc released quiz
+    Given I am logged in as a user with the "PRC Admin" role
+    And "Subject" terms:
+      | name  |
+      | subj1 |
+      | subj2 |
+    And "Assessment" nodes:
+      | title          | field_subject | field_quiz_type                    | author      |
+      | PRC-528 Delete | subj1, subj2  | PARCC-Released Practice Assessment | @currentuid |
+    And I am on "assessments/practice-assessments"
+    Then I click "PRC-528 Delete"
+    And I press "Add Item"
+    Then I click "Non-interactive Item (text only)"
+    And I fill in "edit-body-und-0-value" with "PRC-528 Directions 1 And these are the Body Body Directions Directions"
+    And I fill in "Title" with "PRC-528 Directions 1"
+    And I press "Save"
+    And I press "Add Item"
+    Then I click "Interactive Choice"
+    And I fill in "edit-body-und-0-value" with "PRC-528 Multi Multi Question Question"
+    And I fill in "Title" with "PRC-528 Multi"
+    And I select "Common Core English Language Arts" from "edit-field-standard-und-0-tid-select-1"
+    And I fill in "edit-alternatives-0-answer-value" with "Answer 1"
+    And I fill in "edit-alternatives-1-answer-value" with "Answer 2"
+    And I check the box "edit-alternatives-1-correct"
+    And I check the box "1st Grade"
+    And I press "Save"
+    Then I should see the heading "PRC-528 Delete"
+    Then I should see the link "PRC-528 Directions 1"
+    Then I check the element with xpath selector "//*[starts-with(@id, 'edit-stayers')]"
+    And I press "Save"
+    Then I should not see the link "PRC-528 Directions 1"
+    And I should not see the message containing "PDOException"
+    And I should not see the error message containing "Missing argument 1"
+    But I should see the heading "PRC-528 Delete - copy"

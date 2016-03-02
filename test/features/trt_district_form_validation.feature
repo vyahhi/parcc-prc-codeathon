@@ -12,7 +12,7 @@ Feature: PRC-839 District Name - Add / Edit - Form Validation
   Scenario: No District name
     Given I am logged in as a user with the "District Admin" role
     And I have no "District" nodes
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     When I click "Add District"
     And I press "Submit"
     Then I should see the error message containing "District Name field is required."

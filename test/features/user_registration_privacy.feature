@@ -26,7 +26,7 @@ Feature: PRC-888 Acceptance of privacy policies upon registration
   Scenario: Checked acceptance
     Given I am an anonymous user
     And I am on the homepage
-    And I follow "Join now!"
+    And I follow "Create account"
     Then I fill in "@timestamp@example.com" for "E-mail"
     And I fill in "abc123" for "Password"
     And I fill in "abc123" for "Confirm password"
@@ -40,7 +40,7 @@ Feature: PRC-888 Acceptance of privacy policies upon registration
   Scenario: Not checked acceptance
     Given I am an anonymous user
     And I am on the homepage
-    And I follow "Join now!"
+    And I follow "Create account"
     Then the "I have read and agree with the Terms of Use and User Generated Content Disclaimer." checkbox should not be checked
     Then I fill in "@timestamp@example.com" for "E-mail"
     And I fill in "abc123" for "Password"
@@ -54,7 +54,7 @@ Feature: PRC-888 Acceptance of privacy policies upon registration
   Scenario Outline: Links
     Given I am an anonymous user
     And I am on the homepage
-    And I follow "Join now!"
+    And I follow "Create account"
     Then the "I have read and agree with the Terms of Use and User Generated Content Disclaimer." checkbox should not be checked
     When I click "<link>" in the "content" region
     Then I should see the heading "<link>"

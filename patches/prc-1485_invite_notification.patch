@@ -1,0 +1,25 @@
+diff --git a/docroot/sites/all/modules/contrib/invite/modules/invite_notifications/invite_notifications.module b/docroot/sites/all/modules/contrib/invite/modules/invite_notifications/invite_notifications.module
+index 522aad4..d586631 100644
+--- a/docroot/sites/all/modules/contrib/invite/modules/invite_notifications/invite_notifications.module
++++ b/docroot/sites/all/modules/contrib/invite/modules/invite_notifications/invite_notifications.module
+@@ -8,6 +8,7 @@ function invite_notifications_init() {
+   }
+ 
+   if (isset($user->data['notification_received'])) {
++
+     $result = db_select('invite_notifications')
+       ->fields('invite_notifications')
+       ->condition('uid', $user->uid)
+@@ -21,8 +22,10 @@ function invite_notifications_init() {
+       ':uid' => $user->uid,
+       ':status' => 1
+     ))->fetchField();
+-    if ($result == 0) {
+-      user_save($user, array('data' => array('notification_received' => FALSE)));
++    if ($result == 0  && $user->data['notification_received'] !== FALSE) {//No need to update if nothing has changed!
++      //Loading a fresh user object helps prevent errors down the line
++      $account = user_load($user->uid);
++      user_save($account, array('data' => array('notification_received' => FALSE)));
+     }
+   }
+ }

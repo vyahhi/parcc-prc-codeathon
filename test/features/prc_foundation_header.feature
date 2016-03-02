@@ -34,7 +34,7 @@ Feature: Header/Menu Responsive Behavior (PRC-749)
     # Then the mobile menu should display
     Then "nav.expanded" should be visible
     # And search should be included in the navigation above the main menu.
-    And "form#search-block-form" should be visible
+    And ".show-for-medium-down input#edit-search-block-form--2" should be visible
     # And the main menu should be displayed.
     And "#main-menu-section" should be visible
     # And the login link should be displayed.
@@ -135,4 +135,31 @@ Feature: Header/Menu Responsive Behavior (PRC-749)
     When I am browsing using a "desktop"
     Then "#main-menu-section li.first a" should have a "color" css value of "rgb(255, 255, 255)"
     And "#main-menu-section li.first a" should have a "background-color" css value of "rgb(46, 63, 78)"
+
+  @javascript @api
+  Scenario: prc-1617 is applied correctly and there are no regressions
+    Given I am logged in as a user with the "Administrator" role
+    And I am browsing using a "desktop"
+    And I visit "instructional-tools/formative-instructional-tasks"
+    # The style applies correctly to the contextual links menu
+    Then ".contextual-links-region ul.menu li" should have a "margin-left" css value of "0px"
+    # No regression with the dropdowns
+    When I hover over the element "ul#main-menu li.has-dropdown"
+    Then "li.dropdown-item" should have a "margin-left" css value of "0px"
+    # No regression for the links at the bottom of diglib content on gallery view
+    Given "Digital Library Content" nodes:
+      | title      | body         | status | promote | uid | field_author_name | field_subject | field_grade_level_unlimited | field_media_type |
+      | DL Content | Body Content | 1      | 0       | 1   | Author Name       | Math          | 1st Grade                   | Text             |
+    And I visit the last node created
+    And I click "Edit"
+    And I select the radio button "Public" with the id "edit-field-permissions-und-public"
+    And I press the "Save" button
+    When I visit "library"
+    # No additional margin added to the tabs
+    When I click "DL Content"
+    Then "ul.tabs li" should have a "margin-left" css value of "0px"
+
+
+
+
 

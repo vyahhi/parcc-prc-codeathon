@@ -4,44 +4,33 @@ Feature: PRC-967 Search/Filter Bar: View the Digital Library Filters
   I want to be able to view the Digital Library filters,
   so that I can see the choices I have to refine the Gallery results.
 
-#  Given that I am on Digital Library page
-#  When I press the Filter icon/button
-#  Scenario 1: Filter menu is closed and filters aren't selected
-#    And the Filter Menu is closed
-#    And there are no Filters selected
-#    Then the Filter Menu opens
-#    And I see the content of the Gallery move down to keep the same space between the Gallery and the bottom of the Filter menu
-#    And the Filter menu item status display changes to Open.
-#    And I see the Close button/link
-
-    # This is tested in diglib_filter_selection - @prc-968
-    #    And I see the following filters in the menu:
-    #  Grade
-    #  Pre-K	Kindergarten	1st Grade	2nd Grade	3rd Grade	4th Grade	5th Grade	6th Grade	7th Grade	8th Grade	9th Grade	10th Grade	11th Grade	12th Grade
-    #  Subject
-    #  Career and Technical Education	Educational Leadership	English Language Arts	English Language Development	History/Social Studies	Math
-    #  Physical Education	Science	Special Needs Support	STEM	Visual and Performing Arts	World Languages
-    #  Media
-    #  Text	Image	Audio	Visual
-
-#  Scenario 2: Filter menu is open and filters aren't selected
-#    And the Filter Menu is open
-#    And there are no Filters selected
-#    Then the Filter Menu closes
-#    And the Filter menu item status display changes to Closed
-#    And I see the content of the Gallery move up to keep the same space between the Gallery and the bottom of the Filter menu
-#  Scenario 3: Filter menu is open when filters are selected
-#    And the Filter Menu is open
-#    And there are Filters selected
-#    Then the Filter Menu closes
-#    And I see the content of the Gallery move down to keep the same space between the Gallery and the bottom of the Filter menu
-#    And the Filter menu item status display changes to Selected.
-#  Scenario 4: Filter menu is closed when filters are selected
-#    And the Filter Menu is closed
-#    And there are no Filters selected
-#    Then the Filter Menu opens
-#    And I see the content of the Gallery move down to keep the same space between the Gallery and the bottom of the Filter menu
-#    And the Filter menu item status display changes to Open.
-#    And I see the Close button/link
-#    And I see the filters in the menu (see above list)
-#    And I see the Filters that are currently Selected.
+  @prc-1537
+  Scenario: Subject filters stay on first level
+    Given I am logged in as a user with the "Educator" role
+    And I have no "Digital Library Content" nodes
+    # Use existing Subject, Grade Level, Media Type, because these are set up on install
+    And "Digital Library Content" nodes:
+      | title           | body                                 | status | uid | field_subject              | field_grade_level_unlimited | field_media_type |
+      | Result One      | First Body                           | 1      | 1   | Math                       | 1st Grade                   | Text             |
+      | Result Two      | Lorem ipsum doloranim id est laborum | 1      | 1   | Algebra                    | 11th Grade                  | Text             |
+      | Result Three    | First Body                           | 1      | 1   | Calculus                   | 12th Grade                  | Text             |
+      | Result Four     | Lorem ipsum doloranim id est laborum | 1      | 1   | Number System              | 2nd Grade                   | Text             |
+      | Result Five     | First Body                           | 1      | 1   | Trigonometry               | 4th Grade                   | Text             |
+      | Result Six      | Lorem ipsum doloranim id est laborum | 1      | 1   | World Languages            | 3rd Grade                   | Text             |
+      | Result Seven    | First Body                           | 1      | 1   | Visual and Performing Arts | 7th Grade                   | Text             |
+      | Result Eight    | Lorem ipsum doloranim id est laborum | 1      | 1   | Science                    | 8th Grade                   | Text             |
+      | Result Nine     | Lorem ipsum doloranim id est laborum | 1      | 1   | STEM                       | 6th Grade                   | Text             |
+      | Result Ten      | First Body                           | 1      | 1   | History/Social Studies     | 5th Grade                   | Text             |
+      | Result Eleven   | Lorem ipsum doloranim id est laborum | 1      | 1   | STEM                       | 9th Grade                   | Text             |
+      | Result Twelve   | First Body                           | 1      | 1   | History/Social Studies     | 10th Grade                  | Text             |
+      | Result Thirteen | First Body                           | 1      | 1   | History/Social Studies     | Kindergarten                | Text             |
+      | Result Fourteen | Lorem ipsum doloranim id est laborum | 1      | 1   | World Languages            | Pre-K                       | Text             |
+    And I index search results
+    When I am on "library"
+    Then I should see the link "Math (5)"
+    But I should not see the link "Algebra (1)"
+    When I click "Math (5)"
+    Then I should not see the link "Algebra (1)"
+    Then I should not see the link "Calculus (1)"
+    Then I should not see the link "Number System (1)"
+    Then I should not see the link "Trigonometry (1)"

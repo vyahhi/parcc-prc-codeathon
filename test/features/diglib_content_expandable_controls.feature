@@ -9,9 +9,9 @@ Feature: Add Content: Expandable/Collapsible Controls (PRC-157)
     Given I am logged in as a user with the "Content Contributor" role
     And I am on "node/add/digital-library-content"
     # AC1a Attach a File -collapsed by default
-    And I should not see "Allowed file types: txt pdf doc docx xls xlsx ppt pptx."
+    And I should not see "Allowed file types: txt pdf doc docx xls xlsx ppt pptx mp4."
     And I click "Show Attach a File"
-    And I should see "Allowed file types: txt pdf doc docx xls xlsx ppt pptx."
+    And I should see "Allowed file types: txt pdf doc docx xls xlsx ppt pptx mp4."
     #  AC1b  Add a Thumbnail Image -expanded by default
     And I should see "Add a Thumbnail"
     And I should see "Allowed file types: png gif jpg jpeg."

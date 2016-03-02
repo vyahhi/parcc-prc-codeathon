@@ -16,17 +16,21 @@ function _prc_member_states() {
 }
 
 /**
+ * Extracts the parcc member tids from field_user_state.  Previously used to
+ * also modify the way PARCC states were displayed.
+ *
  * @param $form
  * @param $p_states
  * @return $member_tids
  */
-function _prc_add_member_state_text(&$form, $p_states) {
+function _prc_member_state_tids(&$form, $p_states) {
   $member_tids = array();
 
   // Add text to each member state
   foreach ($form['field_user_state']['und']['#options'] as $tid => &$term) {
     if (in_array($term, $p_states)) {
-      $term = $term . ' - PARCC Member';
+      // PRC-1973 : Don't display PARCC member anymore, but still return the
+      // member TIDs. //$term = $term . ' - PARCC Member';
       $member_tids[] = $tid;
     }
   }
@@ -77,9 +81,6 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
     '#options' => $roles,
   );
 
-  $p_states = _prc_member_states();
-  $member_tids = _prc_add_member_state_text($form, $p_states);
-
   $form['field_user_state']['und']['#title'] = t('State where the invitee teaches');
 
   // Hide the field_role_id field - we'll use this to save the role we pick in invite_role
@@ -91,7 +92,7 @@ function prc_invite_form_form_invite_form_alter(&$form, &$form_state) {
   $roles_with_states = array('PARCC-Member Educator', 'Content Contributor');
   $roles_rids = array();
   $role_states = array();
-  foreach($roles_with_states as $role) {
+  foreach ($roles_with_states as $role) {
     $rid = array_search($role, $roles);
     // IE requires this to be a string. Joy.
     $roles_rids[] = array('value' => "$rid");
@@ -139,20 +140,19 @@ function _prc_invite_form_set_title() {
   drupal_set_title('Invite New PRC Website User');
 }
 
-function prc_invite_form_form_invite_form_validate($form, &$form_state)
-{
+function prc_invite_form_form_invite_form_validate($form, &$form_state) {
   //Require user state if it is one of the roles
   $roles = user_roles();
   $roles_with_states = array('PARCC-Member Educator', 'Content Contributor');
   $roles_rids = array();
   $role_states = array();
-  foreach($roles_with_states as $role) {
+  foreach ($roles_with_states as $role) {
     $rids[] = array_search($role, $roles);
   }
   $uid = $form_state['values']['uid'];
   $state = $form_state['values']['field_user_state']['und'][0]['tid'];
 
-  if(in_array($uid, $rids)  && empty($state)){
+  if (in_array($uid, $rids) && empty($state)) {
     form_set_error('prc_invite_form', 'State where they teach field is required.');
   }
 
@@ -165,20 +165,9 @@ function prc_invite_form_form_invite_form_validate($form, &$form_state)
     $form_state['values']['field_invitation_email_address'] = $form_state['input']['field_invitation_email_address'];
   }
 
+  $role_field = 'invite_role';
   $rids = $form_state['values']['invite_role'];
-  $roles = user_roles();
-  $trt_roles = array('School Admin', 'District Admin', 'State Admin');
-  $roles_rids = array();
-  foreach($trt_roles as $role) {
-    $trt_rid = array_search($role, $roles);
-    $trt_rids[] = $trt_rid;
-  }
-
-  $diff = array_filter(array_diff($rids, $trt_rids));
-
-  if (!count($diff)) {
-    form_set_error('invite_role', t('A non-TRT role is required.'));
-  }
+  _prc_invite_form_validate_trt_roles($rids, $role_field);
 
   $valid_emails = array();
   _prc_invite_form_validate_email_address_format($form_state, 'field_multi_emails', $valid_emails);
@@ -186,6 +175,32 @@ function prc_invite_form_form_invite_form_validate($form, &$form_state)
 
   // Notify field widgets to validate their data.
   field_attach_form_validate('invite', $form_state['invite'], $form, $form_state);
+}
+
+/**
+ * @param $rids
+ * @param $role_field
+ */
+function _prc_invite_form_validate_trt_roles($rids, $role_field) {
+  $rids = array_filter($rids, '_prc_invite_form_valid_roles');
+  $roles = user_roles();
+  $trt_roles = array('School Admin', 'District Admin', 'State Admin');
+  $trt_rids = array();
+  foreach ($trt_roles as $role) {
+    $trt_rid = array_search($role, $roles);
+    $trt_rids[] = $trt_rid;
+  }
+
+  $diff = array_filter(array_diff($rids, $trt_rids));
+
+  if (!count($diff)) {
+    form_set_error($role_field, t('A non-TRT role is required.'));
+  }
+}
+
+function _prc_invite_form_valid_roles($var) {
+  // returns whether the input is a number, not 0
+  return ($var && is_numeric($var));
 }
 
 /**
@@ -219,25 +234,20 @@ function _prc_invite_form_validate_email_address_format(&$form_state, $field_nam
               $valid[$email] = $email;
             }
           }
-        }
-        else {
+        } else {
           $invalid[] = $email;
         }
       }
     }
     if (empty($invalid) && empty($already_exists) && empty($nonunique)) {
       $valid_emails = $valid;
-    }
-    elseif (count($invalid) == 1) {
+    } elseif (count($invalid) == 1) {
       form_set_error($field_name, t('%email is not a valid e-mail address.', array('%email' => reset($invalid))));
-    }
-    elseif (count($invalid)) {
+    } elseif (count($invalid)) {
       form_set_error($field_name, t('%emails are not valid e-mail addresses.', array('%emails' => implode(', ', $invalid))));
-    }
-    elseif (count($already_exists)) {
+    } elseif (count($already_exists)) {
       form_set_error($field_name, t('Please remove the following already existing email addresses from the list: %emails', array('%emails' => implode(', ', $already_exists))));
-    }
-    elseif (count($nonunique)) {
+    } elseif (count($nonunique)) {
       form_set_error($field_name, t('Please remove the following duplicate email addresses from the list: %emails', array('%emails' => implode(', ', $nonunique))));
     }
 
@@ -249,8 +259,7 @@ function _prc_invite_form_validate_email_address_format(&$form_state, $field_nam
 
 // each email address needs its own invite object
 // so we tell the entity builder that this guy is new
-function _prc_invite_form_invitations_entity_builder($entity_type, $entity, $form, $form_state)
-{
+function _prc_invite_form_invitations_entity_builder($entity_type, $entity, $form, $form_state) {
   if (!isset($entity->is_new)) {
     $entity->is_new = TRUE;
     // we want a new invites token, so unset token if it exists
@@ -262,8 +271,7 @@ function _prc_invite_form_invitations_entity_builder($entity_type, $entity, $for
   }
 }
 
-function prc_invite_form_form_invite_form_submit(&$form, &$form_state)
-{
+function prc_invite_form_form_invite_form_submit(&$form, &$form_state) {
   $entity_builders = array('_prc_invite_form_invitations_entity_builder');
   if (array_key_exists('#entity_builders', $form)) {
     $entity_builders += $form['#entity_builders'];
@@ -272,7 +280,7 @@ function prc_invite_form_form_invite_form_submit(&$form, &$form_state)
   $new_body = $form_state['values']['prc_invite_message'] . '<br />' . $form_state['values']['field_invitation_email_body'][LANGUAGE_NONE][0]['value'];
   $form_state['values']['field_invitation_email_body'][LANGUAGE_NONE][0]['value'] = $new_body; // .= pre-concat operator not working
   $rids = $form_state['values']['invite_role'];
-  foreach($rids as $rid) {
+  foreach ($rids as $rid) {
     if ($rid) {
       $form_state['values']['field_role_id'][LANGUAGE_NONE][] = array('value' => $rid);
     }
@@ -281,7 +289,7 @@ function prc_invite_form_form_invite_form_submit(&$form, &$form_state)
   $roles = user_roles();
   $roles_with_states = array('PARCC-Member Educator', 'Content Contributor');
   $roles_rids = array();
-  foreach($roles_with_states as $role) {
+  foreach ($roles_with_states as $role) {
     $state_rid = array_search($role, $roles);
     $roles_rids[] = $state_rid;
   }
@@ -323,7 +331,7 @@ function prc_invite_form_invite_accept($invite) {
       }
       // Add authenticated user back in
       $new_roles[2] = $roles[2];
-      foreach($invite_rid as $user_rid) {
+      foreach ($invite_rid as $user_rid) {
         if (array_key_exists($user_rid, $roles)) {
           $role_name = $roles[$user_rid];
           $new_roles[$user_rid] = $role_name;
@@ -370,9 +378,17 @@ function prc_invite_form_tokens($type, $tokens, array $data = array(), array $op
       switch ($name) {
         case 'role-name':
           $invite = $data['invite'];
-          $rid = $invite->field_role_id[$langcode][0]['value'];
+          $rids = array();
+          foreach ($invite->field_role_id[$langcode] as $rid) {
+            $rid = $rid['value'];
+            $rids[] = $rid;
+          }
           $roles = user_roles();
-          $role_name = $roles[$rid];
+          $role_names = array();
+          foreach ($rids as $rid) {
+            $role_names[] = $roles[$rid];
+          }
+          $role_name = implode(', ', $role_names);
           $replacements[$original] = $role_name;
           break;
       }

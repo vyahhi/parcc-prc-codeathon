@@ -1,3 +1,6 @@
-id,title,objectives,permissions,link title,link url
-1,PARCC Assessments Overview,Provide an overview of PARCC assessments,public,PARCC Assessments Overview,http://stable.parcc-prc.breaktech.org/sites/default/files/44009_PARCC_M1_Overview_Oct31/index.htm
-2,PARCC Accessibility System​,Provide an overview of the PARCC Accessibility System​,public,PARCC Accessibility,http://stable.parcc-prc.breaktech.org/sites/default/files/44009_PARCC_m5_Accessibility_Aug_8/index.htm
+"id","title","objectives","permissions","link title","link url"
+1,"PARCC – An Overview","Provide an overview of PARCC assessments","public","PARCC Assessments Overview","https://s3.amazonaws.com/pfs-ads/prc/s3fs-public/scorm/m1-overview/index.htm"
+2,"The PARCC Accessibility System​","Provide an overview of the PARCC Accessibility System​","public","PARCC Accessibility","https://s3.amazonaws.com/pfs-ads/prc/s3fs-public/scorm/m5-accessibility/index.htm"
+3,"Introduction to the K-2 Formative Tasks",,"public","Introduction to the K-2 Formative Tasks","https://s3.amazonaws.com/pfs-ads/prc/s3fs-public/scorm/m2-k2formative/index.htm"
+4,"Introduction to PARCC Diagnostic Assessment",,"public","Introduction to PARCC Diagnostic Assessment","https://s3.amazonaws.com/pfs-ads/prc/s3fs-public/scorm/m3-diagnostic-gold/index.htm"
+5,"Introduction to the PARCC Speaking and Listening Tools ",,"public","Introduction to the PARCC Speaking and Listening Tools ","https://s3.amazonaws.com/pfs-ads/prc/s3fs-public/scorm/m4-speaking-and-listening/index.htm"

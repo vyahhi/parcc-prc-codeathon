@@ -1,0 +1,32 @@
+From e1528a83e9518c04d150d3e4e0b9f952ee99456f Mon Sep 17 00:00:00 2001
+From: Laurens Meurs <lmeurs@1139006.no-reply.drupal.org>
+Date: Fri, 17 Apr 2015 09:05:15 +0200
+Subject: [PATCH] Issue #2301527 by lmeurs, nod_: Fix client side file
+ validator for IE11
+
+---
+ core/modules/file/file.js | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/core/modules/file/file.js b/core/modules/file/file.js
+index b704542..5a42df6 100644
+--- a/core/modules/file/file.js
++++ b/core/modules/file/file.js
+@@ -97,6 +97,14 @@
+      * Client-side file input validation of file extensions.
+      */
+     validateExtension: function (event) {
++      // On IE 11 setting value programatically will trigger a change event.
++      // Prevent any action when value is empty.
++      if (this.value === '') {
++        // Cancel all other change event handlers.
++        event.stopImmediatePropagation();
++        return;
++      }
++
+       event.preventDefault();
+       // Remove any previous errors.
+       $('.file-upload-js-error').remove();
+-- 
+1.9.0.msysgit.0
+

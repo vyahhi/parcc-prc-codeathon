@@ -1,4 +1,4 @@
-@api @d7 @diglib @search
+@api @d7 @diglib @search @prc-40 @tika
 Feature: PRC-40 Deep Search: Search through TXT Documents
   As an educator,
   I want to search for a keyword through TXT documents,
@@ -31,7 +31,6 @@ Feature: PRC-40 Deep Search: Search through TXT Documents
     When I fill in "Quidditch" for "Search" in the "header" region
     And I press "Search" in the "header" region
     Then I should see the text "Search-text-o-rama"
-    And I should see the link "potter_ipsum.txt"
     When I fill in "Not in the file" for "Search" in the "header" region
     And I press "Search" in the "header" region
     Then I should not see the text "Search-text-o-rama"

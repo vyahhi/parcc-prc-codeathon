@@ -369,7 +369,6 @@ function prc_pd_course_form_form_course_outline_overview_form_alter(&$form, &$fo
  * @param $form
  * @param $form_state
  */
-
 function prc_pd_course_form_form_pd_course_node_form_alter(&$form, &$form_state) {
   $title = drupal_get_title();
   $title = str_replace('PD Course', 'Course', $title);
@@ -447,6 +446,8 @@ function prc_pd_course_form_form_course_object_options_form_alter(&$form, &$form
   // The value comes back already checked, so we decode it so it isn't
   // double-encoded.
   $form['title']['title']['#default_value'] = decode_entities($form['title']['title']['#default_value']);
+
+  unset($form['title']['title']['#required']);
 
   $form['title']['title']['#states'] = array(
     'enabled' => array(
@@ -610,10 +611,25 @@ function prc_pd_course_form_form_quiz_report_form_alter(&$form, &$form_state) {
 }
 
 /**
- * Removes the single grade level field instance from Speaking and Listening Resource node type.
+ * Implements hook_permission().
  */
-function prc_pd_course_form_update_0001(&$sandbox) {
-  if ($instance = field_info_instance('node', 'field_grade_level', 'speaking_and_listening_resource')) {
-    field_delete_instance($instance);
+function prc_pd_course_form_permission() {
+  return array(
+    'attach file to pd module' => array(
+      'title' => t('Attach File field available on PD Module add/edit'),
+      'description' => t('Attach File field available on PD Module add/edit'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter
+ *
+ * @param $form
+ * @param $form_state
+ */
+function prc_pd_course_form_form_pd_module_node_form_alter(&$form, &$form_state) {
+  if (!user_access('attach file to pd module')) {
+    $form['field_file_single']['#access'] = FALSE;
   }
 }

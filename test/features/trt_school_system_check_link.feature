@@ -11,12 +11,15 @@ Feature: PRC-877 School Readiness - View System Check Results
 
 
   Scenario: Create default entities and nodes
-    Given I am logged in as a user with the "School Admin" role
+    Given users:
+      | name                    | mail                   | pass    | field_first_name | field_last_name | status | roles                  |
+      | schooladmin@example.com | schooladmin@example.com | xyz123 | Joe              | Educator        | 1      | Educator, School Admin |
+    And I am logged in as "schooladmin@example.com"
     And I have no "School" nodes
     And I have no entities of type "prc_trt" and bundle "system_check"
     And "School" nodes:
-      | title                 |
-      | School One @timestamp |
+      | title                 | field_contact_email     |
+      | School One @timestamp | schooladmin@example.com |
     And entities of type "prc_trt" and bundle "system_check":
       | created    | field_name | field_number_of_devices | field_device_type | field_operating_system | field_monitor_size | field_processor_speed | field_ram | field_monitor_color_depth | field_browser | field_browser_version | field_browser_cookies_enabled | field_browser_javascript_enabled | field_browser_images_enabled | field_screen_resolution_width | field_screen_resolution_height | field_ref_school            |
       | 1415932389 | Check AA   | 10                      | laptop            | win7                   | 17                 | 1                     | 1         | 24                        | ff            | 34                    | 1                             | 1                                | 1                            | 1027                          | 768                            | @nid[School One @timestamp] |

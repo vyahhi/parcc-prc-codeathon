@@ -59,19 +59,19 @@ function prc_poc_local_node_pd_course_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'course' => array(
-          'weight' => '8',
+          'weight' => '9',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '9',
+          'weight' => '10',
         ),
       ),
       'display' => array(
         'course' => array(
           'default' => array(
-            'weight' => '4',
+            'weight' => '0',
             'visible' => TRUE,
           ),
           'teaser' => array(
@@ -93,11 +93,11 @@ function prc_poc_local_node_pd_course_strongarm() {
         ),
         'course_messages' => array(
           'default' => array(
-            'weight' => '18',
+            'weight' => '17',
             'visible' => FALSE,
           ),
           'teaser' => array(
-            'weight' => '16',
+            'weight' => '18',
             'visible' => FALSE,
           ),
           'search_index' => array(

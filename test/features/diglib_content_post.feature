@@ -42,10 +42,10 @@ Feature: Admin UI: Post Content (PRC-28)
     Given I am logged in as a user with the "Content Contributor" role
     And I am on "prc/admin"
     When I follow "Content"
-    Then the url should match "admin-content"
+    Then the url should match "prc/admin/admin-content"
     Then I click "Add content"
     Then the url should match "node/add/digital-library-content"
-    And I should see the heading "Create Digital Library Content" in the "content" region
+    And I should see the heading "Create Digital Library Content" in the "sub_header" region
 
   Scenario: AC7 - The following fields are to be displayed on
     Given I am logged in as a user with the "Content Contributor" role
@@ -74,6 +74,17 @@ Feature: Admin UI: Post Content (PRC-28)
     And I should see the success message containing "Digital Library Content Test-o-rama has been created."
     Then I follow "Edit"
     And I should see the link "GreatLakesWater.pdf"
+
+  @javascript @prc-1572 @mp4
+  Scenario: PRC-1572 Valid file extensions
+    Given I am logged in as a user with the "Content Contributor" role
+    And I am on "node/add/digital-library-content"
+    And I fill in "Title *" with "Test-o-rama"
+    And I should see "Attach a File"
+ #  We need to expand Attach a File because it's collapsed by default
+    And I click "Show Attach a File"
+    Then I attach the file "testfiles/test1.csv" to "edit-field-document-und-0-upload"
+    Then I should see the error message "The selected file test1.csv cannot be uploaded. Only files with the following extensions are allowed: txt, pdf, doc, docx, xls, xlsx, ppt, pptx, mp4."
 
   @javascript
   Scenario: AC8-11 Users can upload and save a thumbnail

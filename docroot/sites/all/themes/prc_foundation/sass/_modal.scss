@@ -1,0 +1,86 @@
+/**
+ * Custom styling of the modal windows
+ */
+@media #{$screen} {
+  #modalContent .ctools-modal-content {
+    border-color: $modal-border;
+    width: 100%;
+    .modal-header {
+      background-color: $selected-filter-color;
+      padding-top: 1em;
+      padding-bottom: 1em;
+      padding-left: 1em;
+      padding-right: 1em;
+      a.close {
+        color: $selected-filter-color;
+        font-size: 0px;
+        height: 26px;
+        width: 26px;
+        margin: 10px;
+        position: absolute;
+        right: 4px;
+        top: 5px;
+
+        background: sprite($main-sprites, modal-close) no-repeat;
+        &:hover {
+          background: sprite($main-sprites, modal-close-hover) no-repeat;
+        }
+        &:focus {
+          background: sprite($main-sprites, modal-close-focus) no-repeat;
+        }
+        &:active {
+          background: sprite($main-sprites, modal-close-focus) no-repeat;
+        }
+        img {
+          display: none;
+        }
+      }
+    }
+    label {
+      width: auto;
+      float: none;
+    }
+    .resizable-textarea {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    //Stroke between buttons and content
+    .prc-modal-submit-wrapper{
+      padding-top: 2em;
+      margin-top: 2em;
+      border-top: 1px solid $modal-stroke;
+    }
+
+    .modal-content {
+      padding-left: 1em;
+      padding-right: 1em;
+      padding-bottom: 2em;
+      .label-description{
+        @include paragraph();
+      }
+    }
+  }
+  .autologout-dialog {
+    // Prevent overflow on small screens
+    max-width: 98%;
+    margin: 1%;
+    button.ui-dialog-titlebar-close {
+      // Fix overflow bug with autologout dialog
+      min-width: 30px;
+    }
+  }
+}
+
+@media #{$large} {
+  #modalContent .ctools-modal-content {
+    .modal-content {
+      padding-left: 2em;
+      padding-right: 2em;
+    }
+    .modal-header {
+      padding-left: 2em;
+      padding-right: 2em;
+    }
+  }
+}

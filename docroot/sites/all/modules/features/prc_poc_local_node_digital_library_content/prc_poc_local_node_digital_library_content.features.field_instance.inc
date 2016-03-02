@@ -22,7 +22,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -37,13 +37,15 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'label' => 'hidden',
         'module' => 'smart_trim',
         'settings' => array(
-          'more_link' => 1,
+          'more_link' => 0,
           'more_text' => 'Read more',
           'summary_handler' => 'full',
           'trim_length' => 300,
+          'trim_link' => FALSE,
           'trim_options' => array(
             'text' => 0,
           ),
+          'trim_preserve_tags' => '',
           'trim_suffix' => '... ',
           'trim_type' => 'chars',
         ),
@@ -101,7 +103,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -159,7 +161,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 6,
+        'weight' => 5,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -171,7 +173,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 21,
       ),
       'search_result' => array(
         'label' => 'above',
@@ -189,14 +191,14 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
     'entity_type' => 'node',
     'field_name' => 'field_document',
-    'label' => 'Attach a File',
+    'label' => 'Attached Files',
     'required' => 0,
     'settings' => array(
       'course_enrollment' => FALSE,
       'description_field' => 0,
       'file_directory' => '',
-      'file_extensions' => 'txt pdf doc docx xls xlsx ppt pptx',
-      'max_filesize' => '32 MB',
+      'file_extensions' => 'txt pdf doc docx xls xlsx ppt pptx mp4',
+      'max_filesize' => '64 MB',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -223,7 +225,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 10,
+        'weight' => 9,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -264,12 +266,12 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
-  // Exported field_instance: 'node-digital_library_content-field_grade_level'
-  $field_instances['node-digital_library_content-field_grade_level'] = array(
+  // Exported field_instance: 'node-digital_library_content-field_grade_level_unlimited'
+  $field_instances['node-digital_library_content-field_grade_level_unlimited'] = array(
     'bundle' => 'digital_library_content',
     'default_value' => NULL,
     'deleted' => 0,
@@ -277,51 +279,49 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 8,
-      ),
-      'digital_library_item' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 15,
+        'module' => 'ds',
+        'settings' => array(
+          'taxonomy_term_link' => 1,
+          'taxonomy_term_separator' => ', ',
+        ),
+        'type' => 'ds_taxonomy_separator',
+        'weight' => 7,
       ),
       'gallery_view' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 10,
       ),
       'search_result' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_grade_level',
+    'field_name' => 'field_grade_level_unlimited',
     'label' => 'Grade Level',
     'required' => 0,
     'settings' => array(
+      'course_enrollment' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'apply_chosen' => '',
+        'label_help_description' => '',
       ),
-      'type' => 'options_select',
-      'weight' => 12,
+      'type' => 'options_buttons',
+      'weight' => 13,
     ),
   );
 
@@ -337,7 +337,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -349,7 +349,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'search_result' => array(
         'label' => 'above',
@@ -366,7 +366,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
     'entity_type' => 'node',
     'field_name' => 'field_link_to_a_url',
-    'label' => 'Link to URL',
+    'label' => 'Linked URL',
     'required' => 0,
     'settings' => array(
       'absolute_url' => 1,
@@ -378,6 +378,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'target' => 'default',
         'title' => '',
       ),
+      'course_enrollment' => FALSE,
       'display' => array(
         'url_cutoff' => 80,
       ),
@@ -394,7 +395,9 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     'widget' => array(
       'active' => 0,
       'module' => 'link',
-      'settings' => array(),
+      'settings' => array(
+        'label_help_description' => '',
+      ),
       'type' => 'link_field',
       'weight' => 6,
     ),
@@ -453,7 +456,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         'label_help_description' => '',
       ),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -522,7 +525,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
           'use_content_language' => TRUE,
         ),
         'type' => 'ds_taxonomy_view_mode',
-        'weight' => 11,
+        'weight' => 10,
       ),
       'gallery_view' => array(
         'label' => 'above',
@@ -564,7 +567,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         ),
       ),
       'type' => 'taxonomy_shs',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -583,7 +586,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
           'taxonomy_term_separator' => ', ',
         ),
         'type' => 'ds_taxonomy_separator',
-        'weight' => 9,
+        'weight' => 8,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -632,7 +635,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
         ),
       ),
       'type' => 'taxonomy_shs',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -651,7 +654,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
           'taxonomy_term_separator' => ' ',
         ),
         'type' => 'ds_taxonomy_separator',
-        'weight' => 7,
+        'weight' => 6,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -667,7 +670,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
           'taxonomy_term_separator' => ', ',
         ),
         'type' => 'ds_taxonomy_separator',
-        'weight' => 21,
+        'weight' => 6,
       ),
       'search_result' => array(
         'label' => 'above',
@@ -715,7 +718,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'digital_library_item' => array(
         'label' => 'hidden',
@@ -790,14 +793,14 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
   // Translatables
   // Included for use with string extractors like potx.
   t('Add a Thumbnail Image');
-  t('Attach a File');
+  t('Attached Files');
   t('Author Name');
   t('Body');
   t('Enter a comma-separated list of words to describe your content.');
   t('Enter the author name as you wish it to be displayed with the content');
   t('Genre');
   t('Grade Level');
-  t('Link to URL');
+  t('Linked URL');
   t('Media Type');
   t('Permissions');
   t('Standard');

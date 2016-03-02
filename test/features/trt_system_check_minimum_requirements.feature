@@ -10,7 +10,7 @@ Feature: PRC-1058 System Check - PARCC Minimum Technology Requirements link
 
   Scenario: System Check form
     Given I am an anonymous user
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     When I click "System Check"
     Then I should see the link "PARCC minimum technology requirements"
-    And the "PARCC minimum technology requirements" link should point to "www.parcconline.org/sites/parcc/files/TechnologyGuidelines-PARCCAssessments-January2015.pdf"
+    And the "PARCC minimum technology requirements" link should point to "http://www.parcconline.org/files/72/Technology Guidelines for PARCC Assessments/389/TechnologyGuidelinesPARCCAssessments-v5_0-August2015.pdf"

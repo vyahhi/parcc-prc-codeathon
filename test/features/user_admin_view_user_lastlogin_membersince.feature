@@ -12,7 +12,7 @@ Feature: PRC-785 Admin - Users Table: Member Since and Last Logged on
       | name     | mail                              | pass   | field_first_name | field_last_name | status | roles    | created    | login      |
       | Joe User | joe_prc_286@timestamp@example.com | xyz123 | Joe              | User            | 1      | Educator | 1404974880 | 1414974880 |
     And I am logged in as a user with the "PRC Admin" role
-    And I am at "admin-users"
+    And I am at "prc/admin/admin-users"
     Then I should see the link "Active"
     Then I should see the link "Last Logged on"
     Then I click "User ID"

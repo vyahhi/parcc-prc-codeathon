@@ -73,7 +73,7 @@
  */
 ?>
 
-<div role="document" id="page">
+<div role="document" id="page" class="<?php if(!empty($classes)) print $classes ?>">
 
   <?php include path_to_theme() . '/templates/includes/header.inc'; ?>
 
@@ -101,8 +101,9 @@
     </section>
   <?php endif; ?>
 
-  <main role="main" class="row">
-    <div id="content" class="large-12 main columns">
+  <section id="sub-header" class="row">
+    <div class="large-12 columns">
+
       <?php if (!empty($page['highlighted'])): ?>
         <div class="highlight panel callout">
           <?php print render($page['highlighted']); ?>
@@ -118,32 +119,43 @@
         <h1 id="page-title" class="title"><?php print $title; ?></h1>
         <?php print render($title_suffix); ?>
       <?php endif; ?>
-
-      <?php if (!empty($tabs)): ?>
-        <?php print render($tabs); ?>
-        <?php if (!empty($tabs2)): print render($tabs2); endif; ?>
-      <?php endif; ?>
-
-      <?php if ($action_links): ?>
-        <ul class="action-links">
-          <?php print render($action_links); ?>
-        </ul>
-      <?php endif; ?>
-
-      <?php print render($page['content']); ?>
     </div>
+  </section>
+  <!-- /#sub-header -->
+  <main role="main">
+    <div class="inner-main row">
+      <div id="content" class="large-12 main columns">
 
-    <?php if (!empty($page['sidebar_first'])): ?>
-      <aside role="complementary" class="large-12 sidebar-first columns sidebar">
-        <?php print render($page['sidebar_first']); ?>
-      </aside>
-    <?php endif; ?>
+        <?php if (!empty($tabs)): ?>
+          <div class="prc-tabs">
+            <?php print render($tabs); ?>
+            <?php if (!empty($tabs2)): print render($tabs2); endif; ?>
+          </div>
+        <?php endif; ?>
 
-    <?php if (!empty($page['sidebar_second'])): ?>
-      <aside role="complementary" class="large-12 sidebar-second columns sidebar">
-        <?php print render($page['sidebar_second']); ?>
-      </aside>
-    <?php endif; ?>
+        <?php if ($action_links): ?>
+          <ul class="action-links">
+            <?php print render($action_links); ?>
+          </ul>
+        <?php endif; ?>
+
+        <?php print render($page['content']); ?>
+      </div>
+
+      <?php if (!empty($page['sidebar_first'])): ?>
+        <aside role="complementary"
+               class="large-12 sidebar-first columns sidebar">
+          <?php print render($page['sidebar_first']); ?>
+        </aside>
+      <?php endif; ?>
+
+      <?php if (!empty($page['sidebar_second'])): ?>
+        <aside role="complementary"
+               class="large-12 sidebar-second columns sidebar">
+          <?php print render($page['sidebar_second']); ?>
+        </aside>
+      <?php endif; ?>
+    </div>
   </main>
 
   <?php include path_to_theme() . '/templates/includes/footer.inc'; ?>

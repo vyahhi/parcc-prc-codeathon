@@ -1,0 +1,34 @@
+@media #{$screen} {
+  // PARCC Released Items Table
+  .view-parcc-released-items {
+    form {
+      display: inline;
+      text-align: center;
+    }
+    .view-content {
+      overflow: hidden;
+    }
+    .views-table {
+      .views-field-field-release-year,
+      .views-field-field-released-item-type {
+        display: none;
+      }
+    }
+    .view-empty{
+      text-align: left;
+    }
+  }
+  //@todo: Temporarily hide the practice test field since it isn't being used yet
+  #edit-field-practice-test{
+    display: none;
+  }
+}
+
+@media #{$small}{
+  .view-parcc-released-items .views-table {
+    .views-field-field-release-year,
+    .views-field-field-released-item-type {
+      display: table-cell;
+    }
+  }
+}

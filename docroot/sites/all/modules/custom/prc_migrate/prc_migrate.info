@@ -6,6 +6,7 @@ dependencies[] = taxonomy
 dependencies[] = migrate (>=7.x-2.7)
 dependencies[] = migrate_d2d
 
+files[] = prc_migrate.drush.inc
 files[] = src/PrcCsvSimpleTaxonomyMigration.php
 files[] = src/PrcCsvGenreMigration.php
 files[] = src/PrcCsvGradeLevelMigration.php
@@ -18,3 +19,5 @@ files[] = src/PrcCsvUserStatesMigration.php
 files[] = src/PrcJsonStandardMigrateItem.php
 files[] = src/PrcJsonStandardMigrateList.php
 files[] = src/PrcJsonStandardMigration.php
+files[] = src/PrcToPrcRoleMigration.php
+files[] = src/PrcToPrcUserMigration.php

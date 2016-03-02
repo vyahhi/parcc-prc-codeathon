@@ -32,7 +32,7 @@ Feature: PRC-875 Export Testing Capacity Data - State Readiness
     And the school "<school_name>" has run a capacity check
     And the school "School Two" has run a capacity check
     And the school "School Two" has run a capacity check
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     Then I click "<member_state>"
     When I click "Export all testing capacity checks data to .csv"
 

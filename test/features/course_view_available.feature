@@ -15,7 +15,7 @@ Feature: PRC-34 View Available PD Courses
     And I am logged in as a user with the "Educator" role
     And I am on the homepage
     When I click "Professional Learning"
-    Then I should see the heading "Professional Learning" in the "content" region
+    Then I should see the heading "Professional Learning" in the "sub_header" region
     And the url should match "professional-learning"
     And I should not see the text "Welcome to PRC Professional Development page. There are no courses available to your account. Please contact your school/district to benefit from PARCC Professional Development courses exported to your district learning management system."
     # AC6 The following components are displayed for each course:
@@ -32,9 +32,9 @@ Feature: PRC-34 View Available PD Courses
     And I should see the text "Obj1"
     # Thumbnail (when available) -Can we use the 1st module image as thumbnail?
     # AC7 Social and sharing: The following icons are available and redirect the user to the selected application:
-    Then I should see an ".st_email_button" element
-    Then I should see an ".st_facebook_button" element
-    Then I should see an ".st_edmodo_button" element
+    Then I should not see an ".st_email_button" element
+    Then I should not see an ".st_facebook_button" element
+    Then I should not see an ".st_edmodo_button" element
     # AC8 A Sort dropdown menu allows the user to change the order. The only available option for now is: Date: most recent on the top
 
   Scenario: AC3 A user who has permission to no course, shall see the following generic statement:
@@ -42,7 +42,7 @@ Feature: PRC-34 View Available PD Courses
     And I am logged in as a user with the "Educator" role
     And I am on the homepage
     When I click "Professional Learning"
-    Then I should see the heading "Professional Learning" in the "content" region
+    Then I should see the heading "Professional Learning" in the "sub_header" region
     And the url should match "professional-learning"
     Then I should see the text "Welcome to PRC Professional Development page. There are no courses available to your account. Please contact your school/district to benefit from PARCC Professional Development courses exported to your district learning management system."
 

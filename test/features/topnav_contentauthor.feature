@@ -11,7 +11,7 @@ Feature: Role-Based Top Nav - Content Contributor (PRC-159)
     And I should see the link "Library"
     And I should see the link "Assessment"
     And I should see the link "Professional Learning"
-    And I should not see the link "Technology Readiness"
+    And I should see the link "Technology Readiness"
     When I am on "prc/admin"
     Then I should see the link "Content"
     And I should not see the link "Users"

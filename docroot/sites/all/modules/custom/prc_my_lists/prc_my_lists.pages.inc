@@ -53,6 +53,9 @@ function modal_add_to_list($type, $js = NULL, $node = NULL) {
     $output = array();
     $output[] = ctools_ajax_command_reload();
   }
+
+  $output[] = array('command' => 'prcResizeModal');
+
   print ajax_render($output);
   drupal_exit();
 }
@@ -96,10 +99,13 @@ function modal_add_a_list($type, $js = NULL, $node = NULL) {
   ctools_form_include_file($form_state, drupal_get_path('module', 'node') . '/node.pages.inc');
   $output = ctools_modal_form_wrapper('prc_my_lists_create_list_form', $form_state);
 
+  $output[] = array('command' => 'prcResizeModal');
+
   if (!empty($form_state['executed'])) {
     $output = array();
     $output[] = ctools_ajax_command_reload();
   }
+
   print ajax_render($output);
   drupal_exit();
 }
@@ -112,7 +118,7 @@ function prc_my_lists_view_lists_form($form, &$form_state) {
 
   if ($ajax) {
     ctools_include('modal');
-    $markup = ctools_modal_text_button('Create New List', $href, 'Create new favorites list');
+    $markup = ctools_modal_text_button('Create New List', $href, 'Create new favorites list', 'ctools-modal-zurb-modal-style');
   }
   else {
     $markup = l(t('Create New List'), $href);
@@ -141,6 +147,8 @@ function prc_my_lists_view_lists_form($form, &$form_state) {
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Add to List'),
+    '#prefix' => '<div class="prc-modal-submit-wrapper">',
+    '#suffix' => '</div>'
   );
 
 
@@ -281,6 +289,11 @@ function prc_my_lists_view_lists_form_submit(&$form, &$form_state) {
         $list_wrapper->save();
 
         $list_name = $list_node->title;
+
+        // Clear field cache for the node.
+        cache_clear_all('field:node:' . $nid, 'cache_field');
+        // Reindex the node.
+        search_api_track_item_change('node', array($nid));
 
         drupal_set_message("The content is now associated with \"$list_name\".\n");
       }

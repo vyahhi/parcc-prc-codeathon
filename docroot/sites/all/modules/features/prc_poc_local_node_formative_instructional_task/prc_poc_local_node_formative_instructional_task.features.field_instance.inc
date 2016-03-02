@@ -50,7 +50,7 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 31,
+      'weight' => 2,
     ),
   );
 
@@ -82,7 +82,7 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
       'course_enrollment' => FALSE,
       'description_field' => 0,
       'file_directory' => '',
-      'file_extensions' => 'doc docx mp4 pdf xls xlsx',
+      'file_extensions' => 'brf doc docx mp4 pdf xls xlsx pptx',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -94,7 +94,48 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 33,
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-formative_instructional_task-field_formative_resource_type'
+  $field_instances['node-formative_instructional_task-field_formative_resource_type'] = array(
+    'bundle' => 'formative_instructional_task',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_formative_resource_type',
+    'label' => 'Resource Type',
+    'required' => 1,
+    'settings' => array(
+      'course_enrollment' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+        'label_help_description' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 4,
     ),
   );
 
@@ -134,12 +175,12 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
         'label_help_description' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 40,
+      'weight' => 7,
     ),
   );
 
-  // Exported field_instance: 'node-formative_instructional_task-field_resource_type'
-  $field_instances['node-formative_instructional_task-field_resource_type'] = array(
+  // Exported field_instance: 'node-formative_instructional_task-field_permissions'
+  $field_instances['node-formative_instructional_task-field_permissions'] = array(
     'bundle' => 'formative_instructional_task',
     'default_value' => NULL,
     'deleted' => 0,
@@ -147,10 +188,10 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 2,
+        'type' => 'list_default',
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -160,8 +201,8 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_resource_type',
-    'label' => 'Resource Type',
+    'field_name' => 'field_permissions',
+    'label' => 'Permissions',
     'required' => 1,
     'settings' => array(
       'course_enrollment' => FALSE,
@@ -171,11 +212,10 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'apply_chosen' => '',
-        'label_help_description' => '',
+        'label_help_description' => 'This content shall be available to:',
       ),
-      'type' => 'options_select',
-      'weight' => 35,
+      'type' => 'options_buttons',
+      'weight' => 8,
     ),
   );
 
@@ -222,7 +262,7 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
         ),
       ),
       'type' => 'taxonomy_shs',
-      'weight' => 39,
+      'weight' => 6,
     ),
   );
 
@@ -269,7 +309,7 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
         ),
       ),
       'type' => 'taxonomy_shs',
-      'weight' => 37,
+      'weight' => 5,
     ),
   );
 
@@ -279,6 +319,7 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
   t('File');
   t('File requirements go here.');
   t('Grade Level');
+  t('Permissions');
   t('Resource Type');
   t('Standard');
   t('Subject');

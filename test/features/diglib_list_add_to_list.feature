@@ -43,17 +43,17 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     And I have no "digital_library_content" nodes
     # Right now we are just using this line to create a node
     And "Favorites List" nodes:
-    | title        | uid         |
-    | first list   | @currentuid |
-    | second list  | @currentuid |
-    | third list   | @currentuid |
-    | fourth list  | @currentuid |
-    | fifth list   | @currentuid |
-    | sixth list   | @currentuid |
-    | seventh list | @currentuid |
-    | eighth list  | @currentuid |
-    | ninth list   | @currentuid |
-    | tenth list   | @currentuid |
+      | title        | uid         |
+      | first list   | @currentuid |
+      | second list  | @currentuid |
+      | third list   | @currentuid |
+      | fourth list  | @currentuid |
+      | fifth list   | @currentuid |
+      | sixth list   | @currentuid |
+      | seventh list | @currentuid |
+      | eighth list  | @currentuid |
+      | ninth list   | @currentuid |
+      | tenth list   | @currentuid |
     And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
     And I index search results
     And I am on the homepage
@@ -94,7 +94,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     # That means that this test will not pass by simply adding a @javascript
     # tag.
     Then I visit the first node created
-    And I should see the heading "My Only List" in the "content" region
+    And I should see the heading "My Only List" in the "sub_header" region
     And I should see the text "Favorite Content:"
     And I should see the text "To Add To Lists"
     And I should see the text "Content Type:"
@@ -114,7 +114,7 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
     Then I press "Add to List"
     Then I visit the first node created
 #    Then I reload the page
-    And I should see the heading "My Only List" in the "content" region
+    And I should see the heading "My Only List" in the "sub_header" region
     And I should see the text "Favorite Content:"
     And I should see the text "To Add To Lists"
     And I should see the text "Content Type:"
@@ -159,3 +159,17 @@ Feature: PRC-52 Existing Custom List- Organize/Structure Content (End user)
 #  AC7 Selecting the list name does not save the content/custom list association and dismiss the form.
 #  AC8 Content can be associated to only one list at a time.
 #  AC9 An Add to List button will save the association between the content and the existing list and will close the overlay module.
+
+  @javascript @prc-1651
+  Scenario: prc-1651 active state for favorited items
+    Given I am logged in as a user with the "Educator" role
+    And I am viewing my "favorites_list" node with the title "My Only List"
+    And I am viewing a "Digital Library Content" node with the title "To Add To Lists"
+    And I should not see an ".prc_digital_library_add_to_favorites a.favorited" element
+    Then I click "Add to My Lists"
+    Then I select "My Only List" from "List"
+    Then I press "Add to List"
+    Then I should see the message containing "The content is now associated with "
+    And I should see the message containing "My Only List"
+      # We can't check the background image, but we can make sure the class was applied
+    And I should see an ".prc_digital_library_add_to_favorites a.favorited" element

@@ -1,0 +1,4 @@
+name = PRC Technology Readiness Tool - Access Control
+description = Controls access to TRT features of the PARCC PRC.
+package = PRC
+core = 7.x

@@ -34,6 +34,10 @@ function prc_question_form_permission() {
       'title' => t('View Speaking and Listening Resources'),
       'description' => t('View Speaking and Listening Resources'),
     ),
+    'view formative instructional tasks' => array(
+      'title' => t('View Formative Instructional Task Resources'),
+      'description' => t('View Formative Instructional Task Resources'),
+    ),
   );
   return $perms;
 }
@@ -124,6 +128,8 @@ function prc_question_form_form_multichoice_node_form_alter(&$form, &$form_state
   }
 
   $form['alternatives']['settings']['#weight'] = -100;
+  $form['alternatives']['#collapsible'] = FALSE;
+  $form['alternatives']['settings']['#collapsible'] = FALSE;
 
   $form['field_parcc_item']['#access'] = user_access('add parcc items');
 
@@ -227,6 +233,7 @@ function prc_question_form_form_short_answer_node_form_alter(&$form, &$form_stat
   unset($form['answer']['#description']);
   $form['answer']['correct_answer_evaluation']['#access'] = FALSE;
   $form['answer']['regex_box']['#access'] = FALSE;
+  $form['answer']['#collapsible'] = FALSE;
 
   $form['field_standard'][LANGUAGE_NONE]['#title'] = t('Item Standard');
   $form['field_standard'][LANGUAGE_NONE]['#required'] = TRUE;

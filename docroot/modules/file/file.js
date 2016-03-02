@@ -17,7 +17,9 @@ Drupal.behaviors.fileValidateAutoAttach = {
     if (settings.file && settings.file.elements) {
       $.each(settings.file.elements, function(selector) {
         var extensions = settings.file.elements[selector];
-        $(selector, context).bind('change', {extensions: extensions}, Drupal.file.validateExtension);
+        $(selector, context).once(function() {
+          $(this).bind('change', {extensions: extensions}, Drupal.file.validateExtension);
+        });
       });
     }
   },
@@ -35,8 +37,12 @@ Drupal.behaviors.fileValidateAutoAttach = {
  */
 Drupal.behaviors.fileButtons = {
   attach: function (context) {
-    $('input.form-submit', context).bind('mousedown', Drupal.file.disableFields);
-    $('div.form-managed-file input.form-submit', context).bind('mousedown', Drupal.file.progressBar);
+    $('input.form-submit', context).once(function() {
+      $(this).bind('mousedown', Drupal.file.disableFields);
+    });
+    $('div.form-managed-file input.form-submit', context).once(function() {
+      $(this).bind('mousedown', Drupal.file.progressBar);
+    });
   },
   detach: function (context) {
     $('input.form-submit', context).unbind('mousedown', Drupal.file.disableFields);

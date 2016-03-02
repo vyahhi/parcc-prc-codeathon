@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * Drop file fields so that we can recreate them with private file upload
+ * locations. Impacts digital library content, formative instructional tasks,
+ * parcc released items, and speaking and listening resources.
+ */
+function prc_parcc_released_item_form_update_7000(){
+  field_delete_field('field_file_single');
+  field_delete_field('field_document');
+}

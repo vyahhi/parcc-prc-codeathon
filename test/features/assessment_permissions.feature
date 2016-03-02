@@ -15,7 +15,7 @@ Feature: Custom assessments are only visible to their creators
       | U1 Custom  | 1           | Custom Assessment                  |
       | U1 PD Exam | 1           | PD Exam                            |
       | U1 PRC Q   | 1           | PARCC-Released Practice Assessment |
-    When I visit "assessments"
+    When I visit "assessments/practice-assessments"
     Then I should see the link "My Custom"
     And I should not see the link "My PD Exam"
     And I should see the link "My PRC Q"

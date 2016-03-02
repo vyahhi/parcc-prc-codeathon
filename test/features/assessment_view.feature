@@ -8,15 +8,15 @@ Feature: PRC-489 View A List of Tests
     Given I am an anonymous user
     And I am on the homepage
     Then I should see the link "Assessment"
-    When I click "Assessment"
-    Then I should see the heading "Assessment" in the "content" region
+    When I visit "assessments/practice-assessments"
+    Then I should see the heading "Assessment" in the "sub_header" region
 
   Scenario Outline: AC1 Assessments tab for all roles
     Given I am logged in as a user with the "<role>" role
     And I am on the homepage
     Then I should see the link "Assessment"
-    When I click "Assessment"
-    Then I should see the heading "Assessment" in the "content" region
+    When I visit "assessments/practice-assessments"
+    Then I should see the heading "Assessment" in the "sub_header" region
   Examples:
     | role                            |
     | administrator                   |
@@ -32,9 +32,9 @@ Feature: PRC-489 View A List of Tests
       | name          |
       | Middle School |
     And "Assessment" nodes:
-      | title                      | body   | field_grade_level | field_subject                | field_quiz_type   | uid         |
+      | title                      | body   | field_grade_level_unlimited | field_subject                | field_quiz_type   | uid         |
       | PRC-489 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | Custom Assessment | @currentuid |
-    And I click "Assessment"
+    And I visit "assessments/practice-assessments"
     # AC4 The assessment title shall be a link that opens the test (future story)
     Then I should see the link "PRC-489 Assessment Title 1"
 
@@ -65,15 +65,16 @@ Feature: PRC-489 View A List of Tests
   @javascript
   Scenario: PRC-534 Assessment update date sorting
     Given I am logged in as a user with the "PRC Admin" role
+    And I am browsing using a "desktop"
     And "Grade Level" terms:
       | name          |
       | Middle School |
     And "Assessment" nodes:
-      | title                      | body   | field_grade_level | field_subject                | field_quiz_type   | uid         |
+      | title                      | body   | field_grade_level_unlimited | field_subject                | field_quiz_type   | uid         |
       | PRC-534 Assessment Title 1 | Body 1 | Middle School     | Educational Leadership, Math | Custom Assessment | @currentuid |
       | PRC-534 Assessment Title 2 | Body 2 | Middle School     | Educational Leadership, Math | Custom Assessment | @currentuid |
       | PRC-534 Assessment Title 3 | Body 3 | Middle School     | Educational Leadership, Math | Custom Assessment | @currentuid |
-    And I click "Assessment"
+    And I visit "assessments/practice-assessments"
     Then "PRC-534 Assessment Title 1" should precede "PRC-534 Assessment Title 2" for the query "a"
     Then "PRC-534 Assessment Title 2" should precede "PRC-534 Assessment Title 3" for the query "a"
     When I click "PRC-534 Assessment Title 2"
@@ -81,6 +82,6 @@ Feature: PRC-489 View A List of Tests
     And I fill in "Objectives" with "Body 2 Update"
     Then I wait 1 seconds
     Then I press "Save"
-    When I click "Assessment"
+    When I visit "assessments/practice-assessments"
     Then "PRC-534 Assessment Title 2" should precede "PRC-534 Assessment Title 1" for the query "a"
     Then "PRC-534 Assessment Title 1" should precede "PRC-534 Assessment Title 3" for the query "a"

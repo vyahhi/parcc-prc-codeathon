@@ -8,27 +8,27 @@ Feature: Admin UI: Content Tab (PRC-169)
     Given I am logged in as a user with the "Content Contributor" role
     And I am on "prc/admin"
     When I follow "Content" in the "content" region
-    Then I should see the heading "PRC Website Content" in the "content" region
+    Then I should see the heading "PRC Website Content" in the "sub_header" region
     And I should see the link "Add content" in the "content" region
 
   Scenario: AC1 Content Authors should see own content only
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Mary's Content"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     Then I should not see the link "Jane's Content"
     And I should see the link "Mary's Content"
     Then I am an anonymous user
-    Then I should get a "403" HTTP response at "admin-content"
+    Then I should get a "403" HTTP response at "prc/admin/admin-content"
     Then I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "Jane's Content"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     Then I should see the link "Jane's Content"
     And I should not see the link "Mary's Content"
 
   Scenario: AC2 ID: Displays the unique identifier that the system has assigned to each content. SORTABLE
     Given I am logged in as a user with the "Content Contributor" role
     And I am viewing my "Digital Library Content" node with the title "ID Content"
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     Then I should see the link "Nid"
     # AC3 Posted On: Displays the date this content was created for the 1st time. SORTABLE
     Then I should see the link "Posted On"
@@ -51,7 +51,7 @@ Feature: Admin UI: Content Tab (PRC-169)
       | Two       | Two@timestamp   | @currentuid | 1410000200 |
       | Three     | Three@timestamp | @currentuid | 1410000300 |
       | Fifty One | Four@timestamp  | @currentuid | 1410000400 |
-    And I visit "admin-content"
+    And I visit "prc/admin/admin-content"
     And I should see an "Filter all columns" field
     And I should see an "Apply" button
     When I fill in "Filter all columns" with "one"
@@ -71,7 +71,7 @@ Feature: Admin UI: Content Tab (PRC-169)
     | Two     | Two@timestamp   | @currentuid | 1410000200 |
     | Three   | Three@timestamp | @currentuid | 1410000300 |
     | Four    | Four@timestamp  | @currentuid | 1410000400 |
-    Then I visit "admin-content"
+    Then I visit "prc/admin/admin-content"
     Then "One" should precede "Two" for the query "a"
     Then "Two" should precede "Three" for the query "a"
     Then "Three" should precede "Four" for the query "a"
@@ -82,11 +82,11 @@ Feature: Admin UI: Content Tab (PRC-169)
     Then I run drush "genu 0 --kill"
     And I am logged in as a user with the "PRC Admin" role
     Then I run drush "genc 100 --kill --types=digital_library_content"
-    And I visit "/admin-content"
+    And I visit "/prc/admin/admin-content"
     And I should not see the link "next"
     And I should not see the link "last"
     Then I run drush "genc 400 --types=digital_library_content"
-    And I visit "/admin-content"
+    And I visit "/prc/admin/admin-content"
     And I should see the link "next"
     And I should see the link "last"
     And I should not see the link "previous"
@@ -94,3 +94,25 @@ Feature: Admin UI: Content Tab (PRC-169)
     When I follow "next"
     Then I should see the link "previous"
     And I should see the link "first"
+
+    @javascript
+  Scenario: prc-1849 - Items appear twice
+    Given I am logged in as a user with the "Content Contributor" role
+    And I visit "prc/admin/admin-content"
+    And I click "Add content"
+    And I fill in "edit-title" with "My first post @timestamp"
+    And I fill in "Body" with "Isn't this swell?"
+    And I click "Attach a File"
+    And I attach the file "testfiles/TT_Rules_2015.pdf" to "edit-field-document-und-0-upload"
+    And I select the radio button "Public" with the id "edit-field-permissions-und-public"
+    And I press the "Save" button
+    And I click "Edit"
+    And I attach the file "testfiles/GreatLakesWater.pdf" to "edit-field-document-und-1-upload"
+    And I press the "Save" button
+    And I am logged in as a user with the "Content Administrator (Curator)" role
+    And I visit "prc/admin/admin-content"
+    When I fill in "Filter all columns" with "My first"
+    And I press "Apply"
+    And I should see the text "My first post @timestamp"
+    And the text "My first post @timestamp" should not repeat
+

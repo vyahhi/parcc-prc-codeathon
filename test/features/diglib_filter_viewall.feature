@@ -30,15 +30,15 @@ Feature: PRC-980 Search/Filter Bar: View All
       | Media Uno  |
       | Media Deux |
     And "Digital Library Content" nodes:
-      | title      | body        | status | uid | field_subject | field_grade_level | field_media_type |
-      | Result One | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Two | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
+      | title      | body        | status | uid | field_subject | field_grade_level_unlimited | field_media_type |
+      | Result One | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Two | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
     And I am on the homepage
     And I index search results
     When I am on "library"
     Then I should see the link "Result One"
     And I should see the link "Result Two"
-    And I should see the text "All"
+    And I should see the text "Reset"
 
   Scenario: View all from active filter
     Given I have no "Digital Library Content" nodes
@@ -55,9 +55,9 @@ Feature: PRC-980 Search/Filter Bar: View All
       | Media Uno  |
       | Media Deux |
     And "Digital Library Content" nodes:
-      | title      | body        | status | uid | field_subject | field_grade_level | field_media_type |
-      | Result One | First Body  | 1      | 1   | Filter Me One | GL One            | Media Uno        |
-      | Result Two | Second Body | 1      | 1   | Filter Me Two | GL Two            | Media Deux       |
+      | title      | body        | status | uid | field_subject | field_grade_level_unlimited | field_media_type |
+      | Result One | First Body  | 1      | 1   | Filter Me One | GL One                      | Media Uno        |
+      | Result Two | Second Body | 1      | 1   | Filter Me Two | GL Two                      | Media Deux       |
     And I am on the homepage
     And I index search results
     When I am on "library"
@@ -65,9 +65,9 @@ Feature: PRC-980 Search/Filter Bar: View All
     And I press "Apply"
     Then I should not see the link "Result One"
     And I should not see the link "Result Two"
-    And I should see the text "All"
-    When I click "All"
+    And I should see the text "Reset"
+    When I click "Reset"
     Then I should see the link "Result One"
     And I should see the link "Result Two"
-    And I should see the text "All"
+    And I should see the text "Reset"
     And the "edit-search-api-views-fulltext" field should contain ""

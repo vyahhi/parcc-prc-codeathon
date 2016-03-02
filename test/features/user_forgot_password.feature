@@ -11,10 +11,11 @@ Feature: Forgot Password (PRC-146)
       | Joe User | joe_prc_146@example.com | xyz123   | JoeF              | UserL            | 1      |
     And I am an anonymous user
     And I am on the homepage
-    When I click "Forgot password?"
+    And I follow "Log in"
+    When I click "Request new password"
     Then the url should match "user/password"
     And I should see the text "Request new password"
-    Then I fill in "E-mail" with "joe_prc_146@example.com"
+    Then I fill in "E-mail *" with "joe_prc_146@example.com"
     And I press "E-mail new password"
     Then I should see the message containing "Further instructions have been sent to your e-mail address."
     # The matching is very dependent on line-breaks and formatting
@@ -35,11 +36,11 @@ Feature: Forgot Password (PRC-146)
     Then I should see the message containing "The changes have been saved."
     Then I click "Log out"
     Then the url should match "/"
+    Then I follow "Log in"
     Then I fill in "E-mail" with "joe_prc_146@example.com"
     And I fill in "Password" with "password1"
     And I press "Log in"
     Then I should see the link "Log out"
-    And I should see "Welcome, JoeF UserL"
 
   # AC2 - The educator will select the reset password link from the email and update their password.
   # This is covered in the big test for AC1
@@ -51,7 +52,8 @@ Feature: Forgot Password (PRC-146)
   # This test actually goes through the entire reset password flow and covers all 3 ACs.
     Given I am an anonymous user
     And I am on the homepage
-    When I click "Forgot password?"
+    And I follow "Log in"
+    When I click "Request new password"
     Then I fill in "E-mail" with "notarealemailaddress@example.com"
     And I press "E-mail new password"
     Then I should see the error message containing "Sorry, notarealemailaddress@example.com is not recognized as a user name or an e-mail address."
@@ -59,7 +61,8 @@ Feature: Forgot Password (PRC-146)
   Scenario: Invalid email address
     Given I am an anonymous user
     And I am on the homepage
-    When I click "Forgot password?"
+    And I follow "Log in"
+    When I click "Request new password"
     Then I fill in "E-mail" with "notarealemailaddress"
     And I press "E-mail new password"
     Then I should see the error message containing "Sorry, notarealemailaddress is not recognized as a user name or an e-mail address."

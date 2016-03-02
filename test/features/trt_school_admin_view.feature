@@ -21,12 +21,14 @@ Feature: PRC-757 School Readiness - School Admin View
       | School Four  |                          |
 #    And I am logged in as a user with the "School Admin" role
     And I am logged in as "a-@timestamp@example.com"
-    When I visit "technology-readiness"
+    When I visit "assessments/technology-readiness"
     Then I should see the link "School One"
     And I should see the link "School Two"
     And I should see the link "School Three"
     And I should not see the link "School Four"
-    And I should see the text "Summary of what user can do here view readiness by school, run readiness checks, view readiness check results."
+    And I should see the text "Click the link above to access and manage school data and readiness reports. Also run testing capacity and system checks for this school."
+    And I should see the text "For more information on the TRT, please refer to the online tutorial found in the professional learning section of this site."
+    And I should see the text "Each year, after July 31, but before August 15, the checks and reports in this system will be retired and not accessible to users. Please download your reports for your archives before July 31 of each year."
 
   Scenario: School readiness page
     Given I have no "School" nodes
@@ -39,7 +41,7 @@ Feature: PRC-757 School Readiness - School Admin View
       | School Two   | a-@timestamp@example.com |
       | School Three | a-@timestamp@example.com |
     And I am logged in as "a-@timestamp@example.com"
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     When I click "School One"
     Then I should see the heading "School One Readiness"
     And I should see the text "Testing capacity checks"
@@ -58,7 +60,7 @@ Feature: PRC-757 School Readiness - School Admin View
       | title      | field_contact_email      |
       | School One | a-@timestamp@example.com |
     And I am logged in as "a-@timestamp@example.com"
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     When I click "School One"
     Then I should not see the text "Devices capacity"
     And I should not see the text "Bandwidth capacity"
@@ -98,7 +100,7 @@ Feature: PRC-757 School Readiness - School Admin View
       | title      | field_contact_email      |
       | School One | a-@timestamp@example.com |
     And I am logged in as "a-@timestamp@example.com"
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     When I click "School One"
     And I should see the text "System checks"
     And I should see the text "no system checks have been run"
@@ -119,7 +121,7 @@ Feature: PRC-757 School Readiness - School Admin View
       | title      | field_contact_email      |
       | School One | a-@timestamp@example.com |
     And I am logged in as "a-@timestamp@example.com"
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     When I click "School One"
     And I should see the text "System checks"
     And I should see the text "no system checks have been run"
@@ -160,7 +162,7 @@ Feature: PRC-757 School Readiness - School Admin View
       | School 939 S3 @timestamp | <second_user_name>  | @currentuid |
     And I am an anonymous user
     And I am logged in as "First"
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     Then I should see the link "School 939 S1 @timestamp Readiness"
     And I should see the link "School 939 S2 @timestamp Readiness"
     And I should not see the text "School 939 S3 @timestamp Readiness"

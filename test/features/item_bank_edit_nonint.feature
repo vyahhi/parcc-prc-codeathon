@@ -17,7 +17,7 @@ Feature: PRC-1023 Item Bank - Edit Non-Interactive Item - Form
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Assessment directions" nodes
-    And I am on "item-bank"
+    And I am on "assessments/item-bank"
     When I click "Non-interactive (text only)"
     And I fill in "Title" with "NII T"
     And I fill in "Question" with "NII Question"
@@ -34,7 +34,7 @@ Feature: PRC-1023 Item Bank - Edit Non-Interactive Item - Form
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Assessment directions" nodes
-    And I am on "item-bank"
+    And I am on "assessments/item-bank"
     When I click "Non-interactive (text only)"
     And I fill in "Title" with "NII T"
     And I fill in "Question" with "NII Question"

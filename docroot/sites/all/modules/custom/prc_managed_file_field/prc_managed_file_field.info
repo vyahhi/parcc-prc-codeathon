@@ -1,0 +1,6 @@
+name = PRC Managed File Field
+description = Enhancements to core file upload widget.
+package = PRC
+core = 7.x
+
+dependencies[] = file

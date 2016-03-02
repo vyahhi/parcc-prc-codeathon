@@ -32,7 +32,7 @@ Feature: PRC-1064 Manage Schools - Edit School - Delete button
     And "School" nodes:
       | title         | field_ref_district    | field_contact_email | uid         |
       | <school_name> | @nid[<district_name>] | <user_name>         | @currentuid |
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     And I click "<district_name>"
     And I click "Manage Schools"
     When I click "<school_name>"
@@ -72,7 +72,7 @@ Feature: PRC-1064 Manage Schools - Edit School - Delete button
       | title         | field_ref_district    | field_contact_email | uid         |
       | <school_name> | @nid[<district_name>] | <user_name>         | @currentuid |
     And the school "<school_name>" has run a system check
-    And I visit "technology-readiness"
+    And I visit "assessments/technology-readiness"
     And I click "<district_name>"
     And I click "Manage Schools"
     When I click "<school_name>"

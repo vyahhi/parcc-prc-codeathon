@@ -1,0 +1,6 @@
+name = PRC Practice Tests
+description = Integration with ADS for launching practice tests.
+package = PRC
+core = 7.x
+
+files[] = views/views_handler_field_prc_adp_practice_test.inc

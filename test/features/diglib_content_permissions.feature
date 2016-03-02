@@ -75,23 +75,43 @@ Feature: Content Permissions
     | Content Administrator (Curator) |
     | authenticated user              |
 
+  @prc-1779
   Scenario Outline: Saving content as Members Only; hidden from role
     Given "Digital Library Content" nodes:
       | title        | body            | field_permissions  | uid | status |
       | Members Only | This is private | members            | 1   | 1      |
-    And I am logged in as a user with the "<role>" role
-    And I cannot visit the last node created
+    And I am logged in as a user with the "PRC Admin" role
+    And I am viewing my "Digital Library Content" node with the title "Members Only"
+    When I follow "Edit"
+    And I attach the file "testfiles/TT_Rules_2015.pdf" to "edit-field-document-und-0-upload"
+    And I select the radio button "PARCC members ONLY" with the id "edit-field-permissions-und-members"
+    And I press "Save"
+    Then I should see the success message containing "Digital Library Content Members Only has been updated."
+    When I am logged in as a user with the "<role>" role
+    Then I cannot visit the last node created
+    When I am on "system/files/TT_Rules_2015.pdf"
+    Then I should see the text "Access Denied"
   Examples:
     | role                |
     | Educator            |
     | authenticated user  |
 
+  @prc-1779
   Scenario Outline: Saving content as Members Only; hidden from role
     Given "Digital Library Content" nodes:
       | title        | body            | field_permissions  | uid | status |
       | Members Only | This is private | members            | 1   | 1      |
+    And I am logged in as a user with the "PRC Admin" role
+    And I am viewing my "Digital Library Content" node with the title "Members Only"
+    When I follow "Edit"
+    And I attach the file "testfiles/TT_Rules_2015.pdf" to "edit-field-document-und-0-upload"
+    And I select the radio button "PARCC members ONLY" with the id "edit-field-permissions-und-members"
+    And I press "Save"
+    Then I should see the success message containing "Digital Library Content Members Only has been updated."
     And I am logged in as a user with the "<role>" role
     And I visit the last node created
+    When I am on "system/files/TT_Rules_2015.pdf"
+    Then the response Content-Type should be "application/pdf"
   Examples:
     | role                            |
     | Content Contributor             |

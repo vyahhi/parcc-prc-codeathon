@@ -49,3 +49,19 @@ Feature: As a Content Contributor, I need to have specific access to the Digital
     When I click "Rescind Request"
     And I press the "Update state" button
     Then I should see the message containing "My Content transitioned to the draft state."
+
+  @javascript @styleguide
+  Scenario: prc-1653 padding on revision state message
+    Given I visit the last node created
+    And I click "Edit"
+    And I press the "Request Approval" button
+    And press the "Update state" button
+    And I visit the last node created
+    When I click "Rescind Request"
+    And "#state-flow-events-revision" should have a "padding-bottom" css value of "48px"
+    And "#state-flow-events-revision" should have a "padding-left" css value of "32px"
+    And "form#state-flow-events-revision input#edit-submit" should have a "margin-right" css value of "16px"
+    And I press the "Update state" button
+    And I click "My Content"
+    And ".prc-workflow-state" should have a "padding-top" css value of "16px"
+

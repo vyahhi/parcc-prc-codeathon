@@ -77,3 +77,21 @@ function prc_search_form_search_form_validate(&$form, &$form_state) {
     drupal_goto($new_search_url);
   }
 }
+
+/**
+ * Implements hook_node_update()
+ */
+function prc_search_node_update($node){
+  if($node->type == 'digital_library_content') {
+    search_api_track_item_change('node', array($node->nid));
+  }
+}
+
+/**
+ * Implements hook_node_insert()
+ */
+function prc_search_node_insert($node){
+  if($node->type == 'digital_library_content') {
+    search_api_track_item_change('node', array($node->nid));
+  }
+}

@@ -17,15 +17,27 @@ Feature: PRC-69 Admin: Create a Course
 
   Scenario: AC2 Create course fields
     Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
+    And I am on "prc/admin/admin-course"
     When I click "Add course"
-    Then I should see the heading "Create Course" in the "content" region
+    Then I should see the heading "Create Course" in the "sub_header" region
     And I should see a "Course Title *" field
     And I should see a "Course Objectives *" field
     And I should not see a "Body" field
     And I should see a "Tags" field
     And I should see the text "Enter a comma-separated list of words to describe your content."
-    And I should see a "Grade Level" field
+    And I check the box "Pre-K"
+    And I check the box "1st Grade"
+    And I check the box "2nd Grade"
+    And I check the box "3rd Grade"
+    And I check the box "4th Grade"
+    And I check the box "5th Grade"
+    And I check the box "6th Grade"
+    And I check the box "7th Grade"
+    And I check the box "8th Grade"
+    And I check the box "9th Grade"
+    And I check the box "10th Grade"
+    And I check the box "11th Grade"
+    And I check the box "12th Grade"
     And I should see the text "Subject"
 
     And I should see the text "Course Length"
@@ -77,7 +89,7 @@ Feature: PRC-69 Admin: Create a Course
 
   Scenario: AC3. Validations: If a required field is NOT entered after the Save button is selected, The system will display the following feedback on the top of the form:
     Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
+    And I am on "prc/admin/admin-course"
     When I click "Add course"
     And I press "Save"
     Then I should see the error message containing "Course Title field is required."
@@ -86,7 +98,7 @@ Feature: PRC-69 Admin: Create a Course
 
   Scenario: AC4. The Save button will allow the user to save the entries for all the course information.
     Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
+    And I am on "prc/admin/admin-course"
     When I click "Add course"
     And I fill in "Course Title" with "Title PRC-69 AC4 @timestamp"
     And I fill in "Course Objectives" with "Obj PRC-69 AC4 @timestamp"
@@ -97,7 +109,7 @@ Feature: PRC-69 Admin: Create a Course
 
   Scenario: Published checked makes a PD Course published
     Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
+    And I am on "prc/admin/admin-course"
     When I click "Add course"
     And I fill in "Course Title" with "Title PRC-69 Published @timestamp"
     And I fill in "Course Objectives" with "Obj PRC-69 Published @timestamp"
@@ -109,7 +121,7 @@ Feature: PRC-69 Admin: Create a Course
 
   Scenario: Published unchecked makes a PD Course not published
     Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
+    And I am on "prc/admin/admin-course"
     When I click "Add course"
     And I fill in "Course Title" with "Title PRC-69 Published @timestamp"
     And I fill in "Course Objectives" with "Obj PRC-69 Published @timestamp"
@@ -120,7 +132,7 @@ Feature: PRC-69 Admin: Create a Course
 
   Scenario: AC4. Validations: If a required field is NOT entered after the Save button is selected, The system will display the following feedback on the top of the form:
     Given I am logged in as a user with the "Content Administrator (Curator)" role
-    And I am on "admin-course"
+    And I am on "prc/admin/admin-course"
     When I click "Add course"
     And I press "Save"
     Then I should see the error message containing "Course Title field is required."

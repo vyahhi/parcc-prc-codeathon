@@ -93,7 +93,7 @@ Feature: PRC-760 System Check - Unstructured - Form
     And I should not see the checkbox "edit-field-browser-cookies-enabled-und"
     And I should not see the checkbox "edit-field-browser-javascript-enabled-und"
     And I should not see the checkbox "edit-field-browser-images-enabled-und"
-    And I should not see the text "School"
+    And I should not see the text "at your School"
     And I should not see the text "Result"
 
   Scenario: PRC-800 Unstructured System Check form validation
@@ -142,6 +142,8 @@ Feature: PRC-760 System Check - Unstructured - Form
     # TODO: Replace with actual TRT System Check form
     And I am on "admin/structure/entity-type/prc_trt/system_check/add"
     Then I should see the heading "System Check"
-    And I should see the text "Overview and instructional copy goes here."
-    And I should see the text "Important: If you are a school administrator, please run this check from your school readiness page. Contact your District Administrator to have the link to that page emailed to you."
+    And I should see the text "To prepare each school for a successful assessment implementation, a TRT School admin can run system checks on all of the devices in a school to make sure the device or devices meets"
+    And I should see the link "PARCC minimum technology requirements"
+    And I should see the text "Click the link to access the latest requirements document. This check is for testing through 2015 and does not as of this time support testing for EOY 2016 testing. Running an Ad Hoc system check will not be saved."
+    And I should see the text "This test checks one system but, by indicating the number of machines this profile applies to, allows for better testing administration"
     And I should see the text "\* indicates required field"

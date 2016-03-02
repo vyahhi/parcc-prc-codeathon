@@ -71,13 +71,9 @@ function prc_my_lists_node_view($node, $view_mode, $langcode) {
         'link_id' => 'prc_digital_library_add_to_favorites',
         'link_title' => 'Add to My Lists',
       ),
-      'pd_course' => array(
-        'link_id' => 'prc_pd_course_add_to_favorites',
-        'link_title' => 'Add to My PD Lists',
-      ),
       'quiz' => array(
-          'link_id' => 'prc_assessment_add_to_favorites',
-          'link_title' => 'Add to My Quiz Lists',
+        'link_id' => 'prc_assessment_add_to_favorites',
+        'link_title' => 'Add to My Quiz Lists',
       ),
     );
 
@@ -95,8 +91,15 @@ function prc_my_lists_node_view($node, $view_mode, $langcode) {
  * @param $link_id
  */
 function _prc_my_lists_add_to_lists_link($node, $link_title, $link_id) {
+  global $user;
   ctools_include('modal');
   ctools_modal_add_js();
+
+  //If available, settings defined in prc_foundation theme
+  if (function_exists('modal_js_settings')) {
+    modal_js_settings();
+  }
+
   $nid = $node->nid;
 
   $links[$link_id] = array(
@@ -104,13 +107,122 @@ function _prc_my_lists_add_to_lists_link($node, $link_title, $link_id) {
     'href' => "favorites-list/$nid/nojs/add-to-list",
     'attributes' => array(
       'title' => t($link_title),
-      'class' => array('ctools-use-modal'),
+      'class' => array('ctools-use-modal', 'ctools-modal-zurb-modal-style'),
     ),
   );
+
+  //Check to see if the item is already in one of the users lists
+  $w = entity_metadata_wrapper('node', $node);
+  if (isset($w->favored_by)) {
+    $uids = $w->favored_by->raw();
+  } else {
+    $uids = array();
+  }
+
+  if(count($uids)  && in_array($user->uid, $uids)){
+    $links[$link_id]['attributes']['class'][] = 'favorited';
+  }
 
   $node->content['links'][$link_id] = array(
     '#theme' => 'links__node__favorites',
     '#links' => $links,
     '#attributes' => array('class' => array('links', 'inline')),
+  );
+}
+
+/**
+ * Gets a list of UIDs that have favorited the node
+ *
+ * @param $entity
+ * @param $options
+ * @param $name
+ * @param $entity_type
+ * @param $info
+ * @return array
+ */
+function _prc_my_lists_get_favored_by($entity, $options, $name, $entity_type, &$info) {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('uid'))
+    ->condition('n.type', 'favorites_list')
+    ->condition('fc.entity_type', $entity_type)
+    ->condition('fc.field_favorite_content_target_id', $entity->nid)//@todo : Should consult $info
+    ->join('field_data_field_favorite_content', 'fc', 'n.nid = fc.entity_id');
+
+  $results = $query->execute()->fetchCol('uid');
+  if($results) {
+    return $results;
+  }else{
+    return array();
+  }
+}
+
+/**
+ * Implements hook_entity_property_info_alter().
+ */
+function prc_my_lists_entity_property_info_alter(&$info) {
+  if (isset($info['node']['bundles'])) {
+    $info['node']['bundles']['digital_library_content']['properties']['favored_by'] = array(
+      'label' => t('Favored by'),
+      'description' => t('A list of users who have favored the content.'),
+      'type' => 'list<user>', //<user> needed so it shows up in index
+      'getter callback' => '_prc_my_lists_get_favored_by',
+      'computed' => TRUE,
+    );
+    $info['node']['bundles']['digital_library_content']['properties']['prc_favorites_listings'] = array(
+      'label' => t('Favorites Lists the content has been added to'),
+      'description' => t('Indexes the Favorites Lists that the content has been added to.'),
+      'type' => 'list<node>', // This will return the favorites list nodes
+      'getter callback' => '_prc_my_lists_get_saved_to_favorites_lists',
+      'computed' => TRUE,
+    );
+
+  }
+}
+
+/**
+ * This new property will return the favorites list nodes that this node has been added to.
+ * @param $entity
+ * @param $options
+ * @param $name
+ * @param $entity_type
+ * @param $info
+ */
+function _prc_my_lists_get_saved_to_favorites_lists($entity, $options, $name, $entity_type, &$info) {
+  $favorites_lists = array();
+  $nid = $entity->nid;
+  // Get all of the favorites lists this node been added to...
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'favorites_list')
+    ->fieldCondition('field_favorite_content', 'target_id', $nid)
+    ->addMetaData('account', user_load(1)); // Run the query as user 1.
+  $result = $query->execute();
+
+  $news_items_nids = array();
+
+  if (isset($result['node'])) {
+    // Just return the ids, Search API will use EMW to load the entities
+    $news_items_nids = array_keys($result['node']);
+  }
+  return $news_items_nids;
+}
+
+/**
+ * Implements hook_facetapi_filters().
+ */
+function prc_my_lists_facetapi_filters() {
+  return array(
+    'node_access' => array(
+      'handler' => array(
+        'label' => t('Exclude items based on node access'),
+        'class' => 'PRCFacetapiFilterExcludeByNodeAccess',
+      ),
+    ),
+    'node_author' => array(
+      'handler' => array(
+        'label' => t('Exclude items that don\'t belong to the current user'),
+        'class' => 'PRCFacetapiFilterExcludeByNodeUID',
+      ),
+    ),
   );
 }

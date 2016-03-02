@@ -22,19 +22,19 @@ Feature: PRC-1171 Self-Registration - School, District and State Admins can acce
     # Now the invitation is generated. Accept it and verify the user.
     And I am an anonymous user
     And I am on the homepage
-    And I follow "Join now!"
+    And I follow "Create account"
     Then I fill in "example1@timestamp@example.com" for "E-mail"
     And I fill in "abc123" for "Password"
     And I fill in "abc123" for "Confirm password"
     And I fill in "First" for "First Name"
     And I fill in "Last" for "Last Name"
     And I fill in "Automated Test Robot" for "Profession"
-    And I select "Wyoming" from "State where you teach"
+    And I select "Wyoming" from "Where you teach"
     Then I check the box "I have read and agree with the Terms of Use and User Generated Content Disclaimer."
     Then I press the "Create new account" button
     Then I should see the message "Registration successful. You are now logged in."
     And the user "example1@timestamp@example.com" should have a role of "Educator"
     And the user "example1@timestamp@example.com" should have a role of "School Admin"
-    Then I visit "technology-readiness"
+    Then I visit "assessments/technology-readiness"
     And I should see the link "School 944 S1 @timestamp Readiness"
     Then I delete the user with the email address "example1@timestamp@example.com"

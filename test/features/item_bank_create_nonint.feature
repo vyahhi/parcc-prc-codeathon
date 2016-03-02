@@ -6,7 +6,7 @@ Feature: PRC-1007 Item Bank - Create Non-PARCC Non-interactive Item (text only) 
 
   Scenario: Form
     Given I am logged in as a user with the "Educator" role
-    And I am on "item-bank"
+    And I am on "assessments/item-bank"
     When I click "Non-interactive (text only)"
     Then I should see the heading "Create Non-interactive Item (text only)"
     And I should see a "Save" button

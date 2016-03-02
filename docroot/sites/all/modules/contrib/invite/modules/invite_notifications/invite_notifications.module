@@ -21,8 +21,10 @@ function invite_notifications_init() {
       ':uid' => $user->uid,
       ':status' => 1
     ))->fetchField();
-    if ($result == 0) {
-      user_save($user, array('data' => array('notification_received' => FALSE)));
+    if ($result == 0  && $user->data['notification_received'] !== FALSE) {//No need to update if nothing has changed!
+      //Loading a fresh user object helps prevent errors down the line
+      $account = user_load($user->uid);
+      user_save($account, array('data' => array('notification_received' => FALSE)));
     }
   }
 }

@@ -22,11 +22,11 @@ Feature: PRC-1316 Item Bank - Edit Item - Form Validation - PARCC Item unchecked
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Assessment directions" nodes
-    And I am on "assessments"
+    And I am on "assessments/practice-assessments"
     And I click "Create New Assessment"
     And I fill in "Title" with "Quiz Title"
     And I fill in "Objectives" with "Objectives"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I fill in the hidden field "faux_subject" with "Subject"
     And I press "Save"
 
@@ -36,7 +36,7 @@ Feature: PRC-1316 Item Bank - Edit Item - Form Validation - PARCC Item unchecked
     And I check "Make this a PARCC item"
     And I press "Save"
 
-    Then I am on "item-bank"
+    Then I am on "assessments/item-bank"
     And I should see the text "Yes" in the "NII T" row
     When I click "Edit"
     And I uncheck the box "Make this a PARCC item"
@@ -52,11 +52,11 @@ Feature: PRC-1316 Item Bank - Edit Item - Form Validation - PARCC Item unchecked
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Assessment directions" nodes
-    And I am on "assessments"
+    And I am on "assessments/practice-assessments"
     And I click "Create New Assessment"
     And I fill in "Title" with "Quiz Title"
     And I fill in "Objectives" with "Objectives"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I fill in the hidden field "faux_subject" with "Subject"
     And I press "Save"
 
@@ -65,11 +65,11 @@ Feature: PRC-1316 Item Bank - Edit Item - Form Validation - PARCC Item unchecked
     And I fill in "Question" with "Stem 1"
     And I fill in "Correct answer" with "Correct"
     And I fill in the hidden field "faux_standard" with "Standard"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I check the box "Make this a PARCC item"
     Then I press "Save"
 
-    Then I am on "item-bank"
+    Then I am on "assessments/item-bank"
     And I should see the text "Yes" in the "SA 1" row
     When I click "Edit"
     And I uncheck the box "Make this a PARCC item"
@@ -86,11 +86,11 @@ Feature: PRC-1316 Item Bank - Edit Item - Form Validation - PARCC Item unchecked
     And I have no "Multiple choice question" nodes
     And I have no "Short answer question" nodes
     And I have no "Assessment directions" nodes
-    And I am on "assessments"
+    And I am on "assessments/practice-assessments"
     And I click "Create New Assessment"
     And I fill in "Title" with "Quiz Title"
     And I fill in "Objectives" with "Objectives"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I fill in the hidden field "faux_subject" with "Subject"
     And I press "Save"
 
@@ -101,11 +101,11 @@ Feature: PRC-1316 Item Bank - Edit Item - Form Validation - PARCC Item unchecked
     And I fill in "edit-alternatives-0-answer-value" with "One"
     And I fill in "edit-alternatives-1-answer-value" with "Two"
     And I check the box "edit-alternatives-1-correct"
-    And I select "1st Grade" from "Grade Level"
+    And I check the box "1st Grade"
     And I check the box "Make this a PARCC item"
     Then I press "Save"
 
-    Then I am on "item-bank"
+    Then I am on "assessments/item-bank"
     And I should see the text "Yes" in the "IC 1" row
     When I click "Edit"
     And I uncheck the box "Make this a PARCC item"

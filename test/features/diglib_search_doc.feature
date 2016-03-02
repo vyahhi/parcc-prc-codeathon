@@ -1,4 +1,4 @@
-@api @d7 @diglib @search
+@api @d7 @diglib @search @prc-648 @tika
 Feature: PRC-648 Deep Search: DOC, DOCX Documents
   As an educator,
   I want to search for a keyword through DOC and DOCX documents,
@@ -31,7 +31,6 @@ Feature: PRC-648 Deep Search: DOC, DOCX Documents
     When I fill in "Persephone" for "Search" in the "header" region
     And I press "Search" in the "header" region
     Then I should see the text "Search-text-o-rama"
-    And I should see the link "FireflyIpsum.docx"
     When I fill in "Not in the file" for "Search" in the "header" region
     And I press "Search" in the "header" region
     Then I should not see the text "Search-text-o-rama"

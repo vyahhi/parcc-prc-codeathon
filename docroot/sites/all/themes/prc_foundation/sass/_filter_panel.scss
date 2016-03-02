@@ -1,0 +1,124 @@
+@media #{$screen} {
+  #filter-panel {
+    width: 286px;
+    margin-left: auto;
+    margin-right: auto;
+    li {
+      float: left;
+      padding: 0;
+    }
+    .views-exposed-form .views-exposed-widget {
+      padding: 0;
+    }
+    .filter-panel-search {
+      width: 170px;
+      height: 70px;
+    }
+    .filter-panel-search .views-exposed-form {
+      display: inline-block;
+      input {
+        height: 45px;
+        width: 170px;
+        margin: 0;
+        padding-left: 25px;
+        padding-right: 40px;
+        border-top-left-radius: 1000px;
+        border-bottom-left-radius: 1000px;
+        border-color: $gray-stroke;
+        background: sprite($main-sprites, search-filter-icon, 138, 13) no-repeat;
+        font-size: 14px;
+      }
+      input:focus {
+        box-shadow: none;
+      }
+    }
+    .form-item-sort-by,
+    .views-widget-sort-order,
+    .views-submit-button {
+      display: none;
+      padding: 0;
+    }
+    .filter-panel-toggle-link,
+    .filter-panel-all-link {
+      @include button;
+      height: 45px;
+      padding-left: 2.5em;
+      padding-top: .85em;
+      border-color: $gray-stroke;
+      color: $body-font-color;
+      font-weight: normal;
+      font-size: .875em;
+      text-indent: -9999px;
+    }
+    .filter-panel-toggle-link {
+      background: sprite($main-sprites, filter-icon, 19, 13) no-repeat $filter-button-color;
+    }
+    .filter-panel-toggle-link:focus {
+      background: sprite($main-sprites, filter-icon, 19, 13) no-repeat $filter-button-color;
+      color: $body-font-color;
+    }
+    .filter-panel-toggle-link:hover,
+    .filter-panel-toggle-link.selected {
+      background: sprite($main-sprites, filter-icon-selected, 19, 13) no-repeat $parcc-purple;
+      color: white;
+    }
+    .filter-panel-toggle-link.filters-enabled {
+      background: sprite($main-sprites, filter-icon-selected, 19, 13) no-repeat $parcc-purple !important;
+      color: white !important;
+    }
+    .filter-panel-all-link {
+      background: sprite($main-sprites, all-icon, 19, 13) no-repeat $filter-button-color;
+      border-top-right-radius: 1000px;
+      border-bottom-right-radius: 1000px;
+    }
+    .filter-panel-all-link:hover,
+    .filter-panel-all-link:focus {
+      background: sprite($main-sprites, all-icon-selected, 19, 13) no-repeat $parcc-purple;
+    }
+  }
+}
+
+@media #{$small} {
+  #filter-panel {
+    width: 480px;
+    .filter-panel-search {
+      width: 285px;
+      height: 84px;
+    }
+    .filter-panel-search .views-exposed-form input {
+      width: 285px;
+      margin: 0 0 1em 0;
+      background: sprite($main-sprites, search-filter-icon, 250, 13) no-repeat;
+      font-size: 16px;
+    }
+    .filter-panel-toggle-link,
+    .filter-panel-all-link {
+      text-indent: 0;
+    }
+    .filter-panel-toggle-link {
+      background: sprite($main-sprites, filter-icon, 10, 13) no-repeat $filter-button-color;
+    }
+    .filter-panel-toggle-link:focus {
+      background: sprite($main-sprites, filter-icon, 10, 13) no-repeat $filter-button-color;
+      color: $body-font-color;
+    }
+    .filter-panel-toggle-link:hover,
+    .filter-panel-toggle-link.selected {
+      background: sprite($main-sprites, filter-icon-selected, 10, 13) no-repeat $parcc-purple;
+      color: white;
+    }
+    .filter-panel-toggle-link.filters-enabled {
+      background: sprite($main-sprites, filter-icon-selected, 10, 13) no-repeat $parcc-purple !important;
+      color: white !important;
+    }
+    .filter-panel-all-link {
+      background: sprite($main-sprites, all-icon, 10, 13) no-repeat $filter-button-color;
+      border-top-right-radius: 1000px;
+      border-bottom-right-radius: 1000px;
+    }
+    .filter-panel-all-link:hover,
+    .filter-panel-all-link:focus {
+      background: sprite($main-sprites, all-icon-selected, 10, 13) no-repeat $parcc-purple;
+    }
+  }
+}

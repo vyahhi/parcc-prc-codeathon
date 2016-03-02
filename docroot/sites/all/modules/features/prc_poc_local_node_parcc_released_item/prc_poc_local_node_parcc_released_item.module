@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local PARCC Released Item feature.
+ */
+
+include_once 'prc_poc_local_node_parcc_released_item.features.inc';

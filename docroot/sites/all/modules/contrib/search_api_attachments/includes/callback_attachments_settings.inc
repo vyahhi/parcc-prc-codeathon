@@ -12,18 +12,30 @@ class SearchApiAttachmentsAlterSettings extends SearchApiAbstractAlterCallback {
 
   public function alterItems(array &$items) {
 
+    // Extension restriction.
     $exclude = array();
     foreach (explode(' ', $this->options['excluded_extensions']) as $ext) {
       $exclude[$ext] = file_get_mimetype('dummy.' . $ext);
     }
-    if ($this->index->item_type == 'file') {
-      foreach ($items as &$item) {
+
+    // File size restriction.
+    $max_file_size = parse_size($this->options['max_file_size']);
+    if ($this->index->getEntityType() == 'file') {
+      foreach ($items as $id => &$item) {
         $file = array();
         foreach ($item as $key => $value) {
           $file[$key] = $value;
         }
-        if (!in_array($file['filemime'], $exclude) && !$this->is_temporary($file)) {
-          $item->attachments_content = $this->getFileContent($file);
+        // Private file restriction.
+        if (!$this->is_temporary($file) && !($this->options['excluded_private'] && $this->is_private($file))) {
+          // Extension restriction.
+          if (!in_array($file['filemime'], $exclude)) {
+            // File size restriction.
+            $file_size_errors = file_validate_size((object) $file, $max_file_size);
+            if (empty($file_size_errors)) {
+              $item->attachments_content = $this->getFileContent($file);
+            }
+          }
         }
       }
     }
@@ -33,14 +45,26 @@ class SearchApiAttachmentsAlterSettings extends SearchApiAbstractAlterCallback {
         foreach ($fields as $name => $field) {
           if (isset($item->$name)) {
             foreach ($item->$name as $value) {
+              // Limit to the max number of value per field.
+              if (isset($this->options['number_indexed']) && $this->options['number_indexed'] != '0' && count($value) > $this->options['number_indexed']) {
+                $value = array_slice($value, 0, $this->options['number_indexed']);
+              }
               foreach ($value as $file) {
-                if (!in_array($file['filemime'], $exclude) && !$this->is_temporary($file)) {
-                  $attachments = 'attachments_' . $name;
-                  if (isset($item->{$attachments})) {
-                    $item->{$attachments} .= ' ' . $this->getFileContent($file);
-                  }
-                  else {
-                    $item->{$attachments} = $this->getFileContent($file);
+                // Private file restriction.
+                if (!$this->is_temporary($file) && !($this->options['excluded_private'] && $this->is_private($file))) {
+                  // Extension restriction.
+                  if (!in_array($file['filemime'], $exclude)) {
+                    // File size restriction.
+                    $file_size_errors = file_validate_size((object) $file, $max_file_size);
+                    if (empty($file_size_errors)) {
+                      $attachments = 'attachments_' . $name;
+                      if (isset($item->{$attachments})) {
+                        $item->{$attachments} .= ' ' . $this->getFileContent($file);
+                      }
+                      else {
+                        $item->{$attachments} = $this->getFileContent($file);
+                      }
+                    }
                   }
                 }
               }
@@ -61,12 +85,34 @@ class SearchApiAttachmentsAlterSettings extends SearchApiAbstractAlterCallback {
       '#maxlength' => 255,
       '#description' => t('File extensions that are excluded from indexing. Separate extensions with a space and do not include the leading dot. Extensions are internally mapped to a MIME type, so it is not necessary to put variations that map to the same type (e.g. tif is sufficient for tif and tiff)'),
     );
+    $form['number_indexed'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Number of file indexed per file field'),
+      '#default_value' => isset($this->options['number_indexed']) ? $this->options['number_indexed'] : '0',
+      '#size' => 5,
+      '#description' => t('The number of files to index per file field. The order of indexation is the weight in the widget. 0 for no restriction.'),
+    );
+    $form['max_file_size'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Maximum file size'),
+      '#default_value' => isset($this->options['max_file_size']) ? $this->options['max_file_size'] : '0',
+      '#description' => t('Enter a value like "512" (bytes), "80 KB" (kilobytes) or "50 MB" (megabytes) in order to restrict the max file size of files that should be indexed.'),
+      '#size' => 80,
+      '#maxlength' => 255,
+      '#element_validate' => array('_file_generic_settings_max_filesize'),
+    );
+    $form['excluded_private'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Exclude private files'),
+      '#default_value' => isset($this->options['excluded_private']) ? $this->options['excluded_private'] : TRUE,
+      '#description' => t('Check this box if you want to exclude private files to be indexed.'),
+    );
     return $form;
   }
 
   public function propertyInfo() {
     $ret = array();
-    if ($this->index->item_type == 'file') {
+    if ($this->index->getEntityType() == 'file') {
       $ret['attachments_content'] = array(
         'label' => 'File content',
         'description' => 'File content',
@@ -89,7 +135,7 @@ class SearchApiAttachmentsAlterSettings extends SearchApiAbstractAlterCallback {
   protected function getFileFields() {
     $ret = array();
     foreach (field_info_fields() as $name => $field) {
-      if ($field['type'] == 'file' && array_key_exists($this->index->item_type, $field['bundles'])) {
+      if ($field['type'] == 'file' && array_key_exists($this->index->getEntityType(), $field['bundles'])) {
         $ret[$name] = $field;
       }
     }
@@ -128,6 +174,22 @@ class SearchApiAttachmentsAlterSettings extends SearchApiAbstractAlterCallback {
         if ($extraction_method == 'tika') {
           $extraction = $this->extract_tika($file);
         }
+        elseif ($extraction_method == 'python_pdf2txt') {
+          if (in_array($file['filemime'], $this->pdf_mimetypes())) {
+            $extraction = $this->extract_python_pdf2txt($file);
+          }
+          elseif (variable_get('search_api_attachments_debug', FALSE)) {
+            watchdog('search_api_attachments', 'The python_pdf2txt extraction method does not support %mime_type', array('%mime_type' => $file['filemime']), WATCHDOG_WARNING);
+          }
+        }
+        elseif ($extraction_method == 'pdftotext') {
+          if (in_array($file['filemime'], $this->pdf_mimetypes())) {
+            $extraction = $this->extract_pdftotext($file);
+          }
+          elseif (variable_get('search_api_attachments_debug', FALSE)) {
+            watchdog('search_api_attachments', 'The pdftotext extraction method does not support %mime_type', array('%mime_type' => $file['filemime']), WATCHDOG_WARNING);
+          }
+        }
         else {
           $extraction = $this->extract_solr($file);
         }
@@ -142,7 +204,9 @@ class SearchApiAttachmentsAlterSettings extends SearchApiAbstractAlterCallback {
     if ($extraction !== FALSE && isset($cid)) {
       cache_set($cid, $extraction, self::CACHE_TABLE);
     }
-
+    if (variable_get('search_api_attachments_debug', FALSE)) {
+      watchdog('search_api_attachments', "File: @filename\nExtraction: @extraction", array('@filename' => $file['uri'], '@extraction' => $extraction), WATCHDOG_DEBUG);
+    }
     return $extraction;
   }
 
@@ -157,7 +221,6 @@ class SearchApiAttachmentsAlterSettings extends SearchApiAbstractAlterCallback {
 
   protected function extract_exif($file) {
     $ret = '';
-    $size = getimagesize($this->get_realpath($file), $info);
     if (isset($info['APP13'])) {
       $iptc = iptcparse($info['APP13']);
       if (is_array($iptc)) {
@@ -187,7 +250,11 @@ class SearchApiAttachmentsAlterSettings extends SearchApiAbstractAlterCallback {
     if ($file['filemime'] != 'audio/mpeg') {
       $param = ' -Dfile.encoding=UTF8 -cp ' . escapeshellarg($tika_path);
     }
-    $cmd = escapeshellcmd('java') . $param . ' -jar ' . escapeshellarg($tika) . ' -t ' . escapeshellarg($filepath);
+
+    // Force running the Tika jar headless.
+    $param = ' -Djava.awt.headless=true ' . $param;
+
+    $cmd = variable_get('search_api_attachments_java', 'java') . $param . ' -jar ' . escapeshellarg($tika) . ' -t ' . escapeshellarg($filepath);
     if (strpos(ini_get('extension_dir'), 'MAMP/')) {
       $cmd = 'export DYLD_LIBRARY_PATH=""; ' . $cmd;
     }
@@ -198,11 +265,46 @@ class SearchApiAttachmentsAlterSettings extends SearchApiAbstractAlterCallback {
     return shell_exec($cmd);
   }
 
+  protected function extract_pdftotext($file) {
+    $filepath = $this->get_realpath($file);
+    // UTF-8 multibyte characters will be stripped by escapeshellargs() for the
+    // default C-locale.
+    // So temporarily set the locale to UTF-8 so that the filepath remains valid.
+    $backup_locale = setlocale(LC_CTYPE, '0');
+    setlocale(LC_CTYPE, 'en_US.UTF-8');
+    // Pdftotext descriptions states that '-' as text-file will send text to
+    // stdout.
+    $cmd = escapeshellcmd('pdftotext')  . ' ' . escapeshellarg($filepath) . ' -';
+    // Restore the locale.
+    setlocale(LC_CTYPE, $backup_locale);
+    // Support UTF-8 commands: http://www.php.net/manual/en/function.shell-exec.php#85095
+    shell_exec("LANG=en_US.utf-8");
+    return shell_exec($cmd);
+  }
+
+  protected function extract_python_pdf2txt($file) {
+    $filepath = $this->get_realpath($file);
+    // Restore the locale.
+    $pdf2txt_path = realpath(variable_get('search_api_attachments_python_pdf2txt_path', '/usr/bin'));
+    $pdf2txt = realpath($pdf2txt_path . '/' . variable_get('search_api_attachments_python_pdf2txt_script', 'pdf2txt'));
+    $cmd = escapeshellcmd('python') . ' ' . escapeshellarg($pdf2txt) . ' -C -t text ' . escapeshellarg($filepath);
+    // UTF-8 multibyte characters will be stripped by escapeshellargs() for the
+    // default C-locale.
+    // So temporarily set the locale to UTF-8 so that the filepath remains
+    // valid.
+    $backup_locale = setlocale(LC_CTYPE, '0');
+    setlocale(LC_CTYPE, $backup_locale);
+    // Support UTF-8 commands: http://www.php.net/manual/en/function.shell-exec.php#85095
+    shell_exec("LANG=en_US.utf-8");
+    return shell_exec($cmd);
+  }
+
   /**
    * Extract data using Solr (via the ExtractingRequestHandler) or using the
    * remote Tika servlet.
-   * @see  http://wiki.apache.org/solr/ExtractingRequestHandler.
-   * @see  http://wiki.apache.org/tika/TikaJAXRS.
+   *
+   * @see http://wiki.apache.org/solr/ExtractingRequestHandler
+   * @see http://wiki.apache.org/tika/TikaJAXRS
    */
   protected function extract_solr($file) {
     $extraction = FALSE;
@@ -279,11 +381,32 @@ class SearchApiAttachmentsAlterSettings extends SearchApiAbstractAlterCallback {
     return $extraction;
   }
 
+  /**
+   * Check if the file is private.
+   *
+   * @param array $file
+   *   A file array.
+   *
+   * @return bool
+   *   TRUE if the file is private. FALSE otherwise.
+   */
+  protected function is_private($file) {
+    $result = FALSE;
+    $wrapper = 'private://';
+    $uri = $file['uri'];
+    if (substr($uri, 0, 10) == $wrapper) {
+      $result = TRUE;
+    }
+    return $result;
+  }
+
   protected function is_temporary($file) {
-    $needle = 'temporary://';
-    $haystack = $file['uri'];
-    $test = strpos($haystack, $needle);
-    $result = ($test !== FALSE);
+    $result = FALSE;
+    $wrapper = 'temporary://';
+    $uri = $file['uri'];
+    if (substr($uri, 0, 12) == $wrapper) {
+      $result = TRUE;
+    }
     return $result;
   }
 
@@ -298,4 +421,16 @@ class SearchApiAttachmentsAlterSettings extends SearchApiAbstractAlterCallback {
       return $wrapper->getExternalUrl();
     }
   }
+
+  protected function pdf_mimetypes() {
+    return array(
+      'application/pdf',
+      'application/x-pdf',
+      'application/acrobat',
+      'text/x-pdf',
+      'text/pdf',
+      'applications/vnd.pdf',
+    );
+  }
+
 }

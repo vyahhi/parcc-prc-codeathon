@@ -12,12 +12,23 @@ use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Drupal\DrupalExtension\Context\DrupalContext;
 use Drupal\DrupalExtension\Event\EntityEvent;
+use Behat\Behat\Event\SuiteEvent;
 
 class FeatureContext extends DrupalContext {
   protected $timestamp;
   protected $originalMailSystem;
   protected $customParameters;
   protected $sysCheckResult;
+  protected $ssoIsOn = FALSE;
+
+  protected $sso_module_list = array(
+    'prc_sso',
+    'prc_sso_user',
+    'bt_onelogin_saml',
+    'ldap_query',
+    'ldap_servers',
+    'ldap_user'
+  );
 
   /**
    * Initializes context.
@@ -83,8 +94,7 @@ class FeatureContext extends DrupalContext {
     $script = 'foo = 1;';
     try {
       $this->getSession()->getDriver()->evaluateScript($script);
-    }
-    catch (UnsupportedDriverActionException $e) {
+    } catch (UnsupportedDriverActionException $e) {
       $js = FALSE;
     }
     return $js;
@@ -100,6 +110,58 @@ class FeatureContext extends DrupalContext {
   public function assertRegionHeading($heading, $region) {
     $fixed_heading = $this->fixStepArgument($heading);
     return parent::assertRegionHeading($fixed_heading, $region);
+  }
+
+  /**
+   * @BeforeSuite
+   */
+  public static function prepare(SuiteEvent $event) {
+    // Disable honeypot timer before suite runs
+    variable_set('honeypot_time_limit', '0');
+    // Set autologout timeout to minimum length
+    variable_set('autologout_timeout', '60');
+    // Reduce autologout padding
+    variable_set('autologout_padding', '5');
+  }
+
+  /**
+   * @AfterSuite
+   */
+  public static function teardown(SuiteEvent $event) {
+    // Set honeypot timer back to default after suite runs
+    variable_set('honeypot_time_limit', '5');
+    // Reset autologout timeout
+    variable_set('autologout_timeout', '28800');
+    // Reset autologout padding
+    variable_set('autologout_padding', '20');
+  }
+
+  /**
+   * @BeforeScenario @sso
+   */
+  public function beforeScenarioSSO($event) {
+    $this->enableSSO();
+    $this->ssoIsOn = TRUE;
+  }
+
+  private function enableSSO() {
+    if (!module_exists('prc_sso')) {
+      $this->assertDrushCommandWithArgument('en', '-y ' . implode(' ', $this->sso_module_list));
+    }
+  }
+
+  private function disableSSO() {
+    if (module_exists('prc_sso')) {
+      $this->assertDrushCommandWithArgument('dis', '-y ' . implode(' ', $this->sso_module_list));
+    }
+  }
+
+  /**
+   * @BeforeScenario ~@sso
+   */
+  public function beforeScenarioNotSSO($event) {
+    $this->disableSSO();
+    $this->ssoIsOn = FALSE;
   }
 
   /**
@@ -247,16 +309,22 @@ class FeatureContext extends DrupalContext {
     $selectElement = $this->getSession()
       ->getPage()
       ->find('named', array('select', "\"{$select}\""));
-    $optionElement = $selectElement->find('named', array(
-      'option',
-      "\"{$optionValue}\""
-    ));
-    //it should have the attribute selected and it should be set to selected
-    if (!$optionElement->hasAttribute("selected")) {
-      throw new \Exception(sprintf('The select box with "%s" has nothing selected', $select));
-    }
-    if (!$optionElement->getAttribute("selected") == "selected") {
-      throw new \Exception(sprintf('The select box "%s" should have had %s selected.', $select, $optionValue));
+
+    if($selectElement) {
+      $optionElement = $selectElement->find('named', array(
+        'option',
+        "\"{$optionValue}\""
+      ));
+
+      //it should have the attribute selected and it should be set to selected
+      if (!$optionElement->hasAttribute("selected")) {
+        throw new \Exception(sprintf('The select box with "%s" has nothing selected', $select));
+      }
+      if (!$optionElement->getAttribute("selected") == "selected") {
+        throw new \Exception(sprintf('The select box "%s" should have had %s selected.', $select, $optionValue));
+      }
+    }else{
+      throw new \Exception(sprintf('The select box "%s" was not found.', $select));
     }
   }
 
@@ -439,7 +507,7 @@ class FeatureContext extends DrupalContext {
    * @Then /^I should have the "([^"]*)" role$/
    */
   public function iShouldHaveTheRole($role) {
-    $drupal_user = user_load($this->user->uid);
+    $drupal_user = user_load($this->user->uid, TRUE);
     $roles = $drupal_user->roles;
     if (!array_search($role, $roles)) {
       throw new \Exception(sprintf("The current user did not have a role of '%s'", $role));
@@ -627,7 +695,6 @@ class FeatureContext extends DrupalContext {
     }
   }
 
-
   /**
    * Asserts that a given node type is not editable.
    *
@@ -694,7 +761,6 @@ class FeatureContext extends DrupalContext {
     }
   }
 
-
   /**
    * Overrides DrupalContext::createNodes
    * Allows fixStepArgument to be called on each cell value
@@ -703,7 +769,14 @@ class FeatureContext extends DrupalContext {
    */
   public function createNodes($type, TableNode $nodesTable) {
     $this->tableNodeFixStepArguments($nodesTable);
-    parent::createNodes($type, $nodesTable);
+    if ($type == 'multichoice') {
+      foreach ($nodesTable->getHash() as $nodeHash) {
+        $this->createMultichoice($nodeHash);
+      }
+    }
+    else {
+      parent::createNodes($type, $nodesTable);
+    }
   }
 
   public function createNode($type, $title) {
@@ -773,6 +846,116 @@ class FeatureContext extends DrupalContext {
   public function assertUserEditUrl($username) {
     $username = $this->fixStepArgument($username);
     $user = $this->users[$username];
+    $uid = $user->uid;
+
+    $path = "user/$uid/edit";
+    return new Given("I am on \"$path\"");
+  }
+
+  /**
+   * Deletes the specified LDAP user
+   *
+   * @Then /^I delete the LDAP user "(?P<email>[^"]*)"$/
+   */
+  public function deleteLdapUser($email) {
+    if (module_exists('ldap_servers') || module_exists('ldap_query')) {
+      module_load_include('module', 'ldap_servers', 'ldap_severs');
+      $email = $this->fixStepArgument($email);
+      $sid = 'LDAP_QA';
+      $dn = "uid=$email,ou=People,dc=uat,dc=parcconline,dc=org";
+      $ldap_server = ldap_servers_get_servers($sid, NULL, TRUE);
+      $boolean_result = $ldap_server->delete($dn);
+//    Leave the exception out for now because we need to just keep going if the user doesn't exist anymore
+//    if (!$boolean_result) {
+//      throw new \Exception(sprintf('The user "%s" did not exist on the LDAP server', $email));
+//    }
+    }
+  }
+
+  /**
+   * Verifies that the specified LDAP user has the specified attribute value.
+   * @Then /^the LDAP user with "(?P<email>[^"]*)" should have a "(?P<attribute>[^"]*)" attribute of "(?P<value>[^"]*)"$/
+   */
+  public function assertLdapUserAttribute($email, $attribute, $value) {
+    $found_user = FALSE;
+    $found_permission = FALSE;
+    $email = $this->fixStepArgument($email);
+    $value = $this->fixStepArgument($value);
+    $ldap_query = ldap_query_get_queries('prc_users', 'all', TRUE);
+    $results = $ldap_query->query();
+    foreach ($results as $result) {
+      if ($result['mail'][0] == $email) {
+        $found_user = TRUE;
+        if (array_search($value, $result[strtolower($attribute)]) !== FALSE) {
+          $found_permission = TRUE;
+          break;
+        }
+      }
+    }
+    if (!$found_user) {
+      throw new \Exception(sprintf('The user "%s" did not exist on the LDAP server', $email));
+    }
+    if (!$found_permission) {
+      throw new \Exception(sprintf('The user "%s" did not have the "%s" of "%s"', $email, $attribute, $value));
+    }
+  }
+
+  /**
+   * Verifies that the specified LDAP user has the specified permission.
+   *
+   * @Then /^the LDAP user with "(?P<email>[^"]*)" should have the role "(?P<role>[^"]*)"$/
+   */
+  public function assertLdapUserPermission($email, $role) {
+    $found_user = FALSE;
+    $found_permission = FALSE;
+    $email = $this->fixStepArgument($email);
+    $ldap_query = ldap_query_get_queries('prc_users', 'all', TRUE);
+    $results = $ldap_query->query();
+    foreach ($results as $result) {
+      if ($result['mail'][0] == $email) {
+        $found_user = TRUE;
+        if (array_search($role, $result['parccroles'])) {
+          $found_permission = TRUE;
+          break;
+        }
+      }
+    }
+    if (!$found_user) {
+      throw new \Exception(sprintf('The user "%s" did not exist on the LDAP server', $email));
+    }
+    if (!$found_permission) {
+      throw new \Exception(sprintf('The user "%s" did not have the role "%s"', $email, $role));
+    }
+  }
+
+  /**
+   * Verifies that the specified LDAP user does not exist.
+   *
+   * @Then /^there should not be an LDAP user "(?P<email>[^"]*)"$/
+   */
+  public function assertLdapUserNotExists($email) {
+    $found_user = FALSE;
+    $email = $this->fixStepArgument($email);
+    $ldap_query = ldap_query_get_queries('prc_users', 'all', TRUE);
+    $results = $ldap_query->query();
+    foreach ($results as $result) {
+      if ($result['mail'][0] == $email) {
+        $found_user = TRUE;
+      }
+    }
+    if ($found_user) {
+      throw new \Exception(sprintf('The user "%s" existed on the LDAP server', $email));
+    }
+  }
+
+  /**
+   * Verifies that the URL is the edit page for the specified username.
+   *
+   * @Then /^I edit the user "(?P<username>[^"]*)"$/
+   */
+  public function gotoUserEdit($username) {
+    $username = $this->fixStepArgument($username);
+    $user = user_load_by_mail($username);
     $uid = $user->uid;
 
     $expected_path = "user/$uid/edit";
@@ -934,7 +1117,13 @@ class FeatureContext extends DrupalContext {
   public function shouldPrecedeForTheQuery($textBefore, $textAfter, $cssQuery) {
     $items = array_map(
       function ($element) {
-        return $element->getText();
+        if ($element->getTagName() == 'label' && !$element->getText()) {
+          // Certain label tags don't give text in getText() - they only return text in getHtml().
+          return $element->getHtml();
+        }
+        else {
+          return $element->getText();
+        }
       },
       $this->getSession()->getPage()->findAll('css', $cssQuery)
     );
@@ -977,7 +1166,10 @@ class FeatureContext extends DrupalContext {
    * @When /^I index search results$/
    */
   public function iIndexSearchResults() {
+    $this->assertDrushCommand('sapi-c');
     $this->assertDrushCommand('sapi-i');
+    cache_clear_all('*', 'cache_views_data', TRUE);
+    cache_clear_all('*', 'cache_page', TRUE);
   }
 
   /**
@@ -985,6 +1177,19 @@ class FeatureContext extends DrupalContext {
    */
   public function iGiveMyselfTheRole($rolename) {
     $account = user_load($this->user->uid);
+    $roles = user_roles();
+    $rid = array_search($rolename, $roles);
+    $userroles = $account->roles;
+    $userroles[$rid] = $rolename;
+    user_save($account, array('roles' => $userroles));
+  }
+
+  /**
+   * @Given /^I give the user "([^"]*)" the "([^"]*)" role$/
+   */
+  public function iGiveAUserTheRole($email, $rolename) {
+    $email = $this->fixStepArgument($email);
+    $account = user_load_by_mail($email);
     $roles = user_roles();
     $rid = array_search($rolename, $roles);
     $userroles = $account->roles;
@@ -1277,7 +1482,8 @@ class FeatureContext extends DrupalContext {
    */
   public function iWaitForXSeconds($seconds) {
     $ms = $seconds * 1000;
-    $this->getSession()->wait($ms);
+    sleep($seconds);
+//    $this->getSession()->wait($ms);
   }
 
   /**
@@ -1394,6 +1600,13 @@ class FeatureContext extends DrupalContext {
 
     if ($event->getResult()) {
       $this->recordFailedEvent($event);
+    }
+
+    // Remove any LDAP users that were created.
+    if (!empty($this->users)) {
+      foreach ($this->users as $user) {
+        $this->deleteLdapUser($user->mail);
+      }
     }
 
     parent::afterScenario($event);
@@ -1598,6 +1811,39 @@ class FeatureContext extends DrupalContext {
     $wrapper->field_speed_of_connection->set(2);
     $wrapper->save();
   }
+
+  /**
+   * @Given /^the school "([^"]*)" has run a capacity check to three digits$/
+   */
+  public function theSchoolHasRunACapacityCheckThreeDigits($school_name) {
+    $school_name = $this->fixStepArgument($school_name);
+    foreach ($this->nodes as $node) {
+      if ($node->title == $school_name) {
+        $found_nid = $node->nid;
+        break;
+      }
+    }
+    if (!$found_nid) {
+      throw new \Exception(sprintf('The school %s was not found', $school_name));
+    }
+    $school_node = node_load($found_nid);
+    $entity_type = 'prc_trt';
+    $entity = entity_create($entity_type, array('type' => 'capacity_check'));
+    $wrapper = entity_metadata_wrapper($entity_type, $entity);
+    $wrapper->uid = $school_node->uid;
+    $wrapper->field_ref_school->set($school_node);
+    $wrapper->field_devices_capacity->set(58);
+    $wrapper->field_devices_capacity_results->set(92);
+    $wrapper->field_bandwidth_capacity->set(0.004);
+    $wrapper->field_bandwidth_capacity_results->set(0.004);
+    $wrapper->field_number_of_students->set(500);
+    $wrapper->field_number_of_devices->set(150);
+    $wrapper->field_number_testing_days->set(6);
+    $wrapper->field_number_of_sessions->set(2);
+    $wrapper->field_sittings_per_student->set(2);
+    $wrapper->field_speed_of_connection->set(2);
+    $wrapper->save();
+  }
   /**
    * @} End of defgroup "trt browser steps"
    */
@@ -1635,7 +1881,7 @@ class FeatureContext extends DrupalContext {
     $computed = $this->getSession()->evaluateScript("
       return jQuery( '" . $selector . "' ).css('" . $rule . "');
     ");
-    // Adjust backround image results to use relative paths
+    // Adjust background image results to use relative paths
     if ($rule == 'background-image' && !empty($computed)) {
       // Split out the URL components
       $relative = explode('/', $computed);
@@ -1680,7 +1926,7 @@ class FeatureContext extends DrupalContext {
       $link->click();
       return;
     }
-    throw new \Exception(sprintf('Found a row containing "%s", but no "%s" link on the page %s', $rowText, $link, $this->getSession()
+    throw new \Exception(sprintf('Found a row containing "%s", but no "%s" link on the page %s', $row_text, $link, $this->getSession()
       ->getCurrentUrl()));
   }
 
@@ -1876,6 +2122,62 @@ class FeatureContext extends DrupalContext {
         $this->iFillHiddenFieldWith('faux_subject', $hash['faux subject']);
       }
       $this->checkOption($hash['grade level']);
+      if ($hash['permissions'] == 'public') {
+        $this->assertSelectRadioById('Public');
+      }
+      else {
+        $this->assertSelectRadioById('PARCC members ONLY');
+      }
+      $this->pressButton('Save');
+    }
+    // I've been seeing some cases where the admin role seems to stick after creating content
+    // Asserting anonymous seems to take care of it.
+    $this->assertAuthenticatedByRole("anonymous user");
+  }
+
+  /**
+   * Create parcc-released-item content.
+   *
+   * Provide data in following format:
+   * | resource name       | file                          | resource type  | faux standard | faux subject | grade level | permissions |
+   * | Resource @timestamp | testfiles/GreatLakesWater.pdf | Form   | Standard      | Subject      | 1st Grade   | public  |
+   *
+   * @Given /^parcc-released-item content:$/
+   */
+  public function parccReleasedItemContent(TableNode $table) {
+    foreach ($table->getHash() as $hash) {
+      // Let's have an administrator go through the motions.
+      $this->assertAuthenticatedByRole("administrator");
+      $this->visit("node/add/parcc-released-item");
+      $this->fillField('Resource name', $hash['resource name']);
+      $this->selectOption('Resource Type', $hash['resource type']);
+      $this->attachFileToField('edit-field-file-single-und-0-upload', $hash['file']);
+
+      if ($this->isJavascriptSupported()) {
+        // Fill in hidden fields with javascript, because selenium2 rightfully
+        // does not allow interaction with hidden elements.
+        $script = "document.getElementsByName('faux_standard')[0].setAttribute('value','{$hash['faux standard']}');";
+        $this->getSession()->executeScript($script);
+        $script = "document.getElementsByName('faux_subject')[0].setAttribute('value','{$hash['faux subject']}');";
+        $this->getSession()->executeScript($script);
+      }
+      else {
+        $this->iFillHiddenFieldWith('faux_standard', $hash['faux standard']);
+        $this->iFillHiddenFieldWith('faux_subject', $hash['faux subject']);
+      }
+
+      $this->checkOption($hash['grade level']);
+      if ($hash['permissions'] == 'public') {
+        $this->assertSelectRadioById('Public');
+      }
+      else {
+        if ($hash['permissions'] == 'registered') {
+          $this->assertSelectRadioById('Registered');
+        }
+        else {
+          $this->assertSelectRadioById('PARCC members ONLY');
+        }
+      }
       $this->pressButton('Save');
     }
 
@@ -1898,5 +2200,442 @@ class FeatureContext extends DrupalContext {
       }
     }
     throw new \Exception(sprintf("Expecting '%s', found '%s'", $value, implode(',', $found)));
+  }
+
+  /**
+   * @Then /^"([^"]*)" should be "([^"]*)" of the width of "([^"]*)" within a margin of "([^"]*)"$/
+   */
+  public function shouldBeOfTheWidthOfWithinAMarginOf($inner_css, $percent, $outer_css, $margin) {
+    $percent = str_replace('%', '', $percent);
+    $margin = str_replace('%', '', $margin);
+
+    $inner_width = str_replace('px', '', $this->getWidth($inner_css));
+    $outer_width = str_replace('px', '', $this->getWidth($outer_css));
+
+    if ($inner_width > 0 && $outer_width > 0) {
+      $actual_percent = ($inner_width / $outer_width) * 100;
+
+      if (($actual_percent > ($percent + $margin)) || ($actual_percent < ($percent - $margin))) {
+        throw new \Exception(sprintf("%s not within the defined margin of width.", $inner_css));
+      }
+    }
+    else {
+      throw new \Exception(sprintf("One of the provided elements has a width of zero."));
+    }
+  }
+
+  /**
+   * @Given /^"([^"]*)" should be "([^"]*)" wide within a margin of "([^"]*)"$/
+   */
+  public function shouldBeWideWithinAMarginOf($selector, $width, $margin) {
+    $width = str_replace('px', '', $width);
+    $margin = str_replace('%', '', $margin);
+
+    $actual_width = str_replace('px', '', $this->getWidth($selector));
+
+    if ($actual_width > 0) {
+      $percent = ($width / $actual_width) * 100;
+
+      if (($percent > (100 + $margin)) || ($percent < (100 - $margin))) {
+        throw new \Exception(sprintf("%s not within the defined margin of width.", $selector));
+      }
+    }
+    else {
+      throw new \Exception(sprintf("The provided element has a width of zero."));
+    }
+  }
+
+  /**
+   * @Given /^"([^"]*)" should have a "([^"]*)" css value of about "([^"]*)"$/
+   */
+  public function shouldHaveACssValueOfAbout($selector, $attribute, $size) {
+    //Call the parent step with a hard-coded margin of 5%
+    $this->shouldHaveACssValueOfAboutWithAMarginOf($selector, $attribute, $size, '5%');
+  }
+
+  /**
+   * @Given /^"([^"]*)" should have a "([^"]*)" css value of about "([^"]*)" with a margin of "([^"]*)"$/
+   */
+  public function shouldHaveACssValueOfAboutWithAMarginOf($selector, $attribute, $size, $margin) {
+    $size = str_replace('px', '', $size);
+
+    $margin = str_replace('%', '', $margin);
+
+    $actual_size = $this->getSession()
+      ->evaluateScript(
+        "return jQuery( '" . $selector . "' ).css('$attribute');"
+      );
+
+    $actual_size = str_replace('px', '', $actual_size);
+
+    if ($actual_size > 0) {
+      $percent = ($size / $actual_size) * 100;
+
+      if (($percent > (100 + $margin)) || ($percent < (100 - $margin))) {
+        throw new \Exception(sprintf("%s not within the defined margin of width.", $selector));
+      }
+    }
+    else {
+      throw new \Exception(sprintf("The provided element has a width of zero."));
+    }
+  }
+
+  /**
+   * Helper function to retrieve an items width
+   */
+  public function getWidth($selector) {
+    return $this->getSession()->evaluateScript("
+      return jQuery( '" . $selector . "' ).css('width');
+    ");
+  }
+
+  /**
+   * @Given /^the edge of "([^"]*)" should line up with "([^"]*)"$/
+   */
+  public function theEdgeOfShouldLineUpWith($element_one, $element_two) {
+    if ($this->leftOffset($element_one) !== $this->leftOffset($element_two)) {
+      throw new \Exception(sprintf("The edge %s does not align with the edge of %s", $element_one, $element_two));
+    }
+  }
+
+  /**
+   * Helper function to return the left offset
+   */
+  public function leftOffset($selector) {
+    $offset = $this->getSession()->evaluateScript("
+      return jQuery( '" . $selector . "' ).offset();
+    ");
+    return $offset['left'];
+  }
+
+  /**
+   * @Given /^"([^"]*)" should contain no more than "([^"]*)" elements$/
+   */
+  public function shouldContainNoMoreThanElements($element, $max_children) {
+    $widths = $this->getChildWidths($element);
+    if (count($widths) > $max_children) {
+      throw new \Exception("There are more than %s elements in %s", $max_children, $element);
+    }
+  }
+
+  /**
+   * @param $nodeHash
+   * @throws \Exception
+   */
+  private function createMultichoice($nodeHash) {
+    $question = new stdClass();
+    $question->title = $nodeHash['title'];
+    $question->type = 'multichoice';
+    $question->body = array(
+      LANGUAGE_NONE => array(
+        array(
+          'value' => $nodeHash['body'],
+          'format' => 'plain_text',
+        ),
+      )
+    );
+    $question->choice_multi = 0;
+    $question->choice_random = 0;
+    $question->choice_boolean = 0;
+    $question->language = LANGUAGE_NONE;
+    $question->uid = 1;
+    $question->status = 1;
+    $question->field_parcc_item['und'][0]['value'] = $nodeHash['parcc_item'] == 'Yes' ? 1 : 0;
+    $question->alternatives = array(
+      array(
+        'answer' => array(
+          'value' => 'Yes',
+        ),
+        // All these values are necessary to avoid integrity constraint errors.
+        'answer_format' => 'plain_text',
+        'feedback_if_chosen' => '',
+        'feedback_if_not_chosen' => '',
+        'feedback_if_chosen_format' => 'plain_text',
+        'feedback_if_not_chosen_format' => 'plain_text',
+        'score_if_chosen' => 1,
+        'correct' => 1,
+      ),
+      array(
+        'answer' => array(
+          'value' => 'No',
+        ),
+        'answer_format' => 'plain_text',
+        'feedback_if_chosen' => '',
+        'feedback_if_not_chosen' => '',
+        'feedback_if_chosen_format' => 'plain_text',
+        'feedback_if_not_chosen_format' => 'plain_text',
+        'score_if_chosen' => 0,
+        'correct' => 0,
+      ),
+    );
+
+    node_object_prepare($question);
+    $question = node_submit($question);
+    node_save($question);
+    $this->nodes[] = $question;
+  }
+
+
+  /**
+   * @Then /^I should see "(?P<link>(?:[^"]|\\")*)" number "(?P<number>[^"]*)"$/
+   */
+  public function findLinkTextIndex($text, $index) {
+    $page = $this->getSession()->getPage();
+    $links = $page->findAll('xpath', "//a[text()='" . $text . "']");
+    if (!isset($links[$index])) {
+      throw new Exception("{$text} number {$index} could not be found.");
+    }
+  }
+
+  /**
+   * @Given /^I simulate subject\/standard shs requests$/
+   */
+  public function iSimulateSubjectStandardShsRequests() {
+    global $base_url;
+    $url = $base_url . '/js/shs/json';
+
+    $term = taxonomy_get_term_by_name('Career Clusters');
+
+    $term = array_pop($term);
+
+    $vid = $term->vid;
+    $tid = $term->tid;
+
+    $script = "
+
+  window.subStandTest = {
+    complete: false,
+    requests: [],
+    result: null,
+    execute: function () {
+      var data = {
+        callback: \"shs_json_term_get_children\",
+        arguments: {
+          vid: $vid,
+          parent: [$tid],
+          settings: {
+            create_new_levels: 0,
+            create_new_terms: false,
+            force_deepest: 0,
+            node_count: 0,
+            use_chosen: 'chosen',
+            required: false
+          }
+        }
+      };
+
+      for (var i = 0; i < 30; i++) {
+        window.subStandTest.requests.push(jQuery.post(
+            '/js/shs/json',
+            data,
+            function (data, textStatus, xhr) {
+              if (xhr.status == 500) {
+                window.subStandTest.result = false;
+              }
+            },
+            'json'
+          ).fail(function () {
+              window.subStandTest.result = false;
+            }
+          )
+        );
+      }
+    }
+  };
+
+  window.subStandTest.execute();
+
+  jQuery(document).ajaxStop(
+    function () {
+      console.log('AJAX complete.');
+      window.subStandTest.complete = true;
+    }
+  );
+
+
+    ";
+    //execute the javascript test
+    $this->getSession()->getDriver()->executeScript($script);
+    //give it some time to complete
+    sleep(3);
+    //retrieve the result
+    $result = $this->getSession()
+      ->getDriver()
+      ->evaluateScript("window.subStandTest.result");
+
+    if ($result === FALSE) {
+      throw new Exception("AJAX failures detected with SHS.");
+    }
+  }
+
+  /**
+   * @Given /^I visit the path "([^"]*)"$/
+   */
+  public function iVisitThePath($path) {
+    $path = $this->fixStepArgument($path);
+
+    return new Given("I am at \"$path\"");
+  }
+
+  /**
+   * @Given /^the text "([^"]*)" should not repeat$/
+   */
+  public function theTextShouldNotRepeat($text) {
+    $text = $this->fixStepArgument($text);
+    $page = $this->getSession()->getPage();
+    $items = $page->findAll('xpath', "//*[text()='" . $text . "']");
+    if(count($items) > 1){
+      throw new Exception("Multiple instances of '$text' found.");
+    }
+  }
+
+  /**
+   * @Given /^SSO is enabled$/
+   */
+  public function ssoIsEnabled() {
+    if (!module_exists('bt_onelogin_saml')) {
+      throw new Exception("SSO module is not enabled!");
+    }
+  }
+
+  /**
+   * Override login to use user/local-login
+   */
+  public function login() {
+    if ($this->ssoIsOn) {
+      // Check if logged in.
+      if ($this->loggedIn()) {
+        $this->logout();
+      }
+
+      if (!$this->user) {
+        throw new \Exception('Tried to login without a user.');
+      }
+
+      $this->getSession()->visit($this->locatePath('/user/local-login'));
+      $element = $this->getSession()->getPage();
+      $element->fillField($this->getDrupalText('username_field'), $this->user->name);
+      $element->fillField($this->getDrupalText('password_field'), $this->user->pass);
+      $submit = $element->findButton($this->getDrupalText('log_in'));
+      if (empty($submit)) {
+        throw new \Exception(sprintf("No submit button at %s", $this->getSession()
+          ->getCurrentUrl()));
+      }
+
+      // Log in.
+      $submit->click();
+
+      if (!$this->loggedIn()) {
+        throw new \Exception(sprintf("Failed to log in as user '%s' with role '%s'", $this->user->name, $this->user->role));
+      }
+    }
+    else {
+      parent::login();
+     }
+  }
+  /**
+   * @Given /^I select "([^"]*)" from the "([^"]*)" Chosen widget$/
+   */
+  public function assertSelectFromTheChosenElement($option, $select)  {
+    $select = $this->fixStepArgument($select);
+    $option = $this->fixStepArgument($option);
+    if (!$field = $this->getSession()->getPage()->findField($select)) {
+      throw new Exception(sprintf('Unable to find select "%s".', $select));
+    }
+    $fieldName = $field->getAttribute('name');
+    $value = $field->getValue();
+    $opt = $field->find('named', array(
+      'option', $this->getSession()->getSelectorsHandler()->xpathLiteral($option)
+    ));
+    if (!$opt) {
+      throw new Exception(sprintf('Option "%s" not available for Chosen "%s".', $option, $select));
+    }
+    $newValue = $opt->getAttribute('value');
+    if (is_array($value)) {
+      if (!in_array($newValue, $value)) {
+        $value[] = $newValue;
+      }
+    } else {
+      $value = $newValue;
+    }
+    $valueEncoded = json_encode($value);
+    $script = "(function ($) { $('select[name=\"$fieldName\"]').val($valueEncoded).change().trigger('liszt:updated').trigger('chosen:updated'); })(jQuery)";
+    $this->getSession()->getDriver()->executeScript($script);
+  }
+
+  /**
+   * @Given /^I have a practice test entity called "([^"]*)"$/
+   */
+  public function iHaveAPracticeTestEntityCalled($title) {
+    $title = $this->fixStepArgument($title);
+
+    $client = new GuzzleHttp\Client();
+
+    //@todo: use the domain from behat.yml
+    $domain = 'http://parcc-prc.dd:8083'; //local
+
+    //@todo: how to handle this?
+    $username = 'restws_adp';
+    $password = 'adp8765';
+
+    /**
+     * Retrieve CSRF token
+     */
+    $token_url = $domain . '/restws/session/token';
+
+    $token_options = array(
+      'auth' => array($username, $password),
+    );
+
+    $res = $client->request('GET', $token_url, $token_options);
+
+
+    $token = $res->getBody()->getContents();
+
+
+    /**
+     * Create the practice_test entity
+     */
+    $uri = $domain . '/practice_test';
+
+    $data = array(
+      'test_key' => 'PRACT12345',
+      'created' => 12345,
+      'title' => $title
+    );
+
+    $options = array(
+      'auth' => array($username, $password),
+      'headers' => array(
+        'X_CSRF_TOKEN' => $token,
+        'Content-Type' => 'application/json'
+      ),
+      'body' => json_encode($data)
+    );
+
+    $res = $client->request('POST', $uri, $options);
+
+    if($res->getStatusCode() != '201'){
+      throw new \Exception(sprintf("Faled to create practice test entity"));
+    }
+  }
+
+  /**
+   * @Given /^I access the practice test link for "([^"]*)" directly$/
+   */
+  public function visitPracticeTest($node_title){
+    $node_title = $this->fixStepArgument($node_title);
+    $efq = new EntityFieldQuery();
+
+    $efq->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'parcc_released_item')
+      ->entityCondition('title', $node_title);
+
+    $results = $efq->execute();
+
+    $node = array_pop($results['node']);
+
+    // send them to practice-tests/$nid
+    $this->getSession()->visit($this->locatePath('/practice-tests/'.$node->nid));
   }
 }

@@ -12,11 +12,11 @@ Feature: PRC-823 Allow multiple roles in user invite
     And I select "Wyoming" from "State where the invitee teaches"
     And I press "Send Invitation"
     Then the email to "example1@timestamp@example.com" should contain "has sent you an invite!"
-    And the email should contain "has invited you to join Partnership Resource Center at"
+    And the email should contain "Congratulations! Parcc Inc. invites you to register and then log into the Partnership Resource Center."
     And the email should contain "4321MESSAGE1234"
     And I click "Log out"
-    Then I follow link "1" in the email
-    Then I should see the heading "Create User Account to Join Partnership Resource Center" in the "content" region
+    Then I follow link "0" in the email
+    Then I should see the heading "Create User Account to Join Partnership Resource Center" in the "sub_header" region
     And the url should match "user/register"
     And I should see "example1@timestamp@example.com" in the "E-mail" field
     And I fill in "Password" with "abc123"

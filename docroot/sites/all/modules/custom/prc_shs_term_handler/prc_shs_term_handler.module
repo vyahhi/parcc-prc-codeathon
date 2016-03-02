@@ -36,3 +36,19 @@ function _prc_shs_term_handler_recursive_term_description_update(&$terms, $fullt
   }
   return $terms;
 }
+
+/**
+ * Implements hook_js_alter()
+ *
+ * Swap out the contrib version of shs.js for a version that retries the ajax
+ * after multiple failures.
+ *
+ * @param $js
+ */
+function prc_shs_term_handler_js_alter(&$js){
+  $path = drupal_get_path('module', 'shs').'/js/shs.js';
+  if(isset($js[$path])){
+    $new_path = drupal_get_path('module', 'prc_shs_term_handler').'/shs.js';
+    $js[$path]['data'] = $new_path;
+  }
+}
