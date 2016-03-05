@@ -279,6 +279,16 @@
       margin-top: -20px;
     }
   }
+  .page-node-take {
+    .field-name-field-passage {
+      // Todo: re-work with appropriate foundation markup
+      width: 50%;
+      float: left;
+    }
+    table {
+      width: 50%;
+    }
+  }
 }
 
 // Todo - move into screen declaration

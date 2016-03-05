@@ -3929,6 +3929,14 @@ label, .field-name-field-release-year span.fieldset-legend, #edit-alternatives l
   .page-assessments-diagnostics .fake-last-list-item {
     margin-top: -20px;
   }
+
+  .page-node-take .field-name-field-passage {
+    width: 50%;
+    float: left;
+  }
+  .page-node-take table {
+    width: 50%;
+  }
 }
 .node-type-quiz .field-label {
   padding-bottom: .3em;
