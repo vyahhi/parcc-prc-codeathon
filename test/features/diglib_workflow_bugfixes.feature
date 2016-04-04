@@ -20,6 +20,7 @@
       And I select the radio button "Public" with the id "edit-field-permissions-und-public"
       And I press "Save"
       When I click "Edit"
+      And I wait for AJAX to finish
       And I select "None" from "edit-field-standard-und-0-tid-select-1"
       And I press "Publish"
       And I press "Update state"

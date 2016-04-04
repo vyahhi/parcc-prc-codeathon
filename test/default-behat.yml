@@ -44,3 +44,5 @@ default:
       desktop_height: '800'
       desktop_sm_width: '1100'
       desktop_sm_height: '800'
+      rest_user: prc_adp_user
+      rest_password: password

@@ -5,15 +5,14 @@
  * Features Builder definitions.
  */
 
+
 /**
- * Implements hook_features_builders_info().
+ * Implements features_builders_info_alter()
+ *
+ * Use our version of the search api builder rather than the one included by FB
+ *
+ * @param $builders
  */
-function features_builder_search_api_features_builders_info() {
-  $builders = array(
-    'features_builder_search_api' => array(
-      'label' => t('Search API'),
-      'class' => 'SearchAPIFeaturesBuilder',
-    ),
-  );
-  return $builders;
+function features_builder_search_api_features_builders_info_alter(&$builders) {
+  $builders['features_builder_search_api']['class'] = 'SearchAPIFeaturesBuilder';
 }

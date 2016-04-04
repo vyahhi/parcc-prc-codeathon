@@ -57,18 +57,13 @@ Feature: PRC-262 PARCC-Member Educator- Self Registration
 
   Examples:
     | account | state                |
-    | ARKA1   | Arkansas             |
     | CO1876  | Colorado             |
     | DC1790  | District of Columbia |
     | IL1818  | Illinois             |
-    | LOUS1   | Louisiana            |
     | MD1788  | Maryland             |
     | MA1788  | Massachusetts        |
-    | MISS1   | Mississippi          |
     | NJ1787  | New Jersey           |
     | NM1912  | New Mexico           |
-    | NEWY1   | New York             |
-    | OHIO1   | Ohio                 |
     | RI1790  | Rhode Island         |
 
   Scenario: AC6 Registration without member state means can't see member state

@@ -389,10 +389,10 @@
           height: auto;
         }
       }
+      .media-type-text .field-name-title,
       .field-name-title {
         background: url('../images/gallery-icons/text-icon.png') no-repeat 95% center $parcc-purple;
       }
-      .media-type-text .field-name-title,
       .media-type-image .field-name-title {
         background: url('../images/gallery-icons/attachment-icon.png') no-repeat 95% center $icon-gray;
       }

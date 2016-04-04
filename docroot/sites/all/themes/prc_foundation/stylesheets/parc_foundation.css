@@ -4527,10 +4527,10 @@ label, .field-name-field-release-year span.fieldset-legend, #edit-alternatives l
     width: 100%;
     height: auto;
   }
+  .page-library .gallery-main .view-content .large-4 .media-type-text .field-name-title,
   .page-library .gallery-main .view-content .large-4 .field-name-title {
     background: url("../images/gallery-icons/text-icon.png") no-repeat 95% center #70547D;
   }
-  .page-library .gallery-main .view-content .large-4 .media-type-text .field-name-title,
   .page-library .gallery-main .view-content .large-4 .media-type-image .field-name-title {
     background: url("../images/gallery-icons/attachment-icon.png") no-repeat 95% center #6F7E95;
   }

@@ -22,9 +22,17 @@ function features_builder_default_features_builders_info() {
       'label' => t('Entityqueue'),
       'class' => 'EntityqueueFeaturesBuilder',
     ),
+    'features_builder_feeds' => array(
+      'label' => t('Feeds'),
+      'class' => 'FeedsFeaturesBuilder',
+    ),
     'features_builder_field' => array(
       'label' => t('Fields'),
       'class' => 'FieldFeaturesBuilder',
+    ),
+    'features_builder_fieldable_panels_panes' => array(
+      'label' => t('Fieldable Panels Panes'),
+      'class' => 'FieldablePanelsPanesFeaturesBuilder',
     ),
     'features_builder_field_collection' => array(
       'label' => t('Field Collection'),

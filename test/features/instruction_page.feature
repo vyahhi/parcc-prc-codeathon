@@ -24,7 +24,6 @@ Feature: PRC-1400 Instruction Page - Create Landing Page
     But I should see the link "Speaking and Listening"
   Examples:
     | role                            |
-    | Educator                        |
     | PARCC-Member Educator           |
     | Content Contributor             |
     | Content Administrator (Curator) |

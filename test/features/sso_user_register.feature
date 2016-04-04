@@ -5,7 +5,7 @@ Feature: PRC-1893 PRC SSO Register
   Scenario: Account created in PRC via self-registration clicked on the SSO login page
     Given I am on the homepage
 #    And I click "Log in"
-    When I am on "onelogin_saml/sso?destination=user/login"
+    When I am on "onelogin_saml/sso?destination=user"
     And I follow "Create new account"
     Then I fill in "@timestamp@example.com" for "E-mail"
     And I fill in "abc123" for "Password"
@@ -20,7 +20,7 @@ Feature: PRC-1893 PRC SSO Register
     And I am an anonymous user
     And I am on the homepage
 #    And I click "Log in"
-    When I am on "onelogin_saml/sso?destination=user/login"
+    When I am on "onelogin_saml/sso?destination=user"
     And I fill in "username" with "@timestamp@example.com"
     And I fill in "password" with "abc123"
     And I press "Log in"

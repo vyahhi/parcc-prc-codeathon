@@ -3116,6 +3116,195 @@ At this time, the Diagnostic Tools are available to districts via the <strong><a
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
+  $page->name = 'diagnostics_reading_fluency';
+  $page->task = 'page';
+  $page->admin_title = 'Reading Fluency';
+  $page->admin_description = 'The Assessment >>> Diagnostics page.';
+  $page->path = 'instructional-tools/reading-fluency';
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 12,
+            1 => 8,
+            2 => 4,
+            3 => 3,
+            4 => 7,
+            5 => 9,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+    ),
+    'logic' => 'and',
+  );
+  $page->menu = array(
+    'type' => 'none',
+    'title' => 'Diagnostics',
+    'name' => 'main-menu',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
+  $page->arguments = array();
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_diagnostics_reading_fluency__panel_context_e80fc5e5-177a-4dbf-be9a-85f5866814a1';
+  $handler->task = 'page';
+  $handler->subtask = 'diagnostics_reading_fluency';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'ipe',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+    'name' => '',
+  );
+  $display = new panels_display();
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'middle' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = 'Reading Fluency';
+  $display->uuid = '5f094a57-0279-4b5a-9696-6f15eef56bcc';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-6141a73b-e250-45d8-b2d7-80ccb56376fc';
+    $pane->panel = 'middle';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => '',
+      'title' => '',
+      'body' => 'PARCC has developed resources for the assessment of reading fluency in grades 2-8. The purpose of the reading fluency assessments is to provide educators with instructionally useful information related to how students demonstrate strengths and needs with reading fluency. These assessments have been designed to maximize instructional time and minimize testing time. The passages, both literary and informational, were developed to be equivalent in both length (approximately 250 words per passage) and in complexity. Resources found below include materials to collect information about the number of words read per minute, the number of uncorrected errors, the words correct per minute, the accuracy rate, and the expression score.
+
+<table style="width:100%"><thead><tr><th>Reading Fluency Resources</th>
+<th>Grade Level(s)</th>
+</tr></thead><tbody>
+<tr><td>
+<div align="center"><strong><a href="http://prc.parcconline.org/system/files/Teaching%20and%20assessing%20reading%20fluency%20using%20the%20PARCC%20v5%20final_0.pdf">Teacher Administration Guide for Reading Fluency</a></strong></div>
+</td>
+<td>
+<div align="center">2 – 12</div>
+</td>
+</tr>
+<tr><td>
+<div align="center"><strong><a href="http://prc.parcconline.org/system/files/Single%20Student%20Fluency%20Recording%20Sheet%20v4.pdf">Single Student Fluency Recording Sheet (PDF)</a></strong></div>
+<div align="center"><strong><a href="http://prc.parcconline.org/system/files/Single%20Student%20Fluency%20Recording%20Sheet%20v4.docx">Single Student Fluency Recording Sheet (Word)</a></strong></div>
+</td>
+<td>
+<div align="center">2 – 12</div>
+</td>
+</tr>
+<tr><td>
+<div align="center"><strong><a href="http://prc.parcconline.org/system/files/Class%20fluency%20spreadsheet%20V2.xlsx">Class Fluency Spreadsheet (Excel)</a></strong></div>
+</td>
+<td>
+<div align="center">2 – 12</div>
+</td>
+</tr>
+<tr><td>
+<div align="center"><strong><a href="https://prc.parcconline.org/system/files/Expressiveness%20Rubric-2-2.pdf">Expression Rubric</a></strong></div>
+</td>
+<td>
+<div align="center">2-12</div>
+</td>
+</tr>
+<tr><td>
+<div align="center"><strong><a href="https://prc.parcconline.org/system/files/G2%20Reading%20Fluency%20Passages.pdf">Informational and Literary Passages</a></div>
+</td>
+<td>
+<div align="center">2</div>
+</td>
+</tr><tr><td>
+<div align="center""><strong><a href="https://prc.parcconline.org/system/files/G3%20Reading%20Fluency%20Passages.pdf">Informational and Literary Passages</a></strong></div>
+</td>
+<td>
+<div align="center">3</div>
+</td>
+</tr><tr><td>
+<div align="center""><strong><a href="https://prc.parcconline.org/system/files/G4%20Reading%20Fluency%20Passages.pdf">Informational and Literary Passages</a></strong></div>
+</td>
+<td>
+<div align="center">4</div>
+<p></p></td>
+</tr><tr><td>
+<div align="center""><strong><a href="https://prc.parcconline.org/system/files/G5%20Reading%20Fluency%20Passages.pdf">Informational and Literary Passages</a></strong></div>
+</td>
+<td>
+<div align="center">5</div>
+</td>
+</tr><tr><td>
+<div align="center""><strong><a href="https://prc.parcconline.org/system/files/G6%20Reading%20Fluency%20Passages.pdf">Informational and Literary Passages</a></strong></div>
+</td>
+<td>
+<div align="center">6 </div>
+</td>
+</tr><tr><td>
+<div align="center""><strong><a href="https://prc.parcconline.org/system/files/G7%20Reading%20Fluency%20Passages.pdf">Informational and Literary Passages</a></strong></div>
+</td>
+<td>
+<div align="center">7</div>
+</td>
+</tr><tr><td>
+<div align="center""><strong><a href="https://prc.parcconline.org/system/files/G8%20Reading%20Fluency%20Passages.pdf">Informational and Literary Passages</a></strong></div>
+</td>
+<td>
+<div align="center">8</div>
+</td>
+</tr></tbody></table>
+<ul><li><strong><a href="/professional-learning/introduction-parcc-diagnostic-tools">Interactive learning module regarding the diagnostic assessments</a></strong> </li>
+<li><strong><a href="/library/diagnostic-assessments-user%E2%80%99s-guide-faqs-and-more">Learn more information about the diagnostic tools including the Diagnostic Assessment User’s Guide, Assessment Overviews, and FAQs.</a></strong></li>
+</ul> ',
+      'format' => 'full_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '6141a73b-e250-45d8-b2d7-80ccb56376fc';
+    $display->content['new-6141a73b-e250-45d8-b2d7-80ccb56376fc'] = $pane;
+    $display->panels['middle'][0] = 'new-6141a73b-e250-45d8-b2d7-80ccb56376fc';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-6141a73b-e250-45d8-b2d7-80ccb56376fc';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['diagnostics_reading_fluency'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
   $page->name = 'digital_library';
   $page->task = 'page';
   $page->admin_title = 'Digital Library';

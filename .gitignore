@@ -41,6 +41,7 @@ private_files/*
 logs
 *.log
 *.sqlite
+*.sql
 
 # OS generated files #
 ######################

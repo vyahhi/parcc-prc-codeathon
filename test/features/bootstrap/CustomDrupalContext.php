@@ -2571,12 +2571,11 @@ class FeatureContext extends DrupalContext {
 
     $client = new GuzzleHttp\Client();
 
-    //@todo: use the domain from behat.yml
-    $domain = 'http://parcc-prc.dd:8083'; //local
+    $domain = $this->getDrupalParameter('base_url');
 
-    //@todo: how to handle this?
-    $username = 'restws_adp';
-    $password = 'adp8765';
+    //Retrieve the custom parameters from behat.yml
+    $username = $this->customParameters['rest_user_name'];
+    $password = $this->customParameters['rest_user_password'];
 
     /**
      * Retrieve CSRF token

@@ -5,6 +5,7 @@ Feature: PRC-1880 SSO -- Users Created in PRC Exist in SSP IdP
   Scenario: Account created in PRC via self-registration
     Given I am on the homepage
     And I follow "Create account"
+    # And I visit "user/register"
     Then I fill in "@timestamp@example.com" for "E-mail"
     And I fill in "abc123" for "Password"
     And I fill in "abc123" for "Confirm password"
@@ -12,13 +13,14 @@ Feature: PRC-1880 SSO -- Users Created in PRC Exist in SSP IdP
     And I fill in "Last" for "Last Name"
     And I fill in "Automated Test Robot" for "Profession"
     And I select "Wyoming" from "Where you teach"
+    # And I select "Wyoming" from the "Where you teach" Chosen widget
     Then I check the box "I have read and agree with the Terms of Use and User Generated Content Disclaimer."
     Then I press the "Create new account" button
     Then I should see the message "Registration successful. You are now logged in."
     And I am an anonymous user
     And I am on the homepage
 #    And I click "Log in"
-    When I am on "onelogin_saml/sso?destination=user/login"
+    When I am on "onelogin_saml/sso?destination=user"
     And I fill in "username" with "@timestamp@example.com"
     And I fill in "password" with "abc123"
     And I press "Log in"
@@ -55,7 +57,7 @@ Feature: PRC-1880 SSO -- Users Created in PRC Exist in SSP IdP
     And I am an anonymous user
     And I am on the homepage
 #    And I click "Log in"
-    When I am on "onelogin_saml/sso?destination=user/login"
+    When I am on "onelogin_saml/sso?destination=user"
     And I fill in "username" with "example1@timestamp@example.com"
     And I fill in "password" with "abc123"
     And I press "Log in"

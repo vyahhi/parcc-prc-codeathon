@@ -80,3 +80,24 @@ In the file:
 /var/www/simplesamlphp/modules/themeparcc/themes/parcc/core/loginuserpass.php
 
 Change lines 65 and 66 to point the hrefs to the right base PRC url.
+
+REST User For Automated Testing
+===============================
+The prc_adp module creates a user that is used by behat tests for validating REST functionality.  In order to take
+advantage of this, the following line needs to be added to the settings.php file:
+
+    $conf['adp_user_default_pass'] = 'password';
+
+You may change 'password' to whatever you wish.  Also make sure the value in settings.php is the same as for the
+behat.yml custom parameter.
+
+Syncing Critical Tables With Production
+=======================================
+The dev_setup.sh script will require a file called crit-tables.sql.  To create this file, download a copy of the production
+database, import into mysql (in the example that follows we use a database called prc_prod), and run the following command
+in the PRC repository root directory to export the sql file.
+
+    sudo mysqldump prc_prod role taxonomy_term_data taxonomy_term_hierarchy taxonomy_vocabulary > crit-tables.sql
+
+By doing this we can be sure that references in features to terms and roles will match production.  It is recommended
+that the crit-tables.sql file be re-created whenever roles or terms referenced by features are added to production.

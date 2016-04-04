@@ -23,7 +23,7 @@ Feature: PRC-1891 PRC SSO Login Screen
     And I am an anonymous user
     And I am on the homepage
 #    And I click "Log in"
-    When I am on "onelogin_saml/sso?destination=user/login"
+    When I am on "onelogin_saml/sso?destination=user"
     And I fill in "username" with "joe_1891ed@timestamp@example.com"
     And I fill in "password" with "xyz123"
     And I press "Log in"
@@ -34,7 +34,7 @@ Feature: PRC-1891 PRC SSO Login Screen
     Given users:
       | name                    | mail                             | pass   | field_first_name | field_last_name | status | roles    |
       | Joe Educator @timestamp | joe_1891ed@timestamp@example.com | xyz123 | Joe              | Educator        | 1      | Educator |
-    When I am on "onelogin_saml/sso?destination=user/login"
+    When I am on "onelogin_saml/sso?destination=user"
     And I fill in "username" with "joe_1891ed@timestamp@example.com"
     And I fill in "password" with "xyz123"
     And I press "Log in"

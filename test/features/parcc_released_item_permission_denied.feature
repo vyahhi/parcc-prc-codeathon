@@ -12,7 +12,7 @@ Feature: PARCC Released Items - Permissions View Page
       | Registered Resource | testfiles/TT_Rules_2015.pdf | Item  | Standard One      | Subject One      | 1st Grade   | registered     |
       | Members Resource | testfiles/TT_Rules_2015.pdf | Manual | Standard One      | Subject One      | 1st Grade   | members     |
       | Sample Student Resource | testfiles/TT_Rules_2015.pdf | Sample Student Responses | Standard One      | Subject One      | 1st Grade   | public |
-      | Supplemental Document   | testfiles/TT_Rules_2015.pdf | Supplemental Documents | Standard One      | Subject One      | 1st Grade   | public |
+      | Supplemental Document   | testfiles/TT_Rules_2015.pdf | Supplemental Document | Standard One      | Subject One      | 1st Grade   | public |
 
   Scenario: 1 PARCC Released Items - Public Permissions View
     Given I am an anonymous user

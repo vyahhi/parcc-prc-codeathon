@@ -158,8 +158,3 @@ Feature: Header/Menu Responsive Behavior (PRC-749)
     # No additional margin added to the tabs
     When I click "DL Content"
     Then "ul.tabs li" should have a "margin-left" css value of "0px"
-
-
-
-
-

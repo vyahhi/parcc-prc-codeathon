@@ -25,7 +25,7 @@ Feature:  PRC-1862 Ensure users can delete accounts
     And I am an anonymous user
     And I am on the homepage
 #    And I click "Log in"
-    When I am on "onelogin_saml/sso?destination=user/login"
+    When I am on "onelogin_saml/sso?destination=user"
     And I fill in "username" with "@timestamp@example.com"
     And I fill in "password" with "abc123"
     And I press "Log in"
@@ -58,6 +58,7 @@ Feature:  PRC-1862 Ensure users can delete accounts
     And I fill in "password" with "abc123"
     And I press "Log in"
     And I press "Submit"
+
     Then I should be on "user"
     Then I give the user "admin@timestamp@example.com" the "administrator" role
 
@@ -66,7 +67,7 @@ Feature:  PRC-1862 Ensure users can delete accounts
     And I am an anonymous user
     And I am on the homepage
 #    And I click "Log in"
-    When I am on "onelogin_saml/sso?destination=user/login"
+    When I am on "onelogin_saml/sso?destination=user"
     And I fill in "username" with "admin@timestamp@example.com"
     And I fill in "password" with "abc123"
     And I press "Log in"

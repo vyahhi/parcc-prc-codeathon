@@ -90,3 +90,14 @@ Feature: Practice Tests
     And I should not see the link "Computer-Based Item Set"
     And I access the practice test link for "Practice Test @timestamp" directly
 
+  Scenario: 2063 - Valid link with key takes us to the ADS system
+    Given I am an anonymous user
+    And I visit "practice-tests/key/PRACT12345"
+    # As far as PRC knows this is a valid test key, send them on
+    And I should see "Oops!"
+
+  Scenario: 2063 - 404 not found for links
+    And I visit "practic-tests/key/thisisnotavalidkey"
+    # PRC doesn't recognize this as a key
+    And I should see the text "could not be found."
+

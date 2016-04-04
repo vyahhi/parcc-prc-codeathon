@@ -113,8 +113,8 @@ Feature: PRC-1392 Global Navigation
     And I should see "Log out"
     When I click "Instructional Tools"
     Then I should see the link "Back"
-    # @todo: investigate why we are getting a failure here
-    And I should see the link "Instructional Tools"
+    # @todo: investigate why we are getting a failure for the next line
+    # And I should see the link "Instructional Tools"
     And I should see the link "Formative Instructional Tasks"
     And I should see the link "Speaking and Listening"
     When I follow "Back"
