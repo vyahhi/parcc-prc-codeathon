@@ -10,7 +10,7 @@
 function prc_poc_local_message_request_readiness_check_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'message-request_readiness_check-field_comment'
+  // Exported field_instance: 'message-request_readiness_check-field_comment'.
   $field_instances['message-request_readiness_check-field_comment'] = array(
     'bundle' => 'request_readiness_check',
     'default_value' => NULL,
@@ -58,7 +58,8 @@ function prc_poc_local_message_request_readiness_check_field_default_field_insta
     ),
   );
 
-  // Exported field_instance: 'message-request_readiness_check-field_message_rendered_body'
+  // Exported field_instance:
+  // 'message-request_readiness_check-field_message_rendered_body'.
   $field_instances['message-request_readiness_check-field_message_rendered_body'] = array(
     'bundle' => 'request_readiness_check',
     'default_value' => NULL,
@@ -106,7 +107,8 @@ function prc_poc_local_message_request_readiness_check_field_default_field_insta
     ),
   );
 
-  // Exported field_instance: 'message-request_readiness_check-field_message_rendered_subject'
+  // Exported field_instance:
+  // 'message-request_readiness_check-field_message_rendered_subject'.
   $field_instances['message-request_readiness_check-field_message_rendered_subject'] = array(
     'bundle' => 'request_readiness_check',
     'default_value' => NULL,
@@ -154,7 +156,7 @@ function prc_poc_local_message_request_readiness_check_field_default_field_insta
     ),
   );
 
-  // Exported field_instance: 'message-request_readiness_check-field_node'
+  // Exported field_instance: 'message-request_readiness_check-field_node'.
   $field_instances['message-request_readiness_check-field_node'] = array(
     'bundle' => 'request_readiness_check',
     'default_value' => NULL,

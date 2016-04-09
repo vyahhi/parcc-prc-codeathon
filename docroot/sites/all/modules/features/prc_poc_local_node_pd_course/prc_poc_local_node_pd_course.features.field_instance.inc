@@ -10,7 +10,7 @@
 function prc_poc_local_node_pd_course_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-pd_course-field_course_objectives'
+  // Exported field_instance: 'node-pd_course-field_course_objectives'.
   $field_instances['node-pd_course-field_course_objectives'] = array(
     'bundle' => 'pd_course',
     'default_value' => NULL,
@@ -73,7 +73,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pd_course-field_grade_level_unlimited'
+  // Exported field_instance: 'node-pd_course-field_grade_level_unlimited'.
   $field_instances['node-pd_course-field_grade_level_unlimited'] = array(
     'bundle' => 'pd_course',
     'default_value' => NULL,
@@ -124,7 +124,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pd_course-field_length_quantity'
+  // Exported field_instance: 'node-pd_course-field_length_quantity'.
   $field_instances['node-pd_course-field_length_quantity'] = array(
     'bundle' => 'pd_course',
     'default_value' => NULL,
@@ -181,7 +181,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pd_course-field_length_unit'
+  // Exported field_instance: 'node-pd_course-field_length_unit'.
   $field_instances['node-pd_course-field_length_unit'] = array(
     'bundle' => 'pd_course',
     'default_value' => NULL,
@@ -238,7 +238,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pd_course-field_link_to_a_url'
+  // Exported field_instance: 'node-pd_course-field_link_to_a_url'.
   $field_instances['node-pd_course-field_link_to_a_url'] = array(
     'bundle' => 'pd_course',
     'default_value' => NULL,
@@ -316,7 +316,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pd_course-field_member_state_unlimited'
+  // Exported field_instance: 'node-pd_course-field_member_state_unlimited'.
   $field_instances['node-pd_course-field_member_state_unlimited'] = array(
     'bundle' => 'pd_course',
     'default_value' => NULL,
@@ -372,7 +372,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pd_course-field_permissions'
+  // Exported field_instance: 'node-pd_course-field_permissions'.
   $field_instances['node-pd_course-field_permissions'] = array(
     'bundle' => 'pd_course',
     'default_value' => NULL,
@@ -428,7 +428,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pd_course-field_subject'
+  // Exported field_instance: 'node-pd_course-field_subject'.
   $field_instances['node-pd_course-field_subject'] = array(
     'bundle' => 'pd_course',
     'default_value' => NULL,
@@ -491,7 +491,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pd_course-field_tags'
+  // Exported field_instance: 'node-pd_course-field_tags'.
   $field_instances['node-pd_course-field_tags'] = array(
     'bundle' => 'pd_course',
     'default_value' => NULL,
@@ -549,7 +549,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pd_course-field_thumbnail'
+  // Exported field_instance: 'node-pd_course-field_thumbnail'.
   $field_instances['node-pd_course-field_thumbnail'] = array(
     'bundle' => 'pd_course',
     'deleted' => 0,
@@ -630,7 +630,7 @@ function prc_poc_local_node_pd_course_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pd_course-field_users_allowed'
+  // Exported field_instance: 'node-pd_course-field_users_allowed'.
   $field_instances['node-pd_course-field_users_allowed'] = array(
     'bundle' => 'pd_course',
     'default_value' => NULL,

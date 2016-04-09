@@ -10,7 +10,7 @@
 function prc_poc_local_node_short_answer_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-short_answer-body'
+  // Exported field_instance: 'node-short_answer-body'.
   $field_instances['node-short_answer-body'] = array(
     'bundle' => 'short_answer',
     'default_value' => NULL,
@@ -64,7 +64,7 @@ function prc_poc_local_node_short_answer_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-short_answer-field_grade_level_unlimited'
+  // Exported field_instance: 'node-short_answer-field_grade_level_unlimited'.
   $field_instances['node-short_answer-field_grade_level_unlimited'] = array(
     'bundle' => 'short_answer',
     'default_value' => NULL,
@@ -104,7 +104,7 @@ function prc_poc_local_node_short_answer_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-short_answer-field_parcc_item'
+  // Exported field_instance: 'node-short_answer-field_parcc_item'.
   $field_instances['node-short_answer-field_parcc_item'] = array(
     'bundle' => 'short_answer',
     'default_value' => array(
@@ -149,7 +149,7 @@ function prc_poc_local_node_short_answer_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-short_answer-field_standard'
+  // Exported field_instance: 'node-short_answer-field_standard'.
   $field_instances['node-short_answer-field_standard'] = array(
     'bundle' => 'short_answer',
     'default_value' => NULL,

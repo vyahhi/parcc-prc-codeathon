@@ -10,7 +10,7 @@
 function prc_poc_local_node_digital_library_content_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-digital_library_content-body'
+  // Exported field_instance: 'node-digital_library_content-body'.
   $field_instances['node-digital_library_content-body'] = array(
     'bundle' => 'digital_library_content',
     'default_value' => NULL,
@@ -91,7 +91,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
   );
 
-  // Exported field_instance: 'node-digital_library_content-field_author_name'
+  // Exported field_instance: 'node-digital_library_content-field_author_name'.
   $field_instances['node-digital_library_content-field_author_name'] = array(
     'bundle' => 'digital_library_content',
     'default_value' => NULL,
@@ -150,7 +150,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
   );
 
-  // Exported field_instance: 'node-digital_library_content-field_document'
+  // Exported field_instance: 'node-digital_library_content-field_document'.
   $field_instances['node-digital_library_content-field_document'] = array(
     'bundle' => 'digital_library_content',
     'deleted' => 0,
@@ -213,7 +213,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
   );
 
-  // Exported field_instance: 'node-digital_library_content-field_genre'
+  // Exported field_instance: 'node-digital_library_content-field_genre'.
   $field_instances['node-digital_library_content-field_genre'] = array(
     'bundle' => 'digital_library_content',
     'default_value' => NULL,
@@ -270,7 +270,8 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
   );
 
-  // Exported field_instance: 'node-digital_library_content-field_grade_level_unlimited'
+  // Exported field_instance:
+  // 'node-digital_library_content-field_grade_level_unlimited'.
   $field_instances['node-digital_library_content-field_grade_level_unlimited'] = array(
     'bundle' => 'digital_library_content',
     'default_value' => NULL,
@@ -325,7 +326,8 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
   );
 
-  // Exported field_instance: 'node-digital_library_content-field_link_to_a_url'
+  // Exported field_instance:
+  // 'node-digital_library_content-field_link_to_a_url'.
   $field_instances['node-digital_library_content-field_link_to_a_url'] = array(
     'bundle' => 'digital_library_content',
     'default_value' => NULL,
@@ -403,7 +405,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
   );
 
-  // Exported field_instance: 'node-digital_library_content-field_media_type'
+  // Exported field_instance: 'node-digital_library_content-field_media_type'.
   $field_instances['node-digital_library_content-field_media_type'] = array(
     'bundle' => 'digital_library_content',
     'default_value' => NULL,
@@ -460,7 +462,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
   );
 
-  // Exported field_instance: 'node-digital_library_content-field_permissions'
+  // Exported field_instance: 'node-digital_library_content-field_permissions'.
   $field_instances['node-digital_library_content-field_permissions'] = array(
     'bundle' => 'digital_library_content',
     'default_value' => NULL,
@@ -510,7 +512,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
   );
 
-  // Exported field_instance: 'node-digital_library_content-field_standard'
+  // Exported field_instance: 'node-digital_library_content-field_standard'.
   $field_instances['node-digital_library_content-field_standard'] = array(
     'bundle' => 'digital_library_content',
     'default_value' => NULL,
@@ -571,7 +573,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
   );
 
-  // Exported field_instance: 'node-digital_library_content-field_subject'
+  // Exported field_instance: 'node-digital_library_content-field_subject'.
   $field_instances['node-digital_library_content-field_subject'] = array(
     'bundle' => 'digital_library_content',
     'default_value' => NULL,
@@ -639,7 +641,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
   );
 
-  // Exported field_instance: 'node-digital_library_content-field_tags'
+  // Exported field_instance: 'node-digital_library_content-field_tags'.
   $field_instances['node-digital_library_content-field_tags'] = array(
     'bundle' => 'digital_library_content',
     'default_value' => NULL,
@@ -704,7 +706,7 @@ function prc_poc_local_node_digital_library_content_field_default_field_instance
     ),
   );
 
-  // Exported field_instance: 'node-digital_library_content-field_thumbnail'
+  // Exported field_instance: 'node-digital_library_content-field_thumbnail'.
   $field_instances['node-digital_library_content-field_thumbnail'] = array(
     'bundle' => 'digital_library_content',
     'deleted' => 0,

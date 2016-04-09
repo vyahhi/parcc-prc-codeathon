@@ -1,0 +1,8 @@
+name = prc-poc.local Practice Test
+core = 7.x
+package = Entity
+dependencies[] = eck
+dependencies[] = features
+features[eck_bundle][] = practice_test_practice_test
+features[eck_entity_type][] = practice_test
+features[features_api][] = api:2

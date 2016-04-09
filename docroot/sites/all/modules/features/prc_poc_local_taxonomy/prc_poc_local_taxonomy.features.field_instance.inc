@@ -10,7 +10,7 @@
 function prc_poc_local_taxonomy_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'taxonomy_term-member_state-field_state_code'
+  // Exported field_instance: 'taxonomy_term-member_state-field_state_code'.
   $field_instances['taxonomy_term-member_state-field_state_code'] = array(
     'bundle' => 'member_state',
     'default_value' => NULL,
@@ -45,7 +45,8 @@ function prc_poc_local_taxonomy_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-user_states-field_state_abbreviation'
+  // Exported field_instance:
+  // 'taxonomy_term-user_states-field_state_abbreviation'.
   $field_instances['taxonomy_term-user_states-field_state_abbreviation'] = array(
     'bundle' => 'user_states',
     'default_value' => NULL,

@@ -10,7 +10,8 @@
 function prc_poc_local_message_rescind_review_request_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'message-rescind_review_request-field_message_rendered_body'
+  // Exported field_instance:
+  // 'message-rescind_review_request-field_message_rendered_body'.
   $field_instances['message-rescind_review_request-field_message_rendered_body'] = array(
     'bundle' => 'rescind_review_request',
     'default_value' => NULL,
@@ -57,7 +58,8 @@ function prc_poc_local_message_rescind_review_request_field_default_field_instan
     ),
   );
 
-  // Exported field_instance: 'message-rescind_review_request-field_message_rendered_subject'
+  // Exported field_instance:
+  // 'message-rescind_review_request-field_message_rendered_subject'.
   $field_instances['message-rescind_review_request-field_message_rendered_subject'] = array(
     'bundle' => 'rescind_review_request',
     'default_value' => NULL,
@@ -104,7 +106,7 @@ function prc_poc_local_message_rescind_review_request_field_default_field_instan
     ),
   );
 
-  // Exported field_instance: 'message-rescind_review_request-field_node'
+  // Exported field_instance: 'message-rescind_review_request-field_node'.
   $field_instances['message-rescind_review_request-field_node'] = array(
     'bundle' => 'rescind_review_request',
     'default_value' => NULL,
@@ -152,7 +154,7 @@ function prc_poc_local_message_rescind_review_request_field_default_field_instan
     ),
   );
 
-  // Exported field_instance: 'message-rescind_review_request-field_user_ref'
+  // Exported field_instance: 'message-rescind_review_request-field_user_ref'.
   $field_instances['message-rescind_review_request-field_user_ref'] = array(
     'bundle' => 'rescind_review_request',
     'default_value' => NULL,

@@ -14,24 +14,28 @@ function prc_poc_local_eck_ccss_eck_bundle_info() {
       'entity_type' => 'ccss',
       'name' => 'ccss_cluster',
       'label' => 'CCSS Cluster',
+      'config' => array(),
     ),
     'ccss_ccss_domain' => array(
       'machine_name' => 'ccss_ccss_domain',
       'entity_type' => 'ccss',
       'name' => 'ccss_domain',
       'label' => 'CCSS Domain',
+      'config' => array(),
     ),
     'ccss_ccss_standard' => array(
       'machine_name' => 'ccss_ccss_standard',
       'entity_type' => 'ccss',
       'name' => 'ccss_standard',
       'label' => 'CCSS Standard',
+      'config' => array(),
     ),
     'ccss_ccss_superdomain' => array(
       'machine_name' => 'ccss_ccss_superdomain',
       'entity_type' => 'ccss',
       'name' => 'ccss_superdomain',
       'label' => 'CCSS Superdomain',
+      'config' => array(),
     ),
   );
   return $items;

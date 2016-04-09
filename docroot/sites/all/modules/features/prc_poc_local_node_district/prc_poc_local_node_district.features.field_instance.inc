@@ -10,7 +10,7 @@
 function prc_poc_local_node_district_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-district-field_ref_trt_state'
+  // Exported field_instance: 'node-district-field_ref_trt_state'.
   $field_instances['node-district-field_ref_trt_state'] = array(
     'bundle' => 'district',
     'default_value' => NULL,

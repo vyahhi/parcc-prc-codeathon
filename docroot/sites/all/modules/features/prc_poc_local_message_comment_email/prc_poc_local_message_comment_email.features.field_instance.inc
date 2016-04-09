@@ -10,7 +10,7 @@
 function prc_poc_local_message_comment_email_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'message-comment_email-field_comment'
+  // Exported field_instance: 'message-comment_email-field_comment'.
   $field_instances['message-comment_email-field_comment'] = array(
     'bundle' => 'comment_email',
     'default_value' => NULL,
@@ -57,7 +57,8 @@ function prc_poc_local_message_comment_email_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-comment_email-field_message_rendered_body'
+  // Exported field_instance:
+  // 'message-comment_email-field_message_rendered_body'.
   $field_instances['message-comment_email-field_message_rendered_body'] = array(
     'bundle' => 'comment_email',
     'default_value' => NULL,
@@ -104,7 +105,8 @@ function prc_poc_local_message_comment_email_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-comment_email-field_message_rendered_subject'
+  // Exported field_instance:
+  // 'message-comment_email-field_message_rendered_subject'.
   $field_instances['message-comment_email-field_message_rendered_subject'] = array(
     'bundle' => 'comment_email',
     'default_value' => NULL,
@@ -151,7 +153,7 @@ function prc_poc_local_message_comment_email_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-comment_email-field_node'
+  // Exported field_instance: 'message-comment_email-field_node'.
   $field_instances['message-comment_email-field_node'] = array(
     'bundle' => 'comment_email',
     'default_value' => NULL,
@@ -199,7 +201,7 @@ function prc_poc_local_message_comment_email_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-comment_email-field_user_ref'
+  // Exported field_instance: 'message-comment_email-field_user_ref'.
   $field_instances['message-comment_email-field_user_ref'] = array(
     'bundle' => 'comment_email',
     'default_value' => NULL,

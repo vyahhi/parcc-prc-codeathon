@@ -1,10 +1,10 @@
 name = prc-poc.local SEO
 core = 7.x
 package = Configuration
-dependencies[] = ctools
-dependencies[] = features
 dependencies[] = pathauto
 dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
 features[variable][] = pathauto_blog_pattern
 features[variable][] = pathauto_forum_pattern
 features[variable][] = pathauto_node_course_pattern
@@ -44,4 +44,3 @@ features[variable][] = pathauto_taxonomy_term_subject_pattern
 features[variable][] = pathauto_taxonomy_term_tags_pattern
 features[variable][] = pathauto_taxonomy_term_user_states_pattern
 features[variable][] = pathauto_user_pattern
-features[features_api][] = api:2

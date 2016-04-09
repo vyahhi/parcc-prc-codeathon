@@ -10,7 +10,8 @@
 function prc_poc_local_node_speaking_and_listening_resource_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-speaking_and_listening_resource-field_file_single'
+  // Exported field_instance:
+  // 'node-speaking_and_listening_resource-field_file_single'.
   $field_instances['node-speaking_and_listening_resource-field_file_single'] = array(
     'bundle' => 'speaking_and_listening_resource',
     'deleted' => 0,
@@ -54,7 +55,8 @@ function prc_poc_local_node_speaking_and_listening_resource_field_default_field_
     ),
   );
 
-  // Exported field_instance: 'node-speaking_and_listening_resource-field_grade_level_unlimited'
+  // Exported field_instance:
+  // 'node-speaking_and_listening_resource-field_grade_level_unlimited'.
   $field_instances['node-speaking_and_listening_resource-field_grade_level_unlimited'] = array(
     'bundle' => 'speaking_and_listening_resource',
     'default_value' => NULL,
@@ -94,7 +96,8 @@ function prc_poc_local_node_speaking_and_listening_resource_field_default_field_
     ),
   );
 
-  // Exported field_instance: 'node-speaking_and_listening_resource-field_resource_type'
+  // Exported field_instance:
+  // 'node-speaking_and_listening_resource-field_resource_type'.
   $field_instances['node-speaking_and_listening_resource-field_resource_type'] = array(
     'bundle' => 'speaking_and_listening_resource',
     'default_value' => NULL,
@@ -135,7 +138,8 @@ function prc_poc_local_node_speaking_and_listening_resource_field_default_field_
     ),
   );
 
-  // Exported field_instance: 'node-speaking_and_listening_resource-field_standard'
+  // Exported field_instance:
+  // 'node-speaking_and_listening_resource-field_standard'.
   $field_instances['node-speaking_and_listening_resource-field_standard'] = array(
     'bundle' => 'speaking_and_listening_resource',
     'default_value' => NULL,
@@ -182,7 +186,8 @@ function prc_poc_local_node_speaking_and_listening_resource_field_default_field_
     ),
   );
 
-  // Exported field_instance: 'node-speaking_and_listening_resource-field_subject'
+  // Exported field_instance:
+  // 'node-speaking_and_listening_resource-field_subject'.
   $field_instances['node-speaking_and_listening_resource-field_subject'] = array(
     'bundle' => 'speaking_and_listening_resource',
     'default_value' => NULL,

@@ -10,7 +10,7 @@
 function prc_poc_local_node_state_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-state-field_contact_email'
+  // Exported field_instance: 'node-state-field_contact_email'.
   $field_instances['node-state-field_contact_email'] = array(
     'bundle' => 'state',
     'default_value' => NULL,
@@ -52,7 +52,7 @@ function prc_poc_local_node_state_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-state-field_member_state'
+  // Exported field_instance: 'node-state-field_member_state'.
   $field_instances['node-state-field_member_state'] = array(
     'bundle' => 'state',
     'default_value' => NULL,
@@ -93,7 +93,7 @@ function prc_poc_local_node_state_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-state-field_user_state'
+  // Exported field_instance: 'node-state-field_user_state'.
   $field_instances['node-state-field_user_state'] = array(
     'bundle' => 'state',
     'default_value' => NULL,

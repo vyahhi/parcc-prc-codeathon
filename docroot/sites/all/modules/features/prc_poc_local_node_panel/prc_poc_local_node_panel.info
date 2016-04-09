@@ -1,7 +1,10 @@
 name = prc-poc.local Panel
 core = 7.x
 package = Content
-dependencies[] = features
-dependencies[] = prc_poc_local_fields
-features[node][] = panel
+dependencies[] = ctools
+dependencies[] = panels_node
+dependencies[] = prc_poc_local_seo
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
+features[node][] = panel

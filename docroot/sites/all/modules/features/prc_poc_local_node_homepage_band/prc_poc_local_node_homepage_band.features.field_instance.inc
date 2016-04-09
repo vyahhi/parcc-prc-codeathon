@@ -10,7 +10,7 @@
 function prc_poc_local_node_homepage_band_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-homepage_band-body'
+  // Exported field_instance: 'node-homepage_band-body'.
   $field_instances['node-homepage_band-body'] = array(
     'bundle' => 'homepage_band',
     'default_value' => NULL,
@@ -54,7 +54,7 @@ function prc_poc_local_node_homepage_band_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-homepage_band-field_band_image'
+  // Exported field_instance: 'node-homepage_band-field_band_image'.
   $field_instances['node-homepage_band-field_band_image'] = array(
     'bundle' => 'homepage_band',
     'deleted' => 0,
@@ -106,7 +106,7 @@ function prc_poc_local_node_homepage_band_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-homepage_band-field_link_to_a_url'
+  // Exported field_instance: 'node-homepage_band-field_link_to_a_url'.
   $field_instances['node-homepage_band-field_link_to_a_url'] = array(
     'bundle' => 'homepage_band',
     'default_value' => NULL,

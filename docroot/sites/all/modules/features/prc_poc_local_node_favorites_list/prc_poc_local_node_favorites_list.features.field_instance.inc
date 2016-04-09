@@ -10,7 +10,7 @@
 function prc_poc_local_node_favorites_list_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-favorites_list-field_content_type'
+  // Exported field_instance: 'node-favorites_list-field_content_type'.
   $field_instances['node-favorites_list-field_content_type'] = array(
     'bundle' => 'favorites_list',
     'default_value' => array(
@@ -54,7 +54,7 @@ function prc_poc_local_node_favorites_list_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-favorites_list-field_favorite_content'
+  // Exported field_instance: 'node-favorites_list-field_favorite_content'.
   $field_instances['node-favorites_list-field_favorite_content'] = array(
     'bundle' => 'favorites_list',
     'default_value' => NULL,

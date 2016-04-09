@@ -165,11 +165,269 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'quiz',
   );
 
+  // Exported permission: 'access resource ccss'.
+  $permissions['access resource ccss'] = array(
+    'name' => 'access resource ccss',
+    'roles' => array(),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource course'.
+  $permissions['access resource course'] = array(
+    'name' => 'access resource course',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource course_enrollment'.
+  $permissions['access resource course_enrollment'] = array(
+    'name' => 'access resource course_enrollment',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource course_enrollment_type'.
+  $permissions['access resource course_enrollment_type'] = array(
+    'name' => 'access resource course_enrollment_type',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource course_object'.
+  $permissions['access resource course_object'] = array(
+    'name' => 'access resource course_object',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource course_object_fulfillment'.
+  $permissions['access resource course_object_fulfillment'] = array(
+    'name' => 'access resource course_object_fulfillment',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource course_report'.
+  $permissions['access resource course_report'] = array(
+    'name' => 'access resource course_report',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource file'.
+  $permissions['access resource file'] = array(
+    'name' => 'access resource file',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource flagging'.
+  $permissions['access resource flagging'] = array(
+    'name' => 'access resource flagging',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource invite'.
+  $permissions['access resource invite'] = array(
+    'name' => 'access resource invite',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource invite_type'.
+  $permissions['access resource invite_type'] = array(
+    'name' => 'access resource invite_type',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource lti_tool_provider_consumer'.
+  $permissions['access resource lti_tool_provider_consumer'] = array(
+    'name' => 'access resource lti_tool_provider_consumer',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource message'.
+  $permissions['access resource message'] = array(
+    'name' => 'access resource message',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource message_type'.
+  $permissions['access resource message_type'] = array(
+    'name' => 'access resource message_type',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource message_type_category'.
+  $permissions['access resource message_type_category'] = array(
+    'name' => 'access resource message_type_category',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource node'.
+  $permissions['access resource node'] = array(
+    'name' => 'access resource node',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
   // Exported permission: 'access resource practice_test'.
   $permissions['access resource practice_test'] = array(
     'name' => 'access resource practice_test',
     'roles' => array(
       'Practice Test Service Role' => 'Practice Test Service Role',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource prc_trt'.
+  $permissions['access resource prc_trt'] = array(
+    'name' => 'access resource prc_trt',
+    'roles' => array(),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource quiz'.
+  $permissions['access resource quiz'] = array(
+    'name' => 'access resource quiz',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource quiz_question'.
+  $permissions['access resource quiz_question'] = array(
+    'name' => 'access resource quiz_question',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource quiz_question_relationship'.
+  $permissions['access resource quiz_question_relationship'] = array(
+    'name' => 'access resource quiz_question_relationship',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource quiz_result'.
+  $permissions['access resource quiz_result'] = array(
+    'name' => 'access resource quiz_result',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource quiz_result_answer'.
+  $permissions['access resource quiz_result_answer'] = array(
+    'name' => 'access resource quiz_result_answer',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource search_api_index'.
+  $permissions['access resource search_api_index'] = array(
+    'name' => 'access resource search_api_index',
+    'roles' => array(),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource search_api_server'.
+  $permissions['access resource search_api_server'] = array(
+    'name' => 'access resource search_api_server',
+    'roles' => array(),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource taxonomy_term'.
+  $permissions['access resource taxonomy_term'] = array(
+    'name' => 'access resource taxonomy_term',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource taxonomy_vocabulary'.
+  $permissions['access resource taxonomy_vocabulary'] = array(
+    'name' => 'access resource taxonomy_vocabulary',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource user'.
+  $permissions['access resource user'] = array(
+    'name' => 'access resource user',
+    'roles' => array(
+      'State Admin' => 'State Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'restws',
@@ -300,6 +558,15 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'browserclass',
+  );
+
+  // Exported permission: 'administer ckeditor'.
+  $permissions['administer ckeditor'] = array(
+    'name' => 'administer ckeditor',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+    ),
+    'module' => 'ckeditor',
   );
 
   // Exported permission: 'administer content revisions'.
@@ -1106,6 +1373,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'path',
   );
 
+  // Exported permission: 'customize ckeditor'.
+  $permissions['customize ckeditor'] = array(
+    'name' => 'customize ckeditor',
+    'roles' => array(
+      'State Admin' => 'State Admin',
+    ),
+    'module' => 'ckeditor',
+  );
+
   // Exported permission: 'delete any course content'.
   $permissions['delete any course content'] = array(
     'name' => 'delete any course content',
@@ -1802,6 +2078,22 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'eck administer practice_test bundles'.
+  $permissions['eck administer practice_test bundles'] = array(
+    'name' => 'eck administer practice_test bundles',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck administer practice_test practice_test entities'.
+  $permissions['eck administer practice_test practice_test entities'] = array(
+    'name' => 'eck administer practice_test practice_test entities',
+    'roles' => array(),
+    'module' => 'eck',
+  );
+
   // Exported permission: 'eck administer prc_trt bundles'.
   $permissions['eck administer prc_trt bundles'] = array(
     'name' => 'eck administer prc_trt bundles',
@@ -1886,6 +2178,22 @@ function prc_poc_local_users_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
     ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck delete practice_test bundles'.
+  $permissions['eck delete practice_test bundles'] = array(
+    'name' => 'eck delete practice_test bundles',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck delete practice_test practice_test entities'.
+  $permissions['eck delete practice_test practice_test entities'] = array(
+    'name' => 'eck delete practice_test practice_test entities',
+    'roles' => array(),
     'module' => 'eck',
   );
 
@@ -1976,6 +2284,22 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'eck edit practice_test bundles'.
+  $permissions['eck edit practice_test bundles'] = array(
+    'name' => 'eck edit practice_test bundles',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck edit practice_test practice_test entities'.
+  $permissions['eck edit practice_test practice_test entities'] = array(
+    'name' => 'eck edit practice_test practice_test entities',
+    'roles' => array(),
+    'module' => 'eck',
+  );
+
   // Exported permission: 'eck edit prc_trt bundles'.
   $permissions['eck edit prc_trt bundles'] = array(
     'name' => 'eck edit prc_trt bundles',
@@ -2063,6 +2387,22 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'eck list practice_test bundles'.
+  $permissions['eck list practice_test bundles'] = array(
+    'name' => 'eck list practice_test bundles',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck list practice_test practice_test entities'.
+  $permissions['eck list practice_test practice_test entities'] = array(
+    'name' => 'eck list practice_test practice_test entities',
+    'roles' => array(),
+    'module' => 'eck',
+  );
+
   // Exported permission: 'eck list prc_trt bundles'.
   $permissions['eck list prc_trt bundles'] = array(
     'name' => 'eck list prc_trt bundles',
@@ -2127,6 +2467,15 @@ function prc_poc_local_users_user_default_permissions() {
   // Exported permission: 'eck view entities'.
   $permissions['eck view entities'] = array(
     'name' => 'eck view entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck view practice_test bundles'.
+  $permissions['eck view practice_test bundles'] = array(
+    'name' => 'eck view practice_test bundles',
     'roles' => array(
       'administrator' => 'administrator',
     ),
@@ -2786,6 +3135,15 @@ function prc_poc_local_users_user_default_permissions() {
     'module' => 'features',
   );
 
+  // Exported permission: 'manage practice_test properties'.
+  $permissions['manage practice_test properties'] = array(
+    'name' => 'manage practice_test properties',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'eck',
+  );
+
   // Exported permission: 'manage prc_trt properties'.
   $permissions['manage prc_trt properties'] = array(
     'name' => 'manage prc_trt properties',
@@ -3223,19 +3581,6 @@ function prc_poc_local_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'short_answer',
-  );
-
-  // Exported permission: 'use seraph link'.
-  $permissions['use seraph link'] = array(
-    'name' => 'use seraph link',
-    'roles' => array(
-      'Content Administrator (Curator)' => 'Content Administrator (Curator)',
-      'Content Contributor' => 'Content Contributor',
-      'PARCC-Member Educator' => 'PARCC-Member Educator',
-      'PRC Admin' => 'PRC Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'prc_registration',
   );
 
   // Exported permission: 'use text format filtered_html'.

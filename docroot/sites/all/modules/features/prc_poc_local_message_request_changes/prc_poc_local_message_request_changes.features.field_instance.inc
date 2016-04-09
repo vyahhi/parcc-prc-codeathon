@@ -10,7 +10,8 @@
 function prc_poc_local_message_request_changes_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'message-request_changes-field_message_rendered_body'
+  // Exported field_instance:
+  // 'message-request_changes-field_message_rendered_body'.
   $field_instances['message-request_changes-field_message_rendered_body'] = array(
     'bundle' => 'request_changes',
     'default_value' => NULL,
@@ -57,7 +58,8 @@ function prc_poc_local_message_request_changes_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-request_changes-field_message_rendered_subject'
+  // Exported field_instance:
+  // 'message-request_changes-field_message_rendered_subject'.
   $field_instances['message-request_changes-field_message_rendered_subject'] = array(
     'bundle' => 'request_changes',
     'default_value' => NULL,
@@ -104,7 +106,7 @@ function prc_poc_local_message_request_changes_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-request_changes-field_node'
+  // Exported field_instance: 'message-request_changes-field_node'.
   $field_instances['message-request_changes-field_node'] = array(
     'bundle' => 'request_changes',
     'default_value' => NULL,
@@ -152,7 +154,7 @@ function prc_poc_local_message_request_changes_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-request_changes-field_user_ref'
+  // Exported field_instance: 'message-request_changes-field_user_ref'.
   $field_instances['message-request_changes-field_user_ref'] = array(
     'bundle' => 'request_changes',
     'default_value' => NULL,
@@ -203,7 +205,7 @@ function prc_poc_local_message_request_changes_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-request_changes-field_version_id'
+  // Exported field_instance: 'message-request_changes-field_version_id'.
   $field_instances['message-request_changes-field_version_id'] = array(
     'bundle' => 'request_changes',
     'default_value' => NULL,

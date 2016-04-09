@@ -10,7 +10,7 @@
 function prc_poc_local_node_formative_instructional_task_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-formative_instructional_task-body'
+  // Exported field_instance: 'node-formative_instructional_task-body'.
   $field_instances['node-formative_instructional_task-body'] = array(
     'bundle' => 'formative_instructional_task',
     'default_value' => NULL,
@@ -54,7 +54,8 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
     ),
   );
 
-  // Exported field_instance: 'node-formative_instructional_task-field_file_single'
+  // Exported field_instance:
+  // 'node-formative_instructional_task-field_file_single'.
   $field_instances['node-formative_instructional_task-field_file_single'] = array(
     'bundle' => 'formative_instructional_task',
     'deleted' => 0,
@@ -98,7 +99,8 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
     ),
   );
 
-  // Exported field_instance: 'node-formative_instructional_task-field_formative_resource_type'
+  // Exported field_instance:
+  // 'node-formative_instructional_task-field_formative_resource_type'.
   $field_instances['node-formative_instructional_task-field_formative_resource_type'] = array(
     'bundle' => 'formative_instructional_task',
     'default_value' => NULL,
@@ -139,7 +141,8 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
     ),
   );
 
-  // Exported field_instance: 'node-formative_instructional_task-field_grade_level_unlimited'
+  // Exported field_instance:
+  // 'node-formative_instructional_task-field_grade_level_unlimited'.
   $field_instances['node-formative_instructional_task-field_grade_level_unlimited'] = array(
     'bundle' => 'formative_instructional_task',
     'default_value' => NULL,
@@ -179,7 +182,8 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
     ),
   );
 
-  // Exported field_instance: 'node-formative_instructional_task-field_permissions'
+  // Exported field_instance:
+  // 'node-formative_instructional_task-field_permissions'.
   $field_instances['node-formative_instructional_task-field_permissions'] = array(
     'bundle' => 'formative_instructional_task',
     'default_value' => NULL,
@@ -219,7 +223,8 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
     ),
   );
 
-  // Exported field_instance: 'node-formative_instructional_task-field_standard'
+  // Exported field_instance:
+  // 'node-formative_instructional_task-field_standard'.
   $field_instances['node-formative_instructional_task-field_standard'] = array(
     'bundle' => 'formative_instructional_task',
     'default_value' => NULL,
@@ -266,7 +271,7 @@ function prc_poc_local_node_formative_instructional_task_field_default_field_ins
     ),
   );
 
-  // Exported field_instance: 'node-formative_instructional_task-field_subject'
+  // Exported field_instance: 'node-formative_instructional_task-field_subject'.
   $field_instances['node-formative_instructional_task-field_subject'] = array(
     'bundle' => 'formative_instructional_task',
     'default_value' => NULL,

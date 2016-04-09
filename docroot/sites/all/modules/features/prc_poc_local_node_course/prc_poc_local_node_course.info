@@ -1,7 +1,11 @@
 name = prc-poc.local Course
 core = 7.x
 package = Content
+dependencies[] = ctools
 dependencies[] = features
-dependencies[] = prc_poc_local_fields
-features[node][] = course
+dependencies[] = node
+dependencies[] = prc_poc_local_seo
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
+features[node][] = course

@@ -10,7 +10,7 @@
 function prc_poc_local_node_quiz_directions_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-quiz_directions-body'
+  // Exported field_instance: 'node-quiz_directions-body'.
   $field_instances['node-quiz_directions-body'] = array(
     'bundle' => 'quiz_directions',
     'default_value' => NULL,
@@ -64,7 +64,7 @@ function prc_poc_local_node_quiz_directions_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-quiz_directions-field_parcc_item'
+  // Exported field_instance: 'node-quiz_directions-field_parcc_item'.
   $field_instances['node-quiz_directions-field_parcc_item'] = array(
     'bundle' => 'quiz_directions',
     'default_value' => array(

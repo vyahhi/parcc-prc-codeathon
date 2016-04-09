@@ -3776,8 +3776,34 @@ At this time, the Diagnostic Tools are available to districts via the <strong><a
     $pane->configuration = array(
       'admin_title' => '',
       'title' => '',
-      'body' => 'There are 16 ELA and 16 Math performance tasks (Kindergarten – Gr.2) which can be accessed in the table below. The tasks are designed to engage students in learning while you observe how students demonstrate proficiencies with respect to the standards embedded in the tasks. Your observations can be easily recorded using the formative tools (e.g., checklists) which can then be used to inform instructional decisions. In the table below, there are three files for each ELA task; one that provides access to the actual performance task, one that provides the copyrighted text, and one that provides resources that accompany the task. You will need all 3 ELA files in order to do the task with your students. There are also three files for each math task; one that provides access to the full task, one that contains additional checklists besides the one already embedded in the full task file, and one that provides resources that accompany the task. Note that the resources for math are embedded in the full task files; therefore, you may choose to only access the full task files when doing math tasks with your students. This provides access to an <strong><a href=" https://prc.parcconline.org/library/k-2-formative-instructional-tasks-information-and-faqs" target="_blank">overview </a></strong>of the tasks and this <strong><a href="https://prc.parcconline.org/library/k-2-formative-instructional-tasks-faqs" target="_blank"> link </a></strong>to other important information about the tasks including frequently asked questions (FAQs).',
-      'format' => 'filtered_html',
+      'body' => '<p>(Performance/Formative Instructional) tasks are designed to engage students in learning while you observe student progress with respect to the standards. Standards are labelled for each of the tasks. The tasks include materials to implement and record observations about student progress.</p>
+
+<table class="collapsible">
+	<tbody>
+		<tr>
+			<th width="50%" style="border-right: 1px solid grey">ELA</th>
+			<th width="50%">Math</th>
+		</tr>
+		<tr>
+			<td style="border-right: 1px solid grey">
+			<ul>
+				<li><b>Task</b> – Plan with student objective and activities <a href="https://prc.parcconline.org/system/files/K-2%20ELA%20FAQs_0.pdf" target="_blank">(read more)</a></li>
+				<li><b>Text</b> – Text(s) for activities <a href="/content/ela-text-faq-0" target="_blank">(read more)</a></li>
+				<li><b>Resources</b> – Supplementary materials for completing task (vocabulary, observation records, organizers, etc)</li>
+			</ul>
+			</td>
+			<td>
+			<ul>
+				<li><b>Task</b> – ... <a href="https://prc.parcconline.org/system/files/K-2%20Math%20FAQs_0.pdf" target="_blank">(read more)</a></li>
+				<li><b>Text</b> – ...</li>
+				<li><b>Resources</b> – ...</li>
+			</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+',
+      'format' => 'full_html',
       'substitute' => TRUE,
     );
     $pane->cache = array();

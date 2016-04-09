@@ -1,8 +1,6 @@
 name = prc-poc.local Panels
 core = 7.x
-package = Ctools
-dependencies[] = ctools
-dependencies[] = features
+package = CTools
 dependencies[] = page_manager
 dependencies[] = panels
 dependencies[] = panels_everywhere
@@ -35,6 +33,7 @@ features[page_manager_pages][] = assessments
 features[page_manager_pages][] = content_administration_page
 features[page_manager_pages][] = course_management
 features[page_manager_pages][] = diagnostics
+features[page_manager_pages][] = diagnostics_reading_fluency
 features[page_manager_pages][] = digital_library
 features[page_manager_pages][] = formative_instructional_tasks
 features[page_manager_pages][] = home_page

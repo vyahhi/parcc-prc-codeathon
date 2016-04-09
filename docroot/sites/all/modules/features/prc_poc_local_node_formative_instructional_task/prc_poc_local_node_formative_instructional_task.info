@@ -1,16 +1,12 @@
 name = prc-poc.local Formative Instructional Task
 core = 7.x
 package = Content
-dependencies[] = ctools
-dependencies[] = features
 dependencies[] = file
 dependencies[] = list
 dependencies[] = options
 dependencies[] = prc_poc_local_fields
 dependencies[] = shs
-dependencies[] = strongarm
 dependencies[] = taxonomy
-dependencies[] = text
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[field_instance][] = node-formative_instructional_task-body

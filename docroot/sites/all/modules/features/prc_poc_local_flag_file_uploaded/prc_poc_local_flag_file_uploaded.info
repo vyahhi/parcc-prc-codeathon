@@ -1,7 +1,6 @@
 name = prc-poc.local Node: File Uploaded
 core = 7.x
 package = Flags
-dependencies[] = features
 dependencies[] = flag
-features[flag][] = file_uploaded
 features[features_api][] = api:2
+features[flag][] = file_uploaded

@@ -10,7 +10,7 @@
 function prc_poc_local_node_school_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-school-field_contact_email'
+  // Exported field_instance: 'node-school-field_contact_email'.
   $field_instances['node-school-field_contact_email'] = array(
     'bundle' => 'school',
     'default_value' => NULL,
@@ -52,7 +52,7 @@ function prc_poc_local_node_school_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-school-field_number_of_students'
+  // Exported field_instance: 'node-school-field_number_of_students'.
   $field_instances['node-school-field_number_of_students'] = array(
     'bundle' => 'school',
     'default_value' => NULL,
@@ -101,7 +101,7 @@ function prc_poc_local_node_school_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-school-field_ref_district'
+  // Exported field_instance: 'node-school-field_ref_district'.
   $field_instances['node-school-field_ref_district'] = array(
     'bundle' => 'school',
     'default_value' => NULL,

@@ -10,7 +10,7 @@
 function prc_poc_local_node_multichoice_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-multichoice-body'
+  // Exported field_instance: 'node-multichoice-body'.
   $field_instances['node-multichoice-body'] = array(
     'bundle' => 'multichoice',
     'default_value' => NULL,
@@ -63,7 +63,7 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-multichoice-field_grade_level_unlimited'
+  // Exported field_instance: 'node-multichoice-field_grade_level_unlimited'.
   $field_instances['node-multichoice-field_grade_level_unlimited'] = array(
     'bundle' => 'multichoice',
     'default_value' => NULL,
@@ -103,7 +103,7 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-multichoice-field_parcc_item'
+  // Exported field_instance: 'node-multichoice-field_parcc_item'.
   $field_instances['node-multichoice-field_parcc_item'] = array(
     'bundle' => 'multichoice',
     'default_value' => array(
@@ -148,7 +148,7 @@ function prc_poc_local_node_multichoice_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-multichoice-field_standard'
+  // Exported field_instance: 'node-multichoice-field_standard'.
   $field_instances['node-multichoice-field_standard'] = array(
     'bundle' => 'multichoice',
     'default_value' => NULL,

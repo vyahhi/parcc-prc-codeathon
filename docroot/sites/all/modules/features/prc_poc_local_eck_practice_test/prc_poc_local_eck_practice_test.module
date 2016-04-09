@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the prc-poc.local Practice Test feature.
+ */
+
+include_once 'prc_poc_local_eck_practice_test.features.inc';
