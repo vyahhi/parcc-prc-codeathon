@@ -13,3 +13,14 @@ function queryParamExists(variable)
   }
   return(false);
 }
+
+jQuery( document ).ready(function() {
+  jQuery('.collapsible tr:last-child').toggle();
+  jQuery('.collapsible th').prepend('<span>&#9654;</span><span>&#9660;</span>&nbsp;');
+  jQuery('.collapsible th span:last-child').toggle();
+  jQuery('.collapsible tr:first-child').click(function() {
+    jQuery(this).parent().find('tr:last-child').toggle();
+    jQuery(this).parent().find('th span').toggle();
+  })
+});
+

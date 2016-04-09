@@ -42,6 +42,9 @@ function prc_foundation_preprocess_html(&$variables) {
     drupal_add_js(path_to_theme() .'/javascripts/custom/search_content.js');
     drupal_add_js(path_to_theme() .'/javascripts/custom/prc_utilities.js');
   }
+  if (request_path() == 'instructional-tools/formative-instructional-tasks') {
+    drupal_add_js(path_to_theme() .'/javascripts/custom/prc_utilities.js');
+  }
   $resource_table_paths = array(
     'instructional-tools/formative-instructional-tasks',
     'instructional-tools/speaking-listening',

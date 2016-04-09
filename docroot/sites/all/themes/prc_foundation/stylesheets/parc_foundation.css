@@ -1512,9 +1512,12 @@ a {
   color: #70547D;
   text-decoration: none;
   line-height: inherit;
+  border-bottom: 1px dotted #70547D;
 }
 a:hover, a:focus {
   color: #624a6e;
+  text-decoration: none !important;
+  border-bottom: 1px solid #70547D;
 }
 a img {
   border: none;
